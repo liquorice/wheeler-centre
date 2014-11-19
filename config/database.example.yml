@@ -1,0 +1,15 @@
+development: &default
+  adapter: postgresql
+  encoding: unicode
+  database: wheeler_centre_development
+  host: localhost
+  port: <%= ENV["BOXEN_POSTGRESQL_PORT"] %>
+
+test:
+  <<: *default
+  database: wheeler_centre_test
+  min_messages: warning
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
