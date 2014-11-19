@@ -1,31 +1,28 @@
 # Wheeler Centre
 
-_Write a brief overview of the app here._
-
-Primary developers:
-
-* _Your name here_
+Rails + Heracles app for the Wheeler Centre
 
 # Development
 
 ### First-time setup
 
-Check out the app with Boxen:
+Check out the app :
 
-    $ boxen wheeler-centre
+    $ git clone git@bitbucket.org:icelab/wheeler-centre.git
     $ cd ~/src/wheeler-centre
 
 To install the required gems & prepare the database:
 
     $ bin/setup
 
-Run `rake db:sample_data` to load a small set of data for development. See
-`db/sample_data.rb` for details.
+May also need to run the database migration in the process:
+
+    rake db:migrate
 
 ### Running the Application Locally
 
     $ foreman start
-    $ open http://localhost:3000
+    $ open http://localhost:5000
 
 ### Running the Specs
 
