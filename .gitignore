@@ -14,3 +14,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+
+# Sunspot/Solr files
+
+/solr
+/log/*.lck
