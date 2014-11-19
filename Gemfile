@@ -66,6 +66,7 @@ group :test do
 end
 
 group :test, :development do
+  gem "dotenv-rails"
   gem "rspec-rails", "~> 3.0.0.beta2"
 end
 
