@@ -21,3 +21,6 @@ module WheelerCentre
     # config.i18n.default_locale = :de
   end
 end
+
+require "heracles-admin"
+require "heracles_single_site_shim"
