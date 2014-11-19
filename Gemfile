@@ -10,6 +10,9 @@ gem "rails", "~> 4.1.0"
 # Database drivers
 gem "pg"
 
+# Heracles
+gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
+
 # Background worker
 gem "que"
 
@@ -29,7 +32,7 @@ gem "bugsnag"
 # Frontend
 gem "asset_sync"
 gem "coffee-rails", "~> 4.0.0"
-gem "react-rails", github: "reactjs/react-rails"
+gem "react-rails"
 gem "sass-rails", "~> 4.0.2"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
