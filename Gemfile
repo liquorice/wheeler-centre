@@ -48,6 +48,8 @@ gem "rails-assets-jquery"
 gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
 
+gem "devise"
+
 group :production do
   gem "rails_12factor"
 end
