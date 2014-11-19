@@ -13,6 +13,12 @@ gem "pg"
 # Heracles
 gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
 
+# Temporary dependency on forked sunspot queue (with Active Job support). Once
+# this patch goes upstream, we can remove this, since Heracles is the right
+# place to require sunspot-queue (but we can't use github dependencies in its
+# gemspec).
+gem "sunspot-queue", github: "timriley/sunspot-queue"
+
 # Background worker
 gem "que"
 

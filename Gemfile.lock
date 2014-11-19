@@ -10,6 +10,13 @@ GIT
       xpath (~> 2.0)
 
 GIT
+  remote: git://github.com/timriley/sunspot-queue.git
+  revision: 649af734420db481fd0421dde152bbb9e7499bde
+  specs:
+    sunspot-queue (0.10.2)
+      sunspot_rails (>= 1.3.0)
+
+GIT
   remote: git@bitbucket.org:icelab/heracles.git
   revision: 4cd78d72d7d57a3d3387e24cc541a2f00d567f8a
   branch: master
@@ -424,8 +431,6 @@ GEM
     sunspot (2.1.1)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
-    sunspot-queue (0.10.2)
-      sunspot_rails (>= 1.3.0)
     sunspot_rails (2.1.1)
       nokogiri
       rails (>= 3)
@@ -501,6 +506,7 @@ DEPENDENCIES
   slim-rails
   spring
   spring-commands-rspec
+  sunspot-queue!
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
