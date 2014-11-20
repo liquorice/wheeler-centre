@@ -84,5 +84,5 @@ group :development do
   gem "guard", "~> 2"
   gem "guard-rspec"
   gem "guard-livereload"
-  gem "rb-fsevent" if `uname` =~ /Darwin/
+  gem "rb-fsevent"
 end
