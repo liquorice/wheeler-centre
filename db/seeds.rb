@@ -13,7 +13,7 @@ user.save!
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
 site.title = "Wheeler Centre"
-site.hostnames = ["localhost"]
+site.hostnames = ["localhost, wheeler-centre.herokuapp.com"]
 site.published = true
 site.transloadit_params = {
   "steps" => {
