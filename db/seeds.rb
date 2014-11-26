@@ -13,7 +13,7 @@ user.save!
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
 site.title = "Wheeler Centre"
-site.hostnames = ["localhost, wheeler-centre.herokuapp.com"]
+site.hostnames = ["localhost", "wheeler-centre.herokuapp.com"]
 site.published = true
 site.transloadit_params = {
   "steps" => {
@@ -79,7 +79,7 @@ site.transloadit_params = {
 site.save!
 
 # Homepage
-homepage = Heracles::Sites::WheelerCentre::HomePage.find_or_initialize_by(url: "home")
+homepage = Heracles::Sites::Wheelercentre::HomePage.find_or_initialize_by(url: "home")
 homepage.site = site
 homepage.title = "Home"
 homepage.slug = "home"
@@ -87,3 +87,37 @@ homepage.published = true
 homepage.locked = true
 homepage.page_order_position = :first
 homepage.save!
+
+# Blog index page
+blog_index = Heracles::Sites::Wheelercentre::Blog.find_or_initialize_by(url: "blog")
+blog_index.site = site
+blog_index.title = "Blog"
+blog_index.slug = "blog"
+blog_index.published = true
+blog_index.locked = true
+blog_index.page_order_position = :last
+blog_index.save!
+
+# Blog collection
+blog_collection = Heracles::Sites::W::Collection.find_or_initialize_by(url: "blog/all-posts")
+blog_collection.parent = blog_index
+blog_collection.site = site
+blog_collection.title = "All Posts"
+blog_collection.slug = "all-posts"
+blog_collection.fields[:contained_page_type].value = "blog_post"
+blog_collection.fields[:sort_attribute].value = "created_at"
+blog_collection.fields[:sort_direction].value = "DESC"
+blog_collection.published = false
+blog_collection.locked = true
+blog_collection.page_order_position = :last
+blog_collection.save!
+
+# Contact
+contact = Heracles::Sites::Wheelercentre::ContentPage.find_or_initialize_by(url: "contact")
+contact.site = site
+contact.title = "Contact"
+contact.slug = "contact"
+contact.published = true
+contact.locked = false
+contact.page_order_position = :last
+contact.save!
