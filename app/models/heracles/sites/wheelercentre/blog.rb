@@ -1,0 +1,34 @@
+module Heracles
+  module Sites
+    module Wheelercentre
+      class Blog < Heracles::Page
+        def self.config
+          {}
+        end
+
+        def self.hidden?
+          true
+        end
+
+        def posts(options={})
+          search_posts(options)
+        end
+
+        private
+
+        def search_posts(options={})
+          Sunspot.search(BlogPost) do
+            with :site_id, site.id
+            with :parent_id, id
+            with :published, true
+
+            without(:created_at).greater_than_or_equal_to(Time.current)
+
+            order_by :created_ats, :desc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 10
+          end
+        end
+      end
+    end
+  end
+end
