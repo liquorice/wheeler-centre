@@ -79,7 +79,7 @@ site.transloadit_params = {
 site.save!
 
 # Homepage
-homepage = Heracles::Sites::Wheelercentre::HomePage.find_or_initialize_by(url: "home")
+homepage = Heracles::Sites::WheelerCentre::HomePage.find_or_initialize_by(url: "home")
 homepage.site = site
 homepage.title = "Home"
 homepage.slug = "home"
@@ -89,7 +89,7 @@ homepage.page_order_position = :first
 homepage.save!
 
 # Blog index page
-blog_index = Heracles::Sites::Wheelercentre::Blog.find_or_initialize_by(url: "blog")
+blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "blog")
 blog_index.site = site
 blog_index.title = "Blog"
 blog_index.slug = "blog"
@@ -99,7 +99,7 @@ blog_index.page_order_position = :last
 blog_index.save!
 
 # Blog collection
-blog_collection = Heracles::Sites::W::Collection.find_or_initialize_by(url: "blog/all-posts")
+blog_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "blog/all-posts")
 blog_collection.parent = blog_index
 blog_collection.site = site
 blog_collection.title = "All Posts"
@@ -113,7 +113,7 @@ blog_collection.page_order_position = :last
 blog_collection.save!
 
 # Contact
-contact = Heracles::Sites::Wheelercentre::ContentPage.find_or_initialize_by(url: "contact")
+contact = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "contact")
 contact.site = site
 contact.title = "Contact"
 contact.slug = "contact"

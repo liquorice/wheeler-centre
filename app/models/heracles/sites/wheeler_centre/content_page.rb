@@ -1,6 +1,6 @@
 module Heracles
   module Sites
-    module Wheelercentre
+    module WheelerCentre
       class ContentPage < ::Heracles::Page
         def self.config
           {

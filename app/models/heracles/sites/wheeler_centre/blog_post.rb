@@ -1,6 +1,6 @@
 module Heracles
   module Sites
-    module Wheelercentre
+    module WheelerCentre
       class BlogPost < Heracles::Page
 
         ### Page config

@@ -1,6 +1,6 @@
 module Heracles
   module Sites
-    module Wheelercentre
+    module WheelerCentre
       class Blog < Heracles::Page
         def self.config
           {}

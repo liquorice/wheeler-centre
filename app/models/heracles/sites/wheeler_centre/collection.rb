@@ -1,6 +1,6 @@
 module Heracles
   module Sites
-    module Wheelercentre
+    module WheelerCentre
       class Collection < ::Heracles::Collection
       end
     end
