@@ -1,0 +1,22 @@
+- content_for(:title) do
+  .page__title.page__title--content-page
+    h1.title = page.title
+
+- content_for(:hero_image) do
+  - if page.fields[:hero_image].data_present?
+    .hero-image.hero-image--page.copy
+      .figure
+        picture
+          erb:
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+          source srcset=page.fields[:hero_image].asset.content_large_url media="(min-width: 480px)"
+          erb:
+            <!--[if IE 9]></video><![endif]-->
+          img.figure__content src=page.fields[:hero_image].asset.content_small_url itemprop="hero_image" alt=page.title title=page.title
+
+
+- content_for(:middle) do
+  - cache ["content-content", page] do
+    .page__content
+      .page__body.page__body--content-page.copy
+        = render_content(page.fields["body"])
