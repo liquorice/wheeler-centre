@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-
   devise_for :users
 
-  WheelerCentre::Application.routes.draw do
-	  # Heracles admin
-	  mount Heracles::Admin::Engine, at: "/admin"
+  # Heracles admin
+  mount Heracles::Admin::Engine, at: "/admin"
 
-	  # Admin
-	  resource :admin, only: [:show]
-	end
+  # Admin
+  resource :admin, only: [:show]
+
+  # Heracles public pages.
+  post "*path/__preview" => "pages#show", preview: true
+  get "*path" => "pages#show"
+  root to: "pages#show"
 end
