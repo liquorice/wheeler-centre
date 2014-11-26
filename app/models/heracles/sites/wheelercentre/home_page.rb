@@ -1,9 +1,7 @@
 module Heracles
   module Sites
-    module WheelerCentre
+    module Wheelercentre
       class HomePage < ::Heracles::Page
-
-
       end
     end
   end

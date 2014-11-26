@@ -4,7 +4,7 @@ HERACLES_SITE_SLUG = "wheelercentre"
 
 module Heracles
   module Sites
-    module WheelerCentre
+    module Wheelercentre
       # Ensure the site module exists
     end
   end
