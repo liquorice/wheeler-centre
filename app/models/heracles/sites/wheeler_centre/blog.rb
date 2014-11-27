@@ -6,10 +6,6 @@ module Heracles
           {}
         end
 
-        def self.hidden?
-          true
-        end
-
         def posts(options={})
           search_posts(options)
         end
@@ -24,7 +20,7 @@ module Heracles
 
             without(:created_at).greater_than_or_equal_to(Time.current)
 
-            order_by :created_ats, :desc
+            order_by :created_at, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 10
           end
         end
