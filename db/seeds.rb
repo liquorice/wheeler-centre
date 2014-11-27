@@ -88,6 +88,30 @@ homepage.locked = true
 homepage.page_order_position = :first
 homepage.save!
 
+# Events index page
+events_index = Heracles::Sites::WheelerCentre::EventsIndex.find_or_initialize_by(url: "events")
+events_index.site = site
+events_index.title = "Events"
+events_index.slug = "events"
+events_index.published = true
+events_index.locked = true
+events_index.page_order_position = :last
+events_index.save!
+
+# Events collection
+events_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-events")
+events_collection.parent = events_index
+events_collection.site = site
+events_collection.title = "All Events"
+events_collection.slug = "all-events"
+events_collection.fields[:contained_page_type].value = "event"
+events_collection.fields[:sort_attribute].value = "created_at"
+events_collection.fields[:sort_direction].value = "DESC"
+events_collection.published = false
+events_collection.locked = true
+events_collection.page_order_position = :last
+events_collection.save!
+
 # Blog index page
 blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "blog")
 blog_index.site = site
@@ -112,12 +136,56 @@ blog_collection.locked = true
 blog_collection.page_order_position = :last
 blog_collection.save!
 
-# Contact
-contact = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "contact")
-contact.site = site
-contact.title = "Contact"
-contact.slug = "contact"
-contact.published = true
-contact.locked = false
-contact.page_order_position = :last
-contact.save!
+# People page
+people = Heracles::Sites::WheelerCentre::People.find_or_initialize_by(url: "people")
+people.site = site
+people.title = "People"
+people.slug = "people"
+people.published = true
+people.locked = true
+people.page_order_position = :last
+people.save!
+
+# People collection
+people_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "people/all-people")
+people_collection.parent = people
+people_collection.site = site
+people_collection.title = "All People"
+people_collection.slug = "all-people"
+people_collection.fields[:contained_page_type].value = "person"
+people_collection.fields[:sort_attribute].value = "created_at"
+people_collection.fields[:sort_direction].value = "DESC"
+people_collection.published = false
+people_collection.locked = true
+people_collection.page_order_position = :last
+people_collection.save!
+
+# About us
+about_us = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us")
+about_us.site = site
+about_us.title = "About us"
+about_us.slug = "about-us"
+about_us.published = true
+about_us.locked = false
+about_us.page_order_position = :last
+about_us.save!
+
+# Residents
+residents = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "residents")
+residents.site = site
+residents.title = "Residents"
+residents.slug = "residents"
+residents.published = true
+residents.locked = false
+residents.page_order_position = :last
+residents.save!
+
+# Donate
+donate = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "donate")
+donate.site = site
+donate.title = "Donate"
+donate.slug = "donate"
+donate.published = true
+donate.locked = false
+donate.page_order_position = :last
+donate.save!
