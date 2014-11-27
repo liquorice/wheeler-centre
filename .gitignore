@@ -20,3 +20,4 @@
 
 /solr
 /log/*.lck
+/log/sunspot-solr-development.log.1
