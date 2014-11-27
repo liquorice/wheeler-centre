@@ -15,8 +15,7 @@
           img.figure__content src=page.fields[:hero_image].asset.content_small_url itemprop="hero_image" alt=page.title title=page.title
 
 
-- content_for(:middle) do
-  - cache ["content-content", page] do
+- content_for(:content) do
     .page__content
       .page__body.page__body--content-page.copy
         = render_content(page.fields["body"])

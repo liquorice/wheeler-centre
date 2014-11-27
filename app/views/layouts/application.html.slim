@@ -7,11 +7,13 @@ html
     = csrf_meta_tags
 
   body
-  	- if content_for?(:title)
-     	= yield(:title)
-    - if content_for?(:hero_image)
-      = yield(:hero_image)
-    - if content_for?(:content)
-       = yield(:content)
-    - else
-        = yield
+    .body-inner
+      = render 'partials/header'
+    	- if content_for?(:title)
+       	= yield(:title)
+      - if content_for?(:hero_image)
+        = yield(:hero_image)
+      - if content_for?(:content)
+         = yield(:content)
+      - else
+          = yield
