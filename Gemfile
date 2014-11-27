@@ -48,7 +48,11 @@ gem "rails-assets-jquery"
 gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
 
+# Application
 gem "devise"
+
+# Utilities
+gem "ffaker"
 
 group :production do
   gem "rails_12factor"
