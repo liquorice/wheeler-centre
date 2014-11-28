@@ -18,7 +18,6 @@ module Heracles
             with :parent_id, id
             with :published, true
 
-            order_by :created_at, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 10
           end
         end

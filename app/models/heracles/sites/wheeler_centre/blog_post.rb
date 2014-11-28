@@ -8,6 +8,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :publish_at, type: :date_time, show_in_index: true},
               {name: :body, label: "Main content", type: :content, hint: "Main body content", editor_columns: 12},
             ]
           }
@@ -16,6 +17,10 @@ module Heracles
         searchable do
           text :body do
             fields[:body].value
+          end
+
+          time :publish_at do
+            fields[:publish_at].value
           end
         end
 
