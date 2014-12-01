@@ -4,10 +4,9 @@
   width: $full-width;
 }
 
-
 .page__title {
   width: $full-width;
-  margin: 2* $gutter 0 $gutter 0;
+  margin: 2* $gutter 0;
 
   h1 {
     @include font-size(24);
@@ -31,4 +30,15 @@
 .page__body {
   @include font-size(16);
   width: $full-width;
+}
+
+.page__body--session {
+  width: $one-quarter;
+  margin: 2% auto;
+}
+
+.page__body--session-links {
+  a {
+    text-decoration: underline;
+  }
 }

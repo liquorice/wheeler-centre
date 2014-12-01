@@ -1,0 +1,109 @@
+.fields-row {
+  @include clearfix-micro;
+}
+
+.field {
+  @include pad(bottom, normal);
+  float: left;
+  margin-right: -1px;
+  width: 100%;
+}
+
+.field-header {
+  padding-bottom: 3px;
+  padding-bottom: 0.3rem;
+  .has-error {
+    display: inline;
+  }
+}
+
+.field-label {
+  @include font-size(16);
+  @include pad(right, small);
+  color: $grey-dark;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.field-hint {
+  color: $grey-mid;
+  line-height: 1;
+}
+
+.actions {
+  padding: 5% 0;
+}
+
+// Text fields
+.field-text-input {
+  @include font-size(14);
+  @include pad(vert, small);
+  @include pad(horz, smaller);
+  box-shadow: inset 2px 2px 0 rgba($blue , 0.15);
+  border: 1px solid $blue;
+  display: block;
+  line-height: 1.4;
+  height: 4rem;
+  resize: none;
+  width: 100%;
+  &:focus {
+    border-color: darken($blue, 10%);
+  }
+}
+
+// Checkbox
+
+.field-checkbox,
+.field-radio {
+  @include pad(left, normal);
+  display: inline-block;
+  position: relative;
+  .has-error &,
+  .field--has-errors & {
+    color: $highlight;
+  }
+}
+  .field-checkbox-input,
+  .field-radio-input {
+    left: 0;
+    margin-top: -7px;
+    position: absolute;
+    top: 50%;
+  }
+  .field-checkbox-label,
+  .field-radio-label {
+    @include font-size(18);
+    cursor: pointer;
+  }
+
+// Admin: Buttons --------------------------------------------------------------
+
+.button {
+  @include pad(top, small);
+  @include pad(horz, smaller);
+  @include font-size(14);
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.4;
+  padding-bottom: 8px;
+  padding-bottom: 0.8rem;
+  transition-property: background-color, box-shadow;
+  transition-duration: 200ms, 80ms;
+}
+
+.button--small {
+  @include pad(vert, tiny);
+  @include pad(horz, small);
+  @include font-size(12);
+}
+
+.button--highlight {
+  background-color: $blue;
+  color: $white;
+  &:hover {
+    background-color: #9ecafa;
+  }
+}
+
