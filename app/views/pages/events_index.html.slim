@@ -4,15 +4,15 @@
   .page__title.page__title--events
     h1.title == page.title
 
-- content_for(:content) do
+- content_for(:middle) do
   .page__content
     .page__body.page__body--events.copy
       = render_content page.fields[:body]
 
-  - if events.present?
-    .events
-      - events.each do |event|
-        h3.event-widget__title
-          = event.title
+      - if events.present?
+        .events
+          - events.each do |event|
+            h3.event__title
+              = event.title
 
 

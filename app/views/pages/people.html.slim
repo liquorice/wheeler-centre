@@ -1,0 +1,18 @@
+- people = page.people.results
+
+- content_for(:title) do
+  .page__title.page__title--people
+    h1.title == page.title
+
+- content_for(:middle) do
+  .page__content
+    .page__body.page__body--people.copy
+      = render_content page.fields[:body]
+
+      - if people.present?
+        .people
+          - people.each do |person|
+            h3.person__title
+              = person.title
+
+

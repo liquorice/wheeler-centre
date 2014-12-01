@@ -1,0 +1,7 @@
+.middle {
+  @extend %wrapper;
+}
+
+.middle__container {
+  @extend %container;
+}

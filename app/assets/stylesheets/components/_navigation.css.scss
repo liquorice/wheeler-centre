@@ -1,0 +1,21 @@
+.nav {
+  @include font-size(20);
+}
+
+.nav__ul {
+  overflow: hidden;
+  position: relative;
+}
+
+.nav__li {
+  display: inline-block;
+  font-family: 'Helvetica';
+  line-height: 1;
+  margin-bottom: $gutter;
+  margin-right: $gutter;
+
+  a {
+    display: block;
+  }
+}
+

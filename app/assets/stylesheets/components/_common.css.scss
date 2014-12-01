@@ -1,0 +1,21 @@
+%wrapper {
+  width: $full-width;
+}
+
+%container {
+  @include clearfix-overflow();
+  margin: 0 auto;
+  max-width: 1600px;
+  width: 90%;
+}
+
+%column {
+  display: block;
+  float: left;
+  padding: 0 $gutter;
+  margin-bottom: $gutter;
+}
+
+.column-group {
+  @include clearfix-micro;
+}

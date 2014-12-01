@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+// This is Sass, not straight-up Sprockets.
+// Instead of using `= require_self` and `= require_tree .`, use @import instead, e.g.,
+//
+//   @import "products";
+//
+// Sprockets is kinda stupid sometimes. Better to require things explicitly.
+//
+//
+// .rule {
+//   @extend .first;
+//   @include second;
+//   alphabetical: properties;
+//   go: here;
+// }
+//
+
+// Variables ----------------------------------------------------------------
+@import "globals";
+
+// Libraries and patterns ---------------------------------------------------
+
+@import "./patterns/all";
+
+// Base ---------------------------------------------------------------------
+
+@include reset();
+
+*, *:before, *:after {
+box-sizing: border-box;
+}
+
+::selection {
+  color: white;
+}
+
+html {
+  background: $white;
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $white;
+  min-width: 1080px\9;
+  overflow-x: hidden;
+}
+
+.body-inner {
+  _margin-left: auto;
+  _margin-right: auto;
+  _width: 1080px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+// General Components -------------------------------------------------------
+
+@import "./components/common";
+@import "./components/header";
+@import "./components/middle";
+@import "./components/navigation";
+@import "./components/page";

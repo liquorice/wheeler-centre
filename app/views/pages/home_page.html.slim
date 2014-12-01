@@ -1,8 +1,8 @@
 - content_for(:title) do
   - cache page.title do
-    .page__title.page__title--content-page
+    .page__title.page__title--home-page
       h1.title = page.title
 
-- content_for :content do
-  .content
-    .content__container Welcome to the Wheeler Centre
+- content_for(:middle) do
+  .page__content
+    .page__body.page__body--home.copy Welcome to the Wheeler Centre

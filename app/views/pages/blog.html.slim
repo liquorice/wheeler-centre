@@ -1,0 +1,18 @@
+- posts = page.posts.results
+
+- content_for(:title) do
+  .page__title.page__title--blog
+    h1.title == page.title
+
+- content_for(:middle) do
+  .page__content
+    .page__body.page__body--blog.copy
+      = render_content page.fields[:body]
+
+      - if posts.present?
+        .posts
+          - posts.each do |post|
+            h3.post__title
+              = post.title
+
+
