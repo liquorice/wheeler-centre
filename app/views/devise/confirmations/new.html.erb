@@ -1,16 +1,27 @@
-<h2>Resend confirmation instructions</h2>
+<div class="page__content">
+  <div class="page__body page__body--session copy">
+    <div class="page__title page__title--session">
+      <h1 class="title">Resend confirmation instructions</h1>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+		<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+		  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+		  <div class="field">
+		  	<div class="field-header">
+		    	<%= f.label :email, class: "field-label" %>
+		    </div>
+		    <%= f.email_field :email, autofocus: true, class: "field-text-input" %>
+		  </div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+		  <div class="actions">
+		    <%= f.submit "Resend confirmation instructions", class: "button button--highlight" %>
+		  </div>
+		<% end %>
 
-<%= render "devise/shared/links" %>
+		<div class="page__body--session-links">
+      <%= render "devise/shared/links" %>
+    </div>
+
+	</div>
+</div>
