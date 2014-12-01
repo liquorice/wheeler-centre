@@ -5,3 +5,113 @@ a {
     color: $blue;
   }
 }
+
+
+.copy {
+  position: relative;
+
+  a {
+    text-decoration: underline;
+  }
+
+  h1, h2, h3 {
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+    strong {
+      font-weight: normal;
+    }
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+  p {
+    margin-bottom: 1em;
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  blockquote {
+    border-bottom: 5px solid $blue;
+    border-top: 5px solid $blue;
+    margin: 3em auto;
+    padding: 1.5em 1em 1.2em;
+  }
+
+  blockquote p {
+    color: $blue;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    text-align: center;
+
+    em {
+      font-size: 0.75em;
+      font-style: normal;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  strong, b {
+    font-weight: bold;
+  }
+
+  em, i {
+    font-style: italic;
+  }
+
+  ul, ol {
+    margin-bottom: 1em;
+  }
+
+  ul {
+    list-style: circle inside none;
+  }
+
+  .hr {
+    border-top: 1px solid $black;
+    clear: both;
+    margin-bottom: 0;
+    margin-top: 3em;
+    width: $full-width;
+
+    hr {
+      border:none;
+      margin-bottom: 0;
+    }
+  }
+
+  li {
+    margin-bottom: 0.5em;
+    list-style: disc outside none;
+    padding-left: 2em;
+    position: relative;
+
+    &:before {
+      color: $blue;
+      content: '•';
+      display: block;
+      left: 1em;
+      position: absolute;
+    }
+  }
+
+
+
+
+
+}
