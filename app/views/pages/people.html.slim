@@ -12,7 +12,11 @@
       - if people.present?
         .people
           - people.each do |person|
-            h3.person__title
-              = person.title
+            - if person.fields[:hero_image].data_present?
+              .person__hero-image
+                img src=person.fields[:hero_image].asset.admin_thumbnail_url itemprop="hero_image" alt=person.title title=person.title
+            a href=person.absolute_url
+              h3.person__title
+                = person.title
 
 
