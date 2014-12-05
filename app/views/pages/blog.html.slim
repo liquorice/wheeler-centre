@@ -8,11 +8,21 @@
   .page__content
     .page__body.page__body--blog.copy
       = render_content page.fields[:body]
-
       - if posts.present?
-        .posts
-          - posts.each do |post|
-            h3.post__title
-              = post.title
+        - posts.each do |post|
+          .blog-post
+            h2
+              a href=post.absolute_url
+                = post.title
+            .blog-post-details
+              - if post.fields["publish_at"].value.present?
+                .blog-post-details__datetime.copy
+                  p = format_date(post.fields["publish_at"].value, nil, "long")
+            .blog-post-details__summary.copy
+              = render_content(post.fields["summary"])
+            a.blog-post__read-more href=post.absolute_url
+              | Read more
+
+        = paginate(posts)
 
 
