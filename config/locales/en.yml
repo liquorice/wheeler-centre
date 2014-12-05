@@ -23,11 +23,25 @@ en:
   hello: "Hello world"
   date:
     formats:
-      default: '%m/%d/%Y'
-      with_weekday: '%a %m/%d/%y'
+      default: '%-d/%m/%y'
+      with_weekday: '%a %-d/%m/%y'
+      long: '%A %-d %B %Y'
 
   time:
     formats:
-      default: '%a, %b %-d, %Y at %r'
-      date: '%b %-d, %Y'
-      short: '%B %d'
+      time_only: '%-I.%M%P'
+      default: '%-d %B %Y, %-I.%M%P'
+      short: '%-d/%-m/%y, %-I.%M%P'
+      medium: '%a %-d %b %Y, %-I.%M%P'
+      medium_date: '%a %-d %b %Y'
+      long: '%A %-d %B %Y, %-I.%M%P'
+      long_date: '%A %-d %B %Y'
+      year: '%Y'
+      month_name: '%B'
+      month: '%m'
+      day_name: '%A'
+      day: '%-d'
+      path_year: '/%Y'
+      path_month: '/%Y/%m'
+      path_day: '/%Y/%m/%d'
+      month_and_year: '%B %Y'
