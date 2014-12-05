@@ -1,0 +1,24 @@
+- content_for(:title) do
+  .page__title.page__title--event
+    h1.title = page.title
+
+- content_for(:hero_image) do
+  - if page.fields[:hero_image].data_present?
+    .hero-image.hero-image--event.copy
+      .figure
+        picture
+          erb:
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+          source srcset=page.fields[:hero_image].asset.admin_thumbnail_url media="(min-width: 480px)"
+          erb:
+            <!--[if IE 9]></video><![endif]-->
+          img.figure__content src=page.fields[:hero_image].asset.admin_thumbnail_url itemprop="hero_image" alt=page.title title=page.title
+
+- content_for(:middle) do
+  .page__content.page__content--event
+    .event-details
+      .event-details__item
+        = page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, "long")
+
+    .page__body.page__body--event.copy
+      = render_content page.fields[:body]

@@ -1,0 +1,13 @@
+- content_for(:title) do
+  .page__title.page__title--blog-post
+    h1.title = page.title
+
+- content_for(:middle) do
+  .page__content
+    .page__body
+      .blog-post-details
+        - if page.fields["publish_at"].value.present?
+          .blog-post-details__datetime
+            p = format_date(page.fields["publish_at"].value, nil, "long")
+      .page__body--blog-post.copy
+        = render_content(page.fields["body"])
