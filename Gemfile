@@ -53,6 +53,7 @@ gem "devise"
 
 # Utilities
 gem "ffaker"
+gem "syck"
 
 group :production do
   gem "rails_12factor"
