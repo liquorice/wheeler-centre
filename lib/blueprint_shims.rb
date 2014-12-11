@@ -1,5 +1,3 @@
-require "ostruct"
-
 module LegacyBlueprint
   class Base < SimpleDelegator
     def initialize(*)
@@ -17,6 +15,7 @@ module LegacyBlueprint
 
   %i(
     CenevtEvent
+    Page
     Site
     User
   ).each do |legacy_class|
