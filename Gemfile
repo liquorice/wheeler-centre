@@ -53,7 +53,10 @@ gem "devise"
 
 # Utilities
 gem "ffaker"
+
+# Temporary for the Blueprint import
 gem "syck"
+gem "rdiscount"
 
 group :production do
   gem "rails_12factor"
