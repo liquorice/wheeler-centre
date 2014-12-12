@@ -45,7 +45,6 @@ namespace :wheeler_centre do
 
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
-      heracles_event.fields[:member_bookings_open_at].value = Time.zone.parse(blueprint_event["member_bookings_open_at"].to_s)
 
       heracles_event.save!
     end
