@@ -8,20 +8,27 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :publish_at, type: :date_time, show_in_index: true},
-              {name: :body, label: "Main content", type: :content, hint: "Main body content", editor_columns: 12},
+              {name: :summary, type: :content},
+              {name: :body, label: "Content", type: :content, hint: "Main body content", editor_columns: 12},
+              {name: :hero_image, type: :asset, asset_file_type: :image},
+              # Is the author relationship ever going to be many to one?
+              {name: :authors, type: :associated_pages, page_type: :person},
             ]
           }
         end
 
         searchable do
+          text :summary do
+            fields[:summary].value
+          end
           text :body do
             fields[:body].value
           end
 
-          time :publish_at do
-            fields[:publish_at].value
+          string :author_ids, multiple: true do
+            fields[:authors].pages.map(&:id)
           end
+
         end
 
       end
