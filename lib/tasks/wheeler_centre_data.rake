@@ -65,24 +65,43 @@ namespace :wheeler_centre do
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page}
 
-    homepage = Heracles::Page.where(url: "home").first!
+    parent = Heracles::Page.where(url: "home").first!
 
     # Todo: figure out how to strucure the pages within the site
     blueprint_pages.each do |blueprint_page|
+
+      # If a parent page is set in the yaml, find it and use it as the Heracles parent
+      if blueprint_page["parent_page"].present?
+        parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
+      end
+
       heracles_page = Heracles::Page.find_by_slug(blueprint_page["slug"])
 
       unless heracles_page
         heracles_page = Heracles::Page.new_for_site_and_page_type(homepage.site, "content_page")
-        heracles_page.parent = homepage
+        heracles_page.parent = parent
       end
 
       heracles_page.published = true
       heracles_page.slug = blueprint_page["slug"]
       heracles_page.title = blueprint_page["title"]
       heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+      heracles_page.fields[:short_title].value = blueprint_page["short_title"]
 
       heracles_page.save!
     end
 
   end
+
+  desc "Find unique Blueprint classes"
+  task :find_blueprint_classes => :environment do
+    backup_root = "/Users/josephinehall/Development/wheeler-centre"
+    backup_file = "#{backup_root}/backup-2014-12-18.yml"
+    legacy_classes = open(backup_file).grep(/^---.*$/)
+    class_names = legacy_classes.map do |class_name|
+      class_name.split(":").last
+    end
+    puts(class_names.uniq)
+  end
+
 end
