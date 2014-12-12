@@ -5,10 +5,10 @@ module Heracles
         def self.config
           {
             fields: [
-            	{name: :feature_image, type: :asset, asset_file_type: :image},
+              {name: :feature_image, type: :asset, asset_file_type: :image},
               {name: :description, type: :content},
               # - iTunes categories (list)
-							# - Podcast Episodes (collection)
+              # - Podcast Episodes (collection)
             ]
           }
         end

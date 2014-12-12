@@ -9,12 +9,11 @@ module Heracles
               {name: :description, type: :content},
               {name: :transcripts, type: :content},
               # - Video (media)
-							# - Audio (media)
-							{name: :events, type: :associated_pages, page_type: :event},
+              # - Audio (media)
+              {name: :events, type: :associated_pages, page_type: :event},
               # Dates
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :recording_date, type: :date_time, label: "Recording date"},
-
             ]
           }
         end
