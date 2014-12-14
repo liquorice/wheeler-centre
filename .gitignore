@@ -25,8 +25,8 @@
 
 # Ignore custom lib/src stuff
 lib/src/node_modules
-lib/src/tmp/assets/*
-!lib/src/tmp/assets/.gitkeep
+lib/src/tmp/*
+!lib/src/tmp/.gitkeep
 lib/src/public/components
 public/assets/*
 !public/assets/.gitkeep
