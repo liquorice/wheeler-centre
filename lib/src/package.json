@@ -22,6 +22,7 @@
     "http-proxy": "^1.7.3",
     "morgan": "^1.4.1",
     "myth": "^1.2.1",
+    "run-sequence": "^1.0.2",
     "uglify-js": "^2.4.15",
     "wach": "^1.0.0"
   },
