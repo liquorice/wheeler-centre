@@ -66,11 +66,11 @@ namespace :wheeler_centre do
 
     parent = Heracles::Page.where(url: "home").first!
 
-    # Todo: figure out how to strucure the pages within the site
     blueprint_pages.each do |blueprint_page|
 
       # If a parent page is set in the yaml, find it and use it as the Heracles parent
       if blueprint_page["parent_page"].present?
+        # If the parent_page doesn't already exist, create it?
         parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
       end
 
@@ -85,7 +85,7 @@ namespace :wheeler_centre do
       heracles_page.slug = blueprint_page["slug"]
       heracles_page.title = blueprint_page["title"]
       heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
-      heracles_page.fields[:short_title].value = blueprint_page["short_title"]
+      heracles_page.fields[:created_at].value = Time.zone.parse(blueprint_event["created_on"].to_s)
 
       heracles_page.save!
     end
