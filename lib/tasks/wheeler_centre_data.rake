@@ -50,7 +50,7 @@ namespace :wheeler_centre do
     end
   end
 
-  desc "Import blueprint pages"
+  desc "Import blueprint Pages and FaqPages"
   task :import_blueprint_pages => :environment do
 
     require "yaml"
@@ -62,31 +62,37 @@ namespace :wheeler_centre do
     backup_data = File.read(backup_file)
     blueprint_records = YAML.load_stream(backup_data)
 
-    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page}
-
-    parent = Heracles::Page.where(url: "home").first!
+    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage}
 
     blueprint_pages.each do |blueprint_page|
-
       # If a parent page is set in the yaml, find it and use it as the Heracles parent
       if blueprint_page["parent_page"].present?
         # If the parent_page doesn't already exist, create it?
         parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
       end
+      # TODO: make smarter
+      if blueprint_page["slug"].split("/").length > 1
+        # Set the parent to a page by the name of the second-last location in the slug.
+        parent = Heracles::Page.find_by_slug(blueprint_page["slug"].split("/")[-2])
+        # Set the slug to be the last part of the blueprint slug
+        slug = blueprint_page["slug"].split("/").last
+      end
 
       heracles_page = Heracles::Page.find_by_slug(blueprint_page["slug"])
 
       unless heracles_page
-        heracles_page = Heracles::Page.new_for_site_and_page_type(homepage.site, "content_page")
-        heracles_page.parent = parent
+        site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+        heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+        if parent.present?
+          heracles_page.parent = parent
+        end
       end
 
       heracles_page.published = true
-      heracles_page.slug = blueprint_page["slug"]
+      if slug.present? then heracles_page.slug = slug else heracles_page.slug = blueprint_page["slug"] end
       heracles_page.title = blueprint_page["title"]
+      heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
       heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
-      heracles_page.fields[:created_at].value = Time.zone.parse(blueprint_event["created_on"].to_s)
-
       heracles_page.save!
     end
 
