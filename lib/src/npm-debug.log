@@ -1,0 +1,137 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/max/.nodenv/versions/0.11.14/bin/node',
+1 verbose cli   '/Users/max/.nodenv/versions/0.11.14/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.0.0
+3 info using node@v0.11.14
+4 warn package.json wheelercentre-assets@0.0.1 No repository field.
+5 warn package.json wheelercentre-assets@0.0.1 No README data
+6 verbose readDependencies using package.json deps
+7 verbose install where, deps [ '/Users/max/src/wheeler-centre/lib/src',
+7 verbose install   [ 'batch',
+7 verbose install     'clean-css',
+7 verbose install     'connect',
+7 verbose install     'debug',
+7 verbose install     'del',
+7 verbose install     'duo',
+7 verbose install     'duo-jsx',
+7 verbose install     'duo-serve',
+7 verbose install     'duo-test',
+7 verbose install     'gulp',
+7 verbose install     'gulp-jsoncombine',
+7 verbose install     'gulp-mp5',
+7 verbose install     'gulp-rev-all',
+7 verbose install     'gulp-rev-rails-manifest',
+7 verbose install     'http-proxy',
+7 verbose install     'morgan',
+7 verbose install     'myth',
+7 verbose install     'uglify-js',
+7 verbose install     'wach' ] ]
+8 info preinstall wheelercentre-assets@0.0.1
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping duo-jsx@^1.0.3 /Users/max/src/wheeler-centre/lib/src
+11 verbose already installed skipping duo-serve@^0.6.1 /Users/max/src/wheeler-centre/lib/src
+12 verbose already installed skipping duo-test@^0.3.12 /Users/max/src/wheeler-centre/lib/src
+13 verbose already installed skipping gulp@^3.8.10 /Users/max/src/wheeler-centre/lib/src
+14 verbose already installed skipping gulp-jsoncombine@^1.0.0 /Users/max/src/wheeler-centre/lib/src
+15 verbose cache add [ 'gulp-mp5@^0.1.0', null ]
+16 verbose cache add spec="gulp-mp5@^0.1.0" args=["gulp-mp5@^0.1.0",null]
+17 verbose parsed spec { raw: 'gulp-mp5@^0.1.0',
+17 verbose parsed spec   scope: null,
+17 verbose parsed spec   name: 'gulp-mp5',
+17 verbose parsed spec   rawSpec: '^0.1.0',
+17 verbose parsed spec   spec: '>=0.1.0 <0.2.0',
+17 verbose parsed spec   type: 'range' }
+18 verbose already installed skipping gulp-rev-all@^0.7.3 /Users/max/src/wheeler-centre/lib/src
+19 verbose already installed skipping gulp-rev-rails-manifest@^0.0.1 /Users/max/src/wheeler-centre/lib/src
+20 verbose parsed spec { raw: 'gulp-mp5@^0.1.0',
+20 verbose parsed spec   scope: null,
+20 verbose parsed spec   name: 'gulp-mp5',
+20 verbose parsed spec   rawSpec: '^0.1.0',
+20 verbose parsed spec   spec: '>=0.1.0 <0.2.0',
+20 verbose parsed spec   type: 'range' }
+21 verbose addNamed [ 'gulp-mp5', '>=0.1.0 <0.2.0' ]
+22 verbose addNamed [ null, '>=0.1.0 <0.2.0' ]
+23 verbose already installed skipping http-proxy@^1.7.3 /Users/max/src/wheeler-centre/lib/src
+24 silly lockFile c32550f1-gulp-mp5-0-1-0-0-2-0 gulp-mp5@>=0.1.0 <0.2.0
+25 verbose lock gulp-mp5@>=0.1.0 <0.2.0 /Users/max/.npm/c32550f1-gulp-mp5-0-1-0-0-2-0.lock
+26 verbose already installed skipping morgan@^1.4.1 /Users/max/src/wheeler-centre/lib/src
+27 silly addNameRange { name: 'gulp-mp5', range: '>=0.1.0 <0.2.0', hasData: false }
+28 verbose mapToRegistry name gulp-mp5
+29 verbose mapToRegistry uri https://registry.npmjs.org/gulp-mp5
+30 verbose already installed skipping myth@^1.2.1 /Users/max/src/wheeler-centre/lib/src
+31 verbose request on initialization, where is /gulp-mp5
+32 verbose request after pass 1, where is /gulp-mp5
+33 verbose request url raw /gulp-mp5
+34 verbose request resolving registry [ 'https://registry.npmjs.org/', './gulp-mp5' ]
+35 verbose request after pass 2, where is https://registry.npmjs.org/gulp-mp5
+36 verbose request no auth needed
+37 info attempt registry request try #1 at 21:58:15
+38 verbose request id 85c8b58ccd255d57
+39 http request GET https://registry.npmjs.org/gulp-mp5
+40 verbose already installed skipping uglify-js@^2.4.15 /Users/max/src/wheeler-centre/lib/src
+41 verbose already installed skipping wach@^1.0.0 /Users/max/src/wheeler-centre/lib/src
+42 verbose already installed skipping batch@^0.5.1 /Users/max/src/wheeler-centre/lib/src
+43 verbose already installed skipping clean-css@^2.2.17 /Users/max/src/wheeler-centre/lib/src
+44 verbose already installed skipping connect@^3.3.2 /Users/max/src/wheeler-centre/lib/src
+45 verbose already installed skipping debug@^2.1.0 /Users/max/src/wheeler-centre/lib/src
+46 verbose already installed skipping del@^1.1.0 /Users/max/src/wheeler-centre/lib/src
+47 verbose already installed skipping duo@^0.8.10 /Users/max/src/wheeler-centre/lib/src
+48 http 404 https://registry.npmjs.org/gulp-mp5
+49 verbose headers { date: 'Sun, 14 Dec 2014 10:58:16 GMT',
+49 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+49 verbose headers   'content-type': 'application/json',
+49 verbose headers   'cache-control': 'max-age=0',
+49 verbose headers   'content-length': '52',
+49 verbose headers   'accept-ranges': 'bytes',
+49 verbose headers   via: '1.1 varnish',
+49 verbose headers   age: '0',
+49 verbose headers   'x-served-by': 'cache-syd1621-SYD',
+49 verbose headers   'x-cache': 'MISS',
+49 verbose headers   'x-cache-hits': '0',
+49 verbose headers   'x-timer': 'S1418554695.820583,VS0,VE945',
+49 verbose headers   connection: 'close' }
+50 silly registry.get cb [ 404,
+50 silly registry.get   { date: 'Sun, 14 Dec 2014 10:58:16 GMT',
+50 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+50 silly registry.get     'content-type': 'application/json',
+50 silly registry.get     'cache-control': 'max-age=0',
+50 silly registry.get     'content-length': '52',
+50 silly registry.get     'accept-ranges': 'bytes',
+50 silly registry.get     via: '1.1 varnish',
+50 silly registry.get     age: '0',
+50 silly registry.get     'x-served-by': 'cache-syd1621-SYD',
+50 silly registry.get     'x-cache': 'MISS',
+50 silly registry.get     'x-cache-hits': '0',
+50 silly registry.get     'x-timer': 'S1418554695.820583,VS0,VE945',
+50 silly registry.get     connection: 'close' } ]
+51 silly lockFile c32550f1-gulp-mp5-0-1-0-0-2-0 gulp-mp5@>=0.1.0 <0.2.0
+52 silly lockFile c32550f1-gulp-mp5-0-1-0-0-2-0 gulp-mp5@>=0.1.0 <0.2.0
+53 verbose stack Error: 404 Not Found: gulp-mp5
+53 verbose stack     at RegClient.<anonymous> (/Users/max/.nodenv/versions/0.11.14/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:259:14)
+53 verbose stack     at Request._callback (/Users/max/.nodenv/versions/0.11.14/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:198:65)
+53 verbose stack     at Request.self.callback (/Users/max/.nodenv/versions/0.11.14/lib/node_modules/npm/node_modules/request/request.js:236:22)
+53 verbose stack     at Request.emit (events.js:110:17)
+53 verbose stack     at Request.<anonymous> (/Users/max/.nodenv/versions/0.11.14/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+53 verbose stack     at Request.emit (events.js:129:20)
+53 verbose stack     at IncomingMessage.<anonymous> (/Users/max/.nodenv/versions/0.11.14/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+53 verbose stack     at IncomingMessage.emit (events.js:129:20)
+53 verbose stack     at _stream_readable.js:907:16
+53 verbose stack     at process._tickCallback (node.js:372:11)
+54 verbose statusCode 404
+55 verbose pkgid gulp-mp5
+56 verbose cwd /Users/max/src/wheeler-centre/lib/src
+57 error Darwin 14.0.0
+58 error argv "/Users/max/.nodenv/versions/0.11.14/bin/node" "/Users/max/.nodenv/versions/0.11.14/bin/npm" "install"
+59 error node v0.11.14
+60 error npm  v2.0.0
+61 error code E404
+62 error 404 Not Found: gulp-mp5
+62 error 404
+62 error 404 'gulp-mp5' is not in the npm registry.
+62 error 404 You should bug the author to publish it (or use the name yourself!)
+62 error 404 It was specified as a dependency of 'wheelercentre-assets'
+62 error 404
+62 error 404 Note that you can also install from a
+62 error 404 tarball, folder, http url, or git url.
+63 verbose exit [ 1, true ]

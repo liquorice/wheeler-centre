@@ -23,10 +23,10 @@
 /log/sunspot-solr-development.log.1
 
 
-# Ignore custom lib/assets stuff
-lib/assets/node_modules
-lib/assets/tmp/assets/*
-!lib/assets/tmp/assets/.gitkeep
-lib/assets/public/components
+# Ignore custom lib/src stuff
+lib/src/node_modules
+lib/src/tmp/assets/*
+!lib/src/tmp/assets/.gitkeep
+lib/src/public/components
 public/assets/*
 !public/assets/.gitkeep
