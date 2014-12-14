@@ -21,3 +21,12 @@
 /solr
 /log/*.lck
 /log/sunspot-solr-development.log.1
+
+
+# Ignore custom lib/assets stuff
+lib/assets/node_modules
+lib/assets/tmp/assets/*
+!lib/assets/tmp/assets/.gitkeep
+lib/assets/public/components
+public/assets/*
+!public/assets/.gitkeep
