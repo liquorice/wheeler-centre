@@ -5,6 +5,6 @@ namespace :assets do
   end
 end
 
-Rake::Task["assets:precompile"].enhance do
+Rake::Task["assets:precompile"].enhance ["assets:clobber"] do
   Rake::Task["assets:build"].invoke
 end
