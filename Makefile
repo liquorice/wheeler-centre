@@ -1,7 +1,8 @@
 BASE=lib/src
 TMP=tmp
+TARGET_DIR=targets
 BIN=node_modules/.bin
-TARGETS=$(wildcard $(BASE)/targets/**/index.*)
+TARGETS=$(wildcard $(BASE)/$(TARGET_DIR)/**/index.*)
 
 # Clean directories
 clean:
@@ -20,7 +21,7 @@ serve:
 	node $(BASE)/server.js
 
 watch:
-	@echo 'Watching assets in $(APP)'
-	$(BIN)/wach -o "$(BASE)/$(APP)/**/*" make dev
+	@echo 'Watching assets in targets'
+	$(BIN)/wach -o "$(BASE)/$(TARGET_DIR)/**/*" make dev
 
 .PHONY: all clean build dev watch
