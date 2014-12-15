@@ -69,7 +69,7 @@ people_collection.pages.destroy_all
     page.title = Faker::HipsterIpsum.words(2).join(" ").titleize
     page.slug = page.title.downcase.gsub(/\s+/, "-")
     page.published = true
-    page.fields[:body].value = Faker::HipsterIpsum.sentences(6).map { |s| "<p>#{s}</p>" }.join("")
+    page.fields[:biography].value = Faker::HipsterIpsum.sentences(6).map { |s| "<p>#{s}</p>" }.join("")
     page.page_order_position = :last
     page.save!
   end

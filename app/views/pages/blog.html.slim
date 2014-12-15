@@ -15,9 +15,8 @@
               a href=post.absolute_url
                 = post.title
             .blog-post-details
-              - if post.fields["publish_at"].value.present?
-                .blog-post-details__datetime.copy
-                  p = format_date(post.fields["publish_at"].value, nil, "long")
+              .blog-post-details__datetime.copy
+                p = format_date(post.created_at, nil, "long")
             .blog-post-details__summary.copy
               = render_content(post.fields["summary"])
             a.blog-post__read-more href=post.absolute_url

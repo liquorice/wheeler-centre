@@ -3,18 +3,13 @@
     h1.title = page.title
 
 - content_for(:hero_image) do
-  - if page.fields[:hero_image].data_present?
-    .hero-image.hero-image--person.copy
+  - if page.fields[:portrait].data_present?
+    .portrait.portrait--person.copy
       .figure
         picture
-          erb:
-            <!--[if IE 9]><video style="display: none;"><![endif]-->
-          source srcset=page.fields[:hero_image].asset.admin_thumbnail_url media="(min-width: 480px)"
-          erb:
-            <!--[if IE 9]></video><![endif]-->
-          img.figure__content src=page.fields[:hero_image].asset.admin_thumbnail_url itemprop="hero_image" alt=page.title title=page.title
+          img.figure__content src=page.fields[:portrait].asset.admin_thumbnail_url itemprop="portrait" alt=page.title title=page.title
 
 - content_for(:middle) do
   .page__content.page__content--person
     .page__body.page__body--person.copy
-      = render_content page.fields[:body]
+      = render_content page.fields[:biography]

@@ -12,7 +12,7 @@
       - if events.present?
         .events
           - events.each do |event|
-            - if event.fields[:hero_image].data_present?
+            - if event.fields[:promo_image].data_present?
               .event__hero-image
                 img src=event.fields[:hero_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
             a href=event.absolute_url

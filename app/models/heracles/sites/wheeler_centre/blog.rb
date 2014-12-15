@@ -18,9 +18,6 @@ module Heracles
             with :parent_id, id
             with :published, true
 
-            without(:publish_at).greater_than_or_equal_to(Time.current)
-
-            order_by :publish_at, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 10
           end
         end
