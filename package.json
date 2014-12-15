@@ -3,27 +3,27 @@
   "description": "Assets for The Wheeler Centre",
   "version": "0.0.1",
   "author": "Icelab",
+  "devDependencies": {
+    "duo-test": "^0.3.12",
+    "http-proxy": "^1.7.3",
+    "wach": "^1.0.0"
+  },
   "dependencies": {
     "batch": "^0.5.1",
     "clean-css": "^2.2.17",
-    "connect": "^3.3.2",
-    "debug": "^2.1.0",
     "del": "^1.1.0",
     "duo": "^0.8.10",
     "duo-jsx": "^1.0.3",
-    "duo-test": "^0.3.12",
     "gulp": "^3.8.10",
     "gulp-jsoncombine": "^1.0.0",
     "gulp-md5": "^0.1.0",
     "gulp-rev-all": "^0.7.3",
     "gulp-rev-rails-manifest": "^0.0.1",
     "gulp-tap": "^0.1.3",
-    "http-proxy": "^1.7.3",
     "morgan": "^1.4.1",
     "myth": "^1.2.1",
     "run-sequence": "^1.0.2",
-    "uglify-js": "^2.4.15",
-    "wach": "^1.0.0"
+    "uglify-js": "^2.4.15"
   },
   "engines": {
     "node": "0.11.14"
