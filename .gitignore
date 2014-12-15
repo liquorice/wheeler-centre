@@ -25,6 +25,7 @@
 
 # Ignore custom lib/src stuff
 node_modules
+npm-debug.log
 lib/src/tmp/*
 !lib/src/tmp/.gitkeep
 lib/src/public/components
