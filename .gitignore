@@ -28,6 +28,6 @@ node_modules
 npm-debug.log
 lib/src/tmp/*
 !lib/src/tmp/.gitkeep
-lib/src/public/components
+lib/src/targets/**/components
 public/assets/*
 !public/assets/.gitkeep

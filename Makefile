@@ -2,6 +2,7 @@ BASE=lib/src
 APP=public
 TMP=tmp
 BIN=node_modules/.bin
+TARGETS=$(wildcard $(BASE)/targets/**/index.*)
 
 # Clean directories
 clean:
@@ -13,7 +14,7 @@ build:
 
 dev:
 	@echo 'Development: building...'
-	@NODE_ENV=development node $(BASE)/$(APP).js
+	@NODE_ENV=development node $(BASE)/build.js '$(TARGETS)'
 
 serve:
 	@echo 'Serving assets in $(BASE)/$(TMP)'
