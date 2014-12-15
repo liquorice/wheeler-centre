@@ -1,0 +1,10 @@
+/ Loading into the <head> _before_ pretty much everything. The idea is that
+/ things we want to be available as soon as possible — domready, metaquery —
+/ should be included here to avoid waiting for an http request
+/
+/ Files referenced via `Rails.application.assets.find_asset` must be in one
+/ of the sprockets lookup paths, so _not_ in our custom asset setup
+script
+  = Rails.application.assets.find_asset('domready-legacy').to_s.html_safe
+  = Rails.application.assets.find_asset('matchmedia').to_s.html_safe
+  = Rails.application.assets.find_asset('metaquery').to_s.html_safe
