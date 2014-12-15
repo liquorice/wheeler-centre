@@ -1,5 +1,4 @@
 BASE=lib/src
-APP=public
 TMP=tmp
 BIN=node_modules/.bin
 TARGETS=$(wildcard $(BASE)/targets/**/index.*)
@@ -10,7 +9,7 @@ clean:
 
 build:
 	@echo 'Production: building...'
-	@NODE_ENV=production node $(BASE)/$(APP).js
+	@NODE_ENV=production node $(BASE)/build.js '$(TARGETS)'
 
 dev:
 	@echo 'Development: building...'
