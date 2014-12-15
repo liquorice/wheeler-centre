@@ -16,4 +16,4 @@ cp config/database.example.yml config/database.yml
 # Set up database
 bundle exec rake db:setup
 
-
+npm install

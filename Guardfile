@@ -4,6 +4,7 @@ guard :livereload do
   watch(%r{app/views/.+\.slim$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{public/.+\.(css|js|html)})
+  watch(%r{lib/src/tmp/.+\.(css|js|html)})
   watch(%r{config/locales/.+\.yml})
 
   # Rails Assets Pipeline
