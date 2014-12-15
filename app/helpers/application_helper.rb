@@ -1,4 +1,35 @@
 module ApplicationHelper
+  include Heracles::InsertablesHelper
+
+  # Common helpers sit under lib/helpers
+  include TextFormattingHelper
+
+  ### Heracles helpers
+
+  # Use "content_small" by default when rendering image insertables. This can
+  # be overridden by calling `render_content` with a different `version`
+  # option, e.g.
+  #
+  #   render_content(image: {version: :content_large})
+  #
+  # def render_content(content_field, options={})
+  #   defaults = {
+  #     image: {version: :content_small}
+  #   }
+  #   options = defaults.deep_merge(options.deep_symbolize_keys)
+
+  #   super(content_field, options)
+  # end
+
+  ### Application specific helpers
+
+  # Cribbed from Padrino:
+  # http://rubydoc.info/github/padrino/padrino-framework/master/Padrino/Helpers/AssetTagHelpers:favicon_tag
+  def favicon_tag(source, options={})
+    type = File.extname(source).gsub('.','')
+    options = options.dup.reverse_merge!(:href => image_path(source), :rel => 'icon', :type => "image/#{type}")
+    tag(:link, options)
+  end
 
   def format_date(start_date,end_date,length)
     if !end_date.present?

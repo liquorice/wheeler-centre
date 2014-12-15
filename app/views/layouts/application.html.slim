@@ -1,9 +1,14 @@
 doctype 5
 html
   head
-    title Wheeler Centre
-  	= stylesheet_link_tag    "public", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "public", "data-turbolinks-track" => true
+    meta charset="utf-8"
+    = render "partials/metaquery_breakpoints"
+    = render "partials/inline_boot_javascript"
+    = display_meta_tags site: "The Wheeler Centre",
+                        separator: "—",
+                        reverse: true
+  	= stylesheet_link_tag "public", media: "all"
+    = javascript_include_tag "public", async: true
     = csrf_meta_tags
 
   body
@@ -11,11 +16,11 @@ html
       = render 'partials/header'
       .middle
         .middle__container
-          	- if content_for?(:title)
-             	= yield(:title)
-            - if content_for?(:hero_image)
-              = yield(:hero_image)
-            - if content_for?(:middle)
-              = yield(:middle)
-            - else
-              = yield
+          - if content_for?(:title)
+            = yield(:title)
+          - if content_for?(:hero_image)
+            = yield(:hero_image)
+          - if content_for?(:middle)
+            = yield(:middle)
+          - else
+            = yield

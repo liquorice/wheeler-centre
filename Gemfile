@@ -30,6 +30,8 @@ gem "rack-canonical-host"
 
 # Views
 gem "jbuilder", "~> 2.0"
+gem "meta-tags"
+gem "redcarpet"
 gem "slim-rails"
 
 # Integrations

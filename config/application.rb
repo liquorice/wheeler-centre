@@ -16,6 +16,9 @@ module WheelerCentre
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = "Canberra"
 
+    # Add helpers to the load path
+    config.autoload_paths << Rails.root.join("lib", "helpers")
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
