@@ -45,13 +45,12 @@ namespace :wheeler_centre do
 
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
-      heracles_event.fields[:member_bookings_open_at].value = Time.zone.parse(blueprint_event["member_bookings_open_at"].to_s)
 
       heracles_event.save!
     end
   end
 
-  desc "Import blueprint pages"
+  desc "Import blueprint Pages and FaqPages"
   task :import_blueprint_pages => :environment do
 
     require "yaml"
@@ -63,26 +62,62 @@ namespace :wheeler_centre do
     backup_data = File.read(backup_file)
     blueprint_records = YAML.load_stream(backup_data)
 
-    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page}
+    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
 
-    homepage = Heracles::Page.where(url: "home").first!
-
-    # Todo: figure out how to strucure the pages within the site
     blueprint_pages.each do |blueprint_page|
-      heracles_page = Heracles::Page.find_by_slug(blueprint_page["slug"])
+      # If a parent page is set in the yaml, find it and use it as the Heracles parent
+      if blueprint_page["parent_page"].present?
+        parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
+      end
+
+      slug_components = blueprint_page["slug"].split("/")
+      if slug_components.length > 1
+        # Set the slug to be the last part of the blueprint slug
+        slug = slug_components.last
+        puts ("Slug: #{slug}" )
+        # Find the closest parent page
+        slug_components.reverse.each_with_index do |slug_component, index|
+          if index > 0
+            puts ("slug_component: #{slug_component}")
+            parent = Heracles::Page.find_by_slug(slug_component)
+            puts ("Parent: #{parent}")
+          end
+        end
+      end
+
+      if !slug.present?
+        slug = blueprint_page["slug"]
+      end
+
+      heracles_page = Heracles::Page.find_by_slug(slug)
 
       unless heracles_page
-        heracles_page = Heracles::Page.new_for_site_and_page_type(homepage.site, "content_page")
-        heracles_page.parent = homepage
+        site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+        heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+        if parent.present?
+          heracles_page.parent = parent
+        end
       end
 
       heracles_page.published = true
-      heracles_page.slug = blueprint_page["slug"]
+      heracles_page.slug = slug
       heracles_page.title = blueprint_page["title"]
+      heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
       heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
-
       heracles_page.save!
     end
 
   end
+
+  desc "Find unique Blueprint classes"
+  task :find_blueprint_classes => :environment do
+    backup_root = "/Users/josephinehall/Development/wheeler-centre"
+    backup_file = "#{backup_root}/backup-2014-12-18.yml"
+    legacy_classes = open(backup_file).grep(/^---.*$/)
+    class_names = legacy_classes.map do |class_name|
+      class_name.split(":").last
+    end
+    puts(class_names.uniq)
+  end
+
 end

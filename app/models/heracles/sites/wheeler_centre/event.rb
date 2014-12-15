@@ -5,21 +5,19 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :short_title, type: :text, label: "Shortened title"},
+              {name: :short_title, type: :text, label: "Short title"},
               {name: :body, type: :content},
               # Dates
               {name: :start_date, type: :date_time, label: "Event start date"},
               {name: :end_date, type: :date_time, label: "Event end date"},
               {name: :display_date, type: :text, hint: "Specify this if you want to customise the display of the date/time"},
-              {name: :is_all_day, type: :boolean, label: "All day event?"},
               # Venues
               {name: :venue, type: :text, label: "Venue"},
               # Bookings
               {name: :bookings_open_at, type: :date_time, label: "Bookings open on"},
-              {name: :member_bookings_open_at, type: :date_time, label: "Member bookings open on"},
               {name: :external_bookings, type: :text, label: "External bookings"},
               # Other
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :promo_image, type: :asset, asset_file_type: :image},
               {name: :presenters, type: :associated_pages, page_type: :person},
               {name: :series, type: :associated_pages, page_type: :event_series},
               {name: :recordings, type: :associated_pages, page_type: :recording},
@@ -27,8 +25,6 @@ module Heracles
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promotion text"},
-              # Utilities
-              {name: :publish_at, type: :date_time, label: "Publish at"}
             ]
           }
         end
@@ -52,6 +48,10 @@ module Heracles
 
           time :end_date_time do
             fields[:end_date].value
+          end
+
+          string :event_series_ids, multiple: true do
+            fields[:series].pages.map(&:id)
           end
 
         end
