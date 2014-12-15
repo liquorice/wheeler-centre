@@ -19,6 +19,19 @@ May also need to run the database migration in the process:
 
     rake db:migrate
 
+Add the heroku git remote:
+
+    git remote add heroku git@heroku.com:wheeler-centre.git
+
+You can pull production data down using the following commands:
+
+```
+heroku pgbackups:capture --expire
+wget `heroku pgbackups:url` -O dump.sql
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < dump.sql
+rm dump.sql
+```
+
 ### Running the Application Locally
 
     $ foreman start -f Procfile.dev
