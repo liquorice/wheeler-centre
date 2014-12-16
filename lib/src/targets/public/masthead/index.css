@@ -35,6 +35,11 @@
 
 .masthead__navigation-main__item {
   padding-right: 35px;
+  position: relative;
+}
+
+.masthead__navigation-main__item:hover .masthead__navigation-main__dropdown {
+  display: block;
 }
 
 .masthead__navigation-main__item:last-child {
@@ -53,3 +58,17 @@
   font-size: 18px;
   font-size: 1.8rem;
 }
+
+.masthead__navigation-main__dropdown {
+  background-color: green; /* Temporary */
+  display: none;
+  position: absolute;
+  min-width: 400px;
+}
+
+.masthead__navigation-main__dropdown-list {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+ }
