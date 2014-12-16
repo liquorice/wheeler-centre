@@ -10,6 +10,7 @@
 
 @import "./utilities/reset";
 @import "./utilities/clearfix";
+@import "./fonts/font-awesome";
 @import "./masthead";
 
 /* Base */
