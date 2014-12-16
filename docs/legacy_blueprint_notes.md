@@ -26,14 +26,14 @@ Types I've put to the side for the moment:
     SchPage # N/A
     DirPage # page
     CendirPage # N/A
-    TumPage
-    DbyPage
-    CenvidPage
-    CenmemPage
-    CmtPage
-    LnkPage
-    CencalPage
-    CenplaPage
+    TumPage # blog listing-ish thing
+    DbyPage # page
+    CenvidPage # recording
+    CenmemPage # N/A
+    CmtPage # N/A
+    LnkPage # N/A Homepage
+    CencalPage # N/A
+    CenplaPage # page with collections underneath
     Asset
     CencalEvent
     CenevtPresentation
