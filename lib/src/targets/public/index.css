@@ -1,5 +1,16 @@
-@import "./navigation";
+/* Variables */
+
+:root {
+  --primary-color: red;
+}
+
+/* Imports */
+
+@import "./reset";
+@import "./masthead";
+
+/* Base */
 
 html {
-  font-size: 75%;
+  font-size: 62.5%;
 }
