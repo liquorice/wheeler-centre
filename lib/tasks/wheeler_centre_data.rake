@@ -50,9 +50,8 @@ namespace :wheeler_centre do
     end
   end
 
-  desc "Import blueprint Pages and FaqPages"
-  task :import_blueprint_pages => :environment do
-
+  desc "Import blueprint types that map to Page"
+  task :import_blueprint_types_to_page => :environment do
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
@@ -106,7 +105,32 @@ namespace :wheeler_centre do
       heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
       heracles_page.save!
     end
+  end
 
+  desc "Import blueprint FAQs"
+  task :import_blueprint_faqs => :environment do
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_root = "/Users/josephinehall/Development/wheeler-centre"
+    backup_file = "#{backup_root}/backup.yml"
+    backup_data = File.read(backup_file)
+    blueprint_records = YAML.load_stream(backup_data)
+
+    blueprint_faqs = blueprint_records.select { |r| r.class == LegacyBlueprint::FaqQuestion }
+    parent = Heracles::Page.find_by_slug("faq")
+    faqs = ""
+    blueprint_faqs.map do |blueprint_faq|
+      # TODO probably need to put some formatting or styling around each question
+      faqs << LegacyBlueprint::BluedownFormatter.mark_up(blueprint_faq["question"], subject: blueprint_faq, assetify: false)
+      faqs << LegacyBlueprint::BluedownFormatter.mark_up(blueprint_faq["answer"], subject: blueprint_faq, assetify: false)
+    end
+
+    if parent.present?
+      parent.fields[:body].value = faqs
+      parent.save!
+    end
   end
 
   desc "Find unique Blueprint classes"
