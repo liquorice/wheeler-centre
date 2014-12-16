@@ -24,6 +24,22 @@
   float: left;
 }
 
+.masthead__navigation-main__item {
+  padding-right: 35px;
+}
+
+.masthead__navigation-main__item:last-child {
+  padding-right: 0;
+}
+
+.masthead__navigation-secondary__item {
+  padding-right: 30px;
+}
+
+.masthead__navigation-secondary__item:last-child {
+  padding-right: 0;
+}
+
 .masthead__navigation-main__anchor {
   font-size: 18px;
   font-size: 1.8rem;
