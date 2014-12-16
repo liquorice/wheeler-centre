@@ -107,28 +107,29 @@ namespace :wheeler_centre do
     end
   end
 
-  desc "Import blueprint FAQs"
-  task :import_blueprint_faqs => :environment do
+  # Example use: rake wheeler_centre:import_blueprint_types_to_body["/Users/josephinehall/Development/wheeler-centre/backup.yml","faq","FaqQuestion"]
+  desc "Import blueprint types to a page body field"
+  task :import_blueprint_types_to_body, [:yml_file, :page_slug, :type] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
 
-    backup_root = "/Users/josephinehall/Development/wheeler-centre"
-    backup_file = "#{backup_root}/backup.yml"
-    backup_data = File.read(backup_file)
+    backup_data = File.read(args[:yml_file])
     blueprint_records = YAML.load_stream(backup_data)
+    parent = Heracles::Page.find_by_slug(args[:page_slug])
+    body = ""
 
-    blueprint_faqs = blueprint_records.select { |r| r.class == LegacyBlueprint::FaqQuestion }
-    parent = Heracles::Page.find_by_slug("faq")
-    faqs = ""
-    blueprint_faqs.map do |blueprint_faq|
-      # TODO probably need to put some formatting or styling around each question
-      faqs << LegacyBlueprint::BluedownFormatter.mark_up(blueprint_faq["question"], subject: blueprint_faq, assetify: false)
-      faqs << LegacyBlueprint::BluedownFormatter.mark_up(blueprint_faq["answer"], subject: blueprint_faq, assetify: false)
+    if args[:type] == "FaqQuestion"
+      blueprint_types = blueprint_records.select { |r| r.class == LegacyBlueprint::FaqQuestion }
+      blueprint_types.map do |type|
+        # TODO probably need to put some formatting or styling around each question for FAQs?
+        body << LegacyBlueprint::BluedownFormatter.mark_up(type["question"], subject: type, assetify: false)
+        body << LegacyBlueprint::BluedownFormatter.mark_up(type["answer"], subject: type, assetify: false)
+      end
     end
 
     if parent.present?
-      parent.fields[:body].value = faqs
+      parent.fields[:body].value = body
       parent.save!
     end
   end
