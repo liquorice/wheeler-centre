@@ -1,7 +1,7 @@
 namespace :wheeler_centre do
-  desc "Import blueprint events"
-  task :import_blueprint_events [:yml_file] => :environment do |task, args|
 
+  desc "Import blueprint events"
+  task :import_blueprint_events, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
@@ -49,7 +49,7 @@ namespace :wheeler_centre do
   end
 
   desc "Import blueprint types that map to Page"
-  task :import_blueprint_types_to_page [:yml_file] => :environment do |task, args|
+  task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
@@ -128,6 +128,77 @@ namespace :wheeler_centre do
       parent.fields[:body].value = body
       parent.save!
     end
+  end
+
+  desc "Import blueprint legacy 'Criticism Now' pages"
+  task :import_blueprint_criticism_now, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = YAML.load_stream(backup_data)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+    # Find or initialise the Criticism page
+    criticism_now = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/criticism-now")
+    criticism_now.site = site
+    criticism_now.title = "Criticism Now"
+    criticism_now.slug = "criticism-now"
+    criticism_now.published = true
+    criticism_now.parent = projects
+    criticism_now.save!
+
+    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage }
+
+    blueprint_pages.each do |blueprint_page|
+      # The Dailies TumPage isn't part of "Criticism Now"
+      unless blueprint_page["slug"] == "dailies"
+        slug_components = blueprint_page["slug"].split("/")
+        if slug_components.length > 1
+          # Set the slug to be the last part of the blueprint slug
+          slug = slug_components.last
+        end
+
+        if !slug.present?
+          slug = blueprint_page["slug"]
+        end
+
+        heracles_page = Heracles::Page.find_by_slug(slug)
+
+        unless heracles_page
+          site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+          heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+          if criticism_now.present?
+            heracles_page.parent = criticism_now
+          end
+        end
+
+        heracles_page.published = true
+        heracles_page.slug = slug
+        heracles_page.title = blueprint_page["title"]
+        heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
+        heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+        heracles_page.save!
+
+        collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all")
+        collection.parent = heracles_page
+        collection.site = site
+        collection.fields[:contained_page_type].value = "page"
+        collection.fields[:sort_attribute].value = "created_at"
+        collection.fields[:sort_direction].value = "DESC"
+        collection.title = "All"
+        collection.slug = "all"
+        collection.save!
+      end
+    end
+
   end
 
 
