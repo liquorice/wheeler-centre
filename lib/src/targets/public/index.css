@@ -1,12 +1,13 @@
 /* Variables */
 
 :root {
-  --primary-color: red;
+  --primary-color: #009e8c;
 }
 
 /* Imports */
 
 @import "./reset";
+@import "./clearfix";
 @import "./masthead";
 
 /* Base */

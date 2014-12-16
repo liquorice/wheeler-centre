@@ -1,0 +1,23 @@
+/* Clearfixing */
+
+.masthead:before,
+.masthead__navigation-main:before,
+.masthead__navigation-secondary:before,
+.masthead:after,
+.masthead__navigation-main:after,
+.masthead__navigation-secondary:after {
+  content: " ";
+  display: table;
+}
+
+.masthead:after,
+.masthead__navigation-main:after,
+.masthead__navigation-secondary:after {
+  clear: both;
+}
+
+.masthead,
+.masthead__navigation-main,
+.masthead__navigation-secondary {
+  *zoom: 1;
+}

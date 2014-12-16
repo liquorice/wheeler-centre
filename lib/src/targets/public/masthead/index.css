@@ -1,2 +1,15 @@
 /* Masthead */
 
+.masthead {
+  background-color: var(--primary-color);
+}
+
+.masthead__navigation-main {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.masthead__navigation-main__item {
+  float: left;
+}
