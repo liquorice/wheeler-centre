@@ -1,23 +1,15 @@
 /* Clearfixing */
 
-.masthead:before,
-.masthead__navigation-main:before,
-.masthead__navigation-secondary:before,
-.masthead:after,
-.masthead__navigation-main:after,
-.masthead__navigation-secondary:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   display: table;
 }
 
-.masthead:after,
-.masthead__navigation-main:after,
-.masthead__navigation-secondary:after {
+.clearfix:after {
   clear: both;
 }
 
-.masthead,
-.masthead__navigation-main,
-.masthead__navigation-secondary {
+.clearfix {
   *zoom: 1;
 }

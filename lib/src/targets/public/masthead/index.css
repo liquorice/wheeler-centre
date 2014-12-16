@@ -5,11 +5,26 @@
 }
 
 .masthead__navigation-main {
+  float: left;
+}
+
+.masthead__navigation-secondary {
+  float: right;
+}
+
+.masthead__navigation-main,
+.masthead__navigation-secondary {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.masthead__navigation-main__item {
+.masthead__navigation-main__item,
+.masthead__navigation-secondary__item {
   float: left;
+}
+
+.masthead__navigation-main__anchor {
+  font-size: 18px;
+  font-size: 1.8rem;
 }
