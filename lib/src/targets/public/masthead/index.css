@@ -2,6 +2,7 @@
 
 .masthead {
   background-color: var(--primary-color);
+  padding-bottom: 30px;
 }
 
 .masthead__container {
@@ -110,4 +111,19 @@
 .masthead__navigation-secondary__anchor:hover,
 .masthead__navigation-secondary__anchor:focus {
   color: #fff;
+}
+
+.masthead__logo {
+  margin-left: 80px;
+  width: 244px;
+  height: 50px;
+}
+
+.masthead__logo-anchor {
+  display: block;
+  background-image: url("wheeler-centre-logo.svg");
+  background-size: 244px 50px;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999em;
 }
