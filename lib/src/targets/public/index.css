@@ -1,5 +1,24 @@
-@import "./test";
+/* Variables */
+
+:root {
+  --primary-color: #009e8c;
+  --text-color: #666;
+  --max-width: 1440px;
+}
+
+/* Imports */
+
+@import "./utilities/reset";
+@import "./utilities/clearfix";
+@import "./fonts/font-awesome";
+@import "./masthead";
+
+/* Base */
+
+* {
+  box-sizing: border-box;
+}
 
 html {
-  font-size: 75%;
+  font-size: 62.5%;
 }
