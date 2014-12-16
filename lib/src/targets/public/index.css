@@ -8,8 +8,8 @@
 
 /* Imports */
 
-@import "./reset";
-@import "./clearfix";
+@import "./utilities/reset";
+@import "./utilities/clearfix";
 @import "./masthead";
 
 /* Base */
