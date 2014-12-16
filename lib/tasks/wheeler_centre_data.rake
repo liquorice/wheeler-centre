@@ -1,14 +1,12 @@
 namespace :wheeler_centre do
   desc "Import blueprint events"
-  task :import_blueprint_events => :environment do
+  task :import_blueprint_events [:yml_file] => :environment do |task, args|
 
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
 
-    backup_root = "/Users/josephinehall/Development/wheeler-centre"
-    backup_file = "#{backup_root}/backup.yml"
-    backup_data = File.read(backup_file)
+    backup_data = File.read(args[:yml_file])
     blueprint_records = YAML.load_stream(backup_data)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
@@ -51,14 +49,12 @@ namespace :wheeler_centre do
   end
 
   desc "Import blueprint types that map to Page"
-  task :import_blueprint_types_to_page => :environment do
+  task :import_blueprint_types_to_page [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
 
-    backup_root = "/Users/josephinehall/Development/wheeler-centre"
-    backup_file = "#{backup_root}/backup.yml"
-    backup_data = File.read(backup_file)
+    backup_data = File.read(args[:yml_file])
     blueprint_records = YAML.load_stream(backup_data)
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
@@ -133,6 +129,7 @@ namespace :wheeler_centre do
       parent.save!
     end
   end
+
 
   desc "Find unique Blueprint classes"
   task :find_blueprint_classes => :environment do
