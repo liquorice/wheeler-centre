@@ -14,6 +14,8 @@ module Heracles
               {name: :url, type: :text},
               {name: :reviews, type: :content},
               {name: :external_links, type: :content},
+              {name: :is_staff_member, type: :boolean},
+              {name: :user_id, type: :integer},
             ]
           }
         end
