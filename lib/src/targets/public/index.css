@@ -10,6 +10,7 @@
 
 @import "./utilities/reset";
 @import "./utilities/clearfix";
+@import "./fonts/colfax";
 @import "./fonts/font-awesome";
 
 /* Base */
@@ -20,6 +21,10 @@
 
 html {
   font-size: 62.5%;
+}
+
+body {
+  font-family: "Colfax", Helvetica, sans-serif;
 }
 
 /* Components */
