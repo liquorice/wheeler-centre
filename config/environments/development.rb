@@ -27,8 +27,8 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = false
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # Add everything in our custom lib/src/tmp assets directory to the precompiled list
+  config.assets.precompile += Dir["lib/src/tmp/**/*.*"].reject {|f| f =~ /^lib\/src\/tmp\/components/}.collect {|f| f.gsub(/^lib\/src\/tmp\//, "")}
 
   # Use custom asset_host for development
   config.action_controller.asset_host = ENV['ASSET_HOST_DEVELOPMENT']
