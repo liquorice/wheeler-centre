@@ -2,7 +2,8 @@
 
 :root {
   --primary-color: #009e8c;
-  --text-color: #666;
+  --primary-color-lighter: #ccefeb;
+  --text-color: #6b696c;
   --max-width: 1440px;
 }
 
@@ -24,6 +25,7 @@ html {
 }
 
 body {
+  color: var(--text-color);
   font-family: "Colfax", Helvetica, sans-serif;
 }
 
