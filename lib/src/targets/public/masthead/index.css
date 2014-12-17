@@ -2,6 +2,7 @@
 
 .masthead {
   background-color: var(--primary-color);
+  padding-bottom: 30px;
 }
 
 .masthead__container {
@@ -73,24 +74,33 @@
   position: absolute;
 }
 
+.masthead__navigation-main__dropdown-icon {
+  font-size: 8px;
+  font-size: 0.8rem;
+  padding-left: 8px;
+  padding-bottom: 4px;
+  vertical-align: middle;
+}
+
 .masthead__navigation-main__dropdown-list {
   float: left;
   list-style: none;
   margin: 0;
   padding: 0;
- }
+}
 
 .masthead__navigation-main__dropdown-item span {
   color: #fff;
   letter-spacing: .1em;
+  padding-bottom: 20px;
   text-transform: uppercase;
- }
+}
 
 .masthead__navigation-secondary {
   float: right;
 }
 
- .masthead__navigation-secondary__item {
+.masthead__navigation-secondary__item {
   padding-right: 30px;
 }
 
@@ -101,4 +111,19 @@
 .masthead__navigation-secondary__anchor:hover,
 .masthead__navigation-secondary__anchor:focus {
   color: #fff;
+}
+
+.masthead__logo {
+  margin-left: 80px;
+  width: 244px;
+  height: 50px;
+}
+
+.masthead__logo-anchor {
+  display: block;
+  background-image: url("wheeler-centre-logo.svg");
+  background-size: 244px 50px;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999em;
 }

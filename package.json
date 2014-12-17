@@ -5,6 +5,7 @@
   "author": "Icelab",
   "devDependencies": {
     "duo-test": "^0.3.12",
+    "mime": "^1.2.11",
     "http-proxy": "^1.7.3",
     "wach": "^1.0.0"
   },
