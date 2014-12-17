@@ -35,13 +35,12 @@
 
       .masthead__navigation-main__item--has-dropdown:hover,
       .masthead__navigation-main__item--has-dropdown:focus {
-        background-color: color(var(--primary-color) shade(20%));
+        background-color: color(var(--primary-color) shade(15%));
       }
 
       .masthead__navigation-main__item--has-dropdown:hover .masthead__navigation-main__anchor ,
       .masthead__navigation-main__item--has-dropdown:focus .masthead__navigation-main__anchor {
         color: #fff;
-        text-decoration: none;
       }
 
       .masthead__navigation-main__item:hover .masthead__navigation-main__dropdown,
@@ -54,44 +53,59 @@
           display: inline-block;
           font-size: 17px;
           font-size: 1.7rem;
-          padding: 15px;
-          text-decoration: none;
+          padding: 18px;
         }
 
         .masthead__navigation-main__anchor:hover,
         .masthead__navigation-main__anchor:focus {
-          background-color: color(var(--primary-color) shade(20%));
           color: #fff;
-          text-decoration: none;
         }
 
     .masthead__navigation-main__dropdown {
-      background-color: color(var(--primary-color) shade(20%));
+      background-color: color(var(--primary-color) shade(15%));
       display: none;
-      min-width: 400px;
-      padding: 15px;
+      min-width: 460px;
+      padding: 30px 18px 20px;
       position: absolute;
     }
 
     .masthead__navigation-main__dropdown-icon {
       font-size: 8px;
-      font-size: 0.8rem;
       padding-left: 8px;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
       vertical-align: middle;
     }
 
       .masthead__navigation-main__dropdown-list {
         float: left;
         list-style: none;
+        padding-right: 60px;
       }
 
-        .masthead__navigation-main__dropdown-item span {
-          color: #fff;
-          letter-spacing: .1em;
-          padding-bottom: 20px;
-          text-transform: uppercase;
+      .masthead__navigation-main__dropdown-list:last-child {
+        padding-right: 0;
+      }
+
+        .masthead__navigation-main__dropdown-item {
+          color: var(--primary-color-lighter);
+          font-size: 17px;
+          font-size: 1.7rem;
+          padding-bottom: 12px;
         }
+
+        .masthead__navigation-main__dropdown-item:last-child {
+          padding-bottom: 0;
+        }
+
+          .masthead__navigation-main__dropdown-item span {
+            color: #fff;
+            display: block;
+            font-size: 11px;
+            font-size: 1.1rem;
+            letter-spacing: .2em;
+            padding-bottom: 12px;
+            text-transform: uppercase;
+          }
 
     .masthead__navigation-secondary {
       float: right;
