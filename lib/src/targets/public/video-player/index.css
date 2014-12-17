@@ -1,0 +1,130 @@
+
+.video-player {
+  position: relative;
+}
+  /* Teaser */
+  .video-player__teaser {
+    background-image: url(http://placekitten.com/1000/400);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    bottom: 0;
+    color: #fff;
+    left: 0;
+    opacity: 2;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    transition: opacity 300ms;
+    z-index: 2;
+  }
+
+    .video-player__teaser:before {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+
+    .video-player--playing .video-player__teaser {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+  /* Cover */
+  .video-player__cover {
+    background-color: #000;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 300ms;
+    z-index: 1;
+  }
+    .video-player__teaser--preview .video-player__cover {
+      opacity: 0.1;
+    }
+
+  /* Header */
+  .video-player__header {
+    display: inline-block;
+    max-width: 100%;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+    width: 700px;
+    z-index: 3;
+  }
+    .video-player__title {
+      font-size: 32px;
+      font-size: 3.2rem;
+      line-height: 1.4;
+    }
+
+  /* Metadata */
+  .video-player__metadata {
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-size: 1.4rem;
+    letter-spacing: 0.18em;
+    left: 30px;
+    position: absolute;
+    top: 24px;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+    .video-player__watch,
+    .video-player__duration {
+      display: inline-block;
+      padding-bottom: 6px;
+      padding-top: 6px;
+    }
+
+    .video-player__duration {
+      border-left: 1px solid rgba(255,255,255, 0.4);
+      opacity: 0;
+      margin-left: 20px;
+      padding-left: 20px;
+      transition: opacity 300ms;
+    }
+
+  .video-player--loaded .video-player__duration {
+    opacity: 1;
+  }
+
+  /* Content */
+  .video-player__content {
+    background-color: #111;
+    display: block;
+    padding: 20px;
+  }
+    /* Make sure the video doesn’t expand to be ridiculously tall */
+    .video-player__content-inner {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 800px;
+    }
+
+
+
+/* TODO move this */
+.responsive-embed {
+  position: relative;
+  padding-bottom: calc(56.25% + 5%); /* 16:9 */
+  height: 0;
+  z-index: 1;
+}
+  .responsive-embed video,
+  .responsive-embed object,
+  .responsive-embed iframe  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
