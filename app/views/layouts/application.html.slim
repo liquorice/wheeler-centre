@@ -8,6 +8,8 @@ html
                         separator: "—",
                         reverse: true
   	= stylesheet_link_tag "public", media: "all"
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true
     = csrf_meta_tags
 
