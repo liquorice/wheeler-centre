@@ -1,0 +1,38 @@
+
+.video-player {
+  position: relative;
+}
+
+  .video-player__metadata {
+    color: rgba(255,255,255,0.8);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .video-player__duration {
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .video-player--loaded .video-player__duration {
+    opacity: 1;
+  }
+
+  .video-player__cover {
+    background-image: url(http://placekitten.com/1000/400);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  .video-player--playing .video-player__cover {
+    opacity: 0;
+    pointer-events: none;
+  }
