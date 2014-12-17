@@ -245,9 +245,73 @@ namespace :wheeler_centre do
         end
       end
     end
-
   end
 
+  desc "Import Blueprint Dailies"
+  task :import_blueprint_dailies, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = YAML.load_stream(backup_data)
+
+    dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
+    id = dailies_root.first["id"].to_i
+
+    blueprint_dailies = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id}
+
+    blueprint_dailies.each do |blueprint_daily|
+      heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
+      unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
+      heracles_blog_post.published = true
+      heracles_blog_post.slug = blueprint_daily["slug"]
+      heracles_blog_post.title = blueprint_daily["title"]
+      heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["content"], subject: blueprint_daily, assetify: false)
+      heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      heracles_blog_post.parent = Heracles::Page.find_by_slug("blog")
+      heracles_blog_post.collection = Heracles::Page.where(url: "blog/all-posts").first!
+      # TODO ensure the author relationship is preserved
+      heracles_blog_post.save!
+    end
+  end
+
+  desc "Import Blueprint People"
+  task :import_blueprint_people, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = YAML.load_stream(backup_data)
+
+    blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
+
+    blueprint_presenters.each do |blueprint_presenter|
+      heracles_person = Heracles::Page.find_by_slug(blueprint_presenter["slug"])
+      unless heracles_person then heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person") end
+      heracles_person.published = true
+      heracles_person.slug = blueprint_presenter["slug"]
+      heracles_person.title = blueprint_presenter["title"]
+      heracles_person.first_name = blueprint_presenter["name"]
+      heracles_person.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["intro"], subject: blueprint_presenter, assetify: false)
+      heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter, assetify: false)
+      heracles_person.fields[:url].value = blueprint_presenter["url"]
+      heracles_person.fields[:external_links].value = blueprint_presenter["external_links"]
+      # TODO:
+      # {name: :portrait, type: :asset, asset_file_type: :image},
+      # {name: :is_staff_member, type: :boolean},
+      # {name: :user_id, type: :integer},
+      # {name: :reviews, type: :content},
+      heracles_person.created_at = Time.zone.parse(blueprint_presenter["created_on"].to_s)
+      heracles_person.parent = Heracles::Page.find_by_slug("people")
+      heracles_person.collection = Heracles::Page.where(url: "people/all-people").first!
+      heracles_person.save!
+    end
+
+  end
 
   desc "Find unique Blueprint classes"
   task :find_blueprint_classes => :environment do
