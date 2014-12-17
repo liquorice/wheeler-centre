@@ -187,15 +187,62 @@ namespace :wheeler_centre do
         heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
         heracles_page.save!
 
-        collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all")
-        collection.parent = heracles_page
-        collection.site = site
-        collection.fields[:contained_page_type].value = "page"
-        collection.fields[:sort_attribute].value = "created_at"
-        collection.fields[:sort_direction].value = "DESC"
-        collection.title = "All"
-        collection.slug = "all"
-        collection.save!
+        reviews_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all-reviews")
+        reviews_collection.parent = heracles_page
+        reviews_collection.site = site
+        reviews_collection.fields[:contained_page_type].value = "review"
+        reviews_collection.fields[:sort_attribute].value = "created_at"
+        reviews_collection.fields[:sort_direction].value = "DESC"
+        reviews_collection.title = "All Reviews"
+        reviews_collection.slug = "all-reviews"
+        reviews_collection.save!
+
+        responses_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all-responses")
+        responses_collection.parent = heracles_page
+        responses_collection.site = site
+        responses_collection.fields[:contained_page_type].value = "response"
+        responses_collection.fields[:sort_attribute].value = "created_at"
+        responses_collection.fields[:sort_direction].value = "DESC"
+        responses_collection.title = "All Responses"
+        responses_collection.slug = "all-responses"
+        responses_collection.save!
+
+        id = blueprint_page["id"].to_i
+
+        # Find all the Tum{#types} that have the id as their page_id, and sort them intore collections
+        if id.present?
+          blueprint_reviews = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
+          blueprint_reviews.each do |blueprint_review|
+            heracles_review = Heracles::Page.find_by_slug(blueprint_review["slug"])
+            unless heracles_review then heracles_review = Heracles::Page.new_for_site_and_page_type(site, "review") end
+            heracles_review.published = true
+            heracles_review.slug = blueprint_review["slug"]
+            heracles_review.title = blueprint_review["title"]
+            heracles_review.created_at = Time.zone.parse(blueprint_review["created_on"].to_s)
+            heracles_review.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_review["content"], subject: blueprint_review, assetify: false)
+            heracles_review.parent = heracles_page
+            heracles_review.collection = reviews_collection
+            heracles_review.save!
+          end
+
+          blueprint_responses = blueprint_records.select { |r| r.class == LegacyBlueprint::TumQuote && r["page_id"].to_i == id }
+          blueprint_responses.each do |blueprint_response|
+            heracles_response = Heracles::Page.find_by_slug(blueprint_response["slug"])
+            unless heracles_response then heracles_response = Heracles::Page.new_for_site_and_page_type(site, "response") end
+            heracles_response.published = true
+            heracles_response.slug = blueprint_response["slug"]
+            # Trim the title to the first few words
+            heracles_response.title = blueprint_response["title"][0..30].gsub(/\s\w+\s*$/, '...')
+            # Map the Blueprint fields to better-named fields in Heracles.
+            heracles_response.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response, assetify: false)
+            heracles_response.fields[:author].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["content"], subject: blueprint_response, assetify: false)
+            heracles_response.fields[:url].value = blueprint_response["url"]
+            heracles_response.created_at = Time.zone.parse(blueprint_response["created_on"].to_s)
+            heracles_response.parent = heracles_page
+            heracles_response.collection = responses_collection
+            heracles_response.save!
+          end
+        end
       end
     end
 
