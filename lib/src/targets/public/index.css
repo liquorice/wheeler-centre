@@ -5,7 +5,7 @@
   --primary-color-lighter: #ccefeb;
   --primary-color-darker: color(var(--primary-color) shade(15%));
   --text-color: #6b696c;
-  --max-width: 1440px;
+  --max-width: 100%;
 }
 
 /* Imports */

@@ -1,4 +1,24 @@
-.contextual
+.contextual.clearfix
   .contextual__container
     h1.contextual__section-title
       = yield(:title)
+    ul.contextual__navigation-list
+      li.contextual__navigation-item
+        a.contextual__navigation-anchor.contextual__navigation-anchor--active href="#"
+          | Calendar
+        a.contextual__navigation-anchor href="#"
+          | Event series
+        a.contextual__navigation-anchor href="#"
+          | Past events
+        a.contextual__navigation-anchor href="#"
+          | Presenters
+  .upcoming-events
+    ul.upcoming-events__list
+      li.upcoming-events__item
+        | A big event block
+      li.upcoming-events__item
+        | A big event block
+      li.upcoming-events__item
+        | A big event block
+      li.upcoming-events__item
+        | A big event block
