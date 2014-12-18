@@ -1,24 +1,30 @@
+.contextual
+  h1.contextual__section-title
+    = yield(:title)
 .contextual.clearfix
-  .contextual__container
-    h1.contextual__section-title
-      = yield(:title)
-    ul.contextual__navigation-list
-      li.contextual__navigation-item
-        a.contextual__navigation-anchor.contextual__navigation-anchor--active href="#"
-          | Calendar
-        a.contextual__navigation-anchor href="#"
-          | Event series
-        a.contextual__navigation-anchor href="#"
-          | Past events
-        a.contextual__navigation-anchor href="#"
-          | Presenters
-  .upcoming-events
-    ul.upcoming-events__list
+  ul.contextual__navigation-list
+    li.contextual__navigation-item
+      a.contextual__navigation-anchor.contextual__navigation-anchor--active href="#"
+        | Calendar
+    li.contextual__navigation-item
+      a.contextual__navigation-anchor href="#"
+        | Event series
+    li.contextual__navigation-item
+      a.contextual__navigation-anchor href="#"
+        | Past events
+    li.contextual__navigation-item
+      a.contextual__navigation-anchor href="#"
+        | Presenters
+  .upcoming-events.clearfix
+    span.upcoming-events__up-next Up next
+    a.upcoming-events__view-all href="#"
+      | View all 112 of our upcoming events
+    ul.upcoming-events__list.clearfix
       li.upcoming-events__item
-        | A big event block
+        img.upcoming-events__item-image src="http://lorempixel.com/185/50" width="185" height="50"
       li.upcoming-events__item
-        | A big event block
+        img.upcoming-events__item-image src="http://placekitten.com/185/50" width="185" height="50"
       li.upcoming-events__item
-        | A big event block
+        img.upcoming-events__item-image src="http://placecage.com/185/50" width="185" height="50"
       li.upcoming-events__item
-        | A big event block
+        img.upcoming-events__item-image src="http://fillmurray.com/185/50" width="185" height="50"
