@@ -26,13 +26,15 @@ html {
 }
 
 body {
+  background-color: #fff;
   color: var(--text-color);
   font-family: "Colfax", Helvetica, sans-serif;
   font-size: 17px;
-  font-sizd: 1.7rem;
+  font-size: 1.7rem;
 }
 
 /* Components */
 
 @import "./video-player";
 @import "./masthead";
+@import "./contextual";

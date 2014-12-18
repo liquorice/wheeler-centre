@@ -15,6 +15,7 @@ html
 
   body
     = render 'partials/masthead'
+    = render 'partials/contextual'
     - if content_for?(:title)
       = yield(:title)
     - if content_for?(:hero_image)

@@ -135,7 +135,7 @@
 
           .masthead__navigation-secondary__item--search .masthead__navigation-secondary__anchor {
             display: block;
-            padding: 6px 5px 6px 6px;
+            padding: 6px;
             margin-top: -3px;
           }
 
@@ -148,6 +148,7 @@
             color: var(--primary-color-lighter);
             font-size: 11px;
             font-size: 1.1rem;
+            font-weight: bold;
             letter-spacing: .2em;
             text-transform: uppercase;
           }
