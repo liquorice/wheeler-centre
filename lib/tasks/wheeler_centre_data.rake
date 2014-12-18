@@ -285,7 +285,9 @@ namespace :wheeler_centre do
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    # blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
 
@@ -294,23 +296,49 @@ namespace :wheeler_centre do
       unless heracles_person then heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person") end
       heracles_person.published = true
       heracles_person.slug = blueprint_presenter["slug"]
-      heracles_person.title = blueprint_presenter["title"]
-      heracles_person.first_name = blueprint_presenter["name"]
+      heracles_person.title = blueprint_presenter["name"]
+      heracles_person.fields[:display_name].value = blueprint_presenter["name"]
       heracles_person.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["intro"], subject: blueprint_presenter, assetify: false)
       heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter, assetify: false)
       heracles_person.fields[:url].value = blueprint_presenter["url"]
       heracles_person.fields[:external_links].value = blueprint_presenter["external_links"]
       # TODO:
       # {name: :portrait, type: :asset, asset_file_type: :image},
-      # {name: :is_staff_member, type: :boolean},
-      # {name: :user_id, type: :integer},
       # {name: :reviews, type: :content},
+      # Find a staff member that matches this presenter
+      staff_member = find_matching_staff_member(blueprint_presenter, blueprint_records)
+      if staff_member.present?
+        puts (staff_member["slug"])
+        heracles_person.fields[:is_staff_member].value = true
+        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(staff_member["bio"], subject: staff_member, assetify: false)
+        heracles_person.fields[:position_title].value = staff_member["title"]
+        heracles_person.fields[:first_name].value = staff_member["first_name"]
+        heracles_person.fields[:last_name].value = staff_member["surname"]
+      end
+      # Find a matching user and set the id
+      user = find_matching_user(blueprint_presenter, blueprint_records)
+      if user.present?
+        puts (user["id"])
+        heracles_person.fields[:user_id].value = user["id"]
+      end
       heracles_person.created_at = Time.zone.parse(blueprint_presenter["created_on"].to_s)
       heracles_person.parent = Heracles::Page.find_by_slug("people")
       heracles_person.collection = Heracles::Page.where(url: "people/all-people").first!
+      puts (heracles_person.slug)
       heracles_person.save!
     end
+  end
 
+  def find_matching_staff_member(presenter, data)
+    # The best we can do is match on the slug, or maybe the names.
+    staff = data.select { |r| r.class == LegacyBlueprint::PslPerson && r["slug"].to_s == presenter["slug"].to_s }
+    staff.first
+  end
+
+  def find_matching_user(presenter, data)
+    # Find a user by matching on the name, unsure of a better way to do this
+    users = data.select { |r| r.class == LegacyBlueprint::User && r["name"].to_s.downcase == presenter["name"].to_s.downcase }
+    users.first
   end
 
   desc "Find unique Blueprint classes"

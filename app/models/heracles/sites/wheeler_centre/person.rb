@@ -14,8 +14,10 @@ module Heracles
               {name: :url, type: :text},
               {name: :reviews, type: :content},
               {name: :external_links, type: :content},
-              {name: :is_staff_member, type: :boolean},
-              {name: :user_id, type: :integer},
+              {name: :is_staff_member, type: :boolean, defaults: {value: false}, question_text: "Is a Wheeler Centre staff member?"},
+              {name: :staff_bio, type: :content, label: "Staff biography", display_if: 'is_staff_member.value'},
+              {name: :position_title, type: :text, display_if: 'is_staff_member.value'},
+              {name: :user_id, type: :integer, label: "User id"},
             ]
           }
         end
