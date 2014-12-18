@@ -2,8 +2,10 @@
 
 :root {
   --primary-color: #009e8c;
-  --text-color: #666;
-  --max-width: 1440px;
+  --primary-color-lighter: #ccefeb;
+  --primary-color-darker: color(var(--primary-color) shade(15%));
+  --text-color: #6b696c;
+  --max-width: 100%;
 }
 
 /* Imports */
@@ -24,10 +26,15 @@ html {
 }
 
 body {
+  background-color: #fff;
+  color: var(--text-color);
   font-family: "Colfax", Helvetica, sans-serif;
+  font-size: 17px;
+  font-size: 1.7rem;
 }
 
 /* Components */
 
 @import "./video-player";
 @import "./masthead";
+@import "./contextual";
