@@ -11,6 +11,7 @@
 /* Imports */
 
 @import "./utilities/reset";
+@import "./utilities/accessibility";
 @import "./utilities/clearfix";
 @import "./fonts/colfax";
 @import "./fonts/font-awesome";
