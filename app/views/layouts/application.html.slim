@@ -16,17 +16,20 @@ html
     /[if lt IE 9]
       = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true
+
+    / TODO shift to xhr if we use a CDN -> origin structure
     = csrf_meta_tags
 
-  body
-    = render 'partials/masthead'
-    = render 'partials/contextual'
-    / - if content_for?(:title)
-    /   = yield(:title)
-    - if content_for?(:hero_image)
-      = yield(:hero_image)
-    - if content_for?(:middle)
-      = yield(:middle)
-    - else
-      = yield
-    -# = render 'partials/footer'
+  = area :body_outer do
+    body
+      = area :body do
+        = area :masthead do
+          = render 'partials/masthead'
+
+        = area :main_outer do
+          div role="main"
+            = area :main
+            = area :main_footer
+
+        = area :footer do
+          = render 'partials/footer'

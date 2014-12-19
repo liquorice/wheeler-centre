@@ -1,6 +1,9 @@
-.masthead data-view-masthead={foo: "bar"}.to_json
-  .masthead__container
-    = render 'partials/navigation'
-    h1.masthead__logo
-      a.masthead__logo-anchor href="./"
-        | The Wheeler Centre
+.masthead role="banner" data-view-masthead={foo: "bar"}.to_json
+  .masthead__inner
+    .masthead__container
+      = render 'partials/navigation'
+      h1.masthead__logo
+        a.masthead__logo-anchor href="./"
+          | The Wheeler Centre
+  = area :masthead_contextual
+    = render 'partials/masthead_contextual'

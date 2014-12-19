@@ -2,10 +2,12 @@
 
 .masthead {
   background-color: var(--primary-color);
-  padding-top: 15px;
-  padding-left: 35px;
-  padding-right: 35px;
 }
+  .masthead__inner {
+    padding-top: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
 
   .masthead__navigation {
     padding-bottom: 25px;

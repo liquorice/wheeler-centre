@@ -1,19 +1,19 @@
-.contextual
-  h1.contextual__section-title
-    = yield(:title)
-.contextual.clearfix
-  ul.contextual__navigation-list
-    li.contextual__navigation-item
-      a.contextual__navigation-anchor.contextual__navigation-anchor--active href="#"
+.masthead-contextual
+  h1.masthead-contextual__section-title
+    = area :masthead_title
+.masthead-contextual.clearfix
+  ul.masthead-contextual__navigation-list
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="#"
         | Calendar
-    li.contextual__navigation-item
-      a.contextual__navigation-anchor href="#"
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="#"
         | Event series
-    li.contextual__navigation-item
-      a.contextual__navigation-anchor href="#"
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="#"
         | Past events
-    li.contextual__navigation-item
-      a.contextual__navigation-anchor href="#"
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="#"
         | Presenters
   .upcoming-events
     .upcoming-events__navigation.clearfix

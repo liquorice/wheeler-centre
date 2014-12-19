@@ -38,4 +38,4 @@ body {
 
 @import "./video-player";
 @import "./masthead";
-@import "./contextual";
+@import "./masthead-contextual";

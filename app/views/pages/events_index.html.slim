@@ -1,10 +1,10 @@
 - events = page.events.results
 
-- content_for(:title) do
+= area :masthead_title do
   .page__title.page__title--events
     h1.title == page.title
 
-- content_for(:middle) do
+= area :main do
   .page__content
     .page__body.page__body--events.copy
       = render_content page.fields[:body]
