@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 4cd78d72d7d57a3d3387e24cc541a2f00d567f8a
+  revision: f63f2d62e49e3624d2a4c8b20dcc2d019890598e
   branch: master
   specs:
     heracles (1.0.0)
@@ -83,7 +83,7 @@ GEM
       activesupport (= 4.1.8)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    active_model_serializers (0.9.0)
+    active_model_serializers (0.9.2)
       activemodel (>= 3.2)
     activejob (0)
       activemodel-globalid
@@ -108,7 +108,7 @@ GEM
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (4.0.0.1)
+    autoprefixer-rails (4.0.2.1)
       execjs
     bcrypt (3.1.9)
     better_errors (2.0.0)
@@ -221,7 +221,7 @@ GEM
     multi_xml (0.5.5)
     nestive (0.6.0)
       rails (>= 3.0.0)
-    netrc (0.8.0)
+    netrc (0.10.2)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     nokogumbo (1.1.12)
@@ -278,7 +278,7 @@ GEM
     rails-assets-select2 (3.5.2)
       rails-assets-jquery (>= 1.7.1)
     rails-assets-selectivizr (1.0.2)
-    rails-assets-speakingurl (0.17.0)
+    rails-assets-speakingurl (0.18.0)
     rails-assets-viewloader (2.1.0)
       rails-assets-jquery (>= 1.4.3)
     rails-observers (0.1.2)
@@ -335,7 +335,7 @@ GEM
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
     ruby-progressbar (1.7.0)
-    sanitize (3.0.3)
+    sanitize (3.0.4)
       crass (~> 0.2.0)
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.1.12)
