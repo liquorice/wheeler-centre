@@ -4,6 +4,11 @@ html
     meta charset="utf-8"
     = render "partials/metaquery_breakpoints"
     = render "partials/inline_boot_javascript"
+
+    / TODO add DNS prefetch URLs
+    link rel="dns-prefetch" href="//cdn.embedly.com"
+    link rel="dns-prefetch" href="//www.youtube.com"
+
     = display_meta_tags site: "The Wheeler Centre",
                         separator: "—",
                         reverse: true
