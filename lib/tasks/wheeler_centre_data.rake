@@ -289,6 +289,46 @@ namespace :wheeler_centre do
     blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
+    blueprint_users = blueprint_records.select { |r| r.class == LegacyBlueprint::User }
+    blueprint_staff = blueprint_records.select { |r| r.class == LegacyBlueprint::PslPerson }
+
+    blueprint_users.each do |blueprint_user|
+      if blueprint_user["name"].present?
+        # Make a best effort to construct the slug, as we only have `name` to go by
+        slug = blueprint_user["name"].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        names = blueprint_user["name"].split(" ")
+        existing_heracles_person = Heracles::Page.find_by_slug(slug)
+        unless existing_heracles_person
+          puts (slug)
+          # Only create a new person if that slug doesn't already exist
+          heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
+          heracles_person.published = true
+          heracles_person.slug = slug
+          unless blueprint_user["name"] then heracles_person.title = blueprint_user["name"] else heracles_person.title = slug end
+          heracles_person.fields[:first_name].value = names.first
+          heracles_person.fields[:last_name].value = names.drop(1).join(" ")
+          heracles_person.fields[:user_id].value = blueprint_user["id"]
+          heracles_person.save!
+        end
+      end
+    end
+
+    blueprint_staff.each do |blueprint_staff_member|
+      existing_heracles_person = Heracles::Page.find_by_slug(blueprint_staff_member["slug"])
+      unless existing_heracles_person
+        puts (blueprint_staff_member["slug"])
+        heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
+        heracles_person.published = true
+        heracles_person.slug = blueprint_staff_member["slug"]
+        heracles_person.title = blueprint_staff_member["first_name"] + " " + blueprint_staff_member["surname"]
+        heracles_person.fields[:is_staff_member].value = true
+        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_staff_member["bio"], subject: blueprint_staff_member, assetify: false)
+        heracles_person.fields[:position_title].value = blueprint_staff_member["title"]
+        heracles_person.fields[:first_name].value = blueprint_staff_member["first_name"]
+        heracles_person.fields[:last_name].value = blueprint_staff_member["surname"]
+        heracles_person.save!
+      end
+    end
 
     blueprint_presenters.each do |blueprint_presenter|
       heracles_person = Heracles::Page.find_by_slug(blueprint_presenter["slug"])
@@ -304,7 +344,7 @@ namespace :wheeler_centre do
       # {name: :portrait, type: :asset, asset_file_type: :image},
       # {name: :reviews, type: :content},
       # Find a staff member that matches this presenter
-      staff_member = find_matching_staff_member(blueprint_presenter, blueprint_records)
+      staff_member = find_matching_staff_member(blueprint_presenter, blueprint_staff)
       if staff_member.present?
         puts (staff_member["slug"])
         heracles_person.fields[:is_staff_member].value = true
@@ -312,9 +352,16 @@ namespace :wheeler_centre do
         heracles_person.fields[:position_title].value = staff_member["title"]
         heracles_person.fields[:first_name].value = staff_member["first_name"]
         heracles_person.fields[:last_name].value = staff_member["surname"]
+      else
+        # We still need to split the name and assign to first_name and last_name
+        names = blueprint_presenter["name"].split(" ")
+        # Simply make the first component of the name the first_name
+        heracles_person.fields[:first_name].value = names.first
+        # Make everything else the last_name
+        heracles_person.fields[:last_name].value = names.drop(1).join(" ")
       end
       # Find a matching user and set the id
-      user = find_matching_user(blueprint_presenter, blueprint_records)
+      user = find_matching_user(blueprint_presenter, blueprint_users)
       if user.present?
         puts (user["id"])
         heracles_person.fields[:user_id].value = user["id"]
@@ -325,17 +372,18 @@ namespace :wheeler_centre do
       puts (heracles_person.slug)
       heracles_person.save!
     end
+
   end
 
   def find_matching_staff_member(presenter, data)
     # The best we can do is match on the slug, or maybe the names.
-    staff = data.select { |r| r.class == LegacyBlueprint::PslPerson && r["slug"].to_s == presenter["slug"].to_s }
+    staff = data.select { |r| r["slug"].to_s == presenter["slug"].to_s }
     staff.first
   end
 
   def find_matching_user(presenter, data)
     # Find a user by matching on the name, unsure of a better way to do this
-    users = data.select { |r| r.class == LegacyBlueprint::User && r["name"].to_s.downcase == presenter["name"].to_s.downcase }
+    users = data.select { |r| r["name"].to_s.downcase == presenter["name"].to_s.downcase }
     users.first
   end
 
