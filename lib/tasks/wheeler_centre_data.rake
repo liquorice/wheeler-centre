@@ -260,7 +260,8 @@ namespace :wheeler_centre do
     dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
     id = dailies_root.first["id"].to_i
 
-    blueprint_dailies = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id}
+    blueprint_dailies = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
+    all_authors = Heracles::Page.of_type("person")
 
     blueprint_dailies.each do |blueprint_daily|
       heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
@@ -272,9 +273,10 @@ namespace :wheeler_centre do
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
       heracles_blog_post.parent = Heracles::Page.find_by_slug("blog")
       heracles_blog_post.collection = Heracles::Page.where(url: "blog/all-posts").first!
-      # TODO ensure the author relationship is preserved
-      all_authors_ids = Heracles::Page.of_type("supporter").pluck(:id)
-      heracles_blog_post.fields[:authors].page_ids = all_authors_ids.select { |p| p.fields[:user_id] == blueprint_daily["user_id"] }
+      authors = all_authors.select { |p| p.fields[:user_id].value.to_i == blueprint_daily["user_id"].to_i }
+      if authors.present?
+        heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
+      end
       heracles_blog_post.save!
     end
   end
