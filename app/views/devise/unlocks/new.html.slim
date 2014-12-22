@@ -1,0 +1,16 @@
+= area :main do
+  .page__content
+    .page__body.page__body--session.copy
+      .page__title.page__title--session
+        h1.title
+          | Resend unlock instructions
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .field
+          .field-header
+            = f.label :email, class: "field-label"
+          = f.email_field :email, autofocus: true, class: "field-text-input"
+        .actions
+          = f.submit "Resend unlock instructions", class: "button button--highlight"
+      .page__body--session-links
+        = render "devise/shared/links"
