@@ -264,20 +264,22 @@ namespace :wheeler_centre do
     all_authors = Heracles::Page.of_type("person")
 
     blueprint_dailies.each do |blueprint_daily|
-      heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
-      unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
-      heracles_blog_post.published = true
-      heracles_blog_post.slug = blueprint_daily["slug"]
-      heracles_blog_post.title = blueprint_daily["title"]
-      heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["content"], subject: blueprint_daily, assetify: false)
-      heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
-      heracles_blog_post.parent = Heracles::Page.find_by_slug("blog")
-      heracles_blog_post.collection = Heracles::Page.where(url: "blog/all-posts").first!
-      authors = all_authors.select { |p| p.fields[:user_id].value.to_i == blueprint_daily["user_id"].to_i }
-      if authors.present?
-        heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
+      if blueprint_daily["title"].present?
+        heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
+        unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
+        heracles_blog_post.published = true
+        heracles_blog_post.slug = blueprint_daily["slug"]
+        heracles_blog_post.title = blueprint_daily["title"]
+        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["content"], subject: blueprint_daily, assetify: false)
+        heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+        heracles_blog_post.parent = Heracles::Page.find_by_slug("blog")
+        heracles_blog_post.collection = Heracles::Page.where(url: "blog/all-posts").first!
+        authors = all_authors.select { |p| p.fields[:user_id].value.to_i == blueprint_daily["user_id"].to_i }
+        if authors.present?
+          heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
+        end
+        heracles_blog_post.save!
       end
-      heracles_blog_post.save!
     end
   end
 
@@ -346,7 +348,6 @@ namespace :wheeler_centre do
         names = blueprint_user["name"].split(" ")
         existing_heracles_person = Heracles::Page.find_by_slug(slug)
         unless existing_heracles_person
-          puts (slug)
           # Only create a new person if that slug doesn't already exist
           heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
           heracles_person.published = true
@@ -366,7 +367,6 @@ namespace :wheeler_centre do
     blueprint_staff.each do |blueprint_staff_member|
       existing_heracles_person = Heracles::Page.find_by_slug(blueprint_staff_member["slug"])
       unless existing_heracles_person
-        puts (blueprint_staff_member["slug"])
         heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
         heracles_person.published = true
         heracles_person.slug = blueprint_staff_member["slug"]
