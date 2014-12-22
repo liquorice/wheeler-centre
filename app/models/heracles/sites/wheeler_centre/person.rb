@@ -5,7 +5,6 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :display_name, type: :text},
               {name: :first_name, type: :text},
               {name: :last_name, type: :text},
               {name: :portrait, type: :asset, asset_file_type: :image},
@@ -23,10 +22,6 @@ module Heracles
         end
 
         searchable do
-          text :display_name do
-            fields[:display_name].value
-          end
-
           text :first_name do
             fields[:first_name].value
           end

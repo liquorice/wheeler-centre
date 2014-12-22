@@ -287,7 +287,6 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     YAML::ENGINE.yamler = 'syck'
     blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
-    # blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
 
@@ -297,7 +296,6 @@ namespace :wheeler_centre do
       heracles_person.published = true
       heracles_person.slug = blueprint_presenter["slug"]
       heracles_person.title = blueprint_presenter["name"]
-      heracles_person.fields[:display_name].value = blueprint_presenter["name"]
       heracles_person.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["intro"], subject: blueprint_presenter, assetify: false)
       heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter, assetify: false)
       heracles_person.fields[:url].value = blueprint_presenter["url"]
