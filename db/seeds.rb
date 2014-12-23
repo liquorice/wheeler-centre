@@ -112,6 +112,20 @@ events_collection.locked = true
 events_collection.page_order_position = :last
 events_collection.save!
 
+# Events series collection
+events_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
+events_series_collection.parent = events_index
+events_series_collection.site = site
+events_series_collection.title = "All Event Series"
+events_series_collection.slug = "all-event-series"
+events_series_collection.fields[:contained_page_type].value = "event_series"
+events_series_collection.fields[:sort_attribute].value = "created_at"
+events_series_collection.fields[:sort_direction].value = "DESC"
+events_series_collection.published = false
+events_series_collection.locked = true
+events_series_collection.page_order_position = :last
+events_series_collection.save!
+
 # Blog index page
 blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "blog")
 blog_index.site = site

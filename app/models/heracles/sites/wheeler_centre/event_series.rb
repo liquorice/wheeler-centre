@@ -9,6 +9,7 @@ module Heracles
               {name: :body, type: :content},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
+              {name: :series_id, type: :integer, label: "Series Id"},
             ]
           }
         end

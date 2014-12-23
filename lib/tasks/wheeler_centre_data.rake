@@ -1,5 +1,43 @@
 namespace :wheeler_centre do
 
+  desc "Import blueprint event series"
+  task :import_blueprint_event_series, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = YAML.load_stream(backup_data)
+
+    blueprint_event_series = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtProgram }
+    heracles_events_index = Heracles::Page.where(url: "events").first!
+    heracles_events_series_collection = heracles_events_index.children.of_type("collection").where(slug: "all-event-series").first!
+
+    blueprint_event_series.each do |blueprint_series|
+      if blueprint_series["name"].present?
+        heracles_series = Heracles::Page.find_by_slug(blueprint_series["slug"])
+        unless heracles_series
+          heracles_series = Heracles::Page.new_for_site_and_page_type(heracles_events_index.site, "event_series")
+          heracles_series.parent = heracles_events_index
+          heracles_series.collection = heracles_events_series_collection
+        end
+
+        heracles_series.published = true
+        heracles_series.title = blueprint_series["name"]
+        heracles_series.slug = blueprint_series["slug"]
+        heracles_series.created_at = Time.zone.parse(blueprint_series["created_on"].to_s)
+        heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: false)
+        heracles_series.fields[:series_id].value = blueprint_series["id"].to_i
+        heracles_series.fields[:archived].value = true
+        # {name: :promo_image, type: :asset, asset_file_type: :image},
+        # {name: :sponsors, type: :associated_pages, page_type: :sponsor},
+
+        heracles_series.save!
+      end
+    end
+
+  end
+
   desc "Import blueprint events"
   task :import_blueprint_events, [:yml_file] => :environment do |task, args|
     require "yaml"
@@ -13,7 +51,7 @@ namespace :wheeler_centre do
     heracles_events_index = Heracles::Page.where(url: "events").first!
     heracles_events_collection = heracles_events_index.children.of_type("collection").where(slug: "all-events").first!
 
-    puts(blueprint_events)
+    all_series = Heracles::Page.of_type("event_series")
 
     blueprint_events.each do |blueprint_event|
       # Find an existing event
@@ -24,26 +62,24 @@ namespace :wheeler_centre do
         heracles_event = Heracles::Page.new_for_site_and_page_type(heracles_events_index.site, "event")
         heracles_event.parent = heracles_events_index
         heracles_event.collection = heracles_events_collection
+        heracles_event.slug = blueprint_event["slug"]
       end
 
       heracles_event.published = true
       heracles_event.title = blueprint_event["title"]
-      heracles_event.slug = blueprint_event["slug"]
-      heracles_event.fields[:publish_at].value = Time.zone.parse(blueprint_event["publish_on"].to_s)
+      puts (blueprint_event["slug"])
       heracles_event.created_at = Time.zone.parse(blueprint_event["created_on"].to_s)
-
       heracles_event.fields[:short_title].value = blueprint_event["short_title"].to_s
       heracles_event.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_event["content"], subject: blueprint_event, assetify: false)
-
       heracles_event.fields[:start_date].value = Time.zone.parse(blueprint_event["start_date"].to_s)
       heracles_event.fields[:end_date].value = Time.zone.parse(blueprint_event["end_date"].to_s)
-      heracles_event.fields[:is_all_day].value = %w(1 yes true).include?(blueprint_event["whole_day"].to_s)
-
       heracles_event.fields[:venue].value = blueprint_event["venue"].to_s
-
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
-
+      series = all_series.select { |p| p.fields[:series_id].value.to_i == blueprint_event["program_id"].to_i }
+      if series.present?
+        heracles_event.fields[:series].page_ids = series.map(&:id)
+      end
       heracles_event.save!
     end
   end
