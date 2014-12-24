@@ -21,6 +21,10 @@ module ApplicationHelper
     super(content_field, options)
   end
 
+  def url_with_domain(url)
+    (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
+  end
+
   ### Application specific helpers
 
   # Cribbed from Padrino:
