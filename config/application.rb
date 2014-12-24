@@ -27,3 +27,4 @@ end
 
 require "heracles-admin"
 require "heracles_single_site_shim"
+require "helpers/redcarpet_renderers"
