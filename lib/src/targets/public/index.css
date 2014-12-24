@@ -30,13 +30,15 @@ html {
 body {
   background-color: #fff;
   color: var(--text-color);
-  font-family: "Colfax", Helvetica, sans-serif;
+  font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
   font-size: 17px;
   font-size: 1.7rem;
+  line-height: 1.3;
 }
 
 /* Components */
 
+@import "./copy";
 @import "./video-player";
 @import "./masthead";
 @import "./masthead-contextual";

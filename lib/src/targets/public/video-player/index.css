@@ -1,5 +1,6 @@
 
 .video-player {
+  font-family: "Colfax", Helvetica, sans-serif;
   position: relative;
 }
   /* Teaser */
@@ -58,7 +59,7 @@
     width: 700px;
     z-index: 3;
   }
-    .video-player__title {
+    .video-player .video-player__title {
       font-size: 32px;
       font-size: 3.2rem;
       line-height: 1.4;

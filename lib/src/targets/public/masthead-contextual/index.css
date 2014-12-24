@@ -72,6 +72,7 @@
     .upcoming-events__view-all {
       color: var(--primary-color-lighter);
       float: right;
+      font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
       font-size: 16px;
       font-size: 1.6rem;
     }
@@ -137,6 +138,7 @@
 
       .upcoming-events__item-title {
         color: #4a4a4a;
+        font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
         font-size: 16px;
         font-size: 1.6rem;
         overflow: hidden;
