@@ -12,14 +12,14 @@ module ApplicationHelper
   #
   #   render_content(image: {version: :content_large})
   #
-  # def render_content(content_field, options={})
-  #   defaults = {
-  #     image: {version: :content_small}
-  #   }
-  #   options = defaults.deep_merge(options.deep_symbolize_keys)
+  def render_content(content_field, options={})
+    defaults = {
+      image: {version: :content_large}
+    }
+    options = defaults.deep_merge(options.deep_symbolize_keys)
 
-  #   super(content_field, options)
-  # end
+    super(content_field, options)
+  end
 
   ### Application specific helpers
 

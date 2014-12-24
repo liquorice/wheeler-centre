@@ -4,14 +4,13 @@
 }
   /* Teaser */
   .video-player__teaser {
-    background-image: url(http://placekitten.com/1000/400);
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center 20%;
     background-size: cover;
     bottom: 0;
     color: #fff;
     left: 0;
-    opacity: 2;
+    opacity: 1;
     position: absolute;
     right: 0;
     text-align: center;
@@ -38,7 +37,7 @@
     bottom: 0;
     cursor: pointer;
     left: 0;
-    opacity: 0.5;
+    opacity: 0.65;
     position: absolute;
     right: 0;
     top: 0;
