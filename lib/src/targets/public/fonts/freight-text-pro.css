@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'FreightTextProBold-Italic';
+  font-family: 'FreightTextPro';
   src: url('FreightTextProBold-Italic.eot');
   src: url('FreightTextProBold-Italic.eot?#iefix') format('embedded-opentype'),
        url('FreightTextProBold-Italic.woff') format('woff'),
@@ -10,7 +10,7 @@
 }
 
 @font-face {
-  font-family: 'FreightTextProBold-Regular';
+  font-family: 'FreightTextPro';
   src: url('FreightTextProBold-Regular.eot');
   src: url('FreightTextProBold-Regular.eot?#iefix') format('embedded-opentype'),
        url('FreightTextProBold-Regular.woff') format('woff'),
@@ -21,7 +21,7 @@
 }
 
 @font-face {
-  font-family: 'FreightTextProBook-Italic';
+  font-family: 'FreightTextPro';
   src: url('FreightTextProBook-Italic.eot');
   src: url('FreightTextProBook-Italic.eot?#iefix') format('embedded-opentype'),
        url('FreightTextProBook-Italic.woff') format('woff'),
@@ -32,7 +32,7 @@
 }
 
 @font-face {
-  font-family: 'FreightTextProBook-Regular';
+  font-family: 'FreightTextPro';
   src: url('FreightTextProBook-Regular.eot');
   src: url('FreightTextProBook-Regular.eot?#iefix') format('embedded-opentype'),
        url('FreightTextProBook-Regular.woff') format('woff'),
