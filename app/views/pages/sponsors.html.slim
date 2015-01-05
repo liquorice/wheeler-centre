@@ -1,0 +1,22 @@
+- sponsors = page.sponsors.results
+
+- content_for(:title) do
+  .page__title.page__title--sponsors
+    h1.title == page.title
+
+- content_for(:middle) do
+  .page__content
+    .page__body.page__body--sponsors.copy
+      = render_content page.fields[:body]
+
+      - if sponsors.present?
+        .sponsors
+          - sponsors.each do |sponsor|
+            - if sponsor.fields[:logo].data_present?
+              .sponsor__logo
+                img src=sponsor.fields[:logo].asset.admin_thumbnail_url itemprop="logo" alt=sponsor.title title=sponsor.title
+            a href=sponsor.absolute_url
+              h3.sponsor__title
+                = sponsor.title
+
+

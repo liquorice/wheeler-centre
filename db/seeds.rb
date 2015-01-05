@@ -174,6 +174,30 @@ people_collection.locked = true
 people_collection.page_order_position = :last
 people_collection.save!
 
+# Sponsors page
+sponsors = Heracles::Sites::WheelerCentre::Sponsors.find_or_initialize_by(url: "sponsors")
+sponsors.site = site
+sponsors.title = "Sponsors"
+sponsors.slug = "sponsors"
+sponsors.published = true
+sponsors.locked = true
+sponsors.page_order_position = :last
+sponsors.save!
+
+# Sponsors collection
+sponsors_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "sponsors/all-sponsors")
+sponsors_collection.parent = sponsors
+sponsors_collection.site = site
+sponsors_collection.title = "All sponsors"
+sponsors_collection.slug = "all-sponsors"
+sponsors_collection.fields[:contained_page_type].value = "sponsors"
+sponsors_collection.fields[:sort_attribute].value = "created_at"
+sponsors_collection.fields[:sort_direction].value = "DESC"
+sponsors_collection.published = false
+sponsors_collection.locked = true
+sponsors_collection.page_order_position = :last
+sponsors_collection.save!
+
 # About us
 about_us = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us")
 about_us.site = site

@@ -1,4 +1,39 @@
 namespace :wheeler_centre do
+  desc "Import blueprint sponsors"
+  task :import_blueprint_sponsors, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = YAML.load_stream(backup_data)
+
+    blueprint_sponsors = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsor }
+    heracles_sponsors_index = Heracles::Page.where(url: "sponsors").first!
+    heracles_sponsors_collection = heracles_sponsors_index.children.of_type("collection").where(slug: "all-sponsors").first!
+
+    blueprint_sponsors.each do |blueprint_sponsor|
+      if blueprint_sponsor["title"].present?
+        heracles_sponsor = Heracles::Sites::WheelerCentre::Sponsor.find_by_slug(blueprint_sponsor["slug"])
+        unless heracles_sponsor
+          heracles_sponsor = Heracles::Page.new_for_site_and_page_type(heracles_sponsors_index.site, "sponsor")
+        end
+        heracles_sponsor.slug = blueprint_sponsor["slug"]
+        heracles_sponsor.title = blueprint_sponsor["title"]
+        heracles_sponsor.created_at = Time.zone.parse(Time.now.to_s)
+        heracles_sponsor.site = heracles_sponsors_index.site
+        heracles_sponsor.parent = heracles_sponsors_index
+        heracles_sponsor.collection = heracles_sponsors_collection
+        heracles_sponsor.published = true
+        heracles_sponsor.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_sponsor["content"], subject: blueprint_sponsor, assetify: false)
+        if blueprint_sponsor["url"].present? then heracles_sponsor.fields[:url].value = blueprint_sponsor["url"].to_s end
+        if blueprint_sponsor["id"].present? then heracles_sponsor.fields[:sponsor_id].value = blueprint_sponsor["id"].to_i end
+        # {name: :logo, type: :asset, asset_file_type: :image}
+        heracles_sponsor.save!
+      end
+    end
+
+  end
 
   desc "Import blueprint event series"
   task :import_blueprint_event_series, [:yml_file] => :environment do |task, args|
@@ -31,7 +66,6 @@ namespace :wheeler_centre do
         heracles_series.fields[:archived].value = true
         # {name: :promo_image, type: :asset, asset_file_type: :image},
         # {name: :sponsors, type: :associated_pages, page_type: :sponsor},
-
         heracles_series.save!
       end
     end
@@ -48,6 +82,7 @@ namespace :wheeler_centre do
     blueprint_records = YAML.load_stream(backup_data)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
+    blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
     heracles_events_index = Heracles::Page.where(url: "events").first!
     heracles_events_collection = heracles_events_index.children.of_type("collection").where(slug: "all-events").first!
 
@@ -76,10 +111,20 @@ namespace :wheeler_centre do
       heracles_event.fields[:venue].value = blueprint_event["venue"].to_s
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
-      series = all_series.select { |p| p.fields[:series_id].value.to_i == blueprint_event["program_id"].to_i }
-      if series.present?
-        heracles_event.fields[:series].page_ids = series.map(&:id)
+
+      event_series = all_series.select { |p| p.fields[:series_id].value.to_i == blueprint_event["program_id"].to_i }
+      if event_series.present?
+        heracles_event.fields[:series].page_ids = event_series.map(&:id)
       end
+
+      # Find all the sponsors for this event and add them to their event series as associated pages.
+      event_sponsorships = find_matching_event_sponsorships(blueprint_event, blueprint_sponsorships)
+      event_sponsorships.each do |event_sponsorship|
+        event_series.each do |series|
+          #series.fields[:sponsors].page_ids =
+        end
+      end
+
       heracles_event.save!
     end
   end
@@ -245,7 +290,7 @@ namespace :wheeler_centre do
 
         id = blueprint_page["id"].to_i
 
-        # Find all the Tum{#types} that have the id as their page_id, and sort them intore collections
+        # Find all the Tum{#types} that have the id as their page_id, and sort them into collections
         if id.present?
           blueprint_reviews = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
           blueprint_reviews.each do |blueprint_review|
@@ -271,6 +316,7 @@ namespace :wheeler_centre do
             heracles_response.title = blueprint_response["title"][0..30].gsub(/\s\w+\s*$/, '...')
             # Map the Blueprint fields to better-named fields in Heracles.
             heracles_response.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response, assetify: false)
+            # The author is stored in the content field
             heracles_response.fields[:author].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["content"], subject: blueprint_response, assetify: false)
             heracles_response.fields[:url].value = blueprint_response["url"]
             heracles_response.created_at = Time.zone.parse(blueprint_response["created_on"].to_s)
@@ -431,6 +477,10 @@ namespace :wheeler_centre do
     # Find a user by matching on the name, unsure of a better way to do this
     users = data.select { |r| r["name"].to_s.downcase == presenter["name"].to_s.downcase }
     users.first
+  end
+
+  def find_matching_event_sponsorships(event, data)
+    data.select { |r| r["event_id"].to_i == event["id"].to_i }
   end
 
   desc "Find unique Blueprint classes"
