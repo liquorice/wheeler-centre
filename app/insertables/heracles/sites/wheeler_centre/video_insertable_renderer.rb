@@ -10,11 +10,25 @@ module Heracles
           @options = options.with_indifferent_access
 
           @video = @insertable_data["url"]
+          @poster_asset = options[:site].assets.images.find_by_id(@insertable_data[:asset_id])
         end
 
         def render
-          # Render nothing if the video or it's embed data aren't present
+          # Render nothing if the video or its embed data aren't present
           return "" unless @video && @insertable_data["embedData"].present?
+
+          poster_url = @insertable_data["embedData"]["thumbnail_url"]
+          poster_aspect_class = "video-player__poster--landscape"
+          # Extract the poster image asset
+          if @poster_asset
+            version_name  = @options[:version].presence || :original
+            version_name  = :original unless @poster_asset.versions.include?(version_name)
+            poster_url    = @poster_asset.send(:"#{version_name.to_sym}_url")
+
+            poster_aspect_class = if @poster_asset.file_meta["aspect_ratio"] <= 1.333333
+              "video-player__poster--portrait"
+            end
+          end
 
           ratio = @insertable_data["embedData"]["height"].to_f / @insertable_data["embedData"]["width"].to_f
           # The ratio is coupled with CSS to make the embed responsive
@@ -24,7 +38,7 @@ module Heracles
             [video_content_inner].join.html_safe
           end
 
-          video_teaser = content_tag :div, {class: "video-player__teaser", "on-click" => "onTeaserClick"} do
+          video_teaser = content_tag :div, {class: "video-player__teaser #{poster_aspect_class if poster_aspect_class}", style: ("background-image: url(#{poster_url})" if poster_url), "on-click" => "onTeaserClick"} do
             cover = content_tag :div, nil, {class: "video-player__cover"}
             metadata = content_tag :div, class: "video-player__metadata" do
               watch    = content_tag :span, "Watch", {class: "video-player__watch"}

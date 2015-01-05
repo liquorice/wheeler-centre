@@ -12,14 +12,18 @@ module ApplicationHelper
   #
   #   render_content(image: {version: :content_large})
   #
-  # def render_content(content_field, options={})
-  #   defaults = {
-  #     image: {version: :content_small}
-  #   }
-  #   options = defaults.deep_merge(options.deep_symbolize_keys)
+  def render_content(content_field, options={})
+    defaults = {
+      image: {version: :content_large}
+    }
+    options = defaults.deep_merge(options.deep_symbolize_keys)
 
-  #   super(content_field, options)
-  # end
+    super(content_field, options)
+  end
+
+  def url_with_domain(url)
+    (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
+  end
 
   ### Application specific helpers
 

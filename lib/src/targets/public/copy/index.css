@@ -1,0 +1,173 @@
+/* Define styles for blocks of content scoped within the .copy rather than
+ * making them global. Global styles will be constantly overridden.
+ *
+ *      <div class="copy content-area">
+ */
+
+/* Set the baseline on all elements directly inside a copy block
+ * Margin won't work on inline elements anyway
+ */
+
+.copy > *,
+.copy > blockquote > * {
+  margin-top: 0;
+  margin-bottom: 10px;
+  margin-bottom: 1rem;
+}
+
+.copy > hr {
+  margin-top: 17px;
+  margin-top: 1.7rem;
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  clear: both;
+}
+
+/* Block Elements
+---------------------------------------- */
+
+.copy p {
+}
+
+.copy address {
+
+}
+
+.copy blockquote {
+}
+
+.copy hr {
+  border: none;
+  border-bottom: 1px solid lighten($grey-light, 5%);
+}
+
+
+/* Lists
+---------------------------------------- */
+
+.copy ul,
+.copy ol {
+  margin-left: 1.6em;
+}
+.copy ul > li {
+  list-style-type: disc;
+}
+
+.copy ol {
+  margin-left: 1.6em;
+}
+.copy ol > li {
+  list-style-type:decimal;
+}
+
+.copy li {
+  display: list-item;
+}
+
+.copy dl {}
+.copy dt {}
+.copy dd {}
+
+/* Code Blocks
+---------------------------------------- */
+.copy pre {}
+
+.copy code {}
+
+/* Headings
+---------------------------------------- */
+
+.copy h1,
+.copy h2,
+.copy h3,
+.copy h4,
+.copy h5,
+.copy h6 {
+  font-family: "Colfax", Helvetica, sans-serif;
+  font-weight: bold;
+}
+  .copy h1 a,
+  .copy h2 a,
+  .copy h3 a,
+  .copy h4 a,
+  .copy h5 a,
+  .copy h6 a {
+    text-decoration: none;
+  }
+  .copy h1 a:hover,
+  .copy h1 a:focus,
+  .copy h2 a:hover,
+  .copy h2 a:focus,
+  .copy h3 a:hover,
+  .copy h3 a:focus,
+  .copy h4 a:hover,
+  .copy h4 a:focus,
+  .copy h5 a:hover,
+  .copy h5 a:focus,
+  .copy h6 a:hover,
+  .copy h6 a:focus {
+    color: #f09;
+    text-decoration: underline;
+  }
+
+
+.copy h1 {
+  font-size: 22px;
+  font-size: 2.2rem;
+}
+
+.copy h2 {
+  font-size: 18px;
+  font-size: 1.8rem;
+}
+
+.copy h3 {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+.copy h4 {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+
+.copy h5 {}
+.copy h6 {}
+
+
+/* Inline Elements
+---------------------------------------- */
+
+.copy em {
+  font-style: italic;
+}
+
+.copy strong {
+  font-weight: bold;
+}
+
+.copy abbr {
+
+}
+
+.copy img,
+.copy video,
+.copy embed,
+.copy iframe {
+  max-width: 100%;
+}
+
+/* Links
+---------------------------------------- */
+
+.copy a {
+  color: #f09;
+  text-decoration: underline;
+}
+
+.copy a:visited {}
+
+.copy a:hover,
+.copy a:focus {
+  color: $highlight;
+}
