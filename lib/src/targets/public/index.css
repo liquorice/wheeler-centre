@@ -40,7 +40,8 @@ body {
 
 /* Components */
 
-@import "./copy";
-@import "./video-player";
 @import "./masthead";
 @import "./masthead-contextual";
+@import "./footer";
+@import "./copy";
+@import "./video-player";
