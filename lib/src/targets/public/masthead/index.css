@@ -14,41 +14,41 @@
     padding-bottom: 25px;
   }
 
-    .masthead__navigation-main,
-    .masthead__navigation-secondary {
+    .masthead-nav-main,
+    .masthead-nav-secondary {
       list-style: none;
     }
 
-    .masthead__navigation-main {
+    .masthead-nav-main {
       float: left;
       margin-left: -15px;
     }
 
-      .masthead__navigation-main__item,
-      .masthead__navigation-secondary__item {
+      .masthead-nav-main__item,
+      .masthead-nav-secondary__item {
         float: left;
       }
 
-      .masthead__navigation-main__item {
+      .masthead-nav-main__item {
         position: relative;
       }
 
-      .masthead__navigation-main__item--has-dropdown--hover,
-      .masthead__navigation-main__item--has-dropdown:focus {
+      .masthead-nav-main__item--has-dropdown--hover,
+      .masthead-nav-main__item--has-dropdown:focus {
         background-color: var(--primary-color-darker);
       }
 
-      .masthead__navigation-main__item--has-dropdown--hover .masthead__navigation-main__anchor ,
-      .masthead__navigation-main__item--has-dropdown:focus .masthead__navigation-main__anchor {
+      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor ,
+      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
         color: #fff;
       }
 
-      .masthead__navigation-main__item--has-dropdown--hover .masthead__navigation-main__dropdown,
-      .masthead__navigation-main__item--has-dropdown:focus .masthead__navigation-main__dropdown  {
+      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
+      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown  {
         display: block;
       }
 
-        .masthead__navigation-main__anchor {
+        .masthead-nav-main__anchor {
           color: var(--primary-color-lighter);
           display: inline-block;
           font-size: 17px;
@@ -56,12 +56,12 @@
           padding: 18px;
         }
 
-        .masthead__navigation-main__anchor:hover,
-        .masthead__navigation-main__anchor:focus {
+        .masthead-nav-main__anchor:hover,
+        .masthead-nav-main__anchor:focus {
           color: #fff;
         }
 
-    .masthead__navigation-main__dropdown {
+    .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
       min-width: 460px;
@@ -69,35 +69,35 @@
       position: absolute;
     }
 
-    .masthead__navigation-main__dropdown-icon {
+    .masthead-nav-main__dropdown-icon {
       font-size: 8px;
       padding-left: 8px;
       padding-bottom: 3px;
       vertical-align: middle;
     }
 
-      .masthead__navigation-main__dropdown-list {
+      .masthead-nav-main__dropdown-list {
         float: left;
         list-style: none;
         padding-right: 60px;
       }
 
-      .masthead__navigation-main__dropdown-list:last-child {
+      .masthead-nav-main__dropdown-list:last-child {
         padding-right: 0;
       }
 
-        .masthead__navigation-main__dropdown-item {
+        .masthead-nav-main__dropdown-item {
           color: var(--primary-color-lighter);
           font-size: 17px;
           font-size: 1.7rem;
           padding-bottom: 12px;
         }
 
-        .masthead__navigation-main__dropdown-item:last-child {
+        .masthead-nav-main__dropdown-item:last-child {
           padding-bottom: 0;
         }
 
-          .masthead__navigation-main__dropdown-item span {
+          .masthead-nav-main__dropdown-item span {
             color: #fff;
             display: block;
             font-size: 11px;
@@ -107,41 +107,41 @@
             text-transform: uppercase;
           }
 
-          .masthead__navigation-main__dropdown-anchor:hover,
-          .masthead__navigation-main__dropdown-anchor:focus {
+          .masthead-nav-main__dropdown-anchor:hover,
+          .masthead-nav-main__dropdown-anchor:focus {
             color: #fff;
           }
 
-    .masthead__navigation-secondary {
+    .masthead-nav-secondary {
       padding-top: 18px;
       float: right;
     }
 
-      .masthead__navigation-secondary__item {
+      .masthead-nav-secondary__item {
         padding-right: 30px;
       }
 
-      .masthead__navigation-secondary__item:last-child {
+      .masthead-nav-secondary__item:last-child {
         padding-right: 0;
       }
 
-      .masthead__navigation-secondary__item--search {
+      .masthead-nav-secondary__item--search {
         color: var(--primary-color-lighter);
         font-size: 11px;
       }
 
-        .masthead__navigation-secondary__item--search .masthead__navigation-secondary__anchor {
+        .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor {
           display: block;
           padding: 6px;
           margin-top: -3px;
         }
 
-        .masthead__navigation-secondary__item--search .masthead__navigation-secondary__anchor:hover,
-        .masthead__navigation-secondary__item--search .masthead__navigation-secondary__anchor:focus {
+        .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor:hover,
+        .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor:focus {
           background-color: var(--primary-color-darker);
         }
 
-        .masthead__navigation-secondary__anchor {
+        .masthead-nav-secondary__anchor {
           color: var(--primary-color-lighter);
           font-size: 11px;
           font-size: 1.1rem;
@@ -150,22 +150,23 @@
           text-transform: uppercase;
         }
 
-        .masthead__navigation-secondary__anchor:hover,
-        .masthead__navigation-secondary__anchor:focus {
+        .masthead-nav-secondary__anchor:hover,
+        .masthead-nav-secondary__anchor:focus {
           color: #fff;
         }
 
   .masthead__logo {
+    height: 50px;
     margin-left: 80px;
     width: 244px;
-    height: 50px;
   }
 
     .masthead__logo-anchor {
-      display: block;
       background-image: url("wheeler-centre-logo.svg");
       background-size: 244px 50px;
-      width: 100%;
+      color: transparent;
+      display: block;
+      font: 0/0 a;
       height: 100%;
-      text-indent: -9999em;
+      width: 100%;
     }
