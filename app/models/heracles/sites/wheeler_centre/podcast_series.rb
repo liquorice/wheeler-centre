@@ -7,8 +7,8 @@ module Heracles
             fields: [
               {name: :feature_image, type: :asset, asset_file_type: :image},
               {name: :description, type: :content},
-              # - iTunes categories (list)
-              # - Podcast Episodes (collection)
+              {name: :itunes_categories, type: :array},
+              {name: :episodes, type: :associated_pages, page_type: :podcast},
             ]
           }
         end

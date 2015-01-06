@@ -8,8 +8,9 @@ module Heracles
               {name: :short_title, type: :text, label: "Short title"},
               {name: :description, type: :content},
               {name: :transcripts, type: :content},
-              # - Video (media)
-              # - Audio (media)
+              {name: :video, type: :asset, asset_file_type: :video},
+              {name: :audio, type: :asset, asset_file_type: :audio},
+              {name: :promo_image, type: :asset, asset_file_type: :image},
               {name: :events, type: :associated_pages, page_type: :event},
               # Dates
               {name: :publish_date, type: :date_time, label: "Publish date"},

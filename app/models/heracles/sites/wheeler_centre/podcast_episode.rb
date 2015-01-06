@@ -6,8 +6,8 @@ module Heracles
           {
             fields: [
               {name: :description, type: :content},
-              # - Video (media)
-              # - Audio (media)
+              {name: :video, type: :asset, asset_file_type: :video},
+              {name: :audio, type: :asset, asset_file_type: :audio},
               {name: :events, type: :associated_pages, page_type: :event},
               {name: :publish_date, type: :date_time, label: "Publish date"},
             ]
