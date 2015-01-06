@@ -25,6 +25,7 @@ module Heracles
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promotion text"},
+              {name: :sponsors, type: :associated_pages, page_type: :sponsor},
             ]
           }
         end

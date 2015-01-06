@@ -61,11 +61,10 @@ namespace :wheeler_centre do
         heracles_series.title = blueprint_series["name"]
         heracles_series.slug = blueprint_series["slug"]
         heracles_series.created_at = Time.zone.parse(blueprint_series["created_on"].to_s)
-        heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: false)
-        heracles_series.fields[:series_id].value = blueprint_series["id"].to_i
+        if blueprint_series["content"].present? then heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: false) end
+        if blueprint_series["id"].present? then heracles_series.fields[:series_id].value = blueprint_series["id"].to_i end
         heracles_series.fields[:archived].value = true
         # {name: :promo_image, type: :asset, asset_file_type: :image},
-        # {name: :sponsors, type: :associated_pages, page_type: :sponsor},
         heracles_series.save!
       end
     end
@@ -87,6 +86,7 @@ namespace :wheeler_centre do
     heracles_events_collection = heracles_events_index.children.of_type("collection").where(slug: "all-events").first!
 
     all_series = Heracles::Page.of_type("event_series")
+    all_sponsors = Heracles::Page.of_type("sponsor")
 
     blueprint_events.each do |blueprint_event|
       # Find an existing event
@@ -117,12 +117,14 @@ namespace :wheeler_centre do
         heracles_event.fields[:series].page_ids = event_series.map(&:id)
       end
 
-      # Find all the sponsors for this event and add them to their event series as associated pages.
+      # Find all the sponsors for this event and add them to the sponsors field on this event
+      # This mirrors the data as it was in Blueprint, where the relationship was between events and sponsors
       event_sponsorships = find_matching_event_sponsorships(blueprint_event, blueprint_sponsorships)
-      event_sponsorships.each do |event_sponsorship|
-        event_series.each do |series|
-          #series.fields[:sponsors].page_ids =
-        end
+      if event_sponsorships.present?
+        sponsor_ids = event_sponsorships.map { |p| p["sponsor_id"].to_i }
+        puts (sponsor_ids)
+        sponsors = all_sponsors.select { |p| sponsor_ids.include?(p.fields[:sponsor_id].value.to_i) }
+        if sponsors.present? then heracles_event.fields[:sponsors].page_ids = sponsors.map(&:id) end
       end
 
       heracles_event.save!
@@ -510,9 +512,9 @@ namespace :wheeler_centre do
 
     events_sans_series = blueprint_events.select { |r| r["program_id"] == nil }
     puts (events_sans_series.count)
-    events_with_sponsors = blueprint_events.map { |r| r["id"] } & blueprint_sponsorships.map { |r| r["event_id"]}
+    events_with_sponsors = blueprint_events.map { |r| r["id"] } & blueprint_sponsorships.map { |r| r["event_id"] }
     puts (events_with_sponsors.count)
-    events_sans_series_with_sponsors = events_sans_series.select {|r| events_with_sponsors.include? r["id"]}
+    events_sans_series_with_sponsors = events_sans_series.select {|r| events_with_sponsors.include? r["id"] }
     puts(events_sans_series_with_sponsors.count)
 
   end
