@@ -494,4 +494,28 @@ namespace :wheeler_centre do
     puts(class_names.uniq)
   end
 
+  desc "Find events with sponsors but without belonging to an event series"
+  task :find_events_with_sponsors_sans_series, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+
+    blueprint_records = YAML.load_stream(backup_data)
+
+    blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
+    blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
+    puts (blueprint_events.count)
+
+    events_sans_series = blueprint_events.select { |r| r["program_id"] == nil }
+    puts (events_sans_series.count)
+    events_with_sponsors = blueprint_events.map { |r| r["id"] } & blueprint_sponsorships.map { |r| r["event_id"]}
+    puts (events_with_sponsors.count)
+    events_sans_series_with_sponsors = events_sans_series.select {|r| events_with_sponsors.include? r["id"]}
+    puts(events_sans_series_with_sponsors.count)
+
+  end
+
+
 end
