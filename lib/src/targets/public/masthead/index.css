@@ -2,7 +2,7 @@
 
 .masthead {
   background-color: var(--primary-color);
-  font-family: "Colfax", Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
   .masthead__inner {
     padding-top: 15px;

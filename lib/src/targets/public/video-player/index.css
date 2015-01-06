@@ -1,6 +1,6 @@
 
 .video-player {
-  font-family: "Colfax", Helvetica, sans-serif;
+  font-family: var(--font-sans);
   position: relative;
 }
   /* Teaser */

@@ -1,6 +1,8 @@
 /* Variables */
 
 :root {
+  --font-sans: "Colfax", Helvetica, sans-serif;
+  --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c;
   --primary-color-lighter: #ccefeb;
   --primary-color-darker: color(var(--primary-color) shade(15%));
@@ -30,7 +32,7 @@ html {
 body {
   background-color: #fff;
   color: var(--text-color);
-  font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
+  font-family: var(--font-serif);
   font-size: 17px;
   font-size: 1.7rem;
   line-height: 1.3;
