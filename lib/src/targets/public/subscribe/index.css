@@ -1,0 +1,43 @@
+.simple-subscribe__inner {
+  padding-top: 30px;
+  padding-bottom: 35px;
+}
+
+.simple-subscribe__label,
+.simple-subscribe__controls {
+  display: block;
+  float: left;
+  width: 50%;
+}
+  .simple-subscribe__label {
+    line-height: 1.5;
+    padding-right: 15px;
+  }
+  .simple-subscribe__controls {
+    padding-left: 15px;
+  }
+
+  .simple-subscribe__controls {
+    display: flex;
+    font-family: var(--font-sans);
+  }
+    .simple-subscribe__controls input {
+      background-color: #e0eeec;
+      border: none;
+      flex: 1;
+      font-size: 17px;
+      font-size: 1.7rem;
+      padding: 1.4rem 1.8rem;
+    }
+    .simple-subscribe__controls button {
+      background-color: var(--primary-color);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      width: 140px;
+    }

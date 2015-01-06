@@ -1,0 +1,18 @@
+/ Generate a random ID for the input field
+- input_id = "email-" + ('a'..'z').to_a.shuffle[0,8].join
+
+- cache [input_id] do
+  .simple-subscribe.column-wrapper
+    .simple-subscribe__inner.column-wide
+      form.clearfix action="http://inventivelabs.createsend.com/t/r/s/jktkhl/" method="post"
+        / Campaign Monitor fields
+        input type="hidden" name="cm-f-trlyhi" id="Source" value=""
+        input type="hidden" name="cm-f-nebk" id="Referrer" value="http://wheelercentre.com/"
+        javascript:
+          document.getElementById('Referrer').value = document.referrer;
+
+        label.simple-subscribe__label for=input_id
+          p Join The Wheeler Weekly for the lastest on our upcoming events, our best and freshest broadcasts, and previews of events and presenters from our program.
+        .simple-subscribe__controls
+          input placeholder="Enter your email address" type="email" name="cm-jktkhl-jktkhl" id=input_id
+          button type="submit" Subscribe
