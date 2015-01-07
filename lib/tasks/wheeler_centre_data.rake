@@ -6,7 +6,8 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_sponsors = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsor }
     heracles_sponsors_index = Heracles::Page.where(url: "sponsors").first!
@@ -42,7 +43,8 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_event_series = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtProgram }
     heracles_events_index = Heracles::Page.where(url: "events").first!
@@ -82,7 +84,8 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
     blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
@@ -245,7 +248,8 @@ namespace :wheeler_centre do
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
     id = dailies_root.first["id"].to_i
@@ -282,7 +286,8 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
 
@@ -338,7 +343,8 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
     parent = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(args[:page_slug])
     body = ""
 
@@ -364,8 +370,10 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    blueprint_records = YAML.load_stream(backup_data)
+    YAML::ENGINE.yamler = 'syck'
+    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
     # Find or initialise the Projects page
     projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
     projects.site = site
