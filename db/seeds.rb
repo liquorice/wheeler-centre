@@ -126,22 +126,22 @@ events_series_collection.locked = true
 events_series_collection.page_order_position = :last
 events_series_collection.save!
 
-# Blog index page
-blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "blog")
+# Writings index page
+blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "writings")
 blog_index.site = site
-blog_index.title = "Blog"
-blog_index.slug = "blog"
+blog_index.title = "Writings"
+blog_index.slug = "writings"
 blog_index.published = true
 blog_index.locked = true
 blog_index.page_order_position = :last
 blog_index.save!
 
-# Blog collection
-blog_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "blog/all-posts")
+# Writings collection
+blog_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "writings/all-writings")
 blog_collection.parent = blog_index
 blog_collection.site = site
-blog_collection.title = "All Posts"
-blog_collection.slug = "all-posts"
+blog_collection.title = "All Writings"
+blog_collection.slug = "all-writings"
 blog_collection.fields[:contained_page_type].value = "blog_post"
 blog_collection.fields[:sort_attribute].value = "created_at"
 blog_collection.fields[:sort_direction].value = "DESC"
