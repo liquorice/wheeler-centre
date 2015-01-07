@@ -50,7 +50,7 @@ gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
 
 # Application
-gem "devise"
+# ...
 
 # Utilities
 gem "ffaker"
@@ -88,6 +88,7 @@ group :development do
   gem "quiet_assets"
   gem "spring"
   gem "spring-commands-rspec"
+  gem "sunspot_solr"
 
   # Guard et al
   gem "guard", "~> 2"

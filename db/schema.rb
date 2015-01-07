@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119051285) do
+ActiveRecord::Schema.define(version: 20150106055318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,18 +34,47 @@ ActiveRecord::Schema.define(version: 20141119051285) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "site_id",                         null: false
+    t.string   "title"
+    t.text     "description"
+    t.string   "attribution"
   end
 
   add_index "assets", ["file_type"], name: "index_assets_on_file_type", using: :btree
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
 
-  create_table "heracles_users", force: true do |t|
-    t.string   "email",                      null: false
-    t.string   "name",                       null: false
-    t.boolean  "superadmin", default: false
+  create_table "heracles_site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.uuid     "site_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",    null: false
   end
+
+  add_index "heracles_site_administrations", ["site_id"], name: "index_heracles_site_administrations_on_site_id", using: :btree
+  add_index "heracles_site_administrations", ["user_id"], name: "index_heracles_site_administrations_on_user_id", using: :btree
+
+  create_table "heracles_users", force: true do |t|
+    t.string   "email",                                  null: false
+    t.string   "name",                                   null: false
+    t.boolean  "superadmin",             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",        default: 0,     null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+  end
+
+  add_index "heracles_users", ["email"], name: "index_heracles_users_on_email", unique: true, using: :btree
+  add_index "heracles_users", ["reset_password_token"], name: "index_heracles_users_on_reset_password_token", unique: true, using: :btree
+  add_index "heracles_users", ["unlock_token"], name: "index_heracles_users_on_unlock_token", unique: true, using: :btree
 
   create_table "insertions", force: true do |t|
     t.uuid     "page_id"
@@ -85,12 +114,12 @@ ActiveRecord::Schema.define(version: 20141119051285) do
   add_index "pages", ["url"], name: "index_pages_on_url", using: :btree
 
   create_table "que_jobs", primary_key: "queue", force: true do |t|
-    t.integer  "priority",    limit: 2, default: 100,                                        null: false
-    t.datetime "run_at",                default: "now()",                                    null: false
-    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
-    t.text     "job_class",                                                                  null: false
-    t.json     "args",                  default: [],                                         null: false
-    t.integer  "error_count",           default: 0,                                          null: false
+    t.integer  "priority",    limit: 2, default: 100,                   null: false
+    t.datetime "run_at",                default: '2015-01-05 05:20:20', null: false
+    t.integer  "job_id",      limit: 8, default: 0,                     null: false
+    t.text     "job_class",                                             null: false
+    t.json     "args",                  default: [],                    null: false
+    t.integer  "error_count",           default: 0,                     null: false
     t.text     "last_error"
   end
 
@@ -106,16 +135,6 @@ ActiveRecord::Schema.define(version: 20141119051285) do
   add_index "redirects", ["site_id", "source_url"], name: "index_redirects_on_site_id_and_source_url", using: :btree
   add_index "redirects", ["site_id"], name: "index_redirects_on_site_id", using: :btree
 
-  create_table "site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.uuid     "site_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id",    null: false
-  end
-
-  add_index "site_administrations", ["site_id"], name: "index_site_administrations_on_site_id", using: :btree
-  add_index "site_administrations", ["user_id"], name: "index_site_administrations_on_user_id", using: :btree
-
   create_table "sites", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "title"
     t.string   "hostnames",          default: [],                 array: true
@@ -129,6 +148,26 @@ ActiveRecord::Schema.define(version: 20141119051285) do
 
   add_index "sites", ["hostnames"], name: "index_sites_on_hostnames", using: :gin
   add_index "sites", ["published"], name: "index_sites_on_published", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.uuid     "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

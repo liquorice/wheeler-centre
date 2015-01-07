@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # Make an admin user for Heracles
-user = User.find_or_initialize_by(email: "hello@icelab.com.au")
+user = Heracles::User.find_or_initialize_by(email: "hello@icelab.com.au")
 user.password = "password1"
 user.save!
 
