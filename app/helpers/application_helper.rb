@@ -1,5 +1,5 @@
 module ApplicationHelper
-  include Heracles::InsertablesHelper
+  include Heracles::ContentFieldHelper
 
   # Common helpers sit under lib/helpers
   include TextFormattingHelper
