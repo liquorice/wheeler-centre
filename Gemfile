@@ -56,7 +56,7 @@ gem "rails-assets-viewloader"
 gem "ffaker"
 
 # Temporary for the Blueprint import
-gem "syck"
+gem "syck", "1.0.1"
 gem "rdiscount"
 
 group :production do

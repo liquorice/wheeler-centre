@@ -6,8 +6,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_sponsors = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsor }
     heracles_sponsors_index = Heracles::Page.where(url: "sponsors").first!
@@ -43,8 +42,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_event_series = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtProgram }
     heracles_events_index = Heracles::Page.where(url: "events").first!
@@ -84,8 +82,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
     blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
@@ -532,6 +529,22 @@ namespace :wheeler_centre do
     events_sans_series_with_sponsors = events_sans_series.select {|r| events_with_sponsors.include? r["id"] }
     puts(events_sans_series_with_sponsors.count)
 
+  end
+
+  desc "Replace munched characters"
+  task :replace_characters, [:yml_file] => :environment do |task, args|
+    backup_data = File.open(args[:yml_file], 'r:binary').read
+    # backup_data = File.read(args[:yml_file])
+    puts (backup_data)
+
+    new_contents = backup_data.gsub(/\xC3\xA2\xE2\x82\xAC\xE2\x84\xA2/, "&rsquo;")
+
+    puts (backup_data)
+
+
+    File.open(args[:yml_file], "w") {|file| file.puts new_contents }
+    # File.write(args[:yml_file], backup_data.gsub(/\xc3\xa2\xe2\x82\xac\xe2\x84\xa2/, "&rsquo;"))
+    # File.write(args[:yml_file], backup_data.gsub(/\xC3\xA2\xE2\x82\xAC\xE2\x84\xA2/, "&rsquo;"))
   end
 
 

@@ -68,10 +68,6 @@ module LegacyBlueprint
       end
     end
 
-    def self.replace_apostrophes(text)
-      text.gsub(/\xC3\xA2\xE2\x82\xAC\xE2\x84\xA2/, "'")
-    end
-
     def self.strip_spurious_paragraphs(text)
       html_doc = Nokogiri::HTML::fragment(text)
 
