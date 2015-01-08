@@ -56,12 +56,6 @@
     font-size: 2.3rem;
   }
 
-  .blog-post__intro,
-  .blog-post__body {
-    padding-left: 35px;
-    padding-right: 35px;
-  }
-
   .blog-post__body .section--full {
     padding-bottom: 30px;
     padding-top: 30px;

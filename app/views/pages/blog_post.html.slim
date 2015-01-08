@@ -10,9 +10,9 @@
             = l page.created_at, format: :day_dmy_with_full_words
         h1.blog-post__title = page.title
     - if page.fields[:intro].data_present?
-      .blog-post__intro.copy
+      .blog-post__intro.column-wrapper.copy
         = render_content_in_sections page.fields[:intro]
-    .page__body.blog-post__body.copy
+    .blog-post__body.column-wrapper.copy
       = render_content_in_sections page.fields[:body]
     - if page.fields[:meta].data_present?
       .blog-post__meta.column-wrapper
