@@ -8,11 +8,19 @@
  * Margin won't work on inline elements anyway
  */
 
+.copy {
+  font-size: 22px;
+  font-size: 2.2rem;
+  line-height: 1.4;
+}
+
 .copy > *,
-.copy > blockquote > * {
+.copy > blockquote > *,
+.copy section > *,
+.copy section > blockquote > * {
   margin-top: 0;
-  margin-bottom: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .copy > hr {
@@ -34,11 +42,24 @@
 }
 
 .copy blockquote {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  color: #111;
+  font-size: 25px;
+  font-size: 2.5rem;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-top: 30px;
+  margin-bottom: 35px;
+  line-height: 1.45;
+  margin-left: -35px;
 }
 
 .copy hr {
   border: none;
-  border-bottom: 1px solid lighten($grey-light, 5%);
+  border-bottom: 1px solid #ddd;
 }
 
 
@@ -106,29 +127,38 @@
   .copy h5 a:focus,
   .copy h6 a:hover,
   .copy h6 a:focus {
-    color: #f09;
+    color: var(--primary-color);
     text-decoration: underline;
   }
 
+.copy p + h1,
+.copy p + h2,
+.copy p + h3,
+.copy p + h4,
+.copy p + h5,
+.copy p + h6 {
+  padding-top: 10px;
+  padding-top: 1rem;
+}
 
 .copy h1 {
+  font-size: 25px;
+  font-size: 2.5rem;
+}
+
+.copy h2 {
   font-size: 22px;
   font-size: 2.2rem;
 }
 
-.copy h2 {
-  font-size: 18px;
-  font-size: 1.8rem;
-}
-
 .copy h3 {
-  font-size: 16px;
-  font-size: 1.6rem;
+  font-size: 21px;
+  font-size: 2.1rem;
 }
 
 .copy h4 {
-  font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 21px;
+  font-size: 2.1rem;
 }
 
 .copy h5 {}
@@ -161,7 +191,7 @@
 ---------------------------------------- */
 
 .copy a {
-  color: #f09;
+  color: var(--primary-color);
   text-decoration: underline;
 }
 
@@ -169,5 +199,5 @@
 
 .copy a:hover,
 .copy a:focus {
-  color: $highlight;
+  color: #222;
 }

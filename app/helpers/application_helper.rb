@@ -12,13 +12,19 @@ module ApplicationHelper
   #
   #   render_content(image: {version: :content_large})
   #
-  def render_content(content_field, options={})
+  def render_content(content_field, options={}, filters = nil)
     defaults = {
       image: {version: :content_large}
     }
     options = defaults.deep_merge(options.deep_symbolize_keys)
 
-    super(content_field, options)
+    filters ||= standard_content_filters
+    render_content_with_filters(content_field, filters, options)
+  end
+
+  def render_content_in_sections(content_field, options={})
+    filters = standard_content_filters + [Heracles::Sites::WheelerCentre::SectionFilter]
+    render_content content_field, options, filters
   end
 
   def url_with_domain(url)

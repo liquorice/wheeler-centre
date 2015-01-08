@@ -1,13 +1,20 @@
-- content_for(:title) do
-  .page__title.page__title--blog-post
-    h1.title = page.title
-
-- content_for(:middle) do
-  .page__content
-    .page__body
-      .blog-post-details
-        - if page.fields["publish_at"].value.present?
-          .blog-post-details__datetime
-            p = format_date(page.fields["publish_at"].value, nil, "long")
-      .page__body--blog-post.copy
-        = render_content(page.fields["body"])
+= area :main do
+  .blog-post
+    .blog-post__header.column-wrapper
+      .column-wide
+        p.blog-post__byline
+          ' In
+          a href="#" Art & Culture
+          span.blog-post__byline-separator ·
+          time
+            = l page.created_at, format: :day_dmy_with_full_words
+        h1.blog-post__title == widont_format markdown_line page.title
+    - if page.fields[:intro].data_present?
+      .blog-post__intro.column-wrapper.copy
+        = render_content_in_sections page.fields[:intro]
+    .blog-post__body.column-wrapper.copy
+      = render_content_in_sections page.fields[:body]
+    - if page.fields[:meta].data_present?
+      .blog-post__meta.column-wrapper
+        .blog-post__meta-inner.column-mid.copy
+          = render_content page.fields[:meta]

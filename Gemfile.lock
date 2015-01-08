@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 58e136d490b4a509b037fce927b3006a487033f9
+  revision: dc981c8552717685becdcaefb8ac8912ab1bc6b2
   branch: master
   specs:
     heracles (1.0.0)
@@ -284,7 +284,7 @@ GEM
     rails-assets-select2 (3.5.2)
       rails-assets-jquery (>= 1.7.1)
     rails-assets-selectivizr (1.0.2)
-    rails-assets-speakingurl (0.18.0)
+    rails-assets-speakingurl (0.20.0)
     rails-assets-viewloader (2.1.0)
       rails-assets-jquery (>= 1.4.3)
     rails-observers (0.1.2)

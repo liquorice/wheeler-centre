@@ -7,7 +7,9 @@ module Heracles
           {
             fields: [
               {name: :summary, type: :content},
+              {name: :intro, label: "Introduction", type: :content},
               {name: :body, label: "Content", type: :content, hint: "Main body content"},
+              {name: :meta, type: :content, hint: "Additional information about this post. Shows after the body."},
               {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :authors, type: :associated_pages, page_type: :person},
             ]

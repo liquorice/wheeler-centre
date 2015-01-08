@@ -21,7 +21,7 @@ module Heracles
           poster_aspect_class = "video-player__poster--landscape"
           # Extract the poster image asset
           if @poster_asset
-            version_name  = @options[:version].presence || :original
+            version_name  = @options[:version].presence || :content_large
             version_name  = :original unless @poster_asset.versions.include?(version_name)
             poster_url    = @poster_asset.send(:"#{version_name.to_sym}_url")
 
