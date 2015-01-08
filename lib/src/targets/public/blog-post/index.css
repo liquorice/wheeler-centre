@@ -1,0 +1,182 @@
+.blog-post {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.blog-post__header {
+  font-family: var(--font-sans);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+  .blog-post__byline {
+    color: #888;
+    font-size: 15px;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+    .blog-post__byline a {
+      text-decoration: underline;
+      color: #666;
+    }
+      .blog-post__byline a:hover,
+      .blog-post__byline a:focus {
+        color: #222;
+      }
+
+    .blog-post__byline-separator {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+  .blog-post__title {
+    color: var(--primary-color);
+    font-size: 48px;
+    font-size: 4.8rem;
+    font-weight: bold;
+  }
+
+.blog-post__intro {
+  padding-top: 50px;
+  padding-bottom: 15px;
+}
+  .blog-post__intro:after {
+    content: "";
+    border-bottom: 1px solid #ddd;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    width: 30%;
+  }
+
+  .blog-post__intro.copy {
+    font-size: 23px;
+    font-size: 2.3rem;
+  }
+
+  .blog-post__intro,
+  .blog-post__body {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .blog-post__body .section--full {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    margin-left: -35px;
+    margin-right: -35px;
+  }
+
+  .blog-post__intro .section--normal,
+  .blog-post__body .section--normal {
+    max-width: var(--column-mid);
+    position: relative;
+  }
+  .breakpoint-widescreen-wide .blog-post__body .section--normal > *:not(div),
+  .breakpoint-widescreen .blog-post__body .section--normal > *:not(div),
+  .breakpoint-tablet-wide .blog-post__body .section--normal > *:not(div) {
+    /* Shift _most_ of the content over */
+    margin-right: 25%;
+    margin-right: calc(25% + 3rem);
+  }
+  /* Hide the intro line when there's a full-width section as the first thing in the body */
+  .blog-post__intro + .blog-post__body .section--full:first-child .figure:first-child {
+    margin-top: -71px;
+  }
+
+
+.blog-post__meta {
+  padding-top: 30px;
+}
+  .blog-post__meta-inner {
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+  .blog-post__meta-inner:before {
+    border-bottom: 1px solid #ddd;
+    content: "";
+    display: block;
+    margin-bottom: 35px;
+    width: 15%;
+  }
+
+
+/*  .blog-post__body .section--normal:before {
+    position: absolute;
+    content: "";
+    background-color: rgba(255,0,0,0.5);
+    right: 0;
+    width: 25%;
+    top: 0;
+    bottom: 0;
+  }
+*/
+
+
+/* Temp should be more generic */
+
+.blog-post .figure__display--default {
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+  .breakpoint-widescreen-wide .blog-post .figure__display--default {
+    margin-left: -25%;
+    margin-right: -25%;
+  }
+
+.blog-post .figure__display--left-aligned {
+  float: left;
+  margin-right: 35px;
+  padding-bottom: 35px;
+  padding-top: 4px;
+  width: 35%;
+}
+  .breakpoint-widescreen-wide .blog-post .figure__display--left-aligned {
+    margin-left: -25%;
+    width: 50%;
+  }
+
+.blog-post .figure__display--right-aligned {
+  float: right;
+  width: 50%;
+  margin-left: 35px;
+  padding-bottom: 35px;
+  padding-top: 4px;
+}
+  .breakpoint-widescreen-wide .blog-post .figure__display--right-aligned {
+    margin-right: -25%;
+  }
+
+.figure img {
+  width: 100%;
+}
+
+.figure__display--full-width {
+  padding-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+  .copy section,
+  .copy section > .figure {
+    margin-bottom: 0;
+  }
+  .figure__display--full-width img {
+    width: 100%;
+  }
+
+.figure__caption {
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  font-size: 14px;
+  padding-top: 20px;
+}
+  .figure__display--full-width .figure__caption {
+    padding-left: 35px;
+    padding-right: 35px;
+  }

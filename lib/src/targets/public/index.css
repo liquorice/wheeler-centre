@@ -1,12 +1,16 @@
 /* Variables */
 
 :root {
+  --column-wide: 1200px;
+  --column-mid: 940px;
+  --column-small: 860px;
+  --column-narrow: 600px;
   --font-sans: "Colfax", Helvetica, sans-serif;
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c;
   --primary-color-lighter: #ccefeb;
   --primary-color-darker: color(var(--primary-color) shade(15%));
-  --text-color: #6b696c;
+  --text-color: #4a4a4a;
   --max-width: 100%;
 }
 
@@ -53,16 +57,21 @@ body {
   margin-right: auto;
 }
 .column-wide {
-  max-width: 1200px;
+  max-width: var(--column-wide);
 }
 .column-mid {
-  max-width: 940px;
+  max-width: var(--column-mid);
 }
 .column-small {
-  min-width: 860px
+  min-width: var(--column-small);
 }
 .column-narrow {
-  max-width: 600px;
+  max-width: var(--column-narrow);
+}
+
+.section--normal {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Components */
@@ -73,3 +82,4 @@ body {
 @import "./copy";
 @import "./video-player";
 @import "./subscribe";
+@import "./blog-post";

@@ -8,11 +8,19 @@
  * Margin won't work on inline elements anyway
  */
 
+.copy {
+  font-size: 21px;
+  font-size: 2.1rem;
+  line-height: 1.4;
+}
+
 .copy > *,
-.copy > blockquote > * {
+.copy > blockquote > *,
+.copy section > *,
+.copy section > blockquote > * {
   margin-top: 0;
-  margin-bottom: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
+  margin-bottom: 1.2rem;
 }
 
 .copy > hr {
@@ -38,7 +46,7 @@
 
 .copy hr {
   border: none;
-  border-bottom: 1px solid lighten($grey-light, 5%);
+  border-bottom: 1px solid #ddd;
 }
 
 
@@ -106,10 +114,19 @@
   .copy h5 a:focus,
   .copy h6 a:hover,
   .copy h6 a:focus {
-    color: #f09;
+    color: var(--primary-color);
     text-decoration: underline;
   }
 
+.copy p + h1,
+.copy p + h2,
+.copy p + h3,
+.copy p + h4,
+.copy p + h5,
+.copy p + h6 {
+  padding-top: 10px;
+  padding-top: 1rem;
+}
 
 .copy h1 {
   font-size: 22px;
@@ -117,18 +134,18 @@
 }
 
 .copy h2 {
+  font-size: 20px;
+  font-size: 2rem;
+}
+
+.copy h3 {
   font-size: 18px;
   font-size: 1.8rem;
 }
 
-.copy h3 {
-  font-size: 16px;
-  font-size: 1.6rem;
-}
-
 .copy h4 {
-  font-size: 14px;
-  font-size: 1.4rem;
+  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .copy h5 {}
@@ -161,7 +178,7 @@
 ---------------------------------------- */
 
 .copy a {
-  color: #f09;
+  color: var(--primary-color);
   text-decoration: underline;
 }
 
@@ -169,5 +186,5 @@
 
 .copy a:hover,
 .copy a:focus {
-  color: $highlight;
+  color: #222;
 }
