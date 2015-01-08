@@ -8,7 +8,7 @@
           span.blog-post__byline-separator ·
           time
             = l page.created_at, format: :day_dmy_with_full_words
-        h1.blog-post__title = page.title
+        h1.blog-post__title == widont_format markdown_line page.title
     - if page.fields[:intro].data_present?
       .blog-post__intro.column-wrapper.copy
         = render_content_in_sections page.fields[:intro]
