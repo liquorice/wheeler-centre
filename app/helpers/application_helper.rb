@@ -52,4 +52,32 @@ module ApplicationHelper
     display_date
   end
 
+
+  # Set of primary tags/categories that content falls under
+  def primary_tags
+    [
+      "Books, reading & writing",
+      "Art & design",
+      "Creative arts & pop culture",
+      "History, politics & current affairs",
+      "Free speech, human rights & social issues",
+      "Race, religion & identity",
+      "Sex & gender",
+      "Internet, journalism, media & publishing",
+      "Economics, business & marketing",
+      "Education, literacy & numeracy",
+      "Energy, environment & climate",
+      "Health, medicine & psychology",
+      "Science & technology",
+      "Law, ethics & philosophy",
+      "Comedy & humour"
+    ]
+  end
+
+
+  # Select only the primary_tags
+  def select_primary_tags_from(tags)
+    tags.select {|t| primary_tags.include? t.name }
+  end
+
 end

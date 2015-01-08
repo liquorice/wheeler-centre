@@ -1,0 +1,31 @@
+.figure {}
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure__display--full-width {
+    padding-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+    .copy section,
+    .copy section > .figure {
+      margin-bottom: 0;
+    }
+    .figure__display--full-width img {
+      width: 100%;
+    }
+
+  .figure__caption {
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    font-size: 14px;
+    padding-top: 20px;
+  }
+    .figure__display--full-width .figure__caption {
+      padding-left: 35px;
+      padding-right: 35px;
+    }

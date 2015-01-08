@@ -82,6 +82,7 @@ body {
 @import "./masthead-contextual";
 @import "./footer";
 @import "./copy";
+@import "./figure";
 @import "./video-player";
 @import "./subscribe";
 @import "./blog-post";
