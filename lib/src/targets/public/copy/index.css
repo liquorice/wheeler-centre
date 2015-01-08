@@ -42,6 +42,19 @@
 }
 
 .copy blockquote {
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  color: #333;
+  font-size: 23px;
+  font-size: 2.3rem;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-top: 30px;
+  margin-bottom: 35px;
+  line-height: 1.45;
+  margin-left: -35px;
 }
 
 .copy hr {
