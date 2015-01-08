@@ -8,7 +8,9 @@
 # Make an admin user for Heracles
 user = Heracles::User.find_or_initialize_by(email: "hello@icelab.com.au")
 user.password = "password1"
+user.name = "icelab"
 user.save!
+user.update(superadmin: true)
 
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
