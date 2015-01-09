@@ -61,9 +61,17 @@
     z-index: 3;
   }
     .video-player .video-player__title {
+      cursor: pointer;
       font-size: 32px;
       font-size: 3.2rem;
       line-height: 1.4;
+      margin-left: 65px;
+    }
+    .video-player__play-icon {
+      font-size: 50px;
+      position: absolute;
+      margin-top: -5px;
+      opacity: 0.8;
     }
 
   /* Metadata */

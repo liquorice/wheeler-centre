@@ -47,8 +47,8 @@ module Heracles
             end
 
             header = content_tag :div, class: "video-player__header" do
-              icon = content_tag :span, nil, class: "video-player__play-icon"
-              title = content_tag :h3, @insertable_data["embedData"]["title"], class: "video-player__title"
+              icon = content_tag :i, nil, class: "fa fa-play-circle video-player__play-icon"
+              title = content_tag :h3, widont_format(@insertable_data["embedData"]["title"]).html_safe, class: "video-player__title"
               [icon, title].join.html_safe
             end
 
