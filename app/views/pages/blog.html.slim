@@ -1,4 +1,4 @@
-- posts = page.posts.results
+- posts = page.posts(page: params[:page]).results
 
 - content_for(:title) do
   .page__title.page__title--blog
