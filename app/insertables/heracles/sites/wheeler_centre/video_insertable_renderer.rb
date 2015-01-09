@@ -59,7 +59,7 @@ module Heracles
           video_wrapper = content_tag(:div, [video_teaser, video_content].join.html_safe, {class: "video-player {(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}", data: {"view-video-player" => true }})
           caption = ""
           if @insertable_data[:caption].present?
-            caption = content_tag(:div, content_tag(:p, @insertable_data[:caption]), class: "figure__caption copy")
+            caption = content_tag(:div, content_tag(:p, @insertable_data[:caption]), class: "caption figure__caption copy")
           end
           content_tag :div, [video_wrapper, caption].join.html_safe, class: "figure figure__video figure__display--#{(@insertable_data[:display] || "default").downcase}"
         end

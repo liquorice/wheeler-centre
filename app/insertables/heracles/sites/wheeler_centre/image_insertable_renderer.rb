@@ -50,7 +50,7 @@ module Heracles
             if @insertable_data[:show_attribution] && @asset.attribution.present?
               caption_text += @asset.attribution
             end
-            output << content_tag(:div, content_tag(:p, caption_text), class: "figure__caption copy")
+            output << content_tag(:div, content_tag(:p, caption_text), class: "figure__caption caption copy")
           end
 
           content_tag :div, output.join.html_safe, {class: "figure figure__display--#{(@insertable_data[:display].present? ? @insertable_data[:display] : "default").downcase} #{aspect_class}", style: ("width:#{@insertable_data[:width]}" if @insertable_data[:width])}
