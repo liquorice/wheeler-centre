@@ -4,13 +4,14 @@
   .page__title.page__title--blog
     h1.title == page.title
 
-- content_for(:middle) do
+= area :main do
   .page__content
     .page__body.page__body--blog.copy
       = render_content page.fields[:body]
-      - if posts.present?
+    - if posts.present?
+      .column-mid
         - posts.each do |post|
-          .blog-post
+          .blog-post.copy
             h2
               a href=post.absolute_url
                 = post.title
