@@ -4,6 +4,7 @@ module Heracles
       class VideoInsertableRenderer < ::Heracles::VideoInsertableRenderer
         include ActionView::Helpers::TagHelper
         include ActionView::Context
+        include TextFormattingHelper
 
         def initialize(insertable_data={}, options={})
           @insertable_data = insertable_data.with_indifferent_access
