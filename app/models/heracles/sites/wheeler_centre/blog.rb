@@ -3,7 +3,11 @@ module Heracles
     module WheelerCentre
       class Blog < Heracles::Page
         def self.config
-          {}
+          {
+            fields: [
+              {name: :intro, label: "Introduction", type: :content}
+            ]
+          }
         end
 
         def posts(options={})
