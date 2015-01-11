@@ -1,9 +1,32 @@
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Writings
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="/writings"
+          ' Latest writing
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Browse topics
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Guest authors
+
 = area :main do
   .blog-post
     .blog-post__header.column-wrapper
       .column-wide
         p.blog-post__byline
           - selected_primary_tags = select_primary_tags_from(page.tags)
+          - if page.fields[:authors].data_present?
+            - if page.guest_post?
+              ' Guest post by
+            - else
+              ' By
+            = page.fields[:authors].pages.map(&:title).to_sentence
+            span.blog-post__byline-separator ·
           - selected_primary_tags.any?
             ' In
             - selected_primary_tags.each_with_index do |tag, index|

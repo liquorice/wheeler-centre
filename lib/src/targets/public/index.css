@@ -7,7 +7,7 @@
   --column-narrow: 600px;
   --font-sans: "Colfax", Helvetica, sans-serif;
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
-  --primary-color: #009e8c;
+  --primary-color: #009e8c; /* 0, 158, 140 */
   --primary-color-lighter: #ccefeb;
   --primary-color-darker: color(var(--primary-color) shade(15%));
   --text-color: #222;
@@ -44,6 +44,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@import "./copy";
+
 /* Basic layout */
 
 .column-wrapper {
@@ -71,18 +73,67 @@ body {
   max-width: var(--column-narrow);
 }
 
+.block-link {
+  color: var(--primary-color);
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: bold;
+  text-align: center;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin-bottom: 35px;
+}
+  .block-link:hover {
+    color: #222;
+    text-decoration: underline;
+  }
+
 .section--normal {
   margin-left: auto;
   margin-right: auto;
 }
+
+.intro {
+  text-align: center;
+}
+  .intro--small {
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+
+  .section-header {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 35px;
+  }
+
+  .section-header h2 {
+    color: #777;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+    font-size: 14px;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+  }
+
+.page__intro {
+  padding-bottom: 35px;
+}
+  .page__intro.copy {
+    font-size: 25px;
+    font-size: 2.5rem;
+  }
 
 /* Components */
 
 @import "./masthead";
 @import "./masthead-contextual";
 @import "./footer";
-@import "./copy";
 @import "./figure";
 @import "./video-player";
 @import "./subscribe";
+@import "./topics-section";
 @import "./blog-post";

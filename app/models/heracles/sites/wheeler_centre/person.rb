@@ -50,6 +50,14 @@ module Heracles
             fields[:external_links].value
           end
 
+          time :created_at do
+            created_at
+          end
+
+          time :updated_at do
+            updated_at
+          end
+
         end
       end
     end

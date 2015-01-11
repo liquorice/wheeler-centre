@@ -1,28 +1,93 @@
 - posts = page.posts(page: params[:page]).results
+- guest_authors = page.guest_authors.results
 
-- content_for(:title) do
-  .page__title.page__title--blog
-    h1.title == page.title
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Writings
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="/writings"
+          ' Latest writing
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Browse topics
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Guest writers
 
 = area :main do
-  .page__content
-    .page__body.page__body--blog.copy
-      = render_content page.fields[:body]
-    - if posts.present?
-      .column-mid
-        - posts.each do |post|
-          .blog-post.copy
-            h2
-              a href=post.absolute_url
-                = post.title
-            .blog-post-details
-              .blog-post-details__datetime.copy
-                p = format_date(post.created_at, nil, "long")
-            .blog-post-details__summary.copy
-              = render_content(post.fields["summary"])
-            a.blog-post__read-more href=post.absolute_url
-              | Read more
+  .blog-index
+    .page__intro.intro.blog-index__intro.column-wrapper
+      .column-narrow.copy
+        = render_content page.fields[:intro]
+    .blog-index__latest.column-wrapper
+      .column-wide
+        h2.blog-index__latest-header Latest writing
+        - if posts.present?
+          .blog-snap__group.clearfix
+            .blog-snap-halves.blog-snap-halves--1
+              - posts[0..0].each do |post|
+                = render "partials/blog_snap_half", post: post
+            .blog-snap-quarters.blog-snap-quarters--2.clearfix
+              - posts[1..2].each do |post|
+                = render "partials/blog_snap_quarter", post: post
+          .blog-snap__group.clearfix
+            .blog-snap-quarters.blog-snap-quarters--2.clearfix
+              - posts[3..4].each do |post|
+                = render "partials/blog_snap_quarter", post: post
+            .blog-snap-halves.blog-snap-halves--1
+              - posts[5..5].each do |post|
+                = render "partials/blog_snap_half", post: post
+          a.block-link.blog-index__latest-more href="#" There’s more recent writings over here on page two &#8230; &rsaquo;
 
-        = paginate(posts)
+    .blog-index__topic.column-wrapper.gradient-top-down
+      .section-header
+        h2 #discuss
+        .intro.intro--small.column-narrow.copy
+          p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
+      .clearfix
+        - posts[6..11].each do |post|
+          = render "partials/blog_snap_block", post: post, hide_summary: true
 
+    .blog-index__guest-authors.column-wrapper
+      .section-header
+        h2 Guest authors
+        .intro.intro--small.column-narrow.copy
+          p Our recent guest authors and their latest writings.
+      .column-wide
+        .blog-index__guest-authors-inner
+          - guest_authors.each do |guest_author|
+            .guest-author
+              - if guest_author.fields[:portrait].data_present?
+                .author-image
+                  .author-image__inner
+                    img src= guest_author.fields[:portrait].asset.content_thumbnail_url
+              h3.guest-author__title
+                = guest_author.title
+              - if guest_author.fields[:intro].data_present?
+                .guest-author__intro.copy
+                  = force_excerptify_html render_content(guest_author.fields[:intro]), 150
+              ul.blog-post-list
+                - posts.sample(3).each do |post|
+                  li
+                    a.blog-post-list__anchor href=post.absolute_url
+                      h3.blog-post-list__title
+                        span.title-text == widont_format markdown_line post.title
+                        - selected_primary_tags = select_primary_tags_from(post.tags)
+                        - if selected_primary_tags.any?
+                          span.title-tags
+                            '  &nbsp;/&nbsp;
+                            = selected_primary_tags.first
+    .blog-index__topic.column-wrapper
+      .column-mid.clearfix
+        .section-header
+          h2 Victorian Premier’s Literary Awards
+          .intro.intro--small.column-narrow.copy
+            p A ready-made summer reading list of the best of the best in Australian writing now.
+        .blog-snap__group.blog-snap__group--4.clearfix
+          - posts[12..15].each do |post|
+            = render "partials/blog_snap_block", post: post, hide_summary: true
 
+    = render "partials/topics_section"

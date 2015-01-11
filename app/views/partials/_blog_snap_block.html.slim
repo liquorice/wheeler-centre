@@ -1,0 +1,29 @@
+- hide_summary = hide_summary || false
+
+a.blog-snap.blog-snap--block href=post.absolute_url
+  time.blog-snap__date
+    = l post.created_at, format: :medium_date
+  - if post.fields[:hero_image].data_present?
+    .blog-snap__hero
+      .blog-snap__hero-inner
+        img alt="Two angry lookin’ sheep" src=post.fields[:hero_image].asset.content_thumbnail_url
+      - if post.fields[:hero_image].asset.attribution.present?
+        .blog-snap__hero-caption.caption
+          p = post.fields[:hero_image].asset.attribution
+  h3.blog-snap__title
+    span.title-text == widont_format markdown_line post.title
+    - selected_primary_tags = select_primary_tags_from(post.tags)
+    - if selected_primary_tags.any?
+      span.title-tags
+        '  &nbsp;/&nbsp;
+        = selected_primary_tags.first
+  - if post.fields[:authors].data_present?
+    p.blog-snap__authors
+      - if post.guest_post?
+        ' Guest post by
+      - else
+        ' By
+      = post.fields[:authors].pages.map(&:title).to_sentence
+  - if post.fields["summary"].data_present? && !hide_summary
+    .blog-snap__summary.copy
+      = render_content post.fields["summary"]

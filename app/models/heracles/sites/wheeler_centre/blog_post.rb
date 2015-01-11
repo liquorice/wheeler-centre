@@ -11,9 +11,20 @@ module Heracles
               {name: :body, label: "Content", type: :content, hint: "Main body content"},
               {name: :meta, type: :content, hint: "Additional information about this post. Shows after the body."},
               {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :guest_post, type: :boolean, question_text: "Is this a guest post?"},
               {name: :authors, type: :associated_pages, page_type: :person},
             ]
           }
+        end
+
+        ### Accessors
+
+        def parent_blog
+          parent.try(:page_type) == "blog" ? parent : nil
+        end
+
+        def guest_post?
+          fields[:guest_post].value
         end
 
         searchable do
