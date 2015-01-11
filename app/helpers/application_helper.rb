@@ -33,6 +33,15 @@ module ApplicationHelper
 
   ### Application specific helpers
 
+  def excerptify(text, chars = 220)
+    text = strip_tags(text)
+    truncate(text, length: chars)
+  end
+
+  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br a")
+    truncate_html(sanitize(html, tags: allowed_tags.split(' ')), length: length)
+  end
+
   # Cribbed from Padrino:
   # http://rubydoc.info/github/padrino/padrino-framework/master/Padrino/Helpers/AssetTagHelpers:favicon_tag
   def favicon_tag(source, options={})

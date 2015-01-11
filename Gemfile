@@ -33,6 +33,7 @@ gem "jbuilder", "~> 2.0"
 gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"
+gem "truncate_html"
 
 # Integrations
 gem "bugsnag"
