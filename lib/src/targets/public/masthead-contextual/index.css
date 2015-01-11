@@ -89,7 +89,8 @@
     }
 
   .upcoming-events__item {
-    border-left: 2px solid #66dacc;
+    border-left: 1px solid color(var(--primary-color) tint(50%));
+    border-color: rgba(0, 158, 140, 0.5);
     float: left;
     width: 187px;
   }
@@ -101,8 +102,6 @@
   .upcoming-events__item-anchor--hover .upcoming-events__item-image,
   .upcoming-events__item-anchor:focus .upcoming-events__item-image {
     transform: translateY(-50px);
-    transition-property: transform;
-    transition-duration: 100ms;
   }
 
   .upcoming-events__item-anchor--hover .upcoming-events__item-text-container,
@@ -119,6 +118,8 @@
 
       .upcoming-events__item-image {
         display: block;
+        transition-property: transform;
+        transition-duration: 100ms;
       }
 
     .upcoming-events__item-text-container {

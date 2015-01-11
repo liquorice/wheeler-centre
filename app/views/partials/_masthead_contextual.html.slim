@@ -2,19 +2,7 @@
   h1.masthead-contextual__section-title
     = area :masthead_title
 .masthead-contextual.clearfix
-  ul.masthead-contextual__navigation-list
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="#"
-        | Calendar
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="#"
-        | Event series
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="#"
-        | Past events
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="#"
-        | Presenters
+  = area :masthead_contextual_navigation
   .upcoming-events
     .upcoming-events__navigation.clearfix
       span.upcoming-events__up-next Up next
@@ -25,28 +13,28 @@
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placebear.com/185/100" width="185" height="100"
+            img.upcoming-events__item-image src="http://placebear.com/185/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Art &amp; Health
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placesheen.com/185/100" width="185" height="100"
+            img.upcoming-events__item-image src="http://placesheen.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Matthew Reilly
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placecage.com/185/100" width="185" height="100"
+            img.upcoming-events__item-image src="http://placecage.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Nicholas Cage: an awesome thing
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://fillmurray.com/185/100" width="185" height="100"
+            img.upcoming-events__item-image src="http://fillmurray.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Two more months of winter
