@@ -5,8 +5,8 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :body, type: :content},
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :intro, label: "Introduction", type: :content},
+              {name: :body, type: :content}
             ]
           }
         end
