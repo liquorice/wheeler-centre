@@ -263,7 +263,16 @@ namespace :wheeler_centre do
         heracles_blog_post.published = true
         heracles_blog_post.slug = blueprint_daily["slug"]
         heracles_blog_post.title = blueprint_daily["title"]
-        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["content"], subject: blueprint_daily, assetify: false)
+
+        content = blueprint_daily["content"].to_s
+        # Split the summary out on the highlight tag
+        summary = content.split("[[highlight]]")
+        if summary.length > 0
+          content.slice!(summary[0])
+          heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+          heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+        end
+        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_daily, assetify: false)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
         heracles_blog_post.parent = parent
         heracles_blog_post.collection = collection
