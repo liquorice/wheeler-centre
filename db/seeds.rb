@@ -207,6 +207,7 @@ blog_collection.page_order_position = :last
 blog_collection.save!
 
 # Broadcasts index page
+# ------------------------------------------------------------------------------
 broadcasts_index = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "broadcasts")
 broadcasts_index.site = site
 broadcasts_index.title = "Broadcasts"
@@ -216,7 +217,7 @@ broadcasts_index.locked = true
 broadcasts_index.page_order_position = :last
 broadcasts_index.save!
 
-# Recordings collection
+# Broadcasts -> Recordings collection
 recordings_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "broadcasts/all-recordings")
 recordings_collection.parent = broadcasts_index
 recordings_collection.site = site
@@ -230,19 +231,16 @@ recordings_collection.locked = true
 recordings_collection.page_order_position = :last
 recordings_collection.save!
 
-# Podcasts collection
-podcasts_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "broadcasts/all-podcasts")
-podcasts_collection.parent = broadcasts_index
-podcasts_collection.site = site
-podcasts_collection.title = "All Podcasts"
-podcasts_collection.slug = "all-podcasts"
-podcasts_collection.fields[:contained_page_type].value = "podcast-series"
-podcasts_collection.fields[:sort_attribute].value = "created_at"
-podcasts_collection.fields[:sort_direction].value = "DESC"
-podcasts_collection.published = false
-podcasts_collection.locked = true
-podcasts_collection.page_order_position = :last
-podcasts_collection.save!
+# Broadcasts -> Podcasts
+podcasts = Heracles::Sites::WheelerCentre::Podcasts.find_or_initialize_by(url: "podcasts")
+podcasts.site = site
+podcasts.parent = broadcasts_index
+podcasts.title = "Podcasts"
+podcasts.slug = "podcasts"
+podcasts.published = true
+podcasts.locked = true
+podcasts.page_order_position = :last
+podcasts.save!
 
 # People page
 # ------------------------------------------------------------------------------
