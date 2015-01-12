@@ -143,8 +143,7 @@ namespace :wheeler_centre do
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
     blueprint_users = blueprint_records.select { |r| r.class == LegacyBlueprint::User }
@@ -245,8 +244,7 @@ namespace :wheeler_centre do
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
     id = dailies_root.first["id"].to_i
@@ -292,8 +290,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
 
@@ -376,8 +373,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
 
     backup_data = File.read(args[:yml_file])
-    YAML::ENGINE.yamler = 'syck'
-    blueprint_records = YAML.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     # Find or initialise the Projects page
