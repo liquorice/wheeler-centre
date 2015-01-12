@@ -540,21 +540,4 @@ namespace :wheeler_centre do
 
   end
 
-  desc "Replace munched characters"
-  task :replace_characters, [:yml_file] => :environment do |task, args|
-    backup_data = File.open(args[:yml_file], 'r:binary').read
-    # backup_data = File.read(args[:yml_file])
-    puts (backup_data)
-
-    new_contents = backup_data.gsub(/\xC3\xA2\xE2\x82\xAC\xE2\x84\xA2/, "&rsquo;")
-
-    puts (backup_data)
-
-
-    File.open(args[:yml_file], "w") {|file| file.puts new_contents }
-    # File.write(args[:yml_file], backup_data.gsub(/\xc3\xa2\xe2\x82\xac\xe2\x84\xa2/, "&rsquo;"))
-    # File.write(args[:yml_file], backup_data.gsub(/\xC3\xA2\xE2\x82\xAC\xE2\x84\xA2/, "&rsquo;"))
-  end
-
-
 end
