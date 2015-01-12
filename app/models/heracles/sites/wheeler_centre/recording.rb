@@ -15,6 +15,7 @@ module Heracles
               # Dates
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :recording_date, type: :date_time, label: "Recording date"},
+              {name: :recording_id, type: :integer, label: "Recording Id"},
             ]
           }
         end
