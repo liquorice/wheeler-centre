@@ -83,11 +83,6 @@ module LegacyBlueprint
     end
 
 
-    def self.set_controller(cntlr)
-      @controller = cntlr
-    end
-
-
     def self.sanitize(text)
       self.instance.sanitize(text)
     end
