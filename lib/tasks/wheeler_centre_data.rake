@@ -490,6 +490,45 @@ namespace :wheeler_centre do
     end
   end
 
+  desc "Import legacy Blueprint 'CenvidPost' content to be Recordings"
+  task :import_blueprint_recordings, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+    parent = Heracles::Page.find_by_slug("broadcasts")
+    collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
+
+    blueprint_videos.each do |blueprint_video|
+      if blueprint_video["title"].present?
+        heracles_recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(blueprint_video["slug"])
+        unless heracles_recording then heracles_recording = Heracles::Page.new_for_site_and_page_type(site, "recording") end
+        heracles_recording.published = true
+        puts (blueprint_video["slug"])
+        heracles_recording.slug = blueprint_video["slug"]
+        heracles_recording.title = blueprint_video["title"]
+        heracles_recording.fields[:short_title].value = blueprint_video["title"]
+        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video["description"], subject: blueprint_video, assetify: false)
+        heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video["transcript"], subject: blueprint_video, assetify: false)
+        # TODO :video
+        # TODO :audio
+        # TODO :promo_image
+        # TODO check :publish_at?
+        heracles_recording.fields[:recording_date].value = Time.zone.parse(blueprint_video["event_date"].to_s)
+        heracles_recording.created_at = Time.zone.parse(blueprint_video["created_on"].to_s)
+        heracles_recording.fields[:recording_id].value = blueprint_video["page_id"].to_i
+        heracles_recording.parent = parent
+        heracles_recording.collection = collection
+        heracles_recording.save!
+      end
+    end
+  end
+
   def find_matching_staff_member(presenter, data)
     # The best we can do is match on the slug, or maybe the names.
     staff = data.select { |r| r["slug"].to_s == presenter["slug"].to_s }
