@@ -117,13 +117,6 @@ GEM
       execjs
     aws-sdk (1.60.2)
       aws-sdk-v1 (= 1.60.2)
-    aws-sdk-core (2.0.18)
-      builder (~> 3.0)
-      jmespath (~> 1.0)
-      multi_json (~> 1.0)
-      multi_xml (~> 0.5)
-    aws-sdk-resources (2.0.18.pre)
-      aws-sdk-core (= 2.0.18)
     aws-sdk-v1 (1.60.2)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -226,8 +219,6 @@ GEM
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jmespath (1.0.2)
-      multi_json (~> 1.0)
     json (1.8.1)
     jwt (1.2.0)
     kaminari (0.16.1)
@@ -454,7 +445,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk-resources
+  aws-sdk
   better_errors
   binding_of_caller
   bugsnag
