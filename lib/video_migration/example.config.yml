@@ -1,0 +1,9 @@
+## Include correct information about the app and key details
+service_account_email:
+key_file:
+key_secret:
+application_name:
+application_version:
+# Video migration AWS details
+MIGRATION_AWS_SECRET_KEY:
+MIGRATION_AWS_ACCESS_KEY_ID:
