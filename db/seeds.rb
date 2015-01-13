@@ -144,7 +144,7 @@ homepage.save!
 
 # Events
 # ------------------------------------------------------------------------------
-events_index = Heracles::Sites::WheelerCentre::EventsIndex.find_or_initialize_by(url: "events")
+events_index = Heracles::Sites::WheelerCentre::Events.find_or_initialize_by(url: "events")
 events_index.site = site
 events_index.title = "Events"
 events_index.slug = "events"
@@ -167,9 +167,20 @@ events_collection.locked = true
 events_collection.page_order_position = :last
 events_collection.save!
 
-# Events -> Event series collection
+# Events -> Event series index
+events_series_index = Heracles::Sites::WheelerCentre::EventSeriesIndex.find_or_initialize_by(url: "events/series")
+events_series_index.site = site
+events_series_index.parent = events_index
+events_series_index.title = "Series"
+events_series_index.slug = "series"
+events_series_index.published = true
+events_series_index.locked = true
+events_series_index.page_order_position = :last
+events_series_index.save!
+
+# Events -> Event series index -> Event series collection
 event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
-event_series_collection.parent = events_index
+event_series_collection.parent = events_series_index
 event_series_collection.site = site
 event_series_collection.title = "All Event Series"
 event_series_collection.slug = "all-event-series"
@@ -181,9 +192,31 @@ event_series_collection.locked = true
 event_series_collection.page_order_position = :last
 event_series_collection.save!
 
-# Events -> Event venues collection
+# Events -> Presenters
+presenters = Heracles::Sites::WheelerCentre::Presenters.find_or_initialize_by(url: "events/venues")
+presenters.site = site
+presenters.parent = events_index
+presenters.title = "Presenters"
+presenters.slug = "presenters"
+presenters.published = true
+presenters.locked = true
+presenters.page_order_position = :last
+presenters.save!
+
+# Events -> Venues index
+venues_index = Heracles::Sites::WheelerCentre::Venues.find_or_initialize_by(url: "events/venues")
+venues_index.site = site
+venues_index.parent = events_index
+venues_index.title = "Venues"
+venues_index.slug = "venues"
+venues_index.published = true
+venues_index.locked = true
+venues_index.page_order_position = :last
+venues_index.save!
+
+# Events -> Venues index -> Venues collection
 venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-venues")
-venues_collection.parent = events_index
+venues_collection.parent = venues_index
 venues_collection.site = site
 venues_collection.title = "All Venues"
 venues_collection.slug = "all-event-venues"
