@@ -27,7 +27,7 @@
               ' By
             = page.fields[:authors].pages.map(&:title).to_sentence
             span.blog-post__byline-separator ·
-          - selected_primary_topics.any?
+          - if selected_primary_topics.present?
             ' In
             - selected_primary_topics.each_with_index do |topic, index|
               a href=topic.absolute_url = topic.title
