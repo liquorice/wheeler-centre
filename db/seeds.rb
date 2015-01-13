@@ -328,7 +328,6 @@ topics.title = "Topics"
 topics.slug = "topics"
 topics.published = true
 topics.locked = false
-topics.hidden = true
 topics.page_order_position = :last
 topics.save!
 
