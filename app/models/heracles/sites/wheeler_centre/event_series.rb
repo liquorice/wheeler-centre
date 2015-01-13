@@ -16,6 +16,10 @@ module Heracles
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           date :created_at do
             created_at.to_s(:admin_date)
           end

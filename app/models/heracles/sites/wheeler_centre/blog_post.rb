@@ -44,6 +44,10 @@ module Heracles
             created_at
           end
 
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
         end
 
       end

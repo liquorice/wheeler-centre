@@ -23,6 +23,10 @@ module Heracles
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :first_name do
             fields[:first_name].value
           end

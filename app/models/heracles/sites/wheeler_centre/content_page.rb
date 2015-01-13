@@ -11,6 +11,12 @@ module Heracles
             ]
           }
         end
+
+        searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+        end
       end
     end
   end
