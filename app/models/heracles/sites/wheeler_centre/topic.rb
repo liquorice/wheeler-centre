@@ -1,13 +1,12 @@
 module Heracles
   module Sites
     module WheelerCentre
-      class ContentPage < ::Heracles::Page
+      class Topic < ::Heracles::Page
         def self.config
           {
             fields: [
               {name: :intro, label: "Introduction", type: :content},
-              {name: :body, type: :content},
-              {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :body, type: :content}
             ]
           }
         end

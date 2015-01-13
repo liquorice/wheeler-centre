@@ -19,7 +19,7 @@
     .blog-post__header.column-wrapper
       .column-wide
         p.blog-post__byline
-          - selected_primary_tags = select_primary_tags_from(page.tags)
+          - selected_primary_topics = select_primary_topics_for_page(page)
           - if page.fields[:authors].data_present?
             - if page.guest_post?
               ' Guest post by
@@ -27,11 +27,11 @@
               ' By
             = page.fields[:authors].pages.map(&:title).to_sentence
             span.blog-post__byline-separator ·
-          - selected_primary_tags.any?
+          - selected_primary_topics.any?
             ' In
-            - selected_primary_tags.each_with_index do |tag, index|
-              a href="##{tag}"= tag
-              - if index < selected_primary_tags.length - 1
+            - selected_primary_topics.each_with_index do |topic, index|
+              a href=topic.absolute_url = topic.title
+              - if index < selected_primary_topics.length - 1
                 ',
             span.blog-post__byline-separator ·
           time
@@ -46,11 +46,11 @@
       .blog-post__meta.column-wrapper
         .blog-post__meta-inner.column-mid.copy
           = render_content page.fields[:meta]
-    - if page.tags.any?
+    - if page.fields[:topics].data_present?
       .blog-post__tags.column-wrapper
         .column-mid
           h2.blog-post__tag-header Topics
           ul.blog-post__tags-list
-            - page.tags.sort_by(&:name).each do |tag|
+            - page.fields[:topics].pages.sort_by(&:title).each do |topic|
               li
-                a href="" = tag
+                a href=topic.absolute_url = topic.title

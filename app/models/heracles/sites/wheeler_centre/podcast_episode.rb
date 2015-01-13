@@ -10,6 +10,7 @@ module Heracles
               {name: :audio, type: :asset, asset_file_type: :audio},
               {name: :events, type: :associated_pages, page_type: :event},
               {name: :publish_date, type: :date_time, label: "Publish date"},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end

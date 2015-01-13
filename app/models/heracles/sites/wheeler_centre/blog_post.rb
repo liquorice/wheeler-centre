@@ -13,6 +13,7 @@ module Heracles
               {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :guest_post, type: :boolean, question_text: "Is this a guest post?"},
               {name: :authors, type: :associated_pages, page_type: :person},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end

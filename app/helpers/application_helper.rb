@@ -63,6 +63,20 @@ module ApplicationHelper
 
 
   # Set of primary tags/categories that content falls under
+  def topics_page
+    site.pages.find_by_url("topics")
+  end
+
+  def primary_topics
+    topics_page.children.visible.published.of_type("topic")
+  end
+
+  def select_primary_topics_for_page(page)
+    if page.fields[:topics].data_present?
+      page.fields[:topics].pages.select {|t| primary_topics.include? t}
+    end
+  end
+
   def primary_tags
     [
       "Books, reading & writing",

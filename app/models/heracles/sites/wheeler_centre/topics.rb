@@ -1,15 +1,20 @@
 module Heracles
   module Sites
     module WheelerCentre
-      class ContentPage < ::Heracles::Page
+      class Topics < ::Heracles::Page
         def self.config
           {
             fields: [
               {name: :intro, label: "Introduction", type: :content},
-              {name: :body, type: :content},
-              {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :body, type: :content}
             ]
           }
+        end
+
+        ### Accessors
+
+        def primary_topics
+          children.visible.published.of_type("topic")
         end
       end
     end

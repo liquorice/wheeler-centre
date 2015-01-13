@@ -7,7 +7,8 @@ module Heracles
             fields: [
               {name: :feature_image, type: :asset, asset_file_type: :image},
               {name: :description, type: :content},
-              {name: :itunes_categories, type: :array}
+              {name: :itunes_categories, type: :array},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ],
             default_children: {
               type: :collection,
