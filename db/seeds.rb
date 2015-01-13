@@ -153,13 +153,13 @@ events_index.locked = true
 events_index.page_order_position = :last
 events_index.save!
 
-# Events collection
+# Events -> Events collection
 events_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-events")
 events_collection.parent = events_index
 events_collection.site = site
 events_collection.title = "All Events"
 events_collection.slug = "all-events"
-events_collection.fields[:contained_page_type].value = "event"
+events_collection.fields[:contained_page_type].value = :event
 events_collection.fields[:sort_attribute].value = "created_at"
 events_collection.fields[:sort_direction].value = "DESC"
 events_collection.published = false
@@ -167,19 +167,33 @@ events_collection.locked = true
 events_collection.page_order_position = :last
 events_collection.save!
 
-# Events series collection
-events_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
-events_series_collection.parent = events_index
-events_series_collection.site = site
-events_series_collection.title = "All Event Series"
-events_series_collection.slug = "all-event-series"
-events_series_collection.fields[:contained_page_type].value = "event_series"
-events_series_collection.fields[:sort_attribute].value = "created_at"
-events_series_collection.fields[:sort_direction].value = "DESC"
-events_series_collection.published = false
-events_series_collection.locked = true
-events_series_collection.page_order_position = :last
-events_series_collection.save!
+# Events -> Event series collection
+event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
+event_series_collection.parent = events_index
+event_series_collection.site = site
+event_series_collection.title = "All Event Series"
+event_series_collection.slug = "all-event-series"
+event_series_collection.fields[:contained_page_type].value = :event_series
+event_series_collection.fields[:sort_attribute].value = "created_at"
+event_series_collection.fields[:sort_direction].value = "DESC"
+event_series_collection.published = false
+event_series_collection.locked = true
+event_series_collection.page_order_position = :last
+event_series_collection.save!
+
+# Events -> Event venues collection
+venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-venues")
+venues_collection.parent = events_index
+venues_collection.site = site
+venues_collection.title = "All Venues"
+venues_collection.slug = "all-event-venues"
+venues_collection.fields[:contained_page_type].value = :venues
+venues_collection.fields[:sort_attribute].value = "created_at"
+venues_collection.fields[:sort_direction].value = "DESC"
+venues_collection.published = false
+venues_collection.locked = true
+venues_collection.page_order_position = :last
+venues_collection.save!
 
 # Writings
 # ------------------------------------------------------------------------------
@@ -198,7 +212,7 @@ blog_collection.parent = blog_index
 blog_collection.site = site
 blog_collection.title = "All Writings"
 blog_collection.slug = "all-writings"
-blog_collection.fields[:contained_page_type].value = "blog_post"
+blog_collection.fields[:contained_page_type].value = :blog_post
 blog_collection.fields[:sort_attribute].value = "created_at"
 blog_collection.fields[:sort_direction].value = "DESC"
 blog_collection.published = false
@@ -223,7 +237,7 @@ recordings_collection.parent = broadcasts_index
 recordings_collection.site = site
 recordings_collection.title = "All Recordings"
 recordings_collection.slug = "all-recordings"
-recordings_collection.fields[:contained_page_type].value = "recording"
+recordings_collection.fields[:contained_page_type].value = :recording
 recordings_collection.fields[:sort_attribute].value = "created_at"
 recordings_collection.fields[:sort_direction].value = "DESC"
 recordings_collection.published = false
@@ -259,7 +273,7 @@ people_collection.parent = people
 people_collection.site = site
 people_collection.title = "All People"
 people_collection.slug = "all-people"
-people_collection.fields[:contained_page_type].value = "person"
+people_collection.fields[:contained_page_type].value = :person
 people_collection.fields[:sort_attribute].value = "created_at"
 people_collection.fields[:sort_direction].value = "DESC"
 people_collection.published = false
