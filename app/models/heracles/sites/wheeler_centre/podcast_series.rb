@@ -13,6 +13,24 @@ module Heracles
           }
         end
 
+        def default_children_config
+          [
+            {
+              type: :collection,
+              slug: "episodes",
+              title: "Episodes",
+              # FIXME this doesn’t work
+              fields: {
+                contained_page_type: { value: :podcast_episode },
+                sort_attribute: { value: "created_at" },
+                sort_direction: { value: "DESC" }
+              },
+              published: false,
+              locked: true
+            }
+          ]
+        end
+
         searchable do
           text :description do
             fields[:description].value

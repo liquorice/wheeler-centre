@@ -1,12 +1,13 @@
 module Heracles
   module Sites
     module WheelerCentre
-      class EventsIndex < ::Heracles::Page
+      class Events < ::Heracles::Page
         include ApplicationHelper
 
         def self.config
           {
             fields: [
+              {name: :intro, type: :content},
               {name: :body, type: :content},
             ]
           }
