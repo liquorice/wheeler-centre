@@ -10,7 +10,7 @@ module Heracles
               {name: :transcripts, type: :content},
               {name: :video, type: :asset, asset_file_type: :video},
               {name: :audio, type: :asset, asset_file_type: :audio},
-              {name: :promo_image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :events, type: :associated_pages, page_type: :event},
               # Dates
               {name: :publish_date, type: :date_time, label: "Publish date"},

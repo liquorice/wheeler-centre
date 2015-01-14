@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :address, type: :text},
               {name: :address_formatted, type: :content},
               {name: :phone_number, type: :text},
