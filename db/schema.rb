@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106055318) do
+ActiveRecord::Schema.define(version: 20150114053623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,8 +81,10 @@ ActiveRecord::Schema.define(version: 20150106055318) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "inserted_key"
+    t.string   "field",        null: false
   end
 
+  add_index "insertions", ["field"], name: "index_insertions_on_field", using: :btree
   add_index "insertions", ["inserted_key"], name: "index_insertions_on_inserted_key", using: :btree
   add_index "insertions", ["page_id"], name: "index_insertions_on_page_id", using: :btree
 
@@ -103,23 +105,25 @@ ActiveRecord::Schema.define(version: 20150106055318) do
     t.boolean  "hidden",         default: false, null: false
     t.boolean  "locked",         default: false, null: false
     t.integer  "ancestry_depth", default: 0
+    t.string   "insertion_key",                  null: false
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
   add_index "pages", ["collection_id"], name: "index_pages_on_collection_id", using: :btree
   add_index "pages", ["hidden"], name: "index_pages_on_hidden", using: :btree
+  add_index "pages", ["insertion_key"], name: "index_pages_on_insertion_key", using: :btree
   add_index "pages", ["published"], name: "index_pages_on_published", using: :btree
   add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
   add_index "pages", ["type"], name: "index_pages_on_type", using: :btree
   add_index "pages", ["url"], name: "index_pages_on_url", using: :btree
 
   create_table "que_jobs", primary_key: "queue", force: true do |t|
-    t.integer  "priority",    limit: 2, default: 100,                                        null: false
-    t.datetime "run_at",                default: "now()",                                    null: false
-    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
-    t.text     "job_class",                                                                  null: false
-    t.json     "args",                  default: [],                                         null: false
-    t.integer  "error_count",           default: 0,                                          null: false
+    t.integer  "priority",    limit: 2, default: 100,                   null: false
+    t.datetime "run_at",                default: '2015-01-13 23:21:33', null: false
+    t.integer  "job_id",      limit: 8, default: 0,                     null: false
+    t.text     "job_class",                                             null: false
+    t.json     "args",                  default: [],                    null: false
+    t.integer  "error_count",           default: 0,                     null: false
     t.text     "last_error"
   end
 
