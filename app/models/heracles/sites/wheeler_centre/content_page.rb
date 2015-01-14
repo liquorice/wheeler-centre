@@ -6,9 +6,16 @@ module Heracles
           {
             fields: [
               {name: :intro, label: "Introduction", type: :content},
-              {name: :body, type: :content}
+              {name: :body, type: :content},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
+        end
+
+        searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
         end
       end
     end

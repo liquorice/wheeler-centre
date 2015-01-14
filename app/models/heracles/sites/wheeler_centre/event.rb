@@ -28,11 +28,16 @@ module Heracles
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :body do
             fields[:body].value
           end

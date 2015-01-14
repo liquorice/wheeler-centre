@@ -8,18 +8,12 @@ module Heracles
               {name: :feature_image, type: :asset, asset_file_type: :image},
               {name: :description, type: :content},
               {name: :itunes_categories, type: :array},
-              {name: :episodes, type: :associated_pages, page_type: :podcast},
-            ]
-          }
-        end
-
-        def default_children_config
-          [
-            {
+              {name: :topics, type: :associated_pages, page_type: :topic},
+            ],
+            default_children: {
               type: :collection,
               slug: "episodes",
               title: "Episodes",
-              # FIXME this doesn’t work
               fields: {
                 contained_page_type: { value: :podcast_episode },
                 sort_attribute: { value: "created_at" },
@@ -28,10 +22,14 @@ module Heracles
               published: false,
               locked: true
             }
-          ]
+          }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :description do
             fields[:description].value
           end

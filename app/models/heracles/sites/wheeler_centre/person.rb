@@ -17,11 +17,16 @@ module Heracles
               {name: :staff_bio, type: :content, label: "Staff biography", display_if: 'is_staff_member.value'},
               {name: :position_title, type: :text, display_if: 'is_staff_member.value'},
               {name: :user_id, type: :integer, label: "User id"},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :first_name do
             fields[:first_name].value
           end

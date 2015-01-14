@@ -10,11 +10,16 @@ module Heracles
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
               {name: :series_id, type: :integer, label: "Series Id"},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           date :created_at do
             created_at.to_s(:admin_date)
           end

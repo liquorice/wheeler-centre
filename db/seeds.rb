@@ -5,6 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Common helpers
+def slugify(name)
+  name.downcase.gsub(/\&/, "and").gsub(/[^a-zA-Z0-9]/, ' ').gsub(/\s+/, '-')
+end
+
 # Make an admin user for Heracles
 user = Heracles::User.find_or_initialize_by(email: "hello@icelab.com.au")
 user.password = "password1"
@@ -253,6 +259,17 @@ blog_collection.locked = true
 blog_collection.page_order_position = :last
 blog_collection.save!
 
+# Writings -> Guests
+guests = Heracles::Sites::WheelerCentre::Guests.find_or_initialize_by(url: "writings/guests")
+guests.site = site
+guests.parent = blog_index
+guests.title = "Guest authors"
+guests.slug = "guests"
+guests.published = true
+guests.locked = true
+guests.page_order_position = :last
+guests.save!
+
 # Broadcasts index page
 # ------------------------------------------------------------------------------
 broadcasts_index = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "broadcasts")
@@ -313,6 +330,264 @@ people_collection.published = false
 people_collection.locked = true
 people_collection.page_order_position = :last
 people_collection.save!
+
+# Topics
+# ------------------------------------------------------------------------------
+topics = Heracles::Sites::WheelerCentre::Topics.find_or_initialize_by(url: "topics")
+topics.site = site
+topics.title = "Topics"
+topics.slug = "topics"
+topics.published = true
+topics.locked = false
+topics.page_order_position = :last
+topics.save!
+
+topic_names = [
+  {
+    name: "Books, reading & writing",
+    children: [
+      {name: "Fiction"},
+      {name: "Non-fiction"},
+      {name: "Genre"},
+      {name: "True crime"},
+      {name: "Science fiction"},
+      {name: "Romance"},
+      {name: "Fantasy"},
+      {name: "Adventure"},
+      {name: "Poetry"},
+      {name: "Words & language"},
+      {name: "Classics"},
+      {name: "Memoir"},
+      {name: "History"},
+      {name: "Australian writing"},
+      {name: "Indigenous Australian writing"},
+      {name: "Literary awards"},
+      {name: "Young adult"},
+      {name: "Children’s books"},
+      {name: "Editing"},
+      {name: "Literary journals"},
+      {name: "Magazines"},
+      {name: "Graphic novels & comics"},
+      {name: "Erotica"},
+      {name: "Funding"},
+    ]
+  },
+  {
+    name: "Art & design",
+    children: [
+      {
+        name: "Art",
+        children: [
+          {name: "Visual art"},
+          {name: "Sculpture"},
+          {name: "Painting"},
+          {name: "Illustration"},
+          {name: "Media art"}
+        ]
+      },
+      {name: "Industrial design"},
+      {name: "Architecture"},
+      {name: "Urban design"},
+      {name: "Games"},
+      {name: "Fashion"},
+      {name: "Jewellery"},
+      {name: "Graphic design"},
+      {name: "Funding"}
+    ]
+  },
+  {
+    name: "Creative arts & pop culture",
+    children: [
+      {name: "Music"},
+      {name: "Film"},
+      {name: "Theatre/plays"},
+      {name: "Sport"},
+      {name: "Dance"},
+      {name: "TV"},
+      {name: "Performance"},
+      {name: "Media"},
+      {name: "Social media"},
+      {name: "Radio"}
+    ]
+  },
+  {
+    name: "History, politics & current affairs",
+    children: [
+      {name: "Australian politics"},
+      {name: "Rural Australia"},
+      {name: "Australian media"},
+      {name: "History"},
+      {name: "War"},
+      {name: "Activism"},
+      {name: "International relations"},
+      {name: "Diplomacy"},
+      {name: "Military"},
+      {name: "Government"}
+    ]
+  },
+  {
+    name: "Free speech, human rights & social issues",
+    children: [
+      {name: "Social justice"},
+      {name: "Activism"},
+      {name: "Human rights"},
+      {name: "Privacy"},
+      {name: "Censorship"}
+    ]
+  },
+  {
+    name: "Race, religion & identity",
+    children: [
+      {name: "Race"},
+      {name: "Indigenous"},
+      {name: "Identity politics"},
+      {name: "Religion"},
+      {name: "Multiculturalism"},
+      {name: "Discrimination"},
+      {name: "Diversity"},
+      {name: "Islam"},
+      {name: "Youth"},
+      {name: "Spirituality"},
+      {name: "Migration"},
+      {name: "Christianity"},
+      {name: "Jewish"},
+      {name: "Asia"},
+      {name: "Africa"},
+      {name: "Europe"},
+      {name: "Interfaith"},
+      {name: "Pacific"}
+    ]
+  },
+  {
+    name: "Sex & gender",
+    children: [
+      {name: "Sex"},
+      {name: "Gender"},
+      {name: "Sexuality"},
+      {name: "Sexism"},
+      {name: "Erotica"},
+      {name: "Feminism"},
+      {name: "Relationships"},
+      {name: "Women/men"},
+      {name: "Gender and Sexual Diversity"}
+    ]
+  },
+  {
+    name: "Internet, journalism, media & publishing",
+    children: [
+      {name: "Internet culture"},
+      {name: "Digital publishing"},
+      {name: "Online dating"},
+      {name: "Print media"},
+      {name: "Leaking/whistleblowing"},
+      {name: "Editing"},
+      {name: "Journalistic ethics"},
+      {name: "Interviewing"},
+      {name: "Web"},
+      {name: "Newspapers"}
+    ]
+  },
+  {
+    name: "Economics, business & marketing",
+    children: [
+      {name: "Economy"},
+      {name: "Work"},
+      {name: "Publicity"},
+      {name: "Advertising"},
+      {name: "Finance"},
+      {name: "Investment/divestment"},
+      {name: "Gambling"},
+      {name: "Funding"}
+    ]
+  },
+  {
+    name: "Education, literacy & numeracy",
+    children: [
+      {name: "Education"},
+      {name: "University"},
+      {name: "Literacy"},
+      {name: "Mathematics"}
+    ]
+  },
+  {
+    name: "Energy, environment & climate",
+    children: [
+      {name: "Environment"},
+      {name: "Climate change"},
+      {name: "Animals"},
+      {name: "Food"},
+      {name: "Food security"},
+      {name: "Forestry"},
+      {name: "Horticulture"},
+      {name: "Ecology"},
+      {name: "Agriculture"},
+      {name: "Pollution"},
+      {name: "Coal"},
+      {name: "Solar"},
+      {name: "Gas"},
+      {name: "Nuclear"}
+    ]
+  },
+  {
+    name: "Health, medicine & psychology",
+    children: [
+      {name: "Medicine"},
+      {name: "Psychology"},
+      {name: "Mental health"},
+      {name: "Nutrition"},
+      {name: "Drugs"}
+    ]
+  },
+  {
+    name: "Science & technology",
+    children: [
+      {name: "Research"},
+      {name: "Funding"},
+      {name: "Nanotechnology"},
+      {name: "Biology"},
+      {name: "Chemistry"},
+      {name: "Physics"},
+      {name: "Space"}
+    ]
+  },
+  {
+    name: "Law, ethics & philosophy",
+    children: [
+      {name: "Law"},
+      {name: "Crime"},
+      {name: "Ethics"},
+      {name: "Morality"},
+      {name: "Philosophy"}
+    ]
+  },
+  {
+    name: "Comedy & humour",
+    children: [
+      {name: "Satire"}
+    ]
+  }
+]
+
+def build_topic_page(topic, parent, site)
+  slug = slugify(topic[:name])
+  page = Heracles::Sites::WheelerCentre::Topic.find_or_initialize_by(url: "#{parent.absolute_url}/#{slug}")
+  page.site = site
+  page.slug = slug
+  page.parent = parent
+  page.title = topic[:name]
+  page.published = true
+  page.page_order_position = :last
+  page.save!
+  if topic[:children].present?
+    topic[:children].each do |child|
+      build_topic_page(child, page, site)
+    end
+  end
+end
+
+topic_names.each do |topic|
+  build_topic_page(topic, topics, site)
+end
 
 
 # About us

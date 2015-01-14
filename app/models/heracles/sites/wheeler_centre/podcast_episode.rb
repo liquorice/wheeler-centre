@@ -10,11 +10,16 @@ module Heracles
               {name: :audio, type: :asset, asset_file_type: :audio},
               {name: :events, type: :associated_pages, page_type: :event},
               {name: :publish_date, type: :date_time, label: "Publish date"},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :description do
             fields[:description].value
           end

@@ -16,11 +16,16 @@ module Heracles
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :recording_date, type: :date_time, label: "Recording date"},
               {name: :recording_id, type: :integer, label: "Recording Id"},
+              {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
         end
 
         searchable do
+          string :topic_ids, multiple: true do
+            fields[:topics].pages.map(&:id)
+          end
+
           text :description do
             fields[:description].value
           end
