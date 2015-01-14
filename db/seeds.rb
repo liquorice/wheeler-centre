@@ -259,6 +259,17 @@ blog_collection.locked = true
 blog_collection.page_order_position = :last
 blog_collection.save!
 
+# Writings -> Guests
+guests = Heracles::Sites::WheelerCentre::Guests.find_or_initialize_by(url: "writings/guests")
+guests.site = site
+guests.parent = blog_index
+guests.title = "Guest authors"
+guests.slug = "guests"
+guests.published = true
+guests.locked = true
+guests.page_order_position = :last
+guests.save!
+
 # Broadcasts index page
 # ------------------------------------------------------------------------------
 broadcasts_index = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "broadcasts")
