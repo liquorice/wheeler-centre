@@ -34,3 +34,8 @@ lib/src/tmp/*
 lib/src/targets/**/components
 public/assets/*
 !public/assets/.gitkeep
+
+# Ignore Video migration config file
+/lib/video_migration/config.yml
+# And the secret key
+/lib/video_migration/*.p12

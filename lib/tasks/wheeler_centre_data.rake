@@ -486,43 +486,72 @@ namespace :wheeler_centre do
     end
   end
 
+  # Usage:
+  # rake wheeler_centre:import_blueprint_recordings["/Users/josephinehall/Development/wheeler-centre/backup.yml","video.wheelercentre.com","/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml"]
   desc "Import legacy Blueprint 'CenvidPost' content to be Recordings"
-  task :import_blueprint_recordings, [:yml_file] => :environment do |task, args|
+  task :import_blueprint_recordings, [:yml_file, :bucket_name, :video_config_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
+    require "video_migration/s3_util"
+    require "video_migration/video_migration_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
-    blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
+    encoding_formats = find_unique_encoding_formats(blueprint_videos)
 
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
+    s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
+    video_migration_util = VideoMigrationUtil.new(config_file: args[:video_config_file])
 
-    blueprint_videos.each do |blueprint_video|
-      if blueprint_video["title"].present?
-        heracles_recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(blueprint_video["slug"])
+    blueprint_video_posts.each do |blueprint_video_post|
+      if blueprint_video_post["title"].present?
+        heracles_recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(blueprint_video_post["slug"])
         unless heracles_recording then heracles_recording = Heracles::Page.new_for_site_and_page_type(site, "recording") end
         heracles_recording.published = true
-        puts (blueprint_video["slug"])
-        heracles_recording.slug = blueprint_video["slug"]
-        heracles_recording.title = blueprint_video["title"]
-        heracles_recording.fields[:short_title].value = blueprint_video["title"]
-        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video["description"], subject: blueprint_video, assetify: false)
-        heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video["transcript"], subject: blueprint_video, assetify: false)
-        # TODO :video
-        # TODO :audio
-        # TODO :promo_image
-        # TODO check :publish_at?
-        heracles_recording.fields[:recording_date].value = Time.zone.parse(blueprint_video["event_date"].to_s)
-        heracles_recording.created_at = Time.zone.parse(blueprint_video["created_on"].to_s)
-        heracles_recording.fields[:recording_id].value = blueprint_video["page_id"].to_i
+        puts (blueprint_video_post["slug"])
+        heracles_recording.slug = blueprint_video_post["slug"]
+        heracles_recording.title = blueprint_video_post["title"]
+        heracles_recording.fields[:short_title].value = blueprint_video_post["title"]
+        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: false)
+        heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+
+        # Find Videos that match this CenvidPost
+        videos = find_matching_videos(blueprint_video_post, blueprint_videos)
+        if videos.present?
+          # Find the one which has the best encoding format
+          all_formats = find_unique_encoding_formats(videos)
+          # TODO Find the best format - for the moment just take the first one
+          best_video = videos.select { |r| r["encoding_format"].to_s == all_formats.first.to_s }.first
+          if best_video["dest_filename"].to_s.present?
+            # Find the file in the S3 Bucket
+            public_url = s3_util.find_video(best_video["dest_filename"].to_s)
+            # Upload it to youtube, setting some data on it so we know it's associated with this Recording
+            video_migration_util.upload_video(public_url.to_s, blueprint_video_post)
+            # TODO Set the uploaded youtube video on this Recording.
+          end
+
+        end
+
+        # # TODO :audio
+        # # TODO :promo_image
+        # # TODO check :publish_at?
+        heracles_recording.fields[:recording_date].value = Time.zone.parse(blueprint_video_post["event_date"].to_s)
+        heracles_recording.created_at = Time.zone.parse(blueprint_video_post["created_on"].to_s)
+        heracles_recording.fields[:recording_id].value = blueprint_video_post["id"].to_i
         heracles_recording.parent = parent
         heracles_recording.collection = collection
         heracles_recording.save!
       end
     end
+  end
+
+  def find_matching_videos(post, data)
+    data.select { |r| r["post_id"].to_i == post["id"].to_i }
   end
 
   def find_matching_staff_member(presenter, data)
@@ -539,6 +568,13 @@ namespace :wheeler_centre do
 
   def find_matching_event_sponsorships(event, data)
     data.select { |r| r["event_id"].to_i == event["id"].to_i }
+  end
+
+  def find_unique_encoding_formats(data)
+    formats = data.map do |video|
+      video["encoding_format"].to_s
+    end
+    formats.uniq
   end
 
   desc "Find unique Blueprint classes"
