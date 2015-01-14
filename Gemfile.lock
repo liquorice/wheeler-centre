@@ -245,6 +245,9 @@ GEM
     multipart-post (2.0.0)
     nestive (0.6.0)
       rails (>= 3.0.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
     netrc (0.10.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
@@ -466,6 +469,7 @@ DEPENDENCIES
   launchy
   meta-tags
   minitest
+  net-scp
   pg
   poltergeist
   que
