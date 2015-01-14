@@ -495,6 +495,7 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
     require "video_migration/s3_util"
     require "video_migration/video_migration_util"
+    require "video_migration/upload_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
@@ -507,6 +508,7 @@ namespace :wheeler_centre do
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
     video_migration_util = VideoMigrationUtil.new(config_file: args[:video_config_file])
+    upload_util = UploadUtil.new(config_file: args[:video_config_file])
 
     blueprint_video_posts.each do |blueprint_video_post|
       if blueprint_video_post["title"].present?
@@ -530,9 +532,11 @@ namespace :wheeler_centre do
           if best_video["dest_filename"].to_s.present?
             # Find the file in the S3 Bucket
             public_url = s3_util.find_video(best_video["dest_filename"].to_s)
+            upload_util.sync_s3_file
             # Upload it to youtube, setting some data on it so we know it's associated with this Recording
             video_migration_util.upload_video(public_url.to_s, blueprint_video_post)
             # TODO Set the uploaded youtube video on this Recording.
+
           end
 
         end
@@ -552,6 +556,24 @@ namespace :wheeler_centre do
 
   def find_matching_videos(post, data)
     data.select { |r| r["post_id"].to_i == post["id"].to_i }
+  end
+
+  def encoding_formats
+    [
+      "Flash MP4 432p CBWI 800",
+      "Flash MP4 432p CBWI 400",
+      "Flash MP4 432p CBWI 200",
+      "Flash MP4 432p CBWI",
+      "Flash MP4 288p CBWI 800",
+      "Flash MP4 288p CBWI 600",
+      "Flash MP4 288p CBWI 400",
+      "Flash MP4 288p CBWI 200",
+      "Flash MP4 288p CBWI",
+      "Flash Video 288p CBWI",
+      "Flash MP4 288p CBWI TEST",
+      "Flash Video 288p CBWI TEST",
+      "MP3 CBWI",
+    ]
   end
 
   def find_matching_staff_member(presenter, data)
