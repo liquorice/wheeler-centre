@@ -13,40 +13,9 @@ module Heracles
 
         ### Accessors
 
-        def pages(options={})
-          search_pages(options)
-        end
-
-        private
-
-        def search_pages(options={})
-          Sunspot.search(pages_with_topics_classes) do
-            with :site_id, site.id
-            with :published, true
-
-            with :topic_ids, descendant_topics_ids << id
-
-            order_by :created_at, :desc
-
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 20
-          end
-        end
-
-        def descendant_topics_ids
-          descendants.of_type("topic").map(&:id)
-        end
-
-        def pages_with_topics_classes
-          [
-            BlogPost,
-            ContentPage,
-            Event,
-            EventSeries,
-            Person,
-            PodcastEpisode,
-            PodcastSeries,
-            Recording
-          ]
+        def pages
+          insertion_keys_for_self_and_descendents = [insertion_key] + children.of_type(page_type).select(:id, :type).map(&:insertion_key)
+          Heracles::Page.joins(:inserteds).where(:"insertions.field" => "topics", :insertion_key => insertion_keys_for_self_and_descendents)
         end
       end
     end
