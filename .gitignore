@@ -39,3 +39,5 @@ public/assets/*
 /lib/video_migration/config.yml
 # And the secret key
 /lib/video_migration/*.p12
+# Ignore .pem files
+*.pem
