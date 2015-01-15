@@ -72,35 +72,16 @@ module ApplicationHelper
   end
 
   def select_primary_topics_for_page(page)
+    matches = []
     if page.fields[:topics].data_present?
-      page.fields[:topics].pages.select {|t| primary_topics.include? t}
+      page.fields[:topics].pages.each do |topic|
+        matches << topic if primary_topics.include?(topic)
+        topic.ancestors.each do |ancestor|
+          matches << ancestor if primary_topics.include?(ancestor)
+        end
+      end
     end
-  end
-
-  def primary_tags
-    [
-      "Books, reading & writing",
-      "Art & design",
-      "Creative arts & pop culture",
-      "History, politics & current affairs",
-      "Free speech, human rights & social issues",
-      "Race, religion & identity",
-      "Sex & gender",
-      "Internet, journalism, media & publishing",
-      "Economics, business & marketing",
-      "Education, literacy & numeracy",
-      "Energy, environment & climate",
-      "Health, medicine & psychology",
-      "Science & technology",
-      "Law, ethics & philosophy",
-      "Comedy & humour"
-    ]
-  end
-
-
-  # Select only the primary_tags
-  def select_primary_tags_from(tags)
-    tags.select {|t| primary_tags.include? t.name }
+    matches
   end
 
 end
