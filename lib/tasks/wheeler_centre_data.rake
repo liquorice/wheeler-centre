@@ -1,4 +1,56 @@
+# Tag helpers
+def find_topic_page_by_slug(slug)
+  Heracles::Page.of_type("topic").find_by_slug(slug)
+end
+
+def blueprint_tags(blueprint_records)
+  blueprint_records.select { |r| r.class == LegacyBlueprint::Tag }
+end
+
+def blueprint_tags_for(tags, taggable_id, legacy_class)
+  tags.select do |tag|
+    tag["taggable_id"] == taggable_id && tag["taggable_type"] == legacy_class
+  end
+end
+
+def apply_tags_to(page, blueprint_tags)
+  topic_matches = []
+  unmatched_tags = []
+  blueprint_tags.each do |blueprint_tag|
+    topic = find_topic_page_by_slug(blueprint_tag["slug"])
+    if topic
+      topic_matches << topic
+    else
+      unmatched_tags << blueprint_tag
+    end
+  end
+  page.fields[:topics].page_ids = topic_matches.map(&:id)
+  page.tag_list.add(unmatched_tags.map{|t| t["slug"] })
+end
+
 namespace :wheeler_centre do
+  task :yiew, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+
+    tags = blueprint_tags(blueprint_records)
+    tag_for = blueprint_tags_for(tags, "255", "CenvidPost")
+    topic_matches = []
+    unmatched_tags = []
+    tag_for.each do |tag|
+      topic = find_topic_page_by_slug(tag["slug"])
+      if topic
+        topic_matches << topic
+      else
+        unmatched_tags << tag
+      end
+    end
+  end
+
   desc "Import blueprint sponsors"
   task :import_blueprint_sponsors, [:yml_file] => :environment do |task, args|
     require "yaml"
@@ -49,6 +101,7 @@ namespace :wheeler_centre do
     heracles_events_series_collection = heracles_events_index.children.of_type("collection").where(slug: "all-event-series").first!
 
     blueprint_event_series.each do |blueprint_series|
+
       if blueprint_series["name"].present?
         heracles_series = Heracles::Sites::WheelerCentre::EventSeries.find_by_slug(blueprint_series["slug"])
         unless heracles_series
@@ -245,6 +298,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
 
     dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
     id = dailies_root.first["id"].to_i
@@ -278,6 +332,9 @@ namespace :wheeler_centre do
         if authors.present?
           heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
         end
+
+        tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
+        apply_tags_to(heracles_blog_post, tags_for_post)
         heracles_blog_post.save!
       end
     end
@@ -500,7 +557,7 @@ namespace :wheeler_centre do
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
     blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
-    encoding_formats = find_unique_encoding_formats(blueprint_videos)
+    # encoding_formats = find_unique_encoding_formats(blueprint_videos)
 
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
