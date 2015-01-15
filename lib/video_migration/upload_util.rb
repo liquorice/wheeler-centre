@@ -17,12 +17,12 @@ class UploadUtil
 		  :secret_access_key => opts["MIGRATION_AWS_SECRET_KEY"],
 		  :region => "ap-southeast-2")
 
-		# the role, policy and profile all have names, pick something descriptive
 		role_name = "s3-read-only"
 		policy_name = "s3-read-only"
 		@instance_profile_name = "ec3-s3-read-only"
-		key_name = "wheeler-centre-video-migration"
+		@key_name = "wheeler-centre-video-migration"
 		path = "/Users/josephinehall/Development/wheeler-centre/lib/video_migration"
+		@security_group_name = "wheeler-centre-video-migration"
 
 		# required so that Amazon EC2 can generate session credentials on your behalf
 		assume_role_policy_document = '{"Version":"2008-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":["ec2.amazonaws.com"]},"Action":["sts:AssumeRole"]}]}'
@@ -57,9 +57,17 @@ class UploadUtil
 
 		@ec2 = AWS::EC2.new
 
-		@key_pair = @ec2.key_pairs.create(key_name)
-		File.open("#{path}/#{key_name}.pem", "wb") {|f| f.write(@key_pair.private_key) }
-		@private_key = "#{path}/#{key_name}.pem"
+		unless @ec2.key_pairs[@key_name].exists?
+			@key_pair = @ec2.key_pairs.create(@key_name)
+			File.open("#{path}/#{@key_name}.pem", "wb") {|f| f.write(@key_pair.private_key) }
+			@private_key = "#{path}/#{@key_name}.pem"
+		end
+
+		security_group = @ec2.security_groups.filter("group-name", @security_group_name).first
+		unless security_group.present?
+			security_group = @ec2.security_groups.create(@security_group_name)
+			security_group.authorize_ingress(:tcp, 22)
+		end
 
 		list_instances
 	end
@@ -68,7 +76,9 @@ class UploadUtil
 		# Create an instance
 		instance = @ec2.instances.create(
 			:image_id => 'ami-71f7954b',
-			:iam_instance_profile => @instance_profile_name)
+			:iam_instance_profile => @instance_profile_name,
+			:security_groups => @security_group_name,
+			:key_pair => @ec2.key_pairs[@key_name])
 
 		# scp the script to the instance
 		Net::SCP.start(instance.dns_name, "ec2-user", :keys => @private_key ) do |scp|
