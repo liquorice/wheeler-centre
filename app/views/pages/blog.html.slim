@@ -75,11 +75,11 @@
                     a.blog-post-list__anchor href=post.absolute_url
                       h3.blog-post-list__title
                         span.title-text == widont_format markdown_line post.title
-                        - selected_primary_tags = select_primary_tags_from(post.tags)
-                        - if selected_primary_tags.any?
+                        - selected_primary_topics = select_primary_topics_for_page(page)
+                        - if selected_primary_topics.any?
                           span.title-tags
                             '  &nbsp;/&nbsp;
-                            = selected_primary_tags.first
+                            = selected_primary_topics.first.title
     .blog-index__topic.column-wrapper
       .column-mid.clearfix
         .section-header

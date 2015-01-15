@@ -5,8 +5,8 @@
       p Explore the areas of interest across our site.
   .column-wide
     ul.topics-section__list
-      - primary_tags.each do |tag|
+      - primary_topics.each do |topic|
         li.topics-section__list-item
-          a href="#"= tag
+          a href=topic.absolute_url = topic.title
 
 

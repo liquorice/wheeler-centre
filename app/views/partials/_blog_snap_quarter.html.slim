@@ -12,11 +12,11 @@ a.blog-snap.blog-snap--quarter href=post.absolute_url
           p = post.fields[:hero_image].asset.attribution
   h3.blog-snap__title
     span.title-text == widont_format markdown_line post.title
-    - selected_primary_tags = select_primary_tags_from(post.tags)
-    - if selected_primary_tags.any?
+    - selected_primary_topics = select_primary_topics_for_page(post)
+    - if selected_primary_topics.any?
       span.title-tags
         '  &nbsp;/&nbsp;
-        = selected_primary_tags.first
+        = selected_primary_topics.first.title
   - if post.fields[:authors].data_present?
     p.blog-snap__authors
       - if post.guest_post?
@@ -26,4 +26,4 @@ a.blog-snap.blog-snap--quarter href=post.absolute_url
       = post.fields[:authors].pages.map(&:title).to_sentence
   - if post.fields["summary"].data_present? && !hide_summary
     .blog-snap__summary.copy
-      = render_content post.fields["summary"]
+      = force_excerptify_html render_content(post.fields["summary"]), 350, "p i em strong br"
