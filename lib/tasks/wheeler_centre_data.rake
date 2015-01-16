@@ -494,8 +494,8 @@ namespace :wheeler_centre do
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
     require "video_migration/s3_util"
+    require "video_migration/ec2_util"
     require "video_migration/video_migration_util"
-    require "video_migration/upload_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
@@ -506,9 +506,10 @@ namespace :wheeler_centre do
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
+
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
-    video_migration_util = VideoMigrationUtil.new(config_file: args[:video_config_file])
-    upload_util = UploadUtil.new(config_file: args[:video_config_file])
+
+    ec2_util = EC2Util.new(config_file: args[:video_config_file])
 
     blueprint_video_posts.each do |blueprint_video_post|
       if blueprint_video_post["title"].present?
@@ -532,9 +533,12 @@ namespace :wheeler_centre do
           if best_video["dest_filename"].to_s.present?
             # Find the file in the S3 Bucket
             public_url = s3_util.find_video(best_video["dest_filename"].to_s)
-            upload_util.sync_s3_file
-            # Upload it to youtube, setting some data on it so we know it's associated with this Recording
-            video_migration_util.upload_video(public_url.to_s, blueprint_video_post)
+
+            ec2_util.create_instance
+            ec2_util.create_scripts(best_video["dest_filename"].to_s, public_url, blueprint_video_post)
+            ec2_util.transfer_scripts
+            ec2_util.execute_scripts
+
             # TODO Set the uploaded youtube video on this Recording.
 
           end
