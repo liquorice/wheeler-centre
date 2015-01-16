@@ -1,0 +1,19 @@
+{
+  "index.js": {
+    "id": "index.js",
+    "type": "js",
+    "mtime": 1418681262000,
+    "src": "var home = require(\"./home\");\n\nconsole.log(\"foo\");\n",
+    "deps": {
+      "./home": "home/index.js"
+    },
+    "entry": true
+  },
+  "home/index.js": {
+    "id": "home/index.js",
+    "type": "js",
+    "mtime": 1418681262000,
+    "src": "var home = console.log(\"home\");\n\nmodule.exports = home;\n",
+    "deps": {}
+  }
+}

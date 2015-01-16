@@ -31,7 +31,8 @@ node_modules
 npm-debug.log
 lib/src/tmp/*
 !lib/src/tmp/.gitkeep
-lib/src/targets/**/components
+lib/src/targets/**/components/*
+!lib/src/targets/**/components/duo.json
 public/assets/*
 !public/assets/.gitkeep
 
