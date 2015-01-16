@@ -1,0 +1,38 @@
+- random_pages = page.random_pages(page_number: params[:page], per_page: params[:per_page])
+- latest_pages = page.latest_pages
+
+
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Topics
+
+= area :main do
+  .page__content
+    .page__body.page__body--content-page.copy
+      h1 = page.title
+      = render_content(page.fields["body"])
+    .blog-index__latest.column-wrapper
+      .column-wide
+        h2.blog-index__latest-header Latest writing
+        - if latest_pages.present?
+          .blog-snap__group.clearfix
+            .blog-snap-halves.blog-snap-halves--1
+              - latest_pages[0..0].each do |post|
+                = render "partials/blog_snap_half", post: post
+            .blog-snap-quarters.blog-snap-quarters--2.clearfix
+              - latest_pages[1..2].each do |post|
+                = render "partials/blog_snap_quarter", post: post
+          .blog-snap__group.clearfix
+            .blog-snap-quarters.blog-snap-quarters--2.clearfix
+              - latest_pages[3..4].each do |post|
+                = render "partials/blog_snap_quarter", post: post
+            .blog-snap-halves.blog-snap-halves--1
+              - latest_pages[5..5].each do |post|
+                = render "partials/blog_snap_half", post: post
+    .blog-index__topic.column-wrapper.gradient-top-down
+      .section-header
+        h2 Random
+      .clearfix
+        - random_pages.each do |post|
+          = render "partials/blog_snap_block", post: post, hide_summary: true
+        = paginate random_pages
