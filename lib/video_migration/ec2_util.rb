@@ -2,7 +2,7 @@ require "aws-sdk"
 require "yaml"
 require "net/scp"
 
-class UploadUtil
+class EC2Util
 	attr_accessor :config_file
 
 	def initialize(args)
@@ -72,21 +72,35 @@ class UploadUtil
 		list_instances
 	end
 
-	def sync_s3_file
-		# Create an instance
-		instance = @ec2.instances.create(
+	def create_instance
+		@instance = @ec2.instances.create(
 			:image_id => 'ami-71f7954b',
 			:iam_instance_profile => @instance_profile_name,
 			:security_groups => @security_group_name,
 			:key_pair => @ec2.key_pairs[@key_name])
+	end
 
-		# scp the script to the instance
-		Net::SCP.start(instance.dns_name, "ec2-user", :keys => @private_key ) do |scp|
+	def create_scripts(file_name, public_url, blueprint_video)
+		# create video_data.json
+	end
+
+	def transfer_scripts
+		# TODO wait until the instance is running before transferring the scripts
+
+		# scp the script files to the instance
+		# upload_file.sh
+		# video_migration
+		# client_secrets.json
+		# credentials_file.json
+		# video_data.json
+		Net::SCP.start(@instance.dns_name, "ec2-user", :keys => @private_key ) do |scp|
       scp.upload!("#{path}/upload_file.sh", "~", :ssh => @private_key)
     end
+	end
 
-		# # run the script
-
+	def execute_scipts
+		# ssh to the instance
+		# run the script
 	end
 
 	def stop_instances
