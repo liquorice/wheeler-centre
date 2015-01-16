@@ -39,3 +39,5 @@ public/assets/*
 /lib/video_migration/config.yml
 # Ignore .pem files
 *.pem
+lib/video_migration/client_secrets.json
+lib/video_migration/credentials_file.json
