@@ -3,6 +3,10 @@ def find_topic_page_by_slug(slug)
   Heracles::Page.of_type("topic").find_by_slug(slug)
 end
 
+def find_topic_page_by_url(url)
+  Heracles::Page.of_type("topic").find_by_url(url)
+end
+
 def blueprint_tags(blueprint_records)
   blueprint_records.select { |r| r.class == LegacyBlueprint::Tag }
 end
@@ -14,10 +18,43 @@ def blueprint_tags_for(tags, taggable_id, legacy_class)
 end
 
 def apply_tags_to(page, blueprint_tags)
+
+  blueprint_tag_to_topic_url_mappings = {
+    "design" => "topics/art-and-design",
+    "books" => "topics/books-reading-and-writing",
+    "reading" => "topics/books-reading-and-writing",
+    "writing" => "topics/books-reading-and-writing",
+    "writers" => "topics/books-reading-and-writing",
+    "pop-culture" => "topics/creative-arts-and-pop-culture",
+    "history" => "topics/history-politics-and-current-affairs/history",
+    "politics" => "topics/history-politics-and-current-affairs",
+    "current-affairs" => "topics/history-politics-and-current-affairs",
+    "freedom-of-speech" => "topics/free-speech-human-rights-and-social-issues",
+    "identity" => "topics/race-religion-and-identity",
+    "internet" => "topics/internet-journalism-media-and-publishing/internet-culture",
+    "publishing" => "topics/internet-journalism-media-and-publishing",
+    "journalism" => "topics/internet-journalism-media-and-publishing",
+    "citizen-journalism" => "topics/internet-journalism-media-and-publishing",
+    "economics" => "topics/economics-business-and-marketing",
+    "marketing" => "topics/economics-business-and-marketing",
+    "energy" => "topics/energy-environment-and-climate",
+    "environment" => "topics/energy-environment-and-climate",
+    "health" => "topics/health-medicine-and-psychology",
+    "science" => "topics/science-and-technology",
+    "technology" => "topics/science-and-technology",
+    "comedy" => "topics/comedy-and-humour",
+    "humour" => "topics/comedy-and-humour",
+  }
+
   topic_matches = []
   unmatched_tags = []
   blueprint_tags.each do |blueprint_tag|
-    topic = find_topic_page_by_slug(blueprint_tag["slug"])
+    slug = blueprint_tag["slug"]
+    if blueprint_tag_to_topic_url_mappings[slug]
+      topic = find_topic_page_by_url(blueprint_tag_to_topic_url_mappings[slug])
+    else
+      topic = find_topic_page_by_slug(slug)
+    end
     if topic
       topic_matches << topic
     else
