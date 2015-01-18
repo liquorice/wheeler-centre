@@ -17,6 +17,12 @@ def blueprint_tags_for(tags, taggable_id, legacy_class)
   end
 end
 
+def replace_entities(title)
+  title = title.gsub(/&lsquo;/, '‘')
+  title = title.gsub(/&rsquo;/, '’')
+  title
+end
+
 def apply_tags_to(page, blueprint_tags)
 
   blueprint_tag_to_topic_url_mappings = {
@@ -195,7 +201,7 @@ namespace :wheeler_centre do
       end
 
       heracles_event.published = true
-      heracles_event.title = blueprint_event["title"]
+      heracles_event.title = replace_entities(blueprint_event["title"])
       puts (blueprint_event["slug"])
       heracles_event.created_at = Time.zone.parse(blueprint_event["created_on"].to_s)
       heracles_event.fields[:short_title].value = blueprint_event["short_title"].to_s
@@ -351,7 +357,7 @@ namespace :wheeler_centre do
         unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
         heracles_blog_post.published = true
         heracles_blog_post.slug = blueprint_daily["slug"]
-        heracles_blog_post.title = blueprint_daily["title"]
+        heracles_blog_post.title = replace_entities(blueprint_daily["title"])
 
         content = blueprint_daily["content"].to_s
         # Split the summary out on the highlight tag
