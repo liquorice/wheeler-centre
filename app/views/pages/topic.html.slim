@@ -13,9 +13,11 @@
         ' Topic
       h1.topic-page__title
         = page.title
-    .page__intro.intro.column-wrapper
-      .column-narrow.copy
-        = render_content page.fields[:intro]
+
+    - if page.fields[:intro].data_present?
+      .page__intro.intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
     - unless params[:page]
       .topic-page__latest.column-wrapper
         .column-wide.clearfix
@@ -28,16 +30,24 @@
               - elsif post.page_type == "event"
                 = render "partials/event_snap_quarter", post: post
     .column-wrapper
-      .section-header
-        h2 Random
       - if params[:page]
         .pagination-top
           = paginate random_pages
+        .pagination-context.pagination-context--top
+          ' Page
+          = (params[:page] || 1)
+          em &nbsp;of&nbsp;
+          = random_pages.total_pages
       .topic-page__random.clearfix
         - random_pages.each do |post|
           - if post.page_type == "blog_post"
             = render "partials/blog_snap_block", post: post, show_type: true
           - elsif post.page_type == "event"
             = render "partials/event_snap_block", post: post, show_type: true
+      .pagination-context.pagination-context--bottom
+        ' Page
+        = (params[:page] || 1)
+        em &nbsp;of&nbsp;
+        = random_pages.total_pages
       .pagination-bottom
         = paginate random_pages

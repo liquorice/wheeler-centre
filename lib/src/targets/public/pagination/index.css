@@ -28,9 +28,9 @@
   .pagination a,
   .pagination .current {
     display: inline-block;
-    font-size: 17px;
-    font-size: 1.7rem;
-    padding: 20px 20px;
+    font-size: 14px;
+    font-size: 1.4rem;
+    padding: 16px 20px;
     position: relative;
   }
   .pagination a:before,
@@ -81,4 +81,20 @@
     }
   .pagination .next {
     float: right;
+  }
+
+.pagination-context {
+  color: #666;
+  font-size: 16px;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 12px 0;
+}
+  .pagination-context--top {
+    margin-top: -35px;
+    margin-bottom: 35px;
+  }
+
+  .pagination-context em {
+    font-style: italic;
   }

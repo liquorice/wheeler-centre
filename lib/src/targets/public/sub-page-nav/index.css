@@ -25,5 +25,6 @@
   }
     .sub-page-nav__anchor:hover {
       background-color: #dbfffb;
+      color: var(--primary-color);
     }
 
