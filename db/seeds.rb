@@ -156,7 +156,7 @@ events_index.title = "Events"
 events_index.slug = "events"
 events_index.published = true
 events_index.locked = true
-events_index.page_order_position = :last
+events_index.page_order_position = :last if events_index.new_record?
 events_index.save!
 
 # Events -> Events collection
@@ -170,7 +170,7 @@ events_collection.fields[:sort_attribute].value = "created_at"
 events_collection.fields[:sort_direction].value = "DESC"
 events_collection.published = false
 events_collection.locked = true
-events_collection.page_order_position = :last
+events_collection.page_order_position = :last if events_collection.new_record?
 events_collection.save!
 
 # Events -> Event series index
@@ -181,7 +181,7 @@ events_series_index.title = "Series"
 events_series_index.slug = "series"
 events_series_index.published = true
 events_series_index.locked = true
-events_series_index.page_order_position = :last
+events_series_index.page_order_position = :last if events_series_index.new_record?
 events_series_index.save!
 
 # Events -> Event series index -> Event series collection
@@ -195,7 +195,7 @@ event_series_collection.fields[:sort_attribute].value = "created_at"
 event_series_collection.fields[:sort_direction].value = "DESC"
 event_series_collection.published = false
 event_series_collection.locked = true
-event_series_collection.page_order_position = :last
+event_series_collection.page_order_position = :last if event_series_collection.new_record?
 event_series_collection.save!
 
 # Events -> Presenters
@@ -206,7 +206,7 @@ presenters.title = "Presenters"
 presenters.slug = "presenters"
 presenters.published = true
 presenters.locked = true
-presenters.page_order_position = :last
+presenters.page_order_position = :last if presenters.new_record?
 presenters.save!
 
 # Events -> Venues index
@@ -217,7 +217,7 @@ venues_index.title = "Venues"
 venues_index.slug = "venues"
 venues_index.published = true
 venues_index.locked = true
-venues_index.page_order_position = :last
+venues_index.page_order_position = :last if venues_index.new_record?
 venues_index.save!
 
 # Events -> Venues index -> Venues collection
@@ -231,7 +231,7 @@ venues_collection.fields[:sort_attribute].value = "created_at"
 venues_collection.fields[:sort_direction].value = "DESC"
 venues_collection.published = false
 venues_collection.locked = true
-venues_collection.page_order_position = :last
+venues_collection.page_order_position = :last if venues_collection.new_record?
 venues_collection.save!
 
 # Writings
@@ -242,7 +242,7 @@ blog_index.title = "Writings"
 blog_index.slug = "writings"
 blog_index.published = true
 blog_index.locked = true
-blog_index.page_order_position = :last
+blog_index.page_order_position = :last if blog_index.new_record?
 blog_index.save!
 
 # Writings -> Writings collection
@@ -256,7 +256,7 @@ blog_collection.fields[:sort_attribute].value = "created_at"
 blog_collection.fields[:sort_direction].value = "DESC"
 blog_collection.published = false
 blog_collection.locked = true
-blog_collection.page_order_position = :last
+blog_collection.page_order_position = :last if blog_collection.new_record?
 blog_collection.save!
 
 # Writings -> Guests
@@ -267,7 +267,7 @@ guests.title = "Guest authors"
 guests.slug = "guests"
 guests.published = true
 guests.locked = true
-guests.page_order_position = :last
+guests.page_order_position = :last if guests.new_record?
 guests.save!
 
 # Broadcasts index page
@@ -278,7 +278,7 @@ broadcasts_index.title = "Broadcasts"
 broadcasts_index.slug = "broadcasts"
 broadcasts_index.published = true
 broadcasts_index.locked = true
-broadcasts_index.page_order_position = :last
+broadcasts_index.page_order_position = :last if broadcasts_index.new_record?
 broadcasts_index.save!
 
 # Broadcasts -> Recordings collection
@@ -292,7 +292,7 @@ recordings_collection.fields[:sort_attribute].value = "created_at"
 recordings_collection.fields[:sort_direction].value = "DESC"
 recordings_collection.published = false
 recordings_collection.locked = true
-recordings_collection.page_order_position = :last
+recordings_collection.page_order_position = :last if recordings_collection.new_record?
 recordings_collection.save!
 
 # Broadcasts -> Podcasts
@@ -303,7 +303,7 @@ podcasts.title = "Podcasts"
 podcasts.slug = "podcasts"
 podcasts.published = true
 podcasts.locked = true
-podcasts.page_order_position = :last
+podcasts.page_order_position = :last if podcasts.new_record?
 podcasts.save!
 
 # People page
@@ -314,7 +314,7 @@ people.title = "People"
 people.slug = "people"
 people.published = true
 people.locked = true
-people.page_order_position = :last
+people.page_order_position = :last if people.new_record?
 people.save!
 
 # People -> People collection
@@ -328,7 +328,7 @@ people_collection.fields[:sort_attribute].value = "created_at"
 people_collection.fields[:sort_direction].value = "DESC"
 people_collection.published = false
 people_collection.locked = true
-people_collection.page_order_position = :last
+people_collection.page_order_position = :last if people_collection.new_record?
 people_collection.save!
 
 # Topics
@@ -339,7 +339,7 @@ topics.title = "Topics"
 topics.slug = "topics"
 topics.published = true
 topics.locked = false
-topics.page_order_position = :last
+topics.page_order_position = :last if topics.new_record?
 topics.save!
 
 topic_names = [
@@ -576,7 +576,7 @@ def build_topic_page(topic, parent, site)
   page.parent = parent
   page.title = topic[:name]
   page.published = true
-  page.page_order_position = :last
+  page.page_order_position = :last if page.new_record? if page.new_record?
   page.save!
   if topic[:children].present?
     topic[:children].each do |child|
@@ -598,7 +598,7 @@ about_us.title = "About us"
 about_us.slug = "about-us"
 about_us.published = true
 about_us.locked = false
-about_us.page_order_position = :last
+about_us.page_order_position = :last if about_us.new_record? if about_us.new_record?
 about_us.save!
 
 # About us -> Who we are
@@ -609,7 +609,7 @@ who.title = "Who we are"
 who.slug = "who-we-are"
 who.published = true
 who.locked = false
-who.page_order_position = :last
+who.page_order_position = :last if who.new_record?
 who.save!
 
 # About us -> Who funds us
@@ -620,7 +620,7 @@ funds.title = "Who funds us"
 funds.slug = "who-funds-us"
 funds.published = true
 funds.locked = false
-funds.page_order_position = :last
+funds.page_order_position = :last if funds.new_record?
 funds.save!
 
 # About us -> Who funds us -> Support us
@@ -631,7 +631,7 @@ support_us.title = "Support us"
 support_us.slug = "support-us"
 support_us.published = true
 support_us.locked = false
-support_us.page_order_position = :last
+support_us.page_order_position = :last if support_us.new_record?
 support_us.save!
 
 # About us -> Who funds us -> Sponsors
@@ -642,7 +642,7 @@ sponsors.title = "Sponsors"
 sponsors.slug = "sponsors"
 sponsors.published = true
 sponsors.locked = true
-sponsors.page_order_position = :last
+sponsors.page_order_position = :last if sponsors.new_record?
 sponsors.save!
 
 # About us -> Who funds us -> Sponsors -> Sponsors collection
@@ -656,7 +656,7 @@ sponsors_collection.fields[:sort_attribute].value = "created_at"
 sponsors_collection.fields[:sort_direction].value = "DESC"
 sponsors_collection.published = false
 sponsors_collection.locked = true
-sponsors_collection.page_order_position = :last
+sponsors_collection.page_order_position = :last if sponsors_collection.new_record?
 sponsors_collection.save!
 
 # About us -> Residents
@@ -667,7 +667,7 @@ residents.title = "Resident organisations"
 residents.slug = "resident-organisations"
 residents.published = true
 residents.locked = false
-residents.page_order_position = :last
+residents.page_order_position = :last if residents.new_record?
 residents.save!
 
 # About us -> Ticketing
@@ -678,7 +678,7 @@ ticketing.title = "Ticketing"
 ticketing.slug = "ticketing"
 ticketing.published = true
 ticketing.locked = false
-ticketing.page_order_position = :last
+ticketing.page_order_position = :last if ticketing.new_record?
 ticketing.save!
 
 # About us -> FAQs
@@ -689,7 +689,7 @@ faqs.title = "FAQs"
 faqs.slug = "faqs"
 faqs.published = true
 faqs.locked = false
-faqs.page_order_position = :last
+faqs.page_order_position = :last if faqs.new_record?
 faqs.save!
 
 # About us -> Privacy policy
@@ -700,7 +700,7 @@ privacy.title = "Privacy policy"
 privacy.slug = "privacy"
 privacy.published = true
 privacy.locked = false
-privacy.page_order_position = :last
+privacy.page_order_position = :last if privacy.new_record?
 privacy.save!
 
 # About us -> Community guidelines
@@ -711,5 +711,5 @@ community_guidelines.title = "Community guidelines"
 community_guidelines.slug = "community-guidelines"
 community_guidelines.published = true
 community_guidelines.locked = false
-community_guidelines.page_order_position = :last
+community_guidelines.page_order_position = :last if community_guidelines.new_record?
 community_guidelines.save!
