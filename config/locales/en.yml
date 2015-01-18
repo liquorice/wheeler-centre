@@ -21,6 +21,13 @@
 
 en:
   hello: "Hello world"
+  views:
+    pagination:
+      first: "First"
+      last: "Last"
+      previous: "&larr; Prev"
+      next: "Next &rarr;"
+      truncate: "&hellip;"
   date:
     formats:
       default: '%-d/%m/%y'
