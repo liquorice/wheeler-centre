@@ -30,6 +30,7 @@ def apply_tags_to(page, blueprint_tags)
     "books" => "topics/books-reading-and-writing",
     "reading" => "topics/books-reading-and-writing",
     "writing" => "topics/books-reading-and-writing",
+    "nonfiction" => "topics/books-reading-and-writing/non-fiction",
     "writers" => "topics/books-reading-and-writing",
     "pop-culture" => "topics/creative-arts-and-pop-culture",
     "history" => "topics/history-politics-and-current-affairs/history",
@@ -179,6 +180,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
     blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
@@ -226,6 +228,9 @@ namespace :wheeler_centre do
         sponsors = all_sponsors.select { |p| sponsor_ids.include?(p.fields[:sponsor_id].value.to_i) }
         if sponsors.present? then heracles_event.fields[:sponsors].page_ids = sponsors.map(&:id) end
       end
+
+      tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_event["id"], "EvtEvent")
+      apply_tags_to(heracles_event, tags_for_post)
 
       heracles_event.save!
     end
