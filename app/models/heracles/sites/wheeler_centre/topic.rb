@@ -24,7 +24,7 @@ module Heracles
             group("pages.id"). # we can't use `distinct` here since it fails for queries returning JSON column
             order("created_at DESC").
             page(options[:page_number] || 1).
-            per(options[:per_page] || 8)
+            per(options[:per_page] || 4)
         end
 
         def random_pages(options={})
@@ -39,7 +39,7 @@ module Heracles
             group("pages.id"). # we can't use `distinct` here since it fails for queries returning JSON column
             order("random()").
             page(options[:page_number] || 1).
-            per(options[:per_page] || 20)
+            per(options[:per_page] || 18)
         end
       end
     end
