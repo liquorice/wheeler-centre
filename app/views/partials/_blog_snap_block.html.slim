@@ -34,6 +34,6 @@
         = post.fields[:authors].pages.map(&:title).to_sentence
     / Show text if no image
     - unless image
-      .blog-snap__summary
-        .blog-snap__summary-inner
+      .blog-snap--block__summary
+        .blog-snap--block__summary-inner.copy
           = force_excerptify_html render_content(post.fields["summary"]), 300, "p i em strong br"
