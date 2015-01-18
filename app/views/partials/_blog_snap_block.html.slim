@@ -1,29 +1,39 @@
+- show_type = show_type || false
 - hide_summary = hide_summary || false
+- if post.fields[:hero_image].data_present?
+  - image = post.fields[:hero_image].asset
+- elsif rand(3) > 0
+  - image = Heracles::Asset.all.sample(1).first
 
-a.blog-snap.blog-snap--block href=post.absolute_url
-  time.blog-snap__date
-    = l post.created_at, format: :medium_date
-  - if post.fields[:hero_image].data_present?
-    .blog-snap__hero
-      .blog-snap__hero-inner
-        img alt="Two angry lookin’ sheep" src=post.fields[:hero_image].asset.content_thumbnail_url
-      - if post.fields[:hero_image].asset.attribution.present?
-        .blog-snap__hero-caption.caption
-          p = post.fields[:hero_image].asset.attribution
-  h3.blog-snap__title
-    span.title-text == widont_format markdown_line post.title
-    - selected_primary_topics = select_primary_topics_for_page(post)
-    - if selected_primary_topics.any?
-      span.title-tags
-        '  &nbsp;/&nbsp;
-        = selected_primary_topics.first.title
-  - if post.fields[:authors].data_present?
-    p.blog-snap__authors
-      - if post.guest_post?
-        ' Guest post by
-      - else
-        ' By
-      = post.fields[:authors].pages.map(&:title).to_sentence
-  - if post.fields["summary"].data_present? && !hide_summary
-    .blog-snap__summary.copy
-      = force_excerptify_html render_content(post.fields["summary"]), 350, "p i em strong br"
+.snap--block
+  a.blog-snap.blog-snap--block href=post.absolute_url
+    time.blog-snap__date
+      = l post.created_at, format: :medium_date
+    - if image
+      .blog-snap__hero
+        - if show_type
+          span.blog-snap__hero-type Writing
+        .blog-snap__hero-inner
+          img src=image.content_thumbnail_url
+        - if image && image.attribution.present?
+          .blog-snap__hero-caption.caption
+            p = image.attribution
+    h3.blog-snap__title
+      span.title-text == widont_format markdown_line post.title
+      - selected_primary_topics = select_primary_topics_for_page(post)
+      - if selected_primary_topics.any?
+        span.title-tags
+          '  &nbsp;/&nbsp;
+          = selected_primary_topics.first.title
+    - if post.fields[:authors].data_present?
+      p.blog-snap__authors
+        - if post.guest_post?
+          ' Guest post by
+        - else
+          ' By
+        = post.fields[:authors].pages.map(&:title).to_sentence
+    / Show text if no image
+    - unless image
+      .blog-snap__summary
+        .blog-snap__summary-inner
+          = force_excerptify_html render_content(post.fields["summary"]), 300, "p i em strong br"

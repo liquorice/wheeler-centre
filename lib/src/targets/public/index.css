@@ -132,8 +132,11 @@ body {
 @import "./masthead";
 @import "./masthead-contextual";
 @import "./footer";
+@import "./pagination";
 @import "./figure";
+@import "./sub-page-nav";
 @import "./video-player";
 @import "./subscribe";
 @import "./topics-section";
 @import "./blog-post";
+@import "./topic";

@@ -7,32 +7,37 @@
     h1.title Topics
 
 = area :main do
-  .page__content
-    .page__body.page__body--content-page.copy
-      h1 = page.title
-      = render_content(page.fields["body"])
-    .blog-index__latest.column-wrapper
-      .column-wide
-        h2.blog-index__latest-header Latest writing
-        - if latest_pages.present?
-          .blog-snap__group.clearfix
-            .blog-snap-halves.blog-snap-halves--1
-              - latest_pages[0..0].each do |post|
-                = render "partials/blog_snap_half", post: post
-            .blog-snap-quarters.blog-snap-quarters--2.clearfix
-              - latest_pages[1..2].each do |post|
+  .topic-page
+    .topic-page__header
+      p.topic-page__title-label
+        ' Topic
+      h1.topic-page__title
+        = page.title
+    .page__intro.intro.column-wrapper
+      .column-narrow.copy
+        = render_content page.fields[:intro]
+    - unless params[:page]
+      .topic-page__latest.column-wrapper
+        .column-wide.clearfix
+          .topic-page__nav
+            = render "partials/page_children", parent: primary_topic_for_topic(page), current: page
+          .blog-snap__group
+            - latest_pages.each do |post|
+              - if post.page_type == "blog_post"
                 = render "partials/blog_snap_quarter", post: post
-          .blog-snap__group.clearfix
-            .blog-snap-quarters.blog-snap-quarters--2.clearfix
-              - latest_pages[3..4].each do |post|
-                = render "partials/blog_snap_quarter", post: post
-            .blog-snap-halves.blog-snap-halves--1
-              - latest_pages[5..5].each do |post|
-                = render "partials/blog_snap_half", post: post
-    .blog-index__topic.column-wrapper.gradient-top-down
+              - elsif post.page_type == "event"
+                = render "partials/event_snap_quarter", post: post
+    .column-wrapper
       .section-header
         h2 Random
-      .clearfix
+      - if params[:page]
+        .pagination-top
+          = paginate random_pages
+      .topic-page__random.clearfix
         - random_pages.each do |post|
-          = render "partials/blog_snap_block", post: post, hide_summary: true
+          - if post.page_type == "blog_post"
+            = render "partials/blog_snap_block", post: post, show_type: true
+          - elsif post.page_type == "event"
+            = render "partials/event_snap_block", post: post, show_type: true
+      .pagination-bottom
         = paginate random_pages

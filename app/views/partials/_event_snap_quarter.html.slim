@@ -1,0 +1,25 @@
+- hide_summary = hide_summary || false
+
+a.blog-snap.blog-snap--quarter href=post.absolute_url
+  time.blog-snap__date
+    = l post.created_at, format: :medium_date
+  - if post.fields[:promo_image].data_present?
+    .blog-snap__hero
+      .blog-snap__hero-inner
+        img alt="Two angry lookin’ sheep" src=post.fields[:promo_image].asset.content_small_thumbnail_url
+      - if post.fields[:promo_image].asset.attribution.present?
+        .blog-snap__hero-caption.caption
+          p = post.fields[:promo_image].asset.attribution
+  h3.blog-snap__title
+    span.title-text == widont_format markdown_line post.title
+    - selected_primary_topics = select_primary_topics_for_page(post)
+    - if selected_primary_topics.any?
+      span.title-tags
+        '  &nbsp;/&nbsp;
+        = selected_primary_topics.first.title
+  - if post.fields[:presenters].data_present?
+    p.blog-snap__authors
+      = post.fields[:presenters].pages.map(&:title).to_sentence
+  - if post.fields[:body].data_present? && !hide_summary
+    .blog-snap__summary.copy
+      = force_excerptify_html render_content(post.fields["summary"]), 350, "p i em strong br"
