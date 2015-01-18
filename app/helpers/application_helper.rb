@@ -71,17 +71,30 @@ module ApplicationHelper
     topics_page.children.visible.published.of_type("topic")
   end
 
+  # Return an array of all the primary topics for a given `page`
   def select_primary_topics_for_page(page)
     matches = []
     if page.fields[:topics].data_present?
       page.fields[:topics].pages.each do |topic|
-        matches << topic if primary_topics.include?(topic)
-        topic.ancestors.each do |ancestor|
-          matches << ancestor if primary_topics.include?(ancestor)
-        end
+        match = primary_topic_for_topic(topic)
+        matches << match if match
       end
     end
     matches
+  end
+
+  def primary_topic_for_topic(topic)
+    return unless page.page_type == "topic"
+    if primary_topics.to_a.map(&:id).include?(topic.id)
+      primary_topic = topic
+    else
+      topic.ancestors.each do |ancestor|
+        if primary_topics.include?(ancestor)
+          primary_topic = ancestor
+        end
+      end
+    end
+    primary_topic
   end
 
 end
