@@ -15,7 +15,7 @@ RESPONSE_HTML = <<stop
 </html>
 stop
 
-FILE_PATH = '~/client_secrets.json'
+FILE_PATH = 'client_secrets.json'
 
 # Small helper for the sample apps for performing OAuth 2.0 flows from the command
 # line. Starts an embedded server to handle redirects.
@@ -36,7 +36,7 @@ class CommandLineOAuthHelper
   # Request authorization. Checks to see if a local file with credentials is present, and uses that.
   # Otherwise, opens a browser and waits for response, then saves the credentials locally.
   def authorize
-    credentialsFile = '~/credentials_file.json'
+    credentialsFile = 'credentials_file.json'
 
     if File.exist? credentialsFile
       File.open(credentialsFile, 'r') do |file|
@@ -45,7 +45,7 @@ class CommandLineOAuthHelper
         @authorization.client_id = credentials['client_id']
         @authorization.client_secret = credentials['client_secret']
         @authorization.refresh_token = credentials['refresh_token']
-        if credentials['token_expiry'].present?
+        if credentials['token_expiry']
           @authorization.expires_in = (Time.parse(credentials['token_expiry']) - Time.now).ceil
         end
         if @authorization.expired? ||
