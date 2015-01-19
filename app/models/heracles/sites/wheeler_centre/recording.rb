@@ -10,6 +10,7 @@ module Heracles
               {name: :transcripts, type: :content},
               {name: :video, type: :asset, asset_file_type: :video},
               {name: :audio, type: :asset, asset_file_type: :audio},
+              {name: :url, type: :text, label: "Youtube URL"},
               {name: :promo_image, type: :asset, asset_file_type: :image},
               {name: :events, type: :associated_pages, page_type: :event},
               # Dates
