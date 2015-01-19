@@ -89,7 +89,9 @@
 }
 
 
-
+.topic-page__random-intro {
+  margin-bottom: 35px;
+}
 
 .snap-wrapper {
   margin-right: -35px;
