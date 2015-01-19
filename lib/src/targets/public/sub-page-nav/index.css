@@ -9,11 +9,12 @@
   }
 
   .sub-page-nav--level-2 {
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #dedede;
+    border-top: 1px solid #dedede;
     padding-top: 8px;
     padding-bottom: 8px;
     font-weight: normal;
+    margin-bottom: 12px;
   }
 
   .sub-page-nav__item {
