@@ -1,7 +1,6 @@
 /* Pagination */
 
 .pagination {
-  border-radius: 3px;
   clear: both;
   font-family: var(--font-sans);
   margin-bottom: 35px;
