@@ -53,16 +53,16 @@
           = (params[:page] || 1)
           em &nbsp;of&nbsp;
           = random_pages.total_pages
-      .topic-page__random.clearfix
-        - random_pages.each do |post|
-          - if post.page_type == "blog_post"
-            = render "partials/blog_snap_block", post: post, show_type: true
-          - elsif post.page_type == "event"
-            = render "partials/event_snap_block", post: post, show_type: true
-      .pagination-context.pagination-context--bottom
-        ' Page
-        = (params[:page] || 1)
-        em &nbsp;of&nbsp;
-        = random_pages.total_pages
-      .pagination-bottom
-        = paginate random_pages
+        .topic-page__random.snap-wrapper.clearfix
+          - random_pages.each do |post|
+            - if post.page_type == "blog_post"
+              = render "partials/blog_snap_block", post: post, show_type: true
+            - elsif post.page_type == "event"
+              = render "partials/event_snap_block", post: post, show_type: true
+        .pagination-context.pagination-context--bottom
+          ' Page
+          = (params[:page] || 1)
+          em &nbsp;of&nbsp;
+          = random_pages.total_pages
+        .pagination-bottom
+          = paginate random_pages

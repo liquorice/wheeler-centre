@@ -293,6 +293,7 @@
     overflow: hidden;
   }
   .blog-snap__hero img {
+    display: block;
     transition-property: transform, opacity;
     transition-duration: 900ms;
     opacity: 1;
@@ -475,9 +476,7 @@
   width: calc(33% - 35px);
 }
 
-.blog-snap__group--4 .blog-snap {
-  width: 25%;
-}
+
 .blog-snap-quarters--4 .blog-snap {
   width: 25%;
   width: calc(25% - 35px);

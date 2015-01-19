@@ -1,15 +1,19 @@
 - hide_summary = hide_summary || false
+- if post.fields[:promo_image].data_present?
+  - image = post.fields[:promo_image].asset
+- else
+  - image = Heracles::Asset.all.sample(1).first
 
 a.blog-snap.blog-snap--quarter href=post.absolute_url
   time.blog-snap__date
     = l post.created_at, format: :medium_date
-  - if post.fields[:promo_image].data_present?
+  - if image
     .blog-snap__hero
       .blog-snap__hero-inner
-        img alt="Two angry lookin’ sheep" src=post.fields[:promo_image].asset.content_small_thumbnail_url
-      - if post.fields[:promo_image].asset.attribution.present?
+        img src=image.content_small_thumbnail_url
+      - if image.attribution.present?
         .blog-snap__hero-caption.caption
-          p = post.fields[:promo_image].asset.attribution
+          p = image.attribution
   h3.blog-snap__title
     span.title-text == widont_format markdown_line post.title
     - selected_primary_topics = select_primary_topics_for_page(post)

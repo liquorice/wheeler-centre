@@ -47,9 +47,10 @@
         h2 #discuss
         .intro.intro--small.column-narrow.copy
           p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
-      .clearfix
-        - posts[6..11].each do |post|
-          = render "partials/blog_snap_block", post: post, hide_summary: true
+      .column-full
+        .snap-wrapper.clearfix
+          - posts[6..11].each do |post|
+            = render "partials/blog_snap_block", post: post, hide_summary: true
 
     .blog-index__guest-authors.column-wrapper
       .section-header
@@ -86,7 +87,7 @@
           h2 Victorian Premier’s Literary Awards
           .intro.intro--small.column-narrow.copy
             p A ready-made summer reading list of the best of the best in Australian writing now.
-        .blog-snap__group.blog-snap__group--4.clearfix
+        .snap-wrapper.clearfix
           - posts[12..15].each do |post|
             = render "partials/blog_snap_block", post: post, hide_summary: true
 
