@@ -11,7 +11,7 @@
     .topic-page__header
       .topic-page__nav data-view-touch-preview="topic-page__nav--hover"
         p.topic-page__nav-label
-          ' View sub-topics
+          ' View topics
           i.fa.fa-angle-down
           i.fa.fa-angle-up
         .topic-page__nav-list
@@ -47,7 +47,7 @@
           p Anything and everything in <em>#{page.title}</em> from across our archives.
       .column-full
         .pagination-top
-          = paginate random_pages
+          = paginate random_pages, outer_window: 4
         .pagination-context.pagination-context--top
           ' Page
           = (params[:page] || 1)
@@ -65,4 +65,4 @@
           em &nbsp;of&nbsp;
           = random_pages.total_pages
         .pagination-bottom
-          = paginate random_pages
+          = paginate random_pages, outer_window: 4
