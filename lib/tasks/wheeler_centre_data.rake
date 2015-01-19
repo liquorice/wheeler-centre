@@ -495,7 +495,6 @@ namespace :wheeler_centre do
     require "blueprint_import/bluedown_formatter"
     require "video_migration/s3_util"
     require "video_migration/ec2_util"
-    require "video_migration/video_migration_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
@@ -533,14 +532,12 @@ namespace :wheeler_centre do
           if best_video["dest_filename"].to_s.present?
             # Find the file in the S3 Bucket
             public_url = s3_util.find_video(best_video["dest_filename"].to_s)
-
             ec2_util.create_instance
             ec2_util.create_scripts(best_video["dest_filename"].to_s, public_url, blueprint_video_post)
             ec2_util.transfer_scripts
             ec2_util.execute_scripts
-
-            # TODO Set the uploaded youtube video on this Recording.
-
+            heracles_recording.fields[:url] = ec2_util.get_youtube_url
+            ec2_util.terminate_instance
           end
 
         end
