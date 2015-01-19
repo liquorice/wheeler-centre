@@ -1,25 +1,29 @@
 - hide_summary = hide_summary || false
+- if post.fields[:hero_image].data_present?
+  - image = post.fields[:hero_image].asset
+- else
+  - image = Heracles::Asset.all.sample(1).first
 
 a.blog-snap.blog-snap--half href=post.absolute_url
   time.blog-snap__date
     = l post.created_at, format: :medium_date
-  - if post.fields[:hero_image].data_present?
+  - if image
     .blog-snap__hero
       .blog-snap__hero-inner
         picture
           erb:
             <!--[if IE 9]><video style='display: none;'><![endif]-->
-          / source media="(min-width: 640px)" srcset=post.fields[:hero_image].asset.content_medium_url
+          / source media="(min-width: 640px)" srcset=image.content_medium_url
           erb:
             <!--[if IE 9]></video><![endif]-->
-          img alt="Two angry lookin’ sheep" src=post.fields[:hero_image].asset.content_small_thumbnail_url
-      - if post.fields[:hero_image].asset.attribution.present?
+          img alt="Two angry lookin’ sheep" src=image.content_small_thumbnail_url
+      - if image.attribution.present?
         .blog-snap__hero-caption.caption
-          p = post.fields[:hero_image].asset.attribution
+          p = image.attribution
   h3.blog-snap__title
     span.title-text == widont_format markdown_line post.title
     - selected_primary_topics = select_primary_topics_for_page(post)
-    - if selected_primary_topics.any?
+    - if selected_primary_topics && selected_primary_topics.any?
       span.title-tags
         '  &nbsp;/&nbsp;
         = selected_primary_topics.first.title

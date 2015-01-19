@@ -80,11 +80,11 @@ module ApplicationHelper
         matches << match if match
       end
     end
-    matches
+    matches.uniq!
   end
 
   def primary_topic_for_topic(topic)
-    return unless page.page_type == "topic"
+    return unless topic.page_type == "topic"
     if primary_topics.to_a.map(&:id).include?(topic.id)
       primary_topic = topic
     else

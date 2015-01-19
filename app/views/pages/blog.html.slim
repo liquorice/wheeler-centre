@@ -62,9 +62,13 @@
           - guest_authors.each do |guest_author|
             .guest-author
               - if guest_author.fields[:portrait].data_present?
+                - image = guest_author.fields[:portrait].asset
+              - else
+                - image = Heracles::Asset.all.sample(1).first
+              - if image
                 .author-image
                   .author-image__inner
-                    img src= guest_author.fields[:portrait].asset.content_thumbnail_url
+                    img src=image.content_thumbnail_url
               h3.guest-author__title
                 = guest_author.title
               - if guest_author.fields[:intro].data_present?
@@ -76,8 +80,8 @@
                     a.blog-post-list__anchor href=post.absolute_url
                       h3.blog-post-list__title
                         span.title-text == widont_format markdown_line post.title
-                        - selected_primary_topics = select_primary_topics_for_page(page)
-                        - if selected_primary_topics.any?
+                        - selected_primary_topics = select_primary_topics_for_page(post)
+                        - if selected_primary_topics && selected_primary_topics.any?
                           span.title-tags
                             '  &nbsp;/&nbsp;
                             = selected_primary_topics.first.title
