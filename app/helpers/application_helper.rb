@@ -80,7 +80,7 @@ module ApplicationHelper
         matches << match if match
       end
     end
-    matches.uniq!
+    matches.uniq
   end
 
   def primary_topic_for_topic(topic)
