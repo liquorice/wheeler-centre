@@ -10,7 +10,8 @@
 
 /* Headers */
 .event__presenters-header,
-.event__tickets-header {
+.event__tickets-header,
+.event__series-summary-header {
   color: var(--primary-color);
   font-family: var(--font-sans);
   font-size: 15px;
@@ -167,6 +168,7 @@
 .event__tickets {
   float: left;
   position: relative;
+  padding-right: 35px;
   width: 50%;
 }
   .event__tickets:before {
@@ -206,9 +208,28 @@
       transform: scale(1.1,1.1);
     }
 
-.event__tickets {
+/* Series summary */
+
+.event__series-summary {
   float: left;
   padding-right: 35px;
   position: relative;
   width: 50%;
 }
+  .event__series-summary:before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 50%;
+    left: 0;
+    top: 0;
+    border-top: 3px #ededed solid;
+  }
+
+  .event__series-summary-details {
+    color: #666;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }

@@ -1,3 +1,10 @@
+- show_type = show_type || false
+- hide_summary = hide_summary || false
+- if page.fields[:promo_image].data_present?
+  - image = page.fields[:promo_image].asset
+- else
+  - image = Heracles::Asset.all.sample(1).first
+
 = area :masthead_title do
   .page__title.page__title--events
     h1.title Events
@@ -20,17 +27,17 @@
       .event__series-header.column-wrapper
         .column-full.clearfix
           .event__series-header-inner
-            p.event__series-meta Part of a 12 event series
+            p.event__series-meta Part of a #{page.series.events.total} event series
             p.event__series-title = page.series.title
-    - if page.fields[:promo_image].data_present?
+    - if image
       .event__promo-image
         picture
           erb:
             <!--[if IE 9]><video style="display: none;"><![endif]-->
-          source srcset=page.fields[:promo_image].asset.content_medium_url media="(min-width: 480px)"
+          source srcset=image.content_medium_url media="(min-width: 480px)"
           erb:
             <!--[if IE 9]></video><![endif]-->
-          img.figure__content src=page.fields[:promo_image].asset.content_small_url itemprop="hero_image"
+          img.figure__content src=image.content_small_url itemprop="hero_image"
     .column-wrapper
       .column-wide.clearfix
         .event__meta
@@ -55,3 +62,12 @@
             p
               strong This is a free event.
               '  Bookings are recommended.
+
+        - if page.series
+          .event__series-summary
+            h2.event__series-summary-header= page.series.title
+            - if page.series.fields[:body].data_present?
+              .event__series-summary-details.copy
+                = render_content page.series.fields[:body]
+
+
