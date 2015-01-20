@@ -123,7 +123,52 @@ class EC2Util
 		Net::SSH.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
 			# capture all stderr and stdout output from a remote process
 			output = ssh.exec!("hostname")
-			ssh.exec "bash upload_file.sh"
+			ssh.open_channel do |channel|
+				channel.request_pty do |c, success|
+					raise "could not request pty" unless success
+			    if success
+			      command = "sudo yum install ruby-devel"
+			      c.exec(command)
+			    end
+
+					channel.on_data do |ch, data|
+			      puts "got stdout: #{data}"
+			      channel.send_data "yes\n"
+			    end
+
+			    channel.on_extended_data do |ch, type, data|
+			      puts "got stderr: #{data}"
+			    end
+
+			    channel.on_close do |ch|
+			      puts "channel is closing!"
+    			end
+			  end
+			end
+			ssh.open_channel do |channel|
+				channel.request_pty do |c, success|
+					raise "could not request pty" unless success
+			    if success
+			      command = 'sudo yum groupinstall "Development Tools"'
+			      c.exec(command)
+			    end
+
+					channel.on_data do |ch, data|
+			      puts "got stdout: #{data}"
+			      channel.send_data "yes\n"
+			    end
+
+			    channel.on_extended_data do |ch, type, data|
+			      puts "got stderr: #{data}"
+			    end
+
+			    channel.on_close do |ch|
+			      puts "channel is closing!"
+    			end
+			  end
+			end
+
+			ssh.exec("bash upload_file.sh")
 			puts (output)
 		end
 	end

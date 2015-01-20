@@ -58,7 +58,7 @@ videos_insert_response = @auth_client.execute!(
   }
 )
 
-File.open("~/response_data.json", "w", 0600) do |file|
+File.open("response_data.json", "w", 0600) do |file|
   json = JSON.dump(videos_insert_response.data)
   file.write(json)
 end
