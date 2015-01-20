@@ -18,12 +18,6 @@ user.name = "icelab"
 user.save!
 user.update(superadmin: true)
 
-# Make an admin user for Jon
-user = Heracles::User.find_or_initialize_by(email: "jon.tjhia@wheelercentre.com")
-user.password = "bawt6Aik6uS5eW"
-user.name = "Jon Tjhia"
-user.save!
-
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
 site.title = "Wheeler Centre"
@@ -136,6 +130,13 @@ site.transloadit_params = {
   }
 }
 site.save!
+
+# Make an admin user for Jon
+user = Heracles::User.find_or_initialize_by(email: "jon.tjhia@wheelercentre.com")
+user.password = "bawt6Aik6uS5eW"
+user.name = "Jon Tjhia"
+user.sites << site
+user.save!
 
 # Homepage
 # ------------------------------------------------------------------------------
