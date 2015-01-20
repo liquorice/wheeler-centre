@@ -41,6 +41,12 @@ module Heracles
           end
         end
 
+        def venue
+          if fields[:venue].data_present?
+            fields[:venue].pages.first
+          end
+        end
+
 
         ### Searchable attrs
 

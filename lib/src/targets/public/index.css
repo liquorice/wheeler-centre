@@ -145,4 +145,5 @@ body {
 @import "./topics-section";
 @import "./blog-post";
 @import "./event";
+@import "./event-venue-map";
 @import "./topic";

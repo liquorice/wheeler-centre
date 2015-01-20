@@ -69,5 +69,18 @@
             - if page.series.fields[:body].data_present?
               .event__series-summary-details.copy
                 = render_content page.series.fields[:body]
-
-
+    - if page.venue
+      .event__venue data-view-event-venue-map=page.venue.map_data
+        .event__venue-info.column-wrapper
+          .column-wide.clearfix
+            h3.event__venue-header Where?
+            .event__venue-more.copy
+              a href=page.venue.absolute_url More about this venue
+              ', including large map, parking, public transport and accessibility.
+        .event__venue-map-wrapper
+          .event__venue-map
+          .column-wrapper
+            .column-wide
+              .event__venue-map-panel
+                h4= page.venue.title
+                p= render_content page.venue.fields[:address_formatted]

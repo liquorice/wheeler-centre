@@ -2,6 +2,7 @@
 
 .event {
   padding-top: 50px;
+  padding-bottom: 80px;
 }
 
   .event__blocks {
@@ -26,8 +27,9 @@
 .event__meta {
   float: left;
   width: 50%;
-  width: calc(50% - 35px);
+  /*width: calc(50% - 35px);*/
   padding-top: 45px;
+  /*margin-right: -35px;*/
 }
   .event__date-time {
     font-family: var(--font-sans);
@@ -51,7 +53,7 @@
 .event__promo-image {
   float: right;
   width: 50%;
-  width: calc(50% + 35px);
+  /*width: calc(50% + 35px);*/
   padding-bottom: 35px;
   margin-top: -55px;
 }
@@ -105,6 +107,7 @@
 
 .event__presenters {
   float: left;
+  padding-bottom: 50px;
   padding-right: 35px;
   position: relative;
   width: 50%;
@@ -170,6 +173,7 @@
   position: relative;
   padding-right: 35px;
   width: 50%;
+  padding-bottom: 50px;
 }
   .event__tickets:before {
     display: block;
@@ -212,7 +216,8 @@
 
 .event__series-summary {
   float: left;
-  padding-right: 35px;
+  padding-bottom: 35px;
+  padding-right: 50px;
   position: relative;
   width: 50%;
 }
@@ -233,3 +238,33 @@
     font-size: 1.7rem;
     line-height: 1.5;
   }
+
+
+
+/* Venue */
+
+.event__venue {
+  clear: both;
+}
+
+.event__venue-info {
+  padding-bottom: 30px;
+}
+
+.event__venue-header {
+  float: left;
+  color: var(--primary-color);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.event__venue-more {
+  float: right;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-size: 1.5rem;
+}
