@@ -22,19 +22,35 @@
     .masthead-nav-main {
       float: left;
       margin-left: -15px;
+      -webkit-font-smoothing: subpixel-antialiased;
+      font-smoothing: subpixel-antialiased;
     }
 
       .masthead-nav-main__item,
       .masthead-nav-secondary__item {
         float: left;
       }
+        .masthead-nav-main__item--break {
+          padding-right: 16px;
+          margin-right: 16px;
+          position: relative;
+        }
+          /* Little border */
+          .masthead-nav-main__item--break:before {
+            content: "";
+            position: absolute;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            top: 15%;
+            bottom: 15%;
+            right: 0;
+          }
 
       .masthead-nav-main__item {
         position: relative;
       }
 
-      .masthead-nav-main__item--has-dropdown--hover,
-      .masthead-nav-main__item--has-dropdown:focus {
+      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
         background-color: var(--primary-color-darker);
       }
 
@@ -51,8 +67,8 @@
         .masthead-nav-main__anchor {
           color: var(--primary-color-lighter);
           display: inline-block;
-          font-size: 17px;
-          font-size: 1.7rem;
+          font-size: 16px;
+          font-size: 1.6rem;
           padding: 18px;
         }
 
@@ -64,7 +80,7 @@
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
-      min-width: 460px;
+      min-width: 500px;
       padding: 30px 18px 20px;
       position: absolute;
     }
@@ -81,6 +97,9 @@
         list-style: none;
         padding-right: 60px;
       }
+        .masthead-nav-main__dropdown-list--half {
+          width: 50%;
+        }
 
       .masthead-nav-main__dropdown-list:last-child {
         padding-right: 0;
@@ -88,8 +107,8 @@
 
         .masthead-nav-main__dropdown-item {
           color: var(--primary-color-lighter);
-          font-size: 17px;
-          font-size: 1.7rem;
+          font-size: 15px;
+          font-size: 1.5rem;
           padding-bottom: 12px;
         }
 
