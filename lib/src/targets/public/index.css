@@ -11,7 +11,7 @@
   --primary-color: #009e8c; /* 0, 158, 140 */
   --primary-color-lighter: #ccefeb;
   --primary-color-darker: color(var(--primary-color) shade(15%));
-  --text-color: #222;
+  --text-color: #333;
   --max-width: 100%;
 }
 
@@ -144,4 +144,5 @@ body {
 @import "./subscribe";
 @import "./topics-section";
 @import "./blog-post";
+@import "./event";
 @import "./topic";

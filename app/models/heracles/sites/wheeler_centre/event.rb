@@ -33,6 +33,17 @@ module Heracles
           }
         end
 
+        ### Accessors
+
+        def series
+          if fields[:series].data_present?
+            fields[:series].pages.first
+          end
+        end
+
+
+        ### Searchable attrs
+
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
