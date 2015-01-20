@@ -236,6 +236,49 @@ namespace :wheeler_centre do
 
   end
 
+  desc "Import blueprint event venues"
+  task :import_blueprint_event_venues, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+
+    blueprint_venues = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtVenue }
+    heracles_venues_index = Heracles::Page.where(slug: "venues").first!
+    heracles_venues_collection = heracles_venues_index.children.of_type("collection").where(slug: "all-event-venues").first!
+
+    blueprint_venues.each do |blueprint_venue|
+      if blueprint_venue["name"].present?
+        heracles_venue = Heracles::Sites::WheelerCentre::Venue.find_by_slug(blueprint_venue["slug"])
+        unless heracles_venue
+          heracles_venue = Heracles::Page.new_for_site_and_page_type(heracles_venues_index.site, "venue")
+        end
+        heracles_venue.slug = blueprint_venue["slug"]
+        heracles_venue.title = blueprint_venue["name"]
+        heracles_venue.created_at = Time.zone.parse(Time.now.to_s)
+        heracles_venue.site = heracles_venues_index.site
+        heracles_venue.parent = heracles_venues_index
+        heracles_venue.collection = heracles_venues_collection
+        heracles_venue.published = true
+
+        heracles_venue.fields[:legacy_venue_id].value = blueprint_venue["id"]
+
+        # heracles_venue.fields[:hero_image].value =
+        heracles_venue.fields[:address].value = blueprint_venue["address"]
+        heracles_venue.fields[:address_formatted].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["address"], subject: blueprint_venue, assetify: false)
+        heracles_venue.fields[:phone_number].value = blueprint_venue["phone_number"]
+        heracles_venue.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["description"], subject: blueprint_venue, assetify: false)
+        heracles_venue.fields[:directions].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["directions"], subject: blueprint_venue, assetify: false)
+        heracles_venue.fields[:parking].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["parking"], subject: blueprint_venue, assetify: false)
+
+        heracles_venue.save!
+      end
+    end
+
+  end
+
   desc "Import blueprint event series"
   task :import_blueprint_event_series, [:yml_file] => :environment do |task, args|
     require "yaml"
@@ -294,6 +337,7 @@ namespace :wheeler_centre do
     heracles_events_collection = heracles_events_index.children.of_type("collection").where(slug: "all-events").first!
 
     all_series = Heracles::Page.of_type("event_series")
+    all_venues = Heracles::Page.of_type("venue")
     all_sponsors = Heracles::Page.of_type("sponsor")
     all_authors = Heracles::Page.of_type("person")
 
@@ -317,13 +361,19 @@ namespace :wheeler_centre do
       heracles_event.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_event["content"], subject: blueprint_event, assetify: false)
       heracles_event.fields[:start_date].value = Time.zone.parse(blueprint_event["start_date"].to_s)
       heracles_event.fields[:end_date].value = Time.zone.parse(blueprint_event["end_date"].to_s)
-      # heracles_event.fields[:venue].value = blueprint_event["venue"].to_s
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
 
+      # Associate event series with event
       event_series = all_series.select { |p| p.fields[:legacy_series_id].value.to_i == blueprint_event["program_id"].to_i }
       if event_series.present?
         heracles_event.fields[:series].page_ids = event_series.map(&:id)
+      end
+
+      # Associate venue with event
+      event_venues = all_venues.select { |p| p.fields[:legacy_venue_id].value.to_i == blueprint_event["venue_id"].to_i }
+      if event_venues.present?
+        heracles_event.fields[:venue].page_ids = event_venues.map(&:id)
       end
 
       # Associate people with events through presentations
