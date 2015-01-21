@@ -576,14 +576,14 @@ namespace :wheeler_centre do
             :youtube_url => youtube_url
           }
 
-          File.open("youtube_migrations.json", "a") do |file|
-            record = JSON.dump(migration_record)
-            file << record
+          File.open("youtube_migrations.yml", "a") do |file|
+            file << migration_record.to_yaml
           end
 
           recording.fields[:url].value = youtube_url
-          ec2_util.terminate_instance
+          recording.save!
 
+          ec2_util.terminate_instance
         end
       end
     end
