@@ -53,8 +53,10 @@ module Heracles
             events = series.events({per_page: options[:per_page]})
             if events.total < options[:per_page]
               additional_total = options[:per_page] - events.total
-              additional = search_events_by_topic({per_page: additional_total})
-              events = events.results + additional.results
+              additional = search_events_by_topic({per_page: additional_total}).results
+              events = events.results << additional.results
+            else
+              events = events.results
             end
           else
             events = search_events_by_topic({per_page: options[:per_page]}).results
