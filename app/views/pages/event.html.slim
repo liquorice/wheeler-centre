@@ -118,15 +118,15 @@
                     img.event__supporters-image src=sponsor_image.content_small_url
                   - else
                     = sponsor.title
-    - if page.related_events.results.any?
+    - if page.related_events.any?
       .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
         .section-header
           h2 Related events
         .column-full
           .snap-wrapper.clearfix
-            - page.related_events.results.each do |post|
+            - page.related_events.each do |post|
               = render "partials/event_snap_block", post: post, show_type: true
-          - if !page.related_events.results.last_page? && page.series
+          - if page.series
             a.block-link href=page.series.absolute_url
               ' View all the events in
               em = page.series.title
