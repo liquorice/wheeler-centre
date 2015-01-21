@@ -36,10 +36,10 @@ class CommandLineOAuthHelper
   # Request authorization. Checks to see if a local file with credentials is present, and uses that.
   # Otherwise, opens a browser and waits for response, then saves the credentials locally.
   def authorize
-    credentialsFile = 'credentials_file.json'
+    credentials_file = 'credentials_file.json'
 
-    if File.exist? credentialsFile
-      File.open(credentialsFile, 'r') do |file|
+    if File.exist? credentials_file
+      File.open(credentials_file, 'r') do |file|
         credentials = JSON.load(file)
         @authorization.access_token = credentials['access_token']
         @authorization.client_id = credentials['client_id']
@@ -50,7 +50,7 @@ class CommandLineOAuthHelper
         end
         if @authorization.expired? ||
           @authorization.fetch_access_token!
-          save(credentialsFile)
+          save(credentials_file)
         end
       end
     else
@@ -70,14 +70,14 @@ class CommandLineOAuthHelper
       Launchy.open(url)
       server.start()
 
-      save(credentialsFile)
+      save(credentials_file)
     end
 
     return @authorization
   end
 
-  def save(credentialsFile)
-    File.open(credentialsFile, 'w', 0600) do |file|
+  def save(credentials_file)
+    File.open(credentials_file, 'w', 0600) do |file|
       json = JSON.dump({
         :access_token => @authorization.access_token,
         :client_id => @authorization.client_id,
