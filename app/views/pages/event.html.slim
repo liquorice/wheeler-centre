@@ -38,6 +38,9 @@
           erb:
             <!--[if IE 9]></video><![endif]-->
           img.figure__content src=image.content_small_url itemprop="hero_image"
+          - if image.attribution.present?
+            .event__promo-image-caption.caption
+              p = image.attribution
     .column-wrapper
       .column-wide.clearfix
         .event__meta
