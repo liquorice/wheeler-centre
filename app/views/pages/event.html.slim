@@ -84,3 +84,29 @@
               .event__venue-map-panel
                 h4= page.venue.title
                 p= render_content page.venue.fields[:address_formatted]
+    - if page.fields[:sponsors].data_present?
+      .event__supporters.column-wrapper
+        .column-mid
+          p.event__supporters-intro Made possible with the support of:
+          .event__supporters-list
+            - page.fields[:sponsors].pages.each do |sponsor|
+              - if sponsor.fields[:url].data_present?
+                a.event__supporters-item href=sponsor.fields[:url].value
+                  - if sponsor.fields[:logo].data_present?
+                    - image = sponsor.fields[:logo].asset
+                  - elsif rand(3) > 0
+                    - image = Heracles::Asset.all.sample(1).first
+                  - if image
+                    img.event__supporters-image src=image.content_small_url
+                  - else
+                    = sponsor.title
+              - else
+                .event__supporters-item
+                  - if sponsor.fields[:logo].data_present?
+                    - image = sponsor.fields[:logo].asset
+                  - elsif rand(3) > 0
+                    - image = Heracles::Asset.all.sample(1).first
+                  - if image
+                    img.event__supporters-image src=image.content_small_url
+                  - else
+                    = sponsor.title
