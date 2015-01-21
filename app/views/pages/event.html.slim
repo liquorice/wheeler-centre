@@ -46,6 +46,14 @@
             == widont_format markdown_line page.title
         .event__body.copy
           = render_content page.fields[:body]
+        - if page.fields[:topics].data_present?
+          .event__tags
+            h2.event__tag-header Topics
+            ul.event__tags-list
+              - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                li
+                  a href=topic.absolute_url = topic.title
+
 
         - if page.fields[:presenters].data_present?
           .event__presenters
