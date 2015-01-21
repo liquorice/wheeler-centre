@@ -8,6 +8,7 @@ module Heracles
               {name: :short_title, type: :text, label: "Short title"},
               {name: :promo_image, type: :asset, asset_file_type: :image},
               {name: :body, type: :content},
+              {name: :external_video, type: :external_video, label: 'External video'},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
               {name: :start_date, type: :date_time, label: "Event start date"},
