@@ -19,7 +19,7 @@ class EC2Util
 
 		role_name = "s3-read-only"
 		policy_name = "s3-read-only"
-		@instance_profile_name = "ec3-s3-read-only"
+		@instance_profile_name = "s3-read-only"
 		@key_name = "wheeler-centre-video-migration"
 		@path = "/Users/josephinehall/Development/wheeler-centre/lib/video_migration"
 		@security_group_name = "wheeler-centre-video-migration"
@@ -29,7 +29,7 @@ class EC2Util
 
 		# build a custom policy
 		policy = AWS::IAM::Policy.new
-		policy.allow(:actions => ["s3:Get*","s3:List*"], :resources => '*')
+		policy.allow(:actions => ["s3:*"], :resources => '*')
 
 		iam = AWS::IAM.new
 
@@ -81,21 +81,39 @@ class EC2Util
 		puts ("Created instance")
 	end
 
-	def create_scripts(file_name, public_url, blueprint_video)
+	def create_scripts(file_name, public_url, recording)
 		# create video_data.json
 		File.open("#{@path}/video_data.json", "w", 0600) do |file|
 			json = JSON.dump({
 				:file_path => file_name,
-				:title => blueprint_video["title"],
-				:description => blueprint_video["description"], # TODO strip html
-				:category_id => "25",
-				:keywords => "keywords, go, here",
+				:title => recording.title,
+				:description => recording.fields[:description], # TODO strip html
+				:category_id => "22", # People and blog category
+				:keywords => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
 				:privacy_status => "public"
 				})
 			file.write(json)
 			puts ("Created video_data.json")
 		end
-		# TODO create the bash script with the right s3 filenames
+
+		puts (public_url)
+		script = """
+			# Fetch the asset
+			wget #{public_url}
+
+			# Install gems
+			gem install google-api-client
+			gem install trollop
+			gem install thin
+			gem install launchy
+
+			# Run the video migration
+			ruby video_migration_util.rb
+		"""
+		File.open("#{@path}/installation.sh", "w", 0600) do |file|
+			file.write(script)
+			puts ("Created installation script")
+		end
 	end
 
 	def transfer_scripts
@@ -108,7 +126,7 @@ class EC2Util
 			sleep 100
 			puts ("Transferring scripts")
 			Net::SSH.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
-				ssh.scp.upload!("#{@path}/upload_file.sh", ".", :ssh => @private_key )
+				ssh.scp.upload!("#{@path}/installation.sh", ".", :ssh => @private_key )
 				ssh.scp.upload!("#{@path}/video_migration_util.rb", ".", :ssh => @private_key)
 				ssh.scp.upload!("#{@path}/oauth_util.rb", ".", :ssh => @private_key)
 				ssh.scp.upload!("#{@path}/client_secrets.json", ".", :ssh => @private_key)
@@ -168,7 +186,7 @@ class EC2Util
 			  end
 			end
 
-			ssh.exec("bash upload_file.sh")
+			ssh.exec("bash installation.sh")
 			puts (output)
 		end
 	end
@@ -176,14 +194,14 @@ class EC2Util
 	def get_youtube_id
 		response_data = "#{@path}/response_data.json"
 		Net::SCP.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |scp|
-			scp.download!("~/response_data.json", response_data, :ssh => @private_key)
+			scp.download!("response_data.json", response_data, :ssh => @private_key)
 		end
 
 		if File.exist? response_data
 			File.open(response_data, "r") do |file|
 				data = JSON.load(file)
-				puts (data["videos"]["id"])
-				data["videos"]["id"]
+				puts (data["id"])
+				data["id"]
 			end
 		end
 	end
