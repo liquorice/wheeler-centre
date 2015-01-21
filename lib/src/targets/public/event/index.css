@@ -147,10 +147,18 @@
 .event__presenters {
   float: left;
   padding-bottom: 50px;
-  padding-right: 35px;
   position: relative;
   width: 50%;
 }
+  .event__presenters--long {
+    width: 100%;
+  }
+    .event__presenters-group {
+      float: left;
+      padding-right: 35px;
+      width: 50%;
+    }
+
   .event__presenters:before {
     display: block;
     content: "";

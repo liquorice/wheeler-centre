@@ -56,10 +56,19 @@
 
 
         - if page.fields[:presenters].data_present?
-          .event__presenters
-            h2.event__presenters-header Who?
-            - page.fields[:presenters].pages.each do |presenter|
-              = render "partials/presenter_horizontal", presenter: presenter
+          - if page.fields[:presenters].pages.length > 6
+            .event__presenters.event__presenters--long
+              h2.event__presenters-header Who?
+              - page.fields[:presenters].pages.in_groups(2, false).each do |group|
+                - if group.any?
+                  .event__presenters-group
+                    - group.each do |presenter|
+                      = render "partials/presenter_horizontal", presenter: presenter
+          - else
+            .event__presenters
+              h2.event__presenters-header Who?
+              - page.fields[:presenters].pages.each do |presenter|
+                = render "partials/presenter_horizontal", presenter: presenter
 
         .event__tickets
           h2.event__tickets-header How much?
