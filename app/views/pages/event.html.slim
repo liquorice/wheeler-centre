@@ -41,7 +41,7 @@
     .column-wrapper
       .column-wide.clearfix
         .event__meta
-          time.event__date-time= page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, "long")
+          time.event__date-time= page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
           h1.event__title
             == widont_format markdown_line page.title
         .event__body.copy
