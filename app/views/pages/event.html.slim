@@ -93,20 +93,20 @@
               - if sponsor.fields[:url].data_present?
                 a.event__supporters-item href=sponsor.fields[:url].value
                   - if sponsor.fields[:logo].data_present?
-                    - image = sponsor.fields[:logo].asset
+                    - sponsor_image = sponsor.fields[:logo].asset
                   - elsif rand(3) > 0
-                    - image = Heracles::Asset.all.sample(1).first
-                  - if image
-                    img.event__supporters-image src=image.content_small_url
+                    - sponsor_image = Heracles::Asset.all.sample(1).first
+                  - if sponsor_image
+                    img.event__supporters-image src=sponsor_image.content_small_url
                   - else
                     = sponsor.title
               - else
                 .event__supporters-item
                   - if sponsor.fields[:logo].data_present?
-                    - image = sponsor.fields[:logo].asset
+                    - sponsor_image = sponsor.fields[:logo].asset
                   - elsif rand(3) > 0
-                    - image = Heracles::Asset.all.sample(1).first
-                  - if image
-                    img.event__supporters-image src=image.content_small_url
+                    - sponsor_image = Heracles::Asset.all.sample(1).first
+                  - if sponsor_image
+                    img.event__supporters-image src=sponsor_image.content_small_url
                   - else
                     = sponsor.title
