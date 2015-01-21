@@ -64,6 +64,7 @@ gem "trollop"
 gem "aws-sdk"
 gem "net-scp"
 gem "thin"
+gem "nokogiri"
 
 group :production do
   gem "rails_12factor"

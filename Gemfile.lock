@@ -481,6 +481,7 @@ DEPENDENCIES
   meta-tags
   minitest
   net-scp
+  nokogiri
   pg
   poltergeist
   que

@@ -1,6 +1,7 @@
 require "aws-sdk"
 require "yaml"
 require "net/scp"
+require "nokogiri"
 
 class EC2Util
 	attr_accessor :config_file
@@ -82,12 +83,14 @@ class EC2Util
 	end
 
 	def create_scripts(file_name, public_url, recording)
+		description = Nokogiri::HTML(recording.fields[:description].value).text
+		puts (description)
 		# create video_data.json
 		File.open("#{@path}/video_data.json", "w", 0600) do |file|
 			json = JSON.dump({
 				:file_path => file_name,
 				:title => recording.title,
-				:description => recording.fields[:description], # TODO strip html
+				:description => description, # TODO strip html
 				:category_id => "22", # People and blog category
 				:keywords => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
 				:privacy_status => "public"
@@ -97,6 +100,13 @@ class EC2Util
 		end
 
 		puts (public_url)
+
+		unless public_url
+			public_url = "http://download.wheelercentre.com/#{file_name}"
+		end
+
+		puts (public_url)
+
 		script = """
 			# Fetch the asset
 			wget #{public_url}
