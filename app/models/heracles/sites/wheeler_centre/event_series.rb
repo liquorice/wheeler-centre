@@ -26,7 +26,11 @@ module Heracles
         end
 
         def events(options={})
-          search_events(options={})
+          search_events(options)
+        end
+
+        def upcoming_events(options={})
+          search_events(options)
         end
 
         def sponsors
@@ -42,6 +46,7 @@ module Heracles
             with :published, true
 
             order_by :start_date, :asc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
           end
         end
 

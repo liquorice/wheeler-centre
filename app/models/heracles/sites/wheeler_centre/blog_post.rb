@@ -29,6 +29,10 @@ module Heracles
         end
 
         searchable do
+          string :id do
+            id
+          end
+
           text :summary do
             fields[:summary].value
           end

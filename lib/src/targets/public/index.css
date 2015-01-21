@@ -92,6 +92,9 @@ body {
     color: #222;
     text-decoration: underline;
   }
+  .block-link em {
+    font-style: italic;
+  }
 
 .section--normal {
   margin-left: auto;

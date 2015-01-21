@@ -47,10 +47,24 @@ module Heracles
           end
         end
 
+        def related_events(options={})
+          options[:per_page] = 6 || options[:per_page]
+          if series
+            events = series.events({per_page: options[:per_page]})
+          else
+            events = search_events_by_topic({per_page: options[:per_page]})
+          end
+          events
+        end
+
 
         ### Searchable attrs
 
         searchable do
+          string :id do
+            id
+          end
+
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end
@@ -79,6 +93,20 @@ module Heracles
             fields[:series].pages.map(&:id)
           end
 
+        end
+
+        private
+
+        def search_events_by_topic(options={})
+          Sunspot.search(Event) do
+            without :id, id
+            with :site_id, site.id
+            with :topic_ids, fields[:topics].pages.map(&:id)
+            with :published, true
+
+            order_by :start_date_time, :asc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
         end
       end
     end
