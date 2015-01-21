@@ -27,6 +27,7 @@ module Heracles
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
+              {name: :sponsors_intro, type: :content, hint: "Override the 'Made possible with the support of' text"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
@@ -68,8 +69,8 @@ module Heracles
         ### Searchable attrs
 
         searchable do
-          string :id do
-            id
+          string :id do |page|
+            page.id
           end
 
           string :topic_ids, multiple: true do

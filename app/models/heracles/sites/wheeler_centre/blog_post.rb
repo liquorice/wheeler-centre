@@ -29,8 +29,8 @@ module Heracles
         end
 
         searchable do
-          string :id do
-            id
+          string :id do |page|
+            page.id
           end
 
           text :summary do
