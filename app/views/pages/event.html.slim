@@ -104,7 +104,11 @@
     - if page.fields[:sponsors].data_present?
       .event__supporters.column-wrapper
         .column-mid
-          p.event__supporters-intro Made possible with the support of:
+          .event__supporters-intro.copy
+            - if page.fields[:sponsors_intro].data_present?
+              = render_content page.fields[:sponsors_intro]
+            - else
+              p Made possible with the support of:
           .event__supporters-list
             - page.fields[:sponsors].pages.each do |sponsor|
               - if sponsor.fields[:url].data_present?
