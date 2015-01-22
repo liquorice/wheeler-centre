@@ -25,6 +25,7 @@ if File.exist? video_data
     @video_category_id = data["category_id"]
     @video_keywords = data["keywords"]
     @video_privacy_status = data["privacy_status"]
+    @video_recording_date = data["recording_date"]
   end
 end
 
@@ -41,6 +42,9 @@ body = {
     :tags => @video_keywords.split(','),
     :categoryId => @video_category_id,
   },
+  # :recordingDetails => {
+  #   :recordingDate => @video_recording_date
+  # },
   :status => {
     :privacyStatus => @video_privacy_status
   }
