@@ -36,7 +36,8 @@
           position: relative;
         }
 
-        .breakpoint-tablet-wide .masthead-nav-main__item--break {
+        .breakpoint-tablet-wide .masthead-nav-main__item--break,
+        .breakpoint-tablet .masthead-nav-main__item--break {
           padding-right: 12px;
           margin-right: 12px;
         }
@@ -83,7 +84,8 @@
           color: #fff;
         }
 
-        .breakpoint-tablet-wide .masthead-nav-main__anchor {
+        .breakpoint-tablet-wide .masthead-nav-main__anchor,
+        .breakpoint-tablet .masthead-nav-main__anchor {
           padding: 14px;
         }
 
@@ -146,7 +148,10 @@
       float: right;
     }
 
-    .breakpoint-tablet-wide .masthead-nav-secondary {
+    .breakpoint-tablet-wide .masthead-nav-secondary,
+    .breakpoint-tablet .masthead-nav-secondary,
+    .breakpoint-phone-wide .masthead-nav-secondary,
+    .breakpoint-phone .masthead-nav-secondary {
       padding-top: 14px;
     }
 
