@@ -38,20 +38,22 @@
 
 }
 
-.copy blockquote {
+.copy > blockquote,
+.copy > .section--normal > blockquote {
   border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
   color: #111;
   font-size: 25px;
   font-size: 2.5rem;
   padding-top: 35px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   padding-left: 35px;
   padding-right: 35px;
   margin-top: 30px;
   margin-bottom: 35px;
   line-height: 1.45;
   margin-left: -35px;
+  margin-right: -35px;
 }
 
 .copy hr {

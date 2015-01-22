@@ -1,0 +1,27 @@
+.insertable-display-pull-quote__details {
+  @include pad(all, smaller);
+  border: 1px solid $green-mid;
+  overflow: hidden;
+  max-height: 150px;
+  min-height: 30px;
+}
+
+  .insertable-display-pull-quote__controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+  }
+
+.insertable-display-pull-quote__quote {
+  blockquote {
+    @include font-size(18);
+    @include pad(vert, small);
+    color: $grey-mid;
+  }
+  p {
+    @include font-size(14);
+    @include inset(left, normal);
+    color: $grey-mid;
+  }
+}
