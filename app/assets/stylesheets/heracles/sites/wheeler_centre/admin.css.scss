@@ -1,1 +1,9 @@
-// Heracles admin CSS goes here.
+// Import the libs/variables we use in heracles_admin
+@import "globals";
+@import "bourbon";
+@import "font-awesome";
+@import "heracles/admin/shared/patterns/all";
+
+// Overrides/additions ---------------------------------------------------------
+
+@import "heracles/sites/wheeler_centre/fields/field_external_video";
