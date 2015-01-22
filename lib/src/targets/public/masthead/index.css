@@ -148,6 +148,11 @@
           padding-bottom: 12px;
         }
 
+        .breakpoint-w-669 .masthead-nav-main__dropdown-item {
+          font-size: 14px;
+          font-size: 1.4rem;
+        }
+
         .masthead-nav-main__dropdown-item:last-child {
           padding-bottom: 0;
         }
