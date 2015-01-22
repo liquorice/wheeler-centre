@@ -51,10 +51,11 @@ FieldExternalVideo = React.createClass
     @disableInputs()
 
     $.ajax
-      url: "#{HeraclesAdmin.baseURL}api/sites/#{HeraclesAdmin.siteSlug}/fields/external_video/1"
-      type: 'put'
-      dataType: "json"
-      contentType: "application/json"
+      url: "#{HeraclesAdmin.baseURL}api/sites/#{HeraclesAdmin.siteSlug}/fields/external_video"
+      dataType: 'json'
+      contentType: 'application/json'
+      data:
+        url: _this.props.value
       success: (data) ->
         _this.setState
           button_value: 'Successfully loaded!'

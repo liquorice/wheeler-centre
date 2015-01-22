@@ -4,8 +4,10 @@ module Heracles
       module Fields
 
         class ExternalVideoController < Heracles::Admin::ApplicationController
-          def update
-            render json: {id: params[:id]}
+          def index
+            regex = /youtube.com.*(?:\/|v=)([^&$]+)/
+            id = params[:url].match(regex)[1]
+            render json: {id: id}
           end
         end
 
