@@ -146,6 +146,10 @@
       float: right;
     }
 
+    .breakpoint-tablet-wide .masthead-nav-secondary {
+      padding-top: 14px;
+    }
+
       .masthead-nav-secondary__item {
         padding-right: 30px;
       }
