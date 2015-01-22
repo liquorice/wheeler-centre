@@ -89,6 +89,11 @@
           padding: 14px;
         }
 
+        .breakpoint-tablet .masthead-nav-main__anchor {
+          font-size: 15px;
+          font-size: 1.5rem;
+        }
+
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
@@ -150,10 +155,13 @@
     }
 
     .breakpoint-tablet-wide .masthead-nav-secondary,
-    .breakpoint-tablet .masthead-nav-secondary,
-    .breakpoint-phone-wide .masthead-nav-secondary,
-    .breakpoint-phone .masthead-nav-secondary {
+    .breakpoint-tablet .masthead-nav-secondary  {
       padding-top: 14px;
+    }
+
+    .breakpoint-w-879 .masthead-nav-secondary {
+      clear: left;
+      float: none;
     }
 
       .masthead-nav-secondary__item {
