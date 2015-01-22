@@ -42,6 +42,10 @@
           margin-right: 12px;
         }
 
+        .breakpoint-w-879 .masthead-nav-main {
+          margin-bottom: 8px;
+        }
+
           /* Little border */
           .masthead-nav-main__item--break:before {
             content: "";
@@ -160,6 +164,7 @@
     }
 
     .breakpoint-w-879 .masthead-nav-secondary {
+      border-top: 1px solid rgba(255,255,255,0.2);
       clear: left;
       float: none;
     }
