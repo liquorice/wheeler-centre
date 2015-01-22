@@ -26,6 +26,10 @@
       font-smoothing: subpixel-antialiased;
     }
 
+    .breakpoint-w-879 .masthead-nav-main {
+      margin-bottom: 8px;
+    }
+
       .masthead-nav-main__item,
       .masthead-nav-secondary__item {
         float: left;
@@ -37,13 +41,15 @@
         }
 
         .breakpoint-tablet-wide .masthead-nav-main__item--break,
-        .breakpoint-tablet .masthead-nav-main__item--break {
+        .breakpoint-tablet .masthead-nav-main__item--break,
+        .breakpoint-phone-wide .masthead-nav-main__item--break  {
           padding-right: 12px;
           margin-right: 12px;
         }
 
-        .breakpoint-w-879 .masthead-nav-main {
-          margin-bottom: 8px;
+        .breakpoint-w-669 .masthead-nav-main__item--break {
+          padding-right: 10px;
+          margin-right: 10px;
         }
 
           /* Little border */
@@ -89,13 +95,21 @@
         }
 
         .breakpoint-tablet-wide .masthead-nav-main__anchor,
-        .breakpoint-tablet .masthead-nav-main__anchor {
+        .breakpoint-tablet .masthead-nav-main__anchor,
+        .breakpoint-phone-wide .masthead-nav-main__anchor  {
           padding: 14px;
         }
 
-        .breakpoint-tablet .masthead-nav-main__anchor {
+        .breakpoint-tablet .masthead-nav-main__anchor,
+        .breakpoint-phone-wide .masthead-nav-main__anchor  {
           font-size: 15px;
           font-size: 1.5rem;
+        }
+
+        .breakpoint-w-669 .masthead-nav-main__anchor {
+          font-size: 14px;
+          font-size: 1.4rem;
+          padding: 12px;
         }
 
     .masthead-nav-main__dropdown {
@@ -223,6 +237,8 @@
       width: 100%;
     }
 
-  .breakpoint-tablet .masthead__logo {
+  .breakpoint-tablet .masthead__logo,
+  .breakpoint-phone-wide .masthead__logo,
+  .breakpoint-phone .masthead__logo {
     margin-left: 0;
   }
