@@ -35,6 +35,12 @@
           margin-right: 16px;
           position: relative;
         }
+
+        .breakpoint-tablet-wide .masthead-nav-main__item--break {
+          padding-right: 12px;
+          margin-right: 12px;
+        }
+
           /* Little border */
           .masthead-nav-main__item--break:before {
             content: "";
@@ -75,6 +81,10 @@
         .masthead-nav-main__anchor:hover,
         .masthead-nav-main__anchor:focus {
           color: #fff;
+        }
+
+        .breakpoint-tablet-wide .masthead-nav-main__anchor {
+          padding: 14px;
         }
 
     .masthead-nav-main__dropdown {
@@ -189,3 +199,7 @@
       height: 100%;
       width: 100%;
     }
+
+  .breakpoint-tablet .masthead__logo {
+    margin-left: 0;
+  }
