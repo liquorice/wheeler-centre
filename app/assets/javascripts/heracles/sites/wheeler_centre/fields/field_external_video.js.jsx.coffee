@@ -52,6 +52,7 @@ FieldExternalVideo = React.createClass
 
     $.ajax
       url: "#{HeraclesAdmin.baseURL}api/sites/#{HeraclesAdmin.siteSlug}/fields/external_video/1"
+      type: 'put'
       dataType: "json"
       contentType: "application/json"
       success: (data) ->

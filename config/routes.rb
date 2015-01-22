@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       namespace :api do
         resources :sites do
           namespace :fields do
-            resources :external_video, only: [:show]
+            resources :external_video, only: [:update]
           end
         end
       end

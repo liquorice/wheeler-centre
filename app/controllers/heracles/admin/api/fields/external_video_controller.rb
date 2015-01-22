@@ -4,7 +4,7 @@ module Heracles
       module Fields
 
         class ExternalVideoController < Heracles::Admin::ApplicationController
-          def show
+          def update
             render json: {id: params[:id]}
           end
         end
