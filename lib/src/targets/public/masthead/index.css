@@ -22,19 +22,52 @@
     .masthead-nav-main {
       float: left;
       margin-left: -15px;
+      -webkit-font-smoothing: subpixel-antialiased;
+      font-smoothing: subpixel-antialiased;
+    }
+
+    .breakpoint-w-879 .masthead-nav-main {
+      margin-bottom: 8px;
     }
 
       .masthead-nav-main__item,
       .masthead-nav-secondary__item {
         float: left;
       }
+        .masthead-nav-main__item--break {
+          padding-right: 16px;
+          margin-right: 16px;
+          position: relative;
+        }
+
+        .breakpoint-tablet-wide .masthead-nav-main__item--break,
+        .breakpoint-tablet .masthead-nav-main__item--break,
+        .breakpoint-phone-wide .masthead-nav-main__item--break  {
+          padding-right: 12px;
+          margin-right: 12px;
+        }
+
+        .breakpoint-w-669 .masthead-nav-main__item--break {
+          padding-right: 10px;
+          margin-right: 10px;
+        }
+
+          /* Little border */
+          .masthead-nav-main__item--break:before {
+            content: "";
+            position: absolute;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            top: 15%;
+            bottom: 15%;
+            right: 0;
+          }
 
       .masthead-nav-main__item {
         position: relative;
       }
 
-      .masthead-nav-main__item--has-dropdown--hover,
-      .masthead-nav-main__item--has-dropdown:focus {
+      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
         background-color: var(--primary-color-darker);
       }
 
@@ -51,8 +84,8 @@
         .masthead-nav-main__anchor {
           color: var(--primary-color-lighter);
           display: inline-block;
-          font-size: 17px;
-          font-size: 1.7rem;
+          font-size: 16px;
+          font-size: 1.6rem;
           padding: 18px;
         }
 
@@ -61,12 +94,31 @@
           color: #fff;
         }
 
+        .breakpoint-tablet-wide .masthead-nav-main__anchor,
+        .breakpoint-tablet .masthead-nav-main__anchor,
+        .breakpoint-phone-wide .masthead-nav-main__anchor  {
+          padding: 14px;
+        }
+
+        .breakpoint-tablet .masthead-nav-main__anchor,
+        .breakpoint-phone-wide .masthead-nav-main__anchor  {
+          font-size: 15px;
+          font-size: 1.5rem;
+        }
+
+        .breakpoint-w-669 .masthead-nav-main__anchor {
+          font-size: 14px;
+          font-size: 1.4rem;
+          padding: 12px;
+        }
+
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
-      min-width: 460px;
+      min-width: 500px;
       padding: 30px 18px 20px;
       position: absolute;
+      z-index: 20;
     }
 
     .masthead-nav-main__dropdown-icon {
@@ -81,6 +133,9 @@
         list-style: none;
         padding-right: 60px;
       }
+        .masthead-nav-main__dropdown-list--half {
+          width: 50%;
+        }
 
       .masthead-nav-main__dropdown-list:last-child {
         padding-right: 0;
@@ -88,9 +143,14 @@
 
         .masthead-nav-main__dropdown-item {
           color: var(--primary-color-lighter);
-          font-size: 17px;
-          font-size: 1.7rem;
+          font-size: 15px;
+          font-size: 1.5rem;
           padding-bottom: 12px;
+        }
+
+        .breakpoint-w-669 .masthead-nav-main__dropdown-item {
+          font-size: 14px;
+          font-size: 1.4rem;
         }
 
         .masthead-nav-main__dropdown-item:last-child {
@@ -115,6 +175,17 @@
     .masthead-nav-secondary {
       padding-top: 18px;
       float: right;
+    }
+
+    .breakpoint-tablet-wide .masthead-nav-secondary,
+    .breakpoint-tablet .masthead-nav-secondary  {
+      padding-top: 14px;
+    }
+
+    .breakpoint-w-879 .masthead-nav-secondary {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      clear: left;
+      float: none;
     }
 
       .masthead-nav-secondary__item {
@@ -170,3 +241,9 @@
       height: 100%;
       width: 100%;
     }
+
+  .breakpoint-tablet .masthead__logo,
+  .breakpoint-phone-wide .masthead__logo,
+  .breakpoint-phone .masthead__logo {
+    margin-left: 0;
+  }

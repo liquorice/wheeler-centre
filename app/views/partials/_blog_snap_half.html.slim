@@ -10,13 +10,7 @@ a.blog-snap.blog-snap--half href=post.absolute_url
   - if image
     .blog-snap__hero
       .blog-snap__hero-inner
-        picture
-          erb:
-            <!--[if IE 9]><video style='display: none;'><![endif]-->
-          / source media="(min-width: 640px)" srcset=image.content_medium_url
-          erb:
-            <!--[if IE 9]></video><![endif]-->
-          img alt="Two angry lookin’ sheep" src=image.content_small_thumbnail_url
+        img alt="" src=image.content_small_thumbnail_url
       - if image.attribution.present?
         .blog-snap__hero-caption.caption
           p = image.attribution

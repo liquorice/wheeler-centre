@@ -31,6 +31,7 @@
 }
 
 html {
+  background-color: var(--primary-color);
   font-size: 62.5%;
 }
 
@@ -46,6 +47,13 @@ body {
 }
 
 @import "./copy";
+
+.quo {
+  margin-left: -0.28em;
+}
+.dquo {
+  margin-left: -0.5em;
+}
 
 /* Basic layout */
 
@@ -91,6 +99,9 @@ body {
   .block-link:hover {
     color: #222;
     text-decoration: underline;
+  }
+  .block-link em {
+    font-style: italic;
   }
 
 .section--normal {
@@ -139,6 +150,7 @@ body {
 @import "./footer";
 @import "./pagination";
 @import "./figure";
+@import "./pull-quote";
 @import "./sub-page-nav";
 @import "./video-player";
 @import "./subscribe";
