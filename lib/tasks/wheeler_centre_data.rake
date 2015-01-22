@@ -529,7 +529,7 @@ namespace :wheeler_centre do
   end
 
   desc "Migrate videos to Youtube"
-  task :migrate_videos, [:yml_file, :bucket_name, :video_config_file] => :environment do |task, args|
+   task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "video_migration/s3_util"
@@ -544,9 +544,16 @@ namespace :wheeler_centre do
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
     ec2_util = EC2Util.new(config_file: args[:video_config_file])
 
-    # TODO create as many instances as recordings
+    if args[:create_instances]
+      ec2_util.create_instances(10)
+    else
+      ec2_util.get_instances(10)
+    end
 
-    recordings.each do |recording|
+    recordings_for_migration = recordings.drop(args[:drop].to_i).take(args[:take].to_i)
+
+    recordings_for_migration.each_with_index do |recording, index|
+      puts (index)
       # Find Videos that match a given Recording's :recording_id
       videos = find_matching_videos(blueprint_videos, recording.fields[:recording_id].value)
 
@@ -562,14 +569,13 @@ namespace :wheeler_centre do
         if best_video["dest_filename"]
           # Find the file in the S3 Bucket
           public_url = s3_util.find_video(best_video["dest_filename"].to_s)
-          ec2_util.create_instance
-          ec2_util.create_scripts(best_video["dest_filename"].to_s, public_url, recording)
-          ec2_util.transfer_scripts
-          ec2_util.execute_scripts
-
-          youtube_url = ec2_util.get_youtube_url
+          ec2_util.create_scripts(index, best_video["dest_filename"].to_s, public_url, recording)
+          ec2_util.transfer_scripts(index)
+          ec2_util.execute_scripts(index)
+          youtube_url = ec2_util.get_youtube_url(index)
 
           migration_record = {
+            :index => index,
             :id => recording.id,
             :slug => recording.slug,
             :recording_id => recording.fields[:recording_id].value,
@@ -582,12 +588,9 @@ namespace :wheeler_centre do
 
           recording.fields[:url].value = youtube_url
           recording.save!
-
-          ec2_util.terminate_instance
         end
       end
     end
-
   end
 
   def find_matching_videos(data, recording_id)

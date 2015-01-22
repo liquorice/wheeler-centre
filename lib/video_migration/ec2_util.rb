@@ -65,146 +65,184 @@ class EC2Util
 		@private_key = "#{@path}/#{@key_name}.pem"
 
 		security_group = @ec2.security_groups.filter("group-name", @security_group_name).first
-		unless security_group.present?
+		unless security_group
 			security_group = @ec2.security_groups.create(@security_group_name)
 			security_group.authorize_ingress(:tcp, 22)
 		end
 
+		@instances = {}
 		list_instances
 	end
 
-	def create_instance
-		@instance = @ec2.instances.create(
+	def create_instances(number_of_instances)
+		number_of_instances.times do |i|
+			create_instance(i)
+		end
+
+		@instances.each_with_index do |instance, index|
+			instance = @ec2.instances[@instances[index]]
+
+			while instance.status == :pending
+				puts ("Sleeping for a bit")
+				sleep 10
+			end
+
+			if instance.status == :running
+				sleep 120
+				Net::SSH.start(instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
+					# capture all stderr and stdout output from a remote process
+					output = ssh.exec!("hostname")
+					ssh.open_channel do |channel|
+						channel.request_pty do |c, success|
+							raise "could not request pty" unless success
+					    if success
+					      command = "sudo yum install ruby-devel"
+					      c.exec(command)
+					    end
+
+							channel.on_data do |ch, data|
+					      puts "got stdout: #{data}"
+					      channel.send_data "yes\n"
+					    end
+
+					    channel.on_extended_data do |ch, type, data|
+					      puts "got stderr: #{data}"
+					    end
+
+					    channel.on_close do |ch|
+					      puts "channel is closing!"
+		    			end
+					  end
+					end
+					ssh.open_channel do |channel|
+						channel.request_pty do |c, success|
+							raise "could not request pty" unless success
+					    if success
+					      command = 'sudo yum groupinstall "Development Tools"'
+					      c.exec(command)
+					    end
+
+							channel.on_data do |ch, data|
+					      puts "got stdout: #{data}"
+					      channel.send_data "yes\n"
+					    end
+
+					    channel.on_extended_data do |ch, type, data|
+					      puts "got stderr: #{data}"
+					    end
+
+					    channel.on_close do |ch|
+					      puts "channel is closing!"
+		    			end
+					  end
+					end
+
+					# Install gems
+					ssh.exec("gem install google-api-client")
+					ssh.exec("gem install trollop")
+					ssh.exec("gem install thin")
+					ssh.exec("gem install launchy")
+
+					puts (output)
+
+				end
+			end
+		end
+	end
+
+	def create_instance(index)
+		instance = @ec2.instances.create(
 			:image_id => 'ami-71f7954b',
 			:iam_instance_profile => @instance_profile_name,
 			:security_groups => @security_group_name,
 			:key_pair => @ec2.key_pairs[@key_name])
+
+		@instances[index] = instance.id
 		puts ("Created instance")
 	end
 
-	def create_scripts(file_name, public_url, recording)
+	def get_instances(number_of_instances)
+		running_instances = @ec2.instances.select{ |instance| instance.status == :running }
+		puts (running_instances)
+		running_instances.each_with_index do |instance, index|
+			@instances[index] = instance.id
+		end
+
+	end
+
+	def create_scripts(index, file_name, public_url, recording)
+		# Make a directory for this instance
+		Dir.mkdir("#{@path}/migrations/#{index}")
+
+		# Strip HTML from the description
 		description = Nokogiri::HTML(recording.fields[:description].value).text
-		puts (description)
+
 		# create video_data.json
-		File.open("#{@path}/video_data.json", "w", 0600) do |file|
+		File.open("#{@path}/migrations/#{index}/video_data.json", "w", 0600) do |file|
 			json = JSON.dump({
 				:file_path => file_name,
 				:title => recording.title,
-				:description => description, # TODO strip html
+				:description => description,
 				:category_id => "22", # People and blog category
 				:keywords => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
-				:privacy_status => "public"
+				:privacy_status => "public",
+				:recording_date => recording.fields[:recording_date].value.iso8601
 				})
 			file.write(json)
-			puts ("Created video_data.json")
 		end
-
-		puts (public_url)
 
 		unless public_url
 			public_url = "http://download.wheelercentre.com/#{file_name}"
 		end
 
-		puts (public_url)
-
 		script = """
 			# Fetch the asset
 			wget #{public_url}
-
-			# Install gems
-			gem install google-api-client
-			gem install trollop
-			gem install thin
-			gem install launchy
-
 			# Run the video migration
 			ruby video_migration_util.rb
 		"""
-		File.open("#{@path}/installation.sh", "w", 0600) do |file|
+
+		File.open("#{@path}/migrations/#{index}/installation.sh", "w", 0600) do |file|
 			file.write(script)
-			puts ("Created installation script")
+		end
+
+		puts ("Created scripts")
+
+	end
+
+	def transfer_scripts(index)
+		instance = @ec2.instances[@instances[index]]
+		puts ("Transferring scripts")
+		puts (@instances)
+		puts (instance)
+		Net::SSH.start(instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
+			ssh.scp.upload!("#{@path}/migrations/#{index}/installation.sh", ".", :ssh => @private_key )
+			ssh.scp.upload!("#{@path}/video_migration_util.rb", ".", :ssh => @private_key)
+			ssh.scp.upload!("#{@path}/oauth_util.rb", ".", :ssh => @private_key)
+			ssh.scp.upload!("#{@path}/client_secrets.json", ".", :ssh => @private_key)
+			ssh.scp.upload!("#{@path}/credentials_file.json", ".", :ssh => @private_key)
+			ssh.scp.upload!("#{@path}/migrations/#{index}/video_data.json", ".", :ssh => @private_key)
+			ssh.exec("rm -rf response_data.json")
+			puts ("Uploaded all files")
 		end
 	end
 
-	def transfer_scripts
-		while @instance.status == :pending
-			puts ("Sleeping for a bit")
-			sleep 10
-		end
-
-		if @instance.status == :running
-			sleep 100
-			puts ("Transferring scripts")
-			Net::SSH.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
-				ssh.scp.upload!("#{@path}/installation.sh", ".", :ssh => @private_key )
-				ssh.scp.upload!("#{@path}/video_migration_util.rb", ".", :ssh => @private_key)
-				ssh.scp.upload!("#{@path}/oauth_util.rb", ".", :ssh => @private_key)
-				ssh.scp.upload!("#{@path}/client_secrets.json", ".", :ssh => @private_key)
-				ssh.scp.upload!("#{@path}/credentials_file.json", ".", :ssh => @private_key)
-				ssh.scp.upload!("#{@path}/video_data.json", ".", :ssh => @private_key)
-				puts ("Uploaded all files")
-			end
-		end
-	end
-
-	def execute_scripts
-		Net::SSH.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
+	def execute_scripts(index)
+		instance = @ec2.instances[@instances[index]]
+		Net::SSH.start(instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
 			# capture all stderr and stdout output from a remote process
 			output = ssh.exec!("hostname")
-			ssh.open_channel do |channel|
-				channel.request_pty do |c, success|
-					raise "could not request pty" unless success
-			    if success
-			      command = "sudo yum install ruby-devel"
-			      c.exec(command)
-			    end
-
-					channel.on_data do |ch, data|
-			      puts "got stdout: #{data}"
-			      channel.send_data "yes\n"
-			    end
-
-			    channel.on_extended_data do |ch, type, data|
-			      puts "got stderr: #{data}"
-			    end
-
-			    channel.on_close do |ch|
-			      puts "channel is closing!"
-    			end
-			  end
-			end
-			ssh.open_channel do |channel|
-				channel.request_pty do |c, success|
-					raise "could not request pty" unless success
-			    if success
-			      command = 'sudo yum groupinstall "Development Tools"'
-			      c.exec(command)
-			    end
-
-					channel.on_data do |ch, data|
-			      puts "got stdout: #{data}"
-			      channel.send_data "yes\n"
-			    end
-
-			    channel.on_extended_data do |ch, type, data|
-			      puts "got stderr: #{data}"
-			    end
-
-			    channel.on_close do |ch|
-			      puts "channel is closing!"
-    			end
-			  end
-			end
-
 			ssh.exec("bash installation.sh")
 			puts (output)
 		end
 	end
 
-	def get_youtube_id
-		response_data = "#{@path}/response_data.json"
-		Net::SCP.start(@instance.dns_name, "ec2-user", :keys => @private_key) do |scp|
-			scp.download!("response_data.json", response_data, :ssh => @private_key)
+	def get_youtube_id(index)
+		instance = @ec2.instances[@instances[index]]
+		response_data = "#{@path}/migrations/#{index}/response_data.json"
+
+		Net::SCP.start(instance.dns_name, "ec2-user", :keys => @private_key) do |scp|
+			scp.download!("./response_data.json", response_data, :ssh => @private_key)
 		end
 
 		if File.exist? response_data
@@ -216,15 +254,16 @@ class EC2Util
 		end
 	end
 
-	def get_youtube_url
-		id = get_youtube_id
+	def get_youtube_url(index)
+		id = get_youtube_id(index)
 		if id.present?
 			"http://www.youtube.com/watch?v=" + id.to_s
 		end
 	end
 
-	def terminate_instance
-		@instance.terminate
+	def terminate_instance(index)
+		puts @instances[index]
+		@ec2.instances[@instances[index]].terminate
 	end
 
 	def stop_instances
