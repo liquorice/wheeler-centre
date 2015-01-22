@@ -62,6 +62,9 @@ gem "rdiscount"
 gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
 gem "trollop"
 gem "aws-sdk"
+gem "net-scp"
+gem "thin"
+gem "nokogiri"
 
 group :production do
   gem "rails_12factor"

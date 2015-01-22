@@ -667,24 +667,20 @@ namespace :wheeler_centre do
   # Usage:
   # rake wheeler_centre:import_blueprint_recordings["/Users/josephinehall/Development/wheeler-centre/backup.yml","video.wheelercentre.com","/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml"]
   desc "Import legacy Blueprint 'CenvidPost' content to be Recordings"
-  task :import_blueprint_recordings, [:yml_file, :bucket_name, :video_config_file] => :environment do |task, args|
+  task :import_blueprint_recordings, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
     require "video_migration/s3_util"
-    require "video_migration/video_migration_util"
+    require "video_migration/ec2_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
-    blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
-    # encoding_formats = find_unique_encoding_formats(blueprint_videos)
 
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
-    s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
-    video_migration_util = VideoMigrationUtil.new(config_file: args[:video_config_file])
 
     blueprint_video_posts.each do |blueprint_video_post|
       if blueprint_video_post["title"].present?
@@ -697,24 +693,6 @@ namespace :wheeler_centre do
         heracles_recording.fields[:short_title].value = blueprint_video_post["title"]
         heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: false)
         heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
-
-        # Find Videos that match this CenvidPost
-        videos = find_matching_videos(blueprint_video_post, blueprint_videos)
-        if videos.present?
-          # Find the one which has the best encoding format
-          all_formats = find_unique_encoding_formats(videos)
-          # TODO Find the best format - for the moment just take the first one
-          best_video = videos.select { |r| r["encoding_format"].to_s == all_formats.first.to_s }.first
-          if best_video["dest_filename"].to_s.present?
-            # Find the file in the S3 Bucket
-            public_url = s3_util.find_video(best_video["dest_filename"].to_s)
-            # Upload it to youtube, setting some data on it so we know it's associated with this Recording
-            video_migration_util.upload_video(public_url.to_s, blueprint_video_post)
-            # TODO Set the uploaded youtube video on this Recording.
-          end
-
-        end
-
         # # TODO :audio
         # # TODO :promo_image
         # # TODO check :publish_at?
@@ -728,8 +706,91 @@ namespace :wheeler_centre do
     end
   end
 
-  def find_matching_videos(post, data)
-    data.select { |r| r["post_id"].to_i == post["id"].to_i }
+  desc "Migrate videos to Youtube"
+   task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "video_migration/s3_util"
+    require "video_migration/ec2_util"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+
+    blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
+    recordings = Heracles::Page.of_type("recording")
+
+    s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
+    ec2_util = EC2Util.new(config_file: args[:video_config_file])
+
+    if args[:create_instances]
+      ec2_util.create_instances(10)
+    else
+      ec2_util.get_instances(10)
+    end
+
+    recordings_for_migration = recordings.drop(args[:drop].to_i).take(args[:take].to_i)
+
+    recordings_for_migration.each_with_index do |recording, index|
+      puts (index)
+      # Find Videos that match a given Recording's :recording_id
+      videos = find_matching_videos(blueprint_videos, recording.fields[:recording_id].value)
+
+      if videos.present?
+        # Order the video by their encoding formats
+        ordered_videos = encoding_formats.map! do |format|
+          videos.find { |r| r["encoding_format"].to_s == format.to_s }
+        end
+        best_video = ordered_videos.find { |x| not x.nil? }
+
+        puts (best_video)
+
+        if best_video["dest_filename"]
+          # Find the file in the S3 Bucket
+          public_url = s3_util.find_video(best_video["dest_filename"].to_s)
+          ec2_util.create_scripts(index, best_video["dest_filename"].to_s, public_url, recording)
+          ec2_util.transfer_scripts(index)
+          ec2_util.execute_scripts(index)
+          youtube_url = ec2_util.get_youtube_url(index)
+
+          migration_record = {
+            :index => index,
+            :id => recording.id,
+            :slug => recording.slug,
+            :recording_id => recording.fields[:recording_id].value,
+            :youtube_url => youtube_url
+          }
+
+          File.open("youtube_migrations.yml", "a") do |file|
+            file << migration_record.to_yaml
+          end
+
+          recording.fields[:url].value = youtube_url
+          recording.save!
+        end
+      end
+    end
+  end
+
+  def find_matching_videos(data, recording_id)
+    data.select { |r| r["post_id"].to_i == recording_id.to_i }
+  end
+
+  def encoding_formats
+    [
+      "Flash MP4 432p CBWI 800",
+      "Flash MP4 432p CBWI 400",
+      "Flash MP4 432p CBWI 200",
+      "Flash MP4 432p CBWI",
+      "Flash MP4 288p CBWI 800",
+      "Flash MP4 288p CBWI 600",
+      "Flash MP4 288p CBWI 400",
+      "Flash MP4 288p CBWI 200",
+      "Flash MP4 288p CBWI",
+      "Flash Video 288p CBWI",
+      "Flash MP4 288p CBWI TEST",
+      "Flash Video 288p CBWI TEST",
+      "MP3 CBWI",
+    ]
   end
 
   def find_matching_staff_member(presenter, data)
