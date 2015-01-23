@@ -6,13 +6,21 @@ module Heracles
         def self.config
           {
             fields: [
+              # Image
+              {name: :hero_image, type: :asset, asset_file_type: :image},
+              # Content
+              {name: :content_info, type: :info, text: "<hr/>"},
               {name: :summary, type: :content},
               {name: :intro, label: "Introduction", type: :content},
               {name: :body, label: "Content", type: :content, hint: "Main body content"},
               {name: :meta, type: :content, hint: "Additional information about this post. Shows after the body."},
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              # Author
+              {name: :author_info, type: :info, text: "<hr/>"},
               {name: :guest_post, type: :boolean, question_text: "Is this a guest post?"},
               {name: :authors, type: :associated_pages, page_type: :person},
+              # Extra
+              {name: :extra_info, type: :info, text: "<hr/>"},
+              {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
