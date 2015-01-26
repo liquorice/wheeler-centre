@@ -1093,7 +1093,6 @@ namespace :wheeler_centre do
     id = dailies_root.first["id"].to_i
 
     blueprint_dailies_articles = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
-    # blueprint_dailies_quotes   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumQuote && r["page_id"].to_i == id }
     # blueprint_dailies_images   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumImage && r["page_id"].to_i == id }
     # blueprint_dailies_widgets  = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"].to_i == id }
 
@@ -1149,6 +1148,36 @@ namespace :wheeler_centre do
         heracles_blog_post.save!
       end
     end
+
+    # Import the quotes
+    blueprint_dailies_quotes   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumQuote && r["page_id"].to_i == id }
+    blueprint_dailies_quotes.each do |blueprint_daily|
+      attribution = blueprint_daily["content"].to_s
+      quote = blueprint_daily["title"].to_s
+      heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
+      unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
+      heracles_blog_post.published = true
+      heracles_blog_post.slug = blueprint_daily["slug"]
+      heracles_blog_post.title = replace_entities(attribution)
+
+      summary = "<blockquote>#{quote}</blockquote><p>#{attribution}</p>"
+      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary, subject: blueprint_daily, assetify: false)
+      heracles_blog_post.fields[:intro].value = ""
+
+      # Build insertable for body
+      body = '<div contenteditable="false" insertable="pull_quote" value="{&quot;quote&quot;:&quot;'+clean_content(quote)+'&quot;,&quot;attribution&quot;:&quot;'+clean_content(attribution)+'&quot;}"></div>'
+      heracles_blog_post.fields[:body].value = body
+
+      heracles_blog_post.tag_list.add(["quote"])
+
+      heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      heracles_blog_post.parent = parent
+      heracles_blog_post.collection = collection
+      tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
+      apply_tags_to(heracles_blog_post, tags_for_post)
+      heracles_blog_post.save!
+    end
+
   end
 
   desc "Import blueprint types that map to Page"
