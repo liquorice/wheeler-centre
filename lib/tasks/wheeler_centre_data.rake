@@ -1,5 +1,695 @@
 # Tag helpers
-def find_topic_page_by_slug(slug)
+def blueprint_tag_to_topic_url_mappings
+  [
+    { slug: "", url: "topics"},
+
+    { slug: "books", url: "topics/books-reading-and-writing"},
+    { slug: "reading", url: "topics/books-reading-and-writing"},
+    { slug: "writing", url: "topics/books-reading-and-writing"},
+    { slug: "writers", url: "topics/books-reading-and-writing"},
+    { slug: "authors", url: "topics/books-reading-and-writing"},
+
+    { slug: "fiction", url: "topics/books-reading-and-writing/fiction"},
+    { slug: "literature", url: "topics/books-reading-and-writing/fiction"},
+    { slug: "short-stories", url: "topics/books-reading-and-writing/fiction"},
+
+    { slug: "classics", url: "topics/books-reading-and-writing/fiction/classics"},
+    { slug: "texts in the city", url: "topics/books-reading-and-writing/fiction/classics"},
+    { slug: "shakespeare", url: "topics/books-reading-and-writing/fiction/classics"},
+
+    { slug: "crime", url: "topics/books-reading-and-writing/fiction/crime-and-pulp"},
+    { slug: "fiction", url: "topics/books-reading-and-writing/fiction/crime-and-pulp"},
+    { slug: "pulp", url: "topics/books-reading-and-writing/fiction/crime-and-pulp"},
+
+    { slug: "erotica", url: "topics/books-reading-and-writing/fiction/erotica"},
+    { slug: "erotic-fan-fiction", url: "topics/books-reading-and-writing/fiction/erotica"},
+
+    { slug: "creative-nonfiction", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "nonfiction", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "non-fiction", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "nonfictionow", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "journalism", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "essay", url: "topics/books-reading-and-writing/non-fiction"},
+    { slug: "essays", url: "topics/books-reading-and-writing/non-fiction"},
+
+    { slug: "autobiography", url: "topics/books-reading-and-writing/non-fiction/biography-and-memoir"},
+    { slug: "memoir", url: "topics/books-reading-and-writing/non-fiction/biography-and-memoir"},
+    { slug: "biography", url: "topics/books-reading-and-writing/non-fiction/biography-and-memoir"},
+    { slug: "storytelling", url: "topics/books-reading-and-writing/non-fiction/biography-and-memoir"},
+    { slug: "epic-fail", url: "topics/books-reading-and-writing/non-fiction/biography-and-memoir"},
+
+
+    { slug: "true-crime", url: "topics/books-reading-and-writing/non-fiction/crime"},
+
+    { slug: "childrens", url: "topics/books-reading-and-writing/children-s-books"},
+    { slug: "childrens-book-festival", url: "topics/books-reading-and-writing/children-s-books"},
+    { slug: "100-story-building", url: "topics/books-reading-and-writing/children-s-books"},
+
+    { slug: "poems", url: "topics/books-reading-and-writing/poetry"},
+    { slug: "poetry", url: "topics/books-reading-and-writing/poetry"},
+    { slug: "australian-poetry", url: "topics/books-reading-and-writing/poetry"},
+    { slug: "slam-poetry", url: "topics/books-reading-and-writing/poetry"},
+    { slug: "spoken-word", url: "topics/books-reading-and-writing/poetry"},
+    { slug: "oral-storytelling", url: "topics/books-reading-and-writing/poetry"},
+
+    { slug: "graphic", url: "topics/books-reading-and-writing/graphic-novels-and-comics"},
+    { slug: "comics", url: "topics/books-reading-and-writing/graphic-novels-and-comics"},
+    { slug: "graphic novels", url: "topics/books-reading-and-writing/graphic-novels-and-comics"},
+    { slug: "illustration", url: "topics/books-reading-and-writing/graphic-novels-and-comics"},
+
+    { slug: "criticism", url: "topics/books-reading-and-writing/criticism"},
+    { slug: "critical-failure", url: "topics/books-reading-and-writing/criticism"},
+    { slug: "criticism-now", url: "topics/books-reading-and-writing/criticism"},
+    { slug: "the-long-view", url: "topics/books-reading-and-writing/criticism"},
+
+    { slug: "australian-literature", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "indigenous", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "australian-literature 101", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "australian-literature 102", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "australian-poetry", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "australian-writers", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "australian-love stories", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "express-media", url: "topics/books-reading-and-writing/australian-stories"},
+    { slug: "country-sky water fire", url: "topics/books-reading-and-writing/australian-stories"},
+
+    { slug: "publishing", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "blogging", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "book design", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "editing", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "editors", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "publishing", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+    { slug: "ebooks", url: "topics/books-reading-and-writing/editing-publishing-and-book-design"},
+
+    { slug: "literary-journals", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "journals", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "magazines", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "meanland", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "overland", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "meanjin", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "voiceworks", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "express-media", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "mcsweeneys", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "lifted-brow", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "zines", url: "topics/books-reading-and-writing/journals-and-magazines"},
+    { slug: "island", url: "topics/books-reading-and-writing/journals-and-magazines"},
+
+    { slug: "emerging", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+    { slug: "emerging-writers-festival", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+    { slug: "digital-writers-festival", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+    { slug: "the-next-big-thing", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+    { slug: "debut-mondays", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+    { slug: "now-read-this", url: "topics/books-reading-and-writing/new-and-emerging-writers"},
+
+    { slug: "bookshops", url: "topics/books-reading-and-writing/bookshops"},
+    { slug: "bookselling", url: "topics/books-reading-and-writing/bookshops"},
+    { slug: "ebooks", url: "topics/books-reading-and-writing/bookshops"},
+
+    { slug: "prizes", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "awards", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "victorian-premier-s-literary-awards", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "victorian-premiers-literary-awards", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "man-booker-prize", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "stella-prize", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "miles-franklin", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "vogel", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "walkleys", url: "topics/books-reading-and-writing/awards-and-prizes"},
+    { slug: "literary-awards", url: "topics/books-reading-and-writing/awards-and-prizes"},
+
+    { slug: "language", url: "topics/books-reading-and-writing/words-and-language"},
+    { slug: "dictionary", url: "topics/books-reading-and-writing/words-and-language"},
+    { slug: "linguistics", url: "topics/books-reading-and-writing/words-and-language"},
+    { slug: "translation", url: "topics/books-reading-and-writing/words-and-language"},
+
+    { slug: "funding", url: "topics/books-reading-and-writing/funding"},
+    { slug: "fundraising", url: "topics/books-reading-and-writing/funding"},
+    { slug: "philanthropy", url: "topics/books-reading-and-writing/funding"},
+
+    { slug: "creativity", url: "topics/books-reading-and-writing/creativity"},
+    { slug: "working-with-words", url: "topics/books-reading-and-writing/creativity"},
+
+
+    { slug: "breakfast-club", url: "topics/visual-art-and-design"},
+    { slug: "art-and-us", url: "topics/visual-art-and-design"},
+    { slug: "street-art", url: "topics/visual-art-and-design"},
+    { slug: "australian-art", url: "topics/visual-art-and-design"},
+
+    { slug: "art-history", url: "topics/visual-art-and-design/art/art-history"},
+
+    { slug: "urban", url: "topics/visual-art-and-design/urban-design"},
+    { slug: "reading-the-city", url: "topics/visual-art-and-design/urban-design"},
+
+    { slug: "graphic", url: "topics/visual-art-and-design/graphic-design"},
+    { slug: "graphic-design", url: "topics/visual-art-and-design/graphic-design"},
+    { slug: "book-design", url: "topics/visual-art-and-design/graphic-design"},
+    { slug: "design", url: "topics/visual-art-and-design/graphic-design"},
+
+    { slug: "funding", url: "topics/visual-art-and-design/funding"},
+    { slug: "fundraising", url: "topics/visual-art-and-design/funding"},
+    { slug: "philanthropy", url: "topics/visual-art-and-design/funding"},
+
+    { slug: "pop-culture", url: "topics/performing-arts-and-pop-culture"},
+
+    { slug: "culture", url: "topics/performing-arts-and-pop-culture"},
+    { slug: "festival-of-live-art", url: "topics/performing-arts-and-pop-culture"},
+    { slug: "celebrity", url: "topics/performing-arts-and-pop-culture"},
+    { slug: "show-of-the-year", url: "topics/performing-arts-and-pop-culture"},
+    { slug: "myth", url: "topics/performing-arts-and-pop-culture"},
+
+    { slug: "music", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "jazz", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "jazzland", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "melbourne-international-jazz-festival", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "words-and-music", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "opera", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "the-ring-festival", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "disco", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "techno", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "rock-and-roll", url: "topics/performing-arts-and-pop-culture/music"},
+    { slug: "songwriting", url: "topics/performing-arts-and-pop-culture/music"},
+
+    { slug: "theatre", url: "topics/performing-arts-and-pop-culture/theatre"},
+    { slug: "plays", url: "topics/performing-arts-and-pop-culture/theatre"},
+    { slug: "drama", url: "topics/performing-arts-and-pop-culture/theatre"},
+
+    { slug: "tv", url: "topics/performing-arts-and-pop-culture/tv"},
+    { slug: "television", url: "topics/performing-arts-and-pop-culture/tv"},
+    { slug: "australian-tv", url: "topics/performing-arts-and-pop-culture/tv"},
+
+    { slug: "sport", url: "topics/performing-arts-and-pop-culture/sport"},
+    { slug: "afl", url: "topics/performing-arts-and-pop-culture/sport"},
+    { slug: "cricket", url: "topics/performing-arts-and-pop-culture/sport"},
+
+    { slug: "gaming", url: "topics/performing-arts-and-pop-culture/games"},
+
+    { slug: "eavesdropping-on-artists", url: "topics/performing-arts-and-pop-culture/creativity"},
+
+    { slug: "television", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "tv", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "film", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "radio", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "advertising", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "newspapers", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "publishing", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "magazines", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "literary-journals", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "journals", url: "topics/performing-arts-and-pop-culture/media"},
+    { slug: "new-news", url: "topics/performing-arts-and-pop-culture/media"},
+
+    { slug: "society", url: "topics/history-politics-and-current-affairs"},
+    { slug: "intelligence-squared-debates", url: "topics/history-politics-and-current-affairs"},
+
+    { slug: "policy", url: "topics/history-politics-and-current-affairs/australian-politics"},
+    { slug: "the-fifth-estate", url: "topics/history-politics-and-current-affairs/australian-politics"},
+
+    { slug: "history", url: "topics/history-politics-and-current-affairs/history"},
+    { slug: "australian-history", url: "topics/history-politics-and-current-affairs/history"},
+
+    { slug: "war", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+    { slug: "military", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+    { slug: "army", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+    { slug: "navy", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+    { slug: "defence", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+    { slug: "terrorism", url: "topics/history-politics-and-current-affairs/defence-military-and-war"},
+
+    { slug: "social-enterprise", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "boycott", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "gay-rights", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "animal-rights", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "human-rights", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "dissent", url: "topics/history-politics-and-current-affairs/activism"},
+    { slug: "trade-unions", url: "topics/history-politics-and-current-affairs/activism"},
+
+    { slug: "international-relations", url: "topics/history-politics-and-current-affairs/international-relations-and-diplomacy"},
+    { slug: "foreign-affairs", url: "topics/history-politics-and-current-affairs/international-relations-and-diplomacy"},
+    { slug: "diplomacy", url: "topics/history-politics-and-current-affairs/international-relations-and-diplomacy"},
+    { slug: "globalisation", url: "topics/history-politics-and-current-affairs/international-relations-and-diplomacy"},
+    { slug: "terrorism", url: "topics/history-politics-and-current-affairs/international-relations-and-diplomacy"},
+
+    { slug: "australian-politics", url: "topics/history-politics-and-current-affairs/government"},
+    { slug: "politics", url: "topics/history-politics-and-current-affairs/government"},
+    { slug: "policy", url: "topics/history-politics-and-current-affairs/government"},
+
+    { slug: "gender", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "sex", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "feminism", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "men", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "women", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "transgender", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "intersex", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "middlesex-queer-week", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "men-overboard", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "let-s-talk-about-sex", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "sexuality", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "sex-week", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "queer", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+    { slug: "gay-rights", url: "topics/history-politics-and-current-affairs/sexual-and-gender-politics"},
+
+    { slug: "speech", url: "topics/history-politics-and-current-affairs/speech-and-oration"},
+    { slug: "oration", url: "topics/history-politics-and-current-affairs/speech-and-oration"},
+
+    { slug: "society", url: "topics/free-speech-human-rights-and-social-issues"},
+
+    { slug: "freedom-of-speech", url: "topics/free-speech-human-rights-and-social-issues/freedom-of-speech-and-censorship"},
+    { slug: "censorship", url: "topics/free-speech-human-rights-and-social-issues/freedom-of-speech-and-censorship"},
+
+    { slug: "social-justice", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "social-enterprise", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "culture", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "violence", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "addiction", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "poverty", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "wealth", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+    { slug: "development", url: "topics/free-speech-human-rights-and-social-issues/social-justice"},
+
+    { slug: "human-rights", url: "topics/free-speech-human-rights-and-social-issues/human-rights"},
+    { slug: "justice", url: "topics/free-speech-human-rights-and-social-issues/human-rights"},
+
+    { slug: "security", url: "topics/free-speech-human-rights-and-social-issues/privacy"},
+    { slug: "surveillance", url: "topics/free-speech-human-rights-and-social-issues/privacy"},
+    { slug: "espionage", url: "topics/free-speech-human-rights-and-social-issues/privacy"},
+    { slug: "encryption", url: "topics/free-speech-human-rights-and-social-issues/privacy"},
+    { slug: "terrorism", url: "topics/free-speech-human-rights-and-social-issues/privacy"},
+
+    { slug: "social-enterprise", url: "topics/free-speech-human-rights-and-social-issues/activism"},
+    { slug: "boycott", url: "topics/free-speech-human-rights-and-social-issues/activism"},
+    { slug: "dissent", url: "topics/free-speech-human-rights-and-social-issues/activism"},
+
+    { slug: "race", url: "topics/race-religion-and-identity"},
+    { slug: "racism", url: "topics/race-religion-and-identity"},
+    { slug: "multiculturalism", url: "topics/race-religion-and-identity"},
+
+    { slug: "a-question-of-identity", url: "topics/race-religion-and-identity/identity"},
+    { slug: "anthropology", url: "topics/race-religion-and-identity/identity"},
+
+    { slug: "theology", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "faith-and-culture", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "religion", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "christianity", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "islam", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "catholicism", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "hinduism", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "sikhism", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "judaism", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "spirituality", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "animism", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "muslim", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+    { slug: "interfaith", url: "topics/race-religion-and-identity/faith-religion-and-spirituality"},
+
+    { slug: "interfaith", url: "topics/race-religion-and-identity/diversity"},
+    { slug: "queer", url: "topics/race-religion-and-identity/diversity"},
+    { slug: "racism", url: "topics/race-religion-and-identity/diversity"},
+
+    { slug: "young-adults", url: "topics/race-religion-and-identity/young-people"},
+    { slug: "youth", url: "topics/race-religion-and-identity/young-people"},
+
+    { slug: "immigration", url: "topics/race-religion-and-identity/migration"},
+    { slug: "asylum-seekers", url: "topics/race-religion-and-identity/migration"},
+
+    { slug: "new-south-wales", url: "topics/race-religion-and-identity/australia"},
+    { slug: "victoria", url: "topics/race-religion-and-identity/australia"},
+    { slug: "western-australia", url: "topics/race-religion-and-identity/australia"},
+    { slug: "queensland", url: "topics/race-religion-and-identity/australia"},
+    { slug: "brisbane", url: "topics/race-religion-and-identity/australia"},
+    { slug: "melbourne", url: "topics/race-religion-and-identity/australia"},
+    { slug: "sydney", url: "topics/race-religion-and-identity/australia"},
+    { slug: "darwin", url: "topics/race-religion-and-identity/australia"},
+    { slug: "northern-territory", url: "topics/race-religion-and-identity/australia"},
+    { slug: "hobart", url: "topics/race-religion-and-identity/australia"},
+    { slug: "geelong", url: "topics/race-religion-and-identity/australia"},
+    { slug: "sale", url: "topics/race-religion-and-identity/australia"},
+    { slug: "mildura", url: "topics/race-religion-and-identity/australia"},
+    { slug: "frankston", url: "topics/race-religion-and-identity/australia"},
+    { slug: "aireys-inlet", url: "topics/race-religion-and-identity/australia"},
+    { slug: "ballarat", url: "topics/race-religion-and-identity/australia"},
+    { slug: "bendigo", url: "topics/race-religion-and-identity/australia"},
+    { slug: "south-australia", url: "topics/race-religion-and-identity/australia"},
+    { slug: "adelaide", url: "topics/race-religion-and-identity/australia"},
+    { slug: "perth", url: "topics/race-religion-and-identity/australia"},
+    { slug: "australian-politics", url: "topics/race-religion-and-identity/australia"},
+    { slug: "australian-tv", url: "topics/race-religion-and-identity/australia"},
+    { slug: "australian-literature", url: "topics/race-religion-and-identity/australia"},
+    { slug: "indigenous", url: "topics/race-religion-and-identity/australia"},
+    { slug: "country-sky-water-fire", url: "topics/race-religion-and-identity/australia"},
+
+    { slug: "africa", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "egypt", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "liberia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "libya", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "arab-spring", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "arab", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "morocco", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "south-africa", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "zimbabwe", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "zambia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "kenya", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "ethiopia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "sudan", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "african-union", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "ethiopia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "somalia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "pakistan", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "iran", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "iraq", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "yemen", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "saudi-arabia", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "syria", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+    { slug: "turkey", url: "topics/race-religion-and-identity/africa-and-middle-east"},
+
+    { slug: "china", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "japan", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "korea", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "south-korea", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "north-korea", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "philippines", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "thailand", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "singapore", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "malaysia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "asia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "indonesia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "india", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "pakistan", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "tibet", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "taiwan", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "hong-kong", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "cambodia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "vietnam", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "laos", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "myanmar", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "bangladesh", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "sri-lanka", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "pacific", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "pacific-islands", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "new-zealand", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "tonga", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "solomon-islands", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "vanuatu", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "fiji", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "new-caledonia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "samoa", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "papua-new-guinea", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "timor", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "east-timor", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "micronesia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "melanesia", url: "topics/race-religion-and-identity/asia-and-pacific"},
+    { slug: "nauru", url: "topics/race-religion-and-identity/asia-and-pacific"},
+
+    { slug: "france", url: "topics/race-religion-and-identity/europe"},
+    { slug: "england", url: "topics/race-religion-and-identity/europe"},
+    { slug: "scotland", url: "topics/race-religion-and-identity/europe"},
+    { slug: "ireland", url: "topics/race-religion-and-identity/europe"},
+    { slug: "germany", url: "topics/race-religion-and-identity/europe"},
+    { slug: "italy", url: "topics/race-religion-and-identity/europe"},
+    { slug: "european union", url: "topics/race-religion-and-identity/europe"},
+    { slug: "portugal", url: "topics/race-religion-and-identity/europe"},
+    { slug: "spain", url: "topics/race-religion-and-identity/europe"},
+    { slug: "switzerland", url: "topics/race-religion-and-identity/europe"},
+    { slug: "austria", url: "topics/race-religion-and-identity/europe"},
+    { slug: "greece", url: "topics/race-religion-and-identity/europe"},
+    { slug: "poland", url: "topics/race-religion-and-identity/europe"},
+    { slug: "uk", url: "topics/race-religion-and-identity/europe"},
+    { slug: "united kingdom", url: "topics/race-religion-and-identity/europe"},
+    { slug: "russia", url: "topics/race-religion-and-identity/europe"},
+    { slug: "paris", url: "topics/race-religion-and-identity/europe"},
+    { slug: "london", url: "topics/race-religion-and-identity/europe"},
+    { slug: "berlin", url: "topics/race-religion-and-identity/europe"},
+
+    { slug: "south america", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "north america", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "america", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "canada", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "usa", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "united states of america", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "mexico", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "central america", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "new york", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "chicago", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "los angeles", url: "topics/race-religion-and-identity/the-americas"},
+    { slug: "boston", url: "topics/race-religion-and-identity/the-americas"},
+
+    { slug: "sex", url: "topics/sex-and-gender/sex-and-relationships"},
+    { slug: "let-s-talk-about-sex", url: "topics/sex-and-gender/sex-and-relationships"},
+    { slug: "erotica", url: "topics/sex-and-gender/sex-and-relationships"},
+    { slug: "erotic-fan-fiction", url: "topics/sex-and-gender/sex-and-relationships"},
+    { slug: "relationships", url: "topics/sex-and-gender/sex-and-relationships"},
+    { slug: "dating", url: "topics/sex-and-gender/sex-and-relationships"},
+
+    { slug: "queer", url: "topics/sex-and-gender/gender"},
+    { slug: "intersex", url: "topics/sex-and-gender/gender"},
+    { slug: "trans", url: "topics/sex-and-gender/gender"},
+    { slug: "transgender", url: "topics/sex-and-gender/gender"},
+    { slug: "men-overboard", url: "topics/sex-and-gender/gender"},
+    { slug: "diversity", url: "topics/sex-and-gender/gender"},
+    { slug: "masculinity", url: "topics/sex-and-gender/gender"},
+
+    { slug: "gay", url: "topics/sex-and-gender/sexuality"},
+    { slug: "lesbian", url: "topics/sex-and-gender/sexuality"},
+    { slug: "middlesex queer week", url: "topics/sex-and-gender/sexuality"},
+    { slug: "gay rights", url: "topics/sex-and-gender/sexuality"},
+
+    { slug: "feminism", url: "topics/sex-and-gender/sexism-and-feminism"},
+    { slug: "sexism", url: "topics/sex-and-gender/sexism-and-feminism"},
+
+    { slug: "erotica", url: "topics/sex-and-gender/erotica"},
+    { slug: "pornography", url: "topics/sex-and-gender/erotica"},
+    { slug: "erotic-fan-fiction", url: "topics/sex-and-gender/erotica"},
+
+    { slug: "internet", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "digital", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "apps", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "online", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "blogging", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "social-media", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "web", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "trolls", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "hacking", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "twitter", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "reddit", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+    { slug: "facebook", url: "topics/internet-journalism-media-and-publishing/digital-culture"},
+
+    { slug: "publishing", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "digital", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "online", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "blogging", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "web", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "crikey", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "fairfax", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "new news", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "ebooks", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "book design", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "design", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "editing", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+    { slug: "editors", url: "topics/internet-journalism-media-and-publishing/publishing-and-editing"},
+
+    { slug: "social-media", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "television", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "tv", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "film", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "radio", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "advertising", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "newspapers", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "publishing", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "magazines", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "literary-journals", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "journals", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "new-news", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "twitter", url: "topics/internet-journalism-media-and-publishing/media"},
+    { slug: "facebook", url: "topics/internet-journalism-media-and-publishing/media"},
+
+    { slug: "privacy", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "security", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "espionage", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "surveillance", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "encryption", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "wikileaks", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+    { slug: "terrorism", url: "topics/internet-journalism-media-and-publishing/privacy-and-security"},
+
+    { slug: "leaks", url: "topics/internet-journalism-media-and-publishing/leaking-and-whistleblowing"},
+    { slug: "leaking", url: "topics/internet-journalism-media-and-publishing/leaking-and-whistleblowing"},
+    { slug: "whistleblowers", url: "topics/internet-journalism-media-and-publishing/leaking-and-whistleblowing"},
+    { slug: "whistleblowing", url: "topics/internet-journalism-media-and-publishing/leaking-and-whistleblowing"},
+    { slug: "wikileaks", url: "topics/internet-journalism-media-and-publishing/leaking-and-whistleblowing"},
+
+    { slug: "money", url: "topics/economics-business-and-marketing"},
+    { slug: "economics", url: "topics/economics-business-and-marketing"},
+
+    { slug: "economy", url: "topics/economics-business-and-marketing/economy-and-development"},
+    { slug: "development", url: "topics/economics-business-and-marketing/economy-and-development"},
+
+    { slug: "reading-on-vocation", url: "topics/economics-business-and-marketing/work"},
+    { slug: "jobs", url: "topics/economics-business-and-marketing/work"},
+
+    { slug: "marketing", url: "topics/economics-business-and-marketing/marketing-and-publicity"},
+    { slug: "publicity", url: "topics/economics-business-and-marketing/marketing-and-publicity"},
+
+    { slug: "business", url: "topics/economics-business-and-marketing/business-and-finance"},
+    { slug: "finance", url: "topics/economics-business-and-marketing/business-and-finance"},
+    { slug: "social-enterprise", url: "topics/economics-business-and-marketing/business-and-finance"},
+    { slug: "retail", url: "topics/economics-business-and-marketing/business-and-finance"},
+
+    { slug: "funding", url: "topics/economics-business-and-marketing/funding-and-philanthropy"},
+    { slug: "fundraising", url: "topics/economics-business-and-marketing/funding-and-philanthropy"},
+    { slug: "philanthropy", url: "topics/economics-business-and-marketing/funding-and-philanthropy"},
+
+    { slug: "teaching", url: "topics/education-literacy-and-numeracy"},
+    { slug: "university", url: "topics/education-literacy-and-numeracy"},
+    { slug: "academic", url: "topics/education-literacy-and-numeracy"},
+    { slug: "academia", url: "topics/education-literacy-and-numeracy"},
+
+    { slug: "reading", url: "topics/education-literacy-and-numeracy/literacy"},
+
+    { slug: "maths", url: "topics/education-literacy-and-numeracy/mathematics"},
+    { slug: "numeracy", url: "topics/education-literacy-and-numeracy/mathematics"},
+    { slug: "numbers", url: "topics/education-literacy-and-numeracy/mathematics"},
+
+    { slug: "deakins", url: "topics/energy-environment-and-climate"},
+
+    { slug: "country sky", url: "topics/energy-environment-and-climate/environment"},
+    { slug: "water", url: "topics/energy-environment-and-climate/environment"},
+    { slug: "fire", url: "topics/energy-environment-and-climate/environment"},
+    { slug: "nature", url: "topics/energy-environment-and-climate/environment"},
+    { slug: "sustainability", url: "topics/energy-environment-and-climate/environment"},
+    { slug: "rubbish", url: "topics/energy-environment-and-climate/environment"},
+
+    { slug: "climate-change", url: "topics/energy-environment-and-climate/climate-change-and-weather"},
+    { slug: "weather", url: "topics/energy-environment-and-climate/climate-change-and-weather"},
+    { slug: "weather-stations", url: "topics/energy-environment-and-climate/climate-change-and-weather"},
+    { slug: "pollution", url: "topics/energy-environment-and-climate/climate-change-and-weather"},
+    { slug: "sustainability", url: "topics/energy-environment-and-climate/climate-change-and-weather"},
+
+    { slug: "energy", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "pollution", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "coal", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "solar", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "gas", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "nuclear", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "climate-change", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "transport", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "mining", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "bicycle", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "bike", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "public-transport", url: "topics/energy-environment-and-climate/energy-and-resources"},
+    { slug: "sustainability", url: "topics/energy-environment-and-climate/energy-and-resources"},
+
+    { slug: "food", url: "topics/energy-environment-and-climate/food"},
+    { slug: "eating", url: "topics/energy-environment-and-climate/food"},
+    { slug: "cooking", url: "topics/energy-environment-and-climate/food"},
+    { slug: "water-security", url: "topics/energy-environment-and-climate/food"},
+    { slug: "water", url: "topics/energy-environment-and-climate/food"},
+    { slug: "on-water", url: "topics/energy-environment-and-climate/food"},
+
+    { slug: "animals", url: "topics/energy-environment-and-climate/animals-and-nature"},
+    { slug: "nature", url: "topics/energy-environment-and-climate/animals-and-nature"},
+    { slug: "melbourne zoo", url: "topics/energy-environment-and-climate/animals-and-nature"},
+    { slug: "animal rights", url: "topics/energy-environment-and-climate/animals-and-nature"},
+    { slug: "cats", url: "topics/energy-environment-and-climate/animals-and-nature"},
+    { slug: "dogs", url: "topics/energy-environment-and-climate/animals-and-nature"},
+
+    { slug: "urban", url: "topics/energy-environment-and-climate/cities"},
+    { slug: "ideas for melbourne", url: "topics/energy-environment-and-climate/cities"},
+    { slug: "architecture in the city", url: "topics/energy-environment-and-climate/cities"},
+    { slug: "reading the city", url: "topics/energy-environment-and-climate/cities"},
+    { slug: "population", url: "topics/energy-environment-and-climate/cities"},
+    { slug: "transport", url: "topics/energy-environment-and-climate/cities"},
+
+    { slug: "rural", url: "topics/energy-environment-and-climate/country-and-rural"},
+    { slug: "transport", url: "topics/energy-environment-and-climate/country-and-rural"},
+    { slug: "agriculture", url: "topics/energy-environment-and-climate/country-and-rural"},
+
+    { slug: "body", url: "topics/health-medicine-and-psychology"},
+
+    { slug: "life", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "death", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "obits", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "matter-of-life-and-death", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "births-deaths-and-marriages", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "marriage", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "birth", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "school-of-life", url: "topics/health-medicine-and-psychology/life-and-death"},
+    { slug: "parenting", url: "topics/health-medicine-and-psychology/life-and-death"},
+
+    { slug: "health", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "medicine", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "medical", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "surgery", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "disease", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "cancer", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "hiv", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "aids", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "hiv-aids", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "neuroscience", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+    { slug: "doctors", url: "topics/health-medicine-and-psychology/health-and-medicine"},
+
+    { slug: "deaf", url: "topics/health-medicine-and-psychology/deaf"},
+    { slug: "auslan", url: "topics/health-medicine-and-psychology/deaf"},
+
+    { slug: "psychology", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "mental health", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "psychopaths", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "anxiety", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "depression", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "shy", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+    { slug: "neuroscience", url: "topics/health-medicine-and-psychology/psychology-and-mental-health"},
+
+    { slug: "food", url: "topics/health-medicine-and-psychology/food-and-nutrition"},
+    { slug: "nutrition", url: "topics/health-medicine-and-psychology/food-and-nutrition"},
+    { slug: "diet", url: "topics/health-medicine-and-psychology/food-and-nutrition"},
+    { slug: "eating", url: "topics/health-medicine-and-psychology/food-and-nutrition"},
+
+    { slug: "youth", url: "topics/health-medicine-and-psychology/young-and-old"},
+    { slug: "young-adults", url: "topics/health-medicine-and-psychology/young-and-old"},
+    { slug: "ageing", url: "topics/health-medicine-and-psychology/young-and-old"},
+
+    { slug: "sport", url: "topics/health-medicine-and-psychology/sport"},
+    { slug: "sports", url: "topics/health-medicine-and-psychology/sport"},
+
+    { slug: "science", url: "topics/science-and-technology"},
+    { slug: "neuroscience", url: "topics/science-and-technology"},
+
+    { slug: "technology", url: "topics/science-and-technology/technology"},
+    { slug: "computers", url: "topics/science-and-technology/technology"},
+    { slug: "computing", url: "topics/science-and-technology/technology"},
+    { slug: "data", url: "topics/science-and-technology/technology"},
+    { slug: "internet", url: "topics/science-and-technology/technology"},
+    { slug: "digital", url: "topics/science-and-technology/technology"},
+    { slug: "apps", url: "topics/science-and-technology/technology"},
+    { slug: "artificial intelligence", url: "topics/science-and-technology/technology"},
+    { slug: "robots", url: "topics/science-and-technology/technology"},
+    { slug: "manufacturing", url: "topics/science-and-technology/technology"},
+    { slug: "nanotechnology", url: "topics/science-and-technology/technology"},
+    { slug: "phones", url: "topics/science-and-technology/technology"},
+    { slug: "electronics", url: "topics/science-and-technology/technology"},
+    { slug: "engineering", url: "topics/science-and-technology/technology"},
+
+    { slug: "astronomy", url: "topics/science-and-technology/space"},
+    { slug: "space", url: "topics/science-and-technology/space"},
+
+    { slug: "law", url: "topics/law-ethics-and-philosophy"},
+    { slug: "legal", url: "topics/law-ethics-and-philosophy"},
+    { slug: "justice", url: "topics/law-ethics-and-philosophy"},
+    { slug: "law-and-order-week", url: "topics/law-ethics-and-philosophy"},
+
+    { slug: "crime", url: "topics/law-ethics-and-philosophy/crime"},
+    { slug: "true-crime", url: "topics/law-ethics-and-philosophy/crime"},
+    { slug: "prison", url: "topics/law-ethics-and-philosophy/crime"},
+
+    { slug: "ethics", url: "topics/law-ethics-and-philosophy/ethics-and-morals"},
+    { slug: "ethically-speaking", url: "topics/law-ethics-and-philosophy/ethics-and-morals"},
+    { slug: "morality", url: "topics/law-ethics-and-philosophy/ethics-and-morals"},
+
+    { slug: "privacy", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+    { slug: "security", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+    { slug: "espionage", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+    { slug: "surveillance", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+    { slug: "encryption", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+    { slug: "wikileaks", url: "topics/law-ethics-and-philosophy/privacy-and-security"},
+  ]
+end
+
+def topics_mappings_by_slug(blueprint_slug)
+  blueprint_tag_to_topic_url_mappings.select {|mapping| mapping[:slug] == blueprint_slug }
+end
+
+def find_topic_pages_by_slug(slug)
   Heracles::Page.of_type("topic").find_by_slug(slug)
 end
 
@@ -25,46 +715,25 @@ end
 
 def apply_tags_to(page, blueprint_tags)
 
-  blueprint_tag_to_topic_url_mappings = {
-    "design" => "topics/art-and-design",
-    "books" => "topics/books-reading-and-writing",
-    "reading" => "topics/books-reading-and-writing",
-    "writing" => "topics/books-reading-and-writing",
-    "nonfiction" => "topics/books-reading-and-writing/non-fiction",
-    "writers" => "topics/books-reading-and-writing",
-    "pop-culture" => "topics/creative-arts-and-pop-culture",
-    "history" => "topics/history-politics-and-current-affairs/history",
-    "politics" => "topics/history-politics-and-current-affairs",
-    "current-affairs" => "topics/history-politics-and-current-affairs",
-    "freedom-of-speech" => "topics/free-speech-human-rights-and-social-issues",
-    "identity" => "topics/race-religion-and-identity",
-    "internet" => "topics/internet-journalism-media-and-publishing/internet-culture",
-    "publishing" => "topics/internet-journalism-media-and-publishing",
-    "journalism" => "topics/internet-journalism-media-and-publishing",
-    "citizen-journalism" => "topics/internet-journalism-media-and-publishing",
-    "economics" => "topics/economics-business-and-marketing",
-    "marketing" => "topics/economics-business-and-marketing",
-    "energy" => "topics/energy-environment-and-climate",
-    "environment" => "topics/energy-environment-and-climate",
-    "health" => "topics/health-medicine-and-psychology",
-    "science" => "topics/science-and-technology",
-    "technology" => "topics/science-and-technology",
-    "comedy" => "topics/comedy-and-humour",
-    "humour" => "topics/comedy-and-humour",
-  }
-
   topic_matches = []
   unmatched_tags = []
   blueprint_tags.each do |blueprint_tag|
     slug = blueprint_tag["slug"]
-    if blueprint_tag_to_topic_url_mappings[slug]
-      topic = find_topic_page_by_url(blueprint_tag_to_topic_url_mappings[slug])
+    mappings = topics_mappings_by_slug(slug)
+    if mappings
+      mappings.each do |mapping|
+        topic_matches << find_topic_page_by_url(mapping[:url])
+      end
     else
-      topic = find_topic_page_by_slug(slug)
+      topics_by_slug = find_topic_pages_by_slug(slug)
+      if topics_by_slug
+        topics_by_slug.each do |topic|
+          topic_matches << topic
+        end
+      end
     end
-    if topic
-      topic_matches << topic
-    else
+
+    unless topic_matches.any?
       unmatched_tags << blueprint_tag
     end
   end
@@ -419,9 +1088,9 @@ namespace :wheeler_centre do
     id = dailies_root.first["id"].to_i
 
     blueprint_dailies_articles = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
-    blueprint_dailies_quotes   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumQuote && r["page_id"].to_i == id }
-    blueprint_dailies_images   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumImage && r["page_id"].to_i == id }
-    blueprint_dailies_widgets  = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"].to_i == id }
+    # blueprint_dailies_quotes   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumQuote && r["page_id"].to_i == id }
+    # blueprint_dailies_images   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumImage && r["page_id"].to_i == id }
+    # blueprint_dailies_widgets  = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"].to_i == id }
 
     all_authors = Heracles::Page.of_type("person")
     parent = Heracles::Page.find_by_slug("writings")

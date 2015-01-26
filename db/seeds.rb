@@ -347,34 +347,44 @@ topic_names = [
   {
     name: "Books, reading & writing",
     children: [
-      {name: "Fiction"},
-      {name: "Non-fiction"},
-      {name: "Genre"},
-      {name: "True crime"},
-      {name: "Science fiction"},
-      {name: "Romance"},
-      {name: "Fantasy"},
-      {name: "Adventure"},
-      {name: "Poetry"},
-      {name: "Words & language"},
-      {name: "Classics"},
-      {name: "Memoir"},
-      {name: "History"},
-      {name: "Australian writing"},
-      {name: "Indigenous Australian writing"},
-      {name: "Literary awards"},
-      {name: "Young adult"},
+      {
+        name: "Fiction",
+        children: [
+          {name: "Classics"},
+          {name: "Crime & pulp"},
+          {name: "Erotica"},
+          {name: "Fantasy"},
+          {name: "Romance"},
+          {name: "Science fiction"},
+          {name: "Young adult"},
+        ]
+      },
+      {
+        name: "Non-fiction",
+        children: [
+          {name: "Biography & memoir"},
+          {name: "History"},
+          {name: "Travel"},
+          {name: "Crime"},
+        ]
+      },
       {name: "Children’s books"},
-      {name: "Editing"},
-      {name: "Literary journals"},
-      {name: "Magazines"},
+      {name: "Poetry"},
       {name: "Graphic novels & comics"},
-      {name: "Erotica"},
+      {name: "Criticism"},
+      {name: "Australian stories"},
+      {name: "Editing, publishing & book design"},
+      {name: "Journals & magazines"},
+      {name: "New & emerging writers"},
+      {name: "Bookshops"},
+      {name: "Awards & prizes"},
+      {name: "Words & language"},
       {name: "Funding"},
+      {name: "Creativity"},
     ]
   },
   {
-    name: "Art & design",
+    name: "Visual art & design",
     children: [
       {
         name: "Art",
@@ -383,172 +393,150 @@ topic_names = [
           {name: "Sculpture"},
           {name: "Painting"},
           {name: "Illustration"},
-          {name: "Media art"}
+          {name: "Media art"},
+          {name: "Art history"},
         ]
       },
       {name: "Industrial design"},
       {name: "Architecture"},
       {name: "Urban design"},
-      {name: "Games"},
       {name: "Fashion"},
       {name: "Jewellery"},
       {name: "Graphic design"},
-      {name: "Funding"}
+      {name: "Funding"},
     ]
   },
   {
-    name: "Creative arts & pop culture",
+    name: "Performing Arts & Pop Culture",
     children: [
       {name: "Music"},
       {name: "Film"},
-      {name: "Theatre/plays"},
-      {name: "Sport"},
+      {name: "Theatre"},
       {name: "Dance"},
       {name: "TV"},
-      {name: "Performance"},
+      {name: "Radio"},
+      {name: "Sport"},
+      {name: "Games"},
+      {name: "Creativity"},
       {name: "Media"},
-      {name: "Social media"},
-      {name: "Radio"}
     ]
   },
   {
     name: "History, politics & current affairs",
     children: [
       {name: "Australian politics"},
-      {name: "Rural Australia"},
-      {name: "Australian media"},
       {name: "History"},
-      {name: "War"},
+      {name: "Defence, military & war"},
       {name: "Activism"},
-      {name: "International relations"},
-      {name: "Diplomacy"},
-      {name: "Military"},
-      {name: "Government"}
+      {name: "International relations & diplomacy"},
+      {name: "Government"},
+      {name: "Sexual & gender politics"},
+      {name: "Speech & oration"},
     ]
   },
   {
     name: "Free speech, human rights & social issues",
     children: [
+      {name: "Freedom of speech & censorship"},
       {name: "Social justice"},
-      {name: "Activism"},
       {name: "Human rights"},
       {name: "Privacy"},
-      {name: "Censorship"}
+      {name: "Activism"},
+      {name: "Community"},
+      {name: "Gambling"},
     ]
   },
   {
     name: "Race, religion & identity",
     children: [
-      {name: "Race"},
-      {name: "Indigenous"},
-      {name: "Identity politics"},
-      {name: "Religion"},
-      {name: "Multiculturalism"},
-      {name: "Discrimination"},
+      {name: "Race & multiculturalism"},
+      {name: "Identity"},
+      {name: "Faith, religion & spirituality"},
       {name: "Diversity"},
-      {name: "Islam"},
-      {name: "Youth"},
-      {name: "Spirituality"},
+      {name: "Young people"},
+      {name: "Indigenous"},
       {name: "Migration"},
-      {name: "Christianity"},
-      {name: "Jewish"},
-      {name: "Asia"},
-      {name: "Africa"},
+      {name: "Australia"},
+      {name: "Africa & Middle East"},
+      {name: "Asia & Pacific"},
       {name: "Europe"},
-      {name: "Interfaith"},
-      {name: "Pacific"}
+      {name: "The Americas"},
     ]
   },
   {
     name: "Sex & gender",
     children: [
-      {name: "Sex"},
+      {name: "Sex & relationships"},
       {name: "Gender"},
       {name: "Sexuality"},
-      {name: "Sexism"},
+      {name: "Sexism & feminism"},
       {name: "Erotica"},
-      {name: "Feminism"},
-      {name: "Relationships"},
-      {name: "Women/men"},
-      {name: "Gender and Sexual Diversity"}
     ]
   },
   {
     name: "Internet, journalism, media & publishing",
     children: [
-      {name: "Internet culture"},
-      {name: "Digital publishing"},
-      {name: "Online dating"},
-      {name: "Print media"},
-      {name: "Leaking/whistleblowing"},
-      {name: "Editing"},
-      {name: "Journalistic ethics"},
-      {name: "Interviewing"},
-      {name: "Web"},
-      {name: "Newspapers"}
+      {name: "Digital culture"},
+      {name: "Publishing & editing"},
+      {name: "Media"},
+      {name: "Privacy & security"},
+      {name: "Leaking & whistleblowing"},
     ]
   },
   {
     name: "Economics, business & marketing",
     children: [
-      {name: "Economy"},
+      {name: "Economy & development"},
       {name: "Work"},
-      {name: "Publicity"},
+      {name: "Marketing & publicity"},
       {name: "Advertising"},
-      {name: "Finance"},
-      {name: "Investment/divestment"},
-      {name: "Gambling"},
-      {name: "Funding"}
+      {name: "Business & finance"},
+      {name: "Funding & philanthropy"},
     ]
   },
   {
     name: "Education, literacy & numeracy",
     children: [
       {name: "Education"},
-      {name: "University"},
       {name: "Literacy"},
-      {name: "Mathematics"}
+      {name: "Mathematics"},
     ]
   },
   {
     name: "Energy, environment & climate",
     children: [
       {name: "Environment"},
-      {name: "Climate change"},
-      {name: "Animals"},
+      {name: "Climate change & weather"},
+      {name: "Energy & resources"},
       {name: "Food"},
-      {name: "Food security"},
-      {name: "Forestry"},
-      {name: "Horticulture"},
-      {name: "Ecology"},
-      {name: "Agriculture"},
-      {name: "Pollution"},
-      {name: "Coal"},
-      {name: "Solar"},
-      {name: "Gas"},
-      {name: "Nuclear"}
+      {name: "Animals & nature"},
+      {name: "Cities"},
+      {name: "Country & rural"},
     ]
   },
   {
     name: "Health, medicine & psychology",
     children: [
-      {name: "Medicine"},
-      {name: "Psychology"},
-      {name: "Mental health"},
-      {name: "Nutrition"},
-      {name: "Drugs"}
+      {name: "Life & death"},
+      {name: "Health & medicine"},
+      {name: "Disability"},
+      {name: "Deaf"},
+      {name: "Psychology & mental health"},
+      {name: "Food & nutrition"},
+      {name: "Young & old"},
+      {name: "Drugs"},
+      {name: "Sport"},
     ]
   },
   {
     name: "Science & technology",
     children: [
+      {name: "Technology"},
       {name: "Research"},
-      {name: "Funding"},
-      {name: "Nanotechnology"},
       {name: "Biology"},
       {name: "Chemistry"},
       {name: "Physics"},
-      {name: "Space"}
+      {name: "Space"},
     ]
   },
   {
@@ -556,21 +544,26 @@ topic_names = [
     children: [
       {name: "Law"},
       {name: "Crime"},
-      {name: "Ethics"},
-      {name: "Morality"},
-      {name: "Philosophy"}
+      {name: "Ethics & morals"},
+      {name: "Philosophy"},
+      {name: "Privacy & security"},
     ]
   },
   {
     name: "Comedy & humour",
     children: [
-      {name: "Satire"}
+      {name: "Comedy"},
+      {name: "Humour"},
+      {name: "Satire"},
     ]
   }
 ]
 
 def build_topic_page(topic, parent, site)
   slug = slugify(topic[:name])
+  # puts "*************"
+  # puts topic[:name]
+  # puts slug
   page = Heracles::Sites::WheelerCentre::Topic.find_or_initialize_by(url: "#{parent.absolute_url}/#{slug}")
   page.site = site
   page.slug = slug
