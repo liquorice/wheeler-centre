@@ -1094,7 +1094,6 @@ namespace :wheeler_centre do
 
     blueprint_dailies_articles = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
     # blueprint_dailies_images   = blueprint_records.select { |r| r.class == LegacyBlueprint::TumImage && r["page_id"].to_i == id }
-    # blueprint_dailies_widgets  = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"].to_i == id }
 
     all_authors = Heracles::Page.of_type("person")
     parent = Heracles::Page.find_by_slug("writings")
@@ -1104,7 +1103,7 @@ namespace :wheeler_centre do
       if blueprint_daily["title"].present?
         heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
         unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
-        heracles_blog_post.published = true
+        heracles_blog_post.published = blueprint_daily["publish_on"].present?
         heracles_blog_post.slug = blueprint_daily["slug"]
         heracles_blog_post.title = replace_entities(blueprint_daily["title"])
 
@@ -1156,7 +1155,7 @@ namespace :wheeler_centre do
       quote = blueprint_daily["title"].to_s
       heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
       unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
-      heracles_blog_post.published = true
+      heracles_blog_post.published = blueprint_daily["publish_on"].present?
       heracles_blog_post.slug = blueprint_daily["slug"]
       heracles_blog_post.title = replace_entities(attribution)
 
@@ -1168,7 +1167,7 @@ namespace :wheeler_centre do
       body = '<div contenteditable="false" insertable="pull_quote" value="{&quot;quote&quot;:&quot;'+clean_content(quote)+'&quot;,&quot;attribution&quot;:&quot;'+clean_content(attribution)+'&quot;}"></div>'
       heracles_blog_post.fields[:body].value = body
 
-      heracles_blog_post.tag_list.add(["quote"])
+      heracles_blog_post.tag_list.add(["legacy-quote"])
 
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
       heracles_blog_post.parent = parent
@@ -1178,6 +1177,52 @@ namespace :wheeler_centre do
       heracles_blog_post.save!
     end
 
+    # Widgets
+    blueprint_dailies_widgets = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"].to_i == id }
+    blueprint_dailies_widgets_settings = blueprint_records.select { |r| r.class == LegacyBlueprint::Setting && r["key"].to_s == "Summary" && r["configurable_type"].to_s == "TumPost" }
+    blueprint_dailies_widgets.each do |blueprint_daily|
+      heracles_blog_post = Heracles::Page.find_by_slug(blueprint_daily["slug"])
+      unless heracles_blog_post then heracles_blog_post = Heracles::Page.new_for_site_and_page_type(site, "blog_post") end
+      heracles_blog_post.slug = blueprint_daily["slug"]
+
+      # Get title from LegacyBlueprint::Settings
+      summary = blueprint_dailies_widgets_settings.find {|s| s["configurable_id"].to_i == blueprint_daily["id"].to_i}
+      if summary and summary["value"].presence
+        heracles_blog_post.title = replace_entities(summary["value"])
+      else
+        heracles_blog_post.title = replace_entities blueprint_daily["title"]
+      end
+
+      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["title"], subject: blueprint_daily, assetify: false)
+      heracles_blog_post.fields[:intro].value = ""
+
+      # Build insertable for body
+      # Skip any with the old flowplayer markup
+      old_markup_matcher = "data=\"http://wheelercentre.com/static/scripts/flowplayer.commercial"
+      old_markup_regexp = Regexp.new(old_markup_matcher)
+      old_markup_matches = old_markup_regexp.match blueprint_daily["content"].to_s
+      if old_markup_matches
+        heracles_blog_post.fields[:body].value = ""
+        heracles_blog_post.tag_list.add(["legacy-widget-player"])
+        # Don't publish any of these
+        heracles_blog_post.published = false
+      else
+        content = CGI.escape_html(CGI.escape_html(blueprint_daily["content"].to_s.strip))
+        body = '<div contenteditable="false" insertable="code" value="{&quot;code&quot;:&quot;'+content+'&quot;}"></div>'
+        heracles_blog_post.fields[:body].value = body
+        # Publish if avail
+        heracles_blog_post.published = blueprint_daily["publish_on"].present?
+      end
+
+      heracles_blog_post.tag_list.add(["legacy-widget"])
+
+      heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      heracles_blog_post.parent = parent
+      heracles_blog_post.collection = collection
+      tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
+      apply_tags_to(heracles_blog_post, tags_for_post)
+      heracles_blog_post.save!
+    end
   end
 
   desc "Import blueprint types that map to Page"
