@@ -10,9 +10,50 @@
     padding-right: 35px;
   }
 
+  .breakpoint-phone .masthead__container {
+    padding-top: 50px;
+  }
+
   .masthead__navigation {
     padding-bottom: 25px;
   }
+
+  .breakpoint-phone .masthead__navigation {
+    background-color: var(--primary-color-darker);
+    height: 40px;
+    padding-bottom: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+  }
+
+    .masthead__navigation-wrapper {
+      float: left;
+      margin-left: -15px;
+    }
+
+    .masthead__navigation-mobile-toggle {
+      display: none;
+    }
+
+    .breakpoint-phone .masthead__navigation-mobile-toggle {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      padding: 5px;
+    }
+
+    .masthead__navigation-mobile-toggle i {
+      color: var(--primary-color-lighter);
+    }
+
+    .masthead__navigation-mobile-toggle i:hover {
+      color: #fff;
+    }
 
     .masthead-nav-main,
     .masthead-nav-secondary {
@@ -20,8 +61,6 @@
     }
 
     .masthead-nav-main {
-      float: left;
-      margin-left: -15px;
       -webkit-font-smoothing: subpixel-antialiased;
       font-smoothing: subpixel-antialiased;
     }
@@ -30,10 +69,24 @@
       margin-bottom: 8px;
     }
 
+    .breakpoint-phone .masthead-nav-main {
+      background-color: var(--primary-color-lighter);
+      border-bottom: 1px solid var(--primary-color-light);
+      position: absolute;
+      top: 40px;
+      left: 0;
+      right: 0;
+    }
+
       .masthead-nav-main__item,
       .masthead-nav-secondary__item {
         float: left;
       }
+
+      .breakpoint-phone .masthead-nav-main__item {
+        float: none;
+      }
+
         .masthead-nav-main__item--break {
           padding-right: 16px;
           margin-right: 16px;
@@ -52,6 +105,12 @@
           margin-right: 10px;
         }
 
+        .breakpoint-phone .masthead-nav-main__item--break {
+          padding-right: 0;
+          margin-right: 0;
+          border-bottom: 1px solid var(--primary-color-light);
+        }
+
           /* Little border */
           .masthead-nav-main__item--break:before {
             content: "";
@@ -62,6 +121,8 @@
             right: 0;
           }
 
+          .breakpoint-phone .masthead-nav-main__item--break:before { display: none; }
+
       .masthead-nav-main__item {
         position: relative;
       }
@@ -69,10 +130,12 @@
       .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
       .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
         background-color: var(--primary-color-darker);
+        color: #fff;
       }
 
-      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor ,
-      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
+      .breakpoint-phone .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .breakpoint-phone .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
+        background-color: var(--primary-color);
         color: #fff;
       }
 
@@ -112,6 +175,17 @@
           padding: 12px;
         }
 
+        .breakpoint-phone .masthead-nav-main__anchor {
+          color: #333;
+          display: block;
+        }
+
+        .breakpoint-phone .masthead-nav-main__anchor:hover,
+        .breakpoint-phone .masthead-nav-main__anchor:focus {
+          background-color: var(--primary-color);
+          color: #fff;
+        }
+
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
@@ -119,6 +193,13 @@
       padding: 30px 18px 20px;
       position: absolute;
       z-index: 20;
+    }
+
+    .breakpoint-phone .masthead-nav-main__dropdown {
+      background-color: var(--primary-color);
+      min-width: 100%;
+      width: 100%;
+      padding: 12px;
     }
 
     .masthead-nav-main__dropdown-icon {
@@ -167,6 +248,10 @@
             text-transform: uppercase;
           }
 
+          .breakpoint-phone .masthead-nav-main__dropdown-item span {
+            padding-bottom: 6px;
+          }
+
           .masthead-nav-main__dropdown-anchor:hover,
           .masthead-nav-main__dropdown-anchor:focus {
             color: #fff;
@@ -188,8 +273,20 @@
       float: none;
     }
 
+    .breakpoint-phone .masthead-nav-secondary {
+      border-top: none;
+      padding-top: 0;
+      position: absolute;
+      top: 8px;
+      right: 5px;
+    }
+
       .masthead-nav-secondary__item {
         padding-right: 30px;
+      }
+
+      .breakpoint-phone .masthead-nav-secondary__item {
+        padding-right: 20px;
       }
 
       .masthead-nav-secondary__item:last-child {
