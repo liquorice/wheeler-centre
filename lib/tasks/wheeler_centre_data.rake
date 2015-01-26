@@ -1105,16 +1105,26 @@ namespace :wheeler_centre do
         heracles_blog_post.title = replace_entities(blueprint_daily["title"])
 
         content = blueprint_daily["content"].to_s
-        # Split the summary out on the highlight tag
-        summary = content.split("[[highlight]]")
-        # FIXME temporarily strip out all the markdown [stuff]
-        # content = content.gsub(/\[.+\]/, "")
-        if summary.length > 0
+        highlight_regex = /\[\[highlight?.+\]\]/m
+        summary = content.split highlight_regex
+        if summary.length > 1
           content.slice!(summary[0])
           heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
           heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
         end
-        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_daily, assetify: false)
+
+        meta_regex = /(^\*{3}.+)(^\*{2}.+\*{2})(\W*)\z/im
+        meta_matches = meta_regex.match content
+        if meta_matches
+          meta = ""
+          meta_matches.captures.each do |match|
+            meta += match.gsub(/^\*{3}\r\n/, "")
+          end
+          heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: false)
+        end
+        body = content.gsub(meta_regex, "")
+
+        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: false)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
         heracles_blog_post.parent = parent
         heracles_blog_post.collection = collection
