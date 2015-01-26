@@ -1111,6 +1111,10 @@ namespace :wheeler_centre do
           content.slice!(summary[0])
           heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
           heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+        else
+          # Erase any previously imported data
+          heracles_blog_post.fields[:summary].value = ""
+          heracles_blog_post.fields[:intro].value = ""
         end
 
         meta_regex = /(^\*{3}.+)(^\*{2}.+\*{2})(\W*)\z/im
@@ -1121,6 +1125,8 @@ namespace :wheeler_centre do
             meta += match.gsub(/^\*{3}\r\n/, "")
           end
           heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: false)
+        else
+          heracles_blog_post.fields[:meta].value = ""
         end
         body = content.gsub(meta_regex, "")
 
