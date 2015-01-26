@@ -1,12 +1,23 @@
 .figure class="#{display_class} #{aspect_class}" style=("width:#{data[:width]}" if data[:width])
-  picture
-    erb:
-      <!--[if IE 9]><video style="display: none;"><![endif]-->
-    source srcset=large_version_url media="(min-width: 1200px)"
-    source srcset=medium_version_url media="(min-width: 640px)"
-    erb:
-      <!--[if IE 9]></video><![endif]-->
-    img.figure__content src=small_version_url alt=alt_text
+  - if link_url
+    a href=link_url title=(link_title if link_title) target=(link_target if link_target)
+      picture
+        erb:
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+        source srcset=large_version_url media="(min-width: 1200px)"
+        source srcset=medium_version_url media="(min-width: 640px)"
+        erb:
+          <!--[if IE 9]></video><![endif]-->
+        img.figure__content src=small_version_url alt=alt_text
+  - else
+    picture
+      erb:
+        <!--[if IE 9]><video style="display: none;"><![endif]-->
+      source srcset=large_version_url media="(min-width: 1200px)"
+      source srcset=medium_version_url media="(min-width: 640px)"
+      erb:
+        <!--[if IE 9]></video><![endif]-->
+      img.figure__content src=small_version_url alt=alt_text
   - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
     .figure__caption.caption.copy
       p
