@@ -1,3 +1,8 @@
+# String helpers
+def clean_content(str)
+  str.strip.gsub(/\n\n/, "\n")
+end
+
 # Tag helpers
 def blueprint_tag_to_topic_url_mappings
   [
@@ -1109,8 +1114,8 @@ namespace :wheeler_centre do
         summary = content.split highlight_regex
         if summary.length > 1
           content.slice!(summary[0])
-          heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false).strip
-          heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false).strip
+          heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+          heracles_blog_post.fields[:intro].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
         else
           # Erase any previously imported data
           heracles_blog_post.fields[:summary].value = ""
@@ -1128,7 +1133,7 @@ namespace :wheeler_centre do
         else
           heracles_blog_post.fields[:meta].value = ""
         end
-        body = content.gsub(meta_regex, "").strip
+        body = clean_content content.gsub(meta_regex, "")
 
         heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: false)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
