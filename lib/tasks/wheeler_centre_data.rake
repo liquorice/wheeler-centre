@@ -1109,8 +1109,8 @@ namespace :wheeler_centre do
         summary = content.split highlight_regex
         if summary.length > 1
           content.slice!(summary[0])
-          heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
-          heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+          heracles_blog_post.fields[:summary].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false).strip
+          heracles_blog_post.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false).strip
         else
           # Erase any previously imported data
           heracles_blog_post.fields[:summary].value = ""
@@ -1124,11 +1124,11 @@ namespace :wheeler_centre do
           meta_matches.captures.each do |match|
             meta += match.gsub(/^\*{3}\r\n/, "")
           end
-          heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: false)
+          heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: false).strip
         else
           heracles_blog_post.fields[:meta].value = ""
         end
-        body = content.gsub(meta_regex, "")
+        body = content.gsub(meta_regex, "").strip
 
         heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: false)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
