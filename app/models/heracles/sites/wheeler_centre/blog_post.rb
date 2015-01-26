@@ -8,6 +8,7 @@ module Heracles
             fields: [
               # Image
               {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "Set this to override the above hero image in listings"},
               # Content
               {name: :content_info, type: :info, text: "<hr/>"},
               {name: :summary, type: :content},
