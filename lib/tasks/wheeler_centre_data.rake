@@ -1550,7 +1550,103 @@ namespace :wheeler_centre do
     puts (events_with_sponsors.count)
     events_sans_series_with_sponsors = events_sans_series.select {|r| events_with_sponsors.include? r["id"] }
     puts(events_sans_series_with_sponsors.count)
+  end
 
+  desc "Import blueprint assets"
+  task :import_blueprint_assets => :environment do
+    require "yaml"
+    require "blueprint_shims"
+
+    backup_root = "/Users/tim/Files/wheeler-centre-assets"
+    backup_data_file = "#{backup_root}/backup-2014-12-18.yml"
+
+    blueprint_assets = YAML.load_stream(File.read(backup_data_file)).select { |r| r.class == LegacyBlueprint::Asset }
+
+    bar = ProgressBar.new(blueprint_assets.length)
+
+    blueprint_assets.each do |blueprint_asset|
+      bar.increment!
+      next if Heracles::Asset.exists?(blueprint_id: blueprint_asset["id"])
+
+      local_asset_file_path = File.join(backup_root, "assets", blueprint_asset["guid"], blueprint_asset["filename"])
+
+      begin
+        local_asset_file = File.open(local_asset_file_path)
+      rescue Errno::ENOENT => e
+        puts "Could not open file: #{local_asset_file_path}"
+        next
+      end
+
+      tries = 3
+      begin
+        heracles_asset = Heracles::Asset.generate_from_io(local_asset_file, site: Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!)
+      rescue => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          raise e
+        end
+      rescue Timeout::Error => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          raise e
+        end
+      end
+
+      local_asset_file.close unless local_asset_file.closed?
+
+      heracles_asset.blueprint_id               = blueprint_asset["id"]
+      heracles_asset.blueprint_name             = blueprint_asset["name"]
+      heracles_asset.blueprint_filename         = blueprint_asset["filename"]
+      heracles_asset.blueprint_attachable_type  = blueprint_asset["attachable_type"]
+      heracles_asset.blueprint_attachable_id    = blueprint_asset["attachable_id"]
+      heracles_asset.blueprint_position         = blueprint_asset["position"]
+      heracles_asset.blueprint_guid             = blueprint_asset["guid"]
+      heracles_asset.blueprint_caption          = blueprint_asset["caption"]
+      heracles_asset.blueprint_assoc            = blueprint_asset["assoc"]
+
+      begin
+        if heracles_asset.file_ext.present?
+          heracles_asset.save!
+        else
+          puts "Missing file_ext: #{heracles_asset.inspect}"
+        end
+      rescue => e
+        p e
+        p heracles_asset
+        exit
+      end
+    end
+  end
+
+  # You want to build up a yml file thusly:
+  # File.open("wheeler-centre-assets-attributes.yml", "w+") { |f| f.write(Heracles::Asset.all.to_a.map(&:attributes).to_yaml) }
+
+  desc "Build assets from attributes YML"
+  task :build_assets_from_attributes_yml, [:yml_file_url] => :environment do |task, args|
+    require "zlib"
+    require "open-uri"
+
+    gz_data   = open(args[:yml_file_url])
+    gz_reader = Zlib::GzipReader.new(gz_data)
+    yml_data  = gz_reader.read
+
+    attributes = YAML.load(yml_data)
+
+    puts "Importing assets from attributes YML"
+
+    attributes.each do |asset_attrs|
+      if !Heracles::Asset.exists?(blueprint_id: asset_attrs["blueprint_id"])
+        puts asset_attrs["id"]
+        Heracles::Asset.create!(asset_attrs)
+      end
+    end
+
+    puts
+    puts "Done!"
   end
 
 end
