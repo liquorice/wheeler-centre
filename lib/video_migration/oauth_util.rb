@@ -15,7 +15,7 @@ RESPONSE_HTML = <<stop
 </html>
 stop
 
-FILE_PATH = 'client_secrets.json'
+FILE_PATH = "#{Rails.root}/lib/video_migration/client_secrets.json"
 
 # Small helper for the sample apps for performing OAuth 2.0 flows from the command
 # line. Starts an embedded server to handle redirects.
@@ -36,7 +36,7 @@ class CommandLineOAuthHelper
   # Request authorization. Checks to see if a local file with credentials is present, and uses that.
   # Otherwise, opens a browser and waits for response, then saves the credentials locally.
   def authorize
-    credentials_file = 'credentials_file.json'
+    credentials_file = "#{Rails.root}/lib/video_migration/credentials_file.json"
 
     if File.exist? credentials_file
       File.open(credentials_file, 'r') do |file|
