@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: f55774278411120c5fadc9702014556d399781d6
+  revision: caa4982d6f67723ed8a2b0e9e11d387f4f90295b
   branch: master
   specs:
     heracles (1.0.0)
@@ -287,7 +287,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.9)
       sprockets-rails (~> 2.0)
-    rails-assets-fastclick (1.0.5)
+    rails-assets-fastclick (1.0.6)
     rails-assets-filament-fixed (0.1.2)
     rails-assets-filament-sticky (0.1.4)
       rails-assets-filament-fixed (>= 0.1.1)
@@ -302,7 +302,7 @@ GEM
     rails-assets-jquery-ujs-standalone (1.0.0)
       rails-assets-jquery (> 1.7)
     rails-assets-jstimezonedetect (1.0.5)
-    rails-assets-lodash (2.4.1)
+    rails-assets-lodash (3.0.0)
     rails-assets-momentjs (2.9.0)
     rails-assets-nprogress (0.1.6)
     rails-assets-pikaday (1.3.1)
