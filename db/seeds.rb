@@ -24,108 +24,151 @@ site.title = "Wheeler Centre"
 site.hostnames = ["localhost:5000", "wheeler-centre.herokuapp.com"]
 site.published = true
 site.transloadit_params = {
-  "steps"=> {
-    "content_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 300,
-      "height"=> 300,
-      "quality"=> 75,
-      "resize_strategy"=> "fillcrop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+  "steps" => {
+    "content_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 300,
+      "height" => 300,
+      "quality" => 75,
+      "resize_strategy" => "fillcrop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_thumbnail_resized"]
+    "content_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_thumbnail_resized"]
     },
-    "content_small_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 480,
-      "height"=> 720,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_small_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 720,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_small"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_small_resized"]
+    "content_small" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_resized"]
     },
-    "content_medium_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 960,
-      "height"=> 960,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_medium_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 960,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_medium"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_medium_resized"]
+    "content_medium" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_resized"]
     },
-    "content_large_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 1400,
-      "height"=> 1400,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_large_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 1400,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_large"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_large_resized"]
+    "content_large" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_resized"]
     },
-    "content_large_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 1400,
-      "height"=> 800,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_large_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 800,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_large_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_large_thumbnail_resized"]
+    "content_large_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_thumbnail_resized"]
     },
-    "content_medium_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 960,
-      "height"=> 550,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_medium_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 550,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_medium_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_medium_thumbnail_resized"]
+    "content_medium_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_thumbnail_resized"]
     },
-    "content_small_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 480,
-      "height"=> 274,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_small_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 274,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_small_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_small_thumbnail_resized"]
+    "content_small_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_thumbnail_resized"]
     },
-    "store"=> {
-      "use"=> ["content_thumbnail", "content_small", "content_medium", "content_large", "content_small_thumbnail", "content_medium_thumbnail", "content_large_thumbnail"]
+    "audio_mp3" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "mp3"
+    },
+    "audio_ogg" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "ogg"
+    },
+    "video_ipad_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "preset" => "ipad-high"
+    },
+    "video_iphone_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "preset" => "iphone-high"
+    },
+    "store" => {
+      "use" => [
+        "content_thumbnail",
+        "content_small",
+        "content_medium",
+        "content_large",
+        "content_small_thumbnail",
+        "content_medium_thumbnail",
+        "content_large_thumbnail",
+        "audio_mp3",
+        "audio_ogg",
+        "video_ipad_high",
+        "video_iphone_high"
+      ]
+    },
+    "store_youtube" => {
+      "robot" => "/youtube/store",
+      "use" => [":original"],
+      "username" => "",
+      "password" => "",
+      "title" => "${file.name}",
+      "description" => "${file.name} description",
+      "category" => "People & Blogs",
+      "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
+      "visibility" => "private"
     }
   }
 }
