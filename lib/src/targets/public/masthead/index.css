@@ -355,6 +355,8 @@
           z-index: 20;
         }
 
+        .masthead-nav-secondary__search-box--active { display: block; }
+
           .masthead-nav-secondary__search-close {
             background: none;
             border: none;

@@ -65,7 +65,7 @@
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href="/about-us"
         ' Donate
-    li.masthead-nav-secondary__item.masthead-nav-secondary__item--search
+    li.masthead-nav-secondary__item.masthead-nav-secondary__item--search data-view-masthead-search={toggleSelector: ".masthead-nav-secondary__anchor--search", targetSelector: ".masthead-nav-secondary__search-box", closeSelector: ".masthead-nav-secondary__search-close", targetActiveClassName: "masthead-nav-secondary__search-box--active"}.to_json
       .masthead-nav-secondary__search-box
         button.masthead-nav-secondary__search-close
           i.fa.fa-times
@@ -73,7 +73,7 @@
           input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…"
           button.masthead-nav-secondary__search-button
             i.fa.fa-search
-      a.masthead-nav-secondary__anchor href="#"
+      a.masthead-nav-secondary__anchor.masthead-nav-secondary__anchor--search href="#"
         i.fa.fa-search
 
 
