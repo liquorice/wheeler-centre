@@ -22,7 +22,7 @@
           ' Presenters
 
 = area :main do
-  .event
+  .event data-view-event=true
     - if page.series
       .event__series-header.column-wrapper
         .column-full.clearfix
@@ -38,20 +38,40 @@
           erb:
             <!--[if IE 9]></video><![endif]-->
           img.figure__content src=image.content_small_url itemprop="hero_image"
+          - if image.attribution.present?
+            .event__promo-image-caption.caption
+              p = image.attribution
     .column-wrapper
       .column-wide.clearfix
         .event__meta
-          time.event__date-time= page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, "long")
+          time.event__date-time= page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
           h1.event__title
             == widont_format markdown_line page.title
         .event__body.copy
           = render_content page.fields[:body]
+        - if page.fields[:topics].data_present?
+          .event__tags
+            h2.event__tag-header Topics
+            ul.event__tags-list
+              - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                li
+                  a href=topic.absolute_url = topic.title
+
 
         - if page.fields[:presenters].data_present?
-          .event__presenters
-            h2.event__presenters-header Who?
-            - page.fields[:presenters].pages.each do |presenter|
-              = render "partials/presenter_horizontal", presenter: presenter
+          - if page.fields[:presenters].pages.length > 6
+            .event__presenters.event__presenters--long
+              h2.event__presenters-header Who?
+              - page.fields[:presenters].pages.in_groups(2, false).each do |group|
+                - if group.any?
+                  .event__presenters-group
+                    - group.each do |presenter|
+                      = render "partials/presenter_horizontal", presenter: presenter
+          - else
+            .event__presenters
+              h2.event__presenters-header Who?
+              - page.fields[:presenters].pages.each do |presenter|
+                = render "partials/presenter_horizontal", presenter: presenter
 
         .event__tickets
           h2.event__tickets-header How much?
@@ -84,3 +104,46 @@
               .event__venue-map-panel
                 h4= page.venue.title
                 p= render_content page.venue.fields[:address_formatted]
+    - if page.fields[:sponsors].data_present?
+      .event__supporters.column-wrapper
+        .column-mid
+          .event__supporters-intro.copy
+            - if page.fields[:sponsors_intro].data_present?
+              = render_content page.fields[:sponsors_intro]
+            - else
+              p Made possible with the support of:
+          .event__supporters-list
+            - page.fields[:sponsors].pages.each do |sponsor|
+              - if sponsor.fields[:url].data_present?
+                a.event__supporters-item href=sponsor.fields[:url].value
+                  - if sponsor.fields[:logo].data_present?
+                    - sponsor_image = sponsor.fields[:logo].asset
+                  - elsif rand(3) > 0
+                    - sponsor_image = Heracles::Asset.all.sample(1).first
+                  - if sponsor_image
+                    img.event__supporters-image src=sponsor_image.content_small_url
+                  - else
+                    = sponsor.title
+              - else
+                .event__supporters-item
+                  - if sponsor.fields[:logo].data_present?
+                    - sponsor_image = sponsor.fields[:logo].asset
+                  - elsif rand(3) > 0
+                    - sponsor_image = Heracles::Asset.all.sample(1).first
+                  - if sponsor_image
+                    img.event__supporters-image src=sponsor_image.content_small_url
+                  - else
+                    = sponsor.title
+    - if page.related_events.any?
+      .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
+        .section-header
+          h2 Related events
+        .column-full
+          .snap-wrapper.clearfix
+            - page.related_events.each do |post|
+              = render "partials/event_snap_block", post: post, show_type: true
+          - if page.series
+            a.block-link href=page.series.absolute_url
+              ' View all the events in
+              em = page.series.title
+              '  &rsaquo;

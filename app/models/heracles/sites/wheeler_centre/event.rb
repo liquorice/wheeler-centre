@@ -7,6 +7,7 @@ module Heracles
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
               {name: :promo_image, type: :asset, asset_file_type: :image},
+              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "Set this to override the above promo image in listings"},
               {name: :body, type: :content},
               {name: :external_video, type: :external_video, label: 'External video'},
               # Dates
@@ -28,6 +29,7 @@ module Heracles
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
+              {name: :sponsors_intro, type: :content, hint: "Override the 'Made possible with the support of' text"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
@@ -48,10 +50,31 @@ module Heracles
           end
         end
 
+        def related_events(options={})
+          options[:per_page] = 6 || options[:per_page]
+          if series
+            events = series.events({per_page: options[:per_page]})
+            if events.total < options[:per_page]
+              additional_total = options[:per_page] - events.total
+              additional = search_events_by_topic({per_page: additional_total})
+              events = events.results + additional.results
+            else
+              events = events.results
+            end
+          else
+            events = search_events_by_topic({per_page: options[:per_page]}).results
+          end
+          events
+        end
+
 
         ### Searchable attrs
 
         searchable do
+          string :id do |page|
+            page.id
+          end
+
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end
@@ -80,6 +103,20 @@ module Heracles
             fields[:series].pages.map(&:id)
           end
 
+        end
+
+        private
+
+        def search_events_by_topic(options={})
+          Sunspot.search(Event) do
+            without :id, id
+            with :site_id, site.id
+            with :topic_ids, fields[:topics].pages.map(&:id)
+            with :published, true
+
+            order_by :start_date_time, :asc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
         end
       end
     end

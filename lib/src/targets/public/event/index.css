@@ -27,7 +27,7 @@
 .event__meta {
   float: left;
   width: 50%;
-  /*width: calc(50% - 35px);*/
+  width: calc(50% - 35px);
   padding-top: 45px;
   /*margin-right: -35px;*/
 }
@@ -53,21 +53,64 @@
 .event__promo-image {
   float: right;
   width: 50%;
-  /*width: calc(50% + 35px);*/
+  width: calc(50% + 35px);
   padding-bottom: 35px;
   margin-top: -55px;
 }
   .event__promo-image img {
     max-width: 100%;
+    max-width: calc(100% - 35px);
     margin-left: 35px;
   }
-
+  .event__promo-image-caption {
+    margin-left: 35px;
+    padding-top: 15px;
+  }
 
 .event__body {
-  margin-bottom: 55px;
   font-size: 20px;
   font-size: 2rem;
 }
+
+.event__tags {
+  padding-bottom: 55px;
+  color: #888;
+  font-family: var(--font-sans);
+  padding-top: 50px;
+  position: relative;
+}
+  .event__tag-header {
+    font-size: 12px;
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    padding-right: 20px;
+    padding-top: 2px;
+    margin-left: -81px;
+    position: absolute;
+    text-transform: uppercase;
+  }
+  .event__tags-list {
+    display: block;
+    font-size: 15px;
+    font-size: 1.5rem;
+  }
+  .event__tags-list li {
+    display: inline;
+  }
+  .event__tags-list li:after {
+    content: ", ";
+    margin-left: -0.2em;
+  }
+    .event__tags-list li:last-child:after {
+      content: "";
+    }
+  .event__tags-list a {
+    color: #222;
+    text-decoration: underline;
+  }
+    .event__tags-list a:hover {
+      color: var(--primary-color);
+    }
 
 /* Series header */
 
@@ -112,6 +155,16 @@
   position: relative;
   width: 50%;
 }
+  .event__presenters--long {
+    padding-right: 0;
+    width: 100%;
+  }
+    .event__presenters-group {
+      float: left;
+      padding-right: 35px;
+      width: 50%;
+    }
+
   .event__presenters:before {
     display: block;
     content: "";
@@ -245,6 +298,8 @@
 
 .event__venue {
   clear: both;
+  padding-top: 35px;
+  padding-bottom: 35px;
 }
 
 .event__venue-info {
@@ -268,3 +323,40 @@
   font-size: 15px;
   font-size: 1.5rem;
 }
+
+/* Sponsors/supporters */
+
+.event__supporters {
+  padding-top: 35px;
+}
+
+  .event__supporters-intro {
+    font-size: 20px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .event__supporters-list {
+    padding-bottom: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-flow: row wrap;
+    padding-top: 35px;
+  }
+    .event__supporters-image {
+      display: inline;
+      max-width: 200px;
+    }
+    .event__supporters-item {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      flex: 1;
+      min-width: 20%;
+      text-align: center;
+    }

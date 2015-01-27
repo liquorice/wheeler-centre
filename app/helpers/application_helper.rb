@@ -50,13 +50,21 @@ module ApplicationHelper
     tag(:link, options)
   end
 
-  def format_date(start_date,end_date,length)
+  def format_date(start_date,end_date,options={})
+    format = options[:format].to_sym
+    date_only = false || options[:date_only]
     if !end_date.present?
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}, #{I18n.l(start_date, format: :time_only)}"
+      display_date = I18n.l(start_date, format: format)
+      unless date_only
+        display_date += ", #{I18n.l(start_date, format: :time_only)}"
+      end
     elsif start_date.beginning_of_day == end_date.beginning_of_day
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}, #{I18n.l(start_date, format: :time_only)}-#{I18n.l(end_date, format: :time_only)}"
+      display_date = I18n.l(start_date, format: format)
+      unless date_only
+        ", #{I18n.l(start_date, format: :time_only)}-#{I18n.l(end_date, format: :time_only)}"
+      end
     else
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}—#{I18n.l(end_date, format: :"#{length}_date")}"
+      display_date = "#{I18n.l(start_date, format: format)}—#{I18n.l(end_date, format: format)}"
     end
     display_date
   end

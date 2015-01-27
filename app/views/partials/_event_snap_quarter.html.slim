@@ -1,5 +1,7 @@
 - hide_summary = hide_summary || false
-- if post.fields[:promo_image].data_present?
+- if post.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif post.fields[:promo_image].data_present?
   - image = post.fields[:promo_image].asset
 - else
   - image = Heracles::Asset.all.sample(1).first

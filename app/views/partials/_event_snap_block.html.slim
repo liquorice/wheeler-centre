@@ -1,6 +1,8 @@
 - show_type = show_type || false
 - hide_summary = hide_summary || false
-- if post.fields[:promo_image].data_present?
+- if post.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif post.fields[:promo_image].data_present?
   - image = post.fields[:promo_image].asset
 - else
   - image = Heracles::Asset.all.sample(1).first
@@ -18,9 +20,9 @@
         - if image.attribution.present?
           .event-snap__hero-caption.caption
             p = image.attribution
-    - if rand(2) > 0 # post.fields[:event_series].data_present?
+    - if post.series
       p.event-snap__series
-        ' Event series name
+        = post.series.title
     h3.event-snap__title
       span.title-text == widont_format markdown_line post.title
       - selected_primary_topics = select_primary_topics_for_page(post)

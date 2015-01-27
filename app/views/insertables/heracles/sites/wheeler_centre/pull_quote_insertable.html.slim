@@ -1,0 +1,6 @@
+.pull-quote.figure.figure--pull-quote class=display_class
+  blockquote.pull-quote__quote
+    p= initial_quotes(data[:quote]).html_safe
+  - if data[:attribution].present?
+    cite.pull-quote__attribution.caption
+      = data[:attribution]
