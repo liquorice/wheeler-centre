@@ -1,64 +1,63 @@
 .masthead__navigation.clearfix role="navigation"
-  .masthead__navigation-wrapper.clearfix
-    span.masthead__navigation-mobile-toggle
-      i class="fa fa-list"
-    ul.masthead-nav-main.clearfix
-      li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
-        span.masthead-nav-main__anchor
-          ' Topics
-          i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
-        .masthead-nav-main__dropdown.clearfix
-          - primary_topics.in_groups(2, false).each do |group|
-            - if group.any?
-              ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
-                - group.each do |topic|
-                  li.masthead-nav-main__dropdown-item
-                    a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
-                      = topic.title
-      li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
-        a.masthead-nav-main__anchor href="/events"
-          ' Events
-          i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
-        .masthead-nav-main__dropdown.clearfix
-          ul.masthead-nav-main__dropdown-list
-            li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
-              span Our calendar
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Upcoming
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Event series
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Presenters
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Catch up
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Past events
-          ul.masthead-nav-main__dropdown-list
-            li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
-              span Current event series
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Lorem ipsum dolor sit amet
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href="#"
-                ' Another page
-      li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/broadcasts"
-          ' Broadcasts
-      li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/writings"
-          ' Writings
-      li.masthead-nav-main__item.masthead-nav-main__item--break
-        a.masthead-nav-main__anchor href="/events"
-          ' People
-      li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/features"
-          ' Features
+  span.masthead__mobile-toggle
+    i class="fa fa-list"
+  ul.masthead-nav-main.clearfix
+    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
+      span.masthead-nav-main__anchor
+        ' Topics
+        i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+      .masthead-nav-main__dropdown.clearfix
+        - primary_topics.in_groups(2, false).each do |group|
+          - if group.any?
+            ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+              - group.each do |topic|
+                li.masthead-nav-main__dropdown-item
+                  a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
+                    = topic.title
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
+      a.masthead-nav-main__anchor href="/events"
+        ' Events
+        i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+      .masthead-nav-main__dropdown.clearfix
+        ul.masthead-nav-main__dropdown-list
+          li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
+            span Our calendar
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Upcoming
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Event series
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Presenters
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Catch up
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Past events
+        ul.masthead-nav-main__dropdown-list
+          li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
+            span Current event series
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Lorem ipsum dolor sit amet
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="#"
+              ' Another page
+    li.masthead-nav-main__item
+      a.masthead-nav-main__anchor href="/broadcasts"
+        ' Broadcasts
+    li.masthead-nav-main__item
+      a.masthead-nav-main__anchor href="/writings"
+        ' Writings
+    li.masthead-nav-main__item.masthead-nav-main__item--break
+      a.masthead-nav-main__anchor href="/events"
+        ' People
+    li.masthead-nav-main__item
+      a.masthead-nav-main__anchor href="/features"
+        ' Features
   ul.masthead-nav-secondary.clearfix
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href="/about-us"

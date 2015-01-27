@@ -29,16 +29,11 @@
     z-index: 40;
   }
 
-    .masthead__navigation-wrapper {
-      float: left;
-      margin-left: -15px;
-    }
-
-    .masthead__navigation-mobile-toggle {
+    .masthead__mobile-toggle {
       display: none;
     }
 
-    .breakpoint-phone .masthead__navigation-mobile-toggle {
+    .breakpoint-phone .masthead__mobile-toggle {
       cursor: pointer;
       display: block;
       position: absolute;
@@ -47,11 +42,11 @@
       padding: 5px;
     }
 
-    .masthead__navigation-mobile-toggle i {
+    .masthead__mobile-toggle i {
       color: var(--primary-color-lighter);
     }
 
-    .masthead__navigation-mobile-toggle i:hover {
+    .masthead__mobile-toggle i:hover {
       color: #fff;
     }
 
@@ -61,6 +56,8 @@
     }
 
     .masthead-nav-main {
+      float: left;
+      margin-left: -15px;
       -webkit-font-smoothing: subpixel-antialiased;
       font-smoothing: subpixel-antialiased;
     }
@@ -72,6 +69,7 @@
     .breakpoint-phone .masthead-nav-main {
       background-color: var(--primary-color-lighter);
       border-bottom: 1px solid var(--primary-color-light);
+      margin-left: 0;
       position: absolute;
       top: 40px;
       left: 0;
