@@ -195,7 +195,7 @@
       min-width: 500px;
       padding: 30px 18px 20px;
       position: absolute;
-      z-index: 20;
+      z-index: 60;
     }
 
     .breakpoint-phone .masthead-nav-main__dropdown {
@@ -443,6 +443,11 @@
 
           .masthead-nav-secondary__search-button:hover,
           .masthead-nav-secondary__search-button:focus {
+            background-color: #006b5f;
+          }
+
+          .breakpoint-phone .masthead-nav-secondary__search-button:hover,
+          .breakpoint-phone .masthead-nav-secondary__search-button:focus {
             color: #006b5f;
             background-color: #e0eeec;
           }
