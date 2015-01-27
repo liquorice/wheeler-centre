@@ -4,9 +4,7 @@ module Heracles
       class ExternalVideoField < Heracles::Fielded::Field
 
         data_attribute :value
-
-        # For supplying options to the "radio" or "select" editor_types
-        config_attribute :field_option_values
+        data_attribute :youtube
 
         def data_present?
           value.present?
@@ -14,7 +12,8 @@ module Heracles
 
         def assign(attributes={})
           attributes.symbolize_keys!
-          self.value = attributes[:value].presence
+          self.value   = attributes[:value].presence
+          self.youtube = attributes[:youtube].presence
         end
 
         def to_s

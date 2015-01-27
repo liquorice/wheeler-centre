@@ -65,7 +65,13 @@ FieldExternalVideo = React.createClass
             $(@).css
               display:    'block',
             _this.enableInputs()
+            # Update field hash
+            newField = _.extend {}, _this.state.field,
+              youtube: data.items
+            _this.props.updateField _this.state.field.field_name, newField
+            # Set state
             _this.setState
+              field       : newField
               button_value: 'Load data'
               button_class: 'covered'
         , 2000)
