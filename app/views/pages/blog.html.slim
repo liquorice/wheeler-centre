@@ -27,29 +27,35 @@
         h2.blog-index__latest-header Latest writing
         - if posts.present?
           .blog-snap__group.clearfix
-            .blog-snap-halves.blog-snap-halves--1
-              - posts[0..0].each do |post|
-                = render "partials/blog_snap_half", post: post
-            .blog-snap-quarters.blog-snap-quarters--2.clearfix
-              - posts[1..2].each do |post|
-                = render "partials/blog_snap_quarter", post: post
-          .blog-snap__group.clearfix
-            .blog-snap-quarters.blog-snap-quarters--2.clearfix
-              - posts[3..4].each do |post|
-                = render "partials/blog_snap_quarter", post: post
-            .blog-snap-halves.blog-snap-halves--1
-              - posts[5..5].each do |post|
-                = render "partials/blog_snap_half", post: post
+            - if posts[0..0]
+              .blog-snap-halves.blog-snap-halves--1
+                - posts[0..0].each do |post|
+                  = render "partials/blog_snap_half", post: post
+            - if posts[1..2]
+              .blog-snap-quarters.blog-snap-quarters--2.clearfix
+                - posts[1..2].each do |post|
+                  = render "partials/blog_snap_quarter", post: post
+          - if posts[3..4]
+            .blog-snap__group.clearfix
+              .blog-snap-quarters.blog-snap-quarters--2.clearfix
+                - posts[3..4].each do |post|
+                  = render "partials/blog_snap_quarter", post: post
+              - if posts[5..5]
+                .blog-snap-halves.blog-snap-halves--1
+                  - posts[5..5].each do |post|
+                    = render "partials/blog_snap_half", post: post
           a.block-link.blog-index__latest-more href="#" There’s more recent writings over here on page two &#8230; &rsaquo;
 
-    .blog-index__topic.column-wrapper.gradient-top-down
-      .section-header
-        h2 #discuss
-        .intro.intro--small.column-narrow.copy
-          p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
-      .clearfix
-        - posts[6..11].each do |post|
-          = render "partials/blog_snap_block", post: post, hide_summary: true
+    - if posts[6..11]
+      .blog-index__topic.column-wrapper.gradient-top-down
+        .section-header
+          h2 #discuss
+          .intro.intro--small.column-narrow.copy
+            p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
+        .column-full
+          .snap-wrapper.clearfix
+            - posts[6..11].each do |post|
+              = render "partials/blog_snap_block", post: post, hide_summary: true
 
     .blog-index__guest-authors.column-wrapper
       .section-header
@@ -61,9 +67,13 @@
           - guest_authors.each do |guest_author|
             .guest-author
               - if guest_author.fields[:portrait].data_present?
+                - image = guest_author.fields[:portrait].asset
+              - else
+                - image = Heracles::Asset.all.sample(1).first
+              - if image
                 .author-image
                   .author-image__inner
-                    img src= guest_author.fields[:portrait].asset.content_thumbnail_url
+                    img src=image.content_thumbnail_url
               h3.guest-author__title
                 = guest_author.title
               - if guest_author.fields[:intro].data_present?
@@ -75,19 +85,20 @@
                     a.blog-post-list__anchor href=post.absolute_url
                       h3.blog-post-list__title
                         span.title-text == widont_format markdown_line post.title
-                        - selected_primary_tags = select_primary_tags_from(post.tags)
-                        - if selected_primary_tags.any?
+                        - selected_primary_topics = select_primary_topics_for_page(post)
+                        - if selected_primary_topics && selected_primary_topics.any?
                           span.title-tags
                             '  &nbsp;/&nbsp;
-                            = selected_primary_tags.first
-    .blog-index__topic.column-wrapper
-      .column-mid.clearfix
-        .section-header
-          h2 Victorian Premier’s Literary Awards
-          .intro.intro--small.column-narrow.copy
-            p A ready-made summer reading list of the best of the best in Australian writing now.
-        .blog-snap__group.blog-snap__group--4.clearfix
-          - posts[12..15].each do |post|
-            = render "partials/blog_snap_block", post: post, hide_summary: true
+                            = selected_primary_topics.first.title
+    - if posts[12..15]
+      .blog-index__topic.column-wrapper
+        .column-mid.clearfix
+          .section-header
+            h2 Victorian Premier’s Literary Awards
+            .intro.intro--small.column-narrow.copy
+              p A ready-made summer reading list of the best of the best in Australian writing now.
+          .snap-wrapper.clearfix
+            - posts[12..15].each do |post|
+              = render "partials/blog_snap_block", post: post, hide_summary: true
 
     = render "partials/topics_section"

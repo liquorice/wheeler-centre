@@ -1,0 +1,71 @@
+- random_pages = page.random_pages(page_number: params[:page], per_page: params[:per_page])
+- latest_pages = page.latest_pages
+- primary_topic = primary_topic_for_topic(page)
+
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Topics
+
+= area :main do
+  .topic-page
+    .topic-page__header
+      .topic-page__nav data-view-touch-preview="topic-page__nav--hover"
+        p.topic-page__nav-label
+          ' View topics
+          i.fa.fa-angle-down
+          i.fa.fa-angle-up
+        .topic-page__nav-list
+          h3.topic-page__nav-title
+            a href=primary_topic.absolute_url = primary_topic.title
+          = render "partials/page_children", parent: primary_topic, current: page
+      h1.topic-page__title
+        = page.title
+    - if page.fields[:intro].data_present?
+      .page__intro.intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
+    - unless params[:page] || random_pages.total_pages == 1
+      .topic-page__latest.column-wrapper
+        h2.blog-index__latest-header Latest
+        .column-wide.clearfix
+          .blog-snap__group.clearfix
+            .blog-snap-halves.blog-snap-halves--1
+              - latest_pages[0..0].each do |post|
+                - if post.page_type == "blog_post"
+                  = render "partials/blog_snap_quarter", post: post
+                - elsif post.page_type == "event"
+                  = render "partials/event_snap_quarter", post: post
+            .blog-snap-quarters.blog-snap-quarters--2.clearfix
+              - latest_pages[1..2].each do |post|
+                - if post.page_type == "blog_post"
+                  = render "partials/blog_snap_quarter", post: post
+                - elsif post.page_type == "event"
+                  = render "partials/event_snap_quarter", post: post
+    .column-wrapper
+      .topic-page__random-intro.intro
+        .column-narrow.copy
+          p Anything and everything in <em>#{page.title}</em> from across our archives.
+      .column-full
+        - if random_pages.total_pages > 1
+          .pagination-top
+            = paginate random_pages, outer_window: 4
+          .pagination-context.pagination-context--top
+            ' Page
+            = (params[:page] || 1)
+            em &nbsp;of&nbsp;
+            = random_pages.total_pages
+        .topic-page__random.snap-wrapper.clearfix
+          - random_pages.each do |post|
+            - if post.page_type == "blog_post"
+              = render "partials/blog_snap_block", post: post, show_type: true
+            - elsif post.page_type == "event"
+              = render "partials/event_snap_block", post: post, show_type: true
+        - if random_pages.total_pages > 1
+          .pagination-context.pagination-context--bottom
+            ' Page
+            = (params[:page] || 1)
+            em &nbsp;of&nbsp;
+            = random_pages.total_pages
+          .pagination-bottom
+            = paginate random_pages, outer_window: 4
+    = render "partials/topics_section", intro: "Explore the other areas of interest across our site."

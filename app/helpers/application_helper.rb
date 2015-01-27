@@ -50,13 +50,21 @@ module ApplicationHelper
     tag(:link, options)
   end
 
-  def format_date(start_date,end_date,length)
+  def format_date(start_date,end_date,options={})
+    format = options[:format].to_sym
+    date_only = false || options[:date_only]
     if !end_date.present?
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}, #{I18n.l(start_date, format: :time_only)}"
+      display_date = I18n.l(start_date, format: format)
+      unless date_only
+        display_date += ", #{I18n.l(start_date, format: :time_only)}"
+      end
     elsif start_date.beginning_of_day == end_date.beginning_of_day
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}, #{I18n.l(start_date, format: :time_only)}-#{I18n.l(end_date, format: :time_only)}"
+      display_date = I18n.l(start_date, format: format)
+      unless date_only
+        ", #{I18n.l(start_date, format: :time_only)}-#{I18n.l(end_date, format: :time_only)}"
+      end
     else
-      display_date = "#{I18n.l(start_date, format: :"#{length}_date")}—#{I18n.l(end_date, format: :"#{length}_date")}"
+      display_date = "#{I18n.l(start_date, format: format)}—#{I18n.l(end_date, format: format)}"
     end
     display_date
   end
@@ -71,36 +79,30 @@ module ApplicationHelper
     topics_page.children.visible.published.of_type("topic")
   end
 
+  # Return an array of all the primary topics for a given `page`
   def select_primary_topics_for_page(page)
+    matches = []
     if page.fields[:topics].data_present?
-      page.fields[:topics].pages.select {|t| primary_topics.include? t}
+      page.fields[:topics].pages.each do |topic|
+        match = primary_topic_for_topic(topic)
+        matches << match if match
+      end
     end
+    matches.uniq
   end
 
-  def primary_tags
-    [
-      "Books, reading & writing",
-      "Art & design",
-      "Creative arts & pop culture",
-      "History, politics & current affairs",
-      "Free speech, human rights & social issues",
-      "Race, religion & identity",
-      "Sex & gender",
-      "Internet, journalism, media & publishing",
-      "Economics, business & marketing",
-      "Education, literacy & numeracy",
-      "Energy, environment & climate",
-      "Health, medicine & psychology",
-      "Science & technology",
-      "Law, ethics & philosophy",
-      "Comedy & humour"
-    ]
-  end
-
-
-  # Select only the primary_tags
-  def select_primary_tags_from(tags)
-    tags.select {|t| primary_tags.include? t.name }
+  def primary_topic_for_topic(topic)
+    return unless topic.page_type == "topic"
+    if primary_topics.to_a.map(&:id).include?(topic.id)
+      primary_topic = topic
+    else
+      topic.ancestors.each do |ancestor|
+        if primary_topics.include?(ancestor)
+          primary_topic = ancestor
+        end
+      end
+    end
+    primary_topic
   end
 
 end

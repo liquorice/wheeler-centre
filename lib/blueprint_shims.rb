@@ -62,6 +62,7 @@ module LegacyBlueprint
     PslPerson
     Role
     Setting
+    Site
     Tag
     TagPhrase
     Thumbnail

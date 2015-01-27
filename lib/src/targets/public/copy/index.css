@@ -19,16 +19,13 @@
 .copy section > *,
 .copy section > blockquote > * {
   margin-top: 0;
-  margin-bottom: 20px;
-  margin-bottom: 2rem;
+  margin-bottom: 1em;
 }
 
 .copy > hr {
   margin-top: 17px;
   margin-top: 1.7rem;
-  margin-bottom: 20px;
-  margin-bottom: 2rem;
-  clear: both;
+  margin-bottom: 1em;
 }
 
 /* Block Elements
@@ -41,20 +38,22 @@
 
 }
 
-.copy blockquote {
+.copy > blockquote,
+.copy > .section--normal > blockquote {
   border-bottom: 1px solid #ddd;
   border-top: 1px solid #ddd;
   color: #111;
   font-size: 25px;
   font-size: 2.5rem;
   padding-top: 35px;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
   padding-left: 35px;
   padding-right: 35px;
   margin-top: 30px;
   margin-bottom: 35px;
   line-height: 1.45;
   margin-left: -35px;
+  margin-right: -35px;
 }
 
 .copy hr {
@@ -137,28 +136,23 @@
 .copy p + h4,
 .copy p + h5,
 .copy p + h6 {
-  padding-top: 10px;
-  padding-top: 1rem;
+  padding-top: 0.5em;
 }
 
 .copy h1 {
-  font-size: 25px;
-  font-size: 2.5rem;
+  font-size: 1.4em;
 }
 
 .copy h2 {
-  font-size: 22px;
-  font-size: 2.2rem;
+  font-size: 1.2em;
 }
 
 .copy h3 {
-  font-size: 21px;
-  font-size: 2.1rem;
+  font-size: 1em;
 }
 
 .copy h4 {
-  font-size: 21px;
-  font-size: 2.1rem;
+  font-size: 1em;
 }
 
 .copy h5 {}

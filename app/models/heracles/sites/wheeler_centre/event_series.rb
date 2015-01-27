@@ -9,8 +9,8 @@ module Heracles
               {name: :body, type: :content},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
-              {name: :series_id, type: :integer, label: "Series Id"},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"}
             ]
           }
         end
@@ -26,7 +26,11 @@ module Heracles
         end
 
         def events(options={})
-          search_events(options={})
+          search_events(options)
+        end
+
+        def upcoming_events(options={})
+          search_events(options)
         end
 
         def sponsors
@@ -42,6 +46,7 @@ module Heracles
             with :published, true
 
             order_by :start_date, :asc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
           end
         end
 

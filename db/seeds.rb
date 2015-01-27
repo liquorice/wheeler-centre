@@ -18,124 +18,168 @@ user.name = "icelab"
 user.save!
 user.update(superadmin: true)
 
-# Make an admin user for Jon
-user = Heracles::User.find_or_initialize_by(email: "jon.tjhia@wheelercentre.com")
-user.password = "bawt6Aik6uS5eW"
-user.name = "Jon Tjhia"
-user.save!
-
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
 site.title = "Wheeler Centre"
 site.hostnames = ["localhost:5000", "wheeler-centre.herokuapp.com"]
 site.published = true
 site.transloadit_params = {
-  "steps"=> {
-    "content_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 300,
-      "height"=> 300,
-      "quality"=> 75,
-      "resize_strategy"=> "fillcrop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+  "steps" => {
+    "content_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 300,
+      "height" => 300,
+      "quality" => 75,
+      "resize_strategy" => "fillcrop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_thumbnail_resized"]
+    "content_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_thumbnail_resized"]
     },
-    "content_small_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 480,
-      "height"=> 720,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_small_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 720,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_small"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_small_resized"]
+    "content_small" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_resized"]
     },
-    "content_medium_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 960,
-      "height"=> 960,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_medium_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 960,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_medium"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_medium_resized"]
+    "content_medium" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_resized"]
     },
-    "content_large_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 1400,
-      "height"=> 1400,
-      "quality"=> 75,
-      "zoom"=> false,
-      "strip"=> true
+    "content_large_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 1400,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true
     },
-    "content_large"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_large_resized"]
+    "content_large" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_resized"]
     },
-    "content_large_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 1400,
-      "height"=> 800,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_large_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 800,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_large_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_large_thumbnail_resized"]
+    "content_large_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_thumbnail_resized"]
     },
-    "content_medium_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 960,
-      "height"=> 550,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_medium_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 550,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_medium_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_medium_thumbnail_resized"]
+    "content_medium_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_thumbnail_resized"]
     },
-    "content_small_thumbnail_resized"=> {
-      "robot"=> "/image/resize",
-      "use"=> ":original",
-      "width"=> 480,
-      "height"=> 274,
-      "quality"=> 75,
-      "resize_strategy"=> "crop",
-      "gravity"=> "center",
-      "zoom"=> true,
-      "strip"=> true
+    "content_small_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 274,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
     },
-    "content_small_thumbnail"=> {
-      "robot"=> "/image/optimize",
-      "use"=> ["content_small_thumbnail_resized"]
+    "content_small_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_thumbnail_resized"]
     },
-    "store"=> {
-      "use"=> ["content_thumbnail", "content_small", "content_medium", "content_large", "content_small_thumbnail", "content_medium_thumbnail", "content_large_thumbnail"]
+    "audio_mp3" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "mp3"
+    },
+    "audio_ogg" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "ogg"
+    },
+    "video_ipad_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "preset" => "ipad-high"
+    },
+    "video_iphone_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "preset" => "iphone-high"
+    },
+    "store" => {
+      "use" => [
+        "content_thumbnail",
+        "content_small",
+        "content_medium",
+        "content_large",
+        "content_small_thumbnail",
+        "content_medium_thumbnail",
+        "content_large_thumbnail",
+        "audio_mp3",
+        "audio_ogg",
+        "video_ipad_high",
+        "video_iphone_high"
+      ]
+    },
+    "store_youtube" => {
+      "robot" => "/youtube/store",
+      "use" => [":original"],
+      "username" => "",
+      "password" => "",
+      "title" => "${file.name}",
+      "description" => "${file.name} description",
+      "category" => "People & Blogs",
+      "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
+      "visibility" => "private"
     }
   }
 }
 site.save!
+
+# Make an admin user for Jon
+user = Heracles::User.find_or_initialize_by(email: "jon.tjhia@wheelercentre.com")
+user.password = "bawt6Aik6uS5eW"
+user.name = "Jon Tjhia"
+user.sites << site
+user.save!
 
 # Homepage
 # ------------------------------------------------------------------------------
@@ -156,7 +200,7 @@ events_index.title = "Events"
 events_index.slug = "events"
 events_index.published = true
 events_index.locked = true
-events_index.page_order_position = :last
+events_index.page_order_position = :last if events_index.new_record?
 events_index.save!
 
 # Events -> Events collection
@@ -170,7 +214,7 @@ events_collection.fields[:sort_attribute].value = "created_at"
 events_collection.fields[:sort_direction].value = "DESC"
 events_collection.published = false
 events_collection.locked = true
-events_collection.page_order_position = :last
+events_collection.page_order_position = :last if events_collection.new_record?
 events_collection.save!
 
 # Events -> Event series index
@@ -181,7 +225,7 @@ events_series_index.title = "Series"
 events_series_index.slug = "series"
 events_series_index.published = true
 events_series_index.locked = true
-events_series_index.page_order_position = :last
+events_series_index.page_order_position = :last if events_series_index.new_record?
 events_series_index.save!
 
 # Events -> Event series index -> Event series collection
@@ -195,7 +239,7 @@ event_series_collection.fields[:sort_attribute].value = "created_at"
 event_series_collection.fields[:sort_direction].value = "DESC"
 event_series_collection.published = false
 event_series_collection.locked = true
-event_series_collection.page_order_position = :last
+event_series_collection.page_order_position = :last if event_series_collection.new_record?
 event_series_collection.save!
 
 # Events -> Presenters
@@ -206,7 +250,7 @@ presenters.title = "Presenters"
 presenters.slug = "presenters"
 presenters.published = true
 presenters.locked = true
-presenters.page_order_position = :last
+presenters.page_order_position = :last if presenters.new_record?
 presenters.save!
 
 # Events -> Venues index
@@ -217,7 +261,7 @@ venues_index.title = "Venues"
 venues_index.slug = "venues"
 venues_index.published = true
 venues_index.locked = true
-venues_index.page_order_position = :last
+venues_index.page_order_position = :last if venues_index.new_record?
 venues_index.save!
 
 # Events -> Venues index -> Venues collection
@@ -231,7 +275,7 @@ venues_collection.fields[:sort_attribute].value = "created_at"
 venues_collection.fields[:sort_direction].value = "DESC"
 venues_collection.published = false
 venues_collection.locked = true
-venues_collection.page_order_position = :last
+venues_collection.page_order_position = :last if venues_collection.new_record?
 venues_collection.save!
 
 # Writings
@@ -242,7 +286,7 @@ blog_index.title = "Writings"
 blog_index.slug = "writings"
 blog_index.published = true
 blog_index.locked = true
-blog_index.page_order_position = :last
+blog_index.page_order_position = :last if blog_index.new_record?
 blog_index.save!
 
 # Writings -> Writings collection
@@ -256,7 +300,7 @@ blog_collection.fields[:sort_attribute].value = "created_at"
 blog_collection.fields[:sort_direction].value = "DESC"
 blog_collection.published = false
 blog_collection.locked = true
-blog_collection.page_order_position = :last
+blog_collection.page_order_position = :last if blog_collection.new_record?
 blog_collection.save!
 
 # Writings -> Guests
@@ -267,7 +311,7 @@ guests.title = "Guest authors"
 guests.slug = "guests"
 guests.published = true
 guests.locked = true
-guests.page_order_position = :last
+guests.page_order_position = :last if guests.new_record?
 guests.save!
 
 # Broadcasts index page
@@ -278,7 +322,7 @@ broadcasts_index.title = "Broadcasts"
 broadcasts_index.slug = "broadcasts"
 broadcasts_index.published = true
 broadcasts_index.locked = true
-broadcasts_index.page_order_position = :last
+broadcasts_index.page_order_position = :last if broadcasts_index.new_record?
 broadcasts_index.save!
 
 # Broadcasts -> Recordings collection
@@ -292,7 +336,7 @@ recordings_collection.fields[:sort_attribute].value = "created_at"
 recordings_collection.fields[:sort_direction].value = "DESC"
 recordings_collection.published = false
 recordings_collection.locked = true
-recordings_collection.page_order_position = :last
+recordings_collection.page_order_position = :last if recordings_collection.new_record?
 recordings_collection.save!
 
 # Broadcasts -> Podcasts
@@ -303,7 +347,7 @@ podcasts.title = "Podcasts"
 podcasts.slug = "podcasts"
 podcasts.published = true
 podcasts.locked = true
-podcasts.page_order_position = :last
+podcasts.page_order_position = :last if podcasts.new_record?
 podcasts.save!
 
 # People page
@@ -314,7 +358,7 @@ people.title = "People"
 people.slug = "people"
 people.published = true
 people.locked = true
-people.page_order_position = :last
+people.page_order_position = :last if people.new_record?
 people.save!
 
 # People -> People collection
@@ -328,7 +372,7 @@ people_collection.fields[:sort_attribute].value = "created_at"
 people_collection.fields[:sort_direction].value = "DESC"
 people_collection.published = false
 people_collection.locked = true
-people_collection.page_order_position = :last
+people_collection.page_order_position = :last if people_collection.new_record?
 people_collection.save!
 
 # Topics
@@ -339,41 +383,51 @@ topics.title = "Topics"
 topics.slug = "topics"
 topics.published = true
 topics.locked = false
-topics.page_order_position = :last
+topics.page_order_position = :last if topics.new_record?
 topics.save!
 
 topic_names = [
   {
     name: "Books, reading & writing",
     children: [
-      {name: "Fiction"},
-      {name: "Non-fiction"},
-      {name: "Genre"},
-      {name: "True crime"},
-      {name: "Science fiction"},
-      {name: "Romance"},
-      {name: "Fantasy"},
-      {name: "Adventure"},
-      {name: "Poetry"},
-      {name: "Words & language"},
-      {name: "Classics"},
-      {name: "Memoir"},
-      {name: "History"},
-      {name: "Australian writing"},
-      {name: "Indigenous Australian writing"},
-      {name: "Literary awards"},
-      {name: "Young adult"},
+      {
+        name: "Fiction",
+        children: [
+          {name: "Classics"},
+          {name: "Crime & pulp"},
+          {name: "Erotica"},
+          {name: "Fantasy"},
+          {name: "Romance"},
+          {name: "Science fiction"},
+          {name: "Young adult"},
+        ]
+      },
+      {
+        name: "Non-fiction",
+        children: [
+          {name: "Biography & memoir"},
+          {name: "History"},
+          {name: "Travel"},
+          {name: "Crime"},
+        ]
+      },
       {name: "Children’s books"},
-      {name: "Editing"},
-      {name: "Literary journals"},
-      {name: "Magazines"},
+      {name: "Poetry"},
       {name: "Graphic novels & comics"},
-      {name: "Erotica"},
+      {name: "Criticism"},
+      {name: "Australian stories"},
+      {name: "Editing, publishing & book design"},
+      {name: "Journals & magazines"},
+      {name: "New & emerging writers"},
+      {name: "Bookshops"},
+      {name: "Awards & prizes"},
+      {name: "Words & language"},
       {name: "Funding"},
+      {name: "Creativity"},
     ]
   },
   {
-    name: "Art & design",
+    name: "Visual art & design",
     children: [
       {
         name: "Art",
@@ -382,172 +436,150 @@ topic_names = [
           {name: "Sculpture"},
           {name: "Painting"},
           {name: "Illustration"},
-          {name: "Media art"}
+          {name: "Media art"},
+          {name: "Art history"},
         ]
       },
       {name: "Industrial design"},
       {name: "Architecture"},
       {name: "Urban design"},
-      {name: "Games"},
       {name: "Fashion"},
       {name: "Jewellery"},
       {name: "Graphic design"},
-      {name: "Funding"}
+      {name: "Funding"},
     ]
   },
   {
-    name: "Creative arts & pop culture",
+    name: "Performing Arts & Pop Culture",
     children: [
       {name: "Music"},
       {name: "Film"},
-      {name: "Theatre/plays"},
-      {name: "Sport"},
+      {name: "Theatre"},
       {name: "Dance"},
       {name: "TV"},
-      {name: "Performance"},
+      {name: "Radio"},
+      {name: "Sport"},
+      {name: "Games"},
+      {name: "Creativity"},
       {name: "Media"},
-      {name: "Social media"},
-      {name: "Radio"}
     ]
   },
   {
     name: "History, politics & current affairs",
     children: [
       {name: "Australian politics"},
-      {name: "Rural Australia"},
-      {name: "Australian media"},
       {name: "History"},
-      {name: "War"},
+      {name: "Defence, military & war"},
       {name: "Activism"},
-      {name: "International relations"},
-      {name: "Diplomacy"},
-      {name: "Military"},
-      {name: "Government"}
+      {name: "International relations & diplomacy"},
+      {name: "Government"},
+      {name: "Sexual & gender politics"},
+      {name: "Speech & oration"},
     ]
   },
   {
     name: "Free speech, human rights & social issues",
     children: [
+      {name: "Freedom of speech & censorship"},
       {name: "Social justice"},
-      {name: "Activism"},
       {name: "Human rights"},
       {name: "Privacy"},
-      {name: "Censorship"}
+      {name: "Activism"},
+      {name: "Community"},
+      {name: "Gambling"},
     ]
   },
   {
     name: "Race, religion & identity",
     children: [
-      {name: "Race"},
-      {name: "Indigenous"},
-      {name: "Identity politics"},
-      {name: "Religion"},
-      {name: "Multiculturalism"},
-      {name: "Discrimination"},
+      {name: "Race & multiculturalism"},
+      {name: "Identity"},
+      {name: "Faith, religion & spirituality"},
       {name: "Diversity"},
-      {name: "Islam"},
-      {name: "Youth"},
-      {name: "Spirituality"},
+      {name: "Young people"},
+      {name: "Indigenous"},
       {name: "Migration"},
-      {name: "Christianity"},
-      {name: "Jewish"},
-      {name: "Asia"},
-      {name: "Africa"},
+      {name: "Australia"},
+      {name: "Africa & Middle East"},
+      {name: "Asia & Pacific"},
       {name: "Europe"},
-      {name: "Interfaith"},
-      {name: "Pacific"}
+      {name: "The Americas"},
     ]
   },
   {
     name: "Sex & gender",
     children: [
-      {name: "Sex"},
+      {name: "Sex & relationships"},
       {name: "Gender"},
       {name: "Sexuality"},
-      {name: "Sexism"},
+      {name: "Sexism & feminism"},
       {name: "Erotica"},
-      {name: "Feminism"},
-      {name: "Relationships"},
-      {name: "Women/men"},
-      {name: "Gender and Sexual Diversity"}
     ]
   },
   {
     name: "Internet, journalism, media & publishing",
     children: [
-      {name: "Internet culture"},
-      {name: "Digital publishing"},
-      {name: "Online dating"},
-      {name: "Print media"},
-      {name: "Leaking/whistleblowing"},
-      {name: "Editing"},
-      {name: "Journalistic ethics"},
-      {name: "Interviewing"},
-      {name: "Web"},
-      {name: "Newspapers"}
+      {name: "Digital culture"},
+      {name: "Publishing & editing"},
+      {name: "Media"},
+      {name: "Privacy & security"},
+      {name: "Leaking & whistleblowing"},
     ]
   },
   {
     name: "Economics, business & marketing",
     children: [
-      {name: "Economy"},
+      {name: "Economy & development"},
       {name: "Work"},
-      {name: "Publicity"},
+      {name: "Marketing & publicity"},
       {name: "Advertising"},
-      {name: "Finance"},
-      {name: "Investment/divestment"},
-      {name: "Gambling"},
-      {name: "Funding"}
+      {name: "Business & finance"},
+      {name: "Funding & philanthropy"},
     ]
   },
   {
     name: "Education, literacy & numeracy",
     children: [
       {name: "Education"},
-      {name: "University"},
       {name: "Literacy"},
-      {name: "Mathematics"}
+      {name: "Mathematics"},
     ]
   },
   {
     name: "Energy, environment & climate",
     children: [
       {name: "Environment"},
-      {name: "Climate change"},
-      {name: "Animals"},
+      {name: "Climate change & weather"},
+      {name: "Energy & resources"},
       {name: "Food"},
-      {name: "Food security"},
-      {name: "Forestry"},
-      {name: "Horticulture"},
-      {name: "Ecology"},
-      {name: "Agriculture"},
-      {name: "Pollution"},
-      {name: "Coal"},
-      {name: "Solar"},
-      {name: "Gas"},
-      {name: "Nuclear"}
+      {name: "Animals & nature"},
+      {name: "Cities"},
+      {name: "Country & rural"},
     ]
   },
   {
     name: "Health, medicine & psychology",
     children: [
-      {name: "Medicine"},
-      {name: "Psychology"},
-      {name: "Mental health"},
-      {name: "Nutrition"},
-      {name: "Drugs"}
+      {name: "Life & death"},
+      {name: "Health & medicine"},
+      {name: "Disability"},
+      {name: "Deaf"},
+      {name: "Psychology & mental health"},
+      {name: "Food & nutrition"},
+      {name: "Young & old"},
+      {name: "Drugs"},
+      {name: "Sport"},
     ]
   },
   {
     name: "Science & technology",
     children: [
+      {name: "Technology"},
       {name: "Research"},
-      {name: "Funding"},
-      {name: "Nanotechnology"},
       {name: "Biology"},
       {name: "Chemistry"},
       {name: "Physics"},
-      {name: "Space"}
+      {name: "Space"},
     ]
   },
   {
@@ -555,28 +587,33 @@ topic_names = [
     children: [
       {name: "Law"},
       {name: "Crime"},
-      {name: "Ethics"},
-      {name: "Morality"},
-      {name: "Philosophy"}
+      {name: "Ethics & morals"},
+      {name: "Philosophy"},
+      {name: "Privacy & security"},
     ]
   },
   {
     name: "Comedy & humour",
     children: [
-      {name: "Satire"}
+      {name: "Comedy"},
+      {name: "Humour"},
+      {name: "Satire"},
     ]
   }
 ]
 
 def build_topic_page(topic, parent, site)
   slug = slugify(topic[:name])
+  # puts "*************"
+  # puts topic[:name]
+  # puts slug
   page = Heracles::Sites::WheelerCentre::Topic.find_or_initialize_by(url: "#{parent.absolute_url}/#{slug}")
   page.site = site
   page.slug = slug
   page.parent = parent
   page.title = topic[:name]
   page.published = true
-  page.page_order_position = :last
+  page.page_order_position = :last if page.new_record? if page.new_record?
   page.save!
   if topic[:children].present?
     topic[:children].each do |child|
@@ -598,7 +635,7 @@ about_us.title = "About us"
 about_us.slug = "about-us"
 about_us.published = true
 about_us.locked = false
-about_us.page_order_position = :last
+about_us.page_order_position = :last if about_us.new_record? if about_us.new_record?
 about_us.save!
 
 # About us -> Who we are
@@ -609,7 +646,7 @@ who.title = "Who we are"
 who.slug = "who-we-are"
 who.published = true
 who.locked = false
-who.page_order_position = :last
+who.page_order_position = :last if who.new_record?
 who.save!
 
 # About us -> Who funds us
@@ -620,7 +657,7 @@ funds.title = "Who funds us"
 funds.slug = "who-funds-us"
 funds.published = true
 funds.locked = false
-funds.page_order_position = :last
+funds.page_order_position = :last if funds.new_record?
 funds.save!
 
 # About us -> Who funds us -> Support us
@@ -631,7 +668,7 @@ support_us.title = "Support us"
 support_us.slug = "support-us"
 support_us.published = true
 support_us.locked = false
-support_us.page_order_position = :last
+support_us.page_order_position = :last if support_us.new_record?
 support_us.save!
 
 # About us -> Who funds us -> Sponsors
@@ -642,7 +679,7 @@ sponsors.title = "Sponsors"
 sponsors.slug = "sponsors"
 sponsors.published = true
 sponsors.locked = true
-sponsors.page_order_position = :last
+sponsors.page_order_position = :last if sponsors.new_record?
 sponsors.save!
 
 # About us -> Who funds us -> Sponsors -> Sponsors collection
@@ -656,7 +693,7 @@ sponsors_collection.fields[:sort_attribute].value = "created_at"
 sponsors_collection.fields[:sort_direction].value = "DESC"
 sponsors_collection.published = false
 sponsors_collection.locked = true
-sponsors_collection.page_order_position = :last
+sponsors_collection.page_order_position = :last if sponsors_collection.new_record?
 sponsors_collection.save!
 
 # About us -> Residents
@@ -667,7 +704,7 @@ residents.title = "Resident organisations"
 residents.slug = "resident-organisations"
 residents.published = true
 residents.locked = false
-residents.page_order_position = :last
+residents.page_order_position = :last if residents.new_record?
 residents.save!
 
 # About us -> Ticketing
@@ -678,7 +715,7 @@ ticketing.title = "Ticketing"
 ticketing.slug = "ticketing"
 ticketing.published = true
 ticketing.locked = false
-ticketing.page_order_position = :last
+ticketing.page_order_position = :last if ticketing.new_record?
 ticketing.save!
 
 # About us -> FAQs
@@ -689,7 +726,7 @@ faqs.title = "FAQs"
 faqs.slug = "faqs"
 faqs.published = true
 faqs.locked = false
-faqs.page_order_position = :last
+faqs.page_order_position = :last if faqs.new_record?
 faqs.save!
 
 # About us -> Privacy policy
@@ -700,7 +737,7 @@ privacy.title = "Privacy policy"
 privacy.slug = "privacy"
 privacy.published = true
 privacy.locked = false
-privacy.page_order_position = :last
+privacy.page_order_position = :last if privacy.new_record?
 privacy.save!
 
 # About us -> Community guidelines
@@ -711,5 +748,5 @@ community_guidelines.title = "Community guidelines"
 community_guidelines.slug = "community-guidelines"
 community_guidelines.published = true
 community_guidelines.locked = false
-community_guidelines.page_order_position = :last
+community_guidelines.page_order_position = :last if community_guidelines.new_record?
 community_guidelines.save!

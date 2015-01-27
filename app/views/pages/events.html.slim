@@ -19,4 +19,4 @@
               h3.event__title
                 = event.title
             p.event-widget__date
-              = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, "medium")
+              = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")

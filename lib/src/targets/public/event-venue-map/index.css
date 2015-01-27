@@ -1,0 +1,31 @@
+.event__venue-map-wrapper {
+  position: relative;
+  background: var(--primary-color-lighter);
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+  .event__venue-map-panel {
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.05);
+    background: #fff;
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: 1.5;
+    margin-left: -35px;
+    max-width: 340px;
+    padding: 35px 45px 35px 35px;
+    position: relative;
+  }
+    .event__venue-map-panel h4 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+  .event__venue-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }

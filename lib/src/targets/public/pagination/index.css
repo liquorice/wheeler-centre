@@ -1,0 +1,103 @@
+/* Pagination */
+
+.pagination {
+  clear: both;
+  font-family: var(--font-sans);
+  margin-bottom: 35px;
+  text-align: center;
+  font-size: 0;
+}
+  .pagination-bottom .pagination {
+    background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.03)));
+    background: -webkit-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.03));
+    background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.03));
+    background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.03));
+    background: linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.03));
+    border-top: 1px solid #e9e9e9;
+  }
+
+  .pagination-top .pagination {
+    background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0.02))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0)));
+    background: -webkit-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.02));
+    background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.02));
+    background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.02));
+    background: linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(top, transparent, rgba(0, 0, 0, 0.02));
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .pagination a,
+  .pagination .gap,
+  .pagination .current {
+    display: inline-block;
+    font-size: 14px;
+    font-size: 1.4rem;
+    padding: 16px 20px;
+    position: relative;
+  }
+  .pagination a:before,
+  .pagination .gap:before,
+  .pagination .current:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 1px;
+    top: 0;
+    bottom: 0;
+  }
+
+  .pagination-bottom .pagination a:before,
+  .pagination-bottom .pagination .gap:before,
+  .pagination-bottom .pagination .current:before {
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,0.06)), color-stop(100%, rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .pagination-top .pagination a:before,
+  .pagination-top .pagination .gap:before,
+  .pagination-top .pagination .current:before {
+    background: -moz-linear-gradient(bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(0,0,0,0.06)), color-stop(100%, rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -o-linear-gradient(bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .pagination .current {
+    color: #aaa;
+  }
+
+  .pagination a:hover {
+    background-color: #fff;
+    color: var(--primary-color);
+  }
+
+  .pagination .prev {
+    float: left;
+  }
+    .pagination .prev a:before {
+      left: auto;
+      right: 0;
+    }
+  .pagination .next {
+    float: right;
+  }
+
+.pagination-context {
+  color: #666;
+  font-size: 16px;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 12px 0;
+}
+  .pagination-context--top {
+    margin-top: -35px;
+    margin-bottom: 35px;
+  }
+
+  .pagination-context em {
+    font-style: italic;
+  }

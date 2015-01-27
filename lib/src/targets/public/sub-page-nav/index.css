@@ -1,0 +1,31 @@
+/* Sub-page nav */
+
+.sub-page-nav {
+  font-family: var(--font-sans);
+  font-weight: bold;
+}
+
+  .sub-page-nav--level-1 a {
+  }
+
+  .sub-page-nav--level-2 {
+    border-bottom: 1px solid #dedede;
+    border-top: 1px solid #dedede;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: normal;
+    margin-bottom: 12px;
+  }
+
+  .sub-page-nav__item {
+  }
+  .sub-page-nav__anchor {
+    border-radius: 3px;
+    display: block;
+    padding: 7px 12px;
+  }
+    .sub-page-nav__anchor:hover {
+      background-color: #dbfffb;
+      color: var(--primary-color);
+    }
+

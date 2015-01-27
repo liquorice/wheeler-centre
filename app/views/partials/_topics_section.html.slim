@@ -1,12 +1,13 @@
+- intro = intro || "Explore the areas of interest across our site."
 .topics-section.column-wrapper
   .section-header
     h2 Topics
     .intro.intro--small.column-narrow.copy
-      p Explore the areas of interest across our site.
+      p = intro
   .column-wide
     ul.topics-section__list
-      - primary_tags.each do |tag|
+      - primary_topics.each do |topic|
         li.topics-section__list-item
-          a href="#"= tag
+          a href=topic.absolute_url = topic.title
 
 

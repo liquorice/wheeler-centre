@@ -1,6 +1,7 @@
 /* Variables */
 
 :root {
+  --column-full: 1680px;
   --column-wide: 1200px;
   --column-mid: 940px;
   --column-small: 860px;
@@ -9,8 +10,9 @@
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c; /* 0, 158, 140 */
   --primary-color-lighter: #ccefeb;
+  --primary-color-light: #b4dbd7;
   --primary-color-darker: color(var(--primary-color) shade(15%));
-  --text-color: #222;
+  --text-color: #333;
   --max-width: 100%;
 }
 
@@ -30,6 +32,7 @@
 }
 
 html {
+  background-color: var(--primary-color);
   font-size: 62.5%;
 }
 
@@ -46,6 +49,13 @@ body {
 
 @import "./copy";
 
+.quo {
+  margin-left: -0.28em;
+}
+.dquo {
+  margin-left: -0.5em;
+}
+
 /* Basic layout */
 
 .column-wrapper {
@@ -53,12 +63,16 @@ body {
   padding-right: 35px;
 }
 
+.column-full,
 .column-wide,
 .column-mid,
 .column-small,
 .column-narrow {
   margin-left: auto;
   margin-right: auto;
+}
+.column-full {
+  max-width: var(--column-full);
 }
 .column-wide {
   max-width: var(--column-wide);
@@ -67,7 +81,7 @@ body {
   max-width: var(--column-mid);
 }
 .column-small {
-  min-width: var(--column-small);
+  max-width: var(--column-small);
 }
 .column-narrow {
   max-width: var(--column-narrow);
@@ -86,6 +100,9 @@ body {
   .block-link:hover {
     color: #222;
     text-decoration: underline;
+  }
+  .block-link em {
+    font-style: italic;
   }
 
 .section--normal {
@@ -132,8 +149,14 @@ body {
 @import "./masthead";
 @import "./masthead-contextual";
 @import "./footer";
+@import "./pagination";
 @import "./figure";
+@import "./pull-quote";
+@import "./sub-page-nav";
 @import "./video-player";
 @import "./subscribe";
 @import "./topics-section";
 @import "./blog-post";
+@import "./event";
+@import "./event-venue-map";
+@import "./topic";
