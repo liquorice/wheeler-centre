@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150122021924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
   enable_extension "uuid-ossp"
 
   create_table "assets", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
@@ -127,12 +128,12 @@ ActiveRecord::Schema.define(version: 20150122021924) do
   add_index "pages", ["url"], name: "index_pages_on_url", using: :btree
 
   create_table "que_jobs", primary_key: "queue", force: true do |t|
-    t.integer  "priority",    limit: 2, default: 100,                                        null: false
-    t.datetime "run_at",                default: "now()",                                    null: false
-    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
-    t.text     "job_class",                                                                  null: false
-    t.json     "args",                  default: [],                                         null: false
-    t.integer  "error_count",           default: 0,                                          null: false
+    t.integer  "priority",    limit: 2, default: 100,                   null: false
+    t.datetime "run_at",                default: '2015-01-13 23:21:33', null: false
+    t.integer  "job_id",      limit: 8, default: 0,                     null: false
+    t.text     "job_class",                                             null: false
+    t.json     "args",                  default: [],                    null: false
+    t.integer  "error_count",           default: 0,                     null: false
     t.text     "last_error"
   end
 
@@ -147,6 +148,17 @@ ActiveRecord::Schema.define(version: 20150122021924) do
 
   add_index "redirects", ["site_id", "source_url"], name: "index_redirects_on_site_id_and_source_url", using: :btree
   add_index "redirects", ["site_id"], name: "index_redirects_on_site_id", using: :btree
+
+  create_table "site_administrations", id: false, force: true do |t|
+    t.uuid     "id",         default: "uuid_generate_v4()", null: false
+    t.uuid     "site_id",                                   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id",                                   null: false
+  end
+
+  add_index "site_administrations", ["site_id"], name: "index_site_administrations_on_site_id", using: :btree
+  add_index "site_administrations", ["user_id"], name: "index_site_administrations_on_user_id", using: :btree
 
   create_table "sites", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "title"
