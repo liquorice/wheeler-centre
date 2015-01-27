@@ -511,7 +511,6 @@ DEPENDENCIES
   spring-commands-rspec
   sunspot-queue!
   sunspot_solr
-  syck (= 1.0.1)
   thin
   trollop
   truncate_html
