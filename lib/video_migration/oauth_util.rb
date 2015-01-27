@@ -36,7 +36,8 @@ class CommandLineOAuthHelper
   # Request authorization. Checks to see if a local file with credentials is present, and uses that.
   # Otherwise, opens a browser and waits for response, then saves the credentials locally.
   def authorize
-    credentials_file = "#{Rails.root}/lib/video_migration/credentials_file.json"
+    file_scope       = @authorization.scope[0].split('/')[-1]
+    credentials_file = "#{Rails.root}/lib/video_migration/credentials_#{file_scope}.json"
 
     if File.exist? credentials_file
       File.open(credentials_file, 'r') do |file|
