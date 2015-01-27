@@ -292,6 +292,10 @@
         padding-right: 20px;
       }
 
+      .masthead-nav-secondary__item:nth-child(2n) {
+        padding-right: 20px;
+      }
+
       .masthead-nav-secondary__item:last-child {
         padding-right: 0;
       }
@@ -299,12 +303,24 @@
       .masthead-nav-secondary__item--search {
         color: var(--primary-color-lighter);
         font-size: 11px;
+        position: relative;
       }
 
         .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor {
           display: block;
-          padding: 6px;
-          margin-top: -3px;
+          width: 32px;
+          height: 32px;
+          margin-top: -4px;
+          position: relative;
+        }
+
+        .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor i {
+          position: absolute;
+          display: block;
+          top: 50%;
+          left: 50%;
+          margin-top: -5px;
+          margin-left: -5px;
         }
 
         .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor:hover,
@@ -325,6 +341,68 @@
         .masthead-nav-secondary__anchor:focus {
           color: #fff;
         }
+
+        /* Search box */
+
+        .masthead-nav-secondary__search-box {
+          display: none;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 240px;
+          height: 32px;
+          margin-top: -4px;
+          z-index: 20;
+        }
+
+          .masthead-nav-secondary__search-close {
+            background: none;
+            border: none;
+            color: var(--primary-color-lighter);
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: -36px;
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+          }
+
+          .masthead-nav-secondary__search-close:hover,
+          .masthead-nav-secondary__search-close:focus {
+            color: #fff;
+          }
+
+          .masthead-nav-secondary__search-input {
+            background-color: #e0eeec;
+            border: none;
+            float: left;
+            font-size: 14px;
+            height: 32px;
+            padding: 6px 8px;
+            width: 208px /* 240px - 32px */;
+            transition-property: background-color;
+            transition-duration: 150ms;
+          }
+
+          .masthead-nav-secondary__search-input:focus {
+            background-color: #fff;
+          }
+
+          .masthead-nav-secondary__search-button {
+            background-color: var(--primary-color-darker);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            float: left;
+            width: 32px;
+            height: 32px;
+          }
+
+          .masthead-nav-secondary__search-button:hover,
+          .masthead-nav-secondary__search-button:focus {
+            background-color: #006b5f;
+          }
 
   .masthead__logo {
     height: 50px;
