@@ -539,7 +539,8 @@ namespace :wheeler_centre do
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
     blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
-    recordings = Heracles::Page.of_type("recording")
+    blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    recordings = Heracles::Page.of_type("recording").select { |r| r.fields[:recording_id].value > 462 }
 
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
     ec2_util = EC2Util.new(config_file: args[:video_config_file])
@@ -553,9 +554,14 @@ namespace :wheeler_centre do
     recordings_for_migration = recordings.drop(args[:drop].to_i).take(args[:take].to_i)
 
     recordings_for_migration.each_with_index do |recording, index|
-      puts (index)
+      uuid = find_recording_uuid(blueprint_video_posts, recording)
+      puts (uuid)
+
       # Find Videos that match a given Recording's :recording_id
-      videos = find_matching_videos(blueprint_videos, recording.fields[:recording_id].value)
+      #videos = find_matching_videos(blueprint_videos, recording.fields[:recording_id].value)
+
+      # Alternatively, find matching videos by matching on uuid
+      videos = find_matching_videos_by_uuid(blueprint_videos, uuid)
 
       if videos.present?
         # Order the video by their encoding formats
@@ -579,6 +585,7 @@ namespace :wheeler_centre do
             :id => recording.id,
             :slug => recording.slug,
             :recording_id => recording.fields[:recording_id].value,
+            :uuid => uuid,
             :youtube_url => youtube_url
           }
 
@@ -595,6 +602,16 @@ namespace :wheeler_centre do
 
   def find_matching_videos(data, recording_id)
     data.select { |r| r["post_id"].to_i == recording_id.to_i }
+  end
+
+  def find_matching_videos_by_uuid(data, uuid)
+    data.select { |r| r["uuid"] == uuid }
+  end
+
+  def find_recording_uuid(data, recording)
+    cenvid_post = data.find { |r| r["id"].to_i == recording.fields[:recording_id].value }
+    puts (cenvid_post)
+    cenvid_post["uuid"]
   end
 
   def encoding_formats
