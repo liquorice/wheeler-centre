@@ -1,3 +1,6 @@
+# Usage
+# ec2 = EC2Util.new(config_file: "/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml") 
+
 require "aws-sdk"
 require "yaml"
 require "net/scp"
@@ -78,6 +81,8 @@ class EC2Util
 		number_of_instances.times do |i|
 			create_instance(i)
 		end
+		puts ("Sleeping for 120")
+		sleep 120
 
 		@instances.each_with_index do |instance, index|
 			instance = @ec2.instances[@instances[index]]
@@ -88,7 +93,6 @@ class EC2Util
 			end
 
 			if instance.status == :running
-				sleep 120
 				Net::SSH.start(instance.dns_name, "ec2-user", :keys => @private_key) do |ssh|
 					# capture all stderr and stdout output from a remote process
 					output = ssh.exec!("hostname")
@@ -101,7 +105,7 @@ class EC2Util
 					    end
 
 							channel.on_data do |ch, data|
-					      puts "got stdout: #{data}"
+					      # puts "got stdout: #{data}"
 					      channel.send_data "yes\n"
 					    end
 
@@ -123,7 +127,7 @@ class EC2Util
 					    end
 
 							channel.on_data do |ch, data|
-					      puts "got stdout: #{data}"
+					      # puts "got stdout: #{data}"
 					      channel.send_data "yes\n"
 					    end
 
@@ -143,7 +147,7 @@ class EC2Util
 					ssh.exec("gem install thin")
 					ssh.exec("gem install launchy")
 
-					puts (output)
+					puts ("Finished setup")
 
 				end
 			end
@@ -185,8 +189,8 @@ class EC2Util
 				:description => description,
 				:category_id => "22", # People and blog category
 				:keywords => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
-				:privacy_status => "public",
-				:recording_date => recording.fields[:recording_date].value.iso8601
+				:privacy_status => "public"
+				# :recording_date => recording.fields[:recording_date].value.iso8601
 				})
 			file.write(json)
 		end
