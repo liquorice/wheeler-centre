@@ -1481,7 +1481,7 @@ namespace :wheeler_centre do
 
     blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
-    recordings = Heracles::Page.of_type("recording").select { |r| r.fields[:recording_id].value > 462 }
+    recordings = Heracles::Page.of_type("recording").select { |r| r.fields[:url].value == nil }
 
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
     ec2_util = EC2Util.new(config_file: args[:video_config_file])
@@ -1541,6 +1541,33 @@ namespace :wheeler_centre do
     end
   end
 
+  desc "Create video asset records"
+  task :create_video_assets, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    blueprint_notifications = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidNotification }
+    recordings = Heracles::Page.of_type("recording")
+
+    recordings.each do |recording|
+      uuid = find_recording_uuid(blueprint_video_posts, recording)
+      puts ("uuid")
+      puts (uuid)
+      if recording.fields[:recording_id].value < 462
+        recording_notifications = find_recording_notifications(blueprint_notifications, uuid)
+        recording_notifications.each do |notification|
+          puts (notification)
+        end
+      else
+        # Handle these notifications differently
+        # audio_encode = recording_notification["message"]["outputs"][0]["url"]
+      end
+    end
+  end
+
   def find_matching_videos(data, recording_id)
     data.select { |r| r["post_id"].to_i == recording_id.to_i }
   end
@@ -1551,8 +1578,11 @@ namespace :wheeler_centre do
 
   def find_recording_uuid(data, recording)
     cenvid_post = data.find { |r| r["id"].to_i == recording.fields[:recording_id].value }
-    puts (cenvid_post)
     cenvid_post["uuid"]
+  end
+
+  def find_recording_notifications(data, uuid)
+    data.select { |r| r["uuid"] == uuid && r["event_type"] == "Upload" }
   end
 
   def encoding_formats
