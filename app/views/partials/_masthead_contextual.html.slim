@@ -1,40 +1,31 @@
-.masthead-contextual
+.masthead-contextual.masthead-contextual--events.clearfix
   h1.masthead-contextual__section-title
     = area :masthead_title
-.masthead-contextual.clearfix
-  = area :masthead_contextual_navigation
   .upcoming-events
     .upcoming-events__navigation.clearfix
-      span.upcoming-events__up-next Up next
       a.upcoming-events__view-all href="#"
         | View all 112 of our upcoming events
         i.fa.fa-chevron-right
     ul.upcoming-events__list.clearfix
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
-          span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placebear.com/185/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Art &amp; Health
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
-          span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placesheen.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Matthew Reilly
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
-          span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://placecage.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Nicholas Cage: an awesome thing
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
-          span.upcoming-events__item-image-container
-            img.upcoming-events__item-image src="http://fillmurray.com/186/100" width="186" height="100"
           span.upcoming-events__item-text-container
             h1.upcoming-events__item-date Thu 11 Nov
             h2.upcoming-events__item-title Two more months of winter
+.masthead-contextual.clearfix
+  = area :masthead_contextual_navigation

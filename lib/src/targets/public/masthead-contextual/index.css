@@ -4,9 +4,14 @@
   background-color: #fff;
 }
 
+.masthead-contextual--events {
+  background-color: var(--primary-color);
+}
+
   .masthead-contextual__section-title {
     background-color: var(--primary-color);
     color: var(--primary-color-lighter);
+    float: left;
     font-size: 17px;
     font-size: 1.7rem;
     font-weight: bold;
@@ -50,24 +55,11 @@
 .upcoming-events {
   float: right;
   padding-right: 35px;
-  margin-top: -80px;
 }
 
   .upcoming-events__navigation {
     height: 30px;
   }
-
-    .upcoming-events__up-next {
-      color: var(--primary-color-lighter);
-      display: inline-block;
-      font-size: 11px;
-      font-size: 1.1rem;
-      float: left;
-      letter-spacing: 0.2em;
-      padding-left: 2px;
-      padding-right: 30px;
-      text-transform: uppercase;
-    }
 
     .upcoming-events__view-all {
       color: var(--primary-color-lighter);
@@ -98,29 +90,6 @@
   .upcoming-events__item-anchor {
     display: block;
   }
-
-  .upcoming-events__item-anchor--hover .upcoming-events__item-image,
-  .upcoming-events__item-anchor:focus .upcoming-events__item-image {
-    transform: translateY(-50px);
-  }
-
-  .upcoming-events__item-anchor--hover .upcoming-events__item-text-container,
-  .upcoming-events__item-anchor:focus .upcoming-events__item-text-container {
-    background-color: #f1fffd;
-  }
-
-    .upcoming-events__item-image-container {
-      display: block;
-      height: 50px;
-      width: 185px;
-      position: relative;
-    }
-
-      .upcoming-events__item-image {
-        display: block;
-        transition-property: transform;
-        transition-duration: 100ms;
-      }
 
     .upcoming-events__item-text-container {
       background: #fff;
