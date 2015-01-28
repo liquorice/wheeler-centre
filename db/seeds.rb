@@ -316,7 +316,7 @@ guests.save!
 
 # Broadcasts index page
 # ------------------------------------------------------------------------------
-broadcasts_index = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "broadcasts")
+broadcasts_index = Heracles::Sites::WheelerCentre::Broadcasts.find_or_initialize_by(url: "broadcasts")
 broadcasts_index.site = site
 broadcasts_index.title = "Broadcasts"
 broadcasts_index.slug = "broadcasts"
