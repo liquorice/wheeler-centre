@@ -25,6 +25,20 @@ module Heracles
           }
         end
 
+        ### Accessors
+
+        def events
+          if fields[:events].data_present
+            fields[:events].pages
+          end
+        end
+
+        def people
+          if fields[:people].data_present
+            fields[:people].pages
+          end
+        end
+
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
