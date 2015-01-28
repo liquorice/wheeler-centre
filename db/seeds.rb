@@ -158,20 +158,24 @@ site.transloadit_params = {
         "video_ipad_high",
         "video_iphone_high"
       ]
-    },
-    "store_youtube" => {
-      "robot" => "/youtube/store",
-      "use" => [":original"],
-      "username" => "",
-      "password" => "",
-      "title" => "${file.name}",
-      "description" => "${file.name} description",
-      "category" => "People & Blogs",
-      "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
-      "visibility" => "private"
     }
   }
 }
+
+# This template is needs to be set _in_ Transloadit for some reason
+# additional_template = {
+#   "store_youtube" => {
+#     "robot" => "/youtube/store",
+#     "use" => [":original"],
+#     "username" => "",
+#     "password" => "",
+#     "title" => "${file.name}",
+#     "description" => "${file.name} description",
+#     "category" => "People & Blogs",
+#     "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
+#     "visibility" => "private"
+#   }
+# }
 site.save!
 
 # Make an admin user for Jon
