@@ -1486,9 +1486,7 @@ namespace :wheeler_centre do
         recording.save!
       end
     end
-
   end
-
 
   desc "Migrate videos to Youtube"
   task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
@@ -1575,17 +1573,55 @@ namespace :wheeler_centre do
 
     recordings.each do |recording|
       uuid = find_recording_uuid(blueprint_video_posts, recording)
-      puts ("uuid")
-      puts (uuid)
+
       if recording.fields[:recording_id].value < 462
-        recording_notifications = find_recording_notifications(blueprint_notifications, uuid)
-        recording_notifications.each do |notification|
-          puts (notification)
-        end
+        handle_many_notifications(blueprint_notifications, uuid)
       else
         # Handle these notifications differently
-        # audio_encode = recording_notification["message"]["outputs"][0]["url"]
+        handle_single_notification(blueprint_notifications, uuid)
       end
+    end
+  end
+
+
+  def handle_many_notifications(blueprint_notifications, uuid)
+    notifications = find_recording_notifications(blueprint_notifications, uuid)
+
+    messages = []
+    notifications.each do |notification|
+      # Create an array of all the "message" hashes.
+      messages << JSON.parse(notification["message"])
+    end
+
+    handle_many_audio_encodes(messages)
+    handle_many_video_encodes(messages)
+  end
+
+  def handle_single_notification(blueprint_notifications, uuid)
+    notification = find_recording_notification(blueprint_notifications, uuid)
+    if notification.first
+      message = YAML.load(notification.first["message"])
+      puts (message["outputs"][0]["url"])
+    end
+  end
+
+  def handle_many_audio_encodes(messages)
+    encodes = find_audio_encodes(messages)
+    # Check whether any of the encodes is already an s3 file - if so we don't need to do anything.
+    unless find_s3_url(encodes)
+      best_audio_encode = find_best_audio_encode(encodes)
+      audio_encode_file_name = best_audio_encode["job"]["output_file"]["filename"]
+      puts (audio_encode_file_name)
+      # TODO Upload it to s3
+    end
+  end
+
+  def handle_many_video_encodes(messages)
+    best_video_encode = find_best_video_encode(messages)
+    unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
+      video_encode_file_name = best_video_encode["job"]["output_file"]["filename"]
+      puts (video_encode_file_name)
+      # TODO upload it to s3
     end
   end
 
@@ -1604,6 +1640,38 @@ namespace :wheeler_centre do
 
   def find_recording_notifications(data, uuid)
     data.select { |r| r["uuid"] == uuid && r["event_type"] == "Upload" }
+  end
+
+  def find_recording_notification(data, uuid)
+    data.select { |r| r["uuid"] == uuid }
+  end
+
+  def find_audio_encodes(messages)
+    messages.select { |r| r["job"]["profile"]["name"] == "MP3 CBWI"}
+  end
+
+  def find_best_audio_encode(encodes)
+    encodes.first
+  end
+
+  def find_best_video_encode(messages)
+    # Order the messages by their encoding formats
+    ordered_messages = encoding_formats.map! do |format|
+      messages.find { |r| r["job"]["profile"]["name"] == format }
+    end
+    ordered_messages.find { |x| not x.nil? }
+  end
+
+  def find_s3_url(encodes)
+    # check each encode
+    # if any of them have s3 in the url, return the encode
+    encodes.find { |r| is_s3_url(r["job"]["output_file"]["url"]) }
+  end
+
+  def is_s3_url(url)
+    if url.split(":")[0] == "s3"
+      return true
+    end
   end
 
   def encoding_formats
