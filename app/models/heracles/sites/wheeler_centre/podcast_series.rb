@@ -25,6 +25,12 @@ module Heracles
           }
         end
 
+        # Accessors
+
+        def episodes(options={})
+          search_podcast_episodes(options)
+        end
+
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
@@ -32,6 +38,20 @@ module Heracles
 
           text :description do
             fields[:description].value
+          end
+        end
+
+        private
+
+        def search_podcast_episodes(options={})
+          Sunspot.search(PodcastEpisode) do
+            with :site_id, site.id
+            with :parent_id, id
+            with :published, true
+
+            order_by :publish_date_time, :desc
+
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 20
           end
         end
       end

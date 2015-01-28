@@ -6,10 +6,20 @@ module Heracles
           {
             fields: [
               {name: :description, type: :content},
+              # Dates
+              {name: :dates_info, type: :info, text: "<hr/>"},
+              {name: :publish_date, type: :date_time, label: "Publish date"},
+              {name: :recording_date, type: :date_time, label: "Recording date"},
+              # Asset
+              {name: :asset_info, type: :info, text: "<hr/>"},
               {name: :video, type: :asset, asset_file_type: :video},
               {name: :audio, type: :asset, asset_file_type: :audio},
-              {name: :events, type: :associated_pages, page_type: :event},
-              {name: :publish_date, type: :date_time, label: "Publish date"},
+              # Associations
+              {name: :assoc_info, type: :info, text: "<hr/>"},
+              {name: :events, type: :associated_pages, page_type: :event, editor_columns: 6},
+              {name: :people, type: :associated_pages, page_type: :person, editor_columns: 6},
+              # Extra
+              {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
@@ -25,6 +35,10 @@ module Heracles
           end
 
           date :publish_date do
+            fields[:publish_date].value
+          end
+
+          time :publish_date_time do
             fields[:publish_date].value
           end
         end

@@ -18,8 +18,8 @@ module Heracles
               {name: :audio, type: :asset, asset_file_type: :audio},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
-              {name: :events, type: :associated_pages, page_type: :event},
-              {name: :people, type: :associated_pages, page_type: :person},
+              {name: :events, type: :associated_pages, page_type: :event, editor_columns: 6},
+              {name: :people, type: :associated_pages, page_type: :person, editor_columns: 6},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :topics, type: :associated_pages, page_type: :topic},
@@ -41,8 +41,16 @@ module Heracles
             fields[:publish_date].value
           end
 
+          time :publish_date_time do
+            fields[:publish_date_time].value
+          end
+
           date :recording_date do
             fields[:recording_date].value
+          end
+
+          time :recording_date_time do
+            fields[:recording_date_time].value
           end
 
           string :event_ids, multiple: true do
