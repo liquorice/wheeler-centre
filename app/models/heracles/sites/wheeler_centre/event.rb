@@ -24,7 +24,7 @@ module Heracles
               {name: :presenters, type: :associated_pages, page_type: :person},
               {name: :series, type: :associated_pages, page_type: :event_series, editor_type: 'singular'},
               {name: :recordings, type: :associated_pages, page_type: :recording, editor_columns: 6},
-              {name: :podcasts, type: :associated_pages, page_type: :podcast, editor_columns: 6},
+              {name: :podcast_episodes, type: :associated_pages, page_type: :podcast_episode, editor_columns: 6},
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
