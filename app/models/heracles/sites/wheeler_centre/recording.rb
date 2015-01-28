@@ -6,17 +6,24 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
-              {name: :description, type: :content},
-              {name: :transcripts, type: :content},
-              {name: :video, type: :asset, asset_file_type: :video},
-              {name: :audio, type: :asset, asset_file_type: :audio},
               {name: :hero_image, type: :asset, asset_file_type: :image},
-              {name: :events, type: :associated_pages, page_type: :event},
+              {name: :description, type: :content},
               # Dates
+              {name: :dates_info, type: :info, text: "<hr/>"},
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :recording_date, type: :date_time, label: "Recording date"},
-              {name: :recording_id, type: :integer, label: "Recording Id"},
+              # Asset
+              {name: :asset_info, type: :info, text: "<hr/>"},
+              {name: :video, type: :asset, asset_file_type: :video},
+              {name: :audio, type: :asset, asset_file_type: :audio},
+              # Associations
+              {name: :assoc_info, type: :info, text: "<hr/>"},
+              {name: :events, type: :associated_pages, page_type: :event},
+              {name: :people, type: :associated_pages, page_type: :person},
+              # Extra
+              {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :recording_id, type: :integer, label: "Legacy recording ID"},
             ]
           }
         end
@@ -28,10 +35,6 @@ module Heracles
 
           text :description do
             fields[:description].value
-          end
-
-          text :transcripts do
-            fields[:transcripts].value
           end
 
           date :publish_date do
