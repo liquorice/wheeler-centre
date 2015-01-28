@@ -9,6 +9,7 @@ module Heracles
               {name: :description, type: :content},
               {name: :itunes_categories, type: :array},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :legacy_program_id, type: :integer, label: "Legacy program ID"},
             ],
             default_children: {
               type: :collection,
