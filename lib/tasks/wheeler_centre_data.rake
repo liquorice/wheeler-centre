@@ -1469,8 +1469,29 @@ namespace :wheeler_centre do
     end
   end
 
+  # Usage
+  # wheeler_centre:associate_recordings_and_videos["/Users/josephinehall/Development/wheeler-centre/lib/video_migration/youtube_migrations.yml"]
+  desc "Associate Recordings with Youtube videos"
+  task :associate_recordings_and_videos, [:youtube_migrations_yml] => :environment do |task, args|
+    require "yaml"
+
+    data = File.read(args[:youtube_migrations_yml])
+    youtube_migrations = YAML.load(data)
+
+    recordings = Heracles::Page.of_type("recording")
+    recordings.each do |recording|
+      migration = youtube_migrations.find { |r| r["recording_id"] == recording.fields[:recording_id].value }
+      if migration && migration["youtube_url"]
+        recording.fields[:url].value = migration["youtube_url"]
+        recording.save!
+      end
+    end
+
+  end
+
+
   desc "Migrate videos to Youtube"
-   task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
+  task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "video_migration/s3_util"
