@@ -17,8 +17,8 @@
     font-weight: bold;
     letter-spacing: 0.1em;
     padding-left: 35px;
-    padding-top: 45px;
-    padding-bottom: 25px;
+/*    padding-top: 45px;
+    padding-bottom: 25px;*/
     text-transform: uppercase;
   }
 
@@ -64,9 +64,8 @@
     .upcoming-events__view-all {
       color: var(--primary-color-lighter);
       float: right;
-      font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
-      font-size: 16px;
-      font-size: 1.6rem;
+      font-size: 14px;
+      font-size: 1.4rem;
     }
 
     .upcoming-events__view-all:hover,
@@ -80,11 +79,19 @@
       vertical-align: middle;
     }
 
+  .upcoming-events__list {
+    padding-top: 10px;
+  }
+
   .upcoming-events__item {
-    border-left: 1px solid color(var(--primary-color) tint(50%));
-    border-color: rgba(0, 158, 140, 0.5);
+    border-left: 1px solid rgba(255,255,255,0.2);
     float: left;
-    width: 187px;
+    height: 80px;
+    width: 190px;
+  }
+
+  .upcoming-events__item:first-child {
+    border-left: none;
   }
 
   .upcoming-events__item-anchor {
@@ -92,27 +99,24 @@
   }
 
     .upcoming-events__item-text-container {
-      background: #fff;
       display: block;
-      padding: 15px 10px 6px;
+      padding-left: 25px;
+      padding-right: 25px;
+      padding-bottom: 15px;
       position: relative;
       z-index: 2;
     }
 
       .upcoming-events__item-date {
-        color: #6e6e6e;
+        color: var(--primary-color-lighter);
         font-size: 13px;
         font-size: 1.3rem;
-        padding-bottom: 5px;
+        padding-bottom: .6em;
       }
 
       .upcoming-events__item-title {
-        color: #4a4a4a;
+        color: #fff;
         font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
         font-size: 16px;
         font-size: 1.6rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
       }
