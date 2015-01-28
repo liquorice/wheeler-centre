@@ -79,6 +79,7 @@
     }
 
   .upcoming-events__list {
+    overflow: hidden;
     padding-top: 15px;
   }
 
@@ -105,13 +106,15 @@
       bottom: 0;
       left: 0;
       opacity: 0;
-      transition-property: opacity;
+      transition-property: transform, opacity;
       transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(.10, .10, .25, .90);
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__image-container,
     .upcoming-events__item-anchor:focus .upcoming-events__image-container {
-      opacity: .3;
+      transform: translateY(-15px);
+      opacity: 1;
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
@@ -120,6 +123,7 @@
     .upcoming-events__item-anchor:focus .upcoming-events__item-date {
       text-shadow: 1px 1px 1px rgba(0,0,0,.4);
     }
+
 
 /*    .upcoming-events__image-container:after {
       background-image: radial-gradient(transparent 20%, var(--primary-color));
@@ -140,7 +144,7 @@
       padding-bottom: 15px;
       padding-top: 10px;
       position: relative;
-      z-index: 50;
+      z-index: 5;
     }
 
       .upcoming-events__item-date {
