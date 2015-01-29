@@ -56,6 +56,11 @@
   float: right;
   width: 40%;
 }
+.breakpoint-tablet-wide .footer-nav-secondary,
+.breakpoint-tablet .footer-nav-secondary,
+.breakpoint-phone-wide .footer-nav-secondary {
+  padding-left: 60px;
+}
 .breakpoint-phone .footer-nav-secondary {
   border-top: 1px solid rgba(255,255,255,0.2);
   padding-top: 30px;
@@ -66,6 +71,9 @@
   .footer-nav-secondary ul {
     float: right;
   }
+  .breakpoint-tablet-wide .footer-nav-secondary ul,
+  .breakpoint-tablet .footer-nav-secondary ul ,
+  .breakpoint-phone-wide .footer-nav-secondary ul,
   .breakpoint-phone .footer-nav-secondary ul {
     float: none;
   }
