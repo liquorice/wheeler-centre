@@ -1,37 +1,42 @@
 // Admin: Field External Video ---------------------------------------------------
 
 .field-external-video {
-  position: relative;
 }
 
+
+.field-external-video__form {
+  display: flex;
+}
+.field-external-video__input {
+  flex: 1;
+  position: relative;
+}
 .field-external-video__button {
+  margin-left: -1px;
+}
+
+.field-external-video__label {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
-}
-.field-external-video__button--covered {
-  visibility: hidden;
-}
-.field-external-video__button--uncovered, .field-external-video__button--done {
-  visibility: visible;
-  cursor: pointer;
-}
-.field-external-video__button--success {
-  background: $highlight;
-}
-.field-external-video__button--loading, .field-external-video__button--loading:hover {
-  background: $grey;
   cursor: none;
+  font-style: normal;
+}
+.field-external-video__label--loading, .field-external-video__label--loading:hover {
+  background: $grey;
+}
+.field-external-video__label--loaded, .field-external-video__label--loaded:hover {
+  background: $highlight;
 }
 
 .field-external-video__preview {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 .field-external-video__preview-pic {
   float: left;
   margin-right: 15px;
   background: #b3d3da;
-  padding: 15px;
+  padding: 10px;
   img {
     display: block;
     width: 120px;
@@ -42,7 +47,12 @@
   color: $grey-mid;
   margin-bottom: 10px;
   b {
-    display: block;
+    display: inline-block;
+    margin-right: 7px;
     color: $grey-dark;
   }
 }
+a.field-external-video__preview-clear {
+  color: $highlight;
+}
+
