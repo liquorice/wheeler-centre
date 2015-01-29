@@ -26,7 +26,7 @@ module Heracles
             with :published, true
 
             order_by :start_date_time, :asc
-            paginate(page: 1, per_page: 1000)
+            paginate(page: 1, per_page: 50)
           end
         end
       end
