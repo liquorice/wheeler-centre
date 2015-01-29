@@ -31,6 +31,9 @@ module ApplicationHelper
     (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
   end
 
+  def human_boolean(bool)
+    bool ? "yes" : "no"
+  end
   ### Application specific helpers
 
   def excerptify(text, chars = 220)
