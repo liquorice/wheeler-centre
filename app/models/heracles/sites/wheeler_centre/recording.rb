@@ -14,6 +14,7 @@ module Heracles
               {name: :recording_date, type: :date_time, label: "Recording date"},
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
+              {name: :youtube_video, type: :external_video},
               {name: :video, type: :asset, asset_file_type: :video},
               {name: :audio, type: :asset, asset_file_type: :audio},
               # Associations
