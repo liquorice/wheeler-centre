@@ -1434,13 +1434,20 @@ namespace :wheeler_centre do
             heracles_podcast_episode = result.page
           end
 
+          # Dates
+          if blueprint_podcast_episode["publish_on"].present?
+            heracles_podcast_episode.fields[:publish_date].value = ActiveSupport::TimeZone["Melbourne"].parse(blueprint_podcast_episode["publish_on"])
+          end
+
           # Associate field data
           heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["content"], subject: blueprint_podcast_episode, assetify: false)
 
           # Associate with event (event -> podcast episode)
           heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
-          heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
-          heracles_event.save!
+          if heracles_event
+            heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
+            heracles_event.save!
+          end
 
           # Tags
           tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "CenevtEvent")
