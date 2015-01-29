@@ -56,7 +56,7 @@ module Heracles
           end
 
           time :publish_date_time do
-            fields[:publish_date_time].value
+            fields[:publish_date].value
           end
 
           date :recording_date do
@@ -64,7 +64,7 @@ module Heracles
           end
 
           time :recording_date_time do
-            fields[:recording_date_time].value
+            fields[:recording_date].value
           end
 
           string :event_ids, multiple: true do
