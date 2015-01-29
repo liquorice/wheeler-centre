@@ -16,7 +16,7 @@ module Heracles
               {name: :audio, type: :asset, asset_file_type: :audio},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
-              {name: :people, type: :associated_pages, page_type: :person, editor_columns: 6},
+              {name: :people, type: :associated_pages, page_type: :person},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :topics, type: :associated_pages, page_type: :topic},
