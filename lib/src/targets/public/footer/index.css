@@ -93,7 +93,14 @@
   .breakpoint-phone .footer-nav-secondary li {
     display: block;
     padding-left: 0;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
+  }
+
+  .breakpoint-tablet-wide .footer-nav-secondary li.footer-nav-secondary__search,
+  .breakpoint-tablet .footer-nav-secondary li.footer-nav-secondary__search,
+  .breakpoint-phone-wide .footer-nav-secondary li.footer-nav-secondary__search,
+  .breakpoint-phone .footer-nav-secondary li.footer-nav-secondary__search {
+    padding-bottom: 25px;
   }
 
 

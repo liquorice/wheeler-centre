@@ -224,6 +224,17 @@
       padding: 0;
     }
 
+/*    .upcoming-events__item-text-container:after {
+      background-image: linear-gradient(transparent 90%, var(--primary-color));
+      content: "";
+      display: block;
+      position: absolute;
+      height: 20px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+*/
       .upcoming-events__item-date {
         color: var(--primary-color-lighter);
         font-size: 13px;
