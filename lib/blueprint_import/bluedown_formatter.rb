@@ -209,7 +209,7 @@ module LegacyBlueprint
       # Non-image assets should be inline links with some default content.
 
       display = "Right-aligned"
-      if options["size"] == "Size4"
+      if options["size"] == "Size8"
         display = ""
       end
 
@@ -219,6 +219,11 @@ module LegacyBlueprint
         alt_text: options[:caption],
         caption: options[:caption]
       }
+      if options[:link].present?
+        insertable_value[:link] = {
+          href: options[:link]
+        }
+      end
 
       asset_insertable = <<HTML
       <div contenteditable="false" insertable="image" value='#{ERB::Util.h(insertable_value.to_json)}'></div>
