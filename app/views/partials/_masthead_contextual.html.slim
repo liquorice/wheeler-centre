@@ -3,51 +3,55 @@
     = area :masthead_title
   .upcoming-events
     .upcoming-events__navigation.clearfix
+      span.upcoming-events__up-next
+        | Up next
       a.upcoming-events__view-all href="/events"
-        | View all 112 of our upcoming events
+        | View all <span>112 of our upcoming events</span>
         i.fa.fa-chevron-right
     ul.upcoming-events__list.clearfix
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://placekitten.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Thu 1 Feb
             h2.upcoming-events__item-title The Show of the Year
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://placesheen.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Fri 2 Feb
             h2.upcoming-events__item-title Thomas Keneally
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://placecage.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Fri 2 Feb
             h2.upcoming-events__item-title December: Hot Desk Edition
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://fillmurray.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Sun 4 Feb
             h2.upcoming-events__item-title Woolf &amp; Wilde: A Queer Party
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://placekitten.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Thu 1 Feb
             h2.upcoming-events__item-title The Show of the Year
       li.upcoming-events__item
         a.upcoming-events__item-anchor data-view-touch-preview="upcoming-events__item-anchor--hover" href="#"
           span.upcoming-events__image-container
             img.upcoming-events__image alt="" src="http://placesheen.com/195/110"
-          span.upcoming-events__item-text-container
+          span.upcoming-events__item-text-container.clearfix
             h1.upcoming-events__item-date Fri 2 Feb
             h2.upcoming-events__item-title Thomas Keneally
+  h1.masthead-contextual__section-title.masthead-contextual__section-title--mobile
+    = area :masthead_title
 .masthead-contextual.clearfix
   = area :masthead_contextual_navigation

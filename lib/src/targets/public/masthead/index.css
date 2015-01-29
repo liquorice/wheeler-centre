@@ -63,11 +63,6 @@
       font-smoothing: subpixel-antialiased;
     }
 
-    .breakpoint-w-879 .masthead-nav-main {
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      margin-bottom: 8px;
-    }
-
     .breakpoint-phone .masthead-nav-main {
       display: none;
       background-color: var(--primary-color-lighter);
@@ -272,7 +267,9 @@
     }
 
     .breakpoint-w-879 .masthead-nav-secondary {
+      border-top: 1px solid rgba(255,255,255,0.2);
       clear: left;
+      float: none;
     }
 
     .breakpoint-phone .masthead-nav-secondary {
@@ -359,6 +356,7 @@
         }
 
         .breakpoint-w-879 .masthead-nav-secondary__search-box {
+          right: -50px;
           width: 240px;
         }
 
