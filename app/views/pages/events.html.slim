@@ -14,7 +14,7 @@
           - events.each do |event|
             - if event.fields[:promo_image].data_present?
               .event__hero-image
-                img src=event.fields[:hero_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
+                img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
             a href=event.absolute_url
               h3.event__title
                 = event.title

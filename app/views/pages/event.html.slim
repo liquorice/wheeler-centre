@@ -2,8 +2,6 @@
 - hide_summary = hide_summary || false
 - if page.fields[:promo_image].data_present?
   - image = page.fields[:promo_image].asset
-- else
-  - image = Heracles::Asset.all.sample(1).first
 
 = area :masthead_title do
   .page__title.page__title--events
