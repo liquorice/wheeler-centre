@@ -27,8 +27,26 @@ FieldExternalVideo = React.createClass
 
   render: ->
     value = @state.field.value
+
     inputClassName = "field-text-input #{@inputSizeClassName()}"
     buttonClassName = "field-external-video__button field-external-video__button--#{this.state.button_class} button button--soft button--small"
+
+    videoPreview = if @state.field.youtube?
+      `<div className="field-external-video__preview">
+        <div className="field-external-video__preview-pic">
+          <img src={this.state.field.youtube.thumbnail} />
+        </div>
+        <div className="field-external-video__preview-field field-external-video__preview-field--duration">
+          <b>Duration</b>
+          {this.state.field.youtube.duration}
+        </div>
+        <div className="field-external-video__preview-field field-external-video__preview-field--title">
+          <b>Title</b>
+          {this.state.field.youtube.title}
+        </div>
+      </div>`
+
+
     return `<div className={this.displayClassName("field-external-video")}>
         <FieldHeader label={this.state.field.field_config.field_label} name={this.state.field.field_name} hint={this.state.field.field_config.field_hint} required={this.state.field.field_config.field_required}/>
         <div className="field-main">
@@ -36,6 +54,7 @@ FieldExternalVideo = React.createClass
             <input type="text" value={value} ref='fieldInput' className={inputClassName} onChange={this._handleChange}/>
             <button className={buttonClassName} ref='fieldButton' onClick={this._processUrl}>{this.state.button_value}</button>
           </form>
+          {videoPreview}
           <FieldFallback field={this.state.field.field_config.field_fallback} content={this._formatFallback()}/>
         </div>
         <FieldErrors errors={this.state.field.errors}/>
@@ -57,23 +76,36 @@ FieldExternalVideo = React.createClass
       data:
         url: _this.props.value
       success: (data) ->
-        _this.setState
-          button_value: 'Successfully loaded!'
-          button_class: 'success'
+
+
+        # Wrong data received
+        if data.length == 0 || data.error?
+          _this.setState
+            button_value: 'Fetching error...'
+            button_class: 'success'
+
+        # Correct fetch
+        else
+          # Prepare field hash
+          newField = _.extend {}, _this.state.field,
+            youtube: data
+          _this.props.updateField _this.state.field.field_name, newField
+          # Update field state
+          _this.setState
+            field       : newField
+            button_value: 'Successfully loaded!'
+            button_class: 'success'
+
+        # Show hidden fields
         setTimeout(->
           $(_this.refs.fieldButton.getDOMNode()).fadeOut 'slow', ->
             $(@).css
               display:    'block',
             _this.enableInputs()
-            # Update field hash
-            newField = _.extend {}, _this.state.field,
-              youtube: data.items
-            _this.props.updateField _this.state.field.field_name, newField
-            # Set state
             _this.setState
-              field       : newField
               button_value: 'Load data'
               button_class: 'covered'
+
         , 2000)
 
   _handleChange: (event) ->

@@ -51,7 +51,7 @@ gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
 
 # Application
-# ...
+gem "iso8601"
 
 # Utilities
 gem "ffaker"

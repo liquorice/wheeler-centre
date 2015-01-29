@@ -3,6 +3,7 @@
 .field-external-video {
   position: relative;
 }
+
 .field-external-video__button {
   position: absolute;
   top: 1.2rem;
@@ -21,4 +22,27 @@
 .field-external-video__button--loading, .field-external-video__button--loading:hover {
   background: $grey;
   cursor: none;
+}
+
+.field-external-video__preview {
+  margin-top: 15px;
+}
+.field-external-video__preview-pic {
+  float: left;
+  margin-right: 15px;
+  background: #b3d3da;
+  padding: 15px;
+  img {
+    display: block;
+    width: 120px;
+    height: 90px;
+  }
+}
+.field-external-video__preview-field {
+  color: $grey-mid;
+  margin-bottom: 10px;
+  b {
+    display: block;
+    color: $grey-dark;
+  }
 }
