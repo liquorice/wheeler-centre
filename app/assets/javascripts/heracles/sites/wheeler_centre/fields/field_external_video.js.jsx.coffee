@@ -71,10 +71,10 @@ FieldExternalVideo = React.createClass
             </div>
             <button className="field-external-video__button field-addon-button button button--soft" onClick={this._processUrl} disabled={this.state.disabled}>{buttonTitle} data</button>
           </form>
-          {videoPreview}
           <FieldFallback field={this.state.field.field_config.field_fallback} content={this._formatFallback()}/>
+          <FieldErrors errors={this.state.field.errors}/>
+          {videoPreview}
         </div>
-        <FieldErrors errors={this.state.field.errors}/>
       </div>`
 
   _processUrl: ->

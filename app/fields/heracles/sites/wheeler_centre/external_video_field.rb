@@ -5,6 +5,7 @@ module Heracles
 
         data_attribute :value
         data_attribute :youtube
+        validates :youtube, presence: {message: 'field data must be populated before save'}, if: :field_value_defined
 
         def data_present?
           value.present?
@@ -28,6 +29,10 @@ module Heracles
           extract_id
           hit_api
           self.youtube = process_result
+        end
+
+        def field_value_defined
+          self.value.present?
         end
 
       private
