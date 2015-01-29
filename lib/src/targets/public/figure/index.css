@@ -5,7 +5,9 @@
   font-size: 14px;
 }
 
-.figure {}
+.figure {
+  clear: both;
+}
 
   .figure img {
     width: 100%;
