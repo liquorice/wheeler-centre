@@ -93,7 +93,9 @@
 
   /* Hide events on smaller screens */
   .breakpoint-w-1600 .upcoming-events__item:nth-child(6n),
-  .breakpoint-w-1450 .upcoming-events__item:nth-child(5n) {
+  .breakpoint-w-1450 .upcoming-events__item:nth-child(5n),
+  .breakpoint-w-1200 .upcoming-events__item:nth-child(4n),
+  .breakpoint-w-879 .upcoming-events__item:nth-child(3n) {
     display: none;
   }
 
