@@ -1463,6 +1463,71 @@ namespace :wheeler_centre do
     end
   end
 
+  desc "Import blueprint main 'Wheeler Centre' podcast episodes"
+  task :import_blueprint_main_podcast_episodes, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
+    blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+    series = Heracles::Page.find_by_url("broadcasts/podcasts/the-wheeler-centre")
+
+    if series
+      # Create a Podcast episode for each program record
+      blueprint_video_posts.each do |blueprint_podcast_episode|
+        heracles_podcast_series_collection = series.children.of_type("collection").first
+
+        if blueprint_podcast_episode["title"].present?
+          heracles_podcast_episode = Heracles::Page.find_by_url("broadcasts/podcasts/#{series.slug}/#{blueprint_podcast_episode["slug"]}")
+          unless heracles_podcast_episode
+            create_params = {
+              parent: series,
+              collection: heracles_podcast_series_collection,
+              page_order_position: :last,
+              published: blueprint_podcast_episode["publish_on"].present?,
+              slug: blueprint_podcast_episode["slug"],
+              title: replace_entities(blueprint_podcast_episode["title"]),
+              created_at: Time.zone.parse(blueprint_podcast_episode["created_on"].to_s)
+            }
+            result = Heracles::CreatePage.call(site: site, page_type: "podcast_episode", page_params: create_params)
+            heracles_podcast_episode = result.page
+          end
+
+          # Dates
+          if blueprint_podcast_episode["publish_on"].present?
+            heracles_podcast_episode.fields[:publish_date].value = ActiveSupport::TimeZone["Melbourne"].parse(blueprint_podcast_episode["publish_on"])
+          end
+
+          # Associate field data
+          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["description"], subject: blueprint_podcast_episode, assetify: false)
+
+          # Associate with event (event -> podcast episode)
+          heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
+          if heracles_event
+            heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
+            heracles_event.save!
+          end
+
+          # Tags
+          tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "CenevtEvent")
+          if tags_for_post.any?
+            apply_tags_to(heracles_podcast_episode, tags_for_post)
+          end
+          heracles_podcast_episode.save!
+        end
+      end
+    else
+      # Podcast has URL, but no matching series
+      puts "*** COULD NOT FIND MAIN SERIES"
+    end
+  end
+
   desc "Import blueprint types that map to Page"
   task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
     require "yaml"

@@ -370,6 +370,21 @@ podcasts.locked = true
 podcasts.page_order_position = :last if podcasts.new_record?
 podcasts.save!
 
+# Create the default "Wheeler Centre" podcast structure
+params = {
+  parent: podcasts,
+  page_order_position: :last,
+  published: true,
+  slug: "the-wheeler-centre",
+  title: "The Wheeler Centre",
+  created_at: Time.now
+}
+wheeler_podcast = Heracles::Page.find_by_url("broadcasts/podcasts/#{params[:slug]}")
+unless wheeler_podcast
+  result = Heracles::CreatePage.call(site: site, page_type: "podcast_series", page_params: params)
+  wheeler_podcast = result.page
+end
+
 # People page
 # ------------------------------------------------------------------------------
 people = Heracles::Sites::WheelerCentre::People.find_or_initialize_by(url: "people")
