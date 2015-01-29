@@ -34,6 +34,13 @@ module ApplicationHelper
   def human_boolean(bool)
     bool ? "yes" : "no"
   end
+
+  def duration_to_hms(duration, options={})
+    trim_hours = options[:trim_hours] || false
+    format = trim_hours ? "%M:%S" : "%H:%M:%S"
+    Time.at(duration).gmtime.strftime(format)
+  end
+
   ### Application specific helpers
 
   def excerptify(text, chars = 220)
