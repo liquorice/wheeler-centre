@@ -292,6 +292,12 @@
     line-height: 1.5;
   }
 
+.event__series-summary-image {
+  clear: none;
+  float: left;
+  width: 45%;
+}
+
 
 
 /* Venue */

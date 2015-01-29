@@ -1,5 +1,7 @@
 - hide_summary = hide_summary || false
-- if post.fields[:promo_image].data_present?
+- if post.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif post.fields[:promo_image].data_present?
   - image = post.fields[:promo_image].asset
 - else
   - image = Heracles::Asset.all.sample(1).first
@@ -10,7 +12,7 @@ a.blog-snap.blog-snap--quarter href=post.absolute_url
   - if image
     .blog-snap__hero
       .blog-snap__hero-inner
-        img src=image.content_small_thumbnail_url
+        img src=image.content_small_url
       - if image.attribution.present?
         .blog-snap__hero-caption.caption
           p = image.attribution

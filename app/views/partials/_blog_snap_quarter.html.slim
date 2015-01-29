@@ -1,8 +1,9 @@
 - hide_summary = hide_summary || false
-- if post.fields[:hero_image].data_present?
+- if post.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
-- else
-  - image = Heracles::Asset.all.sample(1).first
+- summary = (post.fields["summary"].data_present? ? post.fields["summary"] : post.fields["body"])
 
 a.blog-snap.blog-snap--quarter href=post.absolute_url
   time.blog-snap__date
@@ -28,6 +29,6 @@ a.blog-snap.blog-snap--quarter href=post.absolute_url
       - else
         ' By
       = post.fields[:authors].pages.map(&:title).to_sentence
-  - if post.fields["summary"].data_present? && !hide_summary
+  - if summary.present? && !hide_summary
     .blog-snap__summary.copy
-      = force_excerptify_html render_content(post.fields["summary"]), 350, "p i em strong br"
+      = force_excerptify_html render_content(summary), (image.present? ? 350 : 500)

@@ -6,8 +6,9 @@
 bundle install -j4
 
 # Set up staging and production git remotes
-# git remote add staging git@heroku.com:wheeler-centre-staging.git
-# git remote add production git@heroku.com:wheeler-centre.git
+if [ `git remote | egrep -q "^production$"` ]; then
+  git remote add production git@heroku.com:wheeler-centre.git
+fi
 
 # Copy config files into place
 

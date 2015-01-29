@@ -59,14 +59,15 @@ InsertablePullQuoteDisplay = React.createClass
 InsertablePullQuoteEdit = React.createClass
   mixins: [InsertableEditMixin]
 
-
   handleChange: (ref, e) ->
     @state.value[ref] = e.target.value
     @setState value: @state.value
-    console.log @state.value
 
   hasQuote: ->
-    !_.isEmpty @state.value.quote
+    !_.isEmpty(@state.value.quote)
+
+  onButtonClick: (e) ->
+    unless @hasQuote() then e.preventDefault()
 
   render: ->
     `<div className="insertable-edit fields--reversed">
@@ -100,7 +101,7 @@ InsertablePullQuoteEdit = React.createClass
             </select>
           </div>
         </div>
-        <button type="submit" className="button button--highlight" disabled={!this.hasQuote()}>Save changes to quote</button>
+        <button type="submit" onClick={this.onButtonClick} className={"button button--highlight" + (this.hasQuote() ? "" : " button--disabled")}>Save changes to quote</button>
       </form>
     </div>`
 

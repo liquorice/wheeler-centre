@@ -10,6 +10,7 @@
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c; /* 0, 158, 140 */
   --primary-color-lighter: #ccefeb;
+  --primary-color-light: #b4dbd7;
   --primary-color-darker: color(var(--primary-color) shade(15%));
   --text-color: #333;
   --max-width: 100%;

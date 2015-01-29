@@ -40,12 +40,14 @@ footer.footer role="contentinfo"
       ul
         li
           a href="#" Recently at The Wheeler Centre
-  .footer-nav-secondary
+  .footer-nav-secondary.clearfix
     ul
-      li
-        a href="#"
-          i.fa.fa-search
-          span.screenreaders-only Search
+      li.footer-nav-secondary__search
+        span.screenreaders-only Search
+        form.footer__search-form.clearfix action=""
+          input.footer__search-input placeholder="Search the Wheeler Centre…"
+          button.footer__search-button
+            i.fa.fa-search
       li
         a href="#" About us
       li

@@ -34,6 +34,7 @@ gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"
 gem "truncate_html"
+gem "sanitize"
 
 # Integrations
 gem "bugsnag"
@@ -57,11 +58,12 @@ gem "rails-assets-viewloader"
 gem "ffaker"
 
 # Temporary for the Blueprint import
-gem "syck", "1.0.1"
+# gem "syck", "1.0.1"
 gem "rdiscount"
 gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
 gem "trollop"
 gem "aws-sdk"
+gem "progress_bar"
 
 group :production do
   gem "rails_12factor"

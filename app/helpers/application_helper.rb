@@ -31,6 +31,16 @@ module ApplicationHelper
     (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
   end
 
+  def human_boolean(bool)
+    bool ? "yes" : "no"
+  end
+
+  def duration_to_hms(duration, options={})
+    trim_hours = options[:trim_hours] || false
+    format = trim_hours ? "%M:%S" : "%H:%M:%S"
+    Time.at(duration).gmtime.strftime(format)
+  end
+
   ### Application specific helpers
 
   def excerptify(text, chars = 220)
@@ -38,8 +48,12 @@ module ApplicationHelper
     truncate(text, length: chars)
   end
 
-  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br a")
-    truncate_html(sanitize(html, tags: allowed_tags.split(' ')), length: length)
+  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
+    truncate_html(
+      Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
+        :elements => Sanitize::Config::RESTRICTED[:elements] + allowed_tags.split(" "),
+      )),
+    length: length)
   end
 
   # Cribbed from Padrino:
