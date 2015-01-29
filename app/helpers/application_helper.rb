@@ -38,8 +38,12 @@ module ApplicationHelper
     truncate(text, length: chars)
   end
 
-  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br a")
-    truncate_html(sanitize(html, tags: allowed_tags.split(' ')), length: length)
+  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
+    truncate_html(
+      Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
+        :elements => Sanitize::Config::RESTRICTED[:elements] + allowed_tags.split(" "),
+      )),
+    length: length)
   end
 
   # Cribbed from Padrino:
