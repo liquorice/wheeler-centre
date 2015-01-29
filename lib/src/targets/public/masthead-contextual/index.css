@@ -141,11 +141,11 @@
   }
 
   /* Hide events on smaller screens */
-  .breakpoint-w-1600 .upcoming-events__item:nth-child(6n),
-  .breakpoint-w-1450 .upcoming-events__item:nth-child(5n),
-  .breakpoint-w-1200 .upcoming-events__item:nth-child(4n),
-  .breakpoint-w-879 .upcoming-events__item:nth-child(3n),
-  .breakpoint-w-699 .upcoming-events__item:nth-child(2n) {
+  .breakpoint-w-1600 .upcoming-events__item:nth-child(6),
+  .breakpoint-w-1450 .upcoming-events__item:nth-child(5),
+  .breakpoint-w-1200 .upcoming-events__item:nth-child(4),
+  .breakpoint-w-879 .upcoming-events__item:nth-child(3),
+  .breakpoint-w-699 .upcoming-events__item:nth-child(2) {
     display: none;
   }
 
