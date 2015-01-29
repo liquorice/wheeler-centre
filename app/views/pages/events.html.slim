@@ -1,4 +1,4 @@
-- events = page.events.results
+- events = page.events(page: params[:page], per_page: params[:per_page])
 
 = area :masthead_title do
   .page__title.page__title--events
@@ -9,9 +9,9 @@
     .page__body.page__body--events.copy
       = render_content page.fields[:body]
 
-      - if events.present?
+      - if events.results.present?
         .events
-          - events.each do |event|
+          - events.results.each do |event|
             - if event.fields[:promo_image].data_present?
               .event__hero-image
                 img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
@@ -24,6 +24,6 @@
             ' Page
             = (params[:page] || 1)
             em &nbsp;of&nbsp;
-            = events.total_pages
+            = events.results.total_pages
           .pagination-bottom
-            = paginate events, outer_window: 4
+            = paginate events.results, outer_window: 4

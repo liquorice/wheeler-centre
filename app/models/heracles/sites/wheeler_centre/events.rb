@@ -13,20 +13,20 @@ module Heracles
           }
         end
 
-        def events
-          search_events
+        def events(options={})
+          search_events(options)
         end
 
         private
 
-        def search_events
+        def search_events(options={})
           Sunspot.search(Event) do
             with :site_id, site.id
             with :parent_id, id
             with :published, true
 
             order_by :start_date_time, :asc
-            paginate(page: 1, per_page: 50)
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)
           end
         end
       end
