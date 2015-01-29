@@ -233,7 +233,7 @@ events_series_index.page_order_position = :last if events_series_index.new_recor
 events_series_index.save!
 
 # Events -> Event series index -> Event series collection
-event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
+event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/series/all-event-series")
 event_series_collection.parent = events_series_index
 event_series_collection.site = site
 event_series_collection.title = "All Event Series"
@@ -247,7 +247,7 @@ event_series_collection.page_order_position = :last if event_series_collection.n
 event_series_collection.save!
 
 # Events -> Presenters
-presenters = Heracles::Sites::WheelerCentre::Presenters.find_or_initialize_by(url: "events/venues")
+presenters = Heracles::Sites::WheelerCentre::Presenters.find_or_initialize_by(url: "events/presenters")
 presenters.site = site
 presenters.parent = events_index
 presenters.title = "Presenters"
@@ -269,7 +269,7 @@ venues_index.page_order_position = :last if venues_index.new_record?
 venues_index.save!
 
 # Events -> Venues index -> Venues collection
-venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-venues")
+venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/venues/all-event-venues")
 venues_collection.parent = venues_index
 venues_collection.site = site
 venues_collection.title = "All Venues"
@@ -625,6 +625,9 @@ def build_topic_page(topic, parent, site)
     end
   end
 end
+
+# Delete all topic pages
+Heracles::Page.of_type("topic").delete_all
 
 topic_names.each do |topic|
   build_topic_page(topic, topics, site)
