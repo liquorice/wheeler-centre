@@ -1043,7 +1043,7 @@ namespace :wheeler_centre do
         heracles_series.slug = blueprint_series["slug"]
         puts (blueprint_series["slug"])
         heracles_series.created_at = Time.zone.parse(blueprint_series["created_on"].to_s)
-        if blueprint_series["content"].present? then heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: false) end
+        if blueprint_series["content"].present? then heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: true) end
         if blueprint_series["id"].present?
           puts (blueprint_series["id"])
           heracles_series.fields[:legacy_series_id].value = blueprint_series["id"].to_i
