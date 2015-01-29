@@ -70,6 +70,11 @@
     margin-right: 25%;
     margin-right: calc(25% + 3rem);
   }
+  /* No borders on blockquotes if they're last */
+  .blog-post__intro .section--normal:last-child blockquote:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
   /* Hide the intro line when there's a full-width section as the first thing in the body */
   .blog-post__intro + .blog-post__body .section--full:first-child .figure:first-child {
     margin-top: -71px;
