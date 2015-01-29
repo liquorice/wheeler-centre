@@ -397,6 +397,7 @@
           .masthead-nav-secondary__search-input {
             background-color: #e0eeec;
             border: none;
+            border-radius: 0;
             float: left;
             font-size: 14px;
             height: 32px;
