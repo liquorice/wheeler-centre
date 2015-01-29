@@ -22,13 +22,8 @@
   }
 
   .breakpoint-w-599 .masthead-contextual__section-title {
-    display: none;
-  }
-
-  .breakpoint-w-599 .masthead-contextual__section-title--mobile {
-    display: block;
     padding-top: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
 
   .masthead-contextual__navigation-list {
