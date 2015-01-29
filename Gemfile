@@ -34,6 +34,7 @@ gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"
 gem "truncate_html"
+gem "sanitize"
 
 # Integrations
 gem "bugsnag"
