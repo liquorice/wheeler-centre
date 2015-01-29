@@ -90,6 +90,14 @@
     width: 195px;
   }
 
+  /* Hide events on smaller screens */
+  .breakpoint-w-1900 .upcoming-events__item:nth-child(8n),
+  .breakpoint-w-1700 .upcoming-events__item:nth-child(7n),
+  .breakpoint-w-1500 .upcoming-events__item:nth-child(6n),
+  .breakpoint-w-1300 .upcoming-events__item:nth-child(5n) {
+    display: none;
+  }
+
   .upcoming-events__item:first-child {
     border-left: none;
   }
