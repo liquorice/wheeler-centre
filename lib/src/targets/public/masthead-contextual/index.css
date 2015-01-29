@@ -17,7 +17,7 @@
     font-weight: bold;
     letter-spacing: 0.1em;
     padding-left: 35px;
-    padding-top: 90px;
+    padding-top: 60px;
     text-transform: uppercase;
   }
 
@@ -54,6 +54,7 @@
 .upcoming-events {
   float: right;
   padding-right: 35px;
+  margin-top: -40px;
 }
 
   .upcoming-events__navigation {
@@ -91,8 +92,8 @@
   }
 
   /* Hide events on smaller screens */
-  .breakpoint-w-1500 .upcoming-events__item:nth-child(6n),
-  .breakpoint-w-1300 .upcoming-events__item:nth-child(5n) {
+  .breakpoint-w-1600 .upcoming-events__item:nth-child(6n),
+  .breakpoint-w-1450 .upcoming-events__item:nth-child(5n) {
     display: none;
   }
 
