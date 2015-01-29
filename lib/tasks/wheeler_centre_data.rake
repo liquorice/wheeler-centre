@@ -2029,4 +2029,46 @@ namespace :wheeler_centre do
     puts "Done!"
   end
 
+  desc "Reprocess all assets"
+  task :reprocess_all_assets => :environment do
+    Heracles::Asset.order("created_at ASC").find_each do |asset|
+      # Skip assets that already have the new versions
+      next if !asset.image? || (asset.image? && asset.versions.include?(:itunes))
+
+      Rails.logger.info "#{asset.id} ..."
+
+      tries = 3
+      begin
+        # Reprocess the asset
+        result = asset.reprocess
+
+        if result
+          Rails.logger.info "#{asset.id} done!"
+        else
+          Rails.logger.info "#{asset.id} failed!"
+        end
+      rescue => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          # Catch all exceptions and just carry on if they still don't succeed
+          # after some retries. We'll be able to repeat this task later to re-
+          # process any assets that missed out due to timeouts or other
+          # exceptions.
+          Rails.logger.info "Exception (skipping asset): #{e}"
+        end
+      rescue Timeout::Error => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          Rails.logger.info "Timeout (skipping asset): #{e}"
+        end
+      end
+    end
+
+    Rails.loger.info "Done!"
+  end
+
 end
