@@ -86,7 +86,7 @@
             h2.event__series-summary-header= page.series.title
             - if page.series.fields[:body].data_present?
               .event__series-summary-details.copy
-                = render_content page.series.fields[:body]
+                = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
     - if page.venue
       .event__venue data-view-event-venue-map=page.venue.map_data
         .event__venue-info.column-wrapper
