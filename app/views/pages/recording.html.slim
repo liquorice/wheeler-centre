@@ -10,4 +10,7 @@
 
 = area :main do
   .recording
-    = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
+    .video
+      = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
+    .audio
+      = render "partials/audio", audio: page.fields[:audio]

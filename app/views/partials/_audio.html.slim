@@ -1,0 +1,24 @@
+- asset = audio.asset
+- if audio.data_present?
+  .figure.figure__audio.figure__display--default
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true
+      .audio-player__track format-track-position="trackPosition"
+      .audio-player__inner
+        .audio-player__metadata
+          .audio-player__listen Listen
+          .audio-player__duration format-duration="duration"
+          .audio-player__play-time format-duration="currentTime"
+        .audio-player__header
+          h3.audio-player__title Don’t look back in anger
+        .audio-player__controls
+          button.audio-player__play on-click="onPlayClick" data-hidden="playing"
+            i.fa.fa-play.audio-player__play-icon
+          button.audio-player__pause on-click="onPauseClick" data-visible="playing"
+            i.fa.fa-pause.audio-player__pause-icon
+      .audio-player__handle format-handle-position="trackPosition"
+        .audio-player__handle-nub
+      audio
+        - if asset.versions.include?(:audio_mp3)
+          source src=asset.audio_mp3_url type="audio/mpeg"
+        - if asset.versions.include?(:audio_ogg)
+          source src=asset.audio_ogg_url type="audio/ogg"

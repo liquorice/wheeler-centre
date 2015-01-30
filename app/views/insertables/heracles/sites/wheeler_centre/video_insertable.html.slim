@@ -3,7 +3,8 @@
     .video-player__teaser class=(poster_image_aspect_class if poster_image_aspect_class) on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
       .video-player__cover
       .video-player__header
-        i.fa.fa-play-circle.video-player__play-icon
+        .video-player__play
+          i.fa.fa-play.video-player__play-icon
         h3.video-player__title = widont_format(data[:embedData][:title]).html_safe
       .video-player__metadata
         span.video-player__watch Watch

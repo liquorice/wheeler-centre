@@ -12,7 +12,8 @@
     .video-player__teaser class="video-player__poster--landscape" on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
       .video-player__cover
       .video-player__header
-        i.fa.fa-play-circle.video-player__play-icon
+        .video-player__play
+          i.fa.fa-play.video-player__play-icon
         h3.video-player__title = widont_format(external_video.youtube["title"]).html_safe
       .video-player__metadata
         span.video-player__watch Watch
@@ -20,4 +21,6 @@
     .video-player__content
       .video-player__content-inner
         .responsive-embed style=(responsive_embed_div_style if responsive_embed_div_style)
-          == external_video.embed["html"]
+          / == external_video.embed["html"]
+          erb:
+            <iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FGCKgQ8FSNus%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGCKgQ8FSNus&image=http%3A%2F%2Fi.ytimg.com%2Fvi%2FGCKgQ8FSNus%2Fhqdefault.jpg&key=202529a0a35f408b9070c31ea737fa15&type=text%2Fhtml&schema=youtube" width="854" height="480" scrolling="no" frameborder="0" allowfullscreen></iframe>
