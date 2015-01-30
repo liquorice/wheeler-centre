@@ -97,7 +97,7 @@ module Heracles
         end
 
         def fetch_oembed_data(urls)
-          embedly_api.oembed urls: urls
+          embedly_api.oembed urls: urls, youtube_modestbranding: 1
         end
       end
     end

@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: eb4c36cf65a9dab626d3469f544f857d51dbc140
+  revision: 00452ef6a5b31cdf9086126accfeea1c0ef228dd
   branch: master
   specs:
     heracles (1.0.0)
@@ -115,7 +115,7 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    autoprefixer-rails (5.0.0.3)
+    autoprefixer-rails (5.1.0)
       execjs
       json
     aws-sdk (1.61.0)
@@ -147,7 +147,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.9.0)
     contracts (0.5)
     crass (0.2.1)
     daemons (1.1.9)
