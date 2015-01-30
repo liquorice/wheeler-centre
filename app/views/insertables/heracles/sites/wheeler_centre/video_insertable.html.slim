@@ -1,5 +1,5 @@
 .figure.figure__video class=display_class
-  .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
+  .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}"
     .video-player__teaser class=(poster_image_aspect_class if poster_image_aspect_class) on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
       .video-player__cover
       .video-player__header

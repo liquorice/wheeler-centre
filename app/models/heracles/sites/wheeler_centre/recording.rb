@@ -15,8 +15,9 @@ module Heracles
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
               {name: :youtube_video, type: :external_video},
-              {name: :video, type: :asset, asset_file_type: :video},
-              {name: :audio, type: :asset, asset_file_type: :audio},
+              {name: :video_poster_image, type: :asset, asset_file_type: :image},
+              {name: :video, type: :asset, asset_file_type: :video, editor_columns: 6},
+              {name: :audio, type: :asset, asset_file_type: :audio, editor_columns: 6},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
               {name: :events, type: :associated_pages, page_type: :event, editor_columns: 6},
