@@ -50,6 +50,7 @@ gem "uglifier", ">= 1.3.0"
 gem "rails-assets-jquery"
 gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
+gem "embedly"
 
 # Application
 gem "iso8601"

@@ -9,6 +9,7 @@
 #= stub heracles/admin/fields/field_header
 #= stub heracles/admin/fields/field_fallback
 #= stub heracles/admin/fields/field_errors
+#= stub heracles/admin/components/helper_embedly
 
 
 ###* @jsx React.DOM ###
@@ -43,7 +44,7 @@ FieldExternalVideo = React.createClass
     videoPreview = if @state.field.youtube?
       `<div className="field-external-video__preview">
         <div className="field-external-video__preview-pic">
-          <img src={this.state.field.youtube.thumbnail} />
+          <img src={this.state.field.youtube.thumbnail_url} />
         </div>
         <div className="field-external-video__preview-field field-external-video__preview-field--title">
           <b>Title:</b>
@@ -86,6 +87,20 @@ FieldExternalVideo = React.createClass
         status: 'loading'
       disabled: true
 
+    youTubeDataLoaded = false
+    embedDataLoaded = false
+
+    request = HeraclesAdmin.helpers.embedly.getUrl(_this.props.value)
+    request.success (data) ->
+      unless data[0].type is "error"
+        embedDataLoaded = true
+        newField = _.extend {}, _this.state.field,
+          embed: data[0]
+        _this.props.updateField _this.state.field.field_name, newField
+        _this.setState
+          field: newField
+        _this._checkDataLoaded(youTubeDataLoaded, embedDataLoaded)
+
     $.ajax
       url: "#{HeraclesAdmin.baseURL}api/sites/#{HeraclesAdmin.siteSlug}/fields/external_video"
       dataType: 'json'
@@ -93,8 +108,6 @@ FieldExternalVideo = React.createClass
       data:
         url: _this.props.value
       success: (data) ->
-
-
         # Wrong data received
         if data.length == 0 || data.error?
           _this.setState
@@ -104,28 +117,33 @@ FieldExternalVideo = React.createClass
 
         # Correct data received
         else
+          youTubeDataLoaded = true
           # Prepare field hash
           newField = _.extend {}, _this.state.field,
-            youtube: data
+            youtube: data[0].table
           _this.props.updateField _this.state.field.field_name, newField
-          # Update field state and label
           _this.setState
-            field       : newField
-            label:
-              title: 'Successfully loaded!'
-              status: 'loaded'
+            field: newField
+          _this._checkDataLoaded(youTubeDataLoaded, embedDataLoaded)
 
-        setTimeout(->
-          $(_this.refs.fieldLabel.getDOMNode()).fadeOut 'slow', ->
-            # Hide label block
-            _this.setState
-              label:
-                status: 'hidden'
-              disabled: false
-            # Revert proper display property to label after fadeOut
-            $(@).css
-              display:    'block',
-        , 2000)
+  _checkDataLoaded: (youTubeDataLoaded, embedDataLoaded) ->
+    _this = @
+    if youTubeDataLoaded && embedDataLoaded
+      # Update field state and label
+      @setState
+        label:
+          title: 'Successfully loaded!'
+          status: 'loaded'
+      setTimeout(=>
+        $(_this.refs.fieldLabel.getDOMNode()).fadeOut 'slow', ->
+          # Hide label block
+          _this.setState
+            label:
+              status: 'hidden'
+            disabled: false
+          # Revert proper display property to label after fadeOut
+          $(_this).css display: 'block',
+      , 2000)
 
   _handleClear: (event) ->
     newField = _.extend {}, @state.field,

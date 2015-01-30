@@ -5,6 +5,7 @@ module Heracles
 
         data_attribute :value
         data_attribute :youtube
+        data_attribute :embed
         validates :youtube, presence: {message: 'field data must be populated before save'}, if: :field_value_defined
 
         def data_present?
@@ -15,6 +16,7 @@ module Heracles
           attributes.symbolize_keys!
           self.value   = attributes[:value].presence
           self.youtube = attributes[:youtube].presence
+          self.embed   = attributes[:embed].presence
         end
 
         def to_s
@@ -29,6 +31,7 @@ module Heracles
           extract_id
           hit_api
           self.youtube = process_result
+          self.embed = fetch_oembed_data [self.value]
         end
 
         def field_value_defined
@@ -89,6 +92,13 @@ module Heracles
           end
         end
 
+        def embedly_api
+          @embedly_api ||= Embedly::API.new :key => ENV["EMBEDLY_API_KEY"], :user_agent => 'Mozilla/5.0 (compatible; wheelercentre/1.0; hello@icelab.com.au)'
+        end
+
+        def fetch_oembed_data(urls)
+          embedly_api.oembed urls: urls
+        end
       end
     end
   end
