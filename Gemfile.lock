@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: edaaa9767a3a172e5ace97d432b259f1e5bb2fbf
+  revision: 16a08b8ccf866491a6dc1fe2ebc08505dc885b59
   branch: master
   specs:
     heracles (1.0.0)
@@ -439,7 +439,6 @@ GEM
       rails (>= 3)
       sunspot (= 2.1.1)
     sunspot_solr (2.1.1)
-    syck (1.0.1)
     temple (0.7.5)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
@@ -529,7 +528,6 @@ DEPENDENCIES
   spring-commands-rspec
   sunspot-queue!
   sunspot_solr
-  syck (= 1.0.1)
   thin
   trollop
   truncate_html
