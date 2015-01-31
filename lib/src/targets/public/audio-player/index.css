@@ -3,9 +3,8 @@
 .audio-player {
   background-color: var(--primary-color-lighter);
   font-family: var(--font-sans);
-  margin-top: 100px;
   min-height: 130px;
-  padding: 35px;
+  padding: 35px 35px 39px;
   position: relative;
   user-select: none;
 }
@@ -15,6 +14,16 @@
     margin-right: auto;
     position: relative;
     padding-left: 90px;
+  }
+
+  .audio-player__load {
+    background-color: var(--primary-color-light);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    height: 5px;
+    transition-property: width;
+    transition-duration: 20ms;
   }
 
 .audio-player__track {
@@ -72,7 +81,12 @@
 
   .audio-player__play-time {
     float: right;
+    opacity: 0;
+    transition: opacity 300ms;
   }
+    .audio-player__play-time.visible {
+      opacity: 1;
+    }
 
   .audio-player__title {
     color: var(--primary-color-darker);

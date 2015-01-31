@@ -2,6 +2,7 @@
 - if audio.data_present?
   .figure.figure__audio.figure__display--default
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true
+      .audio-player__load format-load-position="loadProgress"
       .audio-player__track format-track-position="trackPosition"
       .audio-player__inner
         .audio-player__metadata
