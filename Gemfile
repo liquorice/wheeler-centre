@@ -59,7 +59,7 @@ gem "iso8601"
 gem "ffaker"
 
 # Temporary for the Blueprint import
-# gem "syck", "1.0.1"
+gem "syck", "1.0.1"
 gem "rdiscount"
 gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
 gem "trollop"

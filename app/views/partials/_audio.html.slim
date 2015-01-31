@@ -8,7 +8,13 @@
         .audio-player__metadata
           .audio-player__listen Listen
           .audio-player__duration format-duration="duration"
-          .audio-player__play-time format-duration="currentTime"
+          .audio-player__playing data-visible="playing"
+            .audio-player__faker
+              .audio-player__faker-bar.audio-player__faker-bar--one format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--two format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--three format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--four format-faker-bar="currentTime"
+            .audio-player__play-time format-duration="currentTime"
         .audio-player__header
           h3.audio-player__title Don’t look back in anger
         .audio-player__controls
