@@ -27,6 +27,12 @@
         source src=mp3_url type="audio/mpeg"
       - if ogg_url.present?
         source src=ogg_url type="audio/ogg"
-  - if data[:caption].present?
-    .caption.figure__caption.copy
-      p = data[:caption]
+  - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
+    .figure__caption.caption.copy
+      p
+        - if data[:caption].present?
+          = data[:caption]
+          - if (data[:caption].present? && asset.attribution.present? && data[:show_attribution] == true)
+            '  —
+        - if asset.attribution.present? && data[:show_attribution] == true
+          = asset.attribution
