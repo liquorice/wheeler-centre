@@ -22,7 +22,7 @@
           i.fa.fa-pause.audio-player__pause-icon
     .audio-player__handle format-handle-position="trackPosition"
       .audio-player__handle-nub
-    audio
+    audio preload="metadata"
       - if mp3_url.present?
         source src=mp3_url type="audio/mpeg"
       - if ogg_url.present?

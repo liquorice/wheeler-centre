@@ -24,7 +24,7 @@
             i.fa.fa-pause.audio-player__pause-icon
       .audio-player__handle format-handle-position="trackPosition"
         .audio-player__handle-nub
-      audio
+      audio preload="metadata"
         - if asset.versions.include?(:audio_mp3)
           source src=asset.audio_mp3_url type="audio/mpeg"
         - if asset.versions.include?(:audio_ogg)
