@@ -24,6 +24,7 @@ module Heracles
               {name: :people, type: :associated_pages, page_type: :person, editor_columns: 6},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
+              {name: :transcript, type: :content},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :recording_id, type: :integer, label: "Legacy recording ID"},
             ]
