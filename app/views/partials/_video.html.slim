@@ -5,7 +5,7 @@
   - version_name = :original unless video_poster_image.asset.versions.include?(:content_large)
   - poster_image_url = video_poster_image.asset.send(:"#{version_name.to_sym}_url")
 - else
-  - poster_image_url = external_video.youtube["thumbnail_url"]
+  - poster_image_url = external_video.youtube["snippet"]["thumbnails"]["high"]["url"] if external_video.youtube["snippet"]
 
 .figure.figure__video.figure__display--default
   .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
@@ -21,6 +21,4 @@
     .video-player__content
       .video-player__content-inner
         .responsive-embed style=(responsive_embed_div_style if responsive_embed_div_style)
-          / == external_video.embed["html"]
-          erb:
-            <iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FGCKgQ8FSNus%3Ffeature%3Doembed&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DGCKgQ8FSNus&image=http%3A%2F%2Fi.ytimg.com%2Fvi%2FGCKgQ8FSNus%2Fhqdefault.jpg&key=202529a0a35f408b9070c31ea737fa15&type=text%2Fhtml&schema=youtube" width="854" height="480" scrolling="no" frameborder="0" allowfullscreen></iframe>
+          == external_video.embed["html"]
