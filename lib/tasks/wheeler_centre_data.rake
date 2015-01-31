@@ -1744,6 +1744,8 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    youtube_migrations_data = YAML::load(File.read("youtube_migrations.yml"))
+
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
@@ -1757,8 +1759,17 @@ namespace :wheeler_centre do
         heracles_recording.slug = blueprint_video_post["slug"]
         heracles_recording.title = blueprint_video_post["title"]
         heracles_recording.fields[:short_title].value = blueprint_video_post["title"]
-        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: false)
-        heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: true)
+        heracles_recording.fields[:transcript].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+
+        youtube_migration = youtube_migrations_data.find {|y| y[:recording_id] == blueprint_video_post["id"].to_i}
+        if youtube_migration
+          heracles_recording.fields[:youtube_video].value = youtube_migration[:youtube_url]
+          unless heracles_recording.fields[:youtube_video].youtube.present?
+            heracles_recording.fields[:youtube_video].fetch
+          end
+        end
+
         # # TODO :audio
         # # TODO :promo_image
         # # TODO check :publish_at?
