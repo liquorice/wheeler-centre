@@ -30,8 +30,9 @@ module Heracles
         def fetch
           extract_id
           hit_api
+          embed_data = fetch_oembed_data [self.value]
           self.youtube = process_result
-          self.embed = fetch_oembed_data [self.value]
+          self.embed = embed_data.first.marshal_dump if embed_data
         end
 
         def field_value_defined
