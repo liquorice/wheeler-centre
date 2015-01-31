@@ -18,11 +18,11 @@
   }
 
 .audio-player__track {
-  background-color: color(var(--primary-color) tint(45%));
+  background-color: color(var(--primary-color) tint(15%));
   bottom: 0;
   left: 0;
   position: absolute;
-  top: 0;
+  height: 5px;
   transition-property: width;
   transition-duration: 20ms;
 }
