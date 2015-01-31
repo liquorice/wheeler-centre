@@ -806,7 +806,7 @@ namespace :wheeler_centre do
       heracles_person.fields[:external_links].value = blueprint_presenter["external_links"]
 
       # Image
-      blueprint_portrait_image = blueprint_asset_records.find {|r| r["attachable_type"] == "CenevtPresenter" && r["id"].to_i == blueprint_presenter["portrait_id"].to_i}
+      blueprint_portrait_image = blueprint_asset_records.find {|r| (r["attachable_type"] == "CenevtPresenter" || r["assoc"] == "portrait") && r["id"].to_i == blueprint_presenter["portrait_id"].to_i}
       if blueprint_portrait_image.present?
         heracles_promo_image = Heracles::Asset.find_by_blueprint_id(blueprint_portrait_image["id"].to_i)
         if heracles_promo_image
