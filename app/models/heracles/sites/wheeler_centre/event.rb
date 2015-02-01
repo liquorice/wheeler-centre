@@ -79,6 +79,15 @@ module Heracles
           events
         end
 
+        def promo_image
+          if fields[:promo_image].data_present?
+            fields[:promo_image].asset
+          elsif fields[:presenters].data_present?
+            primary_presenter = fields[:presenters].pages.first
+            primary_presenter.fields[:portrait].asset if primary_presenter.fields[:portrait].data_present?
+          end
+        end
+
 
         ### Searchable attrs
 

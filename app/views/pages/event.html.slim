@@ -1,7 +1,5 @@
 - show_type = show_type || false
 - hide_summary = hide_summary || false
-- if page.fields[:promo_image].data_present?
-  - image = page.fields[:promo_image].asset
 
 = area :masthead_title do
   .page__title.page__title--events
@@ -27,18 +25,18 @@
           .event__series-header-inner
             p.event__series-meta Part of a #{page.series.events.total} event series
             p.event__series-title = page.series.title
-    - if image
+    - if page.promo_image
       .event__promo-image
         picture
           erb:
             <!--[if IE 9]><video style="display: none;"><![endif]-->
-          source srcset=image.content_medium_url media="(min-width: 480px)"
+          source srcset=page.promo_image.content_medium_url media="(min-width: 480px)"
           erb:
             <!--[if IE 9]></video><![endif]-->
-          img.figure__content src=image.content_small_url itemprop="hero_image"
-          - if image.attribution.present?
+          img.figure__content src=page.promo_image.content_small_url itemprop="hero_image"
+          - if page.promo_image.attribution.present?
             .event__promo-image-caption.caption
-              p = image.attribution
+              p = page.promo_image.attribution
     .column-wrapper
       .column-wide.clearfix
         .event__meta

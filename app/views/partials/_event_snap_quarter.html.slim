@@ -1,10 +1,8 @@
 - hide_summary = hide_summary || false
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
-- elsif post.fields[:promo_image].data_present?
-  - image = post.fields[:promo_image].asset
-- else
-  - image = Heracles::Asset.all.sample(1).first
+- elsif post.promo_image
+  - image = post.promo_image
 
 a.blog-snap.blog-snap--quarter href=post.absolute_url
   time.blog-snap__date

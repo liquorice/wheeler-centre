@@ -2,8 +2,8 @@
 - hide_summary = hide_summary || false
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
-- elsif post.fields[:promo_image].data_present?
-  - image = post.fields[:promo_image].asset
+- elsif post.promo_image
+  - image = post.promo_image
 
 .snap--block
   a.event-snap.event-snap--block href=post.absolute_url
