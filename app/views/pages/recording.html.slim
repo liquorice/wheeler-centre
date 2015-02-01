@@ -10,7 +10,13 @@
 
 = area :main do
   .recording
-    .video
+    - if page.fields[:youtube_video].data_present?
       = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
-    .audio
-      = render "partials/audio", audio: page.fields[:audio]
+    .column-wrapper
+      .column-mid
+        .content.copy
+          - if page.fields[:description].data_present?
+            = render_content_in_sections page.fields[:description]
+    - if page.events
+      - page.events.each do |event|
+        = render "partials/event_snap_block", post: event
