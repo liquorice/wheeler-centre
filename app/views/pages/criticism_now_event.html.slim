@@ -19,7 +19,7 @@
         h2 Reviews
         - page.reviews.each do |review|
           .review
-            = render_content review[:body]
+            = render_content review.fields[:body]
     - if page.responses.any?
       .reviews
         h2 Responses

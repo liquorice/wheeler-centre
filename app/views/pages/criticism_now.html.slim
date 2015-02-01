@@ -17,3 +17,6 @@
         - page.events.each do |event|
           p
             a href=event.absolute_url = event.title
+    - page.primary_responses.each do |response|
+      .review
+        = render_content response.fields[:body]
