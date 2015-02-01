@@ -119,4 +119,13 @@ module ApplicationHelper
     primary_topic
   end
 
+  # Projects
+  def projects_page
+    site.pages.find_by_url("projects")
+  end
+
+  def projects_for_navigation
+    projects_page.children.visible.published
+  end
+
 end

@@ -55,9 +55,18 @@
     li.masthead-nav-main__item.masthead-nav-main__item--break
       a.masthead-nav-main__anchor href="/events"
         ' People
-    li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/features"
-        ' Features
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      button.masthead-nav-main__anchor
+        ' Projects
+        i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+      .masthead-nav-main__dropdown.clearfix
+        - projects_for_navigation.in_groups(2, false).each do |group|
+          - if group.any?
+            ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+              - group.each do |project|
+                li.masthead-nav-main__dropdown-item
+                  a.masthead-nav-main__dropdown-anchor href=project.absolute_url
+                    = project.title
   ul.masthead-nav-secondary.clearfix
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href="/about-us"
