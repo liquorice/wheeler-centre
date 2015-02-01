@@ -1,0 +1,28 @@
+- recordings = page.recordings(page: params[:page], per_page: params[:per_page])
+
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Broadcasts
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="/events"
+          ' Latest broadcasts
+
+= area :main do
+  .page__content
+    .page__body.page__body--events.copy
+      - if recordings.results.present?
+        .events
+          - recordings.results.each do |recording|
+            a href=recording.absolute_url
+              h3.event__title
+                = recording.title
+          .pagination-context.pagination-context--bottom
+            ' Page
+            = (params[:page] || 1)
+            em &nbsp;of&nbsp;
+            = recordings.results.total_pages
+          .pagination-bottom
+            = paginate recordings.results, outer_window: 4
