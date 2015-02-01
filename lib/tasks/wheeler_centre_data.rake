@@ -1628,6 +1628,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     # Find or initialise the Projects page
@@ -1637,13 +1638,16 @@ namespace :wheeler_centre do
     projects.slug = "projects"
     projects.published = true
     projects.save!
+
     # Find or initialise the Criticism page
-    criticism_now = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/criticism-now")
+    blueprint_criticism_now = blueprint_records.find {|r| r["slug"] == "projects/criticism-now" }
+    criticism_now = Heracles::Sites::WheelerCentre::CriticismNow.find_or_initialize_by(url: "projects/criticism-now")
     criticism_now.site = site
     criticism_now.title = "Criticism Now"
     criticism_now.slug = "criticism-now"
     criticism_now.published = true
     criticism_now.parent = projects
+    criticism_now.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_criticism_now["content"], subject: blueprint_criticism_now, assetify: true)
     criticism_now.save!
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage }
@@ -1661,11 +1665,11 @@ namespace :wheeler_centre do
           slug = blueprint_page["slug"]
         end
 
-        heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
+        heracles_page = Heracles::Sites::WheelerCentre::CriticismNowEvent.find_by_slug(slug)
 
         unless heracles_page
           site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-          heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+          heracles_page = Heracles::Page.new_for_site_and_page_type(site, "criticism_now_event")
           if criticism_now.present?
             heracles_page.parent = criticism_now
           end
@@ -1676,6 +1680,17 @@ namespace :wheeler_centre do
         heracles_page.title = blueprint_page["title"]
         heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
         heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+        blueprint_hero_image = blueprint_asset_records.find {|r| r["attachable_id"].to_i == blueprint_page["id"].to_i && r["name"].to_s.downcase == "banner"}
+        if blueprint_hero_image.present?
+          heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
+          if heracles_hero_image
+            heracles_page.fields[:hero_image].asset_id = heracles_hero_image.id
+          else
+            puts "*** Missing hero image for: #{blueprint_event["title"]}"
+          end
+        else
+          puts "*** Missing hero image for: #{blueprint_event["title"]}"
+        end
         heracles_page.save!
 
         reviews_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all-reviews")
