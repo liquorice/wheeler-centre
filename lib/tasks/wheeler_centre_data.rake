@@ -1754,7 +1754,7 @@ namespace :wheeler_centre do
       if blueprint_video_post["title"].present?
         heracles_recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(blueprint_video_post["slug"])
         unless heracles_recording then heracles_recording = Heracles::Page.new_for_site_and_page_type(site, "recording") end
-        heracles_recording.published = true
+        heracles_recording.published = blueprint_video_post["publish_on"].present?
         puts (blueprint_video_post["slug"])
         heracles_recording.slug = blueprint_video_post["slug"]
         heracles_recording.title = blueprint_video_post["title"]
@@ -1772,13 +1772,98 @@ namespace :wheeler_centre do
 
         # # TODO :audio
         # # TODO :promo_image
-        # # TODO check :publish_at?
         heracles_recording.fields[:recording_date].value = Time.zone.parse(blueprint_video_post["event_date"].to_s)
         heracles_recording.created_at = Time.zone.parse(blueprint_video_post["created_on"].to_s)
         heracles_recording.fields[:recording_id].value = blueprint_video_post["id"].to_i
         heracles_recording.parent = parent
         heracles_recording.collection = collection
         heracles_recording.save!
+      end
+    end
+  end
+
+  def remap_series_slugs(series_slug, event_slug)
+    case series_slug
+    when "new-news-by-the-centre-for-advancing-journalism"
+      "new-news"
+    else
+      "#{series_slug}-#{event_slug}"
+    end
+  end
+
+  desc "Associate imported recordings with imported events"
+  task :associate_recordings_with_events, [:yml_file] => :environment do |task, args|
+    heracles_events = Heracles::Sites::WheelerCentre::Event.all
+    heracles_events.each do |heracles_event|
+      # Recordings have slugs that combine the series with the event
+      # `#{series.slug}-#{event.slug}`
+      if heracles_event.fields[:series].data_present?
+        slug_to_find = remap_series_slugs(heracles_event.fields[:series].pages.first.slug, heracles_event.slug)
+        puts "Finding recording with series-event slug: #{slug_to_find}"
+        recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(slug_to_find)
+      end
+
+      # Special-case for events that are split into multiple recordings
+      if heracles_event.slug == "epic-fail"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^epic-fail/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "on-water-eight-speakers-eight-stories"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^on-water/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "a-gala-night-of-storytelling-2011-voices-from-elsewhere"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^voices-from-elsewhere/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "feminism-has-failed"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^feminism-has-failed/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "the-ethics-of-climate-change-the-moral-case-for-tackling-the-climate-problem"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^the-ethics-of-climate-change/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "innovation-energy-and-climate-change-in-the-developing-world"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^innovation-energy-and-climate-change-in-the-developing-world/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "carbon-down-on-the-farm"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^carbon-down-on-the-farm/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "greening-capitalism-green-bonds-funding-clean-energy-banks-and-global-funds"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^greening-capitalism/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "emissions-trading-dead-or-alive"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^emissions-trading/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "a-gala-night-of-storytelling"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^a-gala-night-of-storytelling/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug.match(/^debut-mondays/)
+        # Match based on event _date_ as well
+        heracles_event_date = heracles_event.fields[:start_date].value.strftime("%Y-%m-%d")
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^debut-mondays/) && r.fields[:recording_date].value.strftime("%Y-%m-%d") == heracles_event_date}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      else
+        # Find a recording that matches the event slug exactly
+        unless recording
+          slug_to_find = heracles_event.slug
+          puts "Finding recording with event-only slug: #{slug_to_find}"
+          recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(slug_to_find)
+        end
+        # Associate any found recording with the current event
+        if recording
+          heracles_event.fields[:recordings].page_ids = [recording.id]
+          heracles_event.save!
+        else
+          puts "*** No recording found for #{heracles_event.title}"
+        end
       end
     end
   end
