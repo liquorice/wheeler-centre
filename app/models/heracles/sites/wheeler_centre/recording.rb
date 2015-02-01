@@ -20,8 +20,7 @@ module Heracles
               {name: :audio, type: :asset, asset_file_type: :audio, editor_columns: 6},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
-              {name: :events, type: :associated_pages, page_type: :event, editor_columns: 6},
-              {name: :people, type: :associated_pages, page_type: :person, editor_columns: 6},
+              {name: :people, type: :associated_pages, page_type: :person},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :transcript, type: :content},
@@ -68,6 +67,10 @@ module Heracles
 
           text :description do
             fields[:description].value
+          end
+
+          text :youtube_video do
+            fields[:youtube_video].value
           end
 
           date :publish_date do
