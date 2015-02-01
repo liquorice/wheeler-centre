@@ -27,6 +27,17 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            authors: fields[:authors].pages.map(&:title).join(", "),
+            publish_date: fields[:publish_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
         ### Accessors
 
         def parent_blog

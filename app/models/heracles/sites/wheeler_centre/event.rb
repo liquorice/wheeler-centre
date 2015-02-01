@@ -36,6 +36,18 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            series: fields[:series].pages.map(&:title).join(", "),
+            recordings: fields[:recordings],
+            start_date: fields[:start_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
         ### Accessors
 
         def series

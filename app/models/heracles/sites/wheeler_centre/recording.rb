@@ -31,12 +31,28 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            events: events.map(&:title).join(", "),
+            youtube_video: fields[:youtube_video].value.presence || "",
+            recording_date: fields[:recording_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
         ### Accessors
 
         def events
-          if fields[:events].data_present
-            fields[:events].pages
-          end
+          Heracles::Page.
+            of_type("event").
+            joins(:insertions).
+            where(
+              :"insertions.field" => "recordings",
+              :"insertions.inserted_key" => insertion_key
+            )
         end
 
         def people
