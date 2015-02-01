@@ -1228,6 +1228,9 @@ namespace :wheeler_centre do
 
         heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: true)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+        if blueprint_daily["publish_on"].present?
+          heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+        end
         heracles_blog_post.parent = parent
         heracles_blog_post.collection = collection
         authors = all_authors.select { |p| p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
@@ -1265,6 +1268,9 @@ namespace :wheeler_centre do
       heracles_blog_post.tag_list.add(["legacy-quote"])
 
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      if blueprint_daily["publish_on"].present?
+        heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+      end
       heracles_blog_post.parent = parent
       heracles_blog_post.collection = collection
       tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
@@ -1312,6 +1318,9 @@ namespace :wheeler_centre do
       heracles_blog_post.tag_list.add(["legacy-widget"])
 
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      if blueprint_daily["publish_on"].present?
+        heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+      end
       heracles_blog_post.parent = parent
       heracles_blog_post.collection = collection
       tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
