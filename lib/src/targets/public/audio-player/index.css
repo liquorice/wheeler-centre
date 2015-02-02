@@ -78,7 +78,12 @@
     border-left: 1px solid rgba(0, 158, 140, 0.2);
     margin-left: 16px;
     padding-left: 20px;
+    opacity: 0;
+    transition: opacity 300ms;
   }
+    .audio-player__duration.visible {
+      opacity: 1;
+    }
     .figure__display--left-aligned .audio-player__duration,
     .figure__display--right-aligned .audio-player__duration {
       border: none;
