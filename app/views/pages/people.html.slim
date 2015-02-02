@@ -1,10 +1,16 @@
 - people = page.people.results
 
-- content_for(:title) do
-  .page__title.page__title--people
-    h1.title == page.title
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title People
 
-- content_for(:middle) do
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' All people
+
+= area :main do
   .page__content
     .page__body.page__body--people.copy
       = render_content page.fields[:body]
@@ -18,5 +24,12 @@
             a href=person.absolute_url
               h3.person__title
                 = person.title
+          .pagination-context.pagination-context--bottom
+            ' Page
+            = (params[:page] || 1)
+            em &nbsp;of&nbsp;
+            = people.total_pages
+          .pagination-bottom
+            = paginate people, outer_window: 4
 
 
