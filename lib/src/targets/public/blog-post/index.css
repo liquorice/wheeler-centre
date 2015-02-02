@@ -2,11 +2,18 @@
   padding-top: 70px;
   padding-bottom: 50px;
 }
+.breakpoint-tablet .blog-post {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
 
 .blog-post__header {
   font-family: var(--font-sans);
   text-align: center;
   margin-bottom: 50px;
+}
+.breakpoint-tablet .blog-post__header {
+  margin-bottom: 20px;
 }
 
   .blog-post__byline {
@@ -35,11 +42,20 @@
     font-size: 4.8rem;
     font-weight: bold;
   }
+  .breakpoint-tablet .blog-post__title {
+    font-size: 38px;
+    font-size: 3.8rem;
+  }
 
 .blog-post__intro {
   padding-top: 50px;
   padding-bottom: 15px;
 }
+.breakpoint-tablet .blog-post__intro {
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
   .blog-post__intro:after {
     content: "";
     border-bottom: 1px solid #dfdfdf;
