@@ -143,6 +143,8 @@
       }
 
         .masthead-nav-main__anchor {
+          background: none;
+          border: none;
           color: var(--primary-color-lighter);
           display: inline-block;
           font-size: 16px;
