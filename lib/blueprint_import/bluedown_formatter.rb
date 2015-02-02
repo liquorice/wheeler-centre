@@ -1,5 +1,7 @@
 module LegacyBlueprint
   class BluedownFormatter
+    require "nokogiri"
+
     include Singleton
     include ActionView::Helpers::SanitizeHelper
     extend ActionView::Helpers::SanitizeHelper::ClassMethods
@@ -48,6 +50,7 @@ module LegacyBlueprint
         text = assetify(tokens, text, options[:subject])
       end
 
+
       # We can't convert this syntax, and I don't think it's used anywhere anyway
       # unless options[:quick_links] == false
       #   text = quick_linkify(tokens, text, options)
@@ -59,6 +62,16 @@ module LegacyBlueprint
         rescue => e
           raise "Markdown failed for: #{text.first(30)}: #{e.inspect}"
         end
+      end
+
+      # Convert any iframes into insertable-approriate versions
+      unless options[:iframify] == false
+        text = iframify(text)
+      end
+
+      # Convert any <object> into code insertables versions
+      unless options[:objectify] == false
+        text = objectify(text)
       end
 
       text = tidy(text) if options[:sanitize] == true
@@ -130,6 +143,8 @@ module LegacyBlueprint
             object_class_name = "TumPost"
           elsif object_class_name == "CenevtEvent"
             object_class_name = "EvtEvent"
+          elsif object_class_name == "CenplaPage"
+            object_class_name = "Page"
           end
           Heracles::Asset.where(
             blueprint_attachable_type: object_class_name,
@@ -146,6 +161,61 @@ module LegacyBlueprint
       end
     end
 
+    def self.iframify(text)
+      embedly_api = Embedly::API.new :key => ENV["EMBEDLY_API_KEY"], :user_agent => 'Mozilla/5.0 (compatible; wheelercentre/1.0; hello@icelab.com.au)'
+      fragment = Nokogiri::HTML(text)
+      iframes = fragment.xpath("//iframe")
+
+      iframes.each do |iframe|
+        url = iframe['src']
+        url = url.gsub(/youtube-nocookie/, "youtube")
+        puts "Adding video insertable for #{url}"
+
+        begin
+          obj = embedly_api.extract :url => url
+        rescue Embedly::BadResponseException
+          puts "retrying embedly api request..."
+          retry
+        end
+
+        dump = obj[0].marshal_dump
+        embedData = {}
+
+        if dump[:media].present? && dump[:media][:html].present?
+          # The data return by the embedly ruby library is slightly different to that of the
+          # javascript one, so we do some mangling
+          embedData[:provider_url]     = dump[:provider_url]
+          embedData[:description]      = dump[:description]
+          embedData[:title]            = dump[:title]
+          embedData[:url]              = dump[:url]
+          embedData[:height]           = dump[:media][:height]
+          embedData[:width]            = dump[:media][:width]
+          embedData[:html]             = dump[:media][:html]
+          embedData[:type]             = dump[:media][:type]
+          embedData[:thumbnail_url]    = dump[:images][0]['url'] if dump[:images].any?
+          embedData[:thumbnail_height] = dump[:images][0]['height'] if dump[:images].any?
+          embedData[:thumbnail_width]  = dump[:images][0]['width'] if dump[:images].any?
+
+          video_insertable = content_tag(:div, '', value: {url: url, display: 'Full-width', embedData: embedData}.to_json, insertable: 'video', contenteditable: 'false')
+          iframe.replace video_insertable
+        else
+          code_insertable = content_tag(:div, '', value: {code: CGI.escape_html(iframe.to_s)}.to_json, insertable: 'code', contenteditable: 'false')
+          iframe.replace code_insertable
+        end
+      end
+      fragment.to_html
+    end
+
+    def self.objectify(text)
+      fragment = Nokogiri::HTML(text)
+      objects = fragment.xpath("//object")
+
+      objects.each do |object|
+        code_insertable = content_tag(:div, '', value: {code: CGI.escape_html(object.to_s)}.to_json, insertable: 'code', contenteditable: 'false')
+        object.replace code_insertable
+      end
+      fragment.to_html
+    end
 
     # Options:
     #  EITHER
@@ -209,7 +279,7 @@ module LegacyBlueprint
       # Non-image assets should be inline links with some default content.
 
       display = "Right-aligned"
-      if options["size"] == "Size8"
+      if options[:size] == "Size8"
         display = ""
       end
 
