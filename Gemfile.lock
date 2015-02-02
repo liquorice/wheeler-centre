@@ -150,6 +150,10 @@ GEM
     coffee-script-source (1.9.0)
     contracts (0.5)
     crass (0.2.1)
+    curb (0.8.6)
+    curb-fu (0.6.2)
+      curb (>= 0.5.4.0)
+      rack-test (>= 0.2.0)
     daemons (1.1.9)
     database_cleaner (1.3.0)
     debug_inspector (0.0.2)
@@ -183,6 +187,12 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    fastly (1.1.5)
+      curb (~> 0.8.6)
+      curb-fu (~> 0.6.2)
+    fastly-rails (0.2.0)
+      fastly (~> 1.1.4)
+      rails
     ffaker (1.25.0)
     ffi (1.9.6)
     font-awesome-rails (4.3.0.0)
@@ -488,6 +498,7 @@ DEPENDENCIES
   dotenv-rails
   embedly
   factory_girl_rails
+  fastly-rails
   ffaker
   foreman
   fuubar (~> 2.0.0)
