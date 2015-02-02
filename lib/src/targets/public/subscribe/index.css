@@ -23,6 +23,11 @@
     line-height: 1.5;
     padding-right: 15px;
   }
+  .breakpoint-phone .simple-subscribe__label {
+    line-height: 1.4;
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
   .simple-subscribe__controls {
     padding-left: 15px;
   }
