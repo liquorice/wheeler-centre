@@ -154,6 +154,11 @@
   padding-top: 4px;
   width: 35%;
 }
+.breakpoint-phone .figure__display--left-aligned {
+  float: none;
+  margin-right: 0;
+  width: 100%;
+}
   .breakpoint-widescreen-wide .blog-post .figure__display--left-aligned {
     margin-left: -25%;
     width: 50%;
@@ -165,6 +170,11 @@
   margin-left: 35px;
   padding-bottom: 35px;
   padding-top: 4px;
+}
+.breakpoint-phone .figure__display--right-aligned {
+  float: none;
+  margin-left: 0;
+  width: 100%;
 }
   .breakpoint-widescreen-wide .blog-post .figure__display--right-aligned {
     margin-right: -25%;
