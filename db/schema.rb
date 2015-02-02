@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122021924) do
+ActiveRecord::Schema.define(version: 20150202061537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150122021924) do
     t.string   "blueprint_guid"
     t.string   "blueprint_caption"
     t.string   "blueprint_assoc"
+    t.integer  "recording_id"
   end
 
   add_index "assets", ["file_type"], name: "index_assets_on_file_type", using: :btree
