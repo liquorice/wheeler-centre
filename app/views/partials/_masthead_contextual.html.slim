@@ -1,54 +1,27 @@
 .masthead-contextual.masthead-contextual--events.clearfix
-  .upcoming-events
-    .upcoming-events__navigation.clearfix
-      span.upcoming-events__up-next
-        | Up next
-      a.upcoming-events__view-all href="/events"
-        | View all <span>112 of our upcoming events</span>
-        i.fa.fa-chevron-right
-    ul.upcoming-events__list.clearfix
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://placekitten.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Thu 1 Feb
-            h2.upcoming-events__item-title The Show of the Year
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://placesheen.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Fri 2 Feb
-            h2.upcoming-events__item-title Thomas Keneally
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://placecage.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Fri 2 Feb
-            h2.upcoming-events__item-title December: Hot Desk Edition
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://fillmurray.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Sun 4 Feb
-            h2.upcoming-events__item-title Woolf &amp; Wilde: A Queer Party
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://placekitten.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Thu 1 Feb
-            h2.upcoming-events__item-title The Show of the Year
-      li.upcoming-events__item
-        a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
-          span.upcoming-events__image-container
-            img.upcoming-events__image alt="" src="http://placesheen.com/195/110"
-          span.upcoming-events__item-text-container.clearfix
-            h1.upcoming-events__item-date Fri 2 Feb
-            h2.upcoming-events__item-title Thomas Keneally
+  - if upcoming_events_for_navigation.results.any?
+    .upcoming-events
+      .upcoming-events__navigation.clearfix
+        span.upcoming-events__up-next
+          | Up next
+        - if upcoming_events_for_navigation.total > 1
+          a.upcoming-events__view-all href="/events"
+            | View all <span>#{upcoming_events_for_navigation.total} of our upcoming events</span>
+            i.fa.fa-chevron-right
+      ul.upcoming-events__list.clearfix
+        - upcoming_events_for_navigation.results.each do |event|
+          - if event.fields[:thumbnail_image].data_present?
+            - image = event.fields[:thumbnail_image].asset
+          - elsif event.promo_image
+            - image = event.promo_image
+          li.upcoming-events__item
+            a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
+              - if image
+                span.upcoming-events__image-container
+                  img.upcoming-events__image alt="" src=image.content_thumbnail_url
+              span.upcoming-events__item-text-container.clearfix
+                h1.upcoming-events__item-date = l event.fields[:start_date].value, format: :medium_date
+                h2.upcoming-events__item-title = event.title
   h1.masthead-contextual__section-title.masthead-contextual__section-title
     = area :masthead_title
 .masthead-contextual.clearfix
