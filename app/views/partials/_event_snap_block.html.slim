@@ -7,8 +7,9 @@
 
 .snap--block
   a.event-snap.event-snap--block href=post.absolute_url
-    time.event-snap__date
-      = l post.fields[:start_date], format: :medium_date
+    - if post.fields[:start_date].data_present?
+      time.event-snap__date
+        = l post.fields[:start_date].value, format: :medium_date
     - if image
       .event-snap__hero
         - if show_type
