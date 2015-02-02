@@ -1954,7 +1954,7 @@ namespace :wheeler_centre do
   end
 
   desc "Import blueprint legacy Texts in the City page"
-  task :import_blueprint_text_in_the_city, [:yml_file] => :environment do |task, args|
+  task :import_blueprint_texts_in_the_city, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
@@ -1973,7 +1973,7 @@ namespace :wheeler_centre do
 
     blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/texts-in-the-city-goes-digital" && r.class == LegacyBlueprint::CenplaPage }
     slug = "texts-in-the-city-goes-digital"
-    vpla_page = Heracles::Sites::WheelerCentre::VplaYear.find_or_initialize_by(url: "projects/#{slug}")
+    vpla_page = Heracles::Sites::WheelerCentre::TextsInTheCity.find_or_initialize_by(url: "projects/#{slug}")
     vpla_page.site = site
     vpla_page.parent = projects
     vpla_page.title = blueprint_page["title"]
@@ -1987,7 +1987,7 @@ namespace :wheeler_centre do
     books_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "projects/#{slug}/all-books")
     books_collection.parent = vpla_page
     books_collection.site = site
-    books_collection.fields[:contained_page_type].value = "book"
+    books_collection.fields[:contained_page_type].value = "texts_in_the_city_book"
     books_collection.fields[:sort_attribute].value = "created_at"
     books_collection.fields[:sort_direction].value = "DESC"
     books_collection.title = "All Books"
@@ -2011,33 +2011,19 @@ namespace :wheeler_centre do
         }
         heracles_book = Heracles::Page.find_by_url("projects/#{slug}/#{blueprint_vpla_book["slug"]}")
         unless heracles_book
-          result = Heracles::CreatePage.call(site: site, page_type: "vpla_book", page_params: create_params)
+          result = Heracles::CreatePage.call(site: site, page_type: "texts_in_the_city_book", page_params: create_params)
           heracles_book = result.page
         end
 
         # Content
-        heracles_book.fields[:publisher].value = blueprint_vpla_book["publisher"]
-        heracles_book.fields[:publication_date].value = blueprint_vpla_book["date_of_publication"]
-
-        heracles_book.fields[:blurb].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["blurb"], subject: heracles_book)
+        heracles_book.fields[:author].value = blueprint_vpla_book["author"]
+        heracles_book.fields[:author_biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["author_bio"], subject: blueprint_vpla_book)
         cover_asset = Heracles::Asset.find_by_blueprint_id(blueprint_vpla_book["cover_image_id"])
         if cover_asset
           heracles_book.fields[:cover_image].asset_id = cover_asset.id
         end
-        heracles_book.fields[:author].value = blueprint_vpla_book["author"]
-        author_asset = Heracles::Asset.find_by_blueprint_id(blueprint_vpla_book["author_portrait_id"])
-        if author_asset
-          heracles_book.fields[:author_image].asset_id = author_asset.id
-        end
-        heracles_book.fields[:author_image_credit].value = blueprint_vpla_book["author_portrait_credit"]
-        heracles_book.fields[:author_biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["author_bio"], subject: blueprint_vpla_book)
-        heracles_book.fields[:videos].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["videos"], subject: blueprint_vpla_book)
-        heracles_book.fields[:links].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["links"], subject: blueprint_vpla_book)
-        heracles_book.fields[:review].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["review"], subject: blueprint_vpla_book)
-        heracles_book.fields[:reviewer].value = blueprint_vpla_book["reviewer"]
-        heracles_book.fields[:library].value = blueprint_vpla_book["reviewer_library"]
-        heracles_book.fields[:library_website].value = blueprint_vpla_book["reviewer_url"]
-
+        heracles_book.fields[:further_reading].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["links"], subject: blueprint_vpla_book)
+        heracles_book.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["review"], subject: blueprint_vpla_book)
         heracles_book.save!
       end
     end
@@ -2085,7 +2071,7 @@ namespace :wheeler_centre do
       books_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "projects/#{slug}/all-books")
       books_collection.parent = vpla_page
       books_collection.site = site
-      books_collection.fields[:contained_page_type].value = "book"
+      books_collection.fields[:contained_page_type].value = "vpla_book"
       books_collection.fields[:sort_attribute].value = "created_at"
       books_collection.fields[:sort_direction].value = "DESC"
       books_collection.title = "All Books"
