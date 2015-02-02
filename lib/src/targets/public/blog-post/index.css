@@ -187,6 +187,13 @@
   padding-top: 50px;
   position: relative;
 }
+.breakpoint-tablet .blog-post__tags {
+  padding-top: 30px;
+}
+.breakpoint-phone-wide .blog-post__tags,
+.breakpoint-phone .blog-post__tags {
+  padding-top: 20px;
+}
   .blog-post__tag-header {
     font-size: 12px;
     font-size: 1.2rem;
@@ -196,6 +203,11 @@
     margin-left: -81px;
     position: absolute;
     text-transform: uppercase;
+  }
+  .breakpoint-w-1200 .blog-post__tag-header {
+    margin-left: 0;
+    padding-bottom: 10px;
+    position: relative;
   }
   .blog-post__tags-list {
     display: block;
