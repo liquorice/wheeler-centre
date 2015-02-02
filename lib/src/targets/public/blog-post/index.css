@@ -29,6 +29,11 @@
     font-size: 1.5rem;
     margin-bottom: 15px;
   }
+  .breakpoint-phone-wide .blog-post__byline,
+  .breakpoint-phone .blog-post__byline {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
     .blog-post__byline a {
       text-decoration: underline;
       color: #666;
