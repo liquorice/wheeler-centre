@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 # Usage
-# >> s3 = S3Util.new(bucket_name: 'video.wheeler-centre.com', config_file: 'video_migration/config.yml')
+# >> s3 = S3Util.new(bucket_name: 'video.wheelercentre.com', config_file: 'video_migration/config.yml')
 # >> s3.find_video(file_name)
 
 require "aws-sdk"
@@ -25,13 +25,26 @@ class S3Util
 		@s3 = AWS::S3.new
 	end
 
-	def find_video(file_name)
+	def find(file_name)
 		bucket = @s3.buckets[@bucket_name]
 		if bucket.exists?
 			if bucket.objects[file_name].exists?
 				puts (bucket.objects[file_name].public_url)
 				bucket.objects[file_name].public_url
 			end
+		end
+	end
+
+	def upload(file_name)
+		bucket = @s3.buckets[@bucket_name]
+		puts ("Checking for bucket")
+		if bucket.exists?
+			# Upload a file.
+			puts ("Uploading...")
+			key = File.basename(file_name)
+			puts ("Key: #{key}")
+			bucket.objects[key].write(:file => file_name)
+			puts ("Uploading file #{file_name} to bucket #{bucket}.")
 		end
 	end
 
