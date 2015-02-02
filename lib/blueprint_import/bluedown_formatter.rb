@@ -196,7 +196,7 @@ module LegacyBlueprint
           embedData[:thumbnail_height] = dump[:images][0]['height'] if dump[:images].any?
           embedData[:thumbnail_width]  = dump[:images][0]['width'] if dump[:images].any?
 
-          video_insertable = content_tag(:div, '', value: {url: url, display: 'Full-width', embedData: embedData}.to_json, insertable: 'video', contenteditable: 'false')
+          video_insertable = content_tag(:div, '', value: {url: url, display: '', embedData: embedData}.to_json, insertable: 'video', contenteditable: 'false')
           iframe.replace video_insertable
         else
           code_insertable = content_tag(:div, '', value: {code: CGI.escape_html(iframe.to_s)}.to_json, insertable: 'code', contenteditable: 'false')
