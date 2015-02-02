@@ -1,65 +1,113 @@
 The following is a list of all the bad entities that have been replaced in the export from Blueprint.
 We checked for entities that had a frequency over 20 times in all the data.
 
-s/\xc3\xa2\xe2\x82\xac\xe2\x84\xa2/\&rsquo;/g
-s/\xE2\x80\x99/\&rsquo;/g
-
-s/\xC3\xA2\xE2\x82\xAC\xCB\x9C/\&lsquo;/g
-s/\xE2\x80\x98/\&lsquo;/g
-
-s/\xc3\xa2\xe2\x82\xac\xe2\x80\x9d/\&minus;/g
-s/\xC3\xA2\xCB\x86\xE2\x80\x99/\&mdash;/g
-
-s/\xE2\x80\x9C/\&ndash;/g
-s/\xC3\xA2\xE2\x82\xAC\xE2\x80\x9C/\&ndash;/g
-s/\xC3\xA2\xE2\x82\xAC\xC2\x90/\&ndash;/g
-s/\xE2\x80\x93/\&ndash;/g
-s/\xE2\x80\x94/\&ndash;/g
-s/\xE2\x88\x92/\&ndash;/g
-
-s/\xC3\xA2\xE2\x82\xAC\xC5\x93/\&ldquo;/g
-s/\xE2\x80\x9C/\&ldquo;/g
-
-s/\xC3\xA2\xE2\x82\xAC\xC2\x9D/\&rdquo;/g
-s/\xE2\x80\x9D/\&rdquo;/g
-
-s/\xC3\x83\xE2\x80\xA6/\&#197;/g
-
-s/\xC3\xA2\xE2\x82\xAC\xC2\xA6/\&hellip;/g
-s/\xE2\x80\xA6/\&hellip;/g
-
-s/\xc3\xa2\xe2\x82\xac\xc2\xa2/\&bull;/g
-s/\xC3\xA2\xE2\x82\xAC\xC2\xA2\xC3\x82\xC2\xA0/\&bull;/g
-
-s/\xc3\x82\xc2\xba/\&deg;/g
-
-s/\xC3\xA2\xE2\x82\xAC\xC2\xB3/\&quot;/g
-
-s/\xC3\x83\xC2\xA9/\&eacute;/g
-
-s/\xC3\x82\xC2\xB7/\&middot;/g
-
-s/\xC3\x82\xC2\xA0/\ /g //empty space??
-s/\xC3\x82\xC2\xAD/\ /g //empty space??
-
-s/\xC3\x83\xC2\xB3/\&oacute;/g
-s/\xC3\x83\xC2\xAD/\&iacute;/g
-s/\xc3\x83\xc2\xb6/\&ouml;/g
-s/\xC3\x83\xC2\xA8/\&egrave;/g
-s/\xC3\x82\xC2\xA3/\&pound;/g
-s/\xC3\x83\xC2\xBC/\&uuml;/g
-s/\xc3\x83\xc2\xa1/\&aacute;/g
-s/\xC3\x83\xC2\xA7/\&ccedil;/g
-s/\xC3\x83\xC2\xAA/\&ecirc;/g
-s/\xC3\x83\xC2\xB1/\&ntilde;/g
-s/\xc3\x83\xc2\xab/\&euml;/g
-s/\xE2\x80\xA2/\&ast;/g
-s/\xC3\x83\xC2\xA0/\&agrave;/g
-
-s/\xE2/\&acirc;/g //hard to select only this
-s/\x80/\  //no idea about this one
-
-
-
-
-
+sed -i '' 's/ruby\/object:/ruby\/object:LegacyBlueprint::/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xE2\\x80\\x9D/\&mdash;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xCB\\x86\\xE2\\x80\\x99/\&mdash;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xE2\\x84\\xA2/\&rsquo;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x99/\&rsquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xCB\\x9C/\&lsquo;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x98/\&lsquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xE2\\x80\\x9D/\&minus;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xE2\\x80\\x9C/\&ndash;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC2\\x90/\&ndash;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x93/\&ndash;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x94/\&ndash;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x88\\x92/\&ndash;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC5\\x93/\&ldquo;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x9C/\&ldquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC2\\x9D/\&rdquo;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\x9D/\&rdquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xE2\\x80\\xA6/\&Aring;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC2\\xA6/\&hellip;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\xA6/\&hellip;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAB\\xC2\\xA2/\&bull;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xBA/\&deg;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC2\\xB3/\&quot;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA9/\&eacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xB7/\&middot;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xA0//g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xAD//g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\xAC//g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xB3/\&oacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xAD/\&iacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xB6/\&ouml;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA8/\&egrave;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xA3/\&pound;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xBC/\&uuml;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA1/\&aacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA7/\&ccedil;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xAA/\&ecirc;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xB1/\&ntilde;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xAB/\&euml;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\xA2/\&ast;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA0/\&agrave;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xBA/\&uacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x84\\xC2\\x81/\&#257;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x85\\xC2\\x8D/\&#333;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xAF/\&iuml;/g' backup.yml && \
+sed -i '' 's/\\xC5\\xA0//g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA4/\&auml;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xB8/\&oslash;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\xB0/ /g' backup.yml && \
+sed -i '' 's/\\xC3\\x8C\\xC2\\x81/\&aacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x85\\xE2\\x80\\xBA/\&#347;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x87\\xE2\\x82\\xAC/&vert;/g' backup.yml && \
+sed -i '' 's/\\xE2\\x80\\xB9//g' backup.yml && \
+sed -i '' 's/\\xC3\\x8A\\xC2\\xBC/\&rsquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x8A\\xC2\\xBB/\&lsquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x84\\xE2\\x80\\x9A/\&#258;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA3/\&atilde;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xB5/\&otilde;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x84\\xC2\\x90/\&#272;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xAC/\&not;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xA2/\&acirc;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xC2\\x9D\\xE2\\x82\\xAC/\&bull;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC2\\xAC/\&igrave;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x82\\xC2\\xBD/\&frac12;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x84\\xA2\\xC2\\xA5/\&hearts;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x85\\xC2\\xBD/\&#381;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x85\\xC2\\xBE/\&#382;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x80\\x9A\\xE2\\x80\\x9A/2/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC2\\xB2/\&rsquo;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83 /\&Eacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC\\xC3\\xA2\\xE2\\x82\\xAC//g' backup.yml && \
+sed -i '' 's/\\xC3\\xA2\\xE2\\x82\\xAC//g' backup.yml && \
+sed -i '' 's/\\xC2\\xA2/\&middot;/g' backup.yml && \
+sed -i '' 's/\\xC3\\x83\\xC5\\x93/\&Uuml;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA9/\&eacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xB3/\&oacute;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xAD/\&iacute;/g' backup.yml && \
+sed -i '' 's/\\xC2\\xB2/\&sup2;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xA7/\&ccedil;/g' backup.yml && \
+sed -i '' 's/\\xC3\\xAC/\&igrave;/g' backup.yml && \
+sed -i '' 's/\\xC2\\xA32/\&pound;/g' backup.yml && \
+sed -i '' 's/\\xC2\\xA0/ /g' backup.yml && \
+sed -i '' 's/Q29sbSBUw4PCs2liw4PCrW4=/Colm Tobin/g' backup.yml && \
+sed -i '' "s/U3RldmVuIE\/DouKCrOKEokNvbm5vcg==/Steven O'Connor/g" backup.yml && \
+sed -i '' 's/U2rDg8Kzbg==/Sjon/g' backup.yml && \
+sed -i '' 's/Q29sbSBUw7NpYsOtbg==/Colm Tobin/g' backup.yml && \
+sed -i '' "s/RXpyYSBCaXjDouKCrOKEonMgQXJ0IEZpeA==/Ezra Bix's Art Fix at Federation Square Book Market/g" backup.yml && \
+sed -i '' "s/QW5kcmV3IE\/DouKCrOKEokhhZ2Fu/Andrew O'Hagan/g" backup.yml && \
+sed -i '' "s/TWF4IEJhcnJ5OiBJdMOi4oKs4oSicyBOb3QgTWUsIEl0w6LigqzihKJzIFlv/Max Barry: It's Not Me, It's You/g" backup.yml && \
+sed -i '' 's/V2Ugw6LihKLCpSBCb29rcw==/We heart Books/g' backup.yml && \
+sed -i '' "s/w6LigqzLnEnDouKCrOKEomxsIFNob3cgWW91IGEgQmFkIE1vdGhlciwgQml0/'I'll Show You a Bad Mother, Bitch!': On Mother's Groups/g" backup.yml && \
+sed -i '' "s/PHA+w6LigqzLnEnDouKCrOKEomxsIFNob3cgWW91IGEgQmFkIE1vdGhlciwg/'I'll Show You a Bad Mother, Bitch!': On Mother's Groups/g" backup.yml && \
+sed -i '' 's/Q29ydMODwqF6YXI=/cortezar/g' backup.yml && \
+sed -i '' 's/U3VzYW7DouKCrOKAnHBob3RvLmpwZw==/missing_1/g' backup.yml && \
+sed -i '' 's/U3VzYW7DouKCrOKAnHBob3Rv/missing_2/g' backup.yml && \
+sed -i '' 's/MTBhbSDDouKCrOKAnCA0cG0g/12AM/g' backup.yml && \
+sed -i '' 's/IDkuMzBhbSDDouKCrOKAnCA0LjMwcG0=/12AM/g' backup.yml && \
+sed -i '' 's/MTBhbSDDouKCrOKAnCA0cG0u/12AM/g' backup.yml && \
+sed -i '' 's/NMOi4oKs4oCcNnBtLg==/12AM/g' backup.yml && \
+sed -i '' "s/Tm92ZWwgV3JpdGluZyDDouKCrOKAnCBUaGluZ3MgSSBXaXNoIEnDouKCrOKE/Novel Writing: Things I Wish I'd Known/g" backup.yml && \
+sed -i '' "s/QSBXb21hbsOi4oKs4oSicyBXYXI=/A Woman's War/g" backup.yml && \
+sed -i '' 's/MTEuMDBhbSDDouKCrOKAnCA1LjAwcG0==/Masterclass: Writing for Film - Making Romulus/g' backup.yml && \
+sed -i '' 's/w6LigqzCqDY6MzAgUE0gZm9yIDc6MDAgUE3DouKCrMKo/Black & Blue: The Writing Editor/g' backup.yml && \
+sed -i '' 's/NjozMHBtIMOi4oKs4oCcIDc6NDVwbQ==/12AM/g' backup.yml && \
+sed -i '' 's/dQ==//g' backup.yml && \
+sed -i '' 's/Cg==//g' backup.yml && \
+sed -i '' 's/Qml0Y2ghw6LigqzihKI6IE9uIE1vdGhlcsOi4oKs4oSicyBHcm91cHM8L3A+//g' backup.yml && \
+sed -i '' 's/Y2ghw6LigqzihKI6IE9uIE1vdGhlcsOi4oKs4oSicyBHcm91cHM=//g' backup.yml && \
+sed -i '' 's/omQgS25vd24=//g' backup.yml && \
+sed -i '' 's/!binary |/|/g' backup.yml
