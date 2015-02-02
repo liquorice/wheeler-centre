@@ -128,4 +128,13 @@ module ApplicationHelper
     projects_page.children.visible.published
   end
 
+  # Events
+  def events_page
+    site.pages.find_by_url("events")
+  end
+
+  def upcoming_events_for_navigation
+    events_page.upcoming_events(per_page: 5)
+  end
+
 end
