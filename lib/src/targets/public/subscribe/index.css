@@ -9,6 +9,16 @@
   float: left;
   width: 50%;
 }
+.breakpoint-w-799 .simple-subscribe__label,
+.breakpoint-w-799 .simple-subscribe__controls {
+  padding-left: 0;
+  padding-right: 0;
+  float: none;
+  width: 100%;
+}
+.breakpoint-w-799 .simple-subscribe__label {
+  padding-bottom: 20px;
+}
   .simple-subscribe__label {
     line-height: 1.5;
     padding-right: 15px;
@@ -29,6 +39,15 @@
       font-size: 1.7rem;
       padding: 1.4rem 1.8rem;
     }
+    .breakpoint-tablet .simple-subscribe__controls input {
+      font-size: 15px;
+      font-size: 1.5rem;
+    }
+    .breakpoint-phone-wide .simple-subscribe__controls input ,
+    .breakpoint-phone .simple-subscribe__controls input  {
+      font-size: 1.4px;
+      font-size: 1.4rem;
+    }
     .simple-subscribe__controls button {
       background-color: var(--primary-color);
       border: none;
@@ -40,4 +59,7 @@
       line-height: 1.2;
       text-transform: uppercase;
       width: 140px;
+    }
+    .breakpoint-phone .simple-subscribe__controls button {
+      width: 100px;
     }
