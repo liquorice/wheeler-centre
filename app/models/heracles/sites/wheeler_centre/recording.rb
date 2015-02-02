@@ -89,10 +89,6 @@ module Heracles
             fields[:recording_date].value
           end
 
-          string :event_ids, multiple: true do
-            fields[:events].pages.map(&:id)
-          end
-
         end
       end
     end
