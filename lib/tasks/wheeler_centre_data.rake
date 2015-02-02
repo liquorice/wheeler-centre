@@ -1537,60 +1537,60 @@ namespace :wheeler_centre do
     end
   end
 
-  desc "Import blueprint types that map to Page"
-  task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
-    require "yaml"
-    require "blueprint_shims"
-    require "blueprint_import/bluedown_formatter"
+  # desc "Import blueprint types that map to Page"
+  # task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
+  #   require "yaml"
+  #   require "blueprint_shims"
+  #   require "blueprint_import/bluedown_formatter"
 
-    backup_data = File.read(args[:yml_file])
-    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+  #   backup_data = File.read(args[:yml_file])
+  #   blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
 
-    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
+  #   blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
 
-    blueprint_pages.each do |blueprint_page|
-      # If a parent page is set in the yaml, find it and use it as the Heracles parent
-      if blueprint_page["parent_page"].present?
-        parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
-      end
+  #   blueprint_pages.each do |blueprint_page|
+  #     # If a parent page is set in the yaml, find it and use it as the Heracles parent
+  #     if blueprint_page["parent_page"].present?
+  #       parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
+  #     end
 
-      slug_components = blueprint_page["slug"].split("/")
-      if slug_components.length > 1
-        # Set the slug to be the last part of the blueprint slug
-        slug = slug_components.last
-        puts ("Slug: #{slug}" )
-        # Find the closest parent page
-        slug_components.reverse.each_with_index do |slug_component, index|
-          if index > 0
-            puts ("slug_component: #{slug_component}")
-            parent = Heracles::Page.find_by_slug(slug_component)
-            puts ("Parent: #{parent}")
-          end
-        end
-      end
+  #     slug_components = blueprint_page["slug"].split("/")
+  #     if slug_components.length > 1
+  #       # Set the slug to be the last part of the blueprint slug
+  #       slug = slug_components.last
+  #       puts ("Slug: #{slug}" )
+  #       # Find the closest parent page
+  #       slug_components.reverse.each_with_index do |slug_component, index|
+  #         if index > 0
+  #           puts ("slug_component: #{slug_component}")
+  #           parent = Heracles::Page.find_by_slug(slug_component)
+  #           puts ("Parent: #{parent}")
+  #         end
+  #       end
+  #     end
 
-      if !slug.present?
-        slug = blueprint_page["slug"]
-      end
+  #     if !slug.present?
+  #       slug = blueprint_page["slug"]
+  #     end
 
-      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
+  #     heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
 
-      unless heracles_page
-        site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-        heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
-        if parent.present?
-          heracles_page.parent = parent
-        end
-      end
+  #     unless heracles_page
+  #       site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+  #       heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+  #       if parent.present?
+  #         heracles_page.parent = parent
+  #       end
+  #     end
 
-      heracles_page.published = true
-      heracles_page.slug = slug
-      heracles_page.title = blueprint_page["title"]
-      heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
-      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
-      heracles_page.save!
-    end
-  end
+  #     heracles_page.published = true
+  #     heracles_page.slug = slug
+  #     heracles_page.title = blueprint_page["title"]
+  #     heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
+  #     heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+  #     heracles_page.save!
+  #   end
+  # end
 
   # Example use: rake wheeler_centre:import_blueprint_types_to_body["/Users/josephinehall/Development/wheeler-centre/backup.yml","faq","FaqQuestion"]
   desc "Import blueprint types to a page body field"
@@ -1752,6 +1752,116 @@ namespace :wheeler_centre do
           end
         end
       end
+    end
+  end
+
+  desc "Import blueprint legacy #discuss page"
+  task :import_blueprint_discuss, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_discuss = blueprint_records.find {|r| r["slug"] == "projects/discuss" && r.class == LegacyBlueprint::CenplaPage }
+
+    discuss = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/discuss")
+    discuss.site = site
+    discuss.parent = projects
+    discuss.title = "#discuss"
+    discuss.slug = "discuss"
+    discuss.published = true
+
+    # Take the banner image and make it an insertable at the top of the body
+    content = "[[banner|size=Size8]]\r\n"
+    content += blueprint_discuss["content"]
+    discuss.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_discuss, assetify: true)
+    discuss.save!
+  end
+
+  desc "Import blueprint legacy hot desk fellowships page"
+  task :import_blueprint_hot_desk_fellowships, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    hot_desk_slugs = [
+      "projects/wheeler-centre-hot-desk-fellowships-2013",
+      "projects/wheeler-centre-hot-desk-fellowships-2014"
+    ]
+
+    hot_desk_slugs.each do |slug|
+      blueprint_page = blueprint_records.find {|r| r["slug"] == slug && r.class == LegacyBlueprint::Page }
+
+      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/#{slug}")
+      heracles_page.site = site
+      heracles_page.parent = projects
+      heracles_page.title = blueprint_page["title"]
+      heracles_page.slug = slug
+      heracles_page.published = true
+
+      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+      heracles_page.save!
+    end
+  end
+
+  desc "Import blueprint legacy VPLAs pages"
+  task :import_blueprint_vplas, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    hot_desk_slugs = [
+      "projects/wheeler-centre-hot-desk-fellowships-2013",
+      "projects/wheeler-centre-hot-desk-fellowships-2014"
+    ]
+
+    hot_desk_slugs.each do |slug|
+      blueprint_page = blueprint_records.find {|r| r["slug"] == slug && r.class == LegacyBlueprint::Page }
+
+      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/#{slug}")
+      heracles_page.site = site
+      heracles_page.parent = projects
+      heracles_page.title = blueprint_page["title"]
+      heracles_page.slug = slug
+      heracles_page.published = true
+
+      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+      heracles_page.save!
     end
   end
 
