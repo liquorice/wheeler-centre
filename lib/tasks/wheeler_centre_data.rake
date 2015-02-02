@@ -1564,64 +1564,162 @@ namespace :wheeler_centre do
   task :create_video_assets, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
+    require "video_migration/s3_util"
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
     blueprint_notifications = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidNotification }
     recordings = Heracles::Page.of_type("recording")
+    s3 = S3Util.new(bucket_name: "video.wheelercentre.com", config_file: "/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml")
 
     recordings.each do |recording|
       uuid = find_recording_uuid(blueprint_video_posts, recording)
 
       if recording.fields[:recording_id].value < 462
-        handle_many_notifications(blueprint_notifications, uuid)
+        puts ("Multiple notifications")
+        notifications = find_recording_notifications(blueprint_notifications, uuid)
+        messages = []
+        notifications.each do |notification|
+          # Create an array of all the "message" hashes.
+          messages << JSON.parse(notification["message"])
+        end
+        audio_file_name = find_audio_encode(messages)
+        video_file_name = find_video_encode(messages)
       else
+        puts("Single notification")
         # Handle these notifications differently
-        handle_single_notification(blueprint_notifications, uuid)
+        notification = find_recording_notification(blueprint_notifications, uuid)
+        if notification.first
+          message = YAML.load(notification.first["message"])
+          puts (message["outputs"])
+          audio_file_url = message["outputs"][0]["url"]
+          audio_file_name = File.basename(audio_file_url)
+          video_file_url = message["outputs"][1]["url"]
+          video_file_name = File.basename(video_file_url)
+
+          # Additional metadata only exists for the newer format of notifications.
+
+          audio_meta = {
+            :duration => message["outputs"][0]["duration_in_ms"],
+            :audio_bitrate => message["outputs"][0]["audio_bitrate_in_kbps"] * 1000,
+            :overall_bitrate => message["outputs"][0]["total_bitrate_in_kbps"] * 1000,
+            :audio_samplerate => message["outputs"][0]["audio_sample_rate"],
+            :audio_channels => 2,
+            :audio_codec => "mp3",
+          }
+
+          video_meta = {
+            :duration => message["outputs"][1]["duration_in_ms"],
+            :width => message["outputs"][1]["width"],
+            :height => message["outputs"][1]["height"],
+            :framerate => message["outputs"][1]["frame_rate"],
+            :video_bitrate => message["outputs"][1]["video_bitrate_in_kbps"] * 1000,
+            :overall_bitrate => message["outputs"][1]["total_bitrate_in_kbps"] * 1000,
+            :video_codec => message["outputs"][1]["video_codec"],
+            :audio_bitrate => message["outputs"][1]["audio_bitrate_in_kbps"] * 1000,
+            :audio_samplerate => message["outputs"][1]["audio_sample_rate"],
+            :audio_channels => message["outputs"][1]["channels"],
+            :audio_codec => message["outputs"][1]["audio_codec"],
+            :date_file_created => message["job"]["created_at"],
+          }
+
+        end
       end
+
+      puts (audio_file_name)
+      puts (video_file_name)
+
+      if audio_file_name
+        unless File.file?(audio_file_name)
+          exec("wget http://download.wheelercentre.com/#{audio_file_name}")
+        end
+        unless s3.find(audio_file_name)
+          s3.upload(audio_file_name)
+        end
+      end
+
+      if video_file_name
+        unless File.file?(video_file_name)
+          exec("wget http://download.wheelercentre.com/#{video_file_name}")
+        end
+        unless s3.find(video_file_name)
+          s3.upload(video_file_name)
+        end
+      end
+
+      results = {
+        :audio_mp3 => {
+          :basename => File.basename(audio_file_name, ".mp3"),
+          :ext => File.extname(audio_file_name),
+          :field => "file",
+          :mime => "audio/mpeg",
+          :meta => audio_meta,
+          :name => audio_file_name,
+          :original_basename => File.basename(audio_file_name, ".mp3"),
+          :size => File.size(audio_file_name),
+          :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{audio_file_name}",
+          :type => "audio",
+          :url => "http://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{audio_file_name}"
+        },
+        :video_mp4 => {
+          :basename => File.basename(video_file_name, ".mp4"),
+          :ext => File.extname(video_file_name),
+          :field => "file",
+          :meta => video_meta,
+          :mime => "video/mp4",
+          :name => video_file_name,
+          :original_basename => File.basename(video_file_name, ".mp4"),
+          :size => File.size(video_file_name),
+          :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{video_file_name}",
+          :type => "video",
+          :url => "http://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{video_file_name}",
+        }
+      }
+
+      results[:original] = results[:video_mp4]
+
+      asset_attrs =  {
+        :recording_id => recording.fields[:recording_id].value,
+        :file_name => video_file_name,
+        :file_basename => File.basename(video_file_name),
+        :file_ext => File.extname(video_file_name),
+        :file_size =>File.size(video_file_name),
+        :file_mime =>"video/mp4",
+        :file_type =>"video",
+        :assembly_id =>"video_migration",
+        :assembly_url => "http://www.video_migration.com",
+        :upload_duration => 0,
+        :execution_duration => 0,
+        :assembly_message =>"The assembly was successfully completed.",
+        :blueprint_guid => uuid,
+        :created_at => Time.now,
+        :results => results,
+        :title => recording.title,
+        :site_id => Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+      }
+
+      # Create the asset records!
+      unless Heracles::Asset.exists?(blueprint_id: recording.fields[:recording_id].value)
+        Heracles::Asset.create!(asset_attrs)
+      end
+
     end
   end
 
-
-  def handle_many_notifications(blueprint_notifications, uuid)
-    notifications = find_recording_notifications(blueprint_notifications, uuid)
-
-    messages = []
-    notifications.each do |notification|
-      # Create an array of all the "message" hashes.
-      messages << JSON.parse(notification["message"])
-    end
-
-    handle_many_audio_encodes(messages)
-    handle_many_video_encodes(messages)
-  end
-
-  def handle_single_notification(blueprint_notifications, uuid)
-    notification = find_recording_notification(blueprint_notifications, uuid)
-    if notification.first
-      message = YAML.load(notification.first["message"])
-      puts (message["outputs"][0]["url"])
-    end
-  end
-
-  def handle_many_audio_encodes(messages)
+  def find_audio_encode(messages)
     encodes = find_audio_encodes(messages)
     # Check whether any of the encodes is already an s3 file - if so we don't need to do anything.
     unless find_s3_url(encodes)
       best_audio_encode = find_best_audio_encode(encodes)
-      audio_encode_file_name = best_audio_encode["job"]["output_file"]["filename"]
-      puts (audio_encode_file_name)
-      # TODO Upload it to s3
+      best_audio_encode["job"]["output_file"]["filename"]
     end
   end
 
-  def handle_many_video_encodes(messages)
+  def find_video_encode(messages)
     best_video_encode = find_best_video_encode(messages)
     unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
-      video_encode_file_name = best_video_encode["job"]["output_file"]["filename"]
-      puts (video_encode_file_name)
-      # TODO upload it to s3
+      best_video_encode["job"]["output_file"]["filename"]
     end
   end
 
