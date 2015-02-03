@@ -4,11 +4,11 @@
 
 require "./s3_util"
 
-s3 = S3Util.new(bucket_name: "video.wheelercentre.com", config_file: "config.yml")
+s3 = S3Util.new(bucket_name: "wheeler-centre-heracles", config_file: "config.yml")
 data = File.read("audio_video_encodes.yml")
 audio_video_encodes = YAML.load(data)
 
-audio_video_encodes.take(10).each do |encode|
+audio_video_encodes.each do |encode|
   puts (encode)
   audio_file_url = encode["audio_encode_url"]
   video_file_url = encode["video_encode_url"]
