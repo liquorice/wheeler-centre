@@ -1,0 +1,30 @@
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Projects
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Criticism Now
+
+= area :main do
+  .page__content
+    - if page.fields[:hero_image].data_present?
+      img src=page.fields[:hero_image].asset.content_medium_url
+    .page__body.page__body--content-page.copy
+      = render_content page.fields["body"]
+    - if page.reviews.any?
+      .reviews
+        h2 Reviews
+        - page.reviews.each do |review|
+          .review
+            = render_content review.fields[:body]
+    - if page.responses.any?
+      .reviews
+        h2 Responses
+        - page.responses.each do |response|
+          .response
+            .copy
+              = render_content response.fields[:body]
+            a href=response.fields[:url] = response.fields[:author]

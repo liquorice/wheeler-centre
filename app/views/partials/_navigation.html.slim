@@ -2,8 +2,8 @@
   button.masthead__mobile-toggle
     i class="fa fa-list"
   ul.masthead-nav-main.clearfix
-    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
-      span.masthead-nav-main__anchor
+    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      button.masthead-nav-main__anchor
         ' Topics
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
       .masthead-nav-main__dropdown.clearfix
@@ -14,7 +14,7 @@
                 li.masthead-nav-main__dropdown-item
                   a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
                     = topic.title
-    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview="masthead-nav-main__item--has-dropdown--hover"
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "a"}.to_json
       a.masthead-nav-main__anchor href="/events"
         ' Events
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
@@ -55,9 +55,18 @@
     li.masthead-nav-main__item.masthead-nav-main__item--break
       a.masthead-nav-main__anchor href="/events"
         ' People
-    li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/features"
-        ' Features
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      button.masthead-nav-main__anchor
+        ' Projects
+        i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+      .masthead-nav-main__dropdown.clearfix
+        - projects_for_navigation.in_groups(2, false).each do |group|
+          - if group.any?
+            ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+              - group.each do |project|
+                li.masthead-nav-main__dropdown-item
+                  a.masthead-nav-main__dropdown-anchor href=project.absolute_url
+                    = project.title
   ul.masthead-nav-secondary.clearfix
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href="/about-us"
@@ -69,11 +78,12 @@
       .masthead-nav-secondary__search-box
         button.masthead-nav-secondary__search-close
           i.fa.fa-times
-        form.masthead-nav-secondary__search-form.cf action=""
+        form.masthead-nav-secondary__search-form.clearfix action=""
           input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…"
           button.masthead-nav-secondary__search-button
             i.fa.fa-search
       a.masthead-nav-secondary__anchor.masthead-nav-secondary__anchor--search href="#"
         i.fa.fa-search
+        span.screenreaders-only Search
 
 

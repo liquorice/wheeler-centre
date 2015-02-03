@@ -292,6 +292,12 @@
     line-height: 1.5;
   }
 
+.event__series-summary-image {
+  clear: none;
+  float: left;
+  width: 45%;
+}
+
 
 
 /* Venue */
@@ -360,3 +366,102 @@
       min-width: 20%;
       text-align: center;
     }
+
+
+/* Index */
+
+.event-index {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+
+  .event-calendar__legend {
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 20px;
+  }
+
+    .event-calendar__legend-day {
+      float: left;
+      text-align: center;
+      width: 14.285714286%; /* Fallback for no calc */
+      width: calc(100% / 7);
+    }
+
+    .event-calendar__legend-day span {
+      color: #bdbbbb;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-size: 1.1rem;
+      letter-spacing: .1em;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-transform: uppercase;
+    }
+
+  .event-calendar__month {
+    margin-bottom: 50px;
+  }
+
+    .event-calendar__month-label {
+      font-family: var(--font-sans);
+      font-weight: bold;
+      font-size: 24px;
+      font-size: 2.4rem;
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 40px;
+    }
+
+    .event-calendar__week {
+      border-top: 1px solid #dfdfdf;
+      padding-left: 35px;
+      padding-right: 35px;
+      padding-bottom: 20px;
+    }
+
+      .event-calendar__day,
+      .event-calendar__day-gap {
+        float: left;
+        margin-top: 20px;
+        position: relative;
+        width: 14.285714286%;
+        width: calc(100% / 7);
+      }
+      .event-calendar__day:before {
+        background-color: #dfdfdf;
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        width: 1px;
+        height: 20px;
+      }
+      .event-calendar__day-gap--2 {
+        width: 28.571428571%;
+        width: calc((100% / 7) * 2);
+      }
+      .event-calendar__day-gap--3 {
+        width: 42.857142857%;
+        width: calc((100% / 7) * 3);
+      }
+      .event-calendar__day-gap--4 {
+        width: 57.142857143%;
+        width: calc((100% / 7) * 4);
+      }
+      .event-calendar__day-gap--5 {
+        width: 71.428571429%;
+        width: calc((100% / 7) * 5);
+      }
+      .event-calendar__day-gap--6 {
+        width: 85.714285714%;
+        width: calc((100% / 7) * 6);
+      }
+      .event-calendar__day-gap--7 {
+        width: 100%;
+      }
+
+        .event-calendar__day-label {
+          border: 1px solid red;
+/*          position: absolute;*/
+        }

@@ -68,8 +68,6 @@
             .guest-author
               - if guest_author.fields[:portrait].data_present?
                 - image = guest_author.fields[:portrait].asset
-              - else
-                - image = Heracles::Asset.all.sample(1).first
               - if image
                 .author-image
                   .author-image__inner

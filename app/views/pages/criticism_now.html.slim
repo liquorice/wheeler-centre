@@ -1,0 +1,22 @@
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Projects
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="#"
+          ' Criticism Now
+
+= area :main do
+  .page__content
+    .page__body.page__body--content-page.copy
+      = render_content page.fields["body"]
+    .events
+      - if page.events.any?
+        - page.events.each do |event|
+          p
+            a href=event.absolute_url = event.title
+    - page.primary_responses.each do |response|
+      .review
+        = render_content response.fields[:body]

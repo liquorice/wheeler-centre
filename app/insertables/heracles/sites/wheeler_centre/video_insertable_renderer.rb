@@ -6,7 +6,7 @@ module Heracles
         ### Helpers
 
         def display_class
-          "figure__display--#{(data[:display] || "default").downcase}"
+          "figure__display--#{(data[:display].presence || "default").downcase}"
         end
         helper_method :display_class
 

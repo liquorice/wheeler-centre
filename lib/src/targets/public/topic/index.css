@@ -3,11 +3,25 @@
 .topic-page {
   padding-top: 50px;
 }
+.breakpoint-tablet .topic-page {
+  padding-top: 40px;
+}
+.breakpoint-phone-wide .topic-page,
+.breakpoint-phone .topic-page {
+  padding-top: 25px;
+}
 
   .topic-page__header {
     font-family: var(--font-sans);
     text-align: center;
     margin-bottom: 50px;
+  }
+  .breakpoint-tablet .topic-page__header {
+    margin-bottom: 30px;
+  }
+  .breakpoint-phone-wide .topic-page__header,
+  .breakpoint-phone .topic-page__header {
+    margin-bottom: 20px;
   }
     .topic-page__title-label {
       color: #888;
@@ -20,6 +34,18 @@
       font-size: 48px;
       font-size: 4.8rem;
       font-weight: bold;
+    }
+    .breakpoint-tablet .topic-page__title {
+      font-size: 38px;
+      font-size: 3.8rem;
+    }
+    .breakpoint-phone-wide .topic-page__title {
+      font-size: 30px;
+      font-size: 3rem;
+    }
+    .breakpoint-phone .topic-page__title {
+      font-size: 28px;
+      font-size: 2.8rem;
     }
 
 .topic-page__nav {
@@ -86,6 +112,14 @@
 .topic-page__latest .blog-snap__group {
   border: none;
   padding-bottom: 35px;
+}
+.breakpoint-tablet .topic-page__latest .blog-snap__group {
+  padding-bottom: 20px;
+}
+.breakpoint-tablet .topic-page__latest .blog-snap__group,
+.breakpoint-phone-wide .topic-page__latest .blog-snap__group,
+.breakpoint-phone .topic-page__latest .blog-snap__group  {
+  padding-bottom: 10px;
 }
 
 

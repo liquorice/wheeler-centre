@@ -3,6 +3,30 @@ def clean_content(str)
   str.strip.gsub(/\n\n/, "\n")
 end
 
+def slugify(name)
+  name.strip.downcase.gsub(/\&/, "and").gsub(/[^a-zA-Z0-9]/, ' ').gsub(/\s+/, '-')
+end
+
+# Recursively build a set of content pages for a given page
+def build_child_content_pages(blueprint_records, site, parent, parent_id)
+  children = blueprint_records.select {|r| r["parent_id"].to_i == parent_id.to_i && r.class == LegacyBlueprint::Page }
+  if children
+    children.each do |child|
+      # Slugs are full URLs here
+      slug_segments = child["slug"].split("/")
+      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: child['slug'])
+      heracles_page.site = site
+      heracles_page.parent = parent
+      heracles_page.title = child["title"]
+      heracles_page.slug = slug_segments.last
+      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(child["content"], subject: child)
+      heracles_page.published = true
+      heracles_page.save!
+      build_child_content_pages(blueprint_records, site, heracles_page, child["id"])
+    end
+  end
+end
+
 # Tag helpers
 def blueprint_tag_to_topic_url_mappings
   [
@@ -727,13 +751,14 @@ def apply_tags_to(page, blueprint_tags)
     mappings = topics_mappings_by_slug(slug)
     if mappings
       mappings.each do |mapping|
-        topic_matches << find_topic_page_by_url(mapping[:url])
+        match = find_topic_page_by_url(mapping[:url])
+        topic_matches << match if match
       end
     else
       topics_by_slug = find_topic_pages_by_slug(slug)
       if topics_by_slug
         topics_by_slug.each do |topic|
-          topic_matches << topic
+          topic_matches << topic if topic
         end
       end
     end
@@ -742,8 +767,15 @@ def apply_tags_to(page, blueprint_tags)
       unmatched_tags << blueprint_tag
     end
   end
-  page.fields[:topics].page_ids = topic_matches.map(&:id)
+  puts topic_matches.inspect
+  if topic_matches.any?
+    page.fields[:topics].page_ids = topic_matches.map(&:id)
+  end
   page.tag_list.add(unmatched_tags.map{|t| t["slug"] })
+end
+
+def blueprint_assets(blueprint_records)
+  blueprint_records.select { |r| r.class == LegacyBlueprint::Asset }
 end
 
 namespace :wheeler_centre do
@@ -780,6 +812,8 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     blueprint_presenters = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtPresenter }
     blueprint_users = blueprint_records.select { |r| r.class == LegacyBlueprint::User }
@@ -795,8 +829,20 @@ namespace :wheeler_centre do
       heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter, assetify: false)
       heracles_person.fields[:url].value = blueprint_presenter["url"]
       heracles_person.fields[:external_links].value = blueprint_presenter["external_links"]
-      # TODO:
-      # {name: :portrait, type: :asset, asset_file_type: :image},
+
+      # Image
+      blueprint_portrait_image = blueprint_asset_records.find {|r| (r["attachable_type"] == "CenevtPresenter" || r["assoc"] == "portrait") && r["id"].to_i == blueprint_presenter["portrait_id"].to_i}
+      if blueprint_portrait_image.present?
+        heracles_promo_image = Heracles::Asset.find_by_blueprint_id(blueprint_portrait_image["id"].to_i)
+        if heracles_promo_image
+          heracles_person.fields[:portrait].asset_id = heracles_promo_image.id
+        else
+          puts "*** Missing promo image for: #{blueprint_presenter["name"]}"
+        end
+      else
+        puts "*** Missing promo image for: #{blueprint_presenter["name"]}"
+      end
+
       # {name: :reviews, type: :content},
       # Find a staff member that matches this presenter
       staff_member = find_matching_staff_member(blueprint_presenter, blueprint_staff)
@@ -821,11 +867,16 @@ namespace :wheeler_centre do
         puts (user["id"])
         heracles_person.fields[:legacy_user_id].value = user["id"]
       end
+
       heracles_person.fields[:legacy_presenter_id].value = blueprint_presenter["id"]
       heracles_person.created_at = Time.zone.parse(blueprint_presenter["created_on"].to_s)
       heracles_person.parent = Heracles::Page.find_by_slug("people")
       heracles_person.collection = Heracles::Page.where(url: "people/all-people").first!
       puts (heracles_person.slug)
+      tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_presenter["id"], "CenevtPresenter")
+      if tags_for_post.present?
+        apply_tags_to(heracles_person, tags_for_post)
+      end
       heracles_person.save!
     end
 
@@ -852,10 +903,10 @@ namespace :wheeler_centre do
       end
     end
 
+
     blueprint_staff.each do |blueprint_staff_member|
-      existing_heracles_person = Heracles::Sites::WheelerCentre::Person.find_by_slug(blueprint_staff_member["slug"])
-      unless existing_heracles_person
-        heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
+      heracles_person = Heracles::Sites::WheelerCentre::Person.find_or_create_by(url: "people/#{blueprint_staff_member["slug"]}")
+      if heracles_person
         heracles_person.published = true
         heracles_person.slug = blueprint_staff_member["slug"]
         heracles_person.title = blueprint_staff_member["first_name"] + " " + blueprint_staff_member["surname"]
@@ -867,6 +918,20 @@ namespace :wheeler_centre do
         heracles_person.created_at = Time.zone.parse(blueprint_staff_member["created_on"].to_s)
         heracles_person.parent = Heracles::Page.find_by_slug("people")
         heracles_person.collection = Heracles::Page.where(url: "people/all-people").first!
+
+        # Image
+        blueprint_portrait_image = blueprint_asset_records.find {|r| r["assoc"] == "portrait" && r["id"].to_i == blueprint_staff_member["portrait_id"].to_i}
+        if blueprint_portrait_image.present?
+          heracles_promo_image = Heracles::Asset.find_by_blueprint_id(blueprint_portrait_image["id"].to_i)
+          if heracles_promo_image
+            heracles_person.fields[:portrait].asset_id = heracles_promo_image.id
+          else
+            puts "*** Missing promo image for: #{blueprint_staff_member["first_name"]} #{blueprint_staff_member["surname"]}"
+          end
+        else
+          puts "*** Missing promo image for: #{blueprint_staff_member["first_name"]} #{blueprint_staff_member["surname"]}"
+        end
+
         heracles_person.save!
       end
     end
@@ -882,6 +947,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     blueprint_sponsors = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsor }
     heracles_sponsors_index = Heracles::Page.where(slug: "sponsors").first!
@@ -900,6 +966,19 @@ namespace :wheeler_centre do
         heracles_sponsor.parent = heracles_sponsors_index
         heracles_sponsor.collection = heracles_sponsors_collection
         heracles_sponsor.published = true
+
+        blueprint_logo_image = blueprint_asset_records.find {|r| r["id"].to_i == blueprint_sponsor["logo_id"].to_i}
+        if blueprint_logo_image.present?
+          heracles_logo_image = Heracles::Asset.find_by_blueprint_id(blueprint_logo_image["id"].to_i)
+          if heracles_logo_image
+            heracles_sponsor.fields[:logo].asset_id = heracles_logo_image.id
+          else
+            puts "*** Missing logo image for: #{blueprint_sponsor["name"]}"
+          end
+        else
+          puts "*** Missing logo image for: #{blueprint_sponsor["name"]}"
+        end
+
         heracles_sponsor.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_sponsor["content"], subject: blueprint_sponsor, assetify: false)
         if blueprint_sponsor["url"].present? then heracles_sponsor.fields[:url].value = blueprint_sponsor["url"].to_s end
         if blueprint_sponsor["id"].present? then heracles_sponsor.fields[:sponsor_id].value = blueprint_sponsor["id"].to_i end
@@ -918,6 +997,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     blueprint_venues = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtVenue }
     heracles_venues_index = Heracles::Page.where(slug: "venues").first!
@@ -939,7 +1019,18 @@ namespace :wheeler_centre do
 
         heracles_venue.fields[:legacy_venue_id].value = blueprint_venue["id"]
 
-        # heracles_venue.fields[:hero_image].value =
+        # Image
+        blueprint_hero_image = blueprint_asset_records.find {|r| r["id"].to_i == blueprint_venue["main_photo_id"].to_i}
+        if blueprint_hero_image.present?
+          heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
+          if heracles_hero_image
+            heracles_venue.fields[:hero_image].asset_id = heracles_hero_image.id
+          else
+            puts "*** Missing hero image for: #{blueprint_venue["name"]}"
+          end
+        else
+          puts "*** Missing hero image for: #{blueprint_venue["name"]}"
+        end
         heracles_venue.fields[:address].value = blueprint_venue["address"]
         heracles_venue.fields[:address_formatted].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["address"], subject: blueprint_venue, assetify: false)
         heracles_venue.fields[:phone_number].value = blueprint_venue["phone_number"]
@@ -961,6 +1052,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     blueprint_event_series = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtProgram }
     heracles_events_series_index = Heracles::Page.where(url: "events/series").first!
@@ -976,18 +1068,32 @@ namespace :wheeler_centre do
           heracles_series.collection = heracles_events_series_collection
         end
 
+        # Image
+        blueprint_hero_image = blueprint_asset_records.find {|r| r["id"].to_i == blueprint_series["banner_id"].to_i}
+        puts blueprint_hero_image.inspect
+        if blueprint_hero_image.present?
+          heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
+          if heracles_hero_image
+            heracles_series.fields[:hero_image].asset_id = heracles_hero_image.id
+          else
+            puts "*** Missing hero image for: #{blueprint_series["name"]}"
+          end
+        else
+          puts "*** Missing hero image for: #{blueprint_series["name"]}"
+        end
+
         heracles_series.published = true
         heracles_series.title = blueprint_series["name"]
         heracles_series.slug = blueprint_series["slug"]
         puts (blueprint_series["slug"])
         heracles_series.created_at = Time.zone.parse(blueprint_series["created_on"].to_s)
-        if blueprint_series["content"].present? then heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: false) end
+        if blueprint_series["content"].present? then heracles_series.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_series["content"], subject: blueprint_series, assetify: true) end
         if blueprint_series["id"].present?
           puts (blueprint_series["id"])
           heracles_series.fields[:legacy_series_id].value = blueprint_series["id"].to_i
         end
         heracles_series.fields[:archived].value = true
-        # {name: :promo_image, type: :asset, asset_file_type: :image},
+
         heracles_series.save!
       end
     end
@@ -1003,6 +1109,7 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_tag_records = blueprint_tags(blueprint_records)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     blueprint_events = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtEvent}
     blueprint_sponsorships = blueprint_records.select { |r| r.class == LegacyBlueprint::CenevtSponsorship }
@@ -1027,12 +1134,25 @@ namespace :wheeler_centre do
         heracles_event.slug = blueprint_event["slug"]
       end
 
-      heracles_event.published = true
+      # Image
+      blueprint_promo_image = blueprint_asset_records.find {|r| r["attachable_type"] == "EvtEvent" && r["attachable_id"].to_i == blueprint_event["id"].to_i && r["name"].to_s.downcase == "promo"}
+      if blueprint_promo_image.present?
+        heracles_promo_image = Heracles::Asset.find_by_blueprint_id(blueprint_promo_image["id"].to_i)
+        if heracles_promo_image
+          heracles_event.fields[:promo_image].asset_id = heracles_promo_image.id
+        else
+          puts "*** Missing promo image for: #{blueprint_event["title"]}"
+        end
+      else
+        puts "*** Missing promo image for: #{blueprint_event["title"]}"
+      end
+
+      heracles_event.published = blueprint_event["publish_on"].present?
       heracles_event.title = replace_entities(blueprint_event["title"])
       puts (blueprint_event["slug"])
       heracles_event.created_at = Time.zone.parse(blueprint_event["created_on"].to_s)
       heracles_event.fields[:short_title].value = blueprint_event["short_title"].to_s
-      heracles_event.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_event["content"], subject: blueprint_event, assetify: false)
+      heracles_event.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_event["content"], subject: blueprint_event, assetify: true)
       heracles_event.fields[:start_date].value = Time.zone.parse(blueprint_event["start_date"].to_s)
       heracles_event.fields[:end_date].value = Time.zone.parse(blueprint_event["end_date"].to_s)
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
@@ -1071,7 +1191,9 @@ namespace :wheeler_centre do
       end
 
       tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_event["id"], "EvtEvent")
-      apply_tags_to(heracles_event, tags_for_post)
+      if tags_for_post.present?
+        apply_tags_to(heracles_event, tags_for_post)
+      end
 
       heracles_event.save!
     end
@@ -1088,6 +1210,7 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_tag_records = blueprint_tags(blueprint_records)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
 
     dailies_root = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage && r["slug"] == "dailies" }
     id = dailies_root.first["id"].to_i
@@ -1107,13 +1230,27 @@ namespace :wheeler_centre do
         heracles_blog_post.slug = blueprint_daily["slug"]
         heracles_blog_post.title = replace_entities(blueprint_daily["title"])
 
+        # Image
+        blueprint_hero_image = blueprint_asset_records.find {|r| r["attachable_type"] == "TumPost" && r["attachable_id"].to_i == blueprint_daily["id"].to_i && r["name"].to_s.downcase == "highlight"}
+        if blueprint_hero_image.present?
+          heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
+          if heracles_hero_image
+            puts "*** Found hero image for: #{heracles_blog_post["title"]}"
+            heracles_blog_post.fields[:hero_image].asset_id = heracles_hero_image.id
+          else
+            puts "*** Missing hero image for: #{heracles_blog_post["title"]}"
+          end
+        else
+          puts "*** Missing hero image for: #{heracles_blog_post["title"]}"
+        end
+
         content = blueprint_daily["content"].to_s
         highlight_regex = /\[\[highlight?.+\]\]/m
         summary = content.split highlight_regex
         if summary.length > 1
           content.slice!(summary[0])
-          heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
-          heracles_blog_post.fields[:intro].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: false)
+          heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: true)
+          heracles_blog_post.fields[:intro].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary[0], subject: blueprint_daily, assetify: true)
         else
           # Erase any previously imported data
           heracles_blog_post.fields[:summary].value = ""
@@ -1127,17 +1264,20 @@ namespace :wheeler_centre do
           meta_matches.captures.each do |match|
             meta += match.gsub(/^\*{3}\r\n/, "")
           end
-          heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: false).strip
+          heracles_blog_post.fields[:meta].value = LegacyBlueprint::BluedownFormatter.mark_up(meta, subject: blueprint_daily, assetify: true).strip
         else
           heracles_blog_post.fields[:meta].value = ""
         end
         body = clean_content content.gsub(meta_regex, "")
 
-        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: false)
+        heracles_blog_post.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(body, subject: blueprint_daily, assetify: true)
         heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+        if blueprint_daily["publish_on"].present?
+          heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+        end
         heracles_blog_post.parent = parent
         heracles_blog_post.collection = collection
-        authors = all_authors.select { |p| p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
+        authors = all_authors.select { |p| blueprint_daily["user_id"].present? && p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
         if authors.present?
           heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
         end
@@ -1164,12 +1304,17 @@ namespace :wheeler_centre do
       heracles_blog_post.fields[:intro].value = ""
 
       # Build insertable for body
-      body = '<div contenteditable="false" insertable="pull_quote" value="{&quot;quote&quot;:&quot;'+clean_content(quote)+'&quot;,&quot;attribution&quot;:&quot;'+clean_content(attribution)+'&quot;}"></div>'
+      quote = ERB::Util.h(quote).gsub(/\n/, "")
+      puts quote.inspect
+      body = '<div contenteditable="false" insertable="pull_quote" value="{&quot;quote&quot;:&quot;'+quote+'&quot;,&quot;attribution&quot;:&quot;'+clean_content(attribution)+'&quot;}"></div>'
       heracles_blog_post.fields[:body].value = body
 
       heracles_blog_post.tag_list.add(["legacy-quote"])
 
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      if blueprint_daily["publish_on"].present?
+        heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+      end
       heracles_blog_post.parent = parent
       heracles_blog_post.collection = collection
       tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
@@ -1217,6 +1362,9 @@ namespace :wheeler_centre do
       heracles_blog_post.tag_list.add(["legacy-widget"])
 
       heracles_blog_post.created_at = Time.zone.parse(blueprint_daily["created_on"].to_s)
+      if blueprint_daily["publish_on"].present?
+        heracles_blog_post.fields[:publish_date].value = Time.zone.parse(blueprint_daily["publish_on"].to_s)
+      end
       heracles_blog_post.parent = parent
       heracles_blog_post.collection = collection
       tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
@@ -1225,60 +1373,268 @@ namespace :wheeler_centre do
     end
   end
 
-  desc "Import blueprint types that map to Page"
-  task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
+  desc "Import blueprint podcast series"
+  task :import_blueprint_podcast_series, [:yml_file] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+    podcast_index = Heracles::Page.find_by_url("broadcasts/podcasts")
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
 
-    blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
+    # Get all the settings with podcast URLs
+    blueprint_podcast_url_settings_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::Setting && r["configurable_type"] == "EvtEvent" && r["key"] == "Podcast URL" && r["value"].present?
+    end
+    # Get all the event ids from those records
+    blueprint_podcast_event_ids = blueprint_podcast_url_settings_records.map {|r| r["configurable_id"].to_i }
 
-    blueprint_pages.each do |blueprint_page|
-      # If a parent page is set in the yaml, find it and use it as the Heracles parent
-      if blueprint_page["parent_page"].present?
-        parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
-      end
+    # Get the actual event records
+    blueprint_podcast_events_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::CenevtEvent && blueprint_podcast_event_ids.include?(r["id"].to_i)
+    end
+    blueprint_podcast_series_ids = blueprint_podcast_events_records.map {|r| r["program_id"].to_i }
 
-      slug_components = blueprint_page["slug"].split("/")
-      if slug_components.length > 1
-        # Set the slug to be the last part of the blueprint slug
-        slug = slug_components.last
-        puts ("Slug: #{slug}" )
-        # Find the closest parent page
-        slug_components.reverse.each_with_index do |slug_component, index|
-          if index > 0
-            puts ("slug_component: #{slug_component}")
-            parent = Heracles::Page.find_by_slug(slug_component)
-            puts ("Parent: #{parent}")
-          end
+    # Get the program records
+    blueprint_podcast_series_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::CenevtProgram && blueprint_podcast_series_ids.include?(r["id"].to_i)
+    end
+
+    # Create a Podcast Series for each program record
+    blueprint_podcast_series_records.each do |blueprint_podcast_series|
+      if blueprint_podcast_series["name"].present?
+        create_params = {
+          parent: podcast_index,
+          page_order_position: :last,
+          published: blueprint_podcast_series["publish_on"].present?,
+          slug: blueprint_podcast_series["slug"],
+          title: replace_entities(blueprint_podcast_series["name"]),
+          created_at: Time.zone.parse(blueprint_podcast_series["created_on"].to_s)
+        }
+        heracles_podcast_series = Heracles::Page.find_by_url("broadcasts/podcasts/#{blueprint_podcast_series["slug"]}")
+        unless heracles_podcast_series
+          result = Heracles::CreatePage.call(site: site, page_type: "podcast_series", page_params: create_params)
+          heracles_podcast_series = result.page
         end
-      end
 
-      if !slug.present?
-        slug = blueprint_page["slug"]
-      end
+        # Associate field data
+        heracles_podcast_series.fields[:legacy_program_id].value = blueprint_podcast_series["id"].to_i
+        heracles_podcast_series.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_series["content"], subject: blueprint_podcast_series, assetify: false)
 
-      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
-
-      unless heracles_page
-        site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-        heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
-        if parent.present?
-          heracles_page.parent = parent
+        # Tags
+        tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_series["id"], "CenevtProgram")
+        if tags_for_post.any?
+          apply_tags_to(heracles_podcast_series, tags_for_post)
         end
+        heracles_podcast_series.save!
       end
-
-      heracles_page.published = true
-      heracles_page.slug = slug
-      heracles_page.title = blueprint_page["title"]
-      heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
-      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
-      heracles_page.save!
     end
   end
+
+  desc "Import blueprint podcast episodes"
+  task :import_blueprint_podcast_episodes, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
+
+    # Get all the settings with podcast URLs
+    blueprint_podcast_url_settings_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::Setting && r["configurable_type"] == "EvtEvent" && r["key"] == "Podcast URL" && r["value"].present?
+    end
+    # Get all the event ids from those records
+    blueprint_podcast_event_ids = blueprint_podcast_url_settings_records.map {|r| r["configurable_id"].to_i }
+
+    # Get the actual event records
+    blueprint_podcast_events_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::CenevtEvent && blueprint_podcast_event_ids.include?(r["id"].to_i)
+    end
+    blueprint_podcast_series_ids = blueprint_podcast_events_records.map {|r| r["program_id"].to_i }
+
+    # Get the program records
+    blueprint_podcast_series_records = blueprint_records.select do |r|
+      r.class == LegacyBlueprint::CenevtProgram && blueprint_podcast_series_ids.include?(r["id"].to_i)
+    end
+
+    # Create a Podcast episode for each program record
+    blueprint_podcast_events_records.each do |blueprint_podcast_episode|
+      # Get the series
+      blueprint_podcast_series = blueprint_podcast_series_records.find {|r| r["id"].to_i == blueprint_podcast_episode["program_id"].to_i }
+      if blueprint_podcast_series
+        heracles_podcast_series = Heracles::Page.find_by_url("broadcasts/podcasts/#{blueprint_podcast_series["slug"]}")
+        heracles_podcast_series_collection = heracles_podcast_series.children.of_type("collection").first
+
+        if blueprint_podcast_episode["title"].present?
+          heracles_podcast_episode = Heracles::Page.find_by_url("broadcasts/podcasts/#{blueprint_podcast_series["slug"]}/#{blueprint_podcast_episode["slug"]}")
+          unless heracles_podcast_episode
+            create_params = {
+              parent: heracles_podcast_series,
+              collection: heracles_podcast_series_collection,
+              page_order_position: :last,
+              published: blueprint_podcast_episode["publish_on"].present?,
+              slug: blueprint_podcast_episode["slug"],
+              title: replace_entities(blueprint_podcast_episode["title"]),
+              created_at: Time.zone.parse(blueprint_podcast_episode["created_on"].to_s)
+            }
+            result = Heracles::CreatePage.call(site: site, page_type: "podcast_episode", page_params: create_params)
+            heracles_podcast_episode = result.page
+          end
+
+          # Dates
+          if blueprint_podcast_episode["publish_on"].present?
+            heracles_podcast_episode.fields[:publish_date].value = ActiveSupport::TimeZone["Melbourne"].parse(blueprint_podcast_episode["publish_on"])
+          end
+
+          # Associate field data
+          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["content"], subject: blueprint_podcast_episode, assetify: false)
+
+          # Associate with event (event -> podcast episode)
+          heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
+          if heracles_event
+            heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
+            heracles_event.save!
+          end
+
+          # Tags
+          tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "CenevtEvent")
+          if tags_for_post.any?
+            apply_tags_to(heracles_podcast_episode, tags_for_post)
+          end
+          heracles_podcast_episode.save!
+        end
+      else
+        # Podcast has URL, but no matching series
+        puts "*** COULD NOT FIND SERIES FOR #{blueprint_podcast_episode["title"]}"
+      end
+    end
+  end
+
+  desc "Import blueprint main 'Wheeler Centre' podcast episodes"
+  task :import_blueprint_main_podcast_episodes, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
+    blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+    series = Heracles::Page.find_by_url("broadcasts/podcasts/the-wheeler-centre")
+
+    if series
+      # Create a Podcast episode for each program record
+      blueprint_video_posts.each do |blueprint_podcast_episode|
+        heracles_podcast_series_collection = series.children.of_type("collection").first
+
+        if blueprint_podcast_episode["title"].present?
+          heracles_podcast_episode = Heracles::Page.find_by_url("broadcasts/podcasts/#{series.slug}/#{blueprint_podcast_episode["slug"]}")
+          unless heracles_podcast_episode
+            create_params = {
+              parent: series,
+              collection: heracles_podcast_series_collection,
+              page_order_position: :last,
+              published: blueprint_podcast_episode["publish_on"].present?,
+              slug: blueprint_podcast_episode["slug"],
+              title: replace_entities(blueprint_podcast_episode["title"]),
+              created_at: Time.zone.parse(blueprint_podcast_episode["created_on"].to_s)
+            }
+            result = Heracles::CreatePage.call(site: site, page_type: "podcast_episode", page_params: create_params)
+            heracles_podcast_episode = result.page
+          end
+
+          # Dates
+          if blueprint_podcast_episode["publish_on"].present?
+            heracles_podcast_episode.fields[:publish_date].value = ActiveSupport::TimeZone["Melbourne"].parse(blueprint_podcast_episode["publish_on"])
+          end
+
+          # Associate field data
+          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["description"], subject: blueprint_podcast_episode, assetify: false)
+
+          # Associate with event (event -> podcast episode)
+          heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
+          if heracles_event
+            heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
+            heracles_event.save!
+          end
+
+          # Tags
+          tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "CenevtEvent")
+          if tags_for_post.any?
+            apply_tags_to(heracles_podcast_episode, tags_for_post)
+          end
+          heracles_podcast_episode.save!
+        end
+      end
+    else
+      # Podcast has URL, but no matching series
+      puts "*** COULD NOT FIND MAIN SERIES"
+    end
+  end
+
+  # desc "Import blueprint types that map to Page"
+  # task :import_blueprint_types_to_page, [:yml_file] => :environment do |task, args|
+  #   require "yaml"
+  #   require "blueprint_shims"
+  #   require "blueprint_import/bluedown_formatter"
+
+  #   backup_data = File.read(args[:yml_file])
+  #   blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+
+  #   blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::Page || r.class == LegacyBlueprint::FaqPage || r.class == LegacyBlueprint::PslPage || r.class == LegacyBlueprint::CttPage || r.class == LegacyBlueprint::DbyPage || r.class == LegacyBlueprint::DirPage}
+
+  #   blueprint_pages.each do |blueprint_page|
+  #     # If a parent page is set in the yaml, find it and use it as the Heracles parent
+  #     if blueprint_page["parent_page"].present?
+  #       parent = Heracles::Page.find_by_slug(blueprint_page["parent_page"])
+  #     end
+
+  #     slug_components = blueprint_page["slug"].split("/")
+  #     if slug_components.length > 1
+  #       # Set the slug to be the last part of the blueprint slug
+  #       slug = slug_components.last
+  #       puts ("Slug: #{slug}" )
+  #       # Find the closest parent page
+  #       slug_components.reverse.each_with_index do |slug_component, index|
+  #         if index > 0
+  #           puts ("slug_component: #{slug_component}")
+  #           parent = Heracles::Page.find_by_slug(slug_component)
+  #           puts ("Parent: #{parent}")
+  #         end
+  #       end
+  #     end
+
+  #     if !slug.present?
+  #       slug = blueprint_page["slug"]
+  #     end
+
+  #     heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
+
+  #     unless heracles_page
+  #       site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+  #       heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+  #       if parent.present?
+  #         heracles_page.parent = parent
+  #       end
+  #     end
+
+  #     heracles_page.published = true
+  #     heracles_page.slug = slug
+  #     heracles_page.title = blueprint_page["title"]
+  #     heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
+  #     heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+  #     heracles_page.save!
+  #   end
+  # end
 
   # Example use: rake wheeler_centre:import_blueprint_types_to_body["/Users/josephinehall/Development/wheeler-centre/backup.yml","faq","FaqQuestion"]
   desc "Import blueprint types to a page body field"
@@ -1316,6 +1672,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_asset_records = blueprint_assets(blueprint_records)
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
 
     # Find or initialise the Projects page
@@ -1325,13 +1682,16 @@ namespace :wheeler_centre do
     projects.slug = "projects"
     projects.published = true
     projects.save!
+
     # Find or initialise the Criticism page
-    criticism_now = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/criticism-now")
+    blueprint_criticism_now = blueprint_records.find {|r| r["slug"] == "projects/criticism-now" }
+    criticism_now = Heracles::Sites::WheelerCentre::CriticismNow.find_or_initialize_by(url: "projects/criticism-now")
     criticism_now.site = site
     criticism_now.title = "Criticism Now"
     criticism_now.slug = "criticism-now"
     criticism_now.published = true
     criticism_now.parent = projects
+    criticism_now.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_criticism_now["content"], subject: blueprint_criticism_now, assetify: true)
     criticism_now.save!
 
     blueprint_pages = blueprint_records.select { |r| r.class == LegacyBlueprint::TumPage }
@@ -1349,11 +1709,11 @@ namespace :wheeler_centre do
           slug = blueprint_page["slug"]
         end
 
-        heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_by_slug(slug)
+        heracles_page = Heracles::Sites::WheelerCentre::CriticismNowEvent.find_by_slug(slug)
 
         unless heracles_page
           site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-          heracles_page = Heracles::Page.new_for_site_and_page_type(site, "content_page")
+          heracles_page = Heracles::Page.new_for_site_and_page_type(site, "criticism_now_event")
           if criticism_now.present?
             heracles_page.parent = criticism_now
           end
@@ -1364,6 +1724,17 @@ namespace :wheeler_centre do
         heracles_page.title = blueprint_page["title"]
         heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
         heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+        blueprint_hero_image = blueprint_asset_records.find {|r| r["attachable_id"].to_i == blueprint_page["id"].to_i && r["name"].to_s.downcase == "banner"}
+        if blueprint_hero_image.present?
+          heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
+          if heracles_hero_image
+            heracles_page.fields[:hero_image].asset_id = heracles_hero_image.id
+          else
+            puts "*** Missing hero image for: #{blueprint_event["title"]}"
+          end
+        else
+          puts "*** Missing hero image for: #{blueprint_event["title"]}"
+        end
         heracles_page.save!
 
         reviews_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: heracles_page.url + "/all-reviews")
@@ -1395,7 +1766,7 @@ namespace :wheeler_centre do
           blueprint_reviews.each do |blueprint_review|
             heracles_review = Heracles::Page.find_by_slug(blueprint_review["slug"])
             unless heracles_review then heracles_review = Heracles::Page.new_for_site_and_page_type(site, "review") end
-            heracles_review.published = true
+            heracles_review.published = blueprint_review["publish_on"].present?
             heracles_review.slug = blueprint_review["slug"]
             heracles_review.title = blueprint_review["title"]
             heracles_review.created_at = Time.zone.parse(blueprint_review["created_on"].to_s)
@@ -1409,7 +1780,7 @@ namespace :wheeler_centre do
           blueprint_responses.each do |blueprint_response|
             heracles_response = Heracles::Page.find_by_slug(blueprint_response["slug"])
             unless heracles_response then heracles_response = Heracles::Page.new_for_site_and_page_type(site, "response") end
-            heracles_response.published = true
+            heracles_response.published = blueprint_response["publish_on"].present?
             heracles_response.slug = blueprint_response["slug"]
             # Trim the title to the first few words
             heracles_response.title = blueprint_response["title"][0..30].gsub(/\s\w+\s*$/, '...')
@@ -1428,6 +1799,437 @@ namespace :wheeler_centre do
     end
   end
 
+  desc "Import blueprint legacy weather stations page"
+  task :import_blueprint_weather_stations, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_weather_stations = blueprint_records.find {|r| r["slug"] == "projects/weather-stations" && r.class == LegacyBlueprint::CenplaPage }
+
+    weather_stations = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/weather-stations")
+    weather_stations.site = site
+    weather_stations.parent = projects
+    weather_stations.title = blueprint_weather_stations["title"]
+    weather_stations.slug = "weather-stations"
+    weather_stations.published = true
+
+    # Take the banner image and make it an insertable at the top of the body
+    content = "[[banner|size=Size8]]\r\n"
+    content += blueprint_weather_stations["content"]
+    weather_stations.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_weather_stations, assetify: true)
+    weather_stations.save!
+  end
+
+  desc "Import blueprint legacy faith and culture page"
+  task :import_blueprint_faith_and_culture, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/faith-and-culture-the-politics-of-belief" && r.class == LegacyBlueprint::Page }
+
+    heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/faith-and-culture-the-politics-of-belief")
+    heracles_page.site = site
+    heracles_page.parent = projects
+    heracles_page.title = blueprint_page["title"]
+    heracles_page.slug = "faith-and-culture-the-politics-of-belief"
+    heracles_page.published = true
+
+    content = blueprint_page["content"]
+    heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_page, assetify: true)
+    heracles_page.save!
+  end
+
+  desc "Import blueprint legacy #discuss page"
+  task :import_blueprint_discuss, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_discuss = blueprint_records.find {|r| r["slug"] == "projects/discuss" && r.class == LegacyBlueprint::CenplaPage }
+
+    discuss = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/discuss")
+    discuss.site = site
+    discuss.parent = projects
+    discuss.title = "#discuss"
+    discuss.slug = "discuss"
+    discuss.published = true
+
+    # Take the banner image and make it an insertable at the top of the body
+    content = "[[banner|size=Size8]]\r\n"
+    content += blueprint_discuss["content"]
+    discuss.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_discuss, assetify: true)
+    discuss.save!
+  end
+
+  desc "Import blueprint legacy hot desk fellowships page"
+  task :import_blueprint_hot_desk_fellowships, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    hot_desk_slugs = [
+      "projects/wheeler-centre-hot-desk-fellowships-2013",
+      "projects/wheeler-centre-hot-desk-fellowships-2014"
+    ]
+
+    hot_desk_slugs.each do |slug|
+      blueprint_page = blueprint_records.find {|r| r["slug"] == slug && r.class == LegacyBlueprint::Page }
+
+      heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/#{slug}")
+      heracles_page.site = site
+      heracles_page.parent = projects
+      heracles_page.title = blueprint_page["title"]
+      heracles_page.slug = slug
+      heracles_page.published = true
+
+      heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+      heracles_page.save!
+    end
+  end
+
+  desc "Import blueprint legacy Deakin Lectures 2010 page"
+  task :import_blueprint_deakin_lectures, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/deakin-lectures-2010" && r.class == LegacyBlueprint::Page }
+
+    heracles_page = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects/deakin-lectures-2010")
+    heracles_page.site = site
+    heracles_page.parent = projects
+    heracles_page.title = blueprint_page["title"]
+    heracles_page.slug = "deakin-lectures-2010"
+    heracles_page.published = true
+
+    heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+    heracles_page.save!
+  end
+
+  desc "Import blueprint legacy Texts in the City page"
+  task :import_blueprint_texts_in_the_city, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/texts-in-the-city-goes-digital" && r.class == LegacyBlueprint::CenplaPage }
+    slug = "texts-in-the-city-goes-digital"
+    vpla_page = Heracles::Sites::WheelerCentre::TextsInTheCity.find_or_initialize_by(url: "projects/#{slug}")
+    vpla_page.site = site
+    vpla_page.parent = projects
+    vpla_page.title = blueprint_page["title"]
+    vpla_page.slug = slug
+    vpla_page.published = true
+    # Content
+    vpla_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+    vpla_page.save!
+
+    # Create a collection for each VPLA year
+    books_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "projects/#{slug}/all-books")
+    books_collection.parent = vpla_page
+    books_collection.site = site
+    books_collection.fields[:contained_page_type].value = "texts_in_the_city_book"
+    books_collection.fields[:sort_attribute].value = "created_at"
+    books_collection.fields[:sort_direction].value = "DESC"
+    books_collection.title = "All Books"
+    books_collection.slug = "all-books"
+    books_collection.save!
+
+    # Find all matching book children
+    blueprint_vpla_books = blueprint_records.select {|r| r["page_id"].to_i == blueprint_page["id"].to_i && r.class == LegacyBlueprint::CenplaBook }
+    puts "Found #{blueprint_vpla_books.length} books"
+    blueprint_vpla_books.each do |blueprint_vpla_book|
+      puts blueprint_vpla_book["title"]
+      if blueprint_vpla_book["title"].present?
+        create_params = {
+          parent: vpla_page,
+          site: site,
+          collection: books_collection,
+          published: blueprint_vpla_book["publish_on"].present?,
+          slug: blueprint_vpla_book["slug"],
+          title: replace_entities(blueprint_vpla_book["title"]),
+          created_at: Time.zone.parse(blueprint_vpla_book["created_on"].to_s)
+        }
+        heracles_book = Heracles::Page.find_by_url("projects/#{slug}/#{blueprint_vpla_book["slug"]}")
+        unless heracles_book
+          result = Heracles::CreatePage.call(site: site, page_type: "texts_in_the_city_book", page_params: create_params)
+          heracles_book = result.page
+        end
+
+        # Content
+        heracles_book.fields[:author].value = blueprint_vpla_book["author"]
+        heracles_book.fields[:author_biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["author_bio"], subject: blueprint_vpla_book)
+        cover_asset = Heracles::Asset.find_by_blueprint_id(blueprint_vpla_book["cover_image_id"])
+        if cover_asset
+          heracles_book.fields[:cover_image].asset_id = cover_asset.id
+        end
+        heracles_book.fields[:further_reading].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["links"], subject: blueprint_vpla_book)
+        heracles_book.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["review"], subject: blueprint_vpla_book)
+        heracles_book.save!
+      end
+    end
+  end
+
+  desc "Import blueprint legacy VPLAs pages"
+  task :import_blueprint_vplas, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    vpla_slugs = [
+      "victorian-premier-s-literary-awards-2011",
+      "victorian-premier-s-literary-awards-2012", # There is no 2013
+      "victorian-premier-s-literary-awards-2014",
+      "victorian-premier-s-literary-awards-2015"
+    ]
+
+    vpla_slugs.each do |slug|
+      blueprint_vpla_page = blueprint_records.find {|r| r["slug"] == "projects/#{slug}" && r.class == LegacyBlueprint::CenplaPage }
+
+      vpla_page = Heracles::Sites::WheelerCentre::VplaYear.find_or_initialize_by(url: "projects/#{slug}")
+      vpla_page.site = site
+      vpla_page.parent = projects
+      vpla_page.title = blueprint_vpla_page["title"]
+      vpla_page.slug = slug
+      vpla_page.published = true
+      # Content
+      vpla_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_page["content"], subject: blueprint_vpla_page, assetify: true)
+      vpla_page.save!
+
+      # Create a collection for each VPLA year
+      books_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "projects/#{slug}/all-books")
+      books_collection.parent = vpla_page
+      books_collection.site = site
+      books_collection.fields[:contained_page_type].value = "vpla_book"
+      books_collection.fields[:sort_attribute].value = "created_at"
+      books_collection.fields[:sort_direction].value = "DESC"
+      books_collection.title = "All Books"
+      books_collection.slug = "all-books"
+      books_collection.save!
+
+      # Construct any random child pages
+      build_child_content_pages blueprint_records, site, vpla_page, blueprint_vpla_page["id"]
+
+      # Categories
+      category_record = blueprint_records.find {|r| r["key"] == "Categories" && r.class == LegacyBlueprint::Setting && r["configurable_id"] == blueprint_vpla_page["id"]}
+      categories = category_record["value"].split("\n\n")
+      heracles_categories = []
+      if categories
+        categories.each do |category|
+          category_slug = slugify(category)
+          category_page = Heracles::Sites::WheelerCentre::VplaCategory.find_or_initialize_by(url: "projects/#{slug}/#{category_slug}")
+          category_page.title = category
+          category_page.parent = vpla_page
+          category_page.site = site
+          category_page.slug = "#{category_slug}"
+          category_page.published = true
+          category_page.hidden = true
+          category_page.page_order_position = :last if category_page.new_record?
+          category_page.save!
+          heracles_categories << category_page
+        end
+      else
+        puts "!!! Could not find categories for #{blueprint_vpla_page["title"]}"
+      end
+
+      # Find all matching book children
+      blueprint_vpla_books = blueprint_records.select {|r| r["page_id"].to_i == blueprint_vpla_page["id"].to_i && r.class == LegacyBlueprint::CenplaBook }
+      puts "Found #{blueprint_vpla_books.length} books"
+      blueprint_vpla_books.each do |blueprint_vpla_book|
+        puts blueprint_vpla_book["title"]
+        if blueprint_vpla_book["title"].present?
+          create_params = {
+            parent: vpla_page,
+            site: site,
+            collection: books_collection,
+            published: blueprint_vpla_book["publish_on"].present?,
+            slug: blueprint_vpla_book["slug"],
+            title: replace_entities(blueprint_vpla_book["title"]),
+            created_at: Time.zone.parse(blueprint_vpla_book["created_on"].to_s)
+          }
+          heracles_book = Heracles::Page.find_by_url("projects/#{slug}/#{blueprint_vpla_book["slug"]}")
+          unless heracles_book
+            result = Heracles::CreatePage.call(site: site, page_type: "vpla_book", page_params: create_params)
+            heracles_book = result.page
+          end
+
+          # Content
+          heracles_book.fields[:publisher].value = blueprint_vpla_book["publisher"]
+          heracles_book.fields[:publication_date].value = blueprint_vpla_book["date_of_publication"]
+
+          heracles_book.fields[:blurb].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["blurb"], subject: heracles_book)
+          cover_asset = Heracles::Asset.find_by_blueprint_id(blueprint_vpla_book["cover_image_id"])
+          if cover_asset
+            heracles_book.fields[:cover_image].asset_id = cover_asset.id
+          end
+          heracles_book.fields[:author].value = blueprint_vpla_book["author"]
+          author_asset = Heracles::Asset.find_by_blueprint_id(blueprint_vpla_book["author_portrait_id"])
+          if author_asset
+            heracles_book.fields[:author_image].asset_id = author_asset.id
+          end
+          heracles_book.fields[:author_image_credit].value = blueprint_vpla_book["author_portrait_credit"]
+          heracles_book.fields[:author_biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["author_bio"], subject: blueprint_vpla_book)
+          heracles_book.fields[:videos].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["videos"], subject: blueprint_vpla_book)
+          heracles_book.fields[:links].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["links"], subject: blueprint_vpla_book)
+          heracles_book.fields[:review].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["review"], subject: blueprint_vpla_book)
+          heracles_book.fields[:reviewer].value = blueprint_vpla_book["reviewer"]
+          heracles_book.fields[:library].value = blueprint_vpla_book["reviewer_library"]
+          heracles_book.fields[:library_website].value = blueprint_vpla_book["reviewer_url"]
+
+          category = heracles_categories.find {|c| c.slug == slugify(blueprint_vpla_book["category"])}
+          if category
+            heracles_book.fields[:category].page_ids = [category.id]
+          else
+            puts "!!! Could not find matching category (#{blueprint_vpla_book["category"]}) for #{blueprint_vpla_book["title"]}"
+          end
+
+          heracles_book.save!
+        end
+      end
+    end
+  end
+
+  desc "Import blueprint legacy Zoo Fellowship pages"
+  task :import_blueprint_zoo_fellowships, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    # Find or initialise the Fellowships page
+    blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/zoo-fellowships-2012" }
+    zoo_page = Heracles::Sites::WheelerCentre::ZooFellowships.find_or_initialize_by(url: "projects/zoo-fellowships-2012")
+    zoo_page.site = site
+    zoo_page.title = blueprint_page["title"]
+    zoo_page.slug = "zoo-fellowships-2012"
+    zoo_page.published = blueprint_page["publish_on"].present?
+    zoo_page.parent = projects
+    zoo_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+    zoo_page.save!
+
+    blueprint_works = blueprint_records.select { |r| r.class == LegacyBlueprint::CenplaBook && r["page_id"] == blueprint_page["id"]}
+    blueprint_works.each do |blueprint_work|
+      work_page = Heracles::Sites::WheelerCentre::ZooFellowshipsWork.find_or_initialize_by(url: "projects/zoo-fellowships-2012/#{blueprint_work['slug']}")
+      work_page.site = site
+      work_page.title = blueprint_work["title"]
+      work_page.slug = blueprint_work["slug"]
+      work_page.published = blueprint_work["publish_on"].present?
+      work_page.parent = zoo_page
+      # Cover
+      asset = Heracles::Asset.find_by_blueprint_id(blueprint_work["cover_image_id"])
+      if asset
+        work_page.fields[:promo_image].asset_id = asset.id
+      end
+      # Content
+      work_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["review"], subject: blueprint_work)
+      work_page.fields[:further_reading].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["links"], subject: blueprint_work)
+      # Author
+      author = Heracles::Sites::WheelerCentre::Person.find_by_title(blueprint_work["title"])
+      if author
+        work_page.fields[:author].page_ids = [author.id]
+      end
+      work_page.save!
+    end
+
+  end
+
   # Usage:
   # rake wheeler_centre:import_blueprint_recordings["/Users/josephinehall/Development/wheeler-centre/backup.yml","video.wheelercentre.com","/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml"]
   desc "Import legacy Blueprint 'CenvidPost' content to be Recordings"
@@ -1441,6 +2243,8 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
+    youtube_migrations_data = YAML::load(File.read("youtube_migrations.yml"))
+
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
     collection = Heracles::Page.where(url: "broadcasts/all-recordings").first!
@@ -1449,16 +2253,24 @@ namespace :wheeler_centre do
       if blueprint_video_post["title"].present?
         heracles_recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(blueprint_video_post["slug"])
         unless heracles_recording then heracles_recording = Heracles::Page.new_for_site_and_page_type(site, "recording") end
-        heracles_recording.published = true
+        heracles_recording.published = blueprint_video_post["publish_on"].present?
         puts (blueprint_video_post["slug"])
         heracles_recording.slug = blueprint_video_post["slug"]
         heracles_recording.title = blueprint_video_post["title"]
         heracles_recording.fields[:short_title].value = blueprint_video_post["title"]
-        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: false)
-        heracles_recording.fields[:transcripts].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+        heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: true)
+        heracles_recording.fields[:transcript].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+
+        youtube_migration = youtube_migrations_data.find {|y| y[:recording_id] == blueprint_video_post["id"].to_i}
+        if youtube_migration
+          heracles_recording.fields[:youtube_video].value = youtube_migration[:youtube_url]
+          unless heracles_recording.fields[:youtube_video].youtube.present?
+            heracles_recording.fields[:youtube_video].fetch
+          end
+        end
+
         # # TODO :audio
         # # TODO :promo_image
-        # # TODO check :publish_at?
         heracles_recording.fields[:recording_date].value = Time.zone.parse(blueprint_video_post["event_date"].to_s)
         heracles_recording.created_at = Time.zone.parse(blueprint_video_post["created_on"].to_s)
         heracles_recording.fields[:recording_id].value = blueprint_video_post["id"].to_i
@@ -1468,6 +2280,7 @@ namespace :wheeler_centre do
       end
     end
   end
+
 
   # Usage
   # wheeler_centre:associate_recordings_and_videos["/Users/josephinehall/Development/wheeler-centre/lib/video_migration/youtube_migrations.yml"]
@@ -1484,6 +2297,92 @@ namespace :wheeler_centre do
       if migration && migration["youtube_url"]
         recording.fields[:url].value = migration["youtube_url"]
         recording.save!
+      end
+    end
+  end
+
+  def remap_series_slugs(series_slug, event_slug)
+    case series_slug
+    when "new-news-by-the-centre-for-advancing-journalism"
+      "new-news"
+    else
+      "#{series_slug}-#{event_slug}"
+    end
+  end
+
+  desc "Associate imported recordings with imported events"
+  task :associate_recordings_with_events, [:yml_file] => :environment do |task, args|
+    heracles_events = Heracles::Sites::WheelerCentre::Event.all
+    heracles_events.each do |heracles_event|
+      # Recordings have slugs that combine the series with the event
+      # `#{series.slug}-#{event.slug}`
+      if heracles_event.fields[:series].data_present?
+        slug_to_find = remap_series_slugs(heracles_event.fields[:series].pages.first.slug, heracles_event.slug)
+        puts "Finding recording with series-event slug: #{slug_to_find}"
+        recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(slug_to_find)
+      end
+
+      # Special-case for events that are split into multiple recordings
+      if heracles_event.slug == "epic-fail"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^epic-fail/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "on-water-eight-speakers-eight-stories"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^on-water/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "a-gala-night-of-storytelling-2011-voices-from-elsewhere"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^voices-from-elsewhere/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "feminism-has-failed"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^feminism-has-failed/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "the-ethics-of-climate-change-the-moral-case-for-tackling-the-climate-problem"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^the-ethics-of-climate-change/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "innovation-energy-and-climate-change-in-the-developing-world"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^innovation-energy-and-climate-change-in-the-developing-world/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "carbon-down-on-the-farm"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^carbon-down-on-the-farm/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "greening-capitalism-green-bonds-funding-clean-energy-banks-and-global-funds"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^greening-capitalism/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "emissions-trading-dead-or-alive"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^emissions-trading/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug == "a-gala-night-of-storytelling"
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^a-gala-night-of-storytelling/)}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      elsif heracles_event.slug.match(/^debut-mondays/)
+        # Match based on event _date_ as well
+        heracles_event_date = heracles_event.fields[:start_date].value.strftime("%Y-%m-%d")
+        matched_recordings = Heracles::Sites::WheelerCentre::Recording.all.select {|r| r.slug.match(/^debut-mondays/) && r.fields[:recording_date].value.strftime("%Y-%m-%d") == heracles_event_date}
+        heracles_event.fields[:recordings].page_ids = matched_recordings.map(&:id)
+        heracles_event.save!
+      else
+        # Find a recording that matches the event slug exactly
+        unless recording
+          slug_to_find = heracles_event.slug
+          puts "Finding recording with event-only slug: #{slug_to_find}"
+          recording = Heracles::Sites::WheelerCentre::Recording.find_by_slug(slug_to_find)
+        end
+        # Associate any found recording with the current event
+        if recording
+          heracles_event.fields[:recordings].page_ids = [recording.id]
+          heracles_event.save!
+        else
+          puts "*** No recording found for #{heracles_event.title}"
+        end
       end
     end
   end
@@ -1978,6 +2877,48 @@ namespace :wheeler_centre do
 
     puts
     puts "Done!"
+  end
+
+  desc "Reprocess all assets"
+  task :reprocess_all_assets => :environment do
+    Heracles::Asset.order("created_at ASC").find_each do |asset|
+      # Skip assets that already have the new versions
+      next if !asset.image? || (asset.image? && asset.versions.include?(:itunes))
+
+      Rails.logger.info "#{asset.id} ..."
+
+      tries = 3
+      begin
+        # Reprocess the asset
+        result = asset.reprocess
+
+        if result
+          Rails.logger.info "#{asset.id} done!"
+        else
+          Rails.logger.info "#{asset.id} failed!"
+        end
+      rescue => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          # Catch all exceptions and just carry on if they still don't succeed
+          # after some retries. We'll be able to repeat this task later to re-
+          # process any assets that missed out due to timeouts or other
+          # exceptions.
+          Rails.logger.info "Exception (skipping asset): #{e}"
+        end
+      rescue Timeout::Error => e
+        if (tries -= 1) > 0
+          sleep 2
+          retry
+        else
+          Rails.logger.info "Timeout (skipping asset): #{e}"
+        end
+      end
+    end
+
+    Rails.logger.info "Done!"
   end
 
 end

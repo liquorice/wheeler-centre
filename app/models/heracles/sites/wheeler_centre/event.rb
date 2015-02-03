@@ -5,9 +5,9 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :short_title, type: :text, label: "Short title"},
+              {name: :short_title, type: :text, label: "Short title", hint: "(optional) Set this to override the title in listings"},
               {name: :promo_image, type: :asset, asset_file_type: :image},
-              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "Set this to override the above promo image in listings"},
+              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
               {name: :body, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
@@ -24,7 +24,7 @@ module Heracles
               {name: :presenters, type: :associated_pages, page_type: :person},
               {name: :series, type: :associated_pages, page_type: :event_series, editor_type: 'singular'},
               {name: :recordings, type: :associated_pages, page_type: :recording, editor_columns: 6},
-              {name: :podcasts, type: :associated_pages, page_type: :podcast, editor_columns: 6},
+              {name: :podcast_episodes, type: :associated_pages, page_type: :podcast_episode, editor_columns: 6},
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
@@ -33,6 +33,22 @@ module Heracles
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
+        end
+
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            series: fields[:series].pages.map(&:title).join(", "),
+            recordings: fields[:recordings],
+            start_date: fields[:start_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
+        def summary_title
+          fields[:short_title].data_present? ? fields[:short_title] : title
         end
 
         ### Accessors
@@ -64,6 +80,15 @@ module Heracles
             events = search_events_by_topic({per_page: options[:per_page]}).results
           end
           events
+        end
+
+        def promo_image
+          if fields[:promo_image].data_present?
+            fields[:promo_image].asset
+          elsif fields[:presenters].data_present?
+            primary_presenter = fields[:presenters].pages.first
+            primary_presenter.fields[:portrait].asset if primary_presenter.fields[:portrait].data_present?
+          end
         end
 
 

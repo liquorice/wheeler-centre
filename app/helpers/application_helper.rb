@@ -31,6 +31,16 @@ module ApplicationHelper
     (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
   end
 
+  def human_boolean(bool)
+    bool ? "yes" : "no"
+  end
+
+  def duration_to_hms(duration, options={})
+    trim_hours = options[:trim_hours] || false
+    format = trim_hours ? "%M:%S" : "%H:%M:%S"
+    Time.at(duration).gmtime.strftime(format)
+  end
+
   ### Application specific helpers
 
   def excerptify(text, chars = 220)
@@ -38,8 +48,12 @@ module ApplicationHelper
     truncate(text, length: chars)
   end
 
-  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br a")
-    truncate_html(sanitize(html, tags: allowed_tags.split(' ')), length: length)
+  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
+    truncate_html(
+      Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
+        :elements => Sanitize::Config::RESTRICTED[:elements] + allowed_tags.split(" "),
+      )),
+    length: length)
   end
 
   # Cribbed from Padrino:
@@ -76,7 +90,7 @@ module ApplicationHelper
   end
 
   def primary_topics
-    topics_page.children.visible.published.of_type("topic")
+    topics_page.children.in_order.visible.published.of_type("topic")
   end
 
   # Return an array of all the primary topics for a given `page`
@@ -103,6 +117,28 @@ module ApplicationHelper
       end
     end
     primary_topic
+  end
+
+  # Projects
+  def projects_page
+    site.pages.find_by_url("projects")
+  end
+
+  def projects_for_navigation
+    projects_page.children.in_order.visible.published
+  end
+
+  # Events
+  def events_page
+    site.pages.find_by_url("events")
+  end
+
+  def upcoming_events_for_navigation
+    events_page.upcoming_events(per_page: 5)
+  end
+
+  def days_for_week(week)
+    (0..6).map {|d| week + d.days}
   end
 
 end

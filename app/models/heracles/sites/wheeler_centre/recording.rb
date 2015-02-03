@@ -6,20 +6,58 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
-              {name: :description, type: :content},
-              {name: :transcripts, type: :content},
-              {name: :video, type: :asset, asset_file_type: :video},
-              {name: :audio, type: :asset, asset_file_type: :audio},
-              {name: :url, type: :text, label: "Youtube URL"},
               {name: :hero_image, type: :asset, asset_file_type: :image},
-              {name: :events, type: :associated_pages, page_type: :event},
+              {name: :description, type: :content},
               # Dates
+              {name: :dates_info, type: :info, text: "<hr/>"},
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :recording_date, type: :date_time, label: "Recording date"},
-              {name: :recording_id, type: :integer, label: "Recording Id"},
+              # Asset
+              {name: :asset_info, type: :info, text: "<hr/>"},
+              {name: :youtube_video, type: :external_video},
+              {name: :video_poster_image, type: :asset, asset_file_type: :image},
+              {name: :video, type: :asset, asset_file_type: :video, editor_columns: 6},
+              {name: :audio, type: :asset, asset_file_type: :audio, editor_columns: 6},
+              # Associations
+              {name: :assoc_info, type: :info, text: "<hr/>"},
+              {name: :people, type: :associated_pages, page_type: :person},
+              # Extra
+              {name: :extra_info, type: :info, text: "<hr/>"},
+              {name: :transcript, type: :content},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :recording_id, type: :integer, label: "Legacy recording ID"},
             ]
           }
+        end
+
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            events: events.map(&:title).join(", "),
+            youtube_video: fields[:youtube_video].value.presence || "",
+            recording_date: fields[:recording_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
+        ### Accessors
+
+        def events
+          Heracles::Page.
+            of_type("event").
+            joins(:insertions).
+            where(
+              :"insertions.field" => "recordings",
+              :"insertions.inserted_key" => insertion_key
+            )
+        end
+
+        def people
+          if fields[:people].data_present
+            fields[:people].pages
+          end
         end
 
         searchable do
@@ -31,11 +69,15 @@ module Heracles
             fields[:description].value
           end
 
-          text :transcripts do
-            fields[:transcripts].value
+          text :youtube_video do
+            fields[:youtube_video].value
           end
 
           date :publish_date do
+            fields[:publish_date].value
+          end
+
+          time :publish_date_time do
             fields[:publish_date].value
           end
 
@@ -43,8 +85,8 @@ module Heracles
             fields[:recording_date].value
           end
 
-          string :event_ids, multiple: true do
-            fields[:events].pages.map(&:id)
+          time :recording_date_time do
+            fields[:recording_date].value
           end
 
         end

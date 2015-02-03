@@ -10,6 +10,13 @@ module Heracles
             ]
           }
         end
+
+        ### Accessors
+
+        def series
+          children.of_type(:podcast_series)
+        end
+
       end
     end
   end

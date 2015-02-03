@@ -1,0 +1,22 @@
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Broadcasts
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href="/events"
+          ' Latest broadcasts
+
+= area :main do
+  .recording
+    - if page.fields[:youtube_video].data_present?
+      = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
+    .column-wrapper
+      .column-mid
+        .content.copy
+          - if page.fields[:description].data_present?
+            = render_content_in_sections page.fields[:description]
+    - if page.events
+      - page.events.each do |event|
+        = render "partials/event_snap_block", post: event

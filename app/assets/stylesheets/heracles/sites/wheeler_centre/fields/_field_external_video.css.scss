@@ -1,0 +1,58 @@
+// Admin: Field External Video ---------------------------------------------------
+
+.field-external-video {
+}
+
+
+.field-external-video__form {
+  display: flex;
+}
+.field-external-video__input {
+  flex: 1;
+  position: relative;
+}
+.field-external-video__button {
+  margin-left: -1px;
+}
+
+.field-external-video__label {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  cursor: none;
+  font-style: normal;
+}
+.field-external-video__label--loading, .field-external-video__label--loading:hover {
+  background: $grey;
+}
+.field-external-video__label--loaded, .field-external-video__label--loaded:hover {
+  background: $highlight;
+}
+
+.field-external-video__preview {
+  margin-top: 10px;
+}
+.field-external-video__preview-pic {
+  float: left;
+  margin-right: 15px;
+  background: #b3d3da;
+  padding: 10px;
+  img {
+    display: block;
+    width: 120px;
+    height: 90px;
+  }
+}
+.field-external-video__preview-field {
+  color: $grey-mid;
+  margin-bottom: 10px;
+  b {
+    display: inline-block;
+    margin-right: 7px;
+    color: $grey-dark;
+  }
+}
+a.field-external-video__preview-clear {
+  color: $highlight;
+}
+

@@ -63,11 +63,6 @@
       font-smoothing: subpixel-antialiased;
     }
 
-    .breakpoint-w-879 .masthead-nav-main {
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      margin-bottom: 8px;
-    }
-
     .breakpoint-phone .masthead-nav-main {
       display: none;
       background-color: var(--primary-color-lighter);
@@ -148,11 +143,18 @@
       }
 
         .masthead-nav-main__anchor {
+          background: none;
+          border: none;
           color: var(--primary-color-lighter);
           display: inline-block;
           font-size: 16px;
           font-size: 1.6rem;
           padding: 18px;
+        }
+
+        button.masthead-nav-main__anchor {
+          text-align: left;
+          width: 100%;
         }
 
         .masthead-nav-main__anchor:hover,
@@ -195,7 +197,7 @@
       min-width: 500px;
       padding: 30px 18px 20px;
       position: absolute;
-      z-index: 20;
+      z-index: 60;
     }
 
     .breakpoint-phone .masthead-nav-main__dropdown {
@@ -262,7 +264,7 @@
           }
 
     .masthead-nav-secondary {
-      padding-top: 18px;
+      padding-top: 16px;
       float: right;
     }
 
@@ -272,7 +274,9 @@
     }
 
     .breakpoint-w-879 .masthead-nav-secondary {
+      border-top: 1px solid rgba(255,255,255,0.2);
       clear: left;
+      float: none;
     }
 
     .breakpoint-phone .masthead-nav-secondary {
@@ -359,6 +363,7 @@
         }
 
         .breakpoint-w-879 .masthead-nav-secondary__search-box {
+          right: -50px;
           width: 240px;
         }
 
@@ -399,6 +404,7 @@
           .masthead-nav-secondary__search-input {
             background-color: #e0eeec;
             border: none;
+            border-radius: 0;
             float: left;
             font-size: 14px;
             height: 32px;
@@ -419,6 +425,7 @@
           .breakpoint-phone .masthead-nav-secondary__search-input {
             height: 40px;
           }
+
 
           .masthead-nav-secondary__search-input:focus {
             background-color: #fff;
@@ -443,6 +450,11 @@
 
           .masthead-nav-secondary__search-button:hover,
           .masthead-nav-secondary__search-button:focus {
+            background-color: #006b5f;
+          }
+
+          .breakpoint-phone .masthead-nav-secondary__search-button:hover,
+          .breakpoint-phone .masthead-nav-secondary__search-button:focus {
             color: #006b5f;
             background-color: #e0eeec;
           }

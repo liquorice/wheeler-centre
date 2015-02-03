@@ -13,6 +13,18 @@
   font-size: 2.2rem;
   line-height: 1.4;
 }
+.breakpoint-tablet .copy {
+  font-size: 20px;
+  font-size: 2rem;
+}
+.breakpoint-phone-wide .copy {
+  font-size: 18px;
+  font-size: 1.8rem;
+}
+.breakpoint-phone .copy {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
 
 .copy > *,
 .copy > blockquote > *,
@@ -54,6 +66,33 @@
   line-height: 1.45;
   margin-left: -35px;
   margin-right: -35px;
+}
+.breakpoint-tablet .copy > blockquote,
+.breakpoint-tablet .copy > .section--normal > blockquote {
+  font-size: 22px;
+  font-size: 2.2rem;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  padding-top: 25px;
+  padding-bottom: 5px;
+}
+.breakpoint-phone-wide .copy > blockquote,
+.breakpoint-phone-wide .copy > .section--normal > blockquote {
+  font-size: 20px;
+  font-size: 2rem;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+.breakpoint-phone .copy > blockquote,
+.breakpoint-phone .copy > .section--normal > blockquote {
+  font-size: 18px;
+  font-size: 1.8rem;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 0;
 }
 
 .copy hr {

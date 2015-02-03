@@ -1,0 +1,39 @@
+- if mp3_url.present? || ogg_url.present?
+  .figure.figure__audio class=display_class
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true data-audio-player-duration=asset.file_meta["duration"]
+      .audio-player__load format-load-position="loadProgress"
+      .audio-player__track format-track-position="trackPosition"
+      .audio-player__inner
+        .audio-player__metadata
+          .audio-player__listen Listen
+          .audio-player__duration format-duration="duration" data-visible="metaDataLoaded"
+          .audio-player__playing data-visible="playing"
+            .audio-player__faker
+              .audio-player__faker-bar.audio-player__faker-bar--one format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--two format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--three format-faker-bar="currentTime"
+              .audio-player__faker-bar.audio-player__faker-bar--four format-faker-bar="currentTime"
+            .audio-player__play-time format-duration="currentTime"
+        .audio-player__header
+          h3.audio-player__title = title
+        .audio-player__controls
+          button.audio-player__play on-click="onPlayClick" data-hidden="playing"
+            i.fa.fa-play.audio-player__play-icon
+          button.audio-player__pause on-click="onPauseClick" data-visible="playing"
+            i.fa.fa-pause.audio-player__pause-icon
+      .audio-player__handle format-handle-position="trackPosition"
+        .audio-player__handle-nub
+      audio preload="metadata"
+        - if mp3_url.present?
+          source src="#{mp3_url}?#{Time.now.to_i}" type="audio/mpeg"
+        - if ogg_url.present?
+          / source src=ogg_url type="audio/ogg"
+    - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
+      .figure__caption.caption.copy
+        p
+          - if data[:caption].present?
+            = data[:caption]
+            - if (data[:caption].present? && asset.attribution.present? && data[:show_attribution] == true)
+              '  —
+          - if asset.attribution.present? && data[:show_attribution] == true
+            = asset.attribution

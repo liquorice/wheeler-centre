@@ -41,4 +41,5 @@ public/assets/*
 # Ignore .pem files
 *.pem
 lib/video_migration/client_secrets.json
-lib/video_migration/credentials_file.json
+lib/video_migration/credentials_youtube.json
+lib/video_migration/credentials_youtube.upload.json

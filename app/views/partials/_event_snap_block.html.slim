@@ -2,16 +2,15 @@
 - hide_summary = hide_summary || false
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
-- elsif post.fields[:promo_image].data_present?
-  - image = post.fields[:promo_image].asset
-- else
-  - image = Heracles::Asset.all.sample(1).first
+- elsif post.promo_image
+  - image = post.promo_image
 
 .snap--block
   a.event-snap.event-snap--block href=post.absolute_url
-    time.event-snap__date
-      = l post.created_at, format: :medium_date
-    - if true || post.fields[:promo_image].data_present?
+    - if post.fields[:start_date].data_present?
+      time.event-snap__date
+        = l post.fields[:start_date].value, format: :medium_date
+    - if image
       .event-snap__hero
         - if show_type
           span.event-snap__hero-type Past event
@@ -32,5 +31,5 @@
           = selected_primary_topics.first.title
     - if post.fields[:presenters].data_present?
       p.event-snap__authors
-        ' By
+        ' With
         = post.fields[:presenters].pages.map(&:title).to_sentence

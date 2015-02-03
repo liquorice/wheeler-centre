@@ -34,6 +34,7 @@ gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"
 gem "truncate_html"
+gem "sanitize"
 
 # Integrations
 gem "bugsnag"
@@ -44,14 +45,16 @@ gem "react-rails"
 gem "sass-rails", "~> 4.0.2"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
+gem "fastly-rails"
 
 # Rails assets
 gem "rails-assets-jquery"
 gem "rails-assets-jquery-ujs-standalone"
 gem "rails-assets-viewloader"
+gem "embedly"
 
 # Application
-# ...
+gem "iso8601"
 
 # Utilities
 gem "ffaker"

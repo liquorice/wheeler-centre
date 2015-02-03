@@ -9,7 +9,7 @@
 = area :main do
   .topic-page
     .topic-page__header
-      .topic-page__nav data-view-touch-preview="topic-page__nav--hover"
+      .topic-page__nav data-view-touch-preview={previewClassName: "topic-page__nav--hover"}.to_json
         p.topic-page__nav-label
           ' View topics
           i.fa.fa-angle-down
@@ -28,7 +28,7 @@
       .topic-page__latest.column-wrapper
         h2.blog-index__latest-header Latest
         .column-wide.clearfix
-          .blog-snap__group.clearfix
+          .blog-snap__group.blog-snap__group--topic-page-latest.clearfix
             .blog-snap-halves.blog-snap-halves--1
               - latest_pages[0..0].each do |post|
                 - if post.page_type == "blog_post"

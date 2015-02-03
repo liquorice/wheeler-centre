@@ -4,14 +4,12 @@
   - image = post.fields[:thumbnail_image].asset
 - elsif post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
-- elsif rand(3) > 0
-  - image = Heracles::Asset.all.sample(1).first
 
 .snap--block
   a.blog-snap.blog-snap--block href=post.absolute_url
     time.blog-snap__date
       = l post.created_at, format: :medium_date
-    - if image
+    - unless image.blank?
       .blog-snap__hero
         - if show_type
           span.blog-snap__hero-type Writing
@@ -35,7 +33,12 @@
           ' By
         = post.fields[:authors].pages.map(&:title).to_sentence
     / Show text if no image
-    - unless image
+    - if image.blank?
+      - summary = ""
+      - if post.fields[:summary].data_present?
+        - summary = post.fields[:summary]
+      - else
+        - summary = post.fields[:body]
       .blog-snap--block__summary
         .blog-snap--block__summary-inner.copy
-          = force_excerptify_html render_content(post.fields["summary"]), 300, "p i em strong br"
+          = force_excerptify_html render_content(summary), 300, "p i em strong br"

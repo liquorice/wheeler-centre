@@ -4,8 +4,19 @@
   font-size: 1.4rem;
   font-size: 14px;
 }
+.breakpoint-tablet .caption,
+.breakpoint-phone-wide .caption,
+.breakpoint-phone .caption {
+  font-size: 1.3rem;
+  font-size: 13px;
+}
+.caption p:last-child {
+  margin-bottom: -5px;
+}
 
-.figure {}
+.figure {
+  clear: both;
+}
 
   .figure img {
     width: 100%;

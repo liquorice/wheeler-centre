@@ -46,7 +46,7 @@ site.transloadit_params = {
       "width" => 480,
       "height" => 720,
       "quality" => 75,
-      "zoom" => false,
+      "zoom" => true,
       "strip" => true
     },
     "content_small" => {
@@ -59,7 +59,7 @@ site.transloadit_params = {
       "width" => 960,
       "height" => 960,
       "quality" => 75,
-      "zoom" => false,
+      "zoom" => true,
       "strip" => true
     },
     "content_medium" => {
@@ -124,6 +124,21 @@ site.transloadit_params = {
       "robot" => "/image/optimize",
       "use" => ["content_small_thumbnail_resized"]
     },
+    "itunes_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 1400,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true
+    },
+    "itunes" => {
+      "robot" => "/image/optimize",
+      "use" => ["itunes_resized"]
+    },
     "audio_mp3" => {
       "robot" => "/audio/encode",
       "use" => ":original",
@@ -153,25 +168,30 @@ site.transloadit_params = {
         "content_small_thumbnail",
         "content_medium_thumbnail",
         "content_large_thumbnail",
+        "itunes",
         "audio_mp3",
         "audio_ogg",
         "video_ipad_high",
         "video_iphone_high"
       ]
-    },
-    "store_youtube" => {
-      "robot" => "/youtube/store",
-      "use" => [":original"],
-      "username" => "",
-      "password" => "",
-      "title" => "${file.name}",
-      "description" => "${file.name} description",
-      "category" => "People & Blogs",
-      "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
-      "visibility" => "private"
     }
   }
 }
+
+# This template is needs to be set _in_ Transloadit for some reason
+# additional_template = {
+#   "store_youtube" => {
+#     "robot" => "/youtube/store",
+#     "use" => [":original"],
+#     "username" => "",
+#     "password" => "",
+#     "title" => "${file.name}",
+#     "description" => "${file.name} description",
+#     "category" => "People & Blogs",
+#     "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
+#     "visibility" => "private"
+#   }
+# }
 site.save!
 
 # Make an admin user for Jon
@@ -229,7 +249,7 @@ events_series_index.page_order_position = :last if events_series_index.new_recor
 events_series_index.save!
 
 # Events -> Event series index -> Event series collection
-event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-series")
+event_series_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/series/all-event-series")
 event_series_collection.parent = events_series_index
 event_series_collection.site = site
 event_series_collection.title = "All Event Series"
@@ -243,7 +263,7 @@ event_series_collection.page_order_position = :last if event_series_collection.n
 event_series_collection.save!
 
 # Events -> Presenters
-presenters = Heracles::Sites::WheelerCentre::Presenters.find_or_initialize_by(url: "events/venues")
+presenters = Heracles::Sites::WheelerCentre::Presenters.find_or_initialize_by(url: "events/presenters")
 presenters.site = site
 presenters.parent = events_index
 presenters.title = "Presenters"
@@ -265,7 +285,7 @@ venues_index.page_order_position = :last if venues_index.new_record?
 venues_index.save!
 
 # Events -> Venues index -> Venues collection
-venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/all-event-venues")
+venues_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "events/venues/all-event-venues")
 venues_collection.parent = venues_index
 venues_collection.site = site
 venues_collection.title = "All Venues"
@@ -316,7 +336,7 @@ guests.save!
 
 # Broadcasts index page
 # ------------------------------------------------------------------------------
-broadcasts_index = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "broadcasts")
+broadcasts_index = Heracles::Sites::WheelerCentre::Broadcasts.find_or_initialize_by(url: "broadcasts")
 broadcasts_index.site = site
 broadcasts_index.title = "Broadcasts"
 broadcasts_index.slug = "broadcasts"
@@ -340,7 +360,7 @@ recordings_collection.page_order_position = :last if recordings_collection.new_r
 recordings_collection.save!
 
 # Broadcasts -> Podcasts
-podcasts = Heracles::Sites::WheelerCentre::Podcasts.find_or_initialize_by(url: "podcasts")
+podcasts = Heracles::Sites::WheelerCentre::Podcasts.find_or_initialize_by(url: "broadcasts/podcasts")
 podcasts.site = site
 podcasts.parent = broadcasts_index
 podcasts.title = "Podcasts"
@@ -349,6 +369,21 @@ podcasts.published = true
 podcasts.locked = true
 podcasts.page_order_position = :last if podcasts.new_record?
 podcasts.save!
+
+# Create the default "Wheeler Centre" podcast structure
+params = {
+  parent: podcasts,
+  page_order_position: :last,
+  published: true,
+  slug: "the-wheeler-centre",
+  title: "The Wheeler Centre",
+  created_at: Time.now
+}
+wheeler_podcast = Heracles::Page.find_by_url("broadcasts/podcasts/#{params[:slug]}")
+unless wheeler_podcast
+  result = Heracles::CreatePage.call(site: site, page_type: "podcast_series", page_params: params)
+  wheeler_podcast = result.page
+end
 
 # People page
 # ------------------------------------------------------------------------------
@@ -607,7 +642,7 @@ def build_topic_page(topic, parent, site)
   # puts "*************"
   # puts topic[:name]
   # puts slug
-  page = Heracles::Sites::WheelerCentre::Topic.find_or_initialize_by(url: "#{parent.absolute_url}/#{slug}")
+  page = Heracles::Sites::WheelerCentre::Topic.find_or_initialize_by(url: "#{parent.absolute_url.gsub(/^\//, "")}/#{slug}")
   page.site = site
   page.slug = slug
   page.parent = parent
@@ -621,6 +656,9 @@ def build_topic_page(topic, parent, site)
     end
   end
 end
+
+# Delete all topic pages
+# Heracles::Page.of_type("topic").delete_all
 
 topic_names.each do |topic|
   build_topic_page(topic, topics, site)
@@ -639,7 +677,7 @@ about_us.page_order_position = :last if about_us.new_record? if about_us.new_rec
 about_us.save!
 
 # About us -> Who we are
-who = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "who-we-are")
+who = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/who-we-are")
 who.site = site
 who.parent = about_us
 who.title = "Who we are"
@@ -650,7 +688,7 @@ who.page_order_position = :last if who.new_record?
 who.save!
 
 # About us -> Who funds us
-funds = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "who-funds-us")
+funds = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/who-funds-us")
 funds.site = site
 funds.parent = about_us
 funds.title = "Who funds us"
@@ -661,7 +699,7 @@ funds.page_order_position = :last if funds.new_record?
 funds.save!
 
 # About us -> Who funds us -> Support us
-support_us = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "support-us")
+support_us = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/who-funds-us/support-us")
 support_us.site = site
 support_us.parent = funds
 support_us.title = "Support us"
@@ -672,7 +710,7 @@ support_us.page_order_position = :last if support_us.new_record?
 support_us.save!
 
 # About us -> Who funds us -> Sponsors
-sponsors = Heracles::Sites::WheelerCentre::Sponsors.find_or_initialize_by(url: "sponsors")
+sponsors = Heracles::Sites::WheelerCentre::Sponsors.find_or_initialize_by(url: "about-us/who-funds-us/sponsors")
 sponsors.site = site
 sponsors.parent = funds
 sponsors.title = "Sponsors"
@@ -683,7 +721,7 @@ sponsors.page_order_position = :last if sponsors.new_record?
 sponsors.save!
 
 # About us -> Who funds us -> Sponsors -> Sponsors collection
-sponsors_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "sponsors/all-sponsors")
+sponsors_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "about-us/who-funds-us/sponsors/all-sponsors")
 sponsors_collection.parent = sponsors
 sponsors_collection.site = site
 sponsors_collection.title = "All sponsors"
@@ -697,7 +735,7 @@ sponsors_collection.page_order_position = :last if sponsors_collection.new_recor
 sponsors_collection.save!
 
 # About us -> Residents
-residents = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "resident-organisations")
+residents = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/resident-organisations")
 residents.site = site
 residents.parent = about_us
 residents.title = "Resident organisations"
@@ -708,7 +746,7 @@ residents.page_order_position = :last if residents.new_record?
 residents.save!
 
 # About us -> Ticketing
-ticketing = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "ticketing")
+ticketing = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/ticketing")
 ticketing.site = site
 ticketing.parent = about_us
 ticketing.title = "Ticketing"
@@ -719,7 +757,7 @@ ticketing.page_order_position = :last if ticketing.new_record?
 ticketing.save!
 
 # About us -> FAQs
-faqs = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "faqs")
+faqs = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/faqs")
 faqs.site = site
 faqs.parent = about_us
 faqs.title = "FAQs"
@@ -730,7 +768,7 @@ faqs.page_order_position = :last if faqs.new_record?
 faqs.save!
 
 # About us -> Privacy policy
-privacy = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "privacy")
+privacy = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/privacy")
 privacy.site = site
 privacy.parent = about_us
 privacy.title = "Privacy policy"
@@ -741,7 +779,7 @@ privacy.page_order_position = :last if privacy.new_record?
 privacy.save!
 
 # About us -> Community guidelines
-community_guidelines = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "community-guidelines")
+community_guidelines = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "about-us/community-guidelines")
 community_guidelines.site = site
 community_guidelines.parent = about_us
 community_guidelines.title = "Community guidelines"
@@ -750,3 +788,224 @@ community_guidelines.published = true
 community_guidelines.locked = false
 community_guidelines.page_order_position = :last if community_guidelines.new_record?
 community_guidelines.save!
+
+# Settings
+# ------------------------------------------------------------------------------
+
+# Hidden settings page
+settings = Heracles::Sites::WheelerCentre::Settings.find_or_initialize_by(url: "settings")
+settings.site = site
+settings.title = "Settings"
+settings.slug = "settings"
+settings.published = true
+settings.hidden = true
+settings.locked = true
+settings.page_order_position = :last if settings.new_record?
+settings.save!
+
+itunes_categories = {
+  name: "Arts",
+  children: [
+    { name: "Design" },
+    { name: "Fashion & Beauty" },
+    { name: "Food" },
+    { name: "Literature" },
+    { name: "Performing Arts" },
+    { name: "Spoken Word" },
+    { name: "Visual Arts" },
+  ]
+},
+{
+  name: "Business",
+  children: [
+    { name: "Business News" },
+    { name: "Careers" },
+    { name: "Investing" },
+    { name: "Management & Marketing" },
+    { name: "Shopping" },
+  ]
+},
+{
+  name: "Comedy"
+},
+{
+  name: "Education",
+  children: [
+    { name: "Educational Technology" },
+    { name: "Higher Education" },
+    { name: "K-12" },
+    { name: "Language Courses" },
+    { name: "Training" },
+  ]
+},
+{
+  name: "Games & Hobbies",
+  children: [
+    { name: "Automotive" },
+    { name: "Aviation" },
+    { name: "Hobbies" },
+    { name: "Other Games" },
+    { name: "Video Games" },
+  ]
+},
+{
+  name: "Government & Organizations",
+  children: [
+    { name: "Local" },
+    { name: "National" },
+    { name: "Non-Profit" },
+    { name: "Regional" },
+  ]
+},
+{
+  name: "Health",
+  children: [
+    { name: "Alternative Health" },
+    { name: "Fitness & Nutrition" },
+    { name: "Self-Help" },
+    { name: "Sexuality" },
+    { name: "Kids & Family" },
+  ]
+},
+{
+  name: "Music",
+  children: [
+    { name: "Alternative" },
+    { name: "Blues" },
+    { name: "Country" },
+    { name: "Easy Listening" },
+    {
+      name: "Electronic",
+      children: [
+        { name: "Acid House" },
+        { name: "Ambient" },
+        { name: "Big Beat" },
+        { name: "Breakbeat" },
+        { name: "Disco" },
+        { name: "Downtempo" },
+        { name: "Drum 'n' Bass" },
+        { name: "Garage" },
+        { name: "Hard House" },
+        { name: "House" },
+        { name: "IDM" },
+        { name: "Jungle" },
+        { name: "Progressive" },
+        { name: "Techno" },
+        { name: "Trance" },
+        { name: "Tribal" },
+        { name: "Trip Hop" },
+      ]
+    },
+    { name: "Folk" },
+    { name: "Freeform" },
+    { name: "Hip-Hop & Rap" },
+    { name: "Inspirational" },
+    { name: "Jazz" },
+    { name: "Latin" },
+    { name: "Metal" },
+    { name: "New Age" },
+    { name: "Oldies" },
+    { name: "Pop" },
+    { name: "R&B & Urban" },
+    { name: "Reggae" },
+    { name: "Rock" },
+    { name: "Seasonal & Holiday" },
+    { name: "Soundtracks" },
+    { name: "World" },
+  ]
+},
+{
+  name: "News & Politics",
+  children: [
+    { name: "Conservative (Right)" },
+    { name: "Liberal (Left)" },
+  ]
+},
+{
+  name: "Religion & Spirituality",
+  children: [
+    { name: "Buddhism" },
+    { name: "Christianity" },
+    { name: "Hinduism" },
+    { name: "Islam" },
+    { name: "Judaism" },
+    { name: "Other" },
+    { name: "Spirituality" },
+  ]
+},
+{
+  name: "Science & Medicine",
+  children: [
+    { name: "Medicine" },
+    { name: "Natural Sciences" },
+    { name: "Social Sciences" },
+  ]
+},
+{
+  name: "Society & Culture",
+  children: [
+    { name: "Gay & Lesbian" },
+    { name: "History" },
+    { name: "Personal Journals" },
+    { name: "Philosophy" },
+    { name: "Places & Travel" },
+  ]
+},
+{
+  name: "Sports & Recreation",
+  children: [
+    { name: "Amateur" },
+    { name: "College & High School" },
+    { name: "Outdoor" },
+    { name: "Professional" },
+  ]
+},
+{
+  name: "TV & Film",
+  children: [
+  ]
+},
+{
+  name: "Technology",
+  children: [
+    { name: "Gadgets" },
+    { name: "IT News" },
+    { name: "Podcasting" },
+    { name: "Software How-To" },
+  ]
+}
+
+def build_itunes_category_page(category, parent, site)
+  slug = slugify(category[:name])
+  # puts "*************"
+  # puts category[:name]
+  # puts slug
+  page = Heracles::Sites::WheelerCentre::ItunesCategory.find_or_initialize_by(url: "#{parent.absolute_url.gsub(/^\//, "")}/#{slug}")
+  page.site = site
+  page.slug = slug
+  page.parent = parent
+  page.title = category[:name]
+  page.published = true
+  page.page_order_position = :last if page.new_record? if page.new_record?
+  page.save!
+  if category[:children].present?
+    category[:children].each do |child|
+      build_itunes_category_page(child, page, site)
+    end
+  end
+end
+
+
+itunes_category_index = Heracles::Sites::WheelerCentre::Placeholder.find_or_initialize_by(url: "settings/itunes-categories")
+itunes_category_index.site = site
+itunes_category_index.parent = settings
+itunes_category_index.title = "iTunes categories"
+itunes_category_index.slug = "itunes-categories"
+itunes_category_index.published = true
+itunes_category_index.hidden = true
+itunes_category_index.page_order_position = :last if itunes_category_index.new_record?
+itunes_category_index.save!
+
+itunes_categories.each do |category|
+  build_itunes_category_page(category, itunes_category_index, site)
+end

@@ -41,6 +41,8 @@ button,
 input,
 select,
 textarea {
+border: none;
+background: transparent;
 font-size: 100%; /* 1 */
 font-family:inherit; /* 1 */
 margin: 0; /* 2 */
