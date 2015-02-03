@@ -2229,10 +2229,67 @@ namespace :wheeler_centre do
       work_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["review"], subject: blueprint_work)
       work_page.fields[:further_reading].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["links"], subject: blueprint_work)
       # Author
-      author = Heracles::Sites::WheelerCentre::Person.find_by_title(blueprint_work["title"])
+      author = Heracles::Sites::WheelerCentre::Person.find_by_title(blueprint_work["author"])
       if author
         work_page.fields[:author].page_ids = [author.id]
       end
+      work_page.page_order_position = :last
+      work_page.save!
+    end
+
+  end
+
+  desc "Import blueprint legacy Long View pages"
+  task :import_blueprint_long_view, [:yml_file] => :environment do |task, args|
+    require "yaml"
+    require "blueprint_shims"
+    require "blueprint_import/bluedown_formatter"
+
+    backup_data = File.read(args[:yml_file])
+    blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+
+    # Find or initialise the Projects page
+    projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+    projects.site = site
+    projects.title = "Projects"
+    projects.slug = "projects"
+    projects.published = true
+    projects.save!
+
+    # Find or initialise the Fellowships page
+    blueprint_page = blueprint_records.find {|r| r["slug"] == "projects/the-long-view" }
+    long_view_page = Heracles::Sites::WheelerCentre::LongView.find_or_initialize_by(url: "projects/the-long-view")
+    long_view_page.site = site
+    long_view_page.title = blueprint_page["title"]
+    long_view_page.slug = "the-long-view"
+    long_view_page.published = blueprint_page["publish_on"].present?
+    long_view_page.parent = projects
+    long_view_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+    long_view_page.save!
+
+    blueprint_works = blueprint_records.select { |r| r.class == LegacyBlueprint::CenplaBook && r["page_id"] == blueprint_page["id"]}
+    blueprint_works.each do |blueprint_work|
+      work_page = Heracles::Sites::WheelerCentre::LongViewReview.find_or_initialize_by(url: "projects/the-long-view/#{blueprint_work['slug']}")
+      work_page.site = site
+      work_page.title = blueprint_work["title"]
+      work_page.slug = blueprint_work["slug"]
+      work_page.published = blueprint_work["publish_on"].present?
+      work_page.parent = long_view_page
+      # Cover
+      asset = Heracles::Asset.find_by_blueprint_id(blueprint_work["cover_image_id"])
+      if asset
+        work_page.fields[:promo_image].asset_id = asset.id
+      end
+      # Content
+      work_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["review"], subject: blueprint_work)
+      work_page.fields[:further_reading].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_work["links"], subject: blueprint_work)
+      # Author
+      author = Heracles::Sites::WheelerCentre::Person.find_by_title(blueprint_work["author"])
+      if author
+        work_page.fields[:author].page_ids = [author.id]
+      end
+      work_page.page_order_position = :last
       work_page.save!
     end
 
