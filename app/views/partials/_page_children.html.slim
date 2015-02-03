@@ -1,7 +1,7 @@
 - level = level || 1
 ul.sub-page-nav class="sub-page-nav--level-#{level}"
-  - if parent.children.any?
-    - parent.children.each do |child|
+  - if parent.children.visible.published.any?
+    - parent.children.in_order.visible.published.each do |child|
       li.sub-page-nav__item class=((child.id == current.id) ? "active" : "")
         a.sub-page-nav__anchor href=child.absolute_url
           = child.title

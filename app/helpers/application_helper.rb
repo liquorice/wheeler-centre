@@ -90,7 +90,7 @@ module ApplicationHelper
   end
 
   def primary_topics
-    topics_page.children.visible.published.of_type("topic")
+    topics_page.children.in_order.visible.published.of_type("topic")
   end
 
   # Return an array of all the primary topics for a given `page`
@@ -125,7 +125,7 @@ module ApplicationHelper
   end
 
   def projects_for_navigation
-    projects_page.children.visible.published
+    projects_page.children.in_order.visible.published
   end
 
   # Events

@@ -14,7 +14,7 @@ module Heracles
         ### Accessors
 
         def primary_topics
-          children.visible.published.of_type("topic")
+          children.in_order.visible.published.of_type("topic")
         end
       end
     end
