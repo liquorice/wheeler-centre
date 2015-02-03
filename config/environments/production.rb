@@ -56,7 +56,7 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
-  config.action_controller.asset_host = ENV['ASSET_HOST_PRODUCTION']
+  #config.action_controller.asset_host = ENV['ASSET_HOST_PRODUCTION']
   config.static_cache_control = "public, max-age=#{1.year.to_i}"
 
   # Precompile additional assets.
