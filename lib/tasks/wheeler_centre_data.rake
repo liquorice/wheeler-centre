@@ -1560,8 +1560,12 @@ namespace :wheeler_centre do
     end
   end
 
+  # Usage
+  # rake wheeler_centre:create_video_assets["backup-data.yml"]
+  # Optional flag to create yaml file of the results for each Recording:
+  # rake wheeler_centre:create_video_assets["backup-data.yml","true"]
   desc "Create video asset records"
-  task :create_video_assets, [:yml_file] => :environment do |task, args|
+  task :create_video_assets, [:yml_file, :create_recordings_assocications] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "video_migration/s3_util"
@@ -1585,6 +1589,8 @@ namespace :wheeler_centre do
         end
         audio_file_name = find_audio_encode(messages)
         video_file_name = find_video_encode(messages)
+        audio_file_size = find_audio_encode_size(messages)
+        video_file_size = find_video_encode_size(messages)
       else
         puts("Single notification")
         # Handle these notifications differently
@@ -1596,108 +1602,122 @@ namespace :wheeler_centre do
             audio_file_name = File.basename(audio_file_url)
             video_file_url = message["outputs"][1]["url"]
             video_file_name = File.basename(video_file_url)
+
+            audio_file_size = if message["outputs"][0]["file_size_in_bytes"] then message["outputs"][0]["file_size_in_bytes"] else 0 end
+            video_file_size = if message["outputs"][1]["file_size_in_bytes"] then message["outputs"][1]["file_size_in_bytes"] else 0 end
+
+            audio_bitrate = if message["outputs"][0]["audio_bitrate_in_kbps"] then message["outputs"][0]["audio_bitrate_in_kbps"] * 1000 end
+            audio_bitrate_overall = if message["outputs"][0]["total_bitrate_in_kbps"] then message["outputs"][0]["total_bitrate_in_kbps"] * 1000 end
+
+            video_bitrate = if message["outputs"][1]["video_bitrate_in_kbps"] then message["outputs"][1]["video_bitrate_in_kbps"] * 1000 end
+            video_bitrate_overall = if message["outputs"][1]["total_bitrate_in_kbps"] then message["outputs"][1]["total_bitrate_in_kbps"] * 1000 end
+            video_audio_bitrate = if message["outputs"][1]["audio_bitrate_in_kbps"] then message["outputs"][1]["audio_bitrate_in_kbps"] * 1000 end
+
+            # Additional metadata only exists for the newer format of notifications.
+            audio_meta = {
+              :duration => message["outputs"][0]["duration_in_ms"],
+              :audio_bitrate => audio_bitrate,
+              :overall_bitrate => audio_bitrate_overall,
+              :audio_samplerate => message["outputs"][0]["audio_sample_rate"],
+              :audio_channels => 2,
+              :audio_codec => "mp3",
+            }
+
+            video_meta = {
+              :duration => message["outputs"][1]["duration_in_ms"],
+              :width => message["outputs"][1]["width"],
+              :height => message["outputs"][1]["height"],
+              :framerate => message["outputs"][1]["frame_rate"],
+              :video_bitrate => video_bitrate,
+              :overall_bitrate => video_bitrate_overall,
+              :video_codec => message["outputs"][1]["video_codec"],
+              :audio_bitrate => video_audio_bitrate,
+              :audio_samplerate => message["outputs"][1]["audio_sample_rate"],
+              :audio_channels => message["outputs"][1]["channels"],
+              :audio_codec => message["outputs"][1]["audio_codec"],
+              :date_file_created => message["job"]["created_at"],
+            }
           end
-
-          # Additional metadata only exists for the newer format of notifications.
-          audio_meta = {
-            :duration => message["outputs"][0]["duration_in_ms"],
-            :audio_bitrate => message["outputs"][0]["audio_bitrate_in_kbps"] * 1000,
-            :overall_bitrate => message["outputs"][0]["total_bitrate_in_kbps"] * 1000,
-            :audio_samplerate => message["outputs"][0]["audio_sample_rate"],
-            :audio_channels => 2,
-            :audio_codec => "mp3",
-          }
-
-          video_meta = {
-            :duration => message["outputs"][1]["duration_in_ms"],
-            :width => message["outputs"][1]["width"],
-            :height => message["outputs"][1]["height"],
-            :framerate => message["outputs"][1]["frame_rate"],
-            :video_bitrate => message["outputs"][1]["video_bitrate_in_kbps"] * 1000,
-            :overall_bitrate => message["outputs"][1]["total_bitrate_in_kbps"] * 1000,
-            :video_codec => message["outputs"][1]["video_codec"],
-            :audio_bitrate => message["outputs"][1]["audio_bitrate_in_kbps"] * 1000,
-            :audio_samplerate => message["outputs"][1]["audio_sample_rate"],
-            :audio_channels => message["outputs"][1]["channels"],
-            :audio_codec => message["outputs"][1]["audio_codec"],
-            :date_file_created => message["job"]["created_at"],
-          }
         end
       end
 
       puts (audio_file_name)
       puts (video_file_name)
 
-      # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
-      # if audio_file_name && video_file_name
-      #   audio_video_encode = {
-      #     "recording_id" => recording.fields[:recording_id].value,
-      #     "uuid" => uuid,
-      #     "audio_encode_url" => "http://download.wheelercentre.com/#{audio_file_name}",
-      #     "video_encode_url" => "http://download.wheelercentre.com/#{video_file_name}"
-      #   }
+      if audio_file_name && video_file_name
 
-      #   File.open("audio_video_encodes.yml", "a", 0600) do |file|
-      #     file << audio_video_encode.to_yaml
-      #   end
-      # end
-
-      results = {
-        :audio_mp3 => {
-          :basename => File.basename(audio_file_name, ".mp3"),
-          :ext => File.extname(audio_file_name),
-          :field => "file",
-          :mime => "audio/mpeg",
-          :meta => audio_meta,
-          :name => audio_file_name,
-          :original_basename => File.basename(audio_file_name, ".mp3"),
-          :size => File.size(audio_file_name),
-          :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{audio_file_name}",
-          :type => "audio",
-          :url => "http://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{audio_file_name}"
-        },
-        :video_mp4 => {
-          :basename => File.basename(video_file_name, ".mp4"),
-          :ext => File.extname(video_file_name),
-          :field => "file",
-          :meta => video_meta,
-          :mime => "video/mp4",
-          :name => video_file_name,
-          :original_basename => File.basename(video_file_name, ".mp4"),
-          :size => File.size(video_file_name),
-          :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{video_file_name}",
-          :type => "video",
-          :url => "http://wheeler-centre-heracles.s3.amazonaws.com/wheeler-centre/assets/#{video_file_name}",
+        results = {
+          :audio_mp3 => {
+            :basename => File.basename(audio_file_name, ".mp3"),
+            :ext => File.extname(audio_file_name),
+            :field => "file",
+            :mime => "audio/mpeg",
+            :meta => audio_meta,
+            :name => audio_file_name,
+            :original_basename => File.basename(audio_file_name, ".mp3"),
+            :size => audio_file_size,
+            :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/#{audio_file_name}",
+            :type => "audio",
+            :url => "http://wheeler-centre-heracles.s3.amazonaws.com/#{audio_file_name}"
+          },
+          :video_mp4 => {
+            :basename => File.basename(video_file_name, ".mp4"),
+            :ext => File.extname(video_file_name),
+            :field => "file",
+            :meta => video_meta,
+            :mime => "video/mp4",
+            :name => video_file_name,
+            :original_basename => File.basename(video_file_name, ".mp4"),
+            :size => video_file_size,
+            :ssl_url => "https://wheeler-centre-heracles.s3.amazonaws.com/#{video_file_name}",
+            :type => "video",
+            :url => "http://wheeler-centre-heracles.s3.amazonaws.com/#{video_file_name}",
+          }
         }
-      }
 
-      results[:original] = results[:video_mp4]
+        results[:original] = results[:video_mp4]
 
-      asset_attrs =  {
-        :recording_id => recording.fields[:recording_id].value,
-        :file_name => video_file_name,
-        :file_basename => File.basename(video_file_name),
-        :file_ext => File.extname(video_file_name),
-        :file_size =>File.size(video_file_name),
-        :file_mime =>"video/mp4",
-        :file_type =>"video",
-        :assembly_id =>"video_migration",
-        :assembly_url => "http://www.video_migration.com",
-        :upload_duration => 0,
-        :execution_duration => 0,
-        :assembly_message =>"The assembly was successfully completed.",
-        :blueprint_guid => uuid,
-        :created_at => Time.now,
-        :results => results,
-        :title => recording.title,
-        :site_id => Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-      }
+        asset_attrs =  {
+          :recording_id => recording.fields[:recording_id].value,
+          :file_name => video_file_name,
+          :file_basename => File.basename(video_file_name),
+          :file_ext => File.extname(video_file_name),
+          :file_size => video_file_size,
+          :file_mime => "video/mp4",
+          :file_type => "video",
+          :assembly_id => "video_migration",
+          :assembly_url => "http://www.video_migration.com",
+          :upload_duration => 0,
+          :execution_duration => 0,
+          :assembly_message =>"The assembly was successfully completed.",
+          :blueprint_guid => uuid,
+          :created_at => Time.now,
+          :results => results,
+          :title => recording.title,
+          :site_id => Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+        }
 
-      # Create the asset records!
-      unless Heracles::Asset.exists?(blueprint_id: recording.fields[:recording_id].value)
-        Heracles::Asset.create!(asset_attrs)
+        # Create the asset records!
+        unless Heracles::Asset.exists?(recording_id: recording.fields[:recording_id].value)
+          asset = Heracles::Asset.create!(asset_attrs)
+        end
+
+        if args[:create_recordings_assocications]
+          # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
+          audio_video_encode = {
+            "recording_id" => recording.fields[:recording_id].value,
+            "uuid" => uuid,
+            "audio_encode_url" => "http://download.wheelercentre.com/#{audio_file_name}",
+            "video_encode_url" => "http://download.wheelercentre.com/#{video_file_name}",
+            "asset_id" => asset.id
+          }
+
+          File.open("audio_video_encodes.yml", "a", 0600) do |file|
+            file << audio_video_encode.to_yaml
+          end
+        end
+
       end
-
     end
   end
 
@@ -1712,12 +1732,31 @@ namespace :wheeler_centre do
     end
   end
 
+  def find_audio_encode_size(messages)
+    encodes = find_audio_encodes(messages)
+    best_audio_encode = find_best_audio_encode(encodes)
+    if best_audio_encode && best_audio_encode["job"]["output_file"]["size"]
+      best_audio_encode["job"]["output_file"]["size"]
+    else
+      0
+    end
+  end
+
   def find_video_encode(messages)
     best_video_encode = find_best_video_encode(messages)
     if best_video_encode
       unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
         best_video_encode["job"]["output_file"]["filename"]
       end
+    end
+  end
+
+  def find_video_encode_size(messages)
+    best_video_encode = find_best_video_encode(messages)
+    if best_video_encode && best_video_encode["job"]["output_file"]["size"]
+      best_video_encode["job"]["output_file"]["size"]
+    else
+      0
     end
   end
 
