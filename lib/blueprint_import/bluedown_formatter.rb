@@ -191,6 +191,7 @@ module LegacyBlueprint
           # The data return by the embedly ruby library is slightly different to that of the
           # javascript one, so we do some mangling
           embedData[:provider_url]     = dump[:provider_url]
+          embedData[:provider_name]    = dump[:provider_name]
           embedData[:description]      = dump[:description]
           embedData[:title]            = dump[:title]
           embedData[:url]              = dump[:url]
