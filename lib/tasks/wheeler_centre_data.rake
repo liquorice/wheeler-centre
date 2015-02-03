@@ -1280,6 +1280,8 @@ namespace :wheeler_centre do
         authors = all_authors.select { |p| blueprint_daily["user_id"].present? && p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
         if authors.present?
           heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
+        else
+          heracles_blog_post.fields[:authors].page_ids = []
         end
 
         tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
