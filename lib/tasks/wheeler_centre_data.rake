@@ -2161,6 +2161,7 @@ namespace :wheeler_centre do
           heracles_book.fields[:reviewer].value = blueprint_vpla_book["reviewer"]
           heracles_book.fields[:library].value = blueprint_vpla_book["reviewer_library"]
           heracles_book.fields[:library_website].value = blueprint_vpla_book["reviewer_url"]
+          heracles_book.fields[:judges_report].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["judges_report"], subject: blueprint_vpla_book)
 
           category = heracles_categories.find {|c| c.slug == slugify(blueprint_vpla_book["category"])}
           if category
