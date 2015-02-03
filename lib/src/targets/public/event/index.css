@@ -526,6 +526,9 @@
         padding-left: 10px;
         padding-right: 10px;
       }
+      .event-calendar-event:not(:first-child) .event-calendar-event__date {
+        display: none;
+      }
 
       .event-calendar-event__series {
         padding-bottom: 4px;
