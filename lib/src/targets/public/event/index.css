@@ -366,3 +366,11 @@
       min-width: 20%;
       text-align: center;
     }
+
+
+/* Index */
+
+.event-index {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}

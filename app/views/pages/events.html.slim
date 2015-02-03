@@ -7,75 +7,78 @@
 
 = area :main do
   .page__content
-    .page__body.page__body--events.copy
-      = render_content page.fields[:body]
+    .page__body.page__body--events
+      .event-index
+        .page__intro.intro.event-index__intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:body]
 
-      / Output days of the week
-      .event-calendar__legend
-        - days_for_week(Date.today.beginning_of_week).each do |day|
-          .event-calendar__legend-day
-            = l day, format: :day_short_name
+        / Output days of the week
+        .event-calendar__legend
+          - days_for_week(Date.today.beginning_of_week).each do |day|
+            .event-calendar__legend-day
+              = l day, format: :day_short_name
 
-      / Group events by year
-      - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
-        .event-calendar__year
-          span = l(year, format: :year)
-          / Group events by month in year
-          - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
-            .event-calendar__month
-              span = l(month, format: :month_name)
-              / Group events by weeks in month
-              - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
-                .event-calendar__week
-                  span = l(week, format: :medium_date)
-                  / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
-                  / so that we can fill them with stuff
-                  - days_with_gap = 0
-                  / Iterate over every day in the week
-                  - days_for_week(week).each_with_index do |day, index|
-                    - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
-                    - if events_for_day.any?
-                      / We have some events! If there is a preceding gap, output the gap _before_ the event
-                      - if days_with_gap > 0
+        / Group events by year
+        - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
+          .event-calendar__year
+            span = l(year, format: :year)
+            / Group events by month in year
+            - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
+              .event-calendar__month
+                span = l(month, format: :month_name)
+                / Group events by weeks in month
+                - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
+                  .event-calendar__week
+                    span = l(week, format: :medium_date)
+                    / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
+                    / so that we can fill them with stuff
+                    - days_with_gap = 0
+                    / Iterate over every day in the week
+                    - days_for_week(week).each_with_index do |day, index|
+                      - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
+                      - if events_for_day.any?
+                        / We have some events! If there is a preceding gap, output the gap _before_ the event
+                        - if days_with_gap > 0
+                          .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
+                            ' Space for a block of
+                            = days_with_gap
+                            '  to fit
+                          / Reset gap to 0 to keep the iteration going
+                          - days_with_gap = 0
+                        / Output our found event/s
+                        .event-calendar__day
+                          span = l(day, format: :day_short_name)
+                          - events_for_day.each do |event|
+                            = render "partials/event_for_calendar", event: event
+                      - elsif index == 6
+                        / Increment the days_with_gap and, because it's the last item in a week
+                        / output the gap
+                        - days_with_gap += 1
                         .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
                           ' Space for a block of
                           = days_with_gap
                           '  to fit
-                        / Reset gap to 0 to keep the iteration going
-                        - days_with_gap = 0
-                      / Output our found event/s
-                      .event-calendar__day
-                        span = l(day, format: :day_short_name)
-                        - events_for_day.each do |event|
-                          = render "partials/event_for_calendar", event: event
-                    - elsif index == 6
-                      / Increment the days_with_gap and, because it's the last item in a week
-                      / output the gap
-                      - days_with_gap += 1
-                      .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
-                        ' Space for a block of
-                        = days_with_gap
-                        '  to fit
-                    - else
-                      / Increment the days_with_gap but output nothing
-                      - days_with_gap += 1
+                      - else
+                        / Increment the days_with_gap but output nothing
+                        - days_with_gap += 1
 
 
-      - if events.results.present?
-        .events
-          - events.results.each do |event|
-            - if event.fields[:promo_image].data_present?
-              .event__hero-image
-                img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
-            a href=event.absolute_url
-              h3.event__title
-                = event.title
-            p.event-widget__date
-              = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")
-          .pagination-context.pagination-context--bottom
-            ' Page
-            = (params[:page] || 1)
-            em &nbsp;of&nbsp;
-            = events.results.total_pages
-          .pagination-bottom
-            = paginate events.results, outer_window: 4
+        - if events.results.present?
+          .events
+            - events.results.each do |event|
+              - if event.fields[:promo_image].data_present?
+                .event__hero-image
+                  img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
+              a href=event.absolute_url
+                h3.event__title
+                  = event.title
+              p.event-widget__date
+                = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")
+            .pagination-context.pagination-context--bottom
+              ' Page
+              = (params[:page] || 1)
+              em &nbsp;of&nbsp;
+              = events.results.total_pages
+            .pagination-bottom
+              = paginate events.results, outer_window: 4
