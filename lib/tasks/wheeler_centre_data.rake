@@ -1766,6 +1766,8 @@ namespace :wheeler_centre do
         if id.present?
           blueprint_reviews = blueprint_records.select { |r| r.class == LegacyBlueprint::TumArticle && r["page_id"].to_i == id }
           blueprint_reviews.each do |blueprint_review|
+            blueprint_settings = blueprint_records.select { |r| r.class == LegacyBlueprint::Setting && r["configurable_id"] == blueprint_review["id"] && r["configurable_type"] == "TumPost"}
+
             heracles_review = Heracles::Page.find_by_slug(blueprint_review["slug"])
             unless heracles_review then heracles_review = Heracles::Page.new_for_site_and_page_type(site, "review") end
             heracles_review.published = blueprint_review["publish_on"].present?
@@ -1773,6 +1775,8 @@ namespace :wheeler_centre do
             heracles_review.title = blueprint_review["title"]
             heracles_review.created_at = Time.zone.parse(blueprint_review["created_on"].to_s)
             heracles_review.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_review["content"], subject: blueprint_review, assetify: false)
+            reviewer = blueprint_settings.find {|s| s["key"] == "Author Name"}
+            heracles_review.fields[:reviewer].value = reviewer["value"] if reviewer
             heracles_review.parent = heracles_page
             heracles_review.collection = reviews_collection
             heracles_review.save!
@@ -1785,9 +1789,10 @@ namespace :wheeler_centre do
             heracles_response.published = blueprint_response["publish_on"].present?
             heracles_response.slug = blueprint_response["slug"]
             # Trim the title to the first few words
-            heracles_response.title = blueprint_response["title"][0..30].gsub(/\s\w+\s*$/, '...')
+            body = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response, assetify: false)
+            heracles_response.title = "#{Sanitize.fragment(body, {:elements => []}).strip[0..50]}…"
             # Map the Blueprint fields to better-named fields in Heracles.
-            heracles_response.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response, assetify: false)
+            heracles_response.fields[:body].value = body
             # The author is stored in the content field
             heracles_response.fields[:author].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["content"], subject: blueprint_response, assetify: false)
             heracles_response.fields[:url].value = blueprint_response["url"]

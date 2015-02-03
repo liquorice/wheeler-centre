@@ -6,6 +6,7 @@ module Heracles
           {
             fields: [
               {name: :body, type: :content},
+              {name: :reviewer, type: :text}
             ]
           }
         end
