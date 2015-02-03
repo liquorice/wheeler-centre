@@ -7,7 +7,7 @@
   a.event-calendar-event__anchor href=event.absolute_url
     - if event.fields[:start_date].data_present?
       time.event-calendar-event__date
-        = l event.fields[:start_date].value, format: :medium_date
+        = l event.fields[:start_date].value, format: :day_short_name_and_date
     - if image
       .event-calendar-event__hero
         .event-calendar-event__hero-inner
