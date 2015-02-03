@@ -64,21 +64,21 @@
                           - days_with_gap += 1
 
 
-        - if events.results.present?
-          .events
-            - events.results.each do |event|
-              - if event.fields[:promo_image].data_present?
-                .event__hero-image
-                  img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
-              a href=event.absolute_url
-                h3.event__title
-                  = event.title
-              p.event-widget__date
-                = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")
-            .pagination-context.pagination-context--bottom
-              ' Page
-              = (params[:page] || 1)
-              em &nbsp;of&nbsp;
-              = events.results.total_pages
-            .pagination-bottom
-              = paginate events.results, outer_window: 4
+        / - if events.results.present?
+        /   .events
+        /     - events.results.each do |event|
+        /       - if event.fields[:promo_image].data_present?
+        /         .event__hero-image
+        /           img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
+        /       a href=event.absolute_url
+        /         h3.event__title
+        /           = event.title
+        /       p.event-widget__date
+        /         = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")
+        /     .pagination-context.pagination-context--bottom
+        /       ' Page
+        /       = (params[:page] || 1)
+        /       em &nbsp;of&nbsp;
+        /       = events.results.total_pages
+        /     .pagination-bottom
+        /       = paginate events.results, outer_window: 4
