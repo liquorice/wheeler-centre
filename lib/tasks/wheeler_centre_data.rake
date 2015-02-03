@@ -1571,12 +1571,11 @@ namespace :wheeler_centre do
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
     blueprint_notifications = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidNotification }
     recordings = Heracles::Page.of_type("recording")
-    s3 = S3Util.new(bucket_name: "video.wheelercentre.com", config_file: "/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml")
 
     recordings.each do |recording|
       uuid = find_recording_uuid(blueprint_video_posts, recording)
 
-      if recording.fields[:recording_id].value < 462
+      if recording.fields[:recording_id].value < 464
         puts ("Multiple notifications")
         notifications = find_recording_notifications(blueprint_notifications, uuid)
         messages = []
@@ -1592,14 +1591,14 @@ namespace :wheeler_centre do
         notification = find_recording_notification(blueprint_notifications, uuid)
         if notification.first
           message = YAML.load(notification.first["message"])
-          puts (message["outputs"])
-          audio_file_url = message["outputs"][0]["url"]
-          audio_file_name = File.basename(audio_file_url)
-          video_file_url = message["outputs"][1]["url"]
-          video_file_name = File.basename(video_file_url)
+          if message
+            audio_file_url = message["outputs"][0]["url"]
+            audio_file_name = File.basename(audio_file_url)
+            video_file_url = message["outputs"][1]["url"]
+            video_file_name = File.basename(video_file_url)
+          end
 
           # Additional metadata only exists for the newer format of notifications.
-
           audio_meta = {
             :duration => message["outputs"][0]["duration_in_ms"],
             :audio_bitrate => message["outputs"][0]["audio_bitrate_in_kbps"] * 1000,
@@ -1623,30 +1622,25 @@ namespace :wheeler_centre do
             :audio_codec => message["outputs"][1]["audio_codec"],
             :date_file_created => message["job"]["created_at"],
           }
-
         end
       end
 
       puts (audio_file_name)
       puts (video_file_name)
 
-      if audio_file_name
-        unless File.file?(audio_file_name)
-          exec("wget http://download.wheelercentre.com/#{audio_file_name}")
-        end
-        unless s3.find(audio_file_name)
-          s3.upload(audio_file_name)
-        end
-      end
+      # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
+      # if audio_file_name && video_file_name
+      #   audio_video_encode = {
+      #     "recording_id" => recording.fields[:recording_id].value,
+      #     "uuid" => uuid,
+      #     "audio_encode_url" => "http://download.wheelercentre.com/#{audio_file_name}",
+      #     "video_encode_url" => "http://download.wheelercentre.com/#{video_file_name}"
+      #   }
 
-      if video_file_name
-        unless File.file?(video_file_name)
-          exec("wget http://download.wheelercentre.com/#{video_file_name}")
-        end
-        unless s3.find(video_file_name)
-          s3.upload(video_file_name)
-        end
-      end
+      #   File.open("audio_video_encodes.yml", "a", 0600) do |file|
+      #     file << audio_video_encode.to_yaml
+      #   end
+      # end
 
       results = {
         :audio_mp3 => {
@@ -1712,14 +1706,18 @@ namespace :wheeler_centre do
     # Check whether any of the encodes is already an s3 file - if so we don't need to do anything.
     unless find_s3_url(encodes)
       best_audio_encode = find_best_audio_encode(encodes)
-      best_audio_encode["job"]["output_file"]["filename"]
+      if best_audio_encode
+        best_audio_encode["job"]["output_file"]["filename"]
+      end
     end
   end
 
   def find_video_encode(messages)
     best_video_encode = find_best_video_encode(messages)
-    unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
-      best_video_encode["job"]["output_file"]["filename"]
+    if best_video_encode
+      unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
+        best_video_encode["job"]["output_file"]["filename"]
+      end
     end
   end
 
