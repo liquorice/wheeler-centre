@@ -867,6 +867,7 @@ namespace :wheeler_centre do
         puts (user["id"])
         heracles_person.fields[:legacy_user_id].value = user["id"]
       end
+
       heracles_person.fields[:legacy_presenter_id].value = blueprint_presenter["id"]
       heracles_person.created_at = Time.zone.parse(blueprint_presenter["created_on"].to_s)
       heracles_person.parent = Heracles::Page.find_by_slug("people")
@@ -902,10 +903,10 @@ namespace :wheeler_centre do
       end
     end
 
+
     blueprint_staff.each do |blueprint_staff_member|
-      existing_heracles_person = Heracles::Sites::WheelerCentre::Person.find_by_slug(blueprint_staff_member["slug"])
-      unless existing_heracles_person
-        heracles_person = Heracles::Page.new_for_site_and_page_type(site, "person")
+      heracles_person = Heracles::Sites::WheelerCentre::Person.find_or_create_by(url: "people/#{blueprint_staff_member["slug"]}")
+      if heracles_person
         heracles_person.published = true
         heracles_person.slug = blueprint_staff_member["slug"]
         heracles_person.title = blueprint_staff_member["first_name"] + " " + blueprint_staff_member["surname"]
@@ -917,6 +918,20 @@ namespace :wheeler_centre do
         heracles_person.created_at = Time.zone.parse(blueprint_staff_member["created_on"].to_s)
         heracles_person.parent = Heracles::Page.find_by_slug("people")
         heracles_person.collection = Heracles::Page.where(url: "people/all-people").first!
+
+        # Image
+        blueprint_portrait_image = blueprint_asset_records.find {|r| r["assoc"] == "portrait" && r["id"].to_i == blueprint_staff_member["portrait_id"].to_i}
+        if blueprint_portrait_image.present?
+          heracles_promo_image = Heracles::Asset.find_by_blueprint_id(blueprint_portrait_image["id"].to_i)
+          if heracles_promo_image
+            heracles_person.fields[:portrait].asset_id = heracles_promo_image.id
+          else
+            puts "*** Missing promo image for: #{blueprint_staff_member["first_name"]} #{blueprint_staff_member["surname"]}"
+          end
+        else
+          puts "*** Missing promo image for: #{blueprint_staff_member["first_name"]} #{blueprint_staff_member["surname"]}"
+        end
+
         heracles_person.save!
       end
     end
@@ -1262,7 +1277,7 @@ namespace :wheeler_centre do
         end
         heracles_blog_post.parent = parent
         heracles_blog_post.collection = collection
-        authors = all_authors.select { |p| p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
+        authors = all_authors.select { |p| blueprint_daily["user_id"].present? && p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
         if authors.present?
           heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
         end
