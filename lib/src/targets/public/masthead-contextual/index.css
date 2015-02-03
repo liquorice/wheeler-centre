@@ -18,6 +18,7 @@
     letter-spacing: 0.1em;
     padding-left: 35px;
     padding-top: 50px;
+    padding-bottom: 20px;
     text-transform: uppercase;
   }
 
@@ -65,7 +66,7 @@
 .upcoming-events {
   float: right;
   padding-right: 35px;
-  margin-top: -50px;
+  margin-top: -48px;
 }
 
 .breakpoint-w-599 .upcoming-events {
