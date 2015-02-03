@@ -152,6 +152,11 @@
           padding: 18px;
         }
 
+        button.masthead-nav-main__anchor {
+          text-align: left;
+          width: 100%;
+        }
+
         .masthead-nav-main__anchor:hover,
         .masthead-nav-main__anchor:focus {
           color: #fff;
