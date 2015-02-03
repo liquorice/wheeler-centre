@@ -481,7 +481,7 @@
       margin-bottom: 10px;
     }
 
-      .event-calendar-event__hero-image {
+      .event-calendar-event__hero img {
         display: block;
         max-width: 100%;
         transition-property: transform, opacity;
@@ -527,8 +527,8 @@
     text-decoration: underline;
   }
 
-  .event-calendar-event__anchor:hover .event-calendar-event__hero-image,
-  .event-calendar-event__anchor:focus .event-calendar-event__hero-image {
+  .event-calendar-event__anchor:hover .event-calendar-event__hero img,
+  .event-calendar-event__anchor:focus .event-calendar-event__hero img {
     transform: scale3d(1.1, 1.1, 1);
     opacity: 0.85;
   }
