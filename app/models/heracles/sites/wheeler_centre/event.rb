@@ -47,6 +47,10 @@ module Heracles
           }
         end
 
+        def summary_title
+          fields[:short_title].data_present? ? fields[:short_title] : title
+        end
+
         ### Accessors
 
         def series
