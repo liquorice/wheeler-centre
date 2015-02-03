@@ -8,13 +8,14 @@
     - if event.fields[:start_date].data_present?
       time.event-calendar-event__date
         = l event.fields[:start_date].value, format: :day_short_name_and_date
-    - if image
-      .event-calendar-event__hero
-        .event-calendar-event__hero-inner
-          img src=image.content_thumbnail_url
-        - if image.attribution.present?
-          .event-calendar-event__hero-caption.caption
-            p = image.attribution
+    / - if image
+    .event-calendar-event__hero
+      .event-calendar-event__hero-inner
+        img.event-calendar-event__hero-image src="http://fillmurray.com/400/350"
+        / = l.event.fields[:promo_image]
+      / - if image.attribution.present?
+      /   .event-calendar-event__hero-caption.caption
+      /     p = image.attribution
     .event-calendar-event__details
       - if event.series
         p.event-calendar-event__series
