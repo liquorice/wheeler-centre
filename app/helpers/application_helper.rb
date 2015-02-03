@@ -137,4 +137,8 @@ module ApplicationHelper
     events_page.upcoming_events(per_page: 5)
   end
 
+  def days_for_week(week)
+    (0..6).map {|d| week + d.days}
+  end
+
 end

@@ -13,6 +13,7 @@ module Heracles
           }
         end
 
+        # Return _all_ the upcoming events
         def upcoming_events(options={})
           search_upcoming_events(options)
         end
