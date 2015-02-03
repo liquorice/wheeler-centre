@@ -2478,7 +2478,7 @@ namespace :wheeler_centre do
     recordings.each do |recording|
       uuid = find_recording_uuid(blueprint_video_posts, recording)
 
-      if recording.fields[:recording_id].value < 464
+      if uuid && recording.fields[:recording_id].value < 464
         puts ("Multiple notifications")
         notifications = find_recording_notifications(blueprint_notifications, uuid)
         messages = []
@@ -2490,7 +2490,7 @@ namespace :wheeler_centre do
         video_file_name = find_video_encode(messages)
         audio_file_size = find_audio_encode_size(messages)
         video_file_size = find_video_encode_size(messages)
-      else
+      elsif uuid
         puts("Single notification")
         # Handle these notifications differently
         notification = find_recording_notification(blueprint_notifications, uuid)
@@ -2599,6 +2599,8 @@ namespace :wheeler_centre do
         # Create the asset records!
         unless Heracles::Asset.exists?(recording_id: recording.fields[:recording_id].value)
           asset = Heracles::Asset.create!(asset_attrs)
+        else
+          asset = Heracles::Asset.find_by_recording_id(recording.fields[:recording_id].value)
         end
 
         if args[:create_recordings_assocications]
@@ -2669,7 +2671,7 @@ namespace :wheeler_centre do
 
   def find_recording_uuid(data, recording)
     cenvid_post = data.find { |r| r["id"].to_i == recording.fields[:recording_id].value }
-    cenvid_post["uuid"]
+    if cenvid_post then cenvid_post["uuid"] end
   end
 
   def find_recording_notifications(data, uuid)
