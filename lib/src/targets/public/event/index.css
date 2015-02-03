@@ -368,7 +368,7 @@
     }
 
 
-/* Index */
+/* Index: calendar; */
 
 .event-index {
   padding-top: 70px;
@@ -424,21 +424,11 @@
       .event-calendar__day-gap {
         float: left;
         margin-top: 20px;
-        position: relative;
         width: 14.285714286%;
         width: calc(100% / 7);
       }
       .event-calendar__day-gap {
         padding: 20px;
-      }
-      .event-calendar__day:before {
-        background-color: #dfdfdf;
-        content: "";
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        width: 1px;
-        height: 20px;
       }
       .event-calendar__day-gap--2 {
         width: 28.571428571%;
@@ -469,7 +459,29 @@
 /*          position: absolute;*/
         }
 
-          .event-calendar-event__anchor {
-            outline: 1px solid red;
-            display: block;
-          }
+/* Index: individual events */
+
+.event-calendar-event {
+  margin-bottom: 20px;
+  position: relative;
+}
+.event-calendar-event:before {
+  background-color: #dfdfdf;
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+}
+
+  .event-calendar-event__anchor {
+    display: block;
+  }
+
+    .event-calendar-event__title {
+      font-size: 16px;
+      font-size: 1.6rem;
+      font-family: var(--font-sans);
+      font-weight: bold;
+    }
