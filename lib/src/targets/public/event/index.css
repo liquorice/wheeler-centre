@@ -428,6 +428,9 @@
         width: 14.285714286%;
         width: calc(100% / 7);
       }
+      .event-calendar__day-gap {
+        padding: 20px;
+      }
       .event-calendar__day:before {
         background-color: #dfdfdf;
         content: "";
@@ -465,3 +468,8 @@
           border: 1px solid red;
 /*          position: absolute;*/
         }
+
+          .event-calendar-event__anchor {
+            outline: 1px solid red;
+            display: block;
+          }
