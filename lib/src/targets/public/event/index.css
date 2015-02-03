@@ -374,3 +374,27 @@
   padding-top: 70px;
   padding-bottom: 50px;
 }
+
+  .event-calendar__legend {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+    .event-calendar__legend-day {
+      float: left;
+      text-align: center;
+      width: 14.285714286%; /* Fallback for no calc */
+      width: calc(100% / 7);
+    }
+
+    .event-calendar__legend-day span {
+      color: #bdbbbb;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-size: 1.1rem;
+      letter-spacing: .1em;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-transform: uppercase;
+    }
+

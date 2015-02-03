@@ -14,10 +14,10 @@
             = render_content page.fields[:body]
 
         / Output days of the week
-        .event-calendar__legend
+        .event-calendar__legend.clearfix
           - days_for_week(Date.today.beginning_of_week).each do |day|
             .event-calendar__legend-day
-              = l day, format: :day_short_name
+              span= l day, format: :day_short_name
 
         / Group events by year
         - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
