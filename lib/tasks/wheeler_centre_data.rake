@@ -1808,7 +1808,7 @@ namespace :wheeler_centre do
     weather_stations.site = site
     weather_stations.parent = projects
     weather_stations.title = blueprint_weather_stations["title"]
-    weather_stations.slug = blueprint_weather_stations["slug"]
+    weather_stations.slug = "weather-stations"
     weather_stations.published = true
 
     # Take the banner image and make it an insertable at the top of the body
@@ -1842,7 +1842,7 @@ namespace :wheeler_centre do
     heracles_page.site = site
     heracles_page.parent = projects
     heracles_page.title = blueprint_page["title"]
-    heracles_page.slug = blueprint_page["slug"]
+    heracles_page.slug = "faith-and-culture-the-politics-of-belief"
     heracles_page.published = true
 
     content = blueprint_page["content"]
