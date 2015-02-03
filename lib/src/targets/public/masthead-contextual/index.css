@@ -210,6 +210,8 @@
     }
 
     .upcoming-events__item-text-container {
+      font-size: 16px;
+      font-size: 1.6rem;
       display: block;
       height: 95px;
       padding-left: 25px;
@@ -242,8 +244,6 @@
       .upcoming-events__item-title {
         color: #fff;
         font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
-        font-size: 16px;
-        font-size: 1.6rem;
       }
 
       .breakpoint-w-599 .upcoming-events__item-title {
