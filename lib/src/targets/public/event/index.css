@@ -422,6 +422,45 @@
 
       .event-calendar__day,
       .event-calendar__day-gap {
+        background-color: pink;
         float: left;
+        margin-top: 20px;
+        position: relative;
+        width: 14.285714286%;
+        width: calc(100% / 7);
       }
-
+      .event-calendar__day:before {
+        background-color: #dfdfdf;
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        width: 1px;
+        height: 20px;
+      }
+      .event-calendar__day-gap {
+        background-color: skyblue;
+      }
+      .event-calendar__day-gap--2 {
+        width: 28.571428571%;
+        width: calc((100% / 7) * 2);
+      }
+      .event-calendar__day-gap--3 {
+        width: 42.857142857%;
+        width: calc((100% / 7) * 3);
+      }
+      .event-calendar__day-gap--4 {
+        width: 57.142857143%;
+        width: calc((100% / 7) * 4);
+      }
+      .event-calendar__day-gap--5 {
+        width: 71.428571429%;
+        width: calc((100% / 7) * 5);
+      }
+      .event-calendar__day-gap--6 {
+        width: 85.714285714%;
+        width: calc((100% / 7) * 6);
+      }
+      .event-calendar__day-gap--7 {
+        width: 100%;
+      }

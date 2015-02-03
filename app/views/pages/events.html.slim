@@ -30,7 +30,7 @@
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
                     .event-calendar__week-inner.clearfix
-                      span = l(week, format: :medium_date)
+                      / span = l(week, format: :medium_date)
                       / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
                       / so that we can fill them with stuff
                       - days_with_gap = 0
@@ -40,7 +40,7 @@
                         - if events_for_day.any?
                           / We have some events! If there is a preceding gap, output the gap _before_ the event
                           - if days_with_gap > 0
-                            .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
+                            .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
                               ' Space for a block of
                               = days_with_gap
                               '  to fit
@@ -55,7 +55,7 @@
                           / Increment the days_with_gap and, because it's the last item in a week
                           / output the gap
                           - days_with_gap += 1
-                          .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
+                          .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
                             ' Space for a block of
                             = days_with_gap
                             '  to fit
