@@ -118,7 +118,6 @@ module LegacyBlueprint
         cap = $3.strip if $3
 
         asset_name, options = parse_asset_string(astr)
-
         puts options.inspect
 
         if cap
@@ -136,7 +135,7 @@ module LegacyBlueprint
         # asset ||= Page.site.gather(Asset).find_by_name(asset_name)
 
         # Find the asset, assuming we've already imported all the Blueprint assets
-        asset = if object_scope
+        if object_scope
           # Find an asset connected directly to the object
           object_class_name = object_scope.class.name.sub(/LegacyBlueprint::/, "")
           if /^Tum/.match object_class_name
@@ -146,13 +145,20 @@ module LegacyBlueprint
           elsif object_class_name == "CenplaPage"
             object_class_name = "Page"
           end
-          Heracles::Asset.where(
+          asset = Heracles::Asset.where(
             blueprint_attachable_type: object_class_name,
             blueprint_attachable_id: object_scope["id"].to_i,
             blueprint_name: asset_name
           ).first
+          unless asset
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: object_class_name,
+              blueprint_attachable_id: object_scope["id"].to_i,
+              file_basename: asset_name
+            ).first
+          end
         else
-          Heracles::Asset.where(blueprint_name: asset_name).first
+          asset = Heracles::Asset.where(blueprint_name: asset_name).first
         end
 
         # replace asset reference with HTML
