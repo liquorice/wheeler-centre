@@ -22,11 +22,10 @@
         / Group events by year
         - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
           .event-calendar__year
-            span = l(year, format: :year)
             / Group events by month in year
             - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
-              .event-calendar__month
-                span = l(month, format: :month_name)
+              .event-calendar__month.gradient-top-down
+                h1.event-calendar__month-heading = l(month, format: :month_name)
                 / Group events by weeks in month
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
