@@ -424,6 +424,7 @@
       .event-calendar__day-gap {
         float: left;
         margin-top: 20px;
+        overflow: hidden;
         width: 14.285714286%;
         width: calc(100% / 7);
       }
@@ -479,9 +480,13 @@
     display: block;
   }
 
-    .event-calendar-event__title {
-      font-size: 16px;
-      font-size: 1.6rem;
-      font-family: var(--font-sans);
-      font-weight: bold;
+    .event-calendar-event__details {
+      padding-right: 20px;
     }
+
+      .event-calendar-event__title .title-text {
+        font-size: 16px;
+        font-size: 1.6rem;
+        font-family: var(--font-sans);
+        font-weight: bold;
+      }

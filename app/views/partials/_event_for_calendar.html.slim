@@ -15,13 +15,14 @@
         - if image.attribution.present?
           .event-calendar-event__hero-caption.caption
             p = image.attribution
-    - if event.series
-      p.event-calendar-event__series
-        = event.series.title
-    h3.event-calendar-event__title
-      span.title-text == widont_format markdown_line event.title
-      - selected_primary_topics = select_primary_topics_for_page(event)
-      - if selected_primary_topics && selected_primary_topics.any?
-        span.title-tags
-          '  &nbsp;/&nbsp;
-          = selected_primary_topics.first.title
+    .event-calendar-event__details
+      - if event.series
+        p.event-calendar-event__series
+          = event.series.title
+      h3.event-calendar-event__title
+        span.title-text == widont_format markdown_line event.title
+        - selected_primary_topics = select_primary_topics_for_page(event)
+        - if selected_primary_topics && selected_primary_topics.any?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = selected_primary_topics.first.title
