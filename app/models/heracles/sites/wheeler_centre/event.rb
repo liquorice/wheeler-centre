@@ -5,11 +5,10 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :short_title, type: :text, label: "Short title"},
+              {name: :short_title, type: :text, label: "Short title", hint: "(optional) Set this to override the title in listings"},
               {name: :promo_image, type: :asset, asset_file_type: :image},
-              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "Set this to override the above promo image in listings"},
+              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
               {name: :body, type: :content},
-              {name: :external_video, type: :external_video, label: 'External video'},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
               {name: :start_date, type: :date_time, label: "Event start date"},
