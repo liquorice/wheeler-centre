@@ -29,38 +29,39 @@
                 / Group events by weeks in month
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
-                    span = l(week, format: :medium_date)
-                    / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
-                    / so that we can fill them with stuff
-                    - days_with_gap = 0
-                    / Iterate over every day in the week
-                    - days_for_week(week).each_with_index do |day, index|
-                      - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
-                      - if events_for_day.any?
-                        / We have some events! If there is a preceding gap, output the gap _before_ the event
-                        - if days_with_gap > 0
+                    .event-calendar__week-inner.clearfix
+                      span = l(week, format: :medium_date)
+                      / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
+                      / so that we can fill them with stuff
+                      - days_with_gap = 0
+                      / Iterate over every day in the week
+                      - days_for_week(week).each_with_index do |day, index|
+                        - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
+                        - if events_for_day.any?
+                          / We have some events! If there is a preceding gap, output the gap _before_ the event
+                          - if days_with_gap > 0
+                            .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
+                              ' Space for a block of
+                              = days_with_gap
+                              '  to fit
+                            / Reset gap to 0 to keep the iteration going
+                            - days_with_gap = 0
+                          / Output our found event/s
+                          .event-calendar__day
+                            span = l(day, format: :day_short_name)
+                            - events_for_day.each do |event|
+                              = render "partials/event_for_calendar", event: event
+                        - elsif index == 6
+                          / Increment the days_with_gap and, because it's the last item in a week
+                          / output the gap
+                          - days_with_gap += 1
                           .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
                             ' Space for a block of
                             = days_with_gap
                             '  to fit
-                          / Reset gap to 0 to keep the iteration going
-                          - days_with_gap = 0
-                        / Output our found event/s
-                        .event-calendar__day
-                          span = l(day, format: :day_short_name)
-                          - events_for_day.each do |event|
-                            = render "partials/event_for_calendar", event: event
-                      - elsif index == 6
-                        / Increment the days_with_gap and, because it's the last item in a week
-                        / output the gap
-                        - days_with_gap += 1
-                        .event-calenday__day-gap class="event-calenday__day-gap--#{days_with_gap}"
-                          ' Space for a block of
-                          = days_with_gap
-                          '  to fit
-                      - else
-                        / Increment the days_with_gap but output nothing
-                        - days_with_gap += 1
+                        - else
+                          / Increment the days_with_gap but output nothing
+                          - days_with_gap += 1
 
 
         - if events.results.present?
