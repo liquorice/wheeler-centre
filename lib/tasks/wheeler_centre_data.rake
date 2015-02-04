@@ -825,8 +825,8 @@ namespace :wheeler_centre do
       heracles_person.published = true
       heracles_person.slug = blueprint_presenter["slug"]
       heracles_person.title = blueprint_presenter["name"]
-      heracles_person.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["intro"], subject: blueprint_presenter, assetify: false)
-      heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter, assetify: false)
+      heracles_person.fields[:intro].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["intro"], subject: blueprint_presenter)
+      heracles_person.fields[:biography].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_presenter["bio"], subject: blueprint_presenter)
       heracles_person.fields[:url].value = blueprint_presenter["url"]
       heracles_person.fields[:external_links].value = blueprint_presenter["external_links"]
 
@@ -849,7 +849,7 @@ namespace :wheeler_centre do
       if staff_member.present?
         puts (staff_member["slug"])
         heracles_person.fields[:is_staff_member].value = true
-        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(staff_member["bio"], subject: staff_member, assetify: false)
+        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(staff_member["bio"], subject: staff_member)
         heracles_person.fields[:position_title].value = staff_member["title"]
         heracles_person.fields[:first_name].value = staff_member["first_name"]
         heracles_person.fields[:last_name].value = staff_member["surname"]
@@ -911,7 +911,7 @@ namespace :wheeler_centre do
         heracles_person.slug = blueprint_staff_member["slug"]
         heracles_person.title = blueprint_staff_member["first_name"] + " " + blueprint_staff_member["surname"]
         heracles_person.fields[:is_staff_member].value = true
-        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_staff_member["bio"], subject: blueprint_staff_member, assetify: false)
+        heracles_person.fields[:staff_bio].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_staff_member["bio"], subject: blueprint_staff_member)
         heracles_person.fields[:position_title].value = blueprint_staff_member["title"]
         heracles_person.fields[:first_name].value = blueprint_staff_member["first_name"]
         heracles_person.fields[:last_name].value = blueprint_staff_member["surname"]
@@ -979,7 +979,7 @@ namespace :wheeler_centre do
           puts "*** Missing logo image for: #{blueprint_sponsor["name"]}"
         end
 
-        heracles_sponsor.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_sponsor["content"], subject: blueprint_sponsor, assetify: false)
+        heracles_sponsor.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_sponsor["content"], subject: blueprint_sponsor)
         if blueprint_sponsor["url"].present? then heracles_sponsor.fields[:url].value = blueprint_sponsor["url"].to_s end
         if blueprint_sponsor["id"].present? then heracles_sponsor.fields[:sponsor_id].value = blueprint_sponsor["id"].to_i end
         # {name: :logo, type: :asset, asset_file_type: :image}
@@ -1032,11 +1032,11 @@ namespace :wheeler_centre do
           puts "*** Missing hero image for: #{blueprint_venue["name"]}"
         end
         heracles_venue.fields[:address].value = blueprint_venue["address"]
-        heracles_venue.fields[:address_formatted].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["address"], subject: blueprint_venue, assetify: false)
+        heracles_venue.fields[:address_formatted].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["address"], subject: blueprint_venue)
         heracles_venue.fields[:phone_number].value = blueprint_venue["phone_number"]
-        heracles_venue.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["description"], subject: blueprint_venue, assetify: false)
-        heracles_venue.fields[:directions].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["directions"], subject: blueprint_venue, assetify: false)
-        heracles_venue.fields[:parking].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["parking"], subject: blueprint_venue, assetify: false)
+        heracles_venue.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["description"], subject: blueprint_venue)
+        heracles_venue.fields[:directions].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["directions"], subject: blueprint_venue)
+        heracles_venue.fields[:parking].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_venue["parking"], subject: blueprint_venue)
 
         heracles_venue.save!
       end
@@ -1302,7 +1302,7 @@ namespace :wheeler_centre do
       heracles_blog_post.title = replace_entities(attribution)
 
       summary = "<blockquote>#{quote}</blockquote><p>#{attribution}</p>"
-      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary, subject: blueprint_daily, assetify: false)
+      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(summary, subject: blueprint_daily)
       heracles_blog_post.fields[:intro].value = ""
 
       # Build insertable for body
@@ -1340,7 +1340,7 @@ namespace :wheeler_centre do
         heracles_blog_post.title = replace_entities blueprint_daily["title"]
       end
 
-      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["title"], subject: blueprint_daily, assetify: false)
+      heracles_blog_post.fields[:summary].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_daily["title"], subject: blueprint_daily)
       heracles_blog_post.fields[:intro].value = ""
 
       # Build insertable for body
@@ -1424,7 +1424,7 @@ namespace :wheeler_centre do
 
         # Associate field data
         heracles_podcast_series.fields[:legacy_program_id].value = blueprint_podcast_series["id"].to_i
-        heracles_podcast_series.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_series["content"], subject: blueprint_podcast_series, assetify: false)
+        heracles_podcast_series.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_series["content"], subject: blueprint_podcast_series)
 
         # !!!
         # We assume there are events already imported with recordings
@@ -1499,7 +1499,7 @@ namespace :wheeler_centre do
           heracles_podcast_episode.fields[:recording_date].value = Time.zone.parse(blueprint_podcast_episode["start_date"].to_s)
 
           # Associate field data
-          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["content"], subject: blueprint_podcast_episode, assetify: false)
+          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["content"], subject: blueprint_podcast_episode)
 
           # Associate with event (event -> podcast episode)
           heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
@@ -1574,7 +1574,7 @@ namespace :wheeler_centre do
           end
 
           # Associate field data
-          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["description"], subject: blueprint_podcast_episode, assetify: false)
+          heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["description"], subject: blueprint_podcast_episode)
 
           # Associate with event (event -> podcast episode)
           heracles_event = Heracles::Page.of_type("event").find_by_slug(blueprint_podcast_episode["slug"])
@@ -1662,7 +1662,7 @@ namespace :wheeler_centre do
   #     heracles_page.slug = slug
   #     heracles_page.title = blueprint_page["title"]
   #     heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
-  #     heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+  #     heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page)
   #     heracles_page.save!
   #   end
   # end
@@ -1684,8 +1684,8 @@ namespace :wheeler_centre do
       blueprint_types = blueprint_records.select { |r| r.class == LegacyBlueprint::FaqQuestion }
       blueprint_types.map do |type|
         # TODO probably need to put some formatting or styling around each question for FAQs?
-        body << LegacyBlueprint::BluedownFormatter.mark_up(type["question"], subject: type, assetify: false)
-        body << LegacyBlueprint::BluedownFormatter.mark_up(type["answer"], subject: type, assetify: false)
+        body << LegacyBlueprint::BluedownFormatter.mark_up(type["question"], subject: type)
+        body << LegacyBlueprint::BluedownFormatter.mark_up(type["answer"], subject: type)
       end
     end
 
@@ -1754,7 +1754,29 @@ namespace :wheeler_centre do
         heracles_page.slug = slug
         heracles_page.title = blueprint_page["title"]
         heracles_page.created_at = Time.zone.parse(blueprint_page["created_on"].to_s)
-        heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: false)
+        heracles_page.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_page["content"], subject: blueprint_page, assetify: true)
+
+        # The one TumLink in each section gets pulled in here
+        blueprint_link = blueprint_records.find { |r| r.class == LegacyBlueprint::TumLink && r["page_id"] == blueprint_page["id"] }
+        if blueprint_link
+            link_content = blueprint_link["title"] + "\n\n[#{blueprint_link['url']}]"
+            heracles_page.fields[:listen].value = LegacyBlueprint::BluedownFormatter.mark_up(link_content, subject: blueprint_link, assetify: true)
+        else
+            puts "!!! No link for #{blueprint_page["title"]}"
+        end
+        # The TumWidgets in each section gets pulled in here
+        blueprint_watches = blueprint_records.select { |r| r.class == LegacyBlueprint::TumWidget && r["page_id"] == blueprint_page["id"] }
+        if blueprint_watches.any?
+            watch_content = ""
+            blueprint_watches.each do |blueprint_watch|
+                content = blueprint_watch["title"] + "\n\n" + blueprint_watch["content"] + "\n\n"
+                watch_content += LegacyBlueprint::BluedownFormatter.mark_up(content, subject: blueprint_watch, assetify: true)
+            end
+            heracles_page.fields[:watch].value = watch_content
+        else
+            puts "!!! No video for #{blueprint_page["title"]}"
+        end
+
         blueprint_hero_image = blueprint_asset_records.find {|r| r["attachable_id"].to_i == blueprint_page["id"].to_i && r["name"].to_s.downcase == "banner"}
         if blueprint_hero_image.present?
           heracles_hero_image = Heracles::Asset.find_by_blueprint_id(blueprint_hero_image["id"].to_i)
@@ -1803,7 +1825,7 @@ namespace :wheeler_centre do
             heracles_review.slug = blueprint_review["slug"]
             heracles_review.title = blueprint_review["title"]
             heracles_review.created_at = Time.zone.parse(blueprint_review["created_on"].to_s)
-            heracles_review.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_review["content"], subject: blueprint_review, assetify: false)
+            heracles_review.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_review["content"], subject: blueprint_review)
             reviewer = blueprint_settings.find {|s| s["key"] == "Author Name"}
             heracles_review.fields[:reviewer].value = reviewer["value"] if reviewer
             heracles_review.parent = heracles_page
@@ -1818,12 +1840,12 @@ namespace :wheeler_centre do
             heracles_response.published = blueprint_response["publish_on"].present?
             heracles_response.slug = blueprint_response["slug"]
             # Trim the title to the first few words
-            body = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response, assetify: false)
+            body = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["title"], subject: blueprint_response)
             heracles_response.title = "#{Sanitize.fragment(body, {:elements => []}).strip[0..50]}…"
             # Map the Blueprint fields to better-named fields in Heracles.
             heracles_response.fields[:body].value = body
             # The author is stored in the content field
-            heracles_response.fields[:author].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["content"], subject: blueprint_response, assetify: false)
+            heracles_response.fields[:author].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_response["content"], subject: blueprint_response)
             heracles_response.fields[:url].value = blueprint_response["url"]
             heracles_response.created_at = Time.zone.parse(blueprint_response["created_on"].to_s)
             heracles_response.parent = heracles_page
@@ -2353,7 +2375,7 @@ namespace :wheeler_centre do
         heracles_recording.title = blueprint_video_post["title"]
         heracles_recording.fields[:short_title].value = blueprint_video_post["title"]
         heracles_recording.fields[:description].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["description"], subject: blueprint_video_post, assetify: true)
-        heracles_recording.fields[:transcript].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post, assetify: false)
+        heracles_recording.fields[:transcript].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_video_post["transcript"], subject: blueprint_video_post)
 
         youtube_migration = youtube_migrations_data.find {|y| y[:recording_id] == blueprint_video_post["id"].to_i}
         if youtube_migration
