@@ -43,3 +43,5 @@ public/assets/*
 lib/video_migration/client_secrets.json
 lib/video_migration/credentials_youtube.json
 lib/video_migration/credentials_youtube.upload.json
+lib/video_migration/encodes
+lib/video_migration/credentials_file.json
