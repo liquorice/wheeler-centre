@@ -2476,66 +2476,71 @@ namespace :wheeler_centre do
     recordings = Heracles::Page.of_type("recording")
 
     recordings.each do |recording|
+      puts ("-------------")
+      puts ("recording_id: #{recording.fields[:recording_id].value}")
       uuid = find_recording_uuid(blueprint_video_posts, recording)
+      puts ("uuid #{uuid}")
 
-      if uuid && recording.fields[:recording_id].value < 464
-        puts ("Multiple notifications")
+      if uuid
         notifications = find_recording_notifications(blueprint_notifications, uuid)
-        messages = []
-        notifications.each do |notification|
-          # Create an array of all the "message" hashes.
-          messages << JSON.parse(notification["message"])
-        end
-        audio_file_name = find_audio_encode(messages)
-        video_file_name = find_video_encode(messages)
-        audio_file_size = find_audio_encode_size(messages)
-        video_file_size = find_video_encode_size(messages)
-      elsif uuid
-        puts("Single notification")
-        # Handle these notifications differently
-        notification = find_recording_notification(blueprint_notifications, uuid)
-        if notification.first
-          message = YAML.load(notification.first["message"])
-          if message
-            audio_file_url = message["outputs"][0]["url"]
-            audio_file_name = File.basename(audio_file_url)
-            video_file_url = message["outputs"][1]["url"]
-            video_file_name = File.basename(video_file_url)
+        puts ("Number of notifications: #{notifications.count}")
 
-            audio_file_size = if message["outputs"][0]["file_size_in_bytes"] then message["outputs"][0]["file_size_in_bytes"] else 0 end
-            video_file_size = if message["outputs"][1]["file_size_in_bytes"] then message["outputs"][1]["file_size_in_bytes"] else 0 end
+        if notifications.count > 1
+          notifications = find_recording_upload_notifications(blueprint_notifications, uuid)
+          messages = []
+          notifications.each do |notification|
+            # Create an array of all the "message" hashes.
+            messages << JSON.parse(notification["message"])
+          end
+          audio_file_name = find_audio_encode(messages)
+          video_file_name = find_video_encode(messages)
+          audio_file_size = find_audio_encode_size(messages)
+          video_file_size = find_video_encode_size(messages)
+        elsif notifications.count > 0
+          # Handle these notifications differently
+          if notifications.first
+            message = YAML.load(notifications.first["message"])
+            if message
+              audio_file_url = message["outputs"][0]["url"]
+              audio_file_name = File.basename(audio_file_url)
+              video_file_url = message["outputs"][1]["url"]
+              video_file_name = File.basename(video_file_url)
 
-            audio_bitrate = if message["outputs"][0]["audio_bitrate_in_kbps"] then message["outputs"][0]["audio_bitrate_in_kbps"] * 1000 end
-            audio_bitrate_overall = if message["outputs"][0]["total_bitrate_in_kbps"] then message["outputs"][0]["total_bitrate_in_kbps"] * 1000 end
+              audio_file_size = if message["outputs"][0]["file_size_in_bytes"] then message["outputs"][0]["file_size_in_bytes"] else 0 end
+              video_file_size = if message["outputs"][1]["file_size_in_bytes"] then message["outputs"][1]["file_size_in_bytes"] else 0 end
 
-            video_bitrate = if message["outputs"][1]["video_bitrate_in_kbps"] then message["outputs"][1]["video_bitrate_in_kbps"] * 1000 end
-            video_bitrate_overall = if message["outputs"][1]["total_bitrate_in_kbps"] then message["outputs"][1]["total_bitrate_in_kbps"] * 1000 end
-            video_audio_bitrate = if message["outputs"][1]["audio_bitrate_in_kbps"] then message["outputs"][1]["audio_bitrate_in_kbps"] * 1000 end
+              audio_bitrate = if message["outputs"][0]["audio_bitrate_in_kbps"] then message["outputs"][0]["audio_bitrate_in_kbps"] * 1000 end
+              audio_bitrate_overall = if message["outputs"][0]["total_bitrate_in_kbps"] then message["outputs"][0]["total_bitrate_in_kbps"] * 1000 end
 
-            # Additional metadata only exists for the newer format of notifications.
-            audio_meta = {
-              :duration => message["outputs"][0]["duration_in_ms"],
-              :audio_bitrate => audio_bitrate,
-              :overall_bitrate => audio_bitrate_overall,
-              :audio_samplerate => message["outputs"][0]["audio_sample_rate"],
-              :audio_channels => 2,
-              :audio_codec => "mp3",
-            }
+              video_bitrate = if message["outputs"][1]["video_bitrate_in_kbps"] then message["outputs"][1]["video_bitrate_in_kbps"] * 1000 end
+              video_bitrate_overall = if message["outputs"][1]["total_bitrate_in_kbps"] then message["outputs"][1]["total_bitrate_in_kbps"] * 1000 end
+              video_audio_bitrate = if message["outputs"][1]["audio_bitrate_in_kbps"] then message["outputs"][1]["audio_bitrate_in_kbps"] * 1000 end
 
-            video_meta = {
-              :duration => message["outputs"][1]["duration_in_ms"],
-              :width => message["outputs"][1]["width"],
-              :height => message["outputs"][1]["height"],
-              :framerate => message["outputs"][1]["frame_rate"],
-              :video_bitrate => video_bitrate,
-              :overall_bitrate => video_bitrate_overall,
-              :video_codec => message["outputs"][1]["video_codec"],
-              :audio_bitrate => video_audio_bitrate,
-              :audio_samplerate => message["outputs"][1]["audio_sample_rate"],
-              :audio_channels => message["outputs"][1]["channels"],
-              :audio_codec => message["outputs"][1]["audio_codec"],
-              :date_file_created => message["job"]["created_at"],
-            }
+              # Additional metadata only exists for the newer format of notifications.
+              audio_meta = {
+                :duration => message["outputs"][0]["duration_in_ms"],
+                :audio_bitrate => audio_bitrate,
+                :overall_bitrate => audio_bitrate_overall,
+                :audio_samplerate => message["outputs"][0]["audio_sample_rate"],
+                :audio_channels => 2,
+                :audio_codec => "mp3",
+              }
+
+              video_meta = {
+                :duration => message["outputs"][1]["duration_in_ms"],
+                :width => message["outputs"][1]["width"],
+                :height => message["outputs"][1]["height"],
+                :framerate => message["outputs"][1]["frame_rate"],
+                :video_bitrate => video_bitrate,
+                :overall_bitrate => video_bitrate_overall,
+                :video_codec => message["outputs"][1]["video_codec"],
+                :audio_bitrate => video_audio_bitrate,
+                :audio_samplerate => message["outputs"][1]["audio_sample_rate"],
+                :audio_channels => message["outputs"][1]["channels"],
+                :audio_codec => message["outputs"][1]["audio_codec"],
+                :date_file_created => message["job"]["created_at"],
+              }
+            end
           end
         end
       end
@@ -2603,6 +2608,9 @@ namespace :wheeler_centre do
           asset = Heracles::Asset.find_by_recording_id(recording.fields[:recording_id].value)
         end
 
+        recording.fields[:video].asset_id = asset.id
+        recording.fields[:audio].asset_id = asset.id
+
         if args[:create_recordings_assocications]
           # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
           audio_video_encode = {
@@ -2617,19 +2625,17 @@ namespace :wheeler_centre do
             file << audio_video_encode.to_yaml
           end
         end
-
       end
+      puts ("*")
     end
   end
 
   def find_audio_encode(messages)
     encodes = find_audio_encodes(messages)
     # Check whether any of the encodes is already an s3 file - if so we don't need to do anything.
-    unless find_s3_url(encodes)
-      best_audio_encode = find_best_audio_encode(encodes)
-      if best_audio_encode
-        best_audio_encode["job"]["output_file"]["filename"]
-      end
+    best_audio_encode = find_best_audio_encode(encodes)
+    if best_audio_encode
+      best_audio_encode["job"]["output_file"]["filename"]
     end
   end
 
@@ -2646,9 +2652,7 @@ namespace :wheeler_centre do
   def find_video_encode(messages)
     best_video_encode = find_best_video_encode(messages)
     if best_video_encode
-      unless is_s3_url(best_video_encode["job"]["output_file"]["url"])
-        best_video_encode["job"]["output_file"]["filename"]
-      end
+      best_video_encode["job"]["output_file"]["filename"]
     end
   end
 
@@ -2674,11 +2678,11 @@ namespace :wheeler_centre do
     if cenvid_post then cenvid_post["uuid"] end
   end
 
-  def find_recording_notifications(data, uuid)
+  def find_recording_upload_notifications(data, uuid)
     data.select { |r| r["uuid"] == uuid && r["event_type"] == "Upload" }
   end
 
-  def find_recording_notification(data, uuid)
+  def find_recording_notifications(data, uuid)
     data.select { |r| r["uuid"] == uuid }
   end
 
