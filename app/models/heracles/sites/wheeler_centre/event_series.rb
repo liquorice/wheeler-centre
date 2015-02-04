@@ -37,14 +37,16 @@ module Heracles
 
         ### Accessors
 
-        def events
+        def events(options={})
           Heracles::Page.
             of_type("event").
             joins(:insertions).
             where(
               :"insertions.field" => "series",
               :"insertions.inserted_key" => insertion_key
-            )
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
         end
 
         def upcoming_events(options={})

@@ -13,7 +13,11 @@
     - if image
       .event-snap__hero
         - if show_type
-          span.event-snap__hero-type Past event
+          span.event-snap__hero-type
+            - if post.upcoming?
+              ' Upcoming event
+            - else
+              ' Past event
         .event-snap__hero-inner
           img src=image.content_thumbnail_url
         - if image.attribution.present?

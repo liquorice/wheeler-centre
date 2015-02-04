@@ -66,6 +66,10 @@ module Heracles
 
         ### Accessors
 
+        def upcoming?
+          (fields[:start_date].value >= Time.zone.now.beginning_of_day)
+        end
+
         def series
           if fields[:series].data_present?
             fields[:series].pages.first
@@ -82,12 +86,12 @@ module Heracles
           options[:per_page] = 6 || options[:per_page]
           if series
             events = series.events({per_page: options[:per_page]})
-            if events.total < options[:per_page]
-              additional_total = options[:per_page] - events.total
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})
-              events = events.results + additional.results
+              events = events + additional.results
             else
-              events = events.results
+              events = events
             end
           else
             events = search_events_by_topic({per_page: options[:per_page]}).results
