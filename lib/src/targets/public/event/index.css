@@ -513,12 +513,35 @@
 }
 .breakpoint-w-999 .event-calendar-event {
   float: left;
-  margin-left: 20px;
-  margin-right: 20px;
-  width: 100px;
   overflow: hidden;
-  width: 250px;
-  height: 300px;
+  width: 25%;
+  height: 340px;
+}
+.breakpoint-w-999 .event-calendar-event:after {
+  background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
+  background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  content: "";
+  position: absolute;
+  height: 80px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.breakpoint-phone-wide .event-calendar-event {
+  width: 50%;
+  height: 380px;
+}
+.breakpoint-phone .event-calendar-event {
+  float: none;
+  width: 100%;
+  height: auto;
+}
+.breakpoint-phone .event-calendar-event:after {
+  display: none;
 }
 .event-calendar-event:before {
   background-color: #dfdfdf;
@@ -540,11 +563,6 @@
       overflow: hidden;
       margin-bottom: 10px;
     }
-    .breakpoint-w-999 .event-calendar-event__hero {
-      border-right: none;
-      display: none; /* DELETE ME */
-    }
-
       .event-calendar-event__hero-inner {
         position: relative;
       }
@@ -569,7 +587,11 @@
         font-size: 13px;
         font-size: 1.3rem;
       }
-
+      .breakpoint-w-999 .event-calendar-event__date,
+      .breakpoint-w-999 .event-calendar-event__series {
+        font-size: 14px;
+        font-size: 1.4rem;
+      }
       .event-calendar-event__date {
         background-color: #fff;
         position: absolute;
@@ -580,9 +602,10 @@
       }
       .breakpoint-w-999 .event-calendar-event__date {
         background-color: transparent;
+        display: block;
         padding-left: 0;
         padding-right: 0;
-        display: block;
+        padding-bottom: 8px;
         position: static;
       }
       .event-calendar-event:not(:first-child) .event-calendar-event__date {

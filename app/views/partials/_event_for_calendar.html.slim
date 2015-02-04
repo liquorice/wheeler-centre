@@ -1,16 +1,16 @@
+- if event.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif event.promo_image
+  - image = event.promo_image
+
 .event-calendar-event
   a.event-calendar-event__anchor href=event.absolute_url
     - if event.fields[:start_date].data_present?
       time.event-calendar-event__date
         = l event.fields[:start_date].value, format: :day_short_name_and_date
-      - if event.fields[:thumbnail_image].data_present?
-        .event-calendar-event__hero
-          .event-calendar-event__hero-inner
-            - image = event.fields[:thumbnail_image].asset
-      - elsif event.promo_image
-        .event-calendar-event__hero
-          .event-calendar-event__hero-inner
-            - image = event.promo_image
+      .event-calendar-event__hero
+        .event-calendar-event__hero-inner
+          img src= image
     .event-calendar-event__details
       - if event.series
         p.event-calendar-event__series
