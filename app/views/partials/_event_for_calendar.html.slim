@@ -10,7 +10,8 @@
         = l event.fields[:start_date].value, format: :day_short_name_and_date
       .event-calendar-event__hero
         .event-calendar-event__hero-inner
-          img src= image
+          - if image
+            img src=image.content_thumbnail_url
     .event-calendar-event__details
       - if event.series
         p.event-calendar-event__series
