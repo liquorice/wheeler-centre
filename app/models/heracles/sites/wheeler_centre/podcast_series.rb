@@ -72,7 +72,11 @@ module Heracles
             with :parent_id, id
             with :published, true
 
-            without :audio_id, nil
+            if options[:type] == "video"
+              without :video_id, nil
+            else
+              without :audio_id, nil
+            end
 
             order_by :publish_date_time, :desc
 

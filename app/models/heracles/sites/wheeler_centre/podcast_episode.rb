@@ -24,6 +24,7 @@ module Heracles
               {name: :people, type: :associated_pages, page_type: :person},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
+              {name: :legacy_recording_id, type: :integer, label: "Legacy recording ID"},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }
@@ -43,8 +44,40 @@ module Heracles
           end
         end
 
-        def audio_mp3_version
-          fields[:audio].asset.results["audio_mp3"]
+        def audio_version
+          if fields[:audio].data_present?
+            fields[:audio].asset.versions.include?(:audio_mp3) ? :audio_mp3 : :original
+          end
+        end
+
+        def audio_result
+          if fields[:audio].data_present?
+            fields[:audio].asset.results[audio_version.to_s]
+          end
+        end
+
+        def audio_url
+          if fields[:audio].data_present?
+            fields[:audio].asset.send(:"#{audio_version}_url")
+          end
+        end
+
+        def video_version
+          if fields[:video].data_present?
+            fields[:video].asset.versions.include?(:ipad_high) ? :ipad_high : :original
+          end
+        end
+
+        def video_result
+          if fields[:video].data_present?
+            fields[:video].asset.results[video_version.to_s]
+          end
+        end
+
+        def video_url
+          if fields[:video].data_present?
+            fields[:video].asset.send(:"#{video_version}_url")
+          end
         end
 
         searchable do
@@ -67,6 +100,12 @@ module Heracles
           string :audio_id do
             if fields[:audio].data_present?
               fields[:audio].asset.id
+            end
+          end
+
+          string :video_id do
+            if fields[:video].data_present?
+              fields[:video].asset.id
             end
           end
         end

@@ -1426,6 +1426,9 @@ namespace :wheeler_centre do
         heracles_podcast_series.fields[:legacy_program_id].value = blueprint_podcast_series["id"].to_i
         heracles_podcast_series.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_series["content"], subject: blueprint_podcast_series, assetify: false)
 
+        # !!!
+        # We assume there are events already imported with recordings
+
         # Tags
         tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_series["id"], "CenevtProgram")
         if tags_for_post.any?
@@ -1502,6 +1505,16 @@ namespace :wheeler_centre do
           if heracles_event
             heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
             heracles_event.save!
+
+            # Get the asset IDs from any recordings too
+            heracles_recordings = heracles_event.fields[:recordings].pages
+            if heracles_recordings.length > 0
+                # Assume it's the first. We won't get matches for events with > 1 recording
+                video_asset_id = heracles_recordings.first.fields[:video].asset_id
+                audio_asset_id = heracles_recordings.first.fields[:audio].asset_id
+                heracles_podcast_episode.fields[:video].asset_id = video_asset_id
+                heracles_podcast_episode.fields[:audio].asset_id = audio_asset_id
+            end
           end
 
           # Tags
@@ -1567,6 +1580,19 @@ namespace :wheeler_centre do
           if heracles_event
             heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
             heracles_event.save!
+
+            # Get the asset IDs from any recordings too
+            heracles_recordings = heracles_event.fields[:recordings].pages
+            if heracles_recordings.length == 1
+                video_asset_id = heracles_recordings.first.fields[:video].asset_id
+                audio_asset_id = heracles_recordings.first.fields[:audio].asset_id
+                heracles_podcast_episode.fields[:video].asset_id = video_asset_id
+                heracles_podcast_episode.fields[:audio].asset_id = audio_asset_id
+            elsif heracles_recordings.length > 1
+                puts "!!!!!!!!!!!!!!!!!!"
+                puts "!!! #{blueprint_podcast_episode['title']} has too many recordings to automatically associate !!!"
+                puts "!!!!!!!!!!!!!!!!!!"
+            end
           end
 
           # Tags
@@ -1574,6 +1600,7 @@ namespace :wheeler_centre do
           if tags_for_post.any?
             apply_tags_to(heracles_podcast_episode, tags_for_post)
           end
+          heracles_podcast_episode.fields[:legacy_recording_id].value = blueprint_podcast_episode["id"].to_i
           heracles_podcast_episode.save!
         end
       end
