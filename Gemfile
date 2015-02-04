@@ -38,6 +38,7 @@ gem "sanitize"
 
 # Integrations
 gem "bugsnag"
+gem "skylight"
 
 # Frontend
 gem "coffee-rails", "~> 4.0.0"
