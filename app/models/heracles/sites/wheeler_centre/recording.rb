@@ -39,8 +39,8 @@ module Heracles
             audio: (fields[:audio].data_present?) ? "Yes" : "No",
             youtube_video: fields[:youtube_video].value.presence || "",
             recording_date: fields[:recording_date],
-            created_at:  created_at.to_s(:admin_date),
-            events: events.map(&:title).join(", ")
+            events: events.map(&:title).join(", "),
+            created_at:  created_at.to_s(:admin_date)
           }
         end
 
