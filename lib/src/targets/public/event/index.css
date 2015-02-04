@@ -513,35 +513,18 @@
 }
 .breakpoint-w-999 .event-calendar-event {
   float: left;
+  margin-right: 2%;
   overflow: hidden;
-  width: 25%;
-  height: 340px;
-}
-.breakpoint-w-999 .event-calendar-event:after {
-  background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
-  background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-  content: "";
-  position: absolute;
-  height: 80px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 23.5%;
 }
 .breakpoint-phone-wide .event-calendar-event {
-  width: 50%;
-  height: 380px;
+  margin-right: 2%;
+  width: 49%;
 }
 .breakpoint-phone .event-calendar-event {
   float: none;
+  margin-right: 0;
   width: 100%;
-  height: auto;
-}
-.breakpoint-phone .event-calendar-event:after {
-  display: none;
 }
 .event-calendar-event:before {
   background-color: #dfdfdf;
@@ -554,6 +537,34 @@
 }
 .breakpoint-w-999 .event-calendar-event:before { display: none; }
 
+/* Clearing floats in the event grid */
+.breakpoint-w-999 .event-calendar-event.nth-child-4n {
+  margin-right: 0;
+}
+.breakpoint-w-999 .event-calendar-event.nth-child-4n-plus-1 {
+  clear: left;
+}
+.breakpoint-phone-wide .event-calendar-event.nth-child-4n {
+  margin-right: 2%;
+}
+.breakpoint-phone-wide .event-calendar-event.nth-child-2n {
+  margin-right: 0;
+}
+.breakpoint-phone-wide .event-calendar-event.nth-child-4n-plus-1 {
+  clear: none;
+}
+.breakpoint-phone-wide .event-calendar-event.nth-child-2n-plus-1 {
+  clear: left;
+}
+.breakpoint-phone .event-calendar-event.nth-child-2n,
+.breakpoint-phone .event-calendar-event.nth-child-2n-plus-1,
+.breakpoint-phone .event-calendar-event.nth-child-4n,
+.breakpoint-phone .event-calendar-event.nth-child-4n-plus-1 {
+  clear: left;
+  margin-right: 0;
+  width: 100%;
+}
+
   .event-calendar-event__anchor {
     display: block;
   }
@@ -562,6 +573,9 @@
       border-right: 1px solid #fff;
       overflow: hidden;
       margin-bottom: 10px;
+    }
+    .breakpoint-w-999 .event-calendar-event__hero {
+      border-right: none;
     }
       .event-calendar-event__hero-inner {
         position: relative;
@@ -578,6 +592,9 @@
     .event-calendar-event__details {
       overflow: hidden;
       padding-right: 20px;
+    }
+    .breakpoint-w-999 .event-calendar-event__details {
+      padding-right: 0;
     }
 
       .event-calendar-event__date,

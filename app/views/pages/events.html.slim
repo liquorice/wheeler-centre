@@ -28,6 +28,8 @@
                 / Superfluous div to add a gradient (can't use a pseudo-element because of the clearfix)
                 .event-calendar__month-gradient
                 h1.event-calendar__month-label = l(month, format: :month_name)
+                / Add an incrementing number to each event so that we can target different groups of events in our stylesheet
+                - event_index = 0
                 / Group events by weeks in month
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
@@ -48,7 +50,9 @@
                           / Output our found event/s
                           .event-calendar__day
                             - events_for_day.each do |event|
-                              = render "partials/event_for_calendar", event: event
+                              / Increment the event counter
+                              - event_index += 1
+                              = render "partials/event_for_calendar", event: event, event_index: event_index
                         - elsif index == 6
                           / Increment the days_with_gap and, because it's the last item in a week
                           / output the gap

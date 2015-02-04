@@ -3,7 +3,23 @@
 - elsif event.promo_image
   - image = event.promo_image
 
-.event-calendar-event
+/ Find an event's position and assign a class
+/ Useful for clearing floats in the event grid
+- nth_child_class = ""
+- if event_index % 2 == 0
+  / Equivalent to nth-child(2n)
+  - nth_child_class += 'nth-child-2n '
+- if event_index % 3 == 0
+  / Equivalent to nth-child(2n+1)
+  - nth_child_class += 'nth-child-2n-plus-1 '
+- if event_index % 4 == 0
+  / Equivalent to nth-child(4n)
+  - nth_child_class += 'nth-child-4n '
+- if event_index % 5 == 0
+  / Equivalent to nth-child(4n+1)
+  - nth_child_class += 'nth-child-4n-plus-1 '
+
+.event-calendar-event class="#{nth_child_class}"
   a.event-calendar-event__anchor href=event.absolute_url
     - if event.fields[:start_date].data_present?
       time.event-calendar-event__date
