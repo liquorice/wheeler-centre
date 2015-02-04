@@ -2677,6 +2677,7 @@ namespace :wheeler_centre do
 
         recording.fields[:video].asset_id = asset.id
         recording.fields[:audio].asset_id = asset.id
+        recording.save!
 
         if args[:create_recordings_assocications]
           # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
