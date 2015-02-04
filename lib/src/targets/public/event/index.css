@@ -575,7 +575,7 @@
 }
 
 .event-calendar-event--booked-out .event-calendar-event__hero-inner:before {
-  background-color: rgba(0,0,0,.4);
+  background-color: rgba(150,150,150,.7);
   content: "";
   position: absolute;
   top: 0;
@@ -600,4 +600,5 @@
   color: #fff;
   z-index: 3;
   text-align: center;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.3);
 }
