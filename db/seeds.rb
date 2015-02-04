@@ -298,6 +298,18 @@ venues_collection.locked = true
 venues_collection.page_order_position = :last if venues_collection.new_record?
 venues_collection.save!
 
+# Events -> Past events
+past_events = Heracles::Sites::WheelerCentre::EventsArchive.find_or_initialize_by(url: "events/past-events")
+past_events.site = site
+past_events.parent = events_index
+past_events.title = "Past events"
+past_events.slug = "past-events"
+past_events.published = true
+past_events.locked = true
+past_events.page_order_position = :last if past_events.new_record?
+past_events.save!
+
+
 # Writings
 # ------------------------------------------------------------------------------
 blog_index = Heracles::Sites::WheelerCentre::Blog.find_or_initialize_by(url: "writings")
