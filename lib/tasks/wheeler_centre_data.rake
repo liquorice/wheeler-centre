@@ -2684,7 +2684,7 @@ namespace :wheeler_centre do
           :file_ext => File.extname(video_file_name),
           :file_size => video_file_size,
           :file_mime => "video/mp4",
-          :file_type => "video",
+          :file_types => ["video", "audio"],
           :assembly_id => "video_migration",
           :assembly_url => "http://www.video_migration.com",
           :upload_duration => 0,
