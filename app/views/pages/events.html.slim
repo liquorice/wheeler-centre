@@ -30,7 +30,6 @@
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
                     .event-calendar__week-inner.clearfix
-                      / span = l(week, format: :medium_date)
                       / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
                       / so that we can fill them with stuff
                       - days_with_gap = 0
@@ -46,7 +45,6 @@
                             - days_with_gap = 0
                           / Output our found event/s
                           .event-calendar__day
-                            / span.event-calendar__day-label = l(day, format: :day_short_name)
                             - events_for_day.each do |event|
                               = render "partials/event_for_calendar", event: event
                         - elsif index == 6

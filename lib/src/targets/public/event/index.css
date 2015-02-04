@@ -497,13 +497,17 @@
       margin-bottom: 10px;
     }
 
-      .event-calendar-event__hero img {
-        display: block;
-        max-width: 100%;
-        transition-property: transform, opacity;
-        transition-duration: 900ms;
-        opacity: 1;
+      .event-calendar-event__hero-inner {
+        position: relative;
       }
+
+        .event-calendar-event__hero img {
+          display: block;
+          max-width: 100%;
+          transition-property: transform, opacity;
+          transition-duration: 900ms;
+          opacity: 1;
+        }
 
     .event-calendar-event__details {
       overflow: hidden;
@@ -552,3 +556,48 @@
     transform: scale3d(1.1, 1.1, 1);
     opacity: 0.85;
   }
+
+/* Index: booked out events */
+
+.event-calendar-event--booked-out .title-text {
+  color: #888;
+}
+
+.event-calendar-event--booked-out .event-calendar-event__anchor:hover .title-text,
+.event-calendar-event--booked-out .event-calendar-event__anchor:focus .title-text {
+  color: #888;
+}
+
+.event-calendar-event--booked-out .event-calendar-event__hero img {
+  filter: gray;
+  filter: grayscale(1);
+  -webkit-filter: grayscale(1);
+}
+
+.event-calendar-event--booked-out .event-calendar-event__hero-inner:before {
+  background-color: rgba(0,0,0,.4);
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
+  content: "Booked out";
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  color: #fff;
+  z-index: 3;
+  text-align: center;
+}
