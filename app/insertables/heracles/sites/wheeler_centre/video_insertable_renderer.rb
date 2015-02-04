@@ -5,6 +5,11 @@ module Heracles
 
         ### Helpers
 
+        def display_type
+          data[:embedData][:type].presence || "video"
+        end
+        helper_method :display_type
+
         def display_class
           "figure__display--#{(data[:display].presence || "default").downcase}"
         end

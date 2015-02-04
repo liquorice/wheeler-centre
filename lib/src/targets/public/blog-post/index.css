@@ -146,6 +146,10 @@
     margin-left: calc(-25% + 35px);
     margin-right: calc(-25% + 35px);
   }
+    .breakpoint-widescreen-wide .blog-post .figure__display--default.figure__rich {
+      margin-left: 0;
+      margin-right: 0;
+    }
 
 .blog-post .figure__display--left-aligned {
   float: left;
