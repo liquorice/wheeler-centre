@@ -16,6 +16,20 @@ module Heracles
           }
         end
 
+        ### Accessors
+
+        def events(options={})
+          search_events(options)
+        end
+
+        def upcoming_events(options={})
+          search_events(options)
+        end
+
+        def sponsors
+           @sponsors ||= fields["sponsors"].pages.published
+        end
+
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
@@ -32,18 +46,6 @@ module Heracles
           date :created_at do
             created_at.to_s(:admin_date)
           end
-        end
-
-        def events(options={})
-          search_events(options)
-        end
-
-        def upcoming_events(options={})
-          search_events(options)
-        end
-
-        def sponsors
-           @sponsors ||= fields["sponsors"].pages.published
         end
 
         private

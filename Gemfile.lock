@@ -16,15 +16,14 @@ GIT
     sunspot-queue (0.10.2)
       sunspot_rails (>= 1.3.0)
 
-GIT
-  remote: git@bitbucket.org:icelab/heracles.git
-  revision: 16a08b8ccf866491a6dc1fe2ebc08505dc885b59
-  branch: master
+PATH
+  remote: ../heracles
   specs:
     heracles (1.0.0)
       activejob
       acts-as-taggable-on
       ancestry
+      api-pagination (~> 4.1.0)
       autoprefixer-rails
       aws-sdk
       bourbon
@@ -110,12 +109,13 @@ GEM
     addressable (2.3.6)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
+    api-pagination (4.1.0)
     arel (5.0.1.20140414130214)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    autoprefixer-rails (5.1.0)
+    autoprefixer-rails (5.1.3)
       execjs
       json
     aws-sdk (1.61.0)
@@ -326,7 +326,7 @@ GEM
     rails-assets-jquery-ujs-standalone (1.0.0)
       rails-assets-jquery (> 1.7)
     rails-assets-jstimezonedetect (1.0.5)
-    rails-assets-lodash (3.0.1)
+    rails-assets-lodash (3.1.0)
     rails-assets-momentjs (2.9.0)
     rails-assets-nprogress (0.1.6)
     rails-assets-pikaday (1.3.1)

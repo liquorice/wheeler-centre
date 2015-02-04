@@ -2890,8 +2890,8 @@ namespace :wheeler_centre do
     require "yaml"
     require "blueprint_shims"
 
-    backup_root = "/Users/tim/Files/wheeler-centre-assets"
-    backup_data_file = "#{backup_root}/backup-2014-12-18.yml"
+    backup_root = "/Users/max/src/wheeler-centre-assets"
+    backup_data_file = "#{backup_root}/backup.yml"
 
     blueprint_assets = YAML.load_stream(File.read(backup_data_file)).select { |r| r.class == LegacyBlueprint::Asset }
 
