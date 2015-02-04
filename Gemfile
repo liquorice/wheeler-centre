@@ -11,8 +11,7 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-# gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
-gem "heracles", path: "../heracles"
+gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
 
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
