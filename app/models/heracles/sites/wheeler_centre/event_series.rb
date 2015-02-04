@@ -8,18 +8,43 @@ module Heracles
               {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :body, type: :content},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
+              {name: :highlight_colour, type: :text, editor_type: 'code'},
               {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
               {name: :topics, type: :associated_pages, page_type: :topic},
-              {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"},
-              {name: :highlight_colour, type: :text, editor_type: 'code'}
+              {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"}
             ]
+          }
+        end
+
+        ### Summary
+
+        def to_summary_hash
+          events_display = if events.length == 1
+            events.map(&:title).join(", ")
+          elsif events.length > 1
+            "#{events.length} events"
+          else
+            "×"
+          end
+          {
+            title: title,
+            events: events_display,
+            archived: (fields[:archived].value) ? "✔" : "•",
+            published: (published) ? "✔" : "•",
+            created_at:  created_at.to_s(:admin_date)
           }
         end
 
         ### Accessors
 
-        def events(options={})
-          search_events(options)
+        def events
+          Heracles::Page.
+            of_type("event").
+            joins(:insertions).
+            where(
+              :"insertions.field" => "series",
+              :"insertions.inserted_key" => insertion_key
+            )
         end
 
         def upcoming_events(options={})

@@ -35,9 +35,11 @@ module Heracles
         def to_summary_hash
           {
             title: title,
-            video: (fields[:video].data_present?) ? "Yes" : "No",
-            audio: (fields[:audio].data_present?) ? "Yes" : "No",
+            people: fields[:people].pages.map(&:title).join(", "),
+            video: (fields[:video].data_present?) ? "✔" : "×",
+            audio: (fields[:audio].data_present?) ? "♫" : "×",
             recording_date: fields[:recording_date],
+            published: (published) ? "✔" : "•",
             created_at:  created_at.to_s(:admin_date)
           }
         end

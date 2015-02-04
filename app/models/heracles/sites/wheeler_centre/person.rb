@@ -23,6 +23,24 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            first_name: fields[:first_name],
+            last_name: fields[:last_name],
+            portrait: (fields[:portrait].data_present?) ? "✔" : "•",
+            staff: (fields[:is_staff_member].value) ? "✔" : "•",
+            published: (published) ? "✔" : "•",
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
+        ### Accessors
+
+        ### Searchable
+
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)

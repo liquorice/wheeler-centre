@@ -41,8 +41,11 @@ module Heracles
           {
             title: title,
             series: fields[:series].pages.map(&:title).join(", "),
+            promo_image: (fields[:promo_image].data_present?) ? "✔" : "•",
+            booking: (fields[:external_bookings].data_present?) ? "✔" : "•",
             recordings: fields[:recordings],
             start_date: fields[:start_date],
+            published: (published) ? "✔" : "•",
             created_at:  created_at.to_s(:admin_date)
           }
         end
