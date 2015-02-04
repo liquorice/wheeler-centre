@@ -150,10 +150,29 @@ module LegacyBlueprint
             blueprint_attachable_id: object_scope["id"].to_i,
             blueprint_name: asset_name
           ).first
+          # Try to match them by their file_basename if we get no match above
+          # because Blueprint assets names be changed _after_ they're embedded
           unless asset
             asset = Heracles::Asset.where(
               blueprint_attachable_type: object_class_name,
               blueprint_attachable_id: object_scope["id"].to_i,
+              file_basename: asset_name
+            ).first
+          end
+          # Still nothing?! Try to match a draft type because Blueprint assets
+          # can be "Drafts" but be actually really used. Drafts have different
+          # IDs so if there are similarly named files then we'll get mistakes
+          # but whatevs
+          unless asset
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: "Draft",
+              blueprint_name: asset_name
+            ).first
+          end
+          unless asset
+            # OH COME ON?! Try to match a draft type and basename
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: "Draft",
               file_basename: asset_name
             ).first
           end
