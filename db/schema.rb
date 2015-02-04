@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202061537) do
+ActiveRecord::Schema.define(version: 20150204055853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20150202061537) do
     t.string   "file_ext",                               null: false
     t.integer  "file_size",                              null: false
     t.string   "file_mime",                              null: false
-    t.string   "file_type"
     t.string   "assembly_id",                            null: false
     t.string   "assembly_url",                           null: false
     t.float    "upload_duration"
@@ -48,9 +47,10 @@ ActiveRecord::Schema.define(version: 20150202061537) do
     t.string   "blueprint_caption"
     t.string   "blueprint_assoc"
     t.integer  "recording_id"
+    t.string   "file_types",                default: [],              array: true
   end
 
-  add_index "assets", ["file_type"], name: "index_assets_on_file_type", using: :btree
+  add_index "assets", ["file_types"], name: "index_assets_on_file_types", using: :btree
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
 
   create_table "heracles_site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
@@ -191,9 +191,11 @@ ActiveRecord::Schema.define(version: 20150202061537) do
   create_table "tags", force: true do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.string  "slug",                       null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
