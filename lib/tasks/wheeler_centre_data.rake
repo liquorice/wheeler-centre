@@ -1496,6 +1496,7 @@ namespace :wheeler_centre do
           if blueprint_podcast_episode["publish_on"].present?
             heracles_podcast_episode.fields[:publish_date].value = ActiveSupport::TimeZone["Melbourne"].parse(blueprint_podcast_episode["publish_on"])
           end
+          heracles_podcast_episode.fields[:recording_date].value = Time.zone.parse(blueprint_podcast_episode["start_date"].to_s)
 
           # Associate field data
           heracles_podcast_episode.fields[:description].value = clean_content LegacyBlueprint::BluedownFormatter.mark_up(blueprint_podcast_episode["content"], subject: blueprint_podcast_episode, assetify: false)
@@ -1580,6 +1581,7 @@ namespace :wheeler_centre do
           if heracles_event
             heracles_event.fields[:podcast_episodes].page_ids = heracles_event.fields[:podcast_episodes].page_ids << heracles_podcast_episode.id
             heracles_event.save!
+            heracles_podcast_episode.fields[:recording_date].value = heracles_event.fields[:start_date].value
 
             # Get the asset IDs from any recordings too
             heracles_recordings = heracles_event.fields[:recordings].pages
