@@ -579,7 +579,7 @@
 
         .event-calendar-event__hero img {
           display: block;
-          max-width: 100%;
+          width: 100%;
           transition-property: transform, opacity;
           transition-duration: 900ms;
           opacity: 1;
@@ -695,6 +695,14 @@
   z-index: 3;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+.breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
+  font-size: 18px;
+  font-size: 1.8rem;
+}
+.breakpoint-phone .event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
+  font-size: 20px;
+  font-size: 2.0rem;
 }
 
 /* Index: event series */
