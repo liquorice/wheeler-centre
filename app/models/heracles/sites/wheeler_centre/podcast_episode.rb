@@ -30,6 +30,18 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            video: (fields[:video].data_present?) ? "Yes" : "No",
+            audio: (fields[:audio].data_present?) ? "Yes" : "No",
+            recording_date: fields[:recording_date],
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
         ### Accessors
 
         def events
