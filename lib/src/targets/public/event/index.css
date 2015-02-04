@@ -374,12 +374,22 @@
   padding-top: 70px;
   padding-bottom: 50px;
 }
+.breakpoint-tablet .event-index {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.breakpoint-phone-wide .event-index,
+.breakpoint-phone .event-index {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
   .event-calendar__legend {
     padding-left: 35px;
     padding-right: 35px;
     padding-bottom: 20px;
   }
+  .breakpoint-w-999 .event-calendar__legend { display: none; }
 
     .event-calendar__legend-day {
       float: left;
@@ -404,7 +414,11 @@
     padding-top: 35px;
     position: relative;
   }
-  .event-calendar__month:before {
+  .breakpoint-w-999 .event-calendar__month {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  .event-calendar__month-gradient {
     background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.05)));
     background: -webkit-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
     background: -moz-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
@@ -434,6 +448,19 @@
       padding-left: 35px;
       padding-right: 35px;
       padding-bottom: 20px;
+    }
+    .breakpoint-w-999 .event-calendar__week {
+      border: 0;
+      display: inline;
+      padding: 0;
+    }
+    .breakpoint-w-999 .event-calendar__week-inner {
+      display: inline;
+    }
+    .breakpoint-w-999 .event-calendar__week-inner.clearfix:before,
+    .breakpoint-w-999 .event-calendar__week-inner.clearfix:after {
+      /* Kill the clearfix to remove any concept of a "week" layout */
+      display: none;
     }
 
       .event-calendar__day,
@@ -470,12 +497,28 @@
       .event-calendar__day-gap--7 {
         width: 100%;
       }
+      .breakpoint-w-999 .event-calendar__day {
+        display: inline;
+        float: none;
+        margin-top: 0;
+        position: static;
+      }
+      .breakpoint-w-999 .event-calendar__day-gap { display: none; }
 
 /* Index: individual events */
 
 .event-calendar-event {
   margin-bottom: 20px;
   position: relative;
+}
+.breakpoint-w-999 .event-calendar-event {
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100px;
+  overflow: hidden;
+  width: 250px;
+  height: 300px;
 }
 .event-calendar-event:before {
   background-color: #dfdfdf;
@@ -486,6 +529,7 @@
   width: 1px;
   height: 20px;
 }
+.breakpoint-w-999 .event-calendar-event:before { display: none; }
 
   .event-calendar-event__anchor {
     display: block;
@@ -495,6 +539,10 @@
       border-right: 1px solid #fff;
       overflow: hidden;
       margin-bottom: 10px;
+    }
+    .breakpoint-w-999 .event-calendar-event__hero {
+      border-right: none;
+      display: none; /* DELETE ME */
     }
 
       .event-calendar-event__hero-inner {
@@ -530,8 +578,18 @@
         padding-left: 10px;
         padding-right: 10px;
       }
+      .breakpoint-w-999 .event-calendar-event__date {
+        background-color: transparent;
+        padding-left: 0;
+        padding-right: 0;
+        display: block;
+        position: static;
+      }
       .event-calendar-event:not(:first-child) .event-calendar-event__date {
         display: none;
+      }
+      .breakpoint-w-999 .event-calendar-event:not(:first-child) .event-calendar-event__date {
+        display: block;
       }
 
       .event-calendar-event__series {
@@ -610,7 +668,7 @@
 }
 
   .event-series__block {
-    background-color: pink;
+    background-color: var(--primary-color);
     float: left;
     text-align: center;
     height: 360px;
