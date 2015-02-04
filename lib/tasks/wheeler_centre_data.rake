@@ -2337,7 +2337,7 @@ namespace :wheeler_centre do
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
-    youtube_migrations_data = YAML::load(File.read("youtube_migrations.yml"))
+    youtube_migrations_data = YAML::load(File.read("lib/video_migration/outputs/youtube_migrations.yml"))
 
     site = Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
     parent = Heracles::Page.find_by_slug("broadcasts")
