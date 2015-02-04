@@ -2234,7 +2234,7 @@ namespace :wheeler_centre do
   end
 
   # Usage:
-  # rake wheeler_centre:import_blueprint_recordings["/Users/josephinehall/Development/wheeler-centre/backup.yml","video.wheelercentre.com","/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml"]
+  # rake wheeler_centre:import_blueprint_recordings["/Users/josephinehall/Development/wheeler-centre/backup.yml"]
   desc "Import legacy Blueprint 'CenvidPost' content to be Recordings"
   task :import_blueprint_recordings, [:yml_file] => :environment do |task, args|
     require "yaml"
@@ -2390,6 +2390,8 @@ namespace :wheeler_centre do
     end
   end
 
+  # Usage
+  # rake wheeler_centre:migrate_videos["/Users/josephinehall/Development/wheeler-centre/backup.yml","video.wheelercentre.com","/Users/josephinehall/Development/wheeler-centre/lib/video_migration/config.yml","0","10"]
   desc "Migrate videos to Youtube"
   task :migrate_videos, [:yml_file, :bucket_name, :video_config_file, :drop, :take, :create_instances ] => :environment do |task, args|
     require "yaml"
