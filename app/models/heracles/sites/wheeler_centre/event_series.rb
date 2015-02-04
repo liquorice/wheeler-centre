@@ -21,6 +21,14 @@ module Heracles
             fields[:topics].pages.map(&:id)
           end
 
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
+
+          text :body do
+            fields[:body].value
+          end
+
           date :created_at do
             created_at.to_s(:admin_date)
           end

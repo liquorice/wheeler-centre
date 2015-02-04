@@ -51,6 +51,16 @@ module Heracles
           fields[:short_title].data_present? ? fields[:short_title] : title
         end
 
+        def summary
+          if fields[:summary].data_present?
+            fields[:summary]
+          elsif fields[:intro].data_present?
+            fields[:intro]
+          else
+            fields[:body]
+          end
+        end
+
         ### Accessors
 
         def series
@@ -103,6 +113,9 @@ module Heracles
             fields[:topics].pages.map(&:id)
           end
 
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
           text :body do
             fields[:body].value
           end
