@@ -2531,7 +2531,7 @@ namespace :wheeler_centre do
   # Optional flag to create yaml file of the results for each Recording:
   # rake wheeler_centre:create_video_assets["backup-data.yml","true"]
   desc "Create video asset records"
-  task :create_video_assets, [:yml_file, :create_recordings_assocications] => :environment do |task, args|
+  task :create_video_assets, [:yml_file, :create_recordings_associations] => :environment do |task, args|
     require "yaml"
     require "blueprint_shims"
     require "video_migration/s3_util"
@@ -2679,7 +2679,7 @@ namespace :wheeler_centre do
         recording.fields[:audio].asset_id = asset.id
         recording.save!
 
-        if args[:create_recordings_assocications]
+        if args[:create_recordings_associations]
           # Write the urls to a file along with the uuids and the recording ids, so we can associate them with Recordings later.
           audio_video_encode = {
             "recording_id" => recording.fields[:recording_id].value,
