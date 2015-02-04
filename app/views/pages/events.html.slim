@@ -24,7 +24,7 @@
           .event-calendar__year
             / Group events by month in year
             - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
-              .event-calendar__month.gradient-top-down
+              .event-calendar__month
                 h1.event-calendar__month-label = l(month, format: :month_name)
                 / Group events by weeks in month
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
@@ -41,9 +41,7 @@
                           / We have some events! If there is a preceding gap, output the gap _before_ the event
                           - if days_with_gap > 0
                             .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
-                              ' Space for a block of
-                              = days_with_gap
-                              '  to fit
+                              / Filler content in here
                             / Reset gap to 0 to keep the iteration going
                             - days_with_gap = 0
                           / Output our found event/s
@@ -56,29 +54,7 @@
                           / output the gap
                           - days_with_gap += 1
                           .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
-                            ' Space for a block of
-                            = days_with_gap
-                            '  to fit
+                            / Filler content in here
                         - else
                           / Increment the days_with_gap but output nothing
                           - days_with_gap += 1
-
-
-        - if events.results.present?
-          .events
-            - events.results.each do |event|
-              - if event.fields[:promo_image].data_present?
-                .event__hero-image
-                  img src=event.fields[:promo_image].asset.admin_thumbnail_url itemprop="hero_image" alt=event.title title=event.title
-              a href=event.absolute_url
-                h3.event__title
-                  = event.title
-              p.event-widget__date
-                = event.fields[:display_date].value.present? ? event.fields[:display_date].value : format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")
-            .pagination-context.pagination-context--bottom
-              ' Page
-              = (params[:page] || 1)
-              em &nbsp;of&nbsp;
-              = events.results.total_pages
-            .pagination-bottom
-              = paginate events.results, outer_window: 4

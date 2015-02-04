@@ -59,6 +59,7 @@ en:
       month: '%m'
       day_name: '%A'
       day_short_name: '%a'
+      day_short_name_and_date: '%a, %e %b'
       day: '%-d'
       path_year: '/%Y'
       path_month: '/%Y/%m'

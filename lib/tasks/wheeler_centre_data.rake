@@ -1280,6 +1280,8 @@ namespace :wheeler_centre do
         authors = all_authors.select { |p| blueprint_daily["user_id"].present? && p.fields[:legacy_user_id].value.to_i == blueprint_daily["user_id"].to_i }
         if authors.present?
           heracles_blog_post.fields[:authors].page_ids = authors.map(&:id)
+        else
+          heracles_blog_post.fields[:authors].page_ids = []
         end
 
         tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_daily["id"], "TumPost")
@@ -2161,6 +2163,7 @@ namespace :wheeler_centre do
           heracles_book.fields[:reviewer].value = blueprint_vpla_book["reviewer"]
           heracles_book.fields[:library].value = blueprint_vpla_book["reviewer_library"]
           heracles_book.fields[:library_website].value = blueprint_vpla_book["reviewer_url"]
+          heracles_book.fields[:judges_report].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_vpla_book["judges_report"], subject: blueprint_vpla_book)
 
           category = heracles_categories.find {|c| c.slug == slugify(blueprint_vpla_book["category"])}
           if category

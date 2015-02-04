@@ -7,21 +7,23 @@
   a.event-calendar-event__anchor href=event.absolute_url
     - if event.fields[:start_date].data_present?
       time.event-calendar-event__date
-        = l event.fields[:start_date].value, format: :medium_date
-    - if image
-      .event-calendar-event__hero
-        .event-calendar-event__hero-inner
-          img src=image.content_thumbnail_url
-        - if image.attribution.present?
-          .event-calendar-event__hero-caption.caption
-            p = image.attribution
-    - if event.series
-      p.event-calendar-event__series
-        = event.series.title
-    h3.event-calendar-event__title
-      span.title-text == widont_format markdown_line event.title
-      - selected_primary_topics = select_primary_topics_for_page(event)
-      - if selected_primary_topics && selected_primary_topics.any?
-        span.title-tags
-          '  &nbsp;/&nbsp;
-          = selected_primary_topics.first.title
+        = l event.fields[:start_date].value, format: :day_short_name_and_date
+      - if event.fields[:thumbnail_image].data_present?
+        .event-calendar-event__hero
+          .event-calendar-event__hero-inner
+            - image = event.fields[:thumbnail_image].asset
+      - elsif event.promo_image
+        .event-calendar-event__hero
+          .event-calendar-event__hero-inner
+            - image = event.promo_image
+    .event-calendar-event__details
+      - if event.series
+        p.event-calendar-event__series
+          = event.series.title
+      h3.event-calendar-event__title
+        span.title-text == widont_format markdown_line event.title
+        - selected_primary_topics = select_primary_topics_for_page(event)
+        - if selected_primary_topics && selected_primary_topics.any?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = selected_primary_topics.first.title
