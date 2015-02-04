@@ -10,7 +10,8 @@ module Heracles
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
               {name: :topics, type: :associated_pages, page_type: :topic},
-              {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"}
+              {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"},
+              {name: :highlight_colour, type: :text, editor_type: 'code'}
             ]
           }
         end

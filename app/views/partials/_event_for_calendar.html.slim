@@ -1,8 +1,3 @@
-- if event.fields[:thumbnail_image].data_present?
-  - image = event.fields[:thumbnail_image].asset
-- elsif event.promo_image
-  - image = event.promo_image
-
 .event-calendar-event
   a.event-calendar-event__anchor href=event.absolute_url
     - if event.fields[:start_date].data_present?

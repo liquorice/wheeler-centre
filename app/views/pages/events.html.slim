@@ -11,7 +11,7 @@
       .event-index
         .page__intro.intro.event-index__intro.column-wrapper
           .column-narrow.copy
-            = render_content page.fields[:body]
+            = render_content page.fields[:intro]
 
         / Output days of the week
         .event-calendar__legend.clearfix
@@ -24,13 +24,14 @@
           .event-calendar__year
             / Group events by month in year
             - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
-              .event-calendar__month
+              .event-calendar__month.clearfix
+                / Superfluous div to add a gradient (can't use a pseudo-element because of the clearfix)
+                .event-calendar__month-gradient
                 h1.event-calendar__month-label = l(month, format: :month_name)
                 / Group events by weeks in month
                 - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
                   .event-calendar__week
                     .event-calendar__week-inner.clearfix
-                      / span = l(week, format: :medium_date)
                       / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
                       / so that we can fill them with stuff
                       - days_with_gap = 0
@@ -46,7 +47,6 @@
                             - days_with_gap = 0
                           / Output our found event/s
                           .event-calendar__day
-                            / span.event-calendar__day-label = l(day, format: :day_short_name)
                             - events_for_day.each do |event|
                               = render "partials/event_for_calendar", event: event
                         - elsif index == 6
@@ -58,3 +58,43 @@
                         - else
                           / Increment the days_with_gap but output nothing
                           - days_with_gap += 1
+
+        / Event series
+        .event-series.clearfix
+          .event-series__block.event-series__block--one
+            a.event-series__anchor href="#"
+              img.event-series__image src="http://lorempixel.com/600/400"
+              .event-series__text
+                h1.event-series__title
+                  | Question Time
+                p.event-series__description
+                  | We&rsquo;re putting the dignity back into proceedings &hellip; along with a generous amount of time. It&rsquo;s one full hour of pure Q&amp;A between you, our audience, moderator Madeleine Morris, and a panel of experts.
+                span.event-series__action View this 6 event series
+          .event-series__block.event-series__block--two
+            a.event-series__anchor href="#"
+              img.event-series__image src="http://fillmurray.com/600/400"
+              .event-series__text
+                h1.event-series__title
+                  | Words &amp; Music
+                p.event-series__description
+                  | Who do our favourite writers listen to? What do the musicians we admire love to read? In each event, our guest writer will highlight music that has inspired their writing, while our guest musician tells us the writing that have helped shape their musical direction.
+                span.event-series__action View this 12 event series
+          .event-series__block.event-series__block--three
+            a.event-series__anchor href="#"
+              img.event-series__image src="http://placesheen.com/600/400"
+              .event-series__text
+                h1.event-series__title
+                  | Middlesex: Queer Week
+                p.event-series__description
+                  | In a week of open discussion and joyous celebration, we&rsquo;re exploring sexuality and identity in all their alternative forms.
+                span.event-series__action View this 4 event series
+          .event-series__block.event-series__block--four
+            a.event-series__anchor href="#"
+              img.event-series__image src="http://placecage.com/600/400"
+              .event-series__text
+                h1.event-series__title
+                  | The Next Big Thing
+                p.event-series__description
+                  | Australia consistently produces a wealth of new literary talent — from debut novelists to shot-story writers, memoirists to poets. How to up? It&rsquo;s simple. Head on down to The Next Big Thing, where you&rsquo;ll head from and meet exciting new and emerging authors.
+                span.event-series__action View this 9 event series
+
