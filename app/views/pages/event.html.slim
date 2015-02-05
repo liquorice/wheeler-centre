@@ -6,21 +6,13 @@
     h1.title Events
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events"
-          ' Calendar
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events/series"
-          ' Event series
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events/presenters"
-          ' Presenters
+  - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .event data-view-event=true
     - if page.series
-      .event__series-header.column-wrapper
+      a.event__series-header.column-wrapper href=page.series.absolute_url
         .column-full.clearfix
           .event__series-header-inner
             p.event__series-meta Part of a #{page.series.events.length} event series

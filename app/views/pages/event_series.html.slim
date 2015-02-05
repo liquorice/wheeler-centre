@@ -6,7 +6,7 @@
     h1.title Events
 
 = area :masthead_contextual_navigation do
-  - pages = [events_page] + events_page.children.visible.published.where(collection_id: nil)
+  - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
