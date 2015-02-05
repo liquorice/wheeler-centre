@@ -16,15 +16,8 @@ GIT
     sunspot-queue (0.10.2)
       sunspot_rails (>= 1.3.0)
 
-<<<<<<< Updated upstream
-GIT
-  remote: git@bitbucket.org:icelab/heracles.git
-  revision: 47d79c3cfb93ca59bc994c707d1b29b38813f0a1
-  branch: master
-=======
 PATH
   remote: ../heracles
->>>>>>> Stashed changes
   specs:
     heracles (1.0.0)
       activejob
@@ -461,7 +454,6 @@ GEM
       rails (>= 3)
       sunspot (= 2.1.1)
     sunspot_solr (2.1.1)
-    syck (1.0.1)
     temple (0.7.5)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
@@ -553,7 +545,6 @@ DEPENDENCIES
   spring-commands-rspec
   sunspot-queue!
   sunspot_solr
-  syck (= 1.0.1)
   thin
   trollop
   truncate_html
