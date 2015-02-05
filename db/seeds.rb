@@ -152,11 +152,13 @@ site.transloadit_params = {
     "video_ipad_high" => {
       "robot" => "/video/encode",
       "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
       "preset" => "ipad-high"
     },
     "video_iphone_high" => {
       "robot" => "/video/encode",
       "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
       "preset" => "iphone-high"
     },
     "store" => {
