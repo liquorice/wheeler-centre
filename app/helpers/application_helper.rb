@@ -141,4 +141,16 @@ module ApplicationHelper
     (0..6).map {|d| week + d.days}
   end
 
+  # General pages
+
+  def descendant_of(page, ancestor)
+    is_descendant = false
+    ancestor.descendants.each  do |d|
+      if d.id == page.id
+        is_descendant = true
+      end
+    end
+    is_descendant
+  end
+
 end

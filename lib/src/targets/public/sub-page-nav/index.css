@@ -17,13 +17,16 @@
     margin-bottom: 12px;
   }
 
-  .sub-page-nav__item {
-  }
+  .sub-page-nav__item {}
+    .sub-page-nav__item--active {}
+    .sub-page-nav__item--has-children {}
+
   .sub-page-nav__anchor {
     border-radius: 3px;
     display: block;
     padding: 7px 12px;
   }
+    .sub-page-nav__anchor--active {}
     .sub-page-nav__anchor:hover {
       background-color: #dbfffb;
       color: var(--primary-color);

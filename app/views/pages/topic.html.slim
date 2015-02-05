@@ -17,7 +17,7 @@
         .topic-page__nav-list
           h3.topic-page__nav-title
             a href=primary_topic.absolute_url = primary_topic.title
-          = render "partials/page_children", parent: primary_topic, current: page
+          = render "partials/page_nav_children", parent: primary_topic, current: page
       h1.topic-page__title
         = page.title
     - if page.fields[:intro].data_present?

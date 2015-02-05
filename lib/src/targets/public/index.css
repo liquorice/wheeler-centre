@@ -156,6 +156,7 @@ body {
 @import "./video-player";
 @import "./audio-player";
 @import "./subscribe";
+@import "./content-page";
 @import "./topics-section";
 @import "./blog-post";
 @import "./event";

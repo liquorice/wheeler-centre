@@ -1,0 +1,9 @@
+- level = level || 1
+ul.sub-page-nav class="sub-page-nav--level-#{level}"
+  - if parent.children.visible.published.any?
+    - parent.children.in_order.visible.published.each do |child|
+      li.sub-page-nav__item class="#{((child.id == current.id) ? "sub-page-nav__item--active" : "")} (child.children.any? ? 'sub-page-nav__item--has-children' ? : '')"
+        a.sub-page-nav__anchor class="#{((child.id == current.id) ? "sub-page-nav__anchor--active" : "")}" href=child.absolute_url
+          = child.title
+        - if (child.children.any? && descendant_of(current, child)) || (child.children.any? && child.id == current.id)
+          = render "partials/page_nav_children", parent: child, current: current, level: level + 1
