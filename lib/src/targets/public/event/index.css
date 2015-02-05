@@ -404,9 +404,9 @@
   width: 40%;
 }
 /* Bookings can span the whole page when there's > 6 presenters */
-.breakpoint-tablet-wide .event__presenters--long + .event__tickets,
-.breakpoint-tablet .event__presenters--long + .event__tickets {
-  width: 100%;
+.event__presenters--long + .event__tickets {
+  padding-right: 0;
+  width: 50%;
 }
 .breakpoint-w-699 .event__tickets {
   padding-bottom: 20px;
@@ -423,6 +423,7 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
+  .event__presenters--long + .event__tickets:before,
   .breakpoint-w-699 .event__tickets:before {
     width: 100%;
   }
@@ -475,9 +476,26 @@
 .event__series-summary {
   float: left;
   padding-bottom: 35px;
-  padding-right: 50px;
+  padding-right: 35px;
   position: relative;
   width: 50%;
+}
+.breakpoint-tablet-wide .event__series-summary,
+.breakpoint-tablet .event__series-summary {
+  padding-bottom: 30px;
+  width: 40%;
+}
+/* Series summary can span the whole page when there's > 6 presenters */
+.event__presenters--long + .event__tickets + .event__series-summary {
+  padding-right: 0;
+  width: 50%;
+}
+.breakpoint-w-699 .event__series-summary,
+.breakpoint-w-699 .event__presenters--long + .event__tickets + .event__series-summary {
+  padding-bottom: 20px;
+  padding-right: 0;
+  float: none;
+  width: 100%;
 }
   .event__series-summary:before {
     display: block;
@@ -488,6 +506,10 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
+  .event__presenters--long + .event__tickets + .event__series-summary:before,
+  .breakpoint-w-699 .event__series-summary:before {
+    width: 100%;
+  }
 
   .event__series-summary-details {
     color: #666;
@@ -495,6 +517,12 @@
     font-size: 17px;
     font-size: 1.7rem;
     line-height: 1.5;
+  }
+  .breakpoint-tablet .event__series-summary-details,
+  .breakpoint-phone-wide .event__series-summary-details,
+  .breakpoint-phone .event__series-summary-details {
+    font-size: 16px;
+    font-size: 1.6rem;
   }
 
 .event__series-summary-image {
