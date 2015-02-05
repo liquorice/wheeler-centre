@@ -9,13 +9,13 @@
 - if event_index % 2 == 0
   / Equivalent to nth-child(2n)
   - nth_child_class += 'nth-child-2n '
-- if event_index % 3 == 0
+- if event_index % 2 == 1
   / Equivalent to nth-child(2n+1)
   - nth_child_class += 'nth-child-2n-plus-1 '
 - if event_index % 4 == 0
   / Equivalent to nth-child(4n)
   - nth_child_class += 'nth-child-4n '
-- if event_index % 5 == 0
+- if event_index % 4 == 1
   / Equivalent to nth-child(4n+1)
   - nth_child_class += 'nth-child-4n-plus-1 '
 
