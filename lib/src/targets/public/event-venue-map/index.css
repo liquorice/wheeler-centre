@@ -17,6 +17,11 @@
     padding: 35px 45px 35px 35px;
     position: relative;
   }
+  .breakpoint-w-699 .event__venue-map-panel {
+    font-size: 15px;
+    font-size: 1.5rem;
+    padding: 15px 25px 15px 15px;
+  }
     .event__venue-map-panel h4 {
       font-weight: bold;
       margin-bottom: 0.5em;

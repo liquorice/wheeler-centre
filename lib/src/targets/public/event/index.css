@@ -467,6 +467,9 @@
   padding-top: 35px;
   padding-bottom: 35px;
 }
+.breakpoint-phone .event__venue {
+  padding-top: 20px;
+}
 
 .event__venue-info {
   padding-bottom: 30px;
