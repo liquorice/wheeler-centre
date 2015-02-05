@@ -3,7 +3,11 @@
 
 = area :masthead_title do
   .page__title.page__title--events
-    h1.title == page.title
+    h1.title Events
+
+= area :masthead_contextual_navigation do
+  - pages = [page] + page.children.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .page__content

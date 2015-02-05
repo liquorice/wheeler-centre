@@ -1,0 +1,32 @@
+- upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 1000)
+- past_events = page.past_events(page: params[:page], per_page: params[:per_page] || 1000)
+
+= area :masthead_title do
+  .page__title.page__title--events
+    h1.title Events
+
+= area :masthead_contextual_navigation do
+  - pages = [events_page] + events_page.children.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .event-series
+    .column-wrapper
+      .column-wide.copy
+        h1  == widont_format markdown_line page.title
+        - if upcoming_events.results.total_pages > 0
+          h2 Upcoming events
+          ul
+            - upcoming_events.results.each do |event|
+              li
+                a href=event.absolute_url = event.title
+
+        - if past_events.results.total_pages > 0
+          h2 Past events
+          ul
+            - past_events.results.each do |event|
+              li
+                a href=event.absolute_url
+                  = event.title
+                  ',
+                  = l event.fields[:start_date].value, format: :medium_date
