@@ -1519,7 +1519,7 @@ namespace :wheeler_centre do
           end
 
           # Tags
-          tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "CenevtEvent")
+          tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_podcast_episode["id"], "EvtEvent")
           if tags_for_post.any?
             apply_tags_to(heracles_podcast_episode, tags_for_post)
           end
@@ -2358,6 +2358,7 @@ namespace :wheeler_centre do
 
     backup_data = File.read(args[:yml_file])
     blueprint_records = Syck.load_stream(backup_data).instance_variable_get(:@documents)
+    blueprint_tag_records = blueprint_tags(blueprint_records)
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
     youtube_migrations_data = YAML::load(File.read("lib/video_migration/outputs/youtube_migrations.yml"))
 
@@ -2392,6 +2393,10 @@ namespace :wheeler_centre do
         heracles_recording.fields[:recording_id].value = blueprint_video_post["id"].to_i
         heracles_recording.parent = parent
         heracles_recording.collection = collection
+        tags_for_post = blueprint_tags_for(blueprint_tag_records, blueprint_video_post["id"], "CenvidPost")
+        if tags_for_post.present?
+          apply_tags_to(heracles_recording, tags_for_post)
+        end
         heracles_recording.save!
       end
     end
@@ -2922,6 +2927,7 @@ namespace :wheeler_centre do
     blueprint_assets.each do |blueprint_asset|
       bar.increment!
       next if Heracles::Asset.exists?(blueprint_id: blueprint_asset["id"])
+      p "Asset name: #{blueprint_asset["name"]}"
 
       local_asset_file_path = File.join(backup_root, "assets", blueprint_asset["guid"], blueprint_asset["filename"])
 
