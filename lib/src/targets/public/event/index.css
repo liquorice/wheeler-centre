@@ -113,6 +113,9 @@
   float: none;
   width: 100%;
 }
+.event__series-header + .event__promo-image {
+  margin-top: -25px;
+}
   .event__promo-image img {
     max-width: 100%;
     max-width: calc(100% - 35px);
@@ -203,8 +206,14 @@
   font-family: var(--font-sans);
   padding-top: 35px;
   padding-bottom: 35px;
+  position: relative;
   transition-property: background-color, color;
   transition-duration: 200ms;
+}
+.breakpoint-w-799 .event__series-header {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
 }
   .event__series-header:hover,
   .event__series-header:focus {
@@ -235,11 +244,25 @@
   .breakpoint-w-999 .event__series-title {
     max-width: 45%;
   }
+  .breakpoint-w-799 .event__series-title {
+    border-left: 0;
+    clear: left;
+    float: none;
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: 8px;
+    max-width: 100%;
+    width: 100%;
+  }
+  .breakpoint-phone-wide .event__series-title,
+  .breakpoint-phone .event__series-title {
+    width: 80%;
+  }
     .event__series-header:hover .event__series-title,
     .event__series-header:focus .event__series-title {
       text-decoration: underline;
     }
-  .event__series-action {
+  .event__series-call-to-action {
     float: right;
     font-size: 12px;
     font-size: 1.2rem;
@@ -249,12 +272,28 @@
     font-smoothing: subpixel-antialiased;
     margin-top: 5px;
   }
-  .breakpoint-w-1200 .event__series-action span { display: none; }
-  .event__series-action i {
-    padding-left: 10px;
-    font-size: 10px;
+  .breakpoint-w-1200 .event__series-call-to-action span { display: none; }
+  .breakpoint-w-799 .event__series-call-to-action {
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
-
+  .breakpoint-phone-wide .event__series-call-to-action,
+  .breakpoint-phone .event__series-call-to-action {
+    top: 40px;
+  }
+  .breakpoint-phone-wide .event__series-call-to-action em,
+  .breakpoint-phone .event__series-call-to-action em {
+    display: none;
+  }
+    .event__series-call-to-action i {
+      padding-left: 10px;
+      font-size: 10px;
+    }
+    .breakpoint-phone-wide .event__series-call-to-action i,
+    .breakpoint-phone .event__series-call-to-action i {
+      font-size: 16px;
+    }
 
 /* Presenters */
 
