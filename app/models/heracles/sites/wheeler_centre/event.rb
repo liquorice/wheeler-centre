@@ -18,8 +18,9 @@ module Heracles
               {name: :venue, type: :associated_pages, page_type: :venue, label: "Venue", editor_type: 'singular'},
               # Bookings
               {name: :booking_info, type: :info, text: "<hr/>"},
+              {name: :ticket_prices, type: :text},
               {name: :bookings_open_at, type: :date_time, label: "Bookings open on"},
-              {name: :external_bookings, type: :text, label: "External bookings"},
+              {name: :external_bookings, type: :text, label: "External bookings URL"},
               # Other
               {name: :presenters, type: :associated_pages, page_type: :person},
               {name: :series, type: :associated_pages, page_type: :event_series, editor_type: 'singular'},
