@@ -54,9 +54,18 @@ module Heracles
             page.id
           end
 
+          string :author_ids, multiple: true do
+            fields[:authors].pages.map(&:id)
+          end
+
+          string :author_titles, multiple: true do
+            fields[:authors].pages.map(&:title)
+          end
+
           text :summary do
             fields[:summary].value
           end
+
           text :body do
             fields[:body].value
           end

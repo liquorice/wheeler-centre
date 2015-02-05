@@ -123,6 +123,15 @@ module Heracles
           string :topic_titles, multiple: true do
             fields[:topics].pages.map(&:title)
           end
+
+          string :presenter_ids, multiple: true do
+            fields[:presenters].pages.map(&:id)
+          end
+
+          string :presenter_titles, multiple: true do
+            fields[:presenters].pages.map(&:title)
+          end
+
           text :body do
             fields[:body].value
           end

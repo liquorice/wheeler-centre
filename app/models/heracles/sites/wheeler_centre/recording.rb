@@ -39,6 +39,7 @@ module Heracles
             audio: (fields[:audio].data_present?) ? "♫" : "×",
             youtube_video: fields[:youtube_video].value.presence || "",
             events: events.map(&:title).join(", "),
+            people: (people.any? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
             published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
             created_at:  created_at.to_s(:admin_date)
@@ -58,8 +59,14 @@ module Heracles
         end
 
         def people
-          if fields[:people].data_present
+          # If there are no people explicitly set on this page, try to infer
+          # them from the related event/s
+          if fields[:people].data_present?
             fields[:people].pages
+          else
+            people = []
+            events.each {|event| people = people + event.fields[:presenters].pages }
+            people
           end
         end
 
@@ -70,6 +77,14 @@ module Heracles
 
           string :topic_titles, multiple: true do
             fields[:topics].pages.map(&:title)
+          end
+
+          string :person_ids, multiple: true do
+            fields[:people].pages.map(&:id)
+          end
+
+          string :person_titles, multiple: true do
+            fields[:people].pages.map(&:title)
           end
 
           text :description do

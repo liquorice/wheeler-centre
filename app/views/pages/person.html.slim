@@ -1,3 +1,8 @@
+- blog_posts = page.blog_posts(page: params[:page], per_page: params[:per_page] || 100)
+- recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
+- upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
+- past_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
+
 = area :masthead_title do
   .page__title.page__title--events
     h1.title People
@@ -9,11 +14,51 @@
           ' People
 
 = area :main do
-  .page__content.page__content--person
-    - if page.fields[:portrait].data_present?
-      .event-presenter__image
-        .event-presenter__image-inner
-          img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
-    .page__body.page__body--person.copy
-      = render_content page.fields[:intro]
-      = render_content_in_sections page.fields[:biography]
+  .person
+    .column-wrapper
+      .column-wide.copy
+        - if page.fields[:portrait].data_present?
+          .person__image
+            .person__image-inner
+              img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
+        - if page.fields[:intro].data_present?
+          .person__intro
+            = render_content_in_sections page.fields[:intro]
+        - if page.fields[:biography].data_present?
+          .person__body
+            = render_content_in_sections page.fields[:biography]
+        - if upcoming_events.results.total_pages > 0
+          h2 Upcoming events
+          ul
+            - upcoming_events.results.each do |event|
+              li
+                a href=event.absolute_url = event.title
+
+        - if past_events.results.total_pages > 0
+          h2 Past events
+          ul
+            - past_events.results.each do |event|
+              li
+                a href=event.absolute_url
+                  = event.title
+                  ',
+                  = l event.fields[:start_date].value, format: :medium_date
+        - if recordings.any?
+          h2 Recordings
+          - recordings.each do |recording|
+            li
+              a href=recording.absolute_url
+                = recording.title
+                ',
+                - if recording.fields[:recording_date].data_present?
+                  = l recording.fields[:recording_date].value, format: :medium_date
+
+        - if blog_posts.any?
+          h2 Blog posts
+          - blog_posts.each do |blog_post|
+            li
+              a href=blog_post.absolute_url
+                = blog_post.title
+                ',
+                - if blog_post.fields[:publish_date].data_present?
+                  = l blog_post.fields[:publish_date].value, format: :medium_date

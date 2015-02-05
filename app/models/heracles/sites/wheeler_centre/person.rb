@@ -39,6 +39,46 @@ module Heracles
 
         ### Accessors
 
+        def upcoming_events(options={})
+          search_upcoming_events(options)
+        end
+
+        def past_events(options={})
+          search_past_events(options)
+        end
+
+        def recordings(options={})
+          Heracles::Page.
+            of_type("recording").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "people",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
+        end
+
+        def blog_posts(options={})
+          Heracles::Page.
+            of_type("blog_post").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "authors",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
+        end
+
+        def podcasts
+          # Through events
+        end
+
         ### Searchable
 
         searchable do
@@ -85,7 +125,32 @@ module Heracles
           time :updated_at do
             updated_at
           end
+        end
 
+        private
+
+        def search_upcoming_events(options={})
+          Sunspot.search(Event) do
+            with :site_id, site.id
+            with :presenter_ids, id
+            with :published, true
+            with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+
+            order_by :start_date, :asc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+          end
+        end
+
+        def search_past_events(options={})
+          Sunspot.search(Event) do
+            with :site_id, site.id
+            with :presenter_ids, id
+            with :published, true
+            with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+
+            order_by :start_date, :desc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+          end
         end
       end
     end

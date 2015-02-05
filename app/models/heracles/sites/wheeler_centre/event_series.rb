@@ -40,6 +40,8 @@ module Heracles
         def events(options={})
           Heracles::Page.
             of_type("event").
+            visible.
+            published.
             joins(:insertions).
             where(
               :"insertions.field" => "series",
