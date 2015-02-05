@@ -102,7 +102,7 @@
                 p= render_content page.venue.fields[:address_formatted]
     - if page.fields[:sponsors].data_present?
       .event__supporters.column-wrapper
-        .column-mid
+        .column-large
           .event__supporters-intro.copy
             - if page.fields[:sponsors_intro].data_present?
               = render_content page.fields[:sponsors_intro]

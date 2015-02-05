@@ -545,6 +545,10 @@
     font-size: 2rem;
     text-align: center;
   }
+  .breakpoint-phone .event__supporters-intro {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
 
   .event__supporters-list {
     padding-bottom: 50px;
@@ -554,6 +558,12 @@
     flex-direction: row;
     flex-flow: row wrap;
     padding-top: 35px;
+  }
+  .breakpoint-w-1200 .event__supporters-list {
+    padding-top: 20px;
+  }
+  .breakpoint-w-879 .event__supporters-list {
+    padding-top: 0;
   }
     .event__supporters-image {
       display: inline;
@@ -566,9 +576,25 @@
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      flex: 1;
-      min-width: 20%;
+      flex: 1 20%;
+      padding-left: 5px;
       text-align: center;
+    }
+    .breakpoint-w-1200 .event__supporters-item {
+      flex: 1 25%;
+    }
+    .breakpoint-w-879 .event__supporters-item {
+      flex: 1 33.3333333%;
+    }
+    .breakpoint-w-669 .event__supporters-item {
+      flex: 1 50%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .breakpoint-w-599 .event__supporters-item {
+      flex: 1 100%;
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
 
 
