@@ -89,7 +89,7 @@
           .event__venue-map
           .column-wrapper
             .column-wide
-              .event__venue-map-panel
+              a.event__venue-map-panel href=page.venue.absolute_url
                 h4= page.venue.title
                 p= render_content page.venue.fields[:address_formatted]
     - if page.fields[:sponsors].data_present?

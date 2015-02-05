@@ -12,10 +12,21 @@
     font-size: 17px;
     font-size: 1.7rem;
     line-height: 1.5;
-    margin-left: -35px;
     max-width: 340px;
     padding: 35px 45px 35px 35px;
     position: relative;
+    transform: scale(1,1);
+    transition-property: transform, background-color, color;
+    transition-duration: 250ms;
+  }
+    .event__venue-map-panel:hover,
+    .event__venue-map-panel:focus {
+      color: var(--primary-color-darker);
+      transform: scale(1.1, 1.1);
+    }
+
+  .breakpoint-widescreen-wide .event__venue-map-panel {
+    margin-left: -35px;
   }
   .breakpoint-w-699 .event__venue-map-panel {
     font-size: 15px;
