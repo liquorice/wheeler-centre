@@ -230,6 +230,10 @@
     font-weight: bold;
     margin-left: 35px;
     padding-left: 35px;
+    max-width: 55%;
+  }
+  .breakpoint-w-999 .event__series-title {
+    max-width: 45%;
   }
     .event__series-header:hover .event__series-title,
     .event__series-header:focus .event__series-title {
@@ -245,6 +249,7 @@
     font-smoothing: subpixel-antialiased;
     margin-top: 5px;
   }
+  .breakpoint-w-1200 .event__series-action span { display: none; }
   .event__series-action i {
     padding-left: 10px;
     font-size: 10px;
