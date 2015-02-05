@@ -144,13 +144,7 @@ module ApplicationHelper
   ### General page helpers
 
   def descendant_of(page, ancestor)
-    is_descendant = false
-    ancestor.descendants.each  do |d|
-      if d.id == page.id
-        is_descendant = true
-      end
-    end
-    is_descendant
+    page.ancestor_ids.include?(ancestor.id)
   end
 
   def is_or_is_descendant_of(page, ancestor)
