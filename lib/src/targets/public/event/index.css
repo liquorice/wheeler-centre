@@ -275,8 +275,8 @@
   .breakpoint-w-1200 .event__series-call-to-action span { display: none; }
   .breakpoint-w-799 .event__series-call-to-action {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 25px;
+    right: 25px;
   }
   .breakpoint-phone-wide .event__series-call-to-action,
   .breakpoint-phone .event__series-call-to-action {
