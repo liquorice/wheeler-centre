@@ -36,13 +36,14 @@
   .masthead-contextual__navigation-item {
     float: left;
     padding-right: 40px;
+    padding-bottom: 5px;
   }
 
   .masthead-contextual__navigation-anchor {
     border-bottom: 2px solid #fff;
     color: var(--primary-color);
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 6px;
   }
 
   .breakpoint-phone .masthead-contextual__navigation-anchor {
