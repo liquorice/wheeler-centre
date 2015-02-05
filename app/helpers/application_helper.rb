@@ -141,7 +141,7 @@ module ApplicationHelper
     (0..6).map {|d| week + d.days}
   end
 
-  # General pages
+  ### General page helpers
 
   def descendant_of(page, ancestor)
     is_descendant = false
@@ -151,6 +151,10 @@ module ApplicationHelper
       end
     end
     is_descendant
+  end
+
+  def is_or_is_descendant_of(page, ancestor)
+    (page.id == ancestor.id || descendant_of(page, ancestor))
   end
 
 end
