@@ -332,6 +332,8 @@
   .breakpoint-tablet .event-presenter__intro {
     font-size: 18px;
     font-size: 1.8rem;
+  }
+  .breakpoint-phone .event-presenter__intro {
     margin-bottom: 60px;
   }
   .breakpoint-phone .event-presenter__intro:after {
@@ -343,12 +345,12 @@
     left: 50%;
     transform: translateX(-50%);
   }
-/*  .breakpoint-phone .event-presenter__intro:last-child {
+  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro {
     margin-bottom: 0;
   }
-  .breakpoint-phone .event-presenter__intro:last-child:after {
+  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro:after {
     display: none;
-  }*/
+  }
 
 /* Ticketing */
 
