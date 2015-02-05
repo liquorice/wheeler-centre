@@ -1155,6 +1155,7 @@ namespace :wheeler_centre do
       heracles_event.fields[:body].value = LegacyBlueprint::BluedownFormatter.mark_up(blueprint_event["content"], subject: blueprint_event, assetify: true)
       heracles_event.fields[:start_date].value = Time.zone.parse(blueprint_event["start_date"].to_s)
       heracles_event.fields[:end_date].value = Time.zone.parse(blueprint_event["end_date"].to_s)
+      heracles_event.fields[:ticket_prices].value = blueprint_event["ticket_prices"].to_s
       heracles_event.fields[:external_bookings].value = blueprint_event["booking_service_url"].to_s
       heracles_event.fields[:bookings_open_at].value = Time.zone.parse(blueprint_event["public_bookings_open_at"].to_s)
 
