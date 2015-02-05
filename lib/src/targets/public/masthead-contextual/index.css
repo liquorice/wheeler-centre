@@ -38,6 +38,12 @@
     padding-right: 40px;
     padding-bottom: 5px;
   }
+  .breakpoint-phone-wide .masthead-contextual__navigation-item {
+    padding-right: 30px;
+  }
+  .breakpoint-phone .masthead-contextual__navigation-item {
+    padding-right: 20px;
+  }
 
   .masthead-contextual__navigation-anchor {
     border-bottom: 2px solid #fff;
