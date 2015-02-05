@@ -2,5 +2,8 @@
   ul.masthead-contextual__navigation-list
     - pages.each do |page|
       li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href=page.absolute_url class=("masthead-contextual__navigation-anchor--active" if is_or_is_descendant_of(current, page))
+        / Bit of complex logic because we're flattening a set of pages
+        / like Events > Series, Presenter into Event, Series, Presenters
+        - active = is_or_is_descendant_of(current, page) && (page.depth > 0 || page == current || page.id == current.parent.id)
+        a.masthead-contextual__navigation-anchor href=page.absolute_url class=("masthead-contextual__navigation-anchor--active" if active)
           = page.title
