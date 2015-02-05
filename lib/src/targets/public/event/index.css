@@ -249,7 +249,7 @@
 .breakpoint-tablet-wide .event__presenters,
 .breakpoint-tablet .event__presenters {
   padding-bottom: 30px;
-  width: 60%;
+/*  width: 60%;*/
 }
 .breakpoint-w-699 .event__presenters {
   float: none;
@@ -401,7 +401,7 @@
 .breakpoint-tablet-wide .event__tickets,
 .breakpoint-tablet .event__tickets {
   padding-bottom: 30px;
-  width: 40%;
+/*  width: 40%;*/
 }
 /* Bookings can span the whole page when there's > 6 presenters */
 .event__presenters--long + .event__tickets {
@@ -483,7 +483,7 @@
 .breakpoint-tablet-wide .event__series-summary,
 .breakpoint-tablet .event__series-summary {
   padding-bottom: 30px;
-  width: 40%;
+/*  width: 40%;*/
 }
 /* Series summary can span the whole page when there's > 6 presenters */
 .event__presenters--long + .event__tickets + .event__series-summary {
