@@ -235,6 +235,20 @@
     .event__series-header:focus .event__series-title {
       text-decoration: underline;
     }
+  .event__series-action {
+    float: right;
+    font-size: 12px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+    margin-top: 5px;
+  }
+  .event__series-action i {
+    padding-left: 10px;
+    font-size: 10px;
+  }
 
 
 /* Presenters */
