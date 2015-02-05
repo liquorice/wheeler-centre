@@ -255,14 +255,34 @@
   padding-right: 0;
   width: 100%;
 }
-  .event__presenters--long {
+  .event__presenters--long,
+  .breakpoint-tablet-wide .event__presenters--long,
+  .breakpoint-tablet .event__presenters--long  {
     padding-right: 0;
     width: 100%;
   }
     .event__presenters-group {
       float: left;
       padding-right: 35px;
+      position: relative;
       width: 50%;
+    }
+    .breakpoint-w-799 .event__presenters-group {
+      float: none;
+      padding-right: 0;
+      width: 100%;
+    }
+    .breakpoint-phone .event__presenters-group:not(:last-child) {
+      padding-bottom: 40px;
+    }
+    .breakpoint-phone .event__presenters-group:not(:last-child):after {
+      display: block;
+      content: "";
+      position: absolute;
+      width: 50%;
+      left: 25%;
+      bottom: 35px;
+      border-top: 2px #ededed solid;
     }
 
   .event__presenters:before {
@@ -282,11 +302,11 @@
 .event-presenter {
   position: relative;
   overflow: hidden;
-  min-height: 100px;
+  min-height: 120px;
   zoom: 1;
   padding-left: 125px;
   padding-top: 4px;
-  margin-bottom: 15px;
+  padding-bottom: 35px;
 }
 .breakpoint-phone .event-presenter {
   padding-left: 0;
@@ -334,22 +354,24 @@
     font-size: 1.8rem;
   }
   .breakpoint-phone .event-presenter__intro {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   .breakpoint-phone .event-presenter__intro:after {
     border-bottom: 2px #ededed solid;
     content: "";
     width: 50%;
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 35px;
+    left: 25%;
   }
   .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro {
     margin-bottom: 0;
   }
   .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro:after {
     display: none;
+  }
+  .event-presenter__intro p:last-child {
+    margin-bottom: 0;
   }
 
 /* Ticketing */
@@ -365,6 +387,11 @@
 .breakpoint-tablet .event__tickets {
   padding-bottom: 30px;
   width: 40%;
+}
+/* Bookings can span the whole page when there's > 6 presenters */
+.breakpoint-tablet-wide .event__presenters--long + .event__tickets,
+.breakpoint-tablet .event__presenters--long + .event__tickets {
+  width: 100%;
 }
 .breakpoint-w-699 .event__tickets {
   padding-bottom: 20px;
@@ -394,7 +421,6 @@
   .breakpoint-phone .event__tickets-summary {
     font-size: 18px;
     font-size: 1.8rem;
-    padding-top: 35px;
   }
 
   .event__tickets-booking {
