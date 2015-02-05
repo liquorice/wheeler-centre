@@ -15,7 +15,7 @@
           - elsif event.promo_image
             - image = event.promo_image
           li.upcoming-events__item
-            a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
+            a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=event.absolute_url
               - if image
                 span.upcoming-events__image-container
                   img.upcoming-events__image alt="" src=image.content_thumbnail_url
