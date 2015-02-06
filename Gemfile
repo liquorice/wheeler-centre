@@ -24,6 +24,7 @@ gem "sunspot-queue", github: "timriley/sunspot-queue"
 
 # Background worker
 gem "que"
+gem 'resque', github: 'resque/resque' # Cache Buster dependency, we have to change it to que soon
 
 # Web server
 gem "unicorn"
