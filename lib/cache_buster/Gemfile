@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+ruby '2.1.5'
+
+group :development do
+  gem 'resque', github: 'resque/resque'
+  gem 'foreman'
+end
+
+gemspec
