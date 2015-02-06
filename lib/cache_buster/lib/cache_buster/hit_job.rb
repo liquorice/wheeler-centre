@@ -6,8 +6,6 @@ require 'dotenv'
 require 'digest/md5'
 require 'cache_buster/hit'
 
-Ohm.redis = Redic.new(ENV['REDISTOGO_URL'])
-
 module HitJob
   @queue = :default
 
