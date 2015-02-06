@@ -60,6 +60,8 @@
               = render "partials/blog_snap_block", post: post, show_type: true
             - elsif post.page_type == "event"
               = render "partials/event_snap_block", post: post, show_type: true
+            - elsif post.page_type == "recording"
+              = render "partials/recording_snap_block", post: post, show_type: true
         - if random_pages.total_pages > 1
           .pagination-context.pagination-context--bottom
             ' Page

@@ -160,5 +160,7 @@ body {
 @import "./topics-section";
 @import "./blog-post";
 @import "./event";
+@import "./event-snap-block";
 @import "./event-venue-map";
+@import "./recording-snap-block";
 @import "./topic";

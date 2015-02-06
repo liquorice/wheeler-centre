@@ -49,6 +49,12 @@ module Heracles
 
         ### Accessors
 
+        def youtube_thumbnail_url
+          if fields[:youtube_video].data_present?
+            fields[:youtube_video].youtube["snippet"]["thumbnails"]["high"]["url"]
+          end
+        end
+
         def events
           Heracles::Page.
             of_type("event").
