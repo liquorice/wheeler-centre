@@ -244,6 +244,15 @@
   padding-top: 60px;
   padding-bottom: 100px;
 }
+.breakpoint-tablet .blog-index {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.breakpoint-phone-wide .blog-index,
+.breakpoint-phone .blog-index {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
 /* Latest */
 .blog-index__latest {}
@@ -597,6 +606,9 @@
 .blog-index__topic {
   padding-top: 35px;
   padding-bottom: 35px;
+}
+.breakpoint-w-879 .blog-index__topic {
+  padding-bottom: 15px;
 }
 
 .blog-snap--block {
