@@ -16,7 +16,7 @@
     .page__body.page__body--people.copy
       = render_content page.fields[:body]
   .column-wrapper
-    .column-wide
+    .column-wide.copy
       / Stinky action differentiation
       / /people?letter=a
       / /people?letter=a&order_by=first_name
@@ -35,22 +35,19 @@
       / /people
       - else
         = render "partials/people_by_letter_nav", page: page, order_by: order_by
-        - people = page.people(order_by: order_by).results
-        - if people.any?
-          .people
-            - people.each do |person|
-              - if person.fields[:portrait].data_present?
-                a.person__portrait href=person.absolute_url
-                  img src=person.fields[:portrait].asset.admin_thumbnail_url itemprop="portrait" alt=person.title title=person.title
-              a href=person.absolute_url
-                h3.person__title
+        - people_from_upcoming_events = page.people_from_upcoming_events
+        - if people_from_upcoming_events.any?
+          h2 Coming up at The Wheeler Centre
+          ul.upcoming-people
+            - people_from_upcoming_events.each do |person|
+              li
+                a href=person.absolute_url
                   = person.title
-            .pagination-context.pagination-context--bottom
-              ' Page
-              = (params[:page] || 1)
-              em &nbsp;of&nbsp;
-              = people.total_pages
-            .pagination-bottom
-              = paginate people, outer_window: 4
-
-
+        - people_from_recent_events = page.people_from_recent_events
+        - if people_from_recent_events.any?
+          h2 Recently at The Wheeler Centre
+          ul.recent-people
+            - people_from_recent_events.each do |person|
+              li
+                a href=person.absolute_url
+                  = person.title
