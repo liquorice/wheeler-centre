@@ -1,16 +1,4 @@
 GIT
-  remote: git://github.com/icelab/cache_buster.git
-  revision: 42d9a2c25fe4b1bf1bd8c08053ee1c14953d2cf7
-  specs:
-    cache_buster (0.0.2)
-      dotenv (~> 1.0)
-      nokogiri (~> 1.6)
-      ohm (~> 2.1)
-      redis (~> 3.2)
-      resque
-      sinatra (~> 1.4)
-
-GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: 4161bbc560631e61e611d59bf797eeb59a6b1021
   specs:
@@ -92,6 +80,17 @@ GIT
       sunspot_rails
       transloadit-rails
       turbolinks
+
+PATH
+  remote: lib/cache_buster
+  specs:
+    cache_buster (0.0.2)
+      dotenv (~> 1.0)
+      nokogiri (~> 1.6)
+      ohm (~> 2.1)
+      redis (~> 3.2)
+      resque
+      sinatra (~> 1.4)
 
 GEM
   remote: https://rubygems.org/
