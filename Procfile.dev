@@ -2,3 +2,4 @@ web: bundle exec unicorn -c ./config/unicorn.rb
 solr: bundle exec rake sunspot:solr:run
 watch_assets: make watch
 serve_assets: make serve
+worker: bundle exec resque work -q default
