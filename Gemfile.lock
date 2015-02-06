@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/icelab/cache_buster.git
-  revision: 878686756c8b99dc0068e3d8b18103c06c16a28f
+  revision: 42d9a2c25fe4b1bf1bd8c08053ee1c14953d2cf7
   specs:
-    cache_buster (0.0.1)
+    cache_buster (0.0.2)
+      dotenv (~> 1.0)
       nokogiri (~> 1.6)
       ohm (~> 2.1)
       redis (~> 3.2)
