@@ -42,6 +42,7 @@ module Heracles
             people: (people.any? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
             published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
+            publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)
           }
         end
