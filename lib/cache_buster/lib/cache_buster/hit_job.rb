@@ -19,7 +19,20 @@ module HitJob
   end
 
   def self.request_page
-    source = Nokogiri::HTML(open("http://#{ENV['CDN_ORIGIN']}#{@hit.page}"))
+    basic_auth_user     = ENV['BASIC_AUTH_USER']
+    basic_auth_password = ENV['BASIC_AUTH_PASSWORD']
+    source = if basic_auth_password && basic_auth_user
+      Nokogiri::HTML(
+        open(
+          "http://#{ENV['CDN_ORIGIN']}#{@hit.page}",
+          :http_basic_authentication => [basic_auth_user, basic_auth_password]
+        )
+      )
+    else
+      Nokogiri::HTML(
+        open("http://#{ENV['CDN_ORIGIN']}#{@hit.page}")
+      )
+    end
     @checksum = Digest::MD5.hexdigest(source)
   end
 
