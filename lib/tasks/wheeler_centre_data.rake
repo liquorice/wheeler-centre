@@ -2407,18 +2407,21 @@ namespace :wheeler_centre do
   # Usage
   # wheeler_centre:associate_recordings_and_videos["/Users/josephinehall/Development/wheeler-centre/lib/video_migration/youtube_migrations.yml"]
   desc "Associate Recordings with Youtube videos"
-  task :associate_recordings_and_videos, [:youtube_migrations_yml] => :environment do |task, args|
+  task :associate_recordings_and_youtube_videos, [:youtube_migrations_yml] => :environment do |task, args|
     require "yaml"
 
-    data = File.read(args[:youtube_migrations_yml])
+    data = File.read("lib/video_migration/outputs/youtube_migrations.yml")
     youtube_migrations = YAML.load(data)
 
     recordings = Heracles::Page.of_type("recording")
     recordings.each do |recording|
-      migration = youtube_migrations.find { |r| r["recording_id"] == recording.fields[:recording_id].value }
-      if migration && migration["youtube_url"]
-        recording.fields[:url].value = migration["youtube_url"]
-        recording.save!
+      if !recording.fields[:youtube_video].data_present?
+        migration = youtube_migrations.find { |r| r["recording_id"] == recording.fields[:recording_id].value }
+        if migration && migration["youtube_url"]
+          recording.fields[:youtube_video].value = migration["youtube_url"]
+          recording.fields[:youtube_video].fetch
+          recording.save!
+        end
       end
     end
   end
