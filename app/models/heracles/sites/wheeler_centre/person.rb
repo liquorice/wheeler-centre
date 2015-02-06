@@ -79,9 +79,21 @@ module Heracles
           # Through events
         end
 
+        def sort_first_name
+          fields[:first_name].value.presence || title
+        end
+
+        def sort_last_name
+          fields[:last_name].value.presence || title
+        end
+
         ### Searchable
 
         searchable do
+          string :title do
+            title
+          end
+
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end
@@ -90,12 +102,28 @@ module Heracles
             fields[:topics].pages.map(&:title)
           end
 
-          text :first_name do
+          string :first_name do
             fields[:first_name].value
           end
 
-          text :last_name do
+          string :last_name do
             fields[:last_name].value
+          end
+
+          string :sort_first_name do
+            sort_first_name
+          end
+
+          string :sort_last_name do
+            sort_last_name
+          end
+
+          string :sort_first_name_first_letter do
+            sort_first_name[0].downcase
+          end
+
+          string :sort_last_name_first_letter do
+            sort_last_name[0].downcase
           end
 
           text :intro do

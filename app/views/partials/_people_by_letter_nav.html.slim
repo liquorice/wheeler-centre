@@ -1,0 +1,6 @@
+- all_letters = ("A".."Z").to_a
+ul
+  - all_letters.each do |letter|
+    li
+      a href="#{page.absolute_url}?letter=#{letter.downcase}&order_by=#{order_by}"
+        = letter

@@ -3,9 +3,18 @@ module Heracles
     module WheelerCentre
       class People < Heracles::Page
         def self.config
-          {}
+          {
+            fields: [
+              {name: :intro, type: :content},
+              {name: :body, type: :content},
+            ]
+          }
         end
 
+        # Options:
+        # - page: 1
+        # - per_page: 2
+        # - order_by: "first_name"
         def people(options={})
           search_people(options)
         end
@@ -17,6 +26,17 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+
+            # Need to sort by first_name/last_name and then title for those sans-one or the other
+            if options[:order_by] == "first_name"
+              with :sort_first_name_first_letter, options[:letter].downcase if options[:letter]
+              order_by :sort_first_name, :asc
+              order_by :sort_last_name, :asc
+            else
+              with :sort_last_name_first_letter, options[:letter].downcase if options[:letter]
+              order_by :sort_last_name, :asc
+              order_by :sort_first_name, :asc
+            end
 
             paginate page: options[:page] || 1, per_page: options[:per_page] || 50
           end
