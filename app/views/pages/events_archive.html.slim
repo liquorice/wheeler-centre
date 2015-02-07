@@ -9,29 +9,34 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .page__content
+  .events-archive
+    .events-archive__top class=("gradient-bottom-up" unless params[:page].present?)
+      .events-archive__header
+        h1.events-archive__title
+          = page.title
+      - if page.fields[:intro].data_present? && !params[:page].present?
+        .events-archive__intro.intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:intro]
     .column-wrapper
-      - if page.fields[:intro].data_present?
-      .topic-page__random-intro.intro
-        .column-narrow.copy
-          = render_content page.fields[:intro]
       .column-full
-        .pagination-top
-          = paginate events.results, outer_window: 4
-        .pagination-context.pagination-context--top
-          ' Page
-          = (params[:page] || 1)
-          em &nbsp;of&nbsp;
-          = events.results.total_pages
-      - if events.results.any?
-        .topic-page__random.snap-wrapper.clearfix
-          - events.results.each do |post|
-            = render "partials/event_snap_block", post: post, show_type: true
-        - if events.results.total_pages > 1
-          .pagination-context.pagination-context--bottom
+        - if params[:page].present?
+          .pagination-top
+            = paginate events.results, outer_window: 4
+          .pagination-context.pagination-context--top
             ' Page
             = (params[:page] || 1)
             em &nbsp;of&nbsp;
             = events.results.total_pages
-          .pagination-bottom
-            = paginate events.results, outer_window: 4
+        - if events.results.any?
+          .snap-wrapper.clearfix
+            - events.results.each do |post|
+              = render "partials/event_snap_block", post: post, show_type: true
+          - if events.results.total_pages > 1
+            .pagination-context.pagination-context--bottom
+              ' Page
+              = (params[:page] || 1)
+              em &nbsp;of&nbsp;
+              = events.results.total_pages
+            .pagination-bottom
+              = paginate events.results, outer_window: 4

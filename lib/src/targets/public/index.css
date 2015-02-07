@@ -207,5 +207,6 @@ body {
 @import "./event";
 @import "./event-snap-block";
 @import "./event-venue-map";
+@import "./events-archive";
 @import "./recording-snap-block";
 @import "./topic";
