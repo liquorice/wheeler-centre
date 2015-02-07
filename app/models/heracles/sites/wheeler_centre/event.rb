@@ -71,6 +71,10 @@ module Heracles
           (fields[:start_date].value >= Time.zone.now.beginning_of_day)
         end
 
+        def booked_out?
+          (fields[:ticketing_stage].value == "Booked out")
+        end
+
         def series
           if fields[:series].data_present?
             fields[:series].pages.first

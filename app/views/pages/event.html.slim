@@ -87,6 +87,13 @@
           - else
             time.event__date-time datetime=l(page.fields[:start_date].value, format: :rfc_3339)
               = format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
+          - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
+            span.event__ticketing-stage =page.fields[:ticketing_stage].value
+          - if page.booked_out?
+            span.event__booked-out-flag Booked out
+          - elsif page.upcoming? && page.fields[:external_bookings].data_present?
+            a.event__tickets-booking.event__tickets-booking--small href=page.fields[:external_bookings].value
+              ' Book your tickets
           h1.event__title
             == widont_format markdown_line page.title
         .event__body.copy
@@ -124,12 +131,15 @@
             h2.event__tickets-header How much?
             .event__tickets-summary.copy
               p
-                - if page.fields[:ticket_prices].data_present?
-                  = page.fields[:ticket_prices].value
-                - else
-                  strong This is a free event.
-                  '  Bookings are recommended.
-                - if page.fields[:external_bookings].data_present?
+                span.event__tickets-booking-text
+                  - if page.fields[:ticket_prices].data_present?
+                    = page.fields[:ticket_prices].value
+                  - else
+                    strong This is a free event.
+                    '  Bookings are recommended.
+                - if page.booked_out?
+                  span.event__booked-out-flag Booked out
+                - elsif page.fields[:external_bookings].data_present?
                   a.event__tickets-booking href=page.fields[:external_bookings].value
                     ' Book your tickets
 
