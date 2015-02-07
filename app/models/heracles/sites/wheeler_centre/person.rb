@@ -163,6 +163,7 @@ module Heracles
             with :presenter_ids, id
             with :published, true
             with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+            without :start_date_time, nil
 
             order_by :start_date, :asc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 18
@@ -175,6 +176,7 @@ module Heracles
             with :presenter_ids, id
             with :published, true
             with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+            without :start_date_time, nil
 
             order_by :start_date, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 18
