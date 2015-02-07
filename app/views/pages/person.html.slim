@@ -1,7 +1,7 @@
 - blog_posts = page.blog_posts(page: params[:page], per_page: params[:per_page] || 100)
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
 - upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
-- past_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
+- past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
 
 = area :masthead_title do
   .page__title.page__title--events
