@@ -45,6 +45,7 @@ gem "bugsnag"
 gem "skylight"
 
 # Frontend
+gem "color"
 gem "coffee-rails", "~> 4.0.0"
 gem "react-rails"
 gem "sass-rails", "~> 4.0.2"
