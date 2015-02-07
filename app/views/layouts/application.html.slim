@@ -23,11 +23,12 @@ html
   = area :body_outer do
     body
       = area :body do
+        = render 'partials/skip_links'
         = area :masthead do
           = render 'partials/masthead'
 
         = area :main_outer do
-          div role="main"
+          div role="main" id="main-content"
             = area :main
             = area :main_footer
 
