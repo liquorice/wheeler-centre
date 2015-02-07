@@ -17,6 +17,8 @@
             - if post.upcoming?
               ' Upcoming event
             - else
+              - if post.fields[:recordings].data_present?
+                i.fa.fa-play.event-snap__past-event-icon
               ' Past event
         .event-snap__hero-inner
           img src=image.content_thumbnail_url

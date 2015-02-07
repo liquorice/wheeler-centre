@@ -93,6 +93,12 @@
     color: #fff;
     transform: translate3d(0, -100%, 0);
   }
+
+  .event-snap__past-event-icon {
+    margin-right: 8px;
+    margin-left: 4px;
+  }
+
   .event-snap__hero-caption {
     padding-top: 6px;
   }
