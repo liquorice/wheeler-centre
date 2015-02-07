@@ -23,29 +23,18 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
           li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
             span Our calendar
           li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Upcoming
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Event series
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Presenters
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Catch up
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Past events
-        ul.masthead-nav-main__dropdown-list
-          li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
-            span Current event series
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Lorem ipsum dolor sit amet
-          li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href="#"
-              ' Another page
+            a.masthead-nav-main__dropdown-anchor href=events_page.absolute_url = events_page.title
+          - events_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
+            li.masthead-nav-main__dropdown-item
+              a.masthead-nav-main__dropdown-anchor href=child.absolute_url = child.title
+        - active_event_series = events_page.active_series.results
+        - if active_event_series.any?
+          ul.masthead-nav-main__dropdown-list
+            li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
+              span Current event series
+            - active_event_series.each do |series|
+              li.masthead-nav-main__dropdown-item
+                a.masthead-nav-main__dropdown-anchor href=series.absolute_url = series.title
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href="/broadcasts"
         ' Broadcasts
