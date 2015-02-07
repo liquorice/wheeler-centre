@@ -1,9 +1,9 @@
 - upcoming_events = page.upcoming_events
 - events = page.upcoming_events(page: params[:page], per_page: params[:per_page])
+- active_series = page.active_series.results
 
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Events
+  .page__title.page__title--events Events
 
 = area :masthead_contextual_navigation do
   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
@@ -26,12 +26,15 @@
         / Group events by year
         - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
           .event-calendar__year
+            h2.screenreaders-only
+              ' Upcoming events for
+              = l(year, format: :year)
             / Group events by month in year
             - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
               .event-calendar__month.clearfix
                 / Superfluous div to add a gradient (can't use a pseudo-element because of the clearfix)
                 .event-calendar__month-gradient
-                h1.event-calendar__month-label = l(month, format: :month_name)
+                h3.event-calendar__month-label = l(month, format: :month_name)
                 / Add an incrementing number to each event so that we can target different groups of events in our stylesheet
                 - event_index = 0
                 / Group events by weeks in month
@@ -68,41 +71,21 @@
                           - days_with_gap += 1
 
         / Event series
-        .event-series.clearfix
-          .event-series__block.event-series__block--one
-            a.event-series__anchor href="#"
-              img.event-series__image src="http://lorempixel.com/600/400"
-              .event-series__text
-                h1.event-series__title
-                  | Question Time
-                p.event-series__description
-                  | We&rsquo;re putting the dignity back into proceedings &hellip; along with a generous amount of time. It&rsquo;s one full hour of pure Q&amp;A between you, our audience, moderator Madeleine Morris, and a panel of experts.
-                span.event-series__action View this 6 event series
-          .event-series__block.event-series__block--two
-            a.event-series__anchor href="#"
-              img.event-series__image src="http://fillmurray.com/600/400"
-              .event-series__text
-                h1.event-series__title
-                  | Words &amp; Music
-                p.event-series__description
-                  | Who do our favourite writers listen to? What do the musicians we admire love to read? In each event, our guest writer will highlight music that has inspired their writing, while our guest musician tells us the writing that have helped shape their musical direction.
-                span.event-series__action View this 12 event series
-          .event-series__block.event-series__block--three
-            a.event-series__anchor href="#"
-              img.event-series__image src="http://placesheen.com/600/400"
-              .event-series__text
-                h1.event-series__title
-                  | Middlesex: Queer Week
-                p.event-series__description
-                  | In a week of open discussion and joyous celebration, we&rsquo;re exploring sexuality and identity in all their alternative forms.
-                span.event-series__action View this 4 event series
-          .event-series__block.event-series__block--four
-            a.event-series__anchor href="#"
-              img.event-series__image src="http://placecage.com/600/400"
-              .event-series__text
-                h1.event-series__title
-                  | The Next Big Thing
-                p.event-series__description
-                  | Australia consistently produces a wealth of new literary talent — from debut novelists to shot-story writers, memoirists to poets. How to up? It&rsquo;s simple. Head on down to The Next Big Thing, where you&rsquo;ll head from and meet exciting new and emerging authors.
-                span.event-series__action View this 9 event series
-
+        - if active_series.any?
+          .event-series.clearfix
+            h2.screenreaders-only Current event series
+            - active_series.each_with_index do |series, index|
+              - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
+              .event-series__block style=style_for_event_series_block(highlight_color)
+                a.event-series__anchor href=series.absolute_url
+                  - if series.fields[:hero_image].data_present?
+                    img.event-series__image src=series.fields[:hero_image].asset.content_small_url
+                  .event-series__text
+                    h3.event-series__title = series.title
+                    - if series.fields[:summary].data_present?
+                      .event-series__description.copy
+                        = render_content series.fields[:summary]
+                    - else
+                      .event-series__description.copy
+                        = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
+                    span.event-series__action View this #{series.events.length} event series

@@ -4,8 +4,8 @@
   - image = post.fields[:hero_image].asset
 
 .snap--block
-  a.event-snap.event-snap--block href=post.absolute_url
-    time.event-snap__date
+  a.recording-snap.recording-snap--block href=post.absolute_url
+    time.recording-snap__date
       - if post.fields[:recording_date].data_present?
         = l post.fields[:recording_date].value, format: :medium_date
       - else
@@ -13,24 +13,26 @@
     / If we don't have hero images for recordings (which is most of the old ones)
     / we want to use the YouTube thumbnail instead
     - if image
-      .event-snap__hero
+      .recording-snap__hero
         - if show_type
-          span.event-snap__hero-type Broadcast
-        .event-snap__hero-inner
+          span.recording-snap__hero-type
+            i.fa.fa-play
+        .recording-snap__hero-inner
           img src=image.content_thumbnail_url
           - if image.attribution.present?
-            .event-snap__hero-caption.caption
+            .recording-snap__hero-caption.caption
               p = image.attribution
     / We have to differentiate because YouTube images are different sizes
     - elsif post.fields[:youtube_video].data_present?
-      .event-snap__hero.event-snap__hero--force-square
-        .event-snap__hero-shim
+      .recording-snap__hero.recording-snap__hero--force-square
+        .recording-snap__hero-shim
         - if show_type
-          span.event-snap__hero-type Broadcast
-        .event-snap__hero-inner
+          span.recording-snap__hero-type
+            i.fa.fa-play
+        .recording-snap__hero-inner
           img src=post.youtube_thumbnail_url
 
-    h3.event-snap__title
+    h3.recording-snap__title
       span.title-text == widont_format markdown_line post.title
       - selected_primary_topics = select_primary_topics_for_page(post)
       - if selected_primary_topics && selected_primary_topics.any?
@@ -38,6 +40,6 @@
           '  &nbsp;/&nbsp;
           = selected_primary_topics.first.title
     - if post.fields[:people].data_present?
-      p.event-snap__authors
+      p.recording-snap__authors
         ' With
         = post.fields[:people].pages.map(&:title).to_sentence

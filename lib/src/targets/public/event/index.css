@@ -1,7 +1,7 @@
 /* Individual events page */
 
 .event {
-  padding-top: 50px;
+  padding-top: 35px;
   padding-bottom: 80px;
 }
 .breakpoint-tablet-wide .event,
@@ -18,6 +18,12 @@
   .event__blocks {
     margin-right: -35px;
   }
+
+/* Intro */
+.event__intro {}
+.event__intro--with-series {
+  padding-top: 50px;
+}
 
 /* Headers */
 .event__presenters-header,
@@ -54,6 +60,13 @@
   float: none;
   width: 100%;
 }
+  .event__meta--past.event__meta {
+    padding-top: 35px;
+  }
+  .breakpoint-phone-wide .event__meta,
+  .breakpoint-phone .event__meta {
+    padding-top: 0;
+  }
 
   .event__date-time {
     color: #888;
@@ -112,9 +125,6 @@
 .breakpoint-w-599 .event__promo-image {
   float: none;
   width: 100%;
-}
-.event__series-header + .event__promo-image {
-  margin-top: -25px;
 }
   .event__promo-image img {
     max-width: 100%;
@@ -497,18 +507,18 @@
     font-size: 1.8rem;
   }
 
-  .event__tickets-booking {
+  .copy .event__tickets-booking {
     border: 1px solid var(--primary-color);
     border-radius: 3px;
     display: inline-block;
     color: var(--primary-color);
     font-family: var(--font-sans);
     font-weight: bold;
-    float: right;
     padding: 12px 18px;
-    margin-top: -12px;
+    /*margin-top: -12px;*/
     margin-bottom: 25px;
-    margin-left: 35px;
+    margin-left: 10px;
+    text-decoration: none;
     transform: scale(1,1);
     transition-property: transform, background-color, color;
     transition-duration: 250ms;
@@ -519,13 +529,13 @@
     clear: left;
     float: none;
     margin-top: 0;
-    margin-left: 0;
   }
 
-    .event__tickets-booking:hover,
-    .event__tickets-booking:focus {
+    .copy .event__tickets-booking:hover,
+    .copy .event__tickets-booking:focus {
       background-color: var(--primary-color);
       color: #fff;
+      text-decoration: none;
       transform: scale(1.1,1.1);
     }
 
@@ -979,7 +989,6 @@
   .event-calendar-event__anchor:hover .event-calendar-event__hero img,
   .event-calendar-event__anchor:focus .event-calendar-event__hero img {
     transform: scale3d(1.1, 1.1, 1);
-    opacity: 0.85;
   }
 
 /* Index: booked out events */
@@ -987,54 +996,73 @@
 .event-calendar-event--booked-out .title-text {
   color: #888;
 }
-
-.event-calendar-event--booked-out .event-calendar-event__anchor:hover .title-text,
-.event-calendar-event--booked-out .event-calendar-event__anchor:focus .title-text {
-  color: #888;
-}
+  .event-calendar-event--booked-out .event-calendar-event__anchor:hover .title-text,
+  .event-calendar-event--booked-out .event-calendar-event__anchor:focus .title-text {
+    color: #666;
+  }
 
 .event-calendar-event--booked-out .event-calendar-event__hero img {
   filter: gray;
   filter: grayscale(1);
   -webkit-filter: grayscale(1);
 }
+  .event-calendar-event--booked-out .event-calendar-event__anchor:hover .event-calendar-event__hero img {
+    filter: none;
+    filter: none;
+    -webkit-filter: none;
+  }
 
-.event-calendar-event--booked-out .event-calendar-event__hero-inner:before {
-  background-color: rgba(150,150,150,.7);
-  content: "";
+.event-calendar-event__flag {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 2;
+  transform: scale3d(1,1,1);
+  transition-property: transform, opacity;
+  transition-duration: 200ms;
+  opacity: 1;
+}
+  .event-calendar-event__anchor:hover .event-calendar-event__flag,
+  .event-calendar-event__anchor:focus .event-calendar-event__flag {
+    transform: scale3d(1.75,1.75,1);
+    opacity: 0;
+  }
+
+  .event-calendar-event--booked-out .event-calendar-event__flag {
+    background-color: rgba(169,180,179,.85);
+  }
+  .event-calendar-event--booking-fast .event-calendar-event__flag {
+    background-color: rgba(0, 158, 140, 0.65);
+  }
+
+.event-calendar-event__flag-text {
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  left: 0;
+  letter-spacing: 0.15em;
+  padding: 20px 40px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  text-transform: uppercase;
+  top: 50%;
+  margin-top: -35px;
+  z-index: 3;
 }
 
-.event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
-  content: "Booked out";
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  position: absolute;
-  top: 40%;
-  left: 0;
-  right: 0;
-  color: #fff;
-  z-index: 3;
-  text-align: center;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.3);
-}
-.breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
-  font-size: 18px;
-  font-size: 1.8rem;
-}
-.breakpoint-phone .event-calendar-event--booked-out .event-calendar-event__hero-inner:after {
-  font-size: 20px;
-  font-size: 2.0rem;
-}
+  .breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__flag {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  .breakpoint-phone .event-calendar-event--booked-out .event-calendar-event__flag {
+    font-size: 20px;
+    font-size: 2.0rem;
+  }
 
 /* Index: event series */
 
@@ -1044,27 +1072,12 @@
 
   .event-series__block {
     background-color: var(--primary-color);
+    color: #fff;
     float: left;
     text-align: center;
     height: 360px;
     width: 50%;
     overflow: hidden;
-  }
-  .event-series__block--one {
-    background-color: #e373b5;
-    color: #fff;
-  }
-  .event-series__block--two {
-    background-color: #44ba9f;
-    color: #fff;
-  }
-  .event-series__block--three {
-    background-color: #a761e5;
-    color: #fff;
-  }
-  .event-series__block--four {
-    background-color: #5192df;
-    color: #fff;
   }
   .breakpoint-phone-wide .event-series__block,
   .breakpoint-phone .event-series__block {
@@ -1099,8 +1112,8 @@
       }
       .event-series__anchor:hover .event-series__image,
       .event-series__anchor:focus .event-series__image {
-        opacity: .2;
-        transform: scale3d(1.1, 1.1, 1);
+        opacity: 0.2;
+        transform: scale3d(1.05, 1.05, 1);
       }
 
       .event-series__text {

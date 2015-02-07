@@ -65,3 +65,4 @@ en:
       path_month: '/%Y/%m'
       path_day: '/%Y/%m/%d'
       month_and_year: '%B %Y'
+      rfc_3339: '%FT%TZ'
