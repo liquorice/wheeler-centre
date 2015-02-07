@@ -87,15 +87,26 @@ module Heracles
           options[:per_page] = 6 || options[:per_page]
           if series
             events = series.events({per_page: options[:per_page], exclude: [id]})
+            # Try and find events based on presenters
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
+              additional = search_events_by_presenters({per_page: additional_total})
+              events = events + additional.results
+            end
+            # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})
               events = events + additional.results
-            else
-              events = events
             end
           else
-            events = search_events_by_topic({per_page: options[:per_page]}).results
+            events = search_events_by_presenters({per_page: options[:per_page]}).results
+            # Try and find events based on topics
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
+              additional = search_events_by_topic({per_page: additional_total})
+              events = events + additional.results
+            end
           end
           events
         end
@@ -161,6 +172,18 @@ module Heracles
 
         private
 
+        def search_events_by_presenters(options={})
+          Sunspot.search(Event) do
+            without :id, id
+            with :site_id, site.id
+            with :presenter_ids, fields[:presenters].pages.map(&:id)
+            with :published, true
+
+            order_by :start_date_time, :desc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
+        end
+
         def search_events_by_topic(options={})
           Sunspot.search(Event) do
             without :id, id
@@ -168,7 +191,7 @@ module Heracles
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
 
-            order_by :start_date_time, :asc
+            order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
