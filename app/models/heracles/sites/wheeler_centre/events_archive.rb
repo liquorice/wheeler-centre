@@ -28,9 +28,11 @@ module Heracles
             with :site_id, site.id
             with :parent_id, events_index.id
             with :published, true
+            with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+            without :start_date_time, nil
 
             order_by :start_date_time, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 36)
           end
         end
       end
