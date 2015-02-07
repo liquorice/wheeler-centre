@@ -6,10 +6,11 @@ module Heracles
           {
             fields: [
               {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :summary, type: :content},
               {name: :body, type: :content},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :highlight_colour, type: :text, editor_type: 'code'},
-              {name: :archived, type: :boolean, question_text: "Is the Event Series archived?"},
+              {name: :archived, type: :boolean, question_text: "Is the series archived?"},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"}
             ]
@@ -63,8 +64,10 @@ module Heracles
         end
 
         def sponsors
-           @sponsors ||= fields["sponsors"].pages.visible.published
+          @sponsors ||= fields[:sponsors].pages.visible.published
         end
+
+        ### Searchable
 
         searchable do
           string :topic_ids, multiple: true do
@@ -75,6 +78,10 @@ module Heracles
             fields[:topics].pages.map(&:title)
           end
 
+          string :event_ids, multiple: true do
+            events.map(&:id)
+          end
+
           text :body do
             fields[:body].value
           end
@@ -82,15 +89,9 @@ module Heracles
           date :created_at do
             created_at.to_s(:admin_date)
           end
-        end
 
-        searchable do
-          string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
-          end
-
-          date :created_at do
-            created_at.to_s(:admin_date)
+          boolean :archived do
+            fields[:archived].value
           end
         end
 

@@ -13,6 +13,8 @@ module Heracles
           }
         end
 
+        ### Accessors
+
         # Return _all_ the upcoming events
         def upcoming_events(options={})
           search_upcoming_events(options)
@@ -20,6 +22,10 @@ module Heracles
 
         def events(options={})
           search_events(options)
+        end
+
+        def active_series
+          children.of_type("event_series_index").first.active_series
         end
 
         private

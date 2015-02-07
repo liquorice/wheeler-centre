@@ -13,19 +13,31 @@ module Heracles
           }
         end
 
-        def event_series
-          search_event_series
+        ### Accessors
+
+        def event_series(options={})
+          search_event_series(options)
+        end
+
+        def active_series(options={})
+          options.reverse_merge!({active: true})
+          search_event_series(options)
         end
 
         private
 
-        def search_event_series
+        def search_event_series(options={})
           Sunspot.search(EventSeries) do
             with :site_id, site.id
             with :parent_id, id
             with :published, true
 
-            order_by :start_date_time, :asc
+            if options[:active] == true
+              with :archived, false
+              without :event_ids, nil
+            end
+
+            order_by :created_at, :asc
             paginate(page: 1, per_page: 1000)
           end
         end
