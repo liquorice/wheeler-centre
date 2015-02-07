@@ -86,7 +86,7 @@ module Heracles
         def related_events(options={})
           options[:per_page] = 6 || options[:per_page]
           if series
-            events = series.events({per_page: options[:per_page]})
+            events = series.events({per_page: options[:per_page], exclude: [id]})
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})

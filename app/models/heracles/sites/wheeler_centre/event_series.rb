@@ -42,6 +42,9 @@ module Heracles
             of_type("event").
             visible.
             published.
+            where.not(
+              id: options[:exclude]
+            ).
             joins(:insertions).
             where(
               :"insertions.field" => "series",
