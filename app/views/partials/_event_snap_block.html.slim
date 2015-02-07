@@ -5,8 +5,8 @@
 - elsif post.promo_image
   - image = post.promo_image
 
-.snap--block
-  a.event-snap.event-snap--block href=post.absolute_url
+.snap-block
+  a.event-snap.event-snap-block href=post.absolute_url
     - if post.fields[:start_date].data_present?
       time.event-snap__date datetime=l(post.fields[:start_date].value, format: :rfc_3339)
         = l post.fields[:start_date].value, format: :medium_date
@@ -36,4 +36,9 @@
     - if post.fields[:presenters].data_present?
       p.event-snap__authors
         ' With
-        = post.fields[:presenters].pages.map(&:title).to_sentence
+        - if post.fields[:presenters].pages.length > 3
+          = post.fields[:presenters].pages[0..2].map(&:title).join(", ")
+          '  and
+          = pluralize(post.fields[:presenters].pages.length-3, "other")
+        - else
+          = post.fields[:presenters].pages.map(&:title).to_sentence

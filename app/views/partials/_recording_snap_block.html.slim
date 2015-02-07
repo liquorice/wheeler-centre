@@ -3,8 +3,8 @@
 - if post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
 
-.snap--block
-  a.recording-snap.recording-snap--block href=post.absolute_url
+.snap-block
+  a.recording-snap.recording-snap-block href=post.absolute_url
     time.recording-snap__date
       - if post.fields[:recording_date].data_present?
         = l post.fields[:recording_date].value, format: :medium_date

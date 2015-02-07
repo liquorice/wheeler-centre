@@ -28,7 +28,7 @@
     margin-bottom: 14px;
     line-height: 1.2;
   }
-    .recording-snap--block .title-text {
+    .recording-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
       line-height: 1.4;
@@ -62,7 +62,7 @@
     font-size: 19px;
     font-size: 1.9rem;
   }
-    .recording-snap--block .recording-snap__summary,
+    .recording-snap-block .recording-snap__summary,
     .recording-snap--quarter .recording-snap__summary {
       font-size: 16px;
       font-size: 1.6rem;

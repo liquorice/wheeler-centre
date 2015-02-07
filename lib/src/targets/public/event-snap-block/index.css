@@ -24,7 +24,7 @@
     margin-bottom: 14px;
     font-weight: bold;
   }
-    .event-snap--block .title-text {
+    .event-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
       line-height: 1.4;
@@ -58,7 +58,7 @@
     font-size: 19px;
     font-size: 1.9rem;
   }
-    .event-snap--block .event-snap__summary,
+    .event-snap-block .event-snap__summary,
     .event-snap--quarter .event-snap__summary {
       font-size: 16px;
       font-size: 1.6rem;
