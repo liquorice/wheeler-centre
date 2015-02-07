@@ -590,31 +590,11 @@
   width: calc(100% - 35px);
 }
 
-
-
-/* */
-
-.gradient-top-down {
-  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.05)));
-  background: -webkit-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
-  background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
-  background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
-  background: linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
-  padding-top: 35px;
-}
-
 .blog-index__topic {
   padding-top: 35px;
   padding-bottom: 35px;
 }
 .breakpoint-w-879 .blog-index__topic {
   padding-bottom: 15px;
-}
-
-.blog-snap--block {
-  /*text-align: center;
-  float: left;
-  width: 16.6%;
-  padding-right: 35px;*/
 }
 

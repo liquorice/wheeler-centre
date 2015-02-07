@@ -147,6 +147,47 @@ body {
     font-size: 2.5rem;
   }
 
+
+
+
+.gradient-top-down {
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.05)));
+  background: -webkit-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
+  background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
+  background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
+  background: linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
+  padding-top: 25px;
+}
+  .breakpoint-tablet-wide .gradient-top-down {
+    padding-top: 20px;
+  }
+  .breakpoint-tablet .gradient-top-down {
+    padding-top: 15px;
+  }
+  .breakpoint-phone-wide .gradient-top-down,
+  .breakpoint-phone .gradient-top-down {
+    padding-top: 10px;
+  }
+
+.gradient-bottom-up {
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #fff), color-stop(20%, rgba(250, 250, 250, 0))), -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(100%, transparent), color-stop(0%, rgba(0, 0, 0, 0.05)));
+  background: -webkit-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.05));
+  background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.05));
+  background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.05));
+  background: linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(top, transparent, rgba(0, 0, 0, 0.05));
+  padding-bottom: 25px;
+}
+  .breakpoint-tablet-wide .gradient-bottom-up {
+    padding-bottom: 20px;
+  }
+  .breakpoint-tablet .gradient-bottom-up {
+    padding-bottom: 15px;
+  }
+  .breakpoint-phone-wide .gradient-bottom-up,
+  .breakpoint-phone .gradient-bottom-up {
+    padding-bottom: 10px;
+  }
+
 /* Components */
 
 @import "./skip-links";
