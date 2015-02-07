@@ -35,26 +35,27 @@
                 h1.event-series__title == widont_format markdown_line page.title
               .event-series__body.copy
                 = render_content page.fields[:body]
-
-    .event-series__upcoming.column-wrapper
-      .section-header
-        h2 Upcoming events
-        .intro.intro--small.column-narrow.copy
-          p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
-      .column-mid
-        - if upcoming_events.results.any?
+    - if upcoming_events.results.any?
+      .event-series__upcoming.column-wrapper
+        .section-header
+          h2 Upcoming events
+          .intro.intro--small.column-narrow.copy
+            p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
+        .column-mid
           .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
             - upcoming_events.results.each do |post|
               = render "partials/event_snap_block", post: post, show_type: true
-
-    .column-wrapper
-      .column-full
-        - if past_events.results.total_pages > 0
+    - if past_events.results.any?
+      .event-series__past.column-wrapper
+        .section-header
           h2 Past events
-          ul
-            - past_events.results.each do |event|
-              li
-                a href=event.absolute_url
-                  = event.title
-                  ',
-                  = l event.fields[:start_date].value, format: :medium_date
+          .intro.intro--small.column-narrow.copy
+            p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
+        .column-full
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 7, widescreen: 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+            - past_events.results.each do |post|
+              - if post.fields[:recordings].data_present?
+                - post.fields[:recordings].pages.each do |recording|
+                  = render "partials/recording_snap_block", post: recording, show_type: true
+              - else
+                = render "partials/event_snap_block", post: post, show_type: true

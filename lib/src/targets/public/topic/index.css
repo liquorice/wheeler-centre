@@ -155,6 +155,18 @@
   width: calc(100% / 4);
 }
 
+.grouper--10 .snap-block {
+  width: calc(100% / 10);
+}
+.grouper--9 .snap-block {
+  width: calc(100% / 9);
+}
+.grouper--8 .snap-block {
+  width: calc(100% / 8);
+}
+.grouper--7 .snap-block {
+  width: calc(100% / 7);
+}
 .grouper--6 .snap-block {
   width: calc(100% / 6);
 }
