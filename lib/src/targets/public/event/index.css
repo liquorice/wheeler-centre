@@ -1,17 +1,17 @@
 /* Individual events page */
 
 .event {
-  padding-top: 35px;
+  /*padding-top: 20px;*/
   padding-bottom: 80px;
 }
 .breakpoint-tablet-wide .event,
 .breakpoint-tablet .event {
-  padding-top: 40px;
+  /*padding-top: 40px;*/
   padding-bottom: 30px;
 }
 .breakpoint-phone-wide .event,
 .breakpoint-phone .event {
-  padding-top: 20px;
+  /*padding-top: 20px;*/
   padding-bottom: 20px;
 }
 
@@ -20,7 +20,9 @@
   }
 
 /* Intro */
-.event__intro {}
+.event__intro {
+  padding-top: 12px;
+}
 .event__intro--with-series {
   padding-top: 50px;
 }
@@ -129,6 +131,7 @@
   .event__promo-image img {
     max-width: 100%;
     max-width: calc(100% - 35px);
+    min-width: 70%;
     margin-left: 35px;
   }
   .breakpoint-w-599 .event__promo-image img {
@@ -138,6 +141,10 @@
     margin-right: auto;
     max-height: 400px;
   }
+  .breakpoint-tablet-wide .event__promo-image img {
+    width: 100%;
+  }
+
   .event__promo-image-caption {
     margin-left: 35px;
     padding-top: 15px;
@@ -224,6 +231,9 @@
   padding-top: 25px;
   padding-bottom: 25px;
   margin-bottom: 25px;
+}
+.breakpoint-phone .event__series-header {
+  margin-bottom: 0;
 }
   .event__series-header:hover,
   .event__series-header:focus {
@@ -712,16 +722,16 @@
 /* Index: calendar; */
 
 .event-index {
-  padding-top: 70px;
+  padding-top: 35px;
   padding-bottom: 50px;
 }
 .breakpoint-tablet .event-index {
-  padding-top: 40px;
+  padding-top: 15px;
   padding-bottom: 20px;
 }
 .breakpoint-phone-wide .event-index,
 .breakpoint-phone .event-index {
-  padding-top: 20px;
+  padding-top: 5px;
   padding-bottom: 20px;
 }
 
@@ -1066,11 +1076,11 @@
 
 /* Index: event series */
 
-.event-series {
+.event-series-summary {
   margin-top: 60px;
 }
 
-  .event-series__block {
+  .event-series-summary__block {
     background-color: var(--primary-color);
     color: #fff;
     float: left;
@@ -1079,14 +1089,14 @@
     width: 50%;
     overflow: hidden;
   }
-  .breakpoint-phone-wide .event-series__block,
-  .breakpoint-phone .event-series__block {
+  .breakpoint-phone-wide .event-series-summary__block,
+  .breakpoint-phone .event-series-summary__block {
     float: none;
     height: auto;
     width: 100%;
   }
 
-    .event-series__anchor {
+    .event-series-summary__anchor {
       display: block;
       height: 360px;
       width: 100%;
@@ -1094,13 +1104,13 @@
       padding: 60px 35px;
       position: relative;
     }
-    .breakpoint-phone-wide .event-series__anchor,
-    .breakpoint-phone .event-series__anchor {
+    .breakpoint-phone-wide .event-series-summary__anchor,
+    .breakpoint-phone .event-series-summary__anchor {
       height: auto;
       padding: 30px 35px;
     }
 
-      .event-series__image {
+      .event-series-summary__image {
         position: absolute;
         top: 0;
         left: 0;
@@ -1110,36 +1120,36 @@
         transition-duration: 900ms;
         z-index: 1;
       }
-      .event-series__anchor:hover .event-series__image,
-      .event-series__anchor:focus .event-series__image {
+      .event-series-summary__anchor:hover .event-series-summary__image,
+      .event-series-summary__anchor:focus .event-series-summary__image {
         opacity: 0.2;
         transform: scale3d(1.05, 1.05, 1);
       }
 
-      .event-series__text {
+      .event-series-summary__text {
         position: relative;
         z-index: 2;
       }
 
-      .event-series__title {
+      .event-series-summary__title {
         font-size: 28px;
         font-size: 2.8rem;
         font-weight: bold;
         padding-bottom: 20px;
       }
-      .breakpoint-tablet-wide .event-series__title,
-      .breakpoint-tablet .event-series__title,
-      .breakpoint-phone-wide .event-series__title,
-      .breakpoint-phone .event-series__title {
+      .breakpoint-tablet-wide .event-series-summary__title,
+      .breakpoint-tablet .event-series-summary__title,
+      .breakpoint-phone-wide .event-series-summary__title,
+      .breakpoint-phone .event-series-summary__title {
         font-size: 24px;
         font-size: 2.4rem;
       }
-      .breakpoint-w-799 .event-series__title {
+      .breakpoint-w-799 .event-series-summary__title {
         font-size: 22px;
         font-size: 2rem;
       }
 
-      .event-series__description {
+      .event-series-summary__description {
         font-size: 20px;
         font-size: 2rem;
         margin-left: auto;
@@ -1147,25 +1157,25 @@
         max-width: 510px;
         padding-bottom: 50px;
       }
-      .breakpoint-tablet-wide .event-series__description,
-      .breakpoint-tablet .event-series__description {
+      .breakpoint-tablet-wide .event-series-summary__description,
+      .breakpoint-tablet .event-series-summary__description {
         font-size: 18px;
         font-size: 1.8rem;
         padding-bottom: 40px;
       }
-      .breakpoint-w-799 .event-series__description {
+      .breakpoint-w-799 .event-series-summary__description {
         font-size: 16px;
         font-size: 1.6rem;
         padding-bottom: 30px;
       }
 
-      .event-series__action {
+      .event-series-summary__action {
         display: block;
         font-size: 16px;
         font-size: 1.6rem;
         font-weight: bold;
       }
-      .event-series__anchor:hover .event-series__action,
-      .event-series__anchor:focus .event-series__action {
+      .event-series-summary__anchor:hover .event-series-summary__action,
+      .event-series-summary__anchor:focus .event-series-summary__action {
         text-decoration: underline;
       }

@@ -21,6 +21,17 @@
     padding-bottom: 20px;
     text-transform: uppercase;
   }
+    .breakpoint-tablet .masthead-contextual__section-title {
+      font-size: 15px;
+      font-size: 1.5rem;
+    }
+    .breakpoint-phone-wide .masthead-contextual__section-title,
+    .breakpoint-phone .masthead-contextual__section-title {
+      display: none;
+    }
+    .breakpoint-phone .masthead-contextual__section-title {
+      padding-left: 15px;
+    }
 
   .breakpoint-w-599 .masthead-contextual__section-title {
     padding-top: 20px;
@@ -29,9 +40,15 @@
 
   .masthead-contextual__navigation-list {
     float: left;
+    margin-bottom: 15px;
     padding-left: 35px;
+    padding-right: 35px;
     padding-top: 25px;
   }
+    .breakpoint-phone .masthead-contextual__navigation-list {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
 
   .masthead-contextual__navigation-item {
     float: left;
@@ -39,10 +56,10 @@
     padding-bottom: 5px;
   }
   .breakpoint-phone-wide .masthead-contextual__navigation-item {
-    padding-right: 30px;
+    padding-right: 20px;
   }
   .breakpoint-phone .masthead-contextual__navigation-item {
-    padding-right: 20px;
+    padding-right: 12px;
   }
 
   .masthead-contextual__navigation-anchor {
@@ -82,7 +99,12 @@
   margin-top: 0;
   padding: 10px 35px;
   margin-top: 15px;
+  margin-bottom: 15px
 }
+  .breakpoint-phone .upcoming-events {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   .upcoming-events__navigation {
     height: 30px;

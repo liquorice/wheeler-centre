@@ -72,20 +72,20 @@
 
         / Event series
         - if active_series.any?
-          .event-series.clearfix
+          .event-series-summary.clearfix
             h2.screenreaders-only Current event series
             - active_series.each_with_index do |series, index|
               - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
-              .event-series__block style=style_for_event_series_block(highlight_color)
-                a.event-series__anchor href=series.absolute_url
+              .event-series-summary__block style=style_for_event_series_block(highlight_color)
+                a.event-series-summary__anchor href=series.absolute_url
                   - if series.fields[:hero_image].data_present?
-                    img.event-series__image src=series.fields[:hero_image].asset.content_small_url
-                  .event-series__text
-                    h3.event-series__title = series.title
+                    img.event-series-summary__image src=series.fields[:hero_image].asset.content_small_url
+                  .event-series-summary__text
+                    h3.event-series-summary__title = series.title
                     - if series.fields[:summary].data_present?
-                      .event-series__description.copy
+                      .event-series-summary__description.copy
                         = render_content series.fields[:summary]
                     - else
-                      .event-series__description.copy
+                      .event-series-summary__description.copy
                         = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
-                    span.event-series__action View this #{series.events.length} event series
+                    span.event-series-summary__action View this #{series.events.length} event series

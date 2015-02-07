@@ -1,5 +1,6 @@
 - upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 1000)
 - past_events = page.past_events(page: params[:page], per_page: params[:per_page] || 1000)
+- image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
 
 = area :masthead_title do
   .page__title.page__title--events
@@ -11,16 +12,43 @@
 
 = area :main do
   .event-series
-    .column-wrapper
-      .column-wide.copy
-        h1  == widont_format markdown_line page.title
-        - if upcoming_events.results.total_pages > 0
-          h2 Upcoming events
-          ul
-            - upcoming_events.results.each do |event|
-              li
-                a href=event.absolute_url = event.title
+    - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
+    .event-series__details style=style_for_event_series_block(highlight_color)
+      .column-wrapper
+        .column-wide.clearfix
+          - if image
+            .event-series__promo
+              .event-series__promo-inner
+                picture
+                  erb:
+                    <!--[if IE 9]><video style="display: none;"><![endif]-->
+                  source srcset=image.content_medium_url media="(min-width: 480px)"
+                  erb:
+                    <!--[if IE 9]></video><![endif]-->
+                  img src=image.content_small_url itemprop="hero_image"
+                  - if image.attribution.present?
+                    .event-series__promo-image-caption.caption
+                      p = image.attribution
+          .event-series__meta class=("event-series__meta--with-promo" if image)
+            .event-series__meta-inner
+              .event-series__header
+                h1.event-series__title == widont_format markdown_line page.title
+              .event-series__body.copy
+                = render_content page.fields[:body]
 
+    .event-series__upcoming.column-wrapper
+      .section-header
+        h2 Upcoming events
+        .intro.intro--small.column-narrow.copy
+          p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
+      .column-mid
+        - if upcoming_events.results.any?
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+            - upcoming_events.results.each do |post|
+              = render "partials/event_snap_block", post: post, show_type: true
+
+    .column-wrapper
+      .column-full
         - if past_events.results.total_pages > 0
           h2 Past events
           ul

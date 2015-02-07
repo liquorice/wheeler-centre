@@ -9,6 +9,10 @@
     padding-left: 35px;
     padding-right: 35px;
   }
+    .breakpoint-phone .masthead__inner {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
 
   .breakpoint-phone .masthead__container {
     padding-top: 50px;
@@ -19,7 +23,7 @@
   }
 
   .breakpoint-phone .masthead__navigation {
-    background-color: var(--primary-color-darker);
+    background-color: color(var(--primary-color) shade(5%));
     height: 40px;
     padding-bottom: 0;
     position: fixed;
