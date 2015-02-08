@@ -221,3 +221,5 @@ body {
 @import "./venue";
 @import "./recording-snap-block";
 @import "./topic";
+@import "./people";
+@import "./person";

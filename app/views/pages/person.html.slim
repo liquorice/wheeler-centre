@@ -10,22 +10,24 @@
 = area :masthead_contextual_navigation do
   ul.masthead-contextual__navigation-list
       li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events"
+        a.masthead-contextual__navigation-anchor href="/people"
           ' People
 
 = area :main do
   .person
+    - if page.fields[:portrait].data_present?
+      .person__image
+        .person__image-inner
+          img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
     .column-wrapper
-      .column-wide.copy
-        - if page.fields[:portrait].data_present?
-          .person__image
-            .person__image-inner
-              img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
+      .column-wide
+        h1.person__title
+          == widont_format markdown_line page.title
         - if page.fields[:intro].data_present?
-          .person__intro
+          .person__intro.copy
             = render_content_in_sections page.fields[:intro]
         - if page.fields[:biography].data_present?
-          .person__body
+          .person__body.copy
             = render_content_in_sections page.fields[:biography]
         - if upcoming_events.results.total_pages > 0
           h2 Upcoming events
