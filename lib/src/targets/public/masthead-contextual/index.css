@@ -155,7 +155,6 @@
     }
 
   .upcoming-events__list {
-    overflow: hidden;
     padding-top: 15px;
   }
 
@@ -204,14 +203,14 @@
 
     .upcoming-events__image-container {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      top: -25%;
       opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
       transition-property: transform, opacity;
       transition-duration: 150ms;
       transition-timing-function: cubic-bezier(.10, .10, .25, .90);
+      z-index: 6;
     }
 
     .breakpoint-w-599 .upcoming-events__image-container {
@@ -225,17 +224,8 @@
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
-    .upcoming-events__item-anchor:focus .upcoming-events__item-title,
-    .upcoming-events__item-anchor:hover .upcoming-events__item-date,
-    .upcoming-events__item-anchor:focus .upcoming-events__item-date {
-      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-    }
-
-    .breakpoint-w-599 .upcoming-events__item-anchor:hover .upcoming-events__item-title,
-    .breakpoint-w-599 .upcoming-events__item-anchor:focus .upcoming-events__item-title,
-    .breakpoint-w-599 .upcoming-events__item-anchor:hover .upcoming-events__item-date,
-    .breakpoint-w-599 .upcoming-events__item-anchor:focus .upcoming-events__item-date {
-      text-shadow: none;
+    .upcoming-events__item-anchor:focus .upcoming-events__item-title {
+      text-decoration: underline;
     }
 
       .upcoming-events__image-container img {
@@ -277,7 +267,10 @@
 
       .upcoming-events__item-title {
         color: #fff;
-        font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
+        font-family: var(--font-serif);
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
       }
 
       .breakpoint-w-599 .upcoming-events__item-title {
