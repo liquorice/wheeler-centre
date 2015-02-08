@@ -20,7 +20,7 @@
             = render_content page.fields[:intro]
     / Main venues
     - if main_venues.any?
-      .main-venues.clearfix
+      .venues-index__main.clearfix
         - main_venues.each do |venue|
           .main-venue__block
             a.main-venue__anchor href=venue.absolute_url

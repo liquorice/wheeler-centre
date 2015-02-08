@@ -104,7 +104,7 @@ body {
   padding-bottom: 35px;
   margin-bottom: 35px;
 }
-  .block-link:hover {
+  a.block-link:hover {
     color: #222;
     text-decoration: underline;
   }
@@ -218,5 +218,6 @@ body {
 @import "./events-series-index";
 @import "./event-series";
 @import "./venues-index";
+@import "./venue";
 @import "./recording-snap-block";
 @import "./topic";

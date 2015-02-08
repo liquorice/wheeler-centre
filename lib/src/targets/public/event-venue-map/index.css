@@ -1,10 +1,14 @@
-.event__venue-map-wrapper {
+.venue-map__wrapper {
   position: relative;
   background: var(--primary-color-lighter);
   padding-top: 35px;
   padding-bottom: 35px;
 }
-  .event__venue-map-panel {
+  .venue-map--large .venue-map__wrapper {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .venue-map__panel {
     box-shadow: 5px 5px 0 rgba(0,0,0,0.05);
     background: #fff;
     display: inline-block;
@@ -19,37 +23,37 @@
     transition-property: transform, background-color, color;
     transition-duration: 250ms;
   }
-    .event__venue-map-panel:hover,
-    .event__venue-map-panel:focus {
+    a.venue-map__panel:hover,
+    a.venue-map__panel:focus {
       color: var(--primary-color-darker);
       transform: scale(1.1, 1.1);
     }
-    .event__venue-map-panel-image {
+    .venue-map__panel-image {
       position: absolute;
       top: 0;
       left: 100%;
       bottom: 0;
       height: 100%;
     }
-    .breakpoint-phone-wide .event__venue-map-panel-image,
-    .breakpoint-phone .event__venue-map-panel-image {
+    .breakpoint-phone-wide .venue-map__panel-image,
+    .breakpoint-phone .venue-map__panel-image {
       display: none;
     }
 
-  .breakpoint-widescreen-wide .event__venue-map-panel {
+  .breakpoint-widescreen-wide .venue-map__panel {
     margin-left: -35px;
   }
-  .breakpoint-w-699 .event__venue-map-panel {
+  .breakpoint-w-699 .venue-map__panel {
     font-size: 15px;
     font-size: 1.5rem;
     padding: 15px 25px 15px 15px;
   }
-    .event__venue-map-panel h4 {
+    .venue-map__panel h4 {
       font-weight: bold;
       margin-bottom: 0.5em;
     }
 
-  .event__venue-map {
+  .venue-map__map {
     position: absolute;
     top: 0;
     left: 0;

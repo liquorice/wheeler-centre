@@ -178,6 +178,10 @@ module Heracles
             fields[:series].pages.map(&:id)
           end
 
+          string :venue_id do
+            fields[:venue].pages.first.id if fields[:venue].data_present?
+          end
+
         end
 
         private

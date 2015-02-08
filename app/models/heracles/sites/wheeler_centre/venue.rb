@@ -28,11 +28,28 @@ module Heracles
           }.to_json
         end
 
+        def events(options={})
+          search_events(options)
+        end
+
         ### Searchable
 
         searchable do
           text :title do
             title
+          end
+        end
+
+        private
+
+        def search_events(options={})
+          Sunspot.search(Event) do
+            with :site_id, site.id
+            with :venue_id, id
+            with :published, true
+
+            order_by :start_date, :desc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 14
           end
         end
 

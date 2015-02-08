@@ -157,14 +157,14 @@
             .event__venue-more.copy
               a href=page.venue.absolute_url More about this venue
               ', including large map, parking, public transport and accessibility.
-        .event__venue-map-wrapper
-          .event__venue-map
+        .venue-map__wrapper
+          .venue-map__map data-map=true
           .column-wrapper
             .column-wide
               - venue_image = page.venue.fields[:hero_image].asset if page.venue.fields[:hero_image].data_present?
-              a.event__venue-map-panel class=("event__venue-map-panel--with-image" if venue_image) href=page.venue.absolute_url
+              a.venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.venue.absolute_url
                 - if venue_image
-                  img.event__venue-map-panel-image src=venue_image.content_thumbnail_url
+                  img.venue-map__panel-image src=venue_image.content_thumbnail_url
                 h4= page.venue.title
                 p= render_content page.venue.fields[:address_formatted]
 
