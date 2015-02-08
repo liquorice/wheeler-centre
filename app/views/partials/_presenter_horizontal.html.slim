@@ -1,12 +1,13 @@
-- if presenter.fields[:portrait].data_present?
-  - image = presenter.fields[:portrait].asset
+- cache ["presenter-horizontal-1", presenter, presenter.fields[:portrait].asset] do
+  - if presenter.fields[:portrait].data_present?
+    - image = presenter.fields[:portrait].asset
 
-.event-presenter.event-presenter--horizontal
-  - if image
-    a.event-presenter__image href=presenter.absolute_url
-      .event-presenter__image-inner
-        img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
-  h3.event-presenter__title
-    a href=presenter.absolute_url = presenter.title
-  .event-presenter__intro.copy
-    = render_content presenter.fields[:intro]
+  .event-presenter.event-presenter--horizontal
+    - if image
+      a.event-presenter__image href=presenter.absolute_url
+        .event-presenter__image-inner
+          img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
+    h3.event-presenter__title
+      a href=presenter.absolute_url = presenter.title
+    .event-presenter__intro.copy
+      = render_content presenter.fields[:intro]
