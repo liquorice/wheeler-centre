@@ -217,6 +217,6 @@ body {
 @import "./events-archive";
 @import "./events-series-index";
 @import "./event-series";
+@import "./venues-index";
 @import "./recording-snap-block";
 @import "./topic";
-

@@ -28,6 +28,14 @@ module Heracles
           }.to_json
         end
 
+        ### Searchable
+
+        searchable do
+          text :title do
+            title
+          end
+        end
+
       end
     end
   end
