@@ -3,87 +3,87 @@
 - image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
 
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Events
+  ' Events
 
 = area :masthead_contextual_navigation do
   - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .event-series
-    - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
-    .event-series__details style=style_for_event_series_block(highlight_color)
-      .column-wrapper
-        .column-wide.clearfix
-          - if image
-            .event-series__promo
-              .event-series__promo-inner
-                picture
-                  erb:
-                    <!--[if IE 9]><video style="display: none;"><![endif]-->
-                  source srcset=image.content_medium_url media="(min-width: 480px)"
-                  erb:
-                    <!--[if IE 9]></video><![endif]-->
-                  img src=image.content_small_url itemprop="hero_image"
-                  - if image.attribution.present?
-                    .event-series__promo-image-caption.caption
-                      p = image.attribution
-          .event-series__meta class=("event-series__meta--with-promo" if image)
-            .event-series__meta-inner
-              .event-series__header
-                h1.event-series__title == widont_format markdown_line page.title
-              .event-series__body.copy
-                = render_content page.fields[:body]
-    - if upcoming_events.results.any?
-      .event-series__upcoming.column-wrapper
-        .section-header
-          h2 Upcoming events
-          .intro.intro--small.column-narrow.copy
-            - if page.fields[:upcoming_intro].data_present?
-              = render_content page.fields[:upcoming_intro]
-            - else
-              p
-                ' Don’t miss the
-                = upcoming_events.results.length
-                '  events up next in
-                em = page.title
-                '.
-        .column-wide
-          - if upcoming_events.results.length >= 4
-            - default_width =  4
-          - elsif upcoming_events.results.length >= 2
-            - default_width = upcoming_events.results.length
-          - else
-            - default_width = 3
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: default_width, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
-            - upcoming_events.results.each do |post|
-              = render "partials/event_snap_block", post: post, show_type: true
-    - if past_events.results.any?
-      .event-series__past.column-wrapper class=("gradient-top-down" if upcoming_events.results.any?)
-        .section-header
-          h2 Past events
-          .intro.intro--small.column-narrow.copy
-            - if page.fields[:past_intro].data_present?
-              = render_content page.fields[:past_intro]
-            - else
-              p
-                ' Explore the
-                = past_events.results.length
-                '  previous events from
-                em = page.title
-                '.
-        .column-full
-          - if past_events.results.length >= 7
-            - default_width =  7
-          - elsif past_events.results.length >= 4
-            - default_width = past_events.results.length
-          - else
-            - default_width = 5
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => default_width, widescreen: 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
-            - past_events.results.each do |post|
-              - if post.recordings && post.recordings.any?
-                - post.recordings.each do |recording|
-                  = render "partials/recording_snap_block", post: recording, show_type: true
+  - cache ["event-series-1", page, upcoming_events, past_events, image] do
+    .event-series
+      - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
+      .event-series__details style=style_for_event_series_block(highlight_color)
+        .column-wrapper
+          .column-wide.clearfix
+            - if image
+              .event-series__promo
+                .event-series__promo-inner
+                  picture
+                    erb:
+                      <!--[if IE 9]><video style="display: none;"><![endif]-->
+                    source srcset=image.content_medium_url media="(min-width: 480px)"
+                    erb:
+                      <!--[if IE 9]></video><![endif]-->
+                    img src=image.content_small_url itemprop="hero_image"
+                    - if image.attribution.present?
+                      .event-series__promo-image-caption.caption
+                        p = image.attribution
+            .event-series__meta class=("event-series__meta--with-promo" if image)
+              .event-series__meta-inner
+                .event-series__header
+                  h1.event-series__title == widont_format markdown_line page.title
+                .event-series__body.copy
+                  = render_content page.fields[:body]
+      - if upcoming_events.results.any?
+        .event-series__upcoming.column-wrapper
+          .section-header
+            h2 Upcoming events
+            .intro.intro--small.column-narrow.copy
+              - if page.fields[:upcoming_intro].data_present?
+                = render_content page.fields[:upcoming_intro]
               - else
+                p
+                  ' Don’t miss the
+                  = upcoming_events.results.length
+                  '  events up next in
+                  em = page.title
+                  '.
+          .column-wide
+            - if upcoming_events.results.length >= 4
+              - default_width =  4
+            - elsif upcoming_events.results.length >= 2
+              - default_width = upcoming_events.results.length
+            - else
+              - default_width = 3
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: default_width, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+              - upcoming_events.results.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
+      - if past_events.results.any?
+        .event-series__past.column-wrapper class=("gradient-top-down" if upcoming_events.results.any?)
+          .section-header
+            h2 Past events
+            .intro.intro--small.column-narrow.copy
+              - if page.fields[:past_intro].data_present?
+                = render_content page.fields[:past_intro]
+              - else
+                p
+                  ' Explore the
+                  = past_events.results.length
+                  '  previous events from
+                  em = page.title
+                  '.
+          .column-full
+            - if past_events.results.length >= 7
+              - default_width =  7
+            - elsif past_events.results.length >= 4
+              - default_width = past_events.results.length
+            - else
+              - default_width = 5
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => default_width, widescreen: 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+              - past_events.results.each do |post|
+                - if post.recordings && post.recordings.any?
+                  - post.recordings.each do |recording|
+                    = render "partials/recording_snap_block", post: recording, show_type: true
+                - else
+                  = render "partials/event_snap_block", post: post, show_type: true
