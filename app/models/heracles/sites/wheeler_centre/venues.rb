@@ -19,15 +19,14 @@ module Heracles
         end
 
         def main_venues
-          if fields[:main_venues].data_present?
-            fields[:main_venues].pages
-          end
+          fields[:main_venues].pages
         end
 
         def other_venues
+          main_venue_ids = main_venues.map(&:id) if main_venues
           children.
           where.not(
-            id: main_venues.map(&:id)
+            id: main_venue_ids
           ).
           of_type("venue").
           published.
