@@ -53,13 +53,26 @@
     padding-right: 0;
   }
 
-  .venue__meta .copy {
+  .venue__meta .copy,
+  .venue__address,
+  .venue__phone {
     color: #666;
     font-family: var(--font-sans);
     font-size: 17px;
     font-size: 1.7rem;
-    line-height: 1.6;
+    line-height: 1.5;
   }
+    .venue__phone {
+      margin-top: 16px;
+    }
+      .venue__phone strong {
+        font-weight: bold;
+        font-size: 12px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        padding-right: 10px;
+      }
   .venue__meta h2 {
     color: var(--primary-color);
     font-family: var(--font-sans);

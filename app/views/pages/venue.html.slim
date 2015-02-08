@@ -33,10 +33,12 @@
             - if page.fields[:phone_number].data_present? || page.fields[:address_formatted].data_present?
               .venue__contact
                 h2.venue__contact-header Contact details
-                .copy
-                  - if page.fields[:phone_number].data_present?
-                    p Phone: = page.fields[:phone_number].value
+                .venue__address
                   = render_content page.fields[:address_formatted]
+                - if page.fields[:phone_number].data_present?
+                  .venue__phone
+                    strong Phone
+                    = page.fields[:phone_number].value
             - if page.fields[:directions].data_present?
               .venue__directions
                 h2.venue__directions-header Directions
