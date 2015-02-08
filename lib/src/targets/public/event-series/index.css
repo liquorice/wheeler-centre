@@ -1,6 +1,8 @@
 /* Event series */
 
-.event-series {}
+.event-series {
+  padding-bottom: 50px;
+}
 
 .event-series__details {
   background-color: var(--primary-color-lighter);
@@ -67,3 +69,13 @@
     font-size: 3.6rem;
     margin-bottom: 12px;
   }
+
+/* Upcoming events */
+.event-series__upcoming {
+  padding-top: 35px;
+}
+
+/* Past events */
+.event-series__past {
+  padding-top: 35px;
+}

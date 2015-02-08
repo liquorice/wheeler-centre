@@ -12,6 +12,12 @@ module Heracles
               {name: :highlight_colour, type: :text, editor_type: 'code'},
               {name: :archived, type: :boolean, question_text: "Is the series archived?"},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              # Upcoming intro
+              {name: :upcoming_info, type: :info, text: "<hr/>"},
+              {name: :upcoming_intro, type: :content},
+              # Past intro
+              {name: :past_info, type: :info, text: "<hr/>"},
+              {name: :past_intro, type: :content},
               {name: :legacy_series_id, type: :integer, label: "Legacy Series ID"}
             ]
           }
