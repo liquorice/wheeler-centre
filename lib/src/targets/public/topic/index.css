@@ -146,43 +146,48 @@
   text-align: center;
 }
 
+.grouper-item {
+  display: inline-block;
+  width: calc(100% / 4);
+  vertical-align: middle;
+}
+
 .snap-block {
   display: inline-block;
   padding-right: 35px;
   padding-bottom: 20px;
   text-align: left;
   vertical-align: top;
-  width: calc(100% / 4);
 }
 
-.grouper--10 .snap-block {
+.grouper--10 .grouper-item {
   width: calc(100% / 10);
 }
-.grouper--9 .snap-block {
+.grouper--9 .grouper-item {
   width: calc(100% / 9);
 }
-.grouper--8 .snap-block {
+.grouper--8 .grouper-item {
   width: calc(100% / 8);
 }
-.grouper--7 .snap-block {
+.grouper--7 .grouper-item {
   width: calc(100% / 7);
 }
-.grouper--6 .snap-block {
+.grouper--6 .grouper-item {
   width: calc(100% / 6);
 }
-.grouper--5 .snap-block {
+.grouper--5 .grouper-item {
   width: calc(100% / 5);
 }
-.grouper--4 .snap-block {
+.grouper--4 .grouper-item {
   width: calc(100% / 4);
 }
-.grouper--3 .snap-block {
+.grouper--3 .grouper-item {
   width: calc(100% / 3);
 }
-.grouper--2 .snap-block {
+.grouper--2 .grouper-item {
   width: calc(100% / 2);
 }
-.grouper--1 .snap-block {
+.grouper--1 .grouper-item {
   float: none;
   padding-right: 0;
   width: auto;

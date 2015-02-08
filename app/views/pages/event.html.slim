@@ -97,7 +97,7 @@
           h1.event__title
             == widont_format markdown_line page.title
         .event__body.copy
-          = render_content page.fields[:body]
+          = render_content_in_sections page.fields[:body]
 
         / Spit out all the topics
         - if page.fields[:topics].data_present?
@@ -177,7 +177,7 @@
               = render_content page.fields[:sponsors_intro]
             - else
               p Made possible with the support of:
-          .event__supporters-list
+          .event__supporters-list data-view-grouper={elementsSelector: ".event__supporters-item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
             - page.fields[:sponsors].pages.each do |sponsor|
               - if sponsor.fields[:url].data_present?
                 a.event__supporters-item href=sponsor.fields[:url].value
