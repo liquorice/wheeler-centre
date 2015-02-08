@@ -75,6 +75,12 @@ module Heracles
           (fields[:ticketing_stage].value == "Booked out")
         end
 
+        def recordings
+          if fields[:recordings].data_present?
+            fields[:recordings].pages.visible.published
+          end
+        end
+
         def series
           if fields[:series].data_present?
             fields[:series].pages.first

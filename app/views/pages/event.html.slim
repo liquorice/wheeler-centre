@@ -18,22 +18,22 @@
             em = time_ago_in_words page.fields[:start_date].value
             '  ago.
             / Show a link to the single recording
-            - if page.fields[:recordings].data_present? && page.fields[:recordings].pages.length == 1
+            - if page.recordings && page.recordings.length == 1
               ' If you missed it, you can catch up on
               a href=page.fields[:recordings].pages.first.absolute_url
                 | this recording of the event
               ' .
             / Concat a list of recordings
-            - elsif page.fields[:recordings].data_present?
+            - elsif page.recordings && page.recordings.any?
               ' If you missed it, you can catch up on these recordings:
-              - page.fields[:recordings].pages.each_with_index do |recording, index|
+              - page.recordings.each_with_index do |recording, index|
                 - if page.series
                   / Try and strip the series title from the recordings
                   a href=recording.absolute_url = recording.title.gsub(/#{page.series.title}\:/, '')
                 - else
                   a href=recording.absolute_url
                     = recording.title.gsub(/#{page.title}\:/, '')
-                  - if index == page.fields[:recordings].pages.length - 1
+                  - if index == page.recordings.length - 1
                     '.
                   - else
                     ',

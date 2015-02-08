@@ -54,8 +54,8 @@
         .column-full
           .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 7, widescreen: 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
             - past_events.results.each do |post|
-              - if post.fields[:recordings].data_present?
-                - post.fields[:recordings].pages.each do |recording|
+              - if post.recordings && post.recordings.any?
+                - post.recordings.each do |recording|
                   = render "partials/recording_snap_block", post: recording, show_type: true
               - else
                 = render "partials/event_snap_block", post: post, show_type: true
