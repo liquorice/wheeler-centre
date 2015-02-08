@@ -161,7 +161,10 @@
           .event__venue-map
           .column-wrapper
             .column-wide
-              a.event__venue-map-panel href=page.venue.absolute_url
+              - venue_image = page.venue.fields[:hero_image].asset if page.venue.fields[:hero_image].data_present?
+              a.event__venue-map-panel class=("event__venue-map-panel--with-image" if venue_image) href=page.venue.absolute_url
+                - if venue_image
+                  img.event__venue-map-panel-image src=venue_image.content_thumbnail_url
                 h4= page.venue.title
                 p= render_content page.venue.fields[:address_formatted]
 

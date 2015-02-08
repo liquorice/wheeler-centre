@@ -24,6 +24,17 @@
       color: var(--primary-color-darker);
       transform: scale(1.1, 1.1);
     }
+    .event__venue-map-panel-image {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      bottom: 0;
+      height: 100%;
+    }
+    .breakpoint-phone-wide .event__venue-map-panel-image,
+    .breakpoint-phone .event__venue-map-panel-image {
+      display: none;
+    }
 
   .breakpoint-widescreen-wide .event__venue-map-panel {
     margin-left: -35px;
