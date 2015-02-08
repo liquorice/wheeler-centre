@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
   def set_cache_headers_for_pages
     response.headers["Surrogate-Key"] = page.cache_key
+    headers.delete 'Set-Cookie'
   end
 
   def set_page_meta_tags
