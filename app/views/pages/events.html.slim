@@ -73,6 +73,11 @@
         / Event series
         - if active_series.any?
           .event-series-summary.clearfix
+            .section-header
+              h2 Current event series
+              - if page.fields[:event_series_intro].data_present?
+                .intro.intro--small.column-narrow.copy
+                  = render_content page.fields[:event_series_intro]
             h2.screenreaders-only Current event series
             - active_series.each_with_index do |series, index|
               - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)

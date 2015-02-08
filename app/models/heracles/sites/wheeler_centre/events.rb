@@ -9,6 +9,9 @@ module Heracles
             fields: [
               {name: :intro, type: :content},
               {name: :body, type: :content},
+              # Even series intro
+              {name: :event_series_info, type: :info, text: "<hr/>"},
+              {name: :event_series_intro, type: :content, hint: "A line or two to introduce the current event series"},
             ]
           }
         end
