@@ -95,7 +95,8 @@
   }
 
   .event-snap__past-event-icon {
-    margin-right: 8px;
+    font-size: 11px;
+    margin-right: 10px;
     margin-left: 4px;
   }
 
