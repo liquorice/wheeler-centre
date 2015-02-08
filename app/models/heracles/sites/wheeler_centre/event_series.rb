@@ -76,6 +76,10 @@ module Heracles
         ### Searchable
 
         searchable do
+          string :title do
+            title
+          end
+
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end

@@ -1,10 +1,10 @@
 /* Events archive */
 
 .events-archive {
-  padding-top: 50px;
+  padding-top: 40px;
 }
   .breakpoint-tablet .events-archive {
-    padding-top: 40px;
+    padding-top: 35px;
   }
   .breakpoint-phone-wide .events-archive,
   .breakpoint-phone .events-archive {
