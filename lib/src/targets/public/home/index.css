@@ -43,6 +43,16 @@
 }
 
 
+.breakpoint-phone .home__highlights,
+.breakpoint-phone .home__user-highlights {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
 /* Quotes */
 
 .home__quotes {
@@ -80,6 +90,12 @@
   padding-bottom: 15px;
   padding-top: 25px;
 }
+  .breakpoint-phone .home-quote {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+  }
+
   .home-quote:after {
     content: "";
     display: block;
@@ -133,6 +149,13 @@
   width: 50%;
 }
 
+  .breakpoint-phone .home__quotes,
+  .breakpoint-phone .home__writings {
+    background: transparent;
+    border: none;
+    width: 100%;
+  }
+
 .home__writings-list {
   padding-left: 35px;
   padding-top: 30px;
@@ -148,6 +171,10 @@
   margin-left: -35px;
   margin-right: -35px;
 }
+  .breakpoint-phone .home__body .section--full {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 
 .content-page__header {
   max-width: var(--column-mid);
@@ -164,7 +191,7 @@
 .home__about {
   background-color: var(--primary-color-lighter);
   background-image: url("about-bg.png");
-  background-size: cover;
+  background-size: cover cover;
   background-position: center center;
   padding-top: 50px;
   padding-bottom: 50px;

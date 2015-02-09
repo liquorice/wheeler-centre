@@ -8,6 +8,9 @@
     float: left;
     width: 25%;
   }
+    .breakpoint-tablet .social-media__account {
+      width: 50%;
+    }
     .social-media__account a {
       color: color(var(--primary-color) shade(25%));
       display: block;
@@ -16,7 +19,8 @@
       font-size: 1.6rem;
       -webkit-font-smoothing: antialiased;
       font-smoothing: antialiased;
-      padding-left: 35px;
+      padding-right: 17px;
+      padding-left: 17px;
       padding-top: 20px;
       padding-bottom: 28px;
       text-align: center;
@@ -41,4 +45,9 @@
     .social-media__account a:hover i,
     .social-media__account a:focus i {
       transform: scale(1.25);
+    }
+
+    .breakpoint-phone-wide .social-media__account span,
+    .breakpoint-phone .social-media__account span {
+      display: none;
     }
