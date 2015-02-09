@@ -72,6 +72,12 @@
     padding-bottom: 4px;
     position: relative;
   }
+  .breakpoint-phone .recording-snap__hero {
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    width: 140px;
+  }
     .recording-snap__hero--force-square {
       position: relative;
     }
