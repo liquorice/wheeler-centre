@@ -327,7 +327,6 @@
 .breakpoint-tablet-wide .event__presenters,
 .breakpoint-tablet .event__presenters {
   padding-bottom: 30px;
-/*  width: 60%;*/
 }
 .breakpoint-w-699 .event__presenters {
   float: none;
@@ -352,7 +351,7 @@
       padding-right: 0;
       width: 100%;
     }
-    .breakpoint-phone .event__presenters-group:not(:last-child) {
+/*    .breakpoint-phone .event__presenters-group:not(:last-child) {
       padding-bottom: 40px;
     }
     .breakpoint-phone .event__presenters-group:not(:last-child):after {
@@ -363,7 +362,7 @@
       left: 25%;
       bottom: 35px;
       border-top: 2px #ededed solid;
-    }
+    }*/
 
   .event__presenters:before {
     display: block;
@@ -388,17 +387,9 @@
   padding-bottom: 35px;
 }
   .breakpoint-phone .event-presenter {
-    padding-left: 0;
+    padding-left: 85px;
+    padding-bottom: 20px;
   }
-  .event-presenter:before,
-  .event-presenter:after {
-    content: " ";
-    display: table;
-  }
-  .event-presenter:after {
-    clear: both;
-  }
-
   .event-presenter__image {
     position: absolute;
     left: 0;
@@ -407,13 +398,8 @@
     width: 100px;
   }
   .breakpoint-phone .event-presenter__image {
-    display: block;
-    position: static;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    height: 120px;
-    width: 120px;
+    width: 60px;
+    height: 60px;
   }
     .event-presenter__image img,
     .event-presenter__image-blank {
@@ -459,26 +445,6 @@
   .breakpoint-tablet .event-presenter__intro {
     font-size: 18px;
     font-size: 1.8rem;
-  }
-  .breakpoint-phone .event-presenter__intro {
-    margin-bottom: 40px;
-  }
-  .breakpoint-phone .event-presenter__intro:after {
-    border-bottom: 2px #ededed solid;
-    content: "";
-    width: 50%;
-    position: absolute;
-    bottom: 35px;
-    left: 25%;
-  }
-  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro {
-    margin-bottom: 0;
-  }
-  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro:after {
-    display: none;
-  }
-  .event-presenter__intro p:last-child {
-    margin-bottom: 0;
   }
 
 /* Ticketing */

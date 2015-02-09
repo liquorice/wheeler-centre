@@ -2,7 +2,7 @@
   - if presenter.fields[:portrait].data_present?
     - image = presenter.fields[:portrait].asset
 
-  .event-presenter.event-presenter--horizontal
+  .event-presenter.event-presenter--horizontal.clearfix
     - if image
       a.event-presenter__image href=presenter.absolute_url
         .event-presenter__image-inner
