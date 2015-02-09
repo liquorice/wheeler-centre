@@ -219,6 +219,7 @@ body {
 @import "./social-media";
 @import "./content-page";
 @import "./topics-section";
+@import "./blog-snap-block";
 @import "./blog-post";
 @import "./event";
 @import "./event-snap-block";
