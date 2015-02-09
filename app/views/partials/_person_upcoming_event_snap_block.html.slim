@@ -1,0 +1,26 @@
+- show_type = show_type || false
+- hide_summary = hide_summary || false
+- if event.fields[:thumbnail_image].data_present?
+  - image = event.fields[:thumbnail_image].asset
+- elsif event.promo_image
+  - image = event.promo_image
+- selected_primary_topics = select_primary_topics_for_page(event)
+
+.snap-block
+    a.person-snap.person-snap-block href=event.absolute_url
+        - if event.fields[:start_date].data_present?
+          time.person-snap__date datetime=l(event.fields[:start_date].value, format: :rfc_3339)
+            = l event.fields[:start_date].value, format: :medium_date
+        - if image
+          .person-snap__hero
+            .person-snap__hero-inner
+              img src=image.content_thumbnail_url
+            - if image.attribution.present?
+              .person-snap__hero-caption.caption
+                 p = image.attribution
+        h3.person-snap__title
+          span.title-text == widont_format markdown_line event.title
+          - if selected_primary_topics && selected_primary_topics.any?
+            span.title-tags
+              '  &nbsp;/&nbsp;
+              = selected_primary_topics.first.title
