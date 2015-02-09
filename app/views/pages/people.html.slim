@@ -37,8 +37,8 @@
         = render "partials/people_by_letter_nav", page: page, order_by: order_by
         - people_from_upcoming_events = page.people_from_upcoming_events
         - if people_from_upcoming_events.any?
-          .people__header.gradient-top-down
-            h2.people__title Coming up at The Wheeler Centre
+          .people__coming-up-header.gradient-top-down
+            h2.people__coming-up-title Coming up at The Wheeler Centre
             - if page.fields[:coming_up_intro].data_present?
               .intro.intro--small.column-narrow.copy
                 = render_content page.fields[:coming_up_intro]
@@ -53,9 +53,14 @@
                     h3.upcoming-people__title = person.title
         - people_from_recent_events = page.people_from_recent_events
         - if people_from_recent_events.any?
-          h2 Recently at The Wheeler Centre
-          ul.recent-people
-            - people_from_recent_events.each do |person|
-              li
-                a href=person.absolute_url
-                  = person.title
+          .people__recently-at-header.gradient-top-down
+            h2.people__recently-at-title Recently at The Wheeler Centre
+          .recent-people
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 6, "phone-wide" => 2, phone: 1 }}.to_json
+              - people_from_recent_events.each do |person|
+                .snap-block.recent-people__block
+                  a.recent-people__anchor href=person.absolute_url
+                    - if person.fields[:portrait].data_present?
+                      .recent-people__image-wrapper
+                        img.recent-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
+                    h3.recent-people__title = person.title

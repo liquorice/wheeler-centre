@@ -33,12 +33,12 @@
 
 /* People index: coming up */
 
-.people__header {
+.people__coming-up-header {
   text-align: center;
   margin-bottom: 50px;
   padding-top: 35px;
 }
-  .people__title {
+  .people__coming-up-title {
     color: var(--primary-color);
     font-family: var(--font-sans);
     font-size: 32px;
@@ -48,17 +48,20 @@
     padding-bottom: 20px;
   }
 
-.upcoming-people__block {
+.upcoming-people__block,
+.recent-people__block {
   padding-bottom: 20px;
 }
 
-.upcoming-people__anchor {
+.upcoming-people__anchor,
+.recent-people__anchor {
   display: block;
   text-align: center;
   width: 100%;
 }
 
-  .upcoming-people__image-wrapper {
+  .upcoming-people__image-wrapper,
+  .recent-people__image-wrapper {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -66,7 +69,8 @@
     max-width: 80%;
   }
 
-    .upcoming-people__image {
+    .upcoming-people__image,
+    .recent-people__image {
       border-radius: 50%;
       display: block;
       transform: scale3d(1, 1, 1);
@@ -75,17 +79,48 @@
       width: 100%;
     }
     .upcoming-people__anchor:hover .upcoming-people__image,
-    .upcoming-people__anchor:focus .upcoming-people__image {
+    .upcoming-people__anchor:focus .upcoming-people__image,
+    .recent-people__anchor:hover .recent-people__image,
+    .recent-people__anchor:focus .recent-people__image  {
       transform: scale3d(1.1, 1.1, 1);
     }
 
-  .upcoming-people__title {
+  .upcoming-people__title,
+  .recent-people__title {
     font-family: var(--font-sans);
     font-weight: bold;
     font-size: 20px;
     font-size: 2rem;
   }
+  .recent-people__title {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
   .upcoming-people__anchor:hover .upcoming-people__title,
-  .upcoming-people__anchor:focus .upcoming-people__title {
+  .upcoming-people__anchor:focus .upcoming-people__title,
+  .recent-people__anchor:hover .recent-people__title,
+  .recent-people__anchor:focus .recent-people__title  {
     color: var(--primary-color);
   }
+
+/* People index: recently at */
+
+.people__recently-at-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-top: 25px;
+  margin-top: 50px;
+}
+  .people__recently-at-title {
+    color: var(--primary-color);
+    font-family: var(--font-sans);
+    font-size: 26px;
+    font-size: 2.6rem;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+.recent-people {
+  margin-bottom: 35px;
+}
