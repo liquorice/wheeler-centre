@@ -86,9 +86,18 @@
     float: left;
     width: 48%;
   }
+  .breakpoint-phone-wide .person__related-column,
+  .breakpoint-phone .person__related-column {
+    width: 100%;
+  }
 
   .person__related-column--first {
     margin-right: 4%;
+  }
+  .breakpoint-phone-wide .person__related-column--first,
+  .breakpoint-phone .person__related-column--first {
+    margin-right: 0;
+    padding-bottom: 35px;
   }
 
   .person__related h2 {
