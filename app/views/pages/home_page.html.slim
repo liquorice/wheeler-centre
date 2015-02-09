@@ -12,18 +12,18 @@
     - if page.sorted_banners.any?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
-          a.home-banner href=banner[:page].fields[:link].value
+          a.home-banner href=banner.fields[:link].value
             .home-banner__shim
             .home-banner__image
-              img src=banner[:page].fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
-            - if banner[:page].fields[:label].data_present? || banner[:page].fields[:category].data_present?
+              img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
+            - if banner.fields[:label].data_present? || banner.fields[:category].data_present?
               .home-banner__detail
-                - if banner[:page].fields[:category].data_present?
-                  - category = banner[:page].fields[:category].value
+                - if banner.fields[:category].data_present?
+                  - category = banner.fields[:category].value
                   p.home-banner__category
                     = category
                     i.fa class=icon_classnames[category]
-                - if banner[:page].fields[:label].data_present?
+                - if banner.fields[:label].data_present?
                   .home-banner__label
-                    = force_excerptify_html render_content(banner[:page].fields[:label]), 350, "i em strong"
+                    = force_excerptify_html render_content(banner.fields[:label]), 350, "i em strong"
                     '  ›
