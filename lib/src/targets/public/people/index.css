@@ -207,11 +207,6 @@
     position: relative;
     width: calc(100% - 80px);
   }
-  .breakpoint-phone .upcoming-people__intro p,
-  .breakpoint-phone .recent-people__intro p,
-  .breakpoint-phone .people-by-letter__intro p {
-    margin-bottom: 0;
-  }
 
 /* People index: recently at */
 
