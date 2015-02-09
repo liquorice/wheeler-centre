@@ -7,18 +7,21 @@
 - selected_primary_topics = select_primary_topics_for_page(event)
 
 .snap-block
-    a.person-snap.person-snap-block href=event.absolute_url
+    a.event-snap.event-snap-block href=event.absolute_url
         - if event.fields[:start_date].data_present?
-          time.person-snap__date datetime=l(event.fields[:start_date].value, format: :rfc_3339)
+          time.event-snap__date datetime=l(event.fields[:start_date].value, format: :rfc_3339)
             = l event.fields[:start_date].value, format: :medium_date
         - if image
-          .person-snap__hero
-            .person-snap__hero-inner
+          .event-snap__hero
+            .event-snap__hero-inner
               img src=image.content_thumbnail_url
             - if image.attribution.present?
-              .person-snap__hero-caption.caption
+              .event-snap__hero-caption.caption
                  p = image.attribution
-        h3.person-snap__title
+        - if event.series
+          p.event-snap__series
+            = event.series.title
+        h3.event-snap__title
           span.title-text == widont_format markdown_line event.title
           - if selected_primary_topics && selected_primary_topics.any?
             span.title-tags

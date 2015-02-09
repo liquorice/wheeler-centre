@@ -42,7 +42,7 @@
                 = render "partials/person_upcoming_event_snap_block", event: event, show_type: true
 
     / Past events and other media types
-    - if past_events.results.total_pages > 0 || recordings.any? || blog_posts.any?
+    - if past_events.results.total_pages > 0 || blog_posts.any?
     .person__related
       .column-wrapper
         .column-wide.clearfix
@@ -61,29 +61,25 @@
                             - if blog_post.fields[:publish_date].data_present?
                               time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
 
-                / Recordings
-                - if recordings.any?
-                  .person__recordings
-                    h2.person__related-header Recordings
-                    .person__related-list
-                      - recordings.each do |recording|
-                        .person__related-block
-                          a.person__related-anchor href=recording.absolute_url
-                            .person__related-text
-                              h3.person__related-title = recording.title
-                              - if recording.fields[:recording_date].data_present?
-                                time.person__related-date = l recording.fields[:recording_date].value, format: :medium_date
-
-          .person__related-column
-            / Past events
-            - if past_events.results.total_pages > 0
-              .person__past-events
-                h2.person__related-header Past events
-                .person__related-list
-                  - past_events.results.each do |event|
-                    .person__related-block
-                      a.person__related-anchor href=event.absolute_url
-                        .person__related-text
-                          h3.person__related-title = event.title
-                        time.person__related-date = l event.fields[:start_date].value, format: :medium_date
-
+            .person__related-column
+              / Past events
+              - if past_events.results.total_pages > 0
+                .person__past-events
+                  h2.person__related-header Past events
+                  .person__related-list
+                    - past_events.results.each do |event|
+                      .person__related-block
+                        a.person__related-anchor href=event.absolute_url
+                          .person__related-text
+                            h3.person__related-title = event.title
+                          time.person__related-date = l event.fields[:start_date].value, format: :medium_date
+  / Recordings
+  - if recordings.any?
+    .person__recordings
+      .column-wrapper class=("gradient-top-down" if blog_posts.any? || past_events.results.total_pages > 0)
+        .section-header
+          h2 Recordings
+        .column-full
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+            - recordings.each do |recording|
+              = render "partials/recording_snap_block", post: recording, show_type: true

@@ -74,78 +74,12 @@
   margin-top: 50px;
 }
 
-/* Event snap block */
-
-.person-snap {
-  display: block;
-  padding-bottom: 15px;
-}
-
-  .person-snap__date {
-    color: #888;
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 1.4rem;
-    font-size: 14px;
-    padding-bottom: 8px;
-  }
-  .person-snap__title {
-    padding-top: 6px;
-    margin-bottom: 14px;
-    font-weight: bold;
-  }
-    .person-snap-block .title-text {
-      font-size: 17px;
-      font-size: 1.7rem;
-      line-height: 1.4;
-    }
-
-    .person-snap__title .title-tags {
-      font-size: 17px;
-      font-size: 1.7rem;
-    }
-    .title-tags {
-      color: #888;
-      font-family: var(--font-serif);
-      font-weight: normal;
-    }
-
-    .person-snap:hover .title-text {
-      color: var(--primary-color);
-      text-decoration: underline;
-    }
-
-  .person-snap__hero {
-    padding-bottom: 4px;
-    position: relative;
-  }
-    .person-snap__hero--force-square {
-      position: relative;
-    }
-
-  .person-snap__hero-caption {
-    padding-top: 6px;
-  }
-  .person-snap__hero-inner {
-    overflow: hidden;
-  }
-  .person-snap__hero img {
-    transition-property: transform, opacity;
-    transition-duration: 900ms;
-    opacity: 1;
-    width: 100%;
-  }
-    .person-snap:hover .person-snap__hero img {
-      transform: scale3d(1.1, 1.1, 1);
-      opacity: 0.85;
-    }
-
 /* Person: past events/blog posts/recordings */
 
 .person__related {
   clear: both;
   padding-top: 60px;
-  padding-bottom: 35px;
+  padding-bottom: 50px;
 }
 
   .person__related-column {
@@ -156,13 +90,6 @@
   .person__related-column--first {
     margin-right: 4%;
   }
-
-  .person__past-events,
-  .person__recordings,
-  .person__blog-posts {
-    margin-bottom: 50px;
-  }
-
 
   .person__related h2 {
     color: #777;
@@ -212,3 +139,7 @@
       white-space: nowrap;
       width: 100%;
     }
+
+.person__recording {
+  margin-bottom: 35px;
+}
