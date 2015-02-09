@@ -222,6 +222,7 @@
   text-align: center;
   margin-bottom: 35px;
   padding-top: 25px;
+  position: relative;
 }
   .people-by-letter__header-title {
     color: var(--primary-color);
@@ -230,8 +231,35 @@
     font-size: 3.6rem;
     font-weight: bold;
   }
-  .breakpoint-phone-wide .people-by-letter__title,
-  .breakpoint-phone .people-by-letter__title {
+  .breakpoint-phone-wide .people-by-letter__header-title,
+  .breakpoint-phone .people-by-letter__header-title {
     font-size: 28px;
     font-size: 2.8rem;
   }
+  .people-by-letter__header-anchor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #888;
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+  }
+  .people-by-letter__header-anchor:hover,
+  .people-by-letter__header-anchor:focus {
+    color: #333;
+  }
+  .breakpoint-phone-wide .people-by-letter__header-anchor,
+  .breakpoint-phone .people-by-letter__header-anchor {
+    position: static;
+    padding-top: 20px;
+  }
+    .people-by-letter__header-anchor i {
+      font-size: 10px;
+      padding-right: 10px;
+    }

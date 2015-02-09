@@ -28,6 +28,9 @@
             .people-by-letter__header
               .people-by-letter__header-title
                 = params[:letter].capitalize
+              a.people-by-letter__header-anchor href="/people"
+                i.fa.fa-chevron-left
+                | Back to all people
             .people-by-letter__grid data-view-people-index-bio={eventSelector: ".upcoming-people__intro p"}.to_json
               .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 5, "phone-wide" => 2, phone: 1 }}.to_json
                 - people_by_letter.each do |person|
