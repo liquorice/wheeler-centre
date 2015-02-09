@@ -34,7 +34,7 @@
                   .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 5, "phone-wide" => 2, phone: 1 }}.to_json
                     - people_by_letter.each do |person|
                       .snap-block.people-by-letter__block
-                        a.people-by-letter__anchor href=person.absolute_url
+                        a.people-by-letter__anchor.clearfix href=person.absolute_url
                           - if person.fields[:portrait].data_present?
                             .people-by-letter__image-wrapper
                               img.people-by-letter__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
@@ -59,7 +59,7 @@
                 .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
                   - people_from_upcoming_events.each do |person|
                     .snap-block.upcoming-people__block
-                      a.upcoming-people__anchor href=person.absolute_url
+                      a.upcoming-people__anchor.clearfix href=person.absolute_url
                         - if person.fields[:portrait].data_present?
                           .upcoming-people__image-wrapper
                             img.upcoming-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
@@ -77,7 +77,7 @@
                 .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 5, "phone-wide" => 2, phone: 1 }}.to_json
                   - people_from_recent_events.each do |person|
                     .snap-block.recent-people__block
-                      a.recent-people__anchor href=person.absolute_url
+                      a.recent-people__anchor.clearfix href=person.absolute_url
                         - if person.fields[:portrait].data_present?
                           .recent-people__image-wrapper
                             img.recent-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
