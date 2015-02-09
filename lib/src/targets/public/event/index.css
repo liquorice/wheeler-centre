@@ -918,6 +918,12 @@
     .breakpoint-w-999 .event-calendar-event__hero {
       border-right: none;
     }
+    .breakpoint-phone .event-calendar-event__hero {
+      float: left;
+      margin-right: 25px;
+      margin-bottom: 25px;
+      width: 140px;
+    }
       .event-calendar-event__hero-inner {
         position: relative;
       }
