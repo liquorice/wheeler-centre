@@ -131,7 +131,8 @@
         - cache ["event-series-summary-1", page, page.series] do
           - if page.series
             .event__series-summary
-              h2.event__series-summary-header= page.series.title
+              h2.event__series-summary-header
+                a href=page.series.absolute_url = page.series.title
               - if page.series.fields[:body].data_present?
                 .event__series-summary-details.copy
                   = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}

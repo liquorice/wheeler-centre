@@ -40,6 +40,14 @@
   padding-top: 35px;
   margin-bottom: 35px;
 }
+  .event__presenters-header a:hover,
+  .event__tickets-header a:hover,
+  .event__series-summary-header a:hover,
+  .event__presenters-header a:focus,
+  .event__tickets-header a:focus,
+  .event__series-summary-header a:focus {
+    text-decoration: underline;
+  }
 
 .event__meta {
   float: left;
