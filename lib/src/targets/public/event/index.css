@@ -415,7 +415,8 @@
     height: 120px;
     width: 120px;
   }
-    .event-presenter__image img {
+    .event-presenter__image img,
+    .event-presenter__image-blank {
       border-radius: 50%;
       display: block;
       transform: scale3d(1, 1, 1);
@@ -424,12 +425,20 @@
       width: 100%;
   }
     a.event-presenter__image:hover img,
-    a.event-presenter__image:focus img {
+    a.event-presenter__image:focus img,
+    a.event-presenter__image:hover .event-presenter__image-blank,
+    a.event-presenter__image:focus .event-presenter__image-blank {
       transform: scale3d(1.1, 1.1, 1);
     }
     .event-presenter__image-inner {
       height: 100%;
       width: 100%;
+    }
+    .event-presenter__image-blank {
+      background-color: #dedede;
+      width: 100%;
+      height: 0;
+      padding-top: 100%; /* Make the placeholder image scale */
     }
 
   .event-presenter__title {
