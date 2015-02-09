@@ -1,7 +1,4 @@
 /* Banner */
-
-.home__banners {}
-
 .home-banner {
   background-color: var(--primary-color);
   color: #fff;
@@ -19,7 +16,7 @@
   }
 
   .home-banner__shim {
-    padding-top: 57.206%;
+    padding-top: 57.1%;
   }
   .home-banner__image {
     bottom: 0;

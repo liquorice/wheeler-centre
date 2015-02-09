@@ -1025,15 +1025,28 @@ end
 
 # Homepage banners
 
-home_banners_index = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "settings/home-banners")
-home_banners_index.parent = settings
-home_banners_index.site = site
-home_banners_index.title = "Home page banners"
-home_banners_index.slug = "home-banners"
-home_banners_index.fields[:contained_page_type].value = :home_banner
-home_banners_index.fields[:sort_attribute].value = "created_at"
-home_banners_index.fields[:sort_direction].value = "DESC"
-home_banners_index.published = false
-home_banners_index.locked = true
-home_banners_index.page_order_position = :last if home_banners_index.new_record?
-home_banners_index.save!
+home_banners_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "settings/home-banners")
+home_banners_collection.parent = settings
+home_banners_collection.site = site
+home_banners_collection.title = "Home page banners"
+home_banners_collection.slug = "home-banners"
+home_banners_collection.fields[:contained_page_type].value = :home_banner
+home_banners_collection.fields[:sort_attribute].value = "created_at"
+home_banners_collection.fields[:sort_direction].value = "DESC"
+home_banners_collection.published = false
+home_banners_collection.locked = true
+home_banners_collection.page_order_position = :last if home_banners_collection.new_record?
+home_banners_collection.save!
+
+home_quotes_collection = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "settings/home-quotes")
+home_quotes_collection.parent = settings
+home_quotes_collection.site = site
+home_quotes_collection.title = "Home page quotes"
+home_quotes_collection.slug = "home-quotes"
+home_quotes_collection.fields[:contained_page_type].value = :home_quote
+home_quotes_collection.fields[:sort_attribute].value = "created_at"
+home_quotes_collection.fields[:sort_direction].value = "DESC"
+home_quotes_collection.published = false
+home_quotes_collection.locked = true
+home_quotes_collection.page_order_position = :last if home_quotes_collection.new_record?
+home_quotes_collection.save!

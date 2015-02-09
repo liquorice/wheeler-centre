@@ -102,6 +102,10 @@ module Heracles
             fields[:topics].pages.map(&:title)
           end
 
+          string :tag_list, multiple: true do
+            tags.map(&:name)
+          end
+
           string :first_name do
             fields[:first_name].value
           end
@@ -179,7 +183,7 @@ module Heracles
             without :start_date_time, nil
 
             order_by :start_date, :desc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 1000
           end
         end
       end

@@ -3,6 +3,21 @@
   "Listen" => "fa-music" \
 }
 
+- if page.fields[:highlights_primary_tags].data_present?
+  - tags = page.fields[:highlights_primary_tags].value.split(",")
+  - highlights = page.highlights(tags: tags)
+- else
+  - highlights = page.highlights
+
+- if page.fields[:highlights_secondary_tags].data_present?
+  - tags = page.fields[:highlights_secondary_tags].value.split(",")
+  - user_highlights = page.user_highlights(tags: tags)
+- else
+  - user_highlights = false
+
+- user_tags = page.fields[:writings_tags].value.split(",") if page.fields[:writings_tags].data_present?
+- user_writings = page.user_writings(per_page: 4, tags: user_tags)
+
 = area :main do
   .home
     - if page.fields[:intro].data_present?
@@ -27,3 +42,111 @@
                   .home-banner__label
                     = force_excerptify_html render_content(banner.fields[:label]), 350, "i em strong"
                     '  ›
+    / Highlights
+    .column-wrapper
+      .column-full.clearfix
+        - if highlights.total > 0
+          - no_user_highlights = (user_highlights.total == 0)
+          - if no_user_highlights
+            - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 2, tablet: 2, "phone-wide" => 1, phone: 1 }
+          - else
+            - per_group = { default: 3, "tablet-wide" => 2, tablet: 2, "phone-wide" => 1, phone: 1 }
+          .home__highlights class=("home__highlights--full" if no_user_highlights) data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
+            .section-header
+              h2
+                - if page.fields[:highlights_primary_title].data_present?
+                  = page.fields[:highlights_primary_title].value
+                - else
+                  ' Highlights
+              - if page.fields[:highlights_primary_content].data_present?
+                .intro.copy
+                  = render_content page.fields[:highlights_primary_content]
+            - highlights.results.each do |post|
+              - if post.page_type == "blog_post"
+                = render "partials/blog_snap_block", post: post, show_type: true
+              - elsif post.page_type == "event"
+                = render "partials/event_snap_block", post: post, show_type: true
+              - elsif post.page_type == "recording"
+                = render "partials/recording_snap_block", post: post, show_type: true
+              - else
+                / TODO Need types for: person, podcast_episode
+                .snap-block
+                  = post.title
+                  '  —
+                  = post.page_type
+        - if user_highlights && user_highlights.total > 0
+          .home__user-highlights data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 2, tablet: 2, "phone-wide" => 1, phone: 1 }}.to_json
+            .section-header
+              h2
+                - if page.fields[:highlights_secondary_title].data_present?
+                  = page.fields[:highlights_secondary_title].value
+                - else
+                  ' Highlights
+              - if page.fields[:highlights_secondary_content].data_present?
+                .intro.copy
+                  = render_content page.fields[:highlights_secondary_content]
+            - user_highlights.results.each do |post|
+              - if post.page_type == "blog_post"
+                = render "partials/blog_snap_block", post: post, show_type: true
+              - elsif post.page_type == "event"
+                = render "partials/event_snap_block", post: post, show_type: true
+              - elsif post.page_type == "recording"
+                = render "partials/recording_snap_block", post: post, show_type: true
+              - else
+                / TODO Need types for: person, podcast_episode
+                .snap-block
+                  = post.title
+                  '  —
+                  = post.page_type
+    / Social mo'
+    = render "partials/social_media_wide"
+
+    / People bits
+    .column-wrapper
+      .column-mid.clearfix
+        .home__quotes
+          .section-header
+            - if page.fields[:quotes_title].data_present?
+              h2
+                = page.fields[:quotes_title].value
+            - if page.fields[:quotes_content].data_present?
+              .intro.copy
+                = render_content page.fields[:quotes_content]
+          .home__quotes-list
+            - if page.fields[:quotes].data_present?
+              - page.fields[:quotes].pages.each do |quote|
+                - presenter = quote.fields[:person].pages.first
+                - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
+                .home-quote
+                  - if image
+                    .event-presenter__image
+                      .event-presenter__image-inner
+                        img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
+                  .home-quote__quote.copy
+                    = render_content quote.fields[:quote]
+                  .home-quote__caption.copy
+                    = render_content quote.fields[:caption]
+        .home__writings
+          .section-header
+            - if page.fields[:writings_title].data_present?
+              h2
+                = page.fields[:writings_title].value
+            - if page.fields[:writings_content].data_present?
+              .intro.copy
+                = render_content page.fields[:writings_content]
+          .home__writings-list
+            - user_writings.results.each_with_index do |writing, index|
+              = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
+
+    / General content area
+    - if page.fields[:body].data_present?
+      .column-wrapper
+        .home__body.copy
+          = render_content_in_sections page.fields["body"]
+
+
+    .home__about.column-wrapper
+      .column-narrow
+        .home__about-content.copy
+          p The Wheeler Centre is Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find some of our finest local and international speaks, sharing their expertise, their imaginations and their ideas.
+        a.home__about-link href="/about-us" Find out more about us ›

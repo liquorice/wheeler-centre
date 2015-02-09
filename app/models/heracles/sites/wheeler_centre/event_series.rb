@@ -88,6 +88,10 @@ module Heracles
             fields[:topics].pages.map(&:title)
           end
 
+          string :tag_list, multiple: true do
+            tags.map(&:name)
+          end
+
           string :event_ids, multiple: true do
             events.map(&:id)
           end
