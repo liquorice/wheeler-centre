@@ -42,7 +42,7 @@
             - if page.fields[:coming_up_intro].data_present?
               .intro.intro--small.column-narrow.copy
                 = render_content page.fields[:coming_up_intro]
-          .upcoming-people
+          .upcoming-people data-view-people-index-bio={eventSelector: ".upcoming-people__intro p"}.to_json
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
               - people_from_upcoming_events.each do |person|
                 .snap-block.upcoming-people__block
@@ -51,12 +51,14 @@
                       .upcoming-people__image-wrapper
                         img.upcoming-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
                     h3.upcoming-people__title = person.title
+                    .upcoming-people__intro.copy
+                      = render_content person.fields[:intro]
         - people_from_recent_events = page.people_from_recent_events
         - if people_from_recent_events.any?
           .people__recently-at-header.gradient-top-down
             h2.people__recently-at-title Recently at The Wheeler Centre
-          .recent-people
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 6, "phone-wide" => 2, phone: 1 }}.to_json
+          .recent-people data-view-people-index-bio={eventSelector: ".upcoming-people__intro p"}.to_json
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 8, "widescreen-wide" => 8, tablet: 5, "phone-wide" => 2, phone: 1 }}.to_json
               - people_from_recent_events.each do |person|
                 .snap-block.recent-people__block
                   a.recent-people__anchor href=person.absolute_url
@@ -64,3 +66,5 @@
                       .recent-people__image-wrapper
                         img.recent-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
                     h3.recent-people__title = person.title
+                    .upcoming-people__intro.copy
+                      = render_content person.fields[:intro]

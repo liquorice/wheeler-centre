@@ -61,8 +61,8 @@
 .breakpoint-phone .recent-people__block {
   border-top: 1px solid #dfdfdf;
   padding-bottom: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 .breakpoint-phone .grouper--1:last-child .upcoming-people__block,
 .breakpoint-phone .grouper--1:last-child .recent-people__block {
@@ -124,22 +124,44 @@
     font-size: 18px;
     font-size: 1.8rem;
   }
+  .breakpoint-tablet .upcoming-people__title,
+  .breakpoint-tablet .recent-people__title {
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
   .breakpoint-phone .upcoming-people__title,
   .breakpoint-phone .recent-people__title {
     float: left;
     font-size: 16px;
     font-size: 1.6rem;
-    padding-top: 22px;
     width: calc(100% - 80px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: 8px;
   }
   .upcoming-people__anchor:hover .upcoming-people__title,
   .upcoming-people__anchor:focus .upcoming-people__title,
   .recent-people__anchor:hover .recent-people__title,
   .recent-people__anchor:focus .recent-people__title  {
     color: var(--primary-color);
+  }
+
+  .upcoming-people__intro,
+  .recent-people__intro {
+    display: none;
+  }
+  .breakpoint-phone .upcoming-people__intro,
+  .breakpoint-phone .recent-people__intro {
+    float: left;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - 80px);
+  }
+  .breakpoint-phone .upcoming-people__intro p,
+  .breakpoint-phone .recent-people__intro p {
+    margin-bottom: 0;
   }
 
 /* People index: recently at */
