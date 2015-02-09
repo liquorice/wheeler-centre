@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: eb501cab7fac187b2f75bb04665c64179cf545e1
+  revision: 23b9e7197968ce4af3abe5444ab2dc2828490545
   branch: master
   specs:
     heracles (1.0.0)
@@ -141,7 +141,7 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
-    autoprefixer-rails (5.1.4)
+    autoprefixer-rails (5.1.5)
       execjs
       json
     aws-sdk (2.0.22)
