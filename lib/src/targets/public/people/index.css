@@ -35,17 +35,22 @@
   border-right: 0;
 }
 
-.people-letters-select {
+.people-select-box {
   display: none;
 }
-.breakpoint-phone-wide .people-letters-select,
-.breakpoint-phone .people-letters-select {
+.breakpoint-phone-wide .people-select-box,
+.breakpoint-phone .people-select-box {
+  display: block;
+}
+
+.people-letters-select,
+.people-letters-select {
   background-color: #fff;
   border: 1px solid var(--primary-color);
   height: 40px;
   display: block;
   margin: 20px auto 30px;
-  width: 60%;
+  width: 65%;
 }
 
 /* People index: coming up */
