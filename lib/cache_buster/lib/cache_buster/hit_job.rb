@@ -1,5 +1,6 @@
 require 'resque'
 require 'ohm'
+require 'fastly'
 require 'open-uri'
 require 'nokogiri'
 require 'dotenv'
@@ -13,6 +14,7 @@ module HitJob
     @hit = Hit[hit_id]
 
     request_page
+    purge_page if @hit.checksum != @checksum
     update_hit
 
     puts "Hit for page #{@hit.page} processed!"
@@ -34,6 +36,11 @@ module HitJob
       )
     end
     @checksum = Digest::MD5.hexdigest(source)
+  end
+
+  def self.purge_page
+    client = Fastly::Client.new(api_key: ENV['FASTLY_API_KEY'])
+    client.post("/service/#{ENV['FASTLY_SERVICE_ID']}/purge/#{@hit.page}")
   end
 
   def self.update_hit
