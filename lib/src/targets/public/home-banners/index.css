@@ -95,7 +95,14 @@
     .home-banner__label em {
       font-style: italic;
     }
-    .breakpoint-tablet-wide .home-banner__label,
+
+    .breakpoint-widescreen .home-banner__label,
+    .breakpoint-tablet-wide .home-banner__label {
+      font-size: 15px;
+      font-size: 1.5rem;
+    }
+
+
     .breakpoint-tablet .home-banner__label,
     .breakpoint-phone-wide .home-banner__label,
     .breakpoint-phone .home-banner__label {
@@ -256,6 +263,17 @@
 .home-banner__group--layout-9.home-banner__group--max-width-one {
   width: 33.3333%;
 }
+  /* Tablet */
+  .breakpoint-tablet .home-banner__group--layout-9 {
+    width: 50%;
+  }
+  /* Collapse the last row into a single set of three */
+  .breakpoint-tablet .home-banner__group--layout-9:last-child {
+    width: 100%;
+  }
+    .breakpoint-tablet .home-banner__group--layout-9:last-child .home-banner {
+      width: 33.333333%;
+    }
   /* Phone */
   .breakpoint-phone-wide .home-banner__group--layout-9,
   .breakpoint-phone .home-banner__group--layout-9 {
