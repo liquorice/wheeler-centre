@@ -7,7 +7,11 @@ SitemapGenerator::Sitemap.default_host = "http://#{ENV['CANONICAL_DOMAIN']}"
 SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['ASSETS_AWS_BUCKET']}.s3.amazonaws.com/"
 SitemapGenerator::Sitemap.public_path   = 'tmp/'
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
-SitemapGenerator::Sitemap.adapter       = SitemapGenerator::WaveAdapter.new
+SitemapGenerator::Sitemap.adapter       = SitemapGenerator::S3Adapter.new(:aws_access_key_id => ENV['ASSETS_AWS_ACCESS_KEY_ID'],
+                                                                          :aws_secret_access_key => ENV['ASSETS_AWS_SECRET_ACCESS_KEY'],
+                                                                          :fog_provider => ENV['FOG_PROVIDER'],
+                                                                          :fog_directory => ENV['ASSETS_AWS_BUCKET'],
+                                                                          :fog_region => ENV['ASSETS_AWS_REGION'])
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
