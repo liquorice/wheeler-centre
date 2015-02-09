@@ -84,7 +84,7 @@
                       h3.blog-post-list__title
                         span.title-text == widont_format markdown_line post.title
                         - selected_primary_topics = select_primary_topics_for_page(post)
-                        - if selected_primary_topics && selected_primary_topics.any?
+                        - if selected_primary_topics && selected_primary_topics.present?
                           span.title-tags
                             '  &nbsp;/&nbsp;
                             = selected_primary_topics.first.title

@@ -24,7 +24,7 @@
       .home__intro.intro.column-wrapper
         .column-mid.copy
           = render_content_in_sections page.fields[:intro]
-    - if page.sorted_banners.any?
+    - if page.sorted_banners.present?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
           a.home-banner href=banner.fields[:link].value

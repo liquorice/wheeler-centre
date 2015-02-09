@@ -1,7 +1,7 @@
 def build_category_tree(xml, categories)
   categories.map do |category|
     xml.itunes :category, text: category[:category].title do
-      build_category_tree xml, category[:children] if category[:children].any?
+      build_category_tree xml, category[:children] if category[:children].present?
     end
   end
 end
@@ -14,7 +14,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
   xml.channel do
     xml.title page.title
     xml.link url_with_domain(page.absolute_url)
-    xml.lastBuildDate episodes.first.fields[:publish_date].value.rfc2822 if episodes.any?
+    xml.lastBuildDate episodes.first.fields[:publish_date].value.rfc2822 if episodes.present?
     xml.language "en-AU"
 
     build_category_tree xml, page.itunes_categories
@@ -31,7 +31,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     end
     xml.itunes :category, text: "Technology"
     xml.itunes :image, href: page.fields[:itunes_image].asset.itunes_url if page.fields[:itunes_image].data_present?
-    if episodes.any?
+    if episodes.present?
       episodes.each do |episode|
         # Let the series explicit value override episode one
         explicit = episode.fields[:explicit].value || page.fields[:explicit].value

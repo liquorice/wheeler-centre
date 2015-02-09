@@ -19,7 +19,7 @@
           .column-narrow.copy
             = render_content page.fields[:intro]
     / Main venues
-    - if main_venues.any?
+    - if main_venues.present?
       .venues-index__main.clearfix
         - main_venues.each do |venue|
           .main-venue__block
@@ -34,7 +34,7 @@
       .event-series__body.copy
         = render_content_in_sections page.fields[:body]
     / Other venues
-    - if other_venues.any?
+    - if other_venues.present?
       .venues-index__other
         .column-wrapper
           .column-mid.clearfix
