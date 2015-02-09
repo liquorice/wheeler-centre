@@ -172,6 +172,9 @@
   padding-top: 25px;
   margin-top: 50px;
 }
+.breakpoint-phone .people__recently-at-header {
+  margin-bottom: 20px;
+}
   .people__recently-at-title {
     color: var(--primary-color);
     font-family: var(--font-sans);
