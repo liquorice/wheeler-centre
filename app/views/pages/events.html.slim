@@ -25,7 +25,7 @@
                 span= l day, format: :day_short_name
 
         / Group events by year
-        - cache ["events-calendar-1", page, Time.zone.now.beginning_of_day, upcoming_events] do
+        - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
           - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
             .event-calendar__year
               h2.screenreaders-only
@@ -73,7 +73,7 @@
                             - days_with_gap += 1
 
         / Event series
-        - cache ["events-active-series-1", page, Time.zone.now.beginning_of_day, active_series] do
+        - cache ["events-active-series-1", page, Time.current.beginning_of_day, active_series] do
           - if active_series.any?
             .event-series-summary.clearfix
               .section-header
