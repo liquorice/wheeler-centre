@@ -1,8 +1,29 @@
-- content_for(:title) do
-  - cache page.title do
-    .page__title.page__title--home-page
-      h1.title = page.title
+- icon_classnames = { \
+  "Watch" => "fa-play-circle", \
+  "Listen" => "fa-music" \
+}
 
-- content_for(:middle) do
-  .page__content
-    .page__body.page__body--home.copy Welcome to the Wheeler Centre
+= area :main do
+  .home
+    - if page.fields[:intro].data_present?
+      .home__intro.intro.column-wrapper
+        .column-mid.copy
+          = render_content_in_sections page.fields[:intro]
+    - if page.sorted_banners.any?
+      .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
+        - page.sorted_banners.each do |banner|
+          a.home-banner href=banner[:page].fields[:link].value class=("home-banner--#{banner[:size].to_s}")
+            .home-banner__shim
+            .home-banner__image
+              img src=banner[:page].fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
+            - if banner[:page].fields[:label].data_present? || banner[:page].fields[:category].data_present?
+              .home-banner__detail
+                - if banner[:page].fields[:category].data_present?
+                  - category = banner[:page].fields[:category].value
+                  p.home-banner__category
+                    = category
+                    i.fa class=icon_classnames[category]
+                - if banner[:page].fields[:label].data_present?
+                  .home-banner__label
+                    = force_excerptify_html render_content(banner[:page].fields[:label]), 350, "i em strong"
+                    '  ›

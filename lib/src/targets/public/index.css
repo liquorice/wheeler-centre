@@ -226,3 +226,5 @@ body {
 @import "./topic";
 @import "./people";
 @import "./person";
+@import "./home";
+@import "./home-banners";
