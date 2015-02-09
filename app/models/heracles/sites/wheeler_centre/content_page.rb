@@ -20,6 +20,10 @@ module Heracles
           string :topic_titles, multiple: true do
             fields[:topics].pages.map(&:title)
           end
+
+          string :tag_list, multiple: true do
+            tags.map(&:name)
+          end
         end
       end
     end

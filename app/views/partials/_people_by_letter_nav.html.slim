@@ -1,4 +1,11 @@
 - all_letters = ("A".."Z").to_a
+.people-select-box data-view-people-select-box={selectSelector: ".people-letters-select", peoplePath: "#{page.absolute_url}", peopleOrderBy: "#{order_by}"}.to_json
+  select.people-letters-select
+    option.people-letters-select__option selected="selected" disabled="disabled" value="#"
+      | Filter people by surname
+    - all_letters.each do |letter|
+      option.people-letters-select__option value="#{letter.downcase}"
+        = letter
 ul.people-letters.clearfix
   - all_letters.each do |letter|
     li.people-letter

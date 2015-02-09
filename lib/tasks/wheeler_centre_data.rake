@@ -2526,7 +2526,7 @@ namespace :wheeler_centre do
 
     blueprint_videos = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidVideo }
     blueprint_video_posts = blueprint_records.select { |r| r.class == LegacyBlueprint::CenvidPost }
-    recordings = Heracles::Page.of_type("recording").select { |r| r.fields[:url].value == nil }
+    recordings = Heracles::Page.of_type("recording").select { |r| r.fields[:youtube_video].value == nil }
 
     s3_util = S3Util.new(bucket_name: args[:bucket_name], config_file: args[:video_config_file])
     ec2_util = EC2Util.new(config_file: args[:video_config_file])
@@ -2579,7 +2579,7 @@ namespace :wheeler_centre do
             file << migration_record.to_yaml
           end
 
-          recording.fields[:url].value = youtube_url
+          recording.fields[:youtube_video].value = youtube_url
           recording.save!
         end
       end
