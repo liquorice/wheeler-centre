@@ -535,22 +535,19 @@
     font-family: var(--font-sans);
     font-weight: bold;
     padding: 8px 12px;
-    /*margin-top: -12px;*/
+    margin-top: 8px;
     margin-bottom: 25px;
     text-decoration: none;
     transform: scale(1,1);
     transition-property: transform, background-color, color;
     transition-duration: 250ms;
   }
-
   .breakpoint-tablet-wide .event__tickets-booking,
   .breakpoint-tablet .event__tickets-booking,
   .breakpoint-phone .event__tickets-booking {
     clear: left;
     float: none;
-    margin-top: 0;
   }
-
     .event__tickets-booking:hover,
     .event__tickets-booking:focus,
     .copy .event__tickets-booking:hover,
