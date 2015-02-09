@@ -13,6 +13,9 @@ gem "pg"
 # Heracles
 gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
 
+# Reactive Cache Buster
+gem "cache_buster", path: "lib/cache_buster"
+
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
 # place to require sunspot-queue (but we can't use github dependencies in its
@@ -21,6 +24,7 @@ gem "sunspot-queue", github: "timriley/sunspot-queue"
 
 # Background worker
 gem "que"
+gem 'resque', github: 'resque/resque' # Cache Buster dependency, we have to change it to que soon
 
 # Web server
 gem "unicorn"
@@ -38,8 +42,10 @@ gem "sanitize"
 
 # Integrations
 gem "bugsnag"
+gem "skylight"
 
 # Frontend
+gem "color"
 gem "coffee-rails", "~> 4.0.0"
 gem "react-rails"
 gem "sass-rails", "~> 4.0.2"
@@ -60,7 +66,7 @@ gem "iso8601"
 gem "ffaker"
 
 # Temporary for the Blueprint import
-gem "syck", "1.0.1"
+# gem "syck", "1.0.1"
 gem "rdiscount"
 gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
 gem "trollop"
@@ -76,6 +82,8 @@ gem "carrierwave"
 
 group :production do
   gem "rails_12factor"
+  gem "dalli"      # memcache on production
+  gem "memcachier" # memcache on production
 end
 
 group :test do

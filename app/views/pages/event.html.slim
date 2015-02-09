@@ -1,141 +1,201 @@
-- show_type = show_type || false
-- hide_summary = hide_summary || false
-
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Events
+  .page__title.page__title--events Events
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events"
-          ' Calendar
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events/series"
-          ' Event series
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events/presenters"
-          ' Presenters
+  - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .event data-view-event=true
-    - if page.series
-      .event__series-header.column-wrapper
-        .column-full.clearfix
-          .event__series-header-inner
-            p.event__series-meta Part of a #{page.series.events.total} event series
-            p.event__series-title = page.series.title
-    - if page.promo_image
-      .event__promo-image
-        picture
-          erb:
-            <!--[if IE 9]><video style="display: none;"><![endif]-->
-          source srcset=page.promo_image.content_medium_url media="(min-width: 480px)"
-          erb:
-            <!--[if IE 9]></video><![endif]-->
-          img.figure__content src=page.promo_image.content_small_url itemprop="hero_image"
-          - if page.promo_image.attribution.present?
-            .event__promo-image-caption.caption
-              p = page.promo_image.attribution
+    - cache ["event-intro-1", page, page.recordings] do
+      - unless page.upcoming?
+        .intro.event__intro.column-wrapper.gradient-bottom-up
+          .column-narrow.copy
+            p
+              ' This is an event from
+              em = time_ago_in_words page.fields[:start_date].value
+              '  ago.
+              / Show a link to the single recording
+              - if page.recordings && page.recordings.length == 1
+                ' If you missed it, you can catch up on
+                a href=page.fields[:recordings].pages.first.absolute_url
+                  | this recording of the event
+                ' .
+              / Concat a list of recordings
+              - elsif page.recordings && page.recordings.any?
+                ' If you missed it, you can catch up on these recordings:
+                - page.recordings.each_with_index do |recording, index|
+                  - if page.series
+                    / Try and strip the series title from the recordings
+                    a href=recording.absolute_url = recording.title.gsub(/#{page.series.title}\:/, '')
+                  - else
+                    a href=recording.absolute_url
+                      = recording.title.gsub(/#{page.title}\:/, '')
+                    - if index == page.recordings.length - 1
+                      '.
+                    - else
+                      ',
+    - cache ["event-series-intro-1", page, page.series] do
+      - if page.series
+        - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
+        a.event__series-header.column-wrapper href=page.series.absolute_url style=style_for_event_series_block(highlight_color)
+          .column-full.clearfix
+            .event__series-header-inner
+              p.event__series-meta Part of a #{page.series.events.length} event series
+              p.event__series-title = page.series.title
+              p.event__series-call-to-action
+                | <em><span>View</span> all <span>events</span> in this series</em>
+                i.fa.fa-chevron-right
+    - cache ["event-promo-1", page, page.promo_image] do
+      - if page.promo_image
+        .event__promo-image
+          picture
+            erb:
+              <!--[if IE 9]><video style="display: none;"><![endif]-->
+            source srcset=page.promo_image.content_medium_url media="(min-width: 480px)"
+            erb:
+              <!--[if IE 9]></video><![endif]-->
+            img.figure__content src=page.promo_image.content_small_url itemprop="hero_image"
+            - if page.promo_image.attribution.present?
+              .event__promo-image-caption.caption
+                p = page.promo_image.attribution
     .column-wrapper
       .column-wide.clearfix
-        .event__meta
-          time.event__date-time= page.fields[:display_date].value.present? ? page.fields[:display_date].value : format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
-          h1.event__title
-            == widont_format markdown_line page.title
-        .event__body.copy
-          = render_content page.fields[:body]
-        - if page.fields[:topics].data_present?
-          .event__tags
-            h2.event__tag-header Topics
-            ul.event__tags-list
-              - page.fields[:topics].pages.sort_by(&:title).each do |topic|
-                li
-                  a href=topic.absolute_url = topic.title
-
-
-        - if page.fields[:presenters].data_present?
-          - if page.fields[:presenters].pages.length > 6
-            .event__presenters.event__presenters--long
-              h2.event__presenters-header Who?
-              - page.fields[:presenters].pages.in_groups(2, false).each do |group|
-                - if group.any?
-                  .event__presenters-group
-                    - group.each do |presenter|
-                      = render "partials/presenter_horizontal", presenter: presenter
-          - else
-            .event__presenters
-              h2.event__presenters-header Who?
-              - page.fields[:presenters].pages.each do |presenter|
-                = render "partials/presenter_horizontal", presenter: presenter
-
-        .event__tickets
-          h2.event__tickets-header How much?
-          - if page.fields[:external_bookings].data_present?
-            a.event__tickets-booking href=page.fields[:external_bookings].value
-              ' Book your tickets
-          .event__tickets-summary.copy
-            p
-              strong This is a free event.
-              '  Bookings are recommended.
-
-        - if page.series
-          .event__series-summary
-            h2.event__series-summary-header= page.series.title
-            - if page.series.fields[:body].data_present?
-              .event__series-summary-details.copy
-                = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
-    - if page.venue
-      .event__venue data-view-event-venue-map=page.venue.map_data
-        .event__venue-info.column-wrapper
-          .column-wide.clearfix
-            h3.event__venue-header Where?
-            .event__venue-more.copy
-              a href=page.venue.absolute_url More about this venue
-              ', including large map, parking, public transport and accessibility.
-        .event__venue-map-wrapper
-          .event__venue-map
-          .column-wrapper
-            .column-wide
-              .event__venue-map-panel
-                h4= page.venue.title
-                p= render_content page.venue.fields[:address_formatted]
-    - if page.fields[:sponsors].data_present?
-      .event__supporters.column-wrapper
-        .column-mid
-          .event__supporters-intro.copy
-            - if page.fields[:sponsors_intro].data_present?
-              = render_content page.fields[:sponsors_intro]
+        - cache ["event-content-1", page] do
+          .event__meta class=("event__meta--past" unless page.upcoming?)
+            - if page.fields[:display_date].value.present?
+              time.event__date-time datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+                = page.fields[:display_date].value
             - else
-              p Made possible with the support of:
-          .event__supporters-list
-            - page.fields[:sponsors].pages.each do |sponsor|
-              - if sponsor.fields[:url].data_present?
-                a.event__supporters-item href=sponsor.fields[:url].value
-                  - if sponsor.fields[:logo].data_present?
-                    - sponsor_image = sponsor.fields[:logo].asset
-                  - if sponsor_image
-                    img.event__supporters-image src=sponsor_image.content_small_url
-                  - else
-                    = sponsor.title
-              - else
-                .event__supporters-item
-                  - if sponsor.fields[:logo].data_present?
-                    - sponsor_image = sponsor.fields[:logo].asset
-                  - if sponsor_image
-                    img.event__supporters-image src=sponsor_image.content_small_url
-                  - else
-                    = sponsor.title
-    - if page.related_events.any?
-      .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
-        .section-header
-          h2 Related events
-        .column-full
-          .snap-wrapper.clearfix
-            - page.related_events.each do |post|
-              = render "partials/event_snap_block", post: post, show_type: true
+              time.event__date-time datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+                = format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
+            - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
+              span.event__ticketing-stage =page.fields[:ticketing_stage].value
+            - if page.booked_out?
+              span.event__booked-out-flag Booked out
+            - elsif page.upcoming? && page.fields[:external_bookings].data_present?
+              a.event__tickets-booking.event__tickets-booking--small href=page.fields[:external_bookings].value
+                ' Book your tickets
+            h1.event__title
+              == widont_format markdown_line page.title
+          .event__body.copy
+            = render_content_in_sections page.fields[:body]
+
+        / Spit out all the topics
+        - cache ["event-topics-1", page, page.fields[:topics].pages] do
+          - if page.fields[:topics].data_present?
+            .event__tags
+              h2.event__tag-header Topics
+              ul.event__tags-list
+                - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                  - cache ["event-topics-item-1", topic] do
+                    li
+                      a href=topic.absolute_url = topic.title
+
+        / Show all the presenters
+        - cache ["event-presenters-1", page.fields[:presenters].pages] do
+          - if page.fields[:presenters].data_present?
+            / Split the presenters into two groups if there are more than 5
+            - if page.fields[:presenters].pages.length > 6
+              .event__presenters.event__presenters--long
+                h2.event__presenters-header Who?
+                - page.fields[:presenters].pages.in_groups(2, false).each do |group|
+                  - if group.any?
+                    .event__presenters-group
+                      - group.each do |presenter|
+                        = render "partials/presenter_horizontal", presenter: presenter
+            - else
+              .event__presenters
+                h2.event__presenters-header Who?
+                - page.fields[:presenters].pages.each do |presenter|
+                  = render "partials/presenter_horizontal", presenter: presenter
+
+        - cache ["event-ticketing-1", page] do
+          - if page.upcoming?
+            .event__tickets
+              h2.event__tickets-header How much?
+              .event__tickets-summary.copy
+                p
+                  span.event__tickets-booking-text
+                    - if page.fields[:ticket_prices].data_present?
+                      = page.fields[:ticket_prices].value
+                    - else
+                      strong This is a free event.
+                      '  Bookings are recommended.
+                  - if page.booked_out?
+                    span.event__booked-out-flag Booked out
+                  - elsif page.fields[:external_bookings].data_present?
+                    a.event__tickets-booking href=page.fields[:external_bookings].value
+                      ' Book your tickets
+
+        - cache ["event-series-summary-1", page, page.series] do
           - if page.series
-            a.block-link href=page.series.absolute_url
-              ' View all the events in
-              em = page.series.title
-              '  &rsaquo;
+            .event__series-summary
+              h2.event__series-summary-header= page.series.title
+              - if page.series.fields[:body].data_present?
+                .event__series-summary-details.copy
+                  = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
+    - cache ["event-venue-1", page, page.venue] do
+      - if page.venue
+        .event__venue data-view-event-venue-map=page.venue.map_data
+          .event__venue-info.column-wrapper
+            .column-wide.clearfix
+              h3.event__venue-header Where?
+              .event__venue-more.copy
+                a href=page.venue.absolute_url More about this venue
+                ', including large map, parking, public transport and accessibility.
+          .venue-map__wrapper
+            .venue-map__map data-map=true
+            .column-wrapper
+              .column-wide
+                - venue_image = page.venue.fields[:hero_image].asset if page.venue.fields[:hero_image].data_present?
+                a.venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.venue.absolute_url
+                  - if venue_image
+                    img.venue-map__panel-image src=venue_image.content_thumbnail_url
+                  h4= page.venue.title
+                  p= render_content page.venue.fields[:address_formatted]
+
+    / Show the sponsors
+    - cache ["event-sponsors-1", page, page.fields[:sponsors].pages] do
+      - if page.fields[:sponsors].data_present?
+        .event__supporters.column-wrapper
+          .column-large
+            .event__supporters-intro.copy
+              - if page.fields[:sponsors_intro].data_present?
+                = render_content page.fields[:sponsors_intro]
+              - else
+                p Made possible with the support of:
+            .event__supporters-list data-view-grouper={elementsSelector: ".event__supporters-item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+              - page.fields[:sponsors].pages.each do |sponsor|
+                - if sponsor.fields[:url].data_present?
+                  a.event__supporters-item href=sponsor.fields[:url].value
+                    - if sponsor.fields[:logo].data_present?
+                      - sponsor_image = sponsor.fields[:logo].asset
+                    - if sponsor_image
+                      img.event__supporters-image src=sponsor_image.content_small_url
+                    - else
+                      = sponsor.title
+                - else
+                  .event__supporters-item
+                    - if sponsor.fields[:logo].data_present?
+                      - sponsor_image = sponsor.fields[:logo].asset
+                    - if sponsor_image
+                      img.event__supporters-image src=sponsor_image.content_small_url
+                    - else
+                      = sponsor.title
+
+    / Show related events
+    - cache ["event-related-1", page, page.related_events, page.fields[:sponsors].pages] do
+      - if page.related_events.any?
+        .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
+          .section-header
+            h2 Related events
+          .column-full
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+              - page.related_events.each do |post|
+                = render "partials/event_snap_block", post: post, show_type: true
+            - if page.series
+              a.block-link href=page.series.absolute_url
+                ' View all the events in
+                em = page.series.title
+                '  &rsaquo;

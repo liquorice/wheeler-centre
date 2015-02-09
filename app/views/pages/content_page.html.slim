@@ -1,14 +1,22 @@
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Content Page
-
-= area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Foo
+  = page.root.title
 
 = area :main do
-  .page__content
-    .page__body.page__body--content-page.copy
-      = render_content(page.fields["body"])
+  .content-page__main
+    .content-page__nav-wrapper
+      .content-page__nav
+        h3.content-page__nav-title
+          - unless page.root.id == page.id
+            a href=page.root.absolute_url = page.root.title
+          - else
+            = page.root.title
+        = render "partials/page_nav_children", parent: page.root, current: page
+    .content-page__content.clearfix
+      .content-page__header
+        h1.content-page__title == widont_format markdown_line page.title
+      - if page.fields[:intro].data_present?
+        .content-page__intro.copy
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:body].data_present?
+        .content-page__body.copy
+          = render_content_in_sections page.fields["body"]

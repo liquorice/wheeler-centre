@@ -33,6 +33,7 @@ module Heracles
           {
             title: title,
             authors: fields[:authors].pages.map(&:title).join(", "),
+            published: (published) ? "✔" : "•",
             publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)
           }
@@ -53,9 +54,18 @@ module Heracles
             page.id
           end
 
+          string :author_ids, multiple: true do
+            fields[:authors].pages.map(&:id)
+          end
+
+          string :author_titles, multiple: true do
+            fields[:authors].pages.map(&:title)
+          end
+
           text :summary do
             fields[:summary].value
           end
+
           text :body do
             fields[:body].value
           end
@@ -70,6 +80,10 @@ module Heracles
 
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
+          end
+
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
           end
 
         end

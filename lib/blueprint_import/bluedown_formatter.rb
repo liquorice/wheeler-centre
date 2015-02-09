@@ -118,7 +118,6 @@ module LegacyBlueprint
         cap = $3.strip if $3
 
         asset_name, options = parse_asset_string(astr)
-
         puts options.inspect
 
         if cap
@@ -136,7 +135,7 @@ module LegacyBlueprint
         # asset ||= Page.site.gather(Asset).find_by_name(asset_name)
 
         # Find the asset, assuming we've already imported all the Blueprint assets
-        asset = if object_scope
+        if object_scope
           # Find an asset connected directly to the object
           object_class_name = object_scope.class.name.sub(/LegacyBlueprint::/, "")
           if /^Tum/.match object_class_name
@@ -146,13 +145,39 @@ module LegacyBlueprint
           elsif object_class_name == "CenplaPage"
             object_class_name = "Page"
           end
-          Heracles::Asset.where(
+          asset = Heracles::Asset.where(
             blueprint_attachable_type: object_class_name,
             blueprint_attachable_id: object_scope["id"].to_i,
             blueprint_name: asset_name
           ).first
+          # Try to match them by their file_basename if we get no match above
+          # because Blueprint assets names be changed _after_ they're embedded
+          unless asset
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: object_class_name,
+              blueprint_attachable_id: object_scope["id"].to_i,
+              file_basename: asset_name
+            ).first
+          end
+          # Still nothing?! Try to match a draft type because Blueprint assets
+          # can be "Drafts" but be actually really used. Drafts have different
+          # IDs so if there are similarly named files then we'll get mistakes
+          # but whatevs
+          unless asset
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: "Draft",
+              blueprint_name: asset_name
+            ).first
+          end
+          unless asset
+            # OH COME ON?! Try to match a draft type and basename
+            asset = Heracles::Asset.where(
+              blueprint_attachable_type: "Draft",
+              file_basename: asset_name
+            ).first
+          end
         else
-          Heracles::Asset.where(blueprint_name: asset_name).first
+          asset = Heracles::Asset.where(blueprint_name: asset_name).first
         end
 
         # replace asset reference with HTML
@@ -185,6 +210,7 @@ module LegacyBlueprint
           # The data return by the embedly ruby library is slightly different to that of the
           # javascript one, so we do some mangling
           embedData[:provider_url]     = dump[:provider_url]
+          embedData[:provider_name]    = dump[:provider_name]
           embedData[:description]      = dump[:description]
           embedData[:title]            = dump[:title]
           embedData[:url]              = dump[:url]

@@ -1,24 +1,50 @@
-.event-calendar-event
-  a.event-calendar-event__anchor href=event.absolute_url
-    - if event.fields[:start_date].data_present?
-      time.event-calendar-event__date
-        = l event.fields[:start_date].value, format: :day_short_name_and_date
-      - if event.fields[:thumbnail_image].data_present?
+- if event.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].asset
+- elsif event.promo_image
+  - image = event.promo_image
+- selected_primary_topics = select_primary_topics_for_page(event)
+
+- cache ["event-for-calendar-1", event, Time.zone.now.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
+  - event_classnames = []
+  / Find an event's position and assign a class
+  / Useful for clearing floats in the event grid
+  - if event_index % 2 == 0
+    / Equivalent to nth-child(2n)
+    - event_classnames << 'nth-child-2n '
+  - if event_index % 2 == 1
+    / Equivalent to nth-child(2n+1)
+    - event_classnames << 'nth-child-2n-plus-1'
+  - if event_index % 4 == 0
+    / Equivalent to nth-child(4n)
+    - event_classnames << 'nth-child-4n '
+  - if event_index % 4 == 1
+    / Equivalent to nth-child(4n+1)
+    - event_classnames << 'nth-child-4n-plus-1'
+
+  / State classes
+  - if event.fields[:ticketing_stage].data_present?
+    - dasherised_stage = event.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
+    - event_classnames << "event-calendar-event--#{dasherised_stage}"
+
+  .event-calendar-event class="#{event_classnames.join(' ')}"
+    a.event-calendar-event__anchor href=event.absolute_url
+      - if event.fields[:start_date].data_present?
+        time.event-calendar-event__date datetime=l(event.fields[:start_date].value, format: :rfc_3339)
+          = l event.fields[:start_date].value, format: :day_short_name_and_date
         .event-calendar-event__hero
           .event-calendar-event__hero-inner
-            - image = event.fields[:thumbnail_image].asset
-      - elsif event.promo_image
-        .event-calendar-event__hero
-          .event-calendar-event__hero-inner
-            - image = event.promo_image
-    .event-calendar-event__details
-      - if event.series
-        p.event-calendar-event__series
-          = event.series.title
-      h3.event-calendar-event__title
-        span.title-text == widont_format markdown_line event.title
-        - selected_primary_topics = select_primary_topics_for_page(event)
-        - if selected_primary_topics && selected_primary_topics.any?
-          span.title-tags
-            '  &nbsp;/&nbsp;
-            = selected_primary_topics.first.title
+            - if event.fields[:ticketing_stage].data_present?
+              .event-calendar-event__flag
+                .event-calendar-event__flag-text = event.fields[:ticketing_stage].value
+            - if image
+              img src=image.content_thumbnail_url
+      .event-calendar-event__details
+        - if event.series
+          p.event-calendar-event__series
+            = event.series.title
+        h4.event-calendar-event__title
+          span.title-text == markdown_line event.title
+          - if selected_primary_topics && selected_primary_topics.any?
+            span.title-tags
+              '  &nbsp;/&nbsp;
+              = selected_primary_topics.first.title

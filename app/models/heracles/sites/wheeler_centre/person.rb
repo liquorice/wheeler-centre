@@ -23,17 +23,107 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            first_name: fields[:first_name],
+            last_name: fields[:last_name],
+            portrait: (fields[:portrait].data_present?) ? "✔" : "•",
+            staff: (fields[:is_staff_member].value) ? "✔" : "•",
+            published: (published) ? "✔" : "•",
+            created_at:  created_at.to_s(:admin_date)
+          }
+        end
+
+        ### Accessors
+
+        def upcoming_events(options={})
+          search_upcoming_events(options)
+        end
+
+        def past_events(options={})
+          search_past_events(options)
+        end
+
+        def recordings(options={})
+          Heracles::Page.
+            of_type("recording").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "people",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
+        end
+
+        def blog_posts(options={})
+          Heracles::Page.
+            of_type("blog_post").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "authors",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
+        end
+
+        def podcasts
+          # Through events
+        end
+
+        def sort_first_name
+          fields[:first_name].value.presence || title
+        end
+
+        def sort_last_name
+          fields[:last_name].value.presence || title
+        end
+
+        ### Searchable
+
         searchable do
+          string :title do
+            title
+          end
+
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end
 
-          text :first_name do
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
+
+          string :first_name do
             fields[:first_name].value
           end
 
-          text :last_name do
+          string :last_name do
             fields[:last_name].value
+          end
+
+          string :sort_first_name do
+            sort_first_name
+          end
+
+          string :sort_last_name do
+            sort_last_name
+          end
+
+          string :sort_first_name_first_letter do
+            sort_first_name[0].downcase
+          end
+
+          string :sort_last_name_first_letter do
+            sort_last_name[0].downcase
           end
 
           text :intro do
@@ -63,7 +153,34 @@ module Heracles
           time :updated_at do
             updated_at
           end
+        end
 
+        private
+
+        def search_upcoming_events(options={})
+          Sunspot.search(Event) do
+            with :site_id, site.id
+            with :presenter_ids, id
+            with :published, true
+            with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+            without :start_date_time, nil
+
+            order_by :start_date, :asc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+          end
+        end
+
+        def search_past_events(options={})
+          Sunspot.search(Event) do
+            with :site_id, site.id
+            with :presenter_ids, id
+            with :published, true
+            with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+            without :start_date_time, nil
+
+            order_by :start_date, :desc
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+          end
         end
       end
     end

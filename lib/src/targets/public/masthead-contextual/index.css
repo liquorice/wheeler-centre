@@ -21,6 +21,17 @@
     padding-bottom: 20px;
     text-transform: uppercase;
   }
+    .breakpoint-tablet .masthead-contextual__section-title {
+      font-size: 15px;
+      font-size: 1.5rem;
+    }
+    .breakpoint-phone-wide .masthead-contextual__section-title,
+    .breakpoint-phone .masthead-contextual__section-title {
+      display: none;
+    }
+    .breakpoint-phone .masthead-contextual__section-title {
+      padding-left: 15px;
+    }
 
   .breakpoint-w-599 .masthead-contextual__section-title {
     padding-top: 20px;
@@ -29,20 +40,33 @@
 
   .masthead-contextual__navigation-list {
     float: left;
+    margin-bottom: 15px;
     padding-left: 35px;
+    padding-right: 35px;
     padding-top: 25px;
   }
+    .breakpoint-phone .masthead-contextual__navigation-list {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
 
   .masthead-contextual__navigation-item {
     float: left;
     padding-right: 40px;
+    padding-bottom: 5px;
+  }
+  .breakpoint-phone-wide .masthead-contextual__navigation-item {
+    padding-right: 20px;
+  }
+  .breakpoint-phone .masthead-contextual__navigation-item {
+    padding-right: 12px;
   }
 
   .masthead-contextual__navigation-anchor {
     border-bottom: 2px solid #fff;
     color: var(--primary-color);
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 6px;
   }
 
   .breakpoint-phone .masthead-contextual__navigation-anchor {
@@ -75,7 +99,12 @@
   margin-top: 0;
   padding: 10px 35px;
   margin-top: 15px;
+  margin-bottom: 15px
 }
+  .breakpoint-phone .upcoming-events {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   .upcoming-events__navigation {
     height: 30px;
@@ -126,7 +155,6 @@
     }
 
   .upcoming-events__list {
-    overflow: hidden;
     padding-top: 15px;
   }
 
@@ -175,14 +203,15 @@
 
     .upcoming-events__image-container {
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      top: -25%;
       opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
       transition-property: transform, opacity;
       transition-duration: 150ms;
       transition-timing-function: cubic-bezier(.10, .10, .25, .90);
+      width: 100%;
+      z-index: 6;
     }
 
     .breakpoint-w-599 .upcoming-events__image-container {
@@ -196,17 +225,8 @@
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
-    .upcoming-events__item-anchor:focus .upcoming-events__item-title,
-    .upcoming-events__item-anchor:hover .upcoming-events__item-date,
-    .upcoming-events__item-anchor:focus .upcoming-events__item-date {
-      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-    }
-
-    .breakpoint-w-599 .upcoming-events__item-anchor:hover .upcoming-events__item-title,
-    .breakpoint-w-599 .upcoming-events__item-anchor:focus .upcoming-events__item-title,
-    .breakpoint-w-599 .upcoming-events__item-anchor:hover .upcoming-events__item-date,
-    .breakpoint-w-599 .upcoming-events__item-anchor:focus .upcoming-events__item-date {
-      text-shadow: none;
+    .upcoming-events__item-anchor:focus .upcoming-events__item-title {
+      text-decoration: underline;
     }
 
       .upcoming-events__image-container img {
@@ -248,7 +268,10 @@
 
       .upcoming-events__item-title {
         color: #fff;
-        font-family: "FreightTextPro", "Hoefler Text", Palatino, serif;
+        font-family: var(--font-serif);
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
       }
 
       .breakpoint-w-599 .upcoming-events__item-title {

@@ -152,11 +152,13 @@ site.transloadit_params = {
     "video_ipad_high" => {
       "robot" => "/video/encode",
       "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
       "preset" => "ipad-high"
     },
     "video_iphone_high" => {
       "robot" => "/video/encode",
       "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
       "preset" => "iphone-high"
     },
     "store" => {
@@ -297,6 +299,18 @@ venues_collection.published = false
 venues_collection.locked = true
 venues_collection.page_order_position = :last if venues_collection.new_record?
 venues_collection.save!
+
+# Events -> Past events
+past_events = Heracles::Sites::WheelerCentre::EventsArchive.find_or_initialize_by(url: "events/past-events")
+past_events.site = site
+past_events.parent = events_index
+past_events.title = "Past events"
+past_events.slug = "past-events"
+past_events.published = true
+past_events.locked = true
+past_events.page_order_position = :last if past_events.new_record?
+past_events.save!
+
 
 # Writings
 # ------------------------------------------------------------------------------
@@ -726,7 +740,7 @@ sponsors_collection.parent = sponsors
 sponsors_collection.site = site
 sponsors_collection.title = "All sponsors"
 sponsors_collection.slug = "all-sponsors"
-sponsors_collection.fields[:contained_page_type].value = "sponsors"
+sponsors_collection.fields[:contained_page_type].value = "sponsor"
 sponsors_collection.fields[:sort_attribute].value = "created_at"
 sponsors_collection.fields[:sort_direction].value = "DESC"
 sponsors_collection.published = false
@@ -995,7 +1009,6 @@ def build_itunes_category_page(category, parent, site)
   end
 end
 
-
 itunes_category_index = Heracles::Sites::WheelerCentre::Placeholder.find_or_initialize_by(url: "settings/itunes-categories")
 itunes_category_index.site = site
 itunes_category_index.parent = settings
@@ -1009,3 +1022,18 @@ itunes_category_index.save!
 itunes_categories.each do |category|
   build_itunes_category_page(category, itunes_category_index, site)
 end
+
+# Homepage banners
+
+home_banners_index = Heracles::Sites::WheelerCentre::Collection.find_or_initialize_by(url: "settings/home-banners")
+home_banners_index.parent = settings
+home_banners_index.site = site
+home_banners_index.title = "Home page banners"
+home_banners_index.slug = "home-banners"
+home_banners_index.fields[:contained_page_type].value = :home_banner
+home_banners_index.fields[:sort_attribute].value = "created_at"
+home_banners_index.fields[:sort_direction].value = "DESC"
+home_banners_index.published = false
+home_banners_index.locked = true
+home_banners_index.page_order_position = :last if home_banners_index.new_record?
+home_banners_index.save!

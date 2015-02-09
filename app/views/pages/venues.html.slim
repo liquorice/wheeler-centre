@@ -1,0 +1,48 @@
+- main_venues   = page.main_venues
+- other_venues = page.other_venues
+
+= area :masthead_title do
+  .page__title.page__title--events Events
+
+= area :masthead_contextual_navigation do
+  - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .venues-index
+    .venues-index__top
+      .venues-index__header
+        h1.venues-index__title
+          = page.title
+      - if page.fields[:intro].data_present?
+        .venues-index__intro.intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:intro]
+    / Main venues
+    - if main_venues.any?
+      .venues-index__main.clearfix
+        - main_venues.each do |venue|
+          .main-venue__block
+            a.main-venue__anchor href=venue.absolute_url
+              - if venue.fields[:hero_image].data_present?
+                img.main-venue__image src=venue.fields[:hero_image].asset.content_small_url
+              .main-venue__text
+                h3.main-venue__title = venue.title
+                .main-venue__description.copy
+                  = force_excerptify_html render_content(venue.fields[:address_formatted]), 150, "i em strong br"
+    - if page.fields[:body].data_present?
+      .event-series__body.copy
+        = render_content_in_sections page.fields[:body]
+    / Other venues
+    - if other_venues.any?
+      .venues-index__other
+        .column-wrapper
+          .column-mid.clearfix
+            - other_venues.in_groups(2, false).each do |group|
+              .venues-list
+                - group.each do |venue|
+                  .venues-list__block
+                    a.venues-list__anchor href=venue.absolute_url
+                      .venues-list__text.clearfix
+                        h3.venues-list__title = markdown_line venue.title
+                        span.venues-list__address = venue.fields[:address]

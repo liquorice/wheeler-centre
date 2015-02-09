@@ -120,7 +120,7 @@ FieldExternalVideo = React.createClass
           youTubeDataLoaded = true
           # Prepare field hash
           newField = _.extend {}, _this.state.field,
-            youtube: data[0].table
+            youtube: data
           _this.props.updateField _this.state.field.field_name, newField
           _this.setState
             field: newField

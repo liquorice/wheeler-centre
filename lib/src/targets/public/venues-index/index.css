@@ -1,0 +1,211 @@
+/* Venues index */
+
+.venues-index {
+  padding-bottom: 50px;
+}
+  .breakpoint-tablet .venues-index {
+    padding-top: 35px;
+  }
+  .breakpoint-phone-wide .venues-index,
+  .breakpoint-phone .venues-index {
+    padding-top: 25px;
+  }
+
+.venues-index__header {
+  font-family: var(--font-sans);
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+  .venues-index__intro {
+    margin-bottom: 45px;
+  }
+  .breakpoint-tablet .venues-index__header {
+    margin-bottom: 30px;
+  }
+  .breakpoint-phone-wide .venues-index__header,
+  .breakpoint-phone .venues-index__header {
+    margin-bottom: 20px;
+  }
+    .venues-index__title-label {
+      color: #888;
+      font-size: 15px;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+    }
+    .venues-index__title {
+      color: var(--primary-color);
+      font-size: 48px;
+      font-size: 4.8rem;
+      font-weight: bold;
+    }
+    .breakpoint-tablet .venues-index__title {
+      font-size: 38px;
+      font-size: 3.8rem;
+    }
+    .breakpoint-phone-wide .venues-index__title {
+      font-size: 30px;
+      font-size: 3rem;
+    }
+    .breakpoint-phone .venues-index__title {
+      font-size: 28px;
+      font-size: 2.8rem;
+    }
+
+
+/* Main venues */
+
+.main-venue__block {
+  background-color: var(--primary-color);
+  color: #fff;
+  float: left;
+  text-align: center;
+  height: 200px;
+  outline: 1px solid #fff;
+  overflow: hidden;
+  width: 50%;
+}
+.breakpoint-phone-wide .main-venue__block,
+.breakpoint-phone .main-venue__block {
+  float: none;
+  height: auto;
+  width: 100%;
+}
+
+  .main-venue__anchor {
+    display: block;
+    height: 360px;
+    width: 100%;
+    font-family: var(--font-sans);
+    padding: 60px 35px;
+    position: relative;
+  }
+  .breakpoint-phone-wide .main-venue__anchor,
+  .breakpoint-phone .main-venue__anchor {
+    height: auto;
+    padding: 30px 35px;
+  }
+
+    .main-venue__image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.1;
+      transition-property: transform, opacity;
+      transition-duration: 900ms;
+      z-index: 1;
+    }
+    .main-venue__anchor:hover .main-venue__image,
+    .main-venue__anchor:focus .main-venue__image {
+      opacity: 0.2;
+      transform: scale3d(1.05, 1.05, 1);
+    }
+
+    .main-venue__text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-venue__title {
+      font-size: 28px;
+      font-size: 2.8rem;
+      font-weight: bold;
+      padding-bottom: 20px;
+    }
+    .breakpoint-tablet-wide .main-venue__title,
+    .breakpoint-tablet .main-venue__title,
+    .breakpoint-phone-wide .main-venue__title,
+    .breakpoint-phone .main-venue__title {
+      font-size: 24px;
+      font-size: 2.4rem;
+    }
+    .breakpoint-w-799 .main-venue__title {
+      font-size: 22px;
+      font-size: 2rem;
+    }
+
+    .main-venue__description {
+      font-size: 20px;
+      font-size: 2rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 510px;
+      padding-bottom: 50px;
+    }
+    .breakpoint-tablet-wide .main-venue__description,
+    .breakpoint-tablet .main-venue__description {
+      font-size: 18px;
+      font-size: 1.8rem;
+      padding-bottom: 40px;
+    }
+    .breakpoint-w-799 .main-venue__description {
+      font-size: 16px;
+      font-size: 1.6rem;
+      padding-bottom: 30px;
+    }
+
+    .main-venue__action {
+      display: block;
+      font-size: 16px;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    .main-venue__anchor:hover .main-venue__action,
+    .main-venue__anchor:focus .main-venue__action {
+      text-decoration: underline;
+    }
+
+/* Other venues list */
+
+.venues-index__other {
+  margin-top: 35px;
+}
+
+.venues-list:first-child {
+  float: left;
+  padding-right: 17px;
+  width: 50%;
+}
+.venues-list:last-child {
+  float: right;
+  padding-left: 17px;
+  width: 50%;
+}
+
+.venues-list__block {
+  font-family: var(--font-sans);
+}
+  .venues-list__anchor {
+    border-bottom: 1px solid #dfdfdf;
+    display: block;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+    .venues-list__block:last-child .venues-list__anchor {
+      border-bottom: none;
+    }
+  .venues-list__title {
+    font-size: 14px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;;
+    width: 100%;
+  }
+    .venues-list__anchor:hover .venues-list__title,
+    .venues-list__anchor:focus .venues-list__title {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+  .venues-list__address {
+    color: #999;
+    display: block;
+    font-size: 14px;
+    font-size: 1.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;;
+    width: 100%;
+  }

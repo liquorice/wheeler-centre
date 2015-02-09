@@ -9,6 +9,9 @@ module Heracles
               {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :intro, label: "Introduction", type: :content},
               {name: :body, type: :content},
+              # Listen
+              {name: :listen, type: :content},
+              {name: :watch, type: :content},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
           }

@@ -18,16 +18,17 @@ html
     = javascript_include_tag "public", async: true
 
     / TODO shift to xhr if we use a CDN -> origin structure
-    = csrf_meta_tags
+    / = csrf_meta_tags
 
   = area :body_outer do
     body
       = area :body do
+        = render 'partials/skip_links'
         = area :masthead do
           = render 'partials/masthead'
 
         = area :main_outer do
-          div role="main"
+          div role="main" id="main-content"
             = area :main
             = area :main_footer
 
@@ -35,3 +36,5 @@ html
           = render 'partials/subscribe_simple_wide'
         = area :footer do
           = render 'partials/footer'
+
+      script async=true src="#{buster_path}"

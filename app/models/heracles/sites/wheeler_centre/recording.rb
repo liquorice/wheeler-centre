@@ -35,14 +35,25 @@ module Heracles
         def to_summary_hash
           {
             title: title,
-            events: events.map(&:title).join(", "),
+            video: (fields[:video].data_present?) ? "✔" : "×",
+            audio: (fields[:audio].data_present?) ? "♫" : "×",
             youtube_video: fields[:youtube_video].value.presence || "",
+            events: events.map(&:title).join(", "),
+            people: (people.any? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
+            published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
+            publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)
           }
         end
 
         ### Accessors
+
+        def youtube_thumbnail_url
+          if fields[:youtube_video].data_present? && fields[:youtube_video].youtube["snippet"].present?
+            fields[:youtube_video].youtube["snippet"]["thumbnails"]["high"]["url"]
+          end
+        end
 
         def events
           Heracles::Page.
@@ -55,14 +66,32 @@ module Heracles
         end
 
         def people
-          if fields[:people].data_present
+          # If there are no people explicitly set on this page, try to infer
+          # them from the related event/s
+          if fields[:people].data_present?
             fields[:people].pages
+          else
+            people = []
+            events.each {|event| people = people + event.fields[:presenters].pages }
+            people
           end
         end
 
         searchable do
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
+          end
+
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
+
+          string :person_ids, multiple: true do
+            fields[:people].pages.map(&:id)
+          end
+
+          string :person_titles, multiple: true do
+            fields[:people].pages.map(&:title)
           end
 
           text :description do

@@ -1,0 +1,68 @@
+- active_series   = page.active_series.results
+- inactive_series = page.inactive_series.results
+
+= area :masthead_title do
+  ' Events
+
+= area :masthead_contextual_navigation do
+  - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  - cache ["event-series-index-1", page, Time.zone.now.beginning_of_day, active_series, inactive_series] do
+    .events-series-index
+      .events-series-index__top
+        .events-series-index__header
+          h1.events-series-index__title
+            = page.title
+        - if page.fields[:intro].data_present?
+          .events-series-index__intro.intro.column-wrapper
+            .column-narrow.copy
+              = render_content page.fields[:intro]
+      / Active event series
+      - if active_series.any?
+        .event-series-summary.clearfix
+          .section-header
+            h2 Current event series
+            - if page.fields[:active_intro].data_present?
+              .intro.intro--small.column-narrow.copy
+                = render_content page.fields[:active_intro]
+          - active_series.each do |series|
+            - cache ["event-active-series-1", series, series.fields[:hero_image].asset] do
+              - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
+              .event-series-summary__block style=style_for_event_series_block(highlight_color)
+                a.event-series-summary__anchor href=series.absolute_url
+                  - if series.fields[:hero_image].data_present?
+                    img.event-series-summary__image src=series.fields[:hero_image].asset.content_small_url
+                  .event-series-summary__text
+                    h3.event-series-summary__title = series.title
+                    - if series.fields[:summary].data_present?
+                      .event-series-summary__description.copy
+                        = render_content series.fields[:summary]
+                    - else
+                      .event-series-summary__description.copy
+                        = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
+                    span.event-series-summary__action View this #{series.events.length} event series
+      - if page.fields[:body].data_present?
+        .event-series__body.copy
+          = render_content_in_sections page.fields[:body]
+      / Inactive series
+      - if inactive_series.any?
+        .event-series__inactive.clearfix
+          .section-header
+            h2 Previous event series
+            - if page.fields[:inactive_intro].data_present?
+              .intro.intro--small.column-narrow.copy
+                = render_content page.fields[:inactive_intro]
+          .column-wrapper
+            .event-series-list.column-mid
+              - inactive_series.each do |series|
+                - cache ["event-inactive-series-1", series, series.fields[:hero_image].asset] do
+                  - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
+                  .event-series-list__block
+                    a.event-series-list__anchor href=series.absolute_url
+                      .event-series-list__text.clearfix
+                        h3.event-series-list__title = markdown_line series.title
+                        span.event-series-list__action style=style_for_event_series_block(highlight_color)
+                          ' View this #{series.events.length} event series
+                          i.fa.fa-angle-right

@@ -18,15 +18,16 @@ module Heracles
               {name: :venue, type: :associated_pages, page_type: :venue, label: "Venue", editor_type: 'singular'},
               # Bookings
               {name: :booking_info, type: :info, text: "<hr/>"},
+              {name: :ticket_prices, type: :text},
               {name: :bookings_open_at, type: :date_time, label: "Bookings open on"},
-              {name: :external_bookings, type: :text, label: "External bookings"},
+              {name: :external_bookings, type: :text, label: "External bookings URL"},
               # Other
               {name: :presenters, type: :associated_pages, page_type: :person},
               {name: :series, type: :associated_pages, page_type: :event_series, editor_type: 'singular'},
               {name: :recordings, type: :associated_pages, page_type: :recording, editor_columns: 6},
               {name: :podcast_episodes, type: :associated_pages, page_type: :podcast_episode, editor_columns: 6},
               {name: :life_stage, type: :text, label: "Life stage"},
-              {name: :ticketing_stage, type: :text, label: "Ticketing stage"},
+              {name: :ticketing_stage, type: :text, editor_type: 'select', option_values: [ "Booking fast", "Booked out" ] },
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
               {name: :sponsors_intro, type: :content, hint: "Override the 'Made possible with the support of' text"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
@@ -41,8 +42,11 @@ module Heracles
           {
             title: title,
             series: fields[:series].pages.map(&:title).join(", "),
+            promo_image: (fields[:promo_image].data_present?) ? "✔" : "•",
+            booking: (fields[:external_bookings].data_present?) ? "✔" : "•",
             recordings: fields[:recordings],
             start_date: fields[:start_date],
+            published: (published) ? "✔" : "•",
             created_at:  created_at.to_s(:admin_date)
           }
         end
@@ -51,7 +55,31 @@ module Heracles
           fields[:short_title].data_present? ? fields[:short_title] : title
         end
 
+        def summary
+          if fields[:summary].data_present?
+            fields[:summary]
+          elsif fields[:intro].data_present?
+            fields[:intro]
+          else
+            fields[:body]
+          end
+        end
+
         ### Accessors
+
+        def upcoming?
+          (fields[:start_date].value >= Time.zone.now.beginning_of_day)
+        end
+
+        def booked_out?
+          (fields[:ticketing_stage].value == "Booked out")
+        end
+
+        def recordings
+          if fields[:recordings].data_present?
+            fields[:recordings].pages.visible.published
+          end
+        end
 
         def series
           if fields[:series].data_present?
@@ -68,16 +96,27 @@ module Heracles
         def related_events(options={})
           options[:per_page] = 6 || options[:per_page]
           if series
-            events = series.events({per_page: options[:per_page]})
-            if events.total < options[:per_page]
-              additional_total = options[:per_page] - events.total
+            events = series.events({per_page: options[:per_page], exclude: [id]})
+            # Try and find events based on presenters
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
+              additional = search_events_by_presenters({per_page: additional_total})
+              events = events + additional.results
+            end
+            # Try and find events based on topics
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})
-              events = events.results + additional.results
-            else
-              events = events.results
+              events = events + additional.results
             end
           else
-            events = search_events_by_topic({per_page: options[:per_page]}).results
+            events = search_events_by_presenters({per_page: options[:per_page]}).results
+            # Try and find events based on topics
+            if events.length < options[:per_page]
+              additional_total = options[:per_page] - events.length
+              additional = search_events_by_topic({per_page: additional_total})
+              events = events + additional.results
+            end
           end
           events
         end
@@ -101,6 +140,18 @@ module Heracles
 
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
+          end
+
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
+
+          string :presenter_ids, multiple: true do
+            fields[:presenters].pages.map(&:id)
+          end
+
+          string :presenter_titles, multiple: true do
+            fields[:presenters].pages.map(&:title)
           end
 
           text :body do
@@ -127,9 +178,25 @@ module Heracles
             fields[:series].pages.map(&:id)
           end
 
+          string :venue_id do
+            fields[:venue].pages.first.id if fields[:venue].data_present?
+          end
+
         end
 
         private
+
+        def search_events_by_presenters(options={})
+          Sunspot.search(Event) do
+            without :id, id
+            with :site_id, site.id
+            with :presenter_ids, fields[:presenters].pages.map(&:id)
+            with :published, true
+
+            order_by :start_date_time, :desc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
+        end
 
         def search_events_by_topic(options={})
           Sunspot.search(Event) do
@@ -138,7 +205,7 @@ module Heracles
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
 
-            order_by :start_date_time, :asc
+            order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end

@@ -59,6 +59,18 @@ module Heracles
             fields[:topics].pages.map(&:id)
           end
 
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
+
+          string :person_ids, multiple: true do
+            fields[:people].pages.map(&:id)
+          end
+
+          string :person_titles, multiple: true do
+            fields[:people].pages.map(&:title)
+          end
+
           text :description do
             fields[:description].value
           end
@@ -72,7 +84,11 @@ module Heracles
             with :parent_id, id
             with :published, true
 
-            without :audio_id, nil
+            if options[:type] == "video"
+              without :video_id, nil
+            else
+              without :audio_id, nil
+            end
 
             order_by :publish_date_time, :desc
 

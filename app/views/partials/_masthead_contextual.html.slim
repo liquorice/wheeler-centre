@@ -2,7 +2,7 @@
   - if upcoming_events_for_navigation.results.any?
     .upcoming-events data-view-masthead-events={eventSelector: ".upcoming-events__item-title"}.to_json
       .upcoming-events__navigation.clearfix
-        span.upcoming-events__up-next
+        h2.upcoming-events__up-next
           | Up next
         - if upcoming_events_for_navigation.total > 1
           a.upcoming-events__view-all href="/events"
@@ -15,13 +15,13 @@
           - elsif event.promo_image
             - image = event.promo_image
           li.upcoming-events__item
-            a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href="#"
+            a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=event.absolute_url
               - if image
                 span.upcoming-events__image-container
                   img.upcoming-events__image alt="" src=image.content_thumbnail_url
               span.upcoming-events__item-text-container.clearfix
-                h1.upcoming-events__item-date = l event.fields[:start_date].value, format: :medium_date
-                h2.upcoming-events__item-title = event.title
+                time.upcoming-events__item-date datetime=l(event.fields[:start_date].value, format: :rfc_3339) = l event.fields[:start_date].value, format: :medium_date
+                h3.upcoming-events__item-title = event.title
   h1.masthead-contextual__section-title
     = area :masthead_title
 .masthead-contextual.clearfix

@@ -17,6 +17,7 @@ module Heracles
           insertion_keys_for_self_and_descendents = [insertion_key] + children.of_type(page_type).select(:id, :type).map(&:insertion_key)
 
           Heracles::Page.
+            published.visible.
             joins(:insertions).
             where(
               :"insertions.field" => "topics",
@@ -32,6 +33,7 @@ module Heracles
 
           Heracles::Page.connection.execute("SELECT setseed(0.#{Time.current.beginning_of_day.to_i});")
           Heracles::Page.
+            published.visible.
             joins(:insertions).
             where(
               :"insertions.field" => "topics",

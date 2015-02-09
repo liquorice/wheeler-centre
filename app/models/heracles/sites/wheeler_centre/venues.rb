@@ -9,12 +9,28 @@ module Heracles
             fields: [
               {name: :intro, type: :content},
               {name: :body, type: :content},
+              {name: :main_venues, type: :associated_pages, page_type: :venue},
             ]
           }
         end
 
         def venues
           search_venues
+        end
+
+        def main_venues
+          fields[:main_venues].pages
+        end
+
+        def other_venues
+          main_venue_ids = main_venues.map(&:id) if main_venues
+          children.
+          where.not(
+            id: main_venue_ids
+          ).
+          of_type("venue").
+          published.
+          order(:title)
         end
 
         private
@@ -25,7 +41,7 @@ module Heracles
             with :parent_id, id
             with :published, true
 
-            order_by :start_date_time, :asc
+            order_by :title, :asc
             paginate(page: 1, per_page: 1000)
           end
         end

@@ -16,6 +16,10 @@ module Heracles
           string :topic_ids, multiple: true do
             fields[:topics].pages.map(&:id)
           end
+
+          string :topic_titles, multiple: true do
+            fields[:topics].pages.map(&:title)
+          end
         end
       end
     end

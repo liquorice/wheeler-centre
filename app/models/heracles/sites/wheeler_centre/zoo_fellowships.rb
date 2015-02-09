@@ -13,7 +13,7 @@ module Heracles
         ### Accessors
 
         def works
-          children.of_type("zoo_fellowships_work").visible.published
+          children.of_type("zoo_fellowships_work").in_order.visible.published
         end
 
       end

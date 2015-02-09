@@ -17,7 +17,7 @@
         .topic-page__nav-list
           h3.topic-page__nav-title
             a href=primary_topic.absolute_url = primary_topic.title
-          = render "partials/page_children", parent: primary_topic, current: page
+          = render "partials/page_nav_children", parent: primary_topic, current: page
       h1.topic-page__title
         = page.title
     - if page.fields[:intro].data_present?
@@ -54,12 +54,14 @@
             = (params[:page] || 1)
             em &nbsp;of&nbsp;
             = random_pages.total_pages
-        .topic-page__random.snap-wrapper.clearfix
+        .topic-page__random.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
           - random_pages.each do |post|
             - if post.page_type == "blog_post"
               = render "partials/blog_snap_block", post: post, show_type: true
             - elsif post.page_type == "event"
               = render "partials/event_snap_block", post: post, show_type: true
+            - elsif post.page_type == "recording"
+              = render "partials/recording_snap_block", post: post, show_type: true
         - if random_pages.total_pages > 1
           .pagination-context.pagination-context--bottom
             ' Page

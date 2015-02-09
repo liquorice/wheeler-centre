@@ -4,32 +4,44 @@
   - image = post.fields[:thumbnail_image].asset
 - elsif post.promo_image
   - image = post.promo_image
+- selected_primary_topics = select_primary_topics_for_page(post)
 
-.snap--block
-  a.event-snap.event-snap--block href=post.absolute_url
-    - if post.fields[:start_date].data_present?
-      time.event-snap__date
-        = l post.fields[:start_date].value, format: :medium_date
-    - if image
-      .event-snap__hero
-        - if show_type
-          span.event-snap__hero-type Past event
-        .event-snap__hero-inner
-          img src=image.content_thumbnail_url
-        - if image.attribution.present?
-          .event-snap__hero-caption.caption
-            p = image.attribution
-    - if post.series
-      p.event-snap__series
-        = post.series.title
-    h3.event-snap__title
-      span.title-text == widont_format markdown_line post.title
-      - selected_primary_topics = select_primary_topics_for_page(post)
-      - if selected_primary_topics && selected_primary_topics.any?
-        span.title-tags
-          '  &nbsp;/&nbsp;
-          = selected_primary_topics.first.title
-    - if post.fields[:presenters].data_present?
-      p.event-snap__authors
-        ' With
-        = post.fields[:presenters].pages.map(&:title).to_sentence
+- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, hide_summary, image, post.fields[:presenters].pages, post.recordings, selected_primary_topics, post.series] do
+  .snap-block
+    a.event-snap.event-snap-block href=post.absolute_url
+      - if post.fields[:start_date].data_present?
+        time.event-snap__date datetime=l(post.fields[:start_date].value, format: :rfc_3339)
+          = l post.fields[:start_date].value, format: :medium_date
+      - if image
+        .event-snap__hero
+          - if show_type
+            span.event-snap__hero-type
+              - if post.upcoming?
+                ' Upcoming event
+              - else
+                - if post.recordings && post.recordings.any?
+                  i.fa.fa-play.event-snap__past-event-icon
+                ' Past event
+          .event-snap__hero-inner
+            img src=image.content_thumbnail_url
+          - if image.attribution.present?
+            .event-snap__hero-caption.caption
+              p = image.attribution
+      - if post.series
+        p.event-snap__series
+          = post.series.title
+      h3.event-snap__title
+        span.title-text == widont_format markdown_line post.title
+        - if selected_primary_topics && selected_primary_topics.any?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = selected_primary_topics.first.title
+      - if post.fields[:presenters].data_present?
+        p.event-snap__authors
+          ' With
+          - if post.fields[:presenters].pages.length > 3
+            = post.fields[:presenters].pages[0..2].map(&:title).join(", ")
+            '  and
+            = pluralize(post.fields[:presenters].pages.length-3, "other")
+          - else
+            = post.fields[:presenters].pages.map(&:title).to_sentence
