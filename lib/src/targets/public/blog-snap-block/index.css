@@ -71,6 +71,12 @@
     padding-bottom: 4px;
     position: relative;
   }
+  .breakpoint-phone .blog-snap__hero {
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    width: 120px;
+  }
   .blog-snap__hero-type {
     background-color: #fff;
     font-family: var(--font-sans);
@@ -93,6 +99,9 @@
     background-color: var(--primary-color);
     color: #fff;
     transform: translate3d(0, -100%, 0);
+  }
+  .breakpoint-phone a:hover .blog-snap__hero-type {
+    transform: translate3d(0, 0, 0);
   }
 
   .blog-snap__hero-caption {
