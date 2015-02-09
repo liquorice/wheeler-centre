@@ -1,7 +1,7 @@
 /* People index: letters */
 
 .people-letters {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dfdfdf;
   margin-top: 35px;
 }
 
@@ -18,7 +18,7 @@
   font-family: var(--font-sans);
   font-size: 15px;
   font-size: 1.5rem;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #dfdfdf;
   padding-top: 10px;
   padding-bottom: 8px;
 }
@@ -47,10 +47,26 @@
     padding-top: 20px;
     padding-bottom: 20px;
   }
+  .breakpoint-phone-wide .people__coming-up-title,
+  .breakpoint-phone .people__coming-up-title {
+    font-size: 28px;
+    font-size: 2.8rem;
+  }
 
 .upcoming-people__block,
 .recent-people__block {
   padding-bottom: 20px;
+}
+.breakpoint-phone .upcoming-people__block,
+.breakpoint-phone .recent-people__block {
+  border-top: 1px solid #dfdfdf;
+  padding-bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.breakpoint-phone .grouper--1:last-child .upcoming-people__block,
+.breakpoint-phone .grouper--1:last-child .recent-people__block {
+  border-bottom: 1px solid #dfdfdf;
 }
 
 .upcoming-people__anchor,
@@ -58,6 +74,10 @@
   display: block;
   text-align: center;
   width: 100%;
+}
+.breakpoint-phone .upcoming-people__anchor,
+.breakpoint-phone .recent-people__anchor {
+  text-align: left;
 }
 
   .upcoming-people__image-wrapper,
@@ -67,6 +87,14 @@
     margin-right: auto;
     margin-bottom: 25px;
     max-width: 80%;
+  }
+  .breakpoint-phone .upcoming-people__image-wrapper,
+  .breakpoint-phone .recent-people__image-wrapper {
+    float: left;
+    margin-bottom: 0;
+    margin-right: 20px;
+    width: 60px;
+    height: 60px;
   }
 
     .upcoming-people__image,
@@ -95,6 +123,17 @@
   .recent-people__title {
     font-size: 18px;
     font-size: 1.8rem;
+  }
+  .breakpoint-phone .upcoming-people__title,
+  .breakpoint-phone .recent-people__title {
+    float: left;
+    font-size: 16px;
+    font-size: 1.6rem;
+    padding-top: 22px;
+    width: calc(100% - 80px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .upcoming-people__anchor:hover .upcoming-people__title,
   .upcoming-people__anchor:focus .upcoming-people__title,
