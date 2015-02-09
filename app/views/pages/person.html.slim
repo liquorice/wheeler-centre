@@ -43,36 +43,36 @@
 
     / Past events and other media types
     - if past_events.results.total_pages > 0 || blog_posts.any?
-    .person__related
-      .column-wrapper
-        .column-wide.clearfix
-          - if blog_posts.any? || recordings.any?
-            .person__related-column.person__related-column--first
-              / Blog posts
-              - if blog_posts.any?
-                .person__blog-posts
-                  h2.person__related-header Writings
-                  .person__related-list
-                    - blog_posts.each do |blog_post|
-                      .person__related-block
-                        a.person__related-anchor href=blog_post.absolute_url
-                          .person__related-text
-                            h3.person__related-title = blog_post.title
-                            - if blog_post.fields[:publish_date].data_present?
-                              time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
+      .person__related
+        .column-wrapper
+          .column-wide.clearfix
+            - if blog_posts.any? || recordings.any?
+              .person__related-column.person__related-column--first
+                / Blog posts
+                - if blog_posts.any?
+                  .person__blog-posts
+                    h2.person__related-header Writings
+                    .person__related-list
+                      - blog_posts.each do |blog_post|
+                        .person__related-block
+                          a.person__related-anchor href=blog_post.absolute_url
+                            .person__related-text
+                              h3.person__related-title = blog_post.title
+                              - if blog_post.fields[:publish_date].data_present?
+                                time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
 
-            .person__related-column
-              / Past events
-              - if past_events.results.total_pages > 0
-                .person__past-events
-                  h2.person__related-header Past events
-                  .person__related-list
-                    - past_events.results.each do |event|
-                      .person__related-block
-                        a.person__related-anchor href=event.absolute_url
-                          .person__related-text
-                            h3.person__related-title = event.title
-                          time.person__related-date = l event.fields[:start_date].value, format: :medium_date
+              .person__related-column
+                / Past events
+                - if past_events.results.total_pages > 0
+                  .person__past-events
+                    h2.person__related-header Past events
+                    .person__related-list
+                      - past_events.results.each do |event|
+                        .person__related-block
+                          a.person__related-anchor href=event.absolute_url
+                            .person__related-text
+                              h3.person__related-title = event.title
+                            time.person__related-date = l event.fields[:start_date].value, format: :medium_date
     / Recordings
     - if recordings.any?
       .person__recordings

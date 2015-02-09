@@ -71,6 +71,7 @@
   background-color: var(--primary-color-lighter);
   clear: both;
   padding-top: 20px;
+  margin-bottom: 20px;
   margin-top: 50px;
 }
 
@@ -78,7 +79,7 @@
 
 .person__related {
   clear: both;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 50px;
 }
 
