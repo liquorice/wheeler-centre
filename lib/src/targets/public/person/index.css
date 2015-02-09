@@ -82,6 +82,11 @@
   padding-top: 40px;
   padding-bottom: 50px;
 }
+.breakpoint-phone-wide .person__related,
+.breakpoint-phone .person__related {
+  padding-bottom: 0;
+  padding-top: 20px;
+}
 
   .person__related-column {
     float: left;
@@ -150,6 +155,12 @@
       width: 100%;
     }
 
-.person__recording {
+.person__recordings {
   margin-bottom: 35px;
 }
+.breakpoint-phone-wide .person__recordings,
+.breakpoint-phone .person__recordings {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+

@@ -46,10 +46,10 @@
       .person__related
         .column-wrapper
           .column-wide.clearfix
-            - if blog_posts.any? || recordings.any?
-              .person__related-column.person__related-column--first
-                / Blog posts
-                - if blog_posts.any?
+            - if blog_posts.any? || past_events.results.total_pages > 0
+              / Blog posts
+              - if blog_posts.any?
+                .person__related-column.person__related-column--first
                   .person__blog-posts
                     h2.person__related-header Writings
                     .person__related-list
@@ -61,9 +61,9 @@
                               - if blog_post.fields[:publish_date].data_present?
                                 time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
 
-              .person__related-column
-                / Past events
-                - if past_events.results.total_pages > 0
+              / Past events
+              - if past_events.results.total_pages > 0
+                .person__related-column
                   .person__past-events
                     h2.person__related-header Past events
                     .person__related-list
