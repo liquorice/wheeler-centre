@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 571ce5cb6f02595777ea88e5e44e71d2e1da392f
+  revision: eb501cab7fac187b2f75bb04665c64179cf545e1
   branch: master
   specs:
     heracles (1.0.0)
