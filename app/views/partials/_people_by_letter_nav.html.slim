@@ -1,6 +1,6 @@
 - all_letters = ("A".."Z").to_a
 / TODO: Move this to a JS component
-select.people-letters-select onChange="window.location.href=this.value"
+select.people-letters-select data-people-select-box={selectSelector: ".people-letters-select"}.to_json
   option
     | Filter people by surname
   - all_letters.each do |letter|
