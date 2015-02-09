@@ -78,7 +78,6 @@ gem "progress_bar"
 
 # Sitemap
 gem "sitemap_generator"
-gem "carrierwave"
 gem "fog"
 
 group :production do
