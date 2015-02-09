@@ -11,7 +11,7 @@ a.blog-snap.blog-snap--quarter href=post.absolute_url
   - if image
     .blog-snap__hero
       .blog-snap__hero-inner
-        img src=image.content_small_thumbnail_url
+        img src=image.results[:content_small_thumbnail][:url]
       - if image.attribution.present?
         .blog-snap__hero-caption.caption
           p = image.attribution
