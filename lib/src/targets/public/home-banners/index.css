@@ -54,6 +54,14 @@
     position: absolute;
     right: 0;
   }
+    .breakpoint-tablet-wide .home-banner__detail,
+    .breakpoint-tablet .home-banner__detail {
+      padding: 18px;
+    }
+    .breakpoint-phone-wide .home-banner__detail,
+    .breakpoint-phone .home-banner__detail {
+      padding: 15px;
+    }
     .home-banner__category {
       font-size: 13px;
       font-size: 1.3rem;
@@ -61,6 +69,12 @@
       margin-bottom: 5px;
       padding-bottom: 5px;
       text-transform: uppercase;
+    }
+    .breakpoint-phone-wide .home-banner__category,
+    .breakpoint-phone .home-banner__category {
+      font-size: 10px;
+      font-size: 1rem;
+      margin-bottom: 0;
     }
 
     .home-banner__category i {
@@ -80,6 +94,25 @@
     }
     .home-banner__label em {
       font-style: italic;
+    }
+
+    .breakpoint-widescreen .home-banner__label,
+    .breakpoint-tablet-wide .home-banner__label {
+      font-size: 15px;
+      font-size: 1.5rem;
+    }
+
+
+    .breakpoint-tablet .home-banner__label,
+    .breakpoint-phone-wide .home-banner__label,
+    .breakpoint-phone .home-banner__label {
+      font-size: 13px;
+      font-size: 1.3rem;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
     }
 
 /* Layout properties */
@@ -111,6 +144,19 @@
 .home-banner__group--layout-3.home-banner__group--max-width-one {
   width: 33.33333%;
 }
+  /* Phone wide */
+  .breakpoint-phone-wide .home-banner__group--layout-3,
+  .breakpoint-phone .home-banner__group--layout-3 {
+    width: 100%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-3 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-3 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-3 .home-banner--width-one,
+  .breakpoint-phone .home-banner__group--layout-3 .home-banner--width-one {
+    width: 50%;
+  }
 
 .home-banner__group--layout-4.home-banner__group--max-width-two {
   width: 40%;
@@ -118,18 +164,56 @@
 .home-banner__group--layout-4.home-banner__group--max-width-one {
   width: 20%;
 }
+  /* Phone wide */
+  .breakpoint-phone-wide .home-banner__group--layout-4,
+  .breakpoint-phone .home-banner__group--layout-4 {
+    width: 100%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-4 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-4 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-4 .home-banner--width-one,
+  .breakpoint-phone .home-banner__group--layout-4 .home-banner--width-one {
+    width: 50%;
+  }
 
+/* 5 */
 .home-banner__group--layout-5.home-banner__group--max-width-two {
   width: 50%;
 }
 .home-banner__group--layout-5.home-banner__group--max-width-one {
   width: 25%;
 }
+  /* Phone wide */
+  .breakpoint-phone-wide .home-banner__group--layout-5,
+  .breakpoint-phone .home-banner__group--layout-5 {
+    width: 100%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-5 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-5 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-5 .home-banner--width-one,
+  .breakpoint-phone .home-banner__group--layout-5 .home-banner--width-one {
+    width: 50%;
+  }
 
+/* 6 */
 .home-banner__group--layout-6.home-banner__group--max-width-two,
 .home-banner__group--layout-6.home-banner__group--max-width-one {
   width: 50%;
 }
+  /* Phone */
+  .breakpoint-phone-wide .home-banner__group--layout-6,
+  .breakpoint-phone .home-banner__group--layout-6 {
+    width: 100%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-6 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-6 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+
 
 /* Layout 7 is a special case because prime numbers are mean to me */
 .home-banner__group--layout-7 {
@@ -141,15 +225,62 @@
   .home-banner__group--layout-7:last-child .home-banner {
     width: 33.333333%;
   }
+  .breakpoint-phone-wide .home-banner__group--layout-7:first-child .home-banner,
+  .breakpoint-phone .home-banner__group--layout-7:first-child .home-banner,
+  .breakpoint-phone-wide .home-banner__group--layout-7:last-child .home-banner,
+  .breakpoint-phone .home-banner__group--layout-7:last-child .home-banner {
+    width: 50%;
+  }
+  /* We have a list of three, so we make the first one full width */
+  .breakpoint-phone-wide .home-banner__group--layout-7:last-child .home-banner:first-child,
+  .breakpoint-phone .home-banner__group--layout-7:last-child .home-banner:first-child {
+    width: 100%;
+  }
 
-
+/* 8 */
 .home-banner__group--layout-8.home-banner__group--max-width-two {
   width: 36.35%;
 }
 .home-banner__group--layout-8.home-banner__group--max-width-one {
   width: 27.3%;
 }
+  /* Phone */
+  .breakpoint-phone-wide .home-banner__group--layout-8,
+  .breakpoint-phone .home-banner__group--layout-8 {
+    width: 100%;
+  }
+    .breakpoint-phone-wide .home-banner__group--layout-8:last-child .home-banner,
+    .breakpoint-phone .home-banner__group--layout-8:last-child .home-banner {
+      width: 50%;
+    }
+  .breakpoint-phone-wide .home-banner__group--layout-8 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-8 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+
+/* 9 */
 .home-banner__group--layout-9.home-banner__group--max-width-two,
 .home-banner__group--layout-9.home-banner__group--max-width-one {
   width: 33.3333%;
 }
+  /* Tablet */
+  .breakpoint-tablet .home-banner__group--layout-9 {
+    width: 50%;
+  }
+  /* Collapse the last row into a single set of three */
+  .breakpoint-tablet .home-banner__group--layout-9:last-child {
+    width: 100%;
+  }
+    .breakpoint-tablet .home-banner__group--layout-9:last-child .home-banner {
+      width: 33.333333%;
+    }
+  /* Phone */
+  .breakpoint-phone-wide .home-banner__group--layout-9,
+  .breakpoint-phone .home-banner__group--layout-9 {
+    width: 100%;
+  }
+  .breakpoint-phone-wide .home-banner__group--layout-9 .home-banner--width-two .home-banner__shim,
+  .breakpoint-phone .home-banner__group--layout-9 .home-banner--width-two .home-banner__shim {
+    padding-top: 40%;
+  }
+

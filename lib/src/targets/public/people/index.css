@@ -4,6 +4,10 @@
   border-bottom: 1px solid #dfdfdf;
   margin-top: 35px;
 }
+.breakpoint-phone-wide .people-letters,
+.breakpoint-phone .people-letters {
+  display: none;
+}
 
 .people-letter {
   float: left;
@@ -29,6 +33,19 @@
 }
 .people-letter:last-child a {
   border-right: 0;
+}
+
+.people-letters-select {
+  display: none;
+}
+.breakpoint-phone-wide .people-letters-select,
+.breakpoint-phone .people-letters-select {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  height: 40px;
+  display: block;
+  margin: 20px auto 30px;
+  width: 60%;
 }
 
 /* People index: coming up */
