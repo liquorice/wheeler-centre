@@ -12,7 +12,7 @@
     - if page.sorted_banners.any?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
-          a.home-banner href=banner[:page].fields[:link].value class=("home-banner--#{banner[:size].to_s}")
+          a.home-banner href=banner[:page].fields[:link].value
             .home-banner__shim
             .home-banner__image
               img src=banner[:page].fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
