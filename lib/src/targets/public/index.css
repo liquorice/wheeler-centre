@@ -149,6 +149,11 @@ body {
     padding-bottom: 12px;
   }
 
+  .section-header .intro {
+    font-size: 17px;
+    font-size: 1.7rem;
+  }
+
 .page__intro {
   padding-bottom: 35px;
 }
@@ -211,6 +216,7 @@ body {
 @import "./video-player";
 @import "./audio-player";
 @import "./subscribe";
+@import "./social-media";
 @import "./content-page";
 @import "./topics-section";
 @import "./blog-post";

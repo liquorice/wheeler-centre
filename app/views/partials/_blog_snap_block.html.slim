@@ -1,4 +1,5 @@
 - show_type = show_type || false
+- hide_image = hide_image || false
 - hide_summary = hide_summary || false
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
@@ -13,11 +14,12 @@
       .blog-snap__hero
         - if show_type
           span.blog-snap__hero-type Writing
-        .blog-snap__hero-inner
-          img src=image.content_thumbnail_url
-        - if image && image.attribution.present?
-          .blog-snap__hero-caption.caption
-            p = image.attribution
+        - unless hide_image
+          .blog-snap__hero-inner
+            img src=image.content_thumbnail_url
+          - if image && image.attribution.present?
+            .blog-snap__hero-caption.caption
+              p = image.attribution
     h3.blog-snap__title
       span.title-text == widont_format markdown_line post.title
       - selected_primary_topics = select_primary_topics_for_page(post)

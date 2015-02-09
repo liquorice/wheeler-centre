@@ -423,8 +423,8 @@
       transition-duration: 250ms;
       width: 100%;
   }
-    .event-presenter__image:hover img,
-    .event-presenter__image:focus img {
+    a.event-presenter__image:hover img,
+    a.event-presenter__image:focus img {
       transform: scale3d(1.1, 1.1, 1);
     }
     .event-presenter__image-inner {

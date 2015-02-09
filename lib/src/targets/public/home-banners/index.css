@@ -1,7 +1,4 @@
 /* Banner */
-
-.home__banners {}
-
 .home-banner {
   background-color: var(--primary-color);
   color: #fff;
