@@ -8,15 +8,15 @@
 = area :masthead_contextual_navigation do
   ul.masthead-contextual__navigation-list
       li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
+        a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="/people"
           ' All people
 
 = area :main do
   .page__content
-    .page__body.page__body--people.copy
+    .page__body.page__body--people
       = render_content page.fields[:body]
   .column-wrapper
-    .column-wide.copy
+    .column-wide
       / Stinky action differentiation
       / /people?letter=a
       / /people?letter=a&order_by=first_name
@@ -24,7 +24,7 @@
         = render "partials/people_by_letter_nav", page: page, order_by: order_by
         - people_by_letter = page.people(per_page: 1000, letter: params[:letter], order_by: order_by).results
         - if people_by_letter.any?
-          .people-list.copy
+          .people-list
             h2 = params[:letter].capitalize
             ul
               - people_by_letter.each do |person|
@@ -37,12 +37,20 @@
         = render "partials/people_by_letter_nav", page: page, order_by: order_by
         - people_from_upcoming_events = page.people_from_upcoming_events
         - if people_from_upcoming_events.any?
-          h2 Coming up at The Wheeler Centre
-          ul.upcoming-people
-            - people_from_upcoming_events.each do |person|
-              li
-                a href=person.absolute_url
-                  = person.title
+          .people__header.gradient-top-down
+            h2.people__title Coming up at The Wheeler Centre
+            - if page.fields[:coming_up_intro].data_present?
+              .intro.intro--small.column-narrow.copy
+                = render_content page.fields[:coming_up_intro]
+          .upcoming-people
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+              - people_from_upcoming_events.each do |person|
+                .snap-block.upcoming-people__block
+                  a.upcoming-people__anchor href=person.absolute_url
+                    - if person.fields[:portrait].data_present?
+                      .upcoming-people__image-wrapper
+                        img.upcoming-people__image src=person.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{person.title}"
+                    h3.upcoming-people__title = person.title
         - people_from_recent_events = page.people_from_recent_events
         - if people_from_recent_events.any?
           h2 Recently at The Wheeler Centre

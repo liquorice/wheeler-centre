@@ -1,1 +1,91 @@
-/* People index */
+/* People index: letters */
+
+.people-letters {
+  border-bottom: 1px solid #ddd;
+  margin-top: 35px;
+}
+
+.people-letter {
+  float: left;
+  text-align: center;
+  width: 3.846153846%;
+  width: calc(100% / 26);
+}
+
+.people-letter a {
+  color: var(--primary-color);
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-size: 1.5rem;
+  border-right: 1px solid #ddd;
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+.people-letter a:hover,
+.people-letter a:focus {
+  background-color: var(--primary-color-lighter);
+  color: #4a4a4a;
+}
+.people-letter:last-child a {
+  border-right: 0;
+}
+
+/* People index: coming up */
+
+.people__header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-top: 35px;
+}
+  .people__title {
+    color: var(--primary-color);
+    font-family: var(--font-sans);
+    font-size: 32px;
+    font-size: 3.2rem;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+.upcoming-people__block {
+  padding-bottom: 20px;
+}
+
+.upcoming-people__anchor {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+  .upcoming-people__image-wrapper {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    max-width: 80%;
+  }
+
+    .upcoming-people__image {
+      border-radius: 50%;
+      display: block;
+      transform: scale3d(1, 1, 1);
+      transition-property: transform;
+      transition-duration: 250ms;
+      width: 100%;
+    }
+    .upcoming-people__anchor:hover .upcoming-people__image,
+    .upcoming-people__anchor:focus .upcoming-people__image {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+
+  .upcoming-people__title {
+    font-family: var(--font-sans);
+    font-weight: bold;
+    font-size: 20px;
+    font-size: 2rem;
+  }
+  .upcoming-people__anchor:hover .upcoming-people__title,
+  .upcoming-people__anchor:focus .upcoming-people__title {
+    color: var(--primary-color);
+  }

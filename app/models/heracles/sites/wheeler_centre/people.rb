@@ -7,6 +7,9 @@ module Heracles
             fields: [
               {name: :intro, type: :content},
               {name: :body, type: :content},
+              # Coming up intro
+              {name: :coming_up_info, type: :info, text: "<hr/>"},
+              {name: :coming_up_intro, type: :content}
             ]
           }
         end
