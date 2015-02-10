@@ -399,6 +399,18 @@ unless wheeler_podcast
   wheeler_podcast = result.page
 end
 
+# Broadcasts -> Past broadcasts
+past_broadcasts = Heracles::Sites::WheelerCentre::BroadcastsArchive.find_or_initialize_by(url: "broadcasts/past-broadcasts")
+past_broadcasts.site = site
+past_broadcasts.parent = broadcasts_index
+past_broadcasts.title = "Past broadcasts"
+past_broadcasts.slug = "past-broadcasts"
+past_broadcasts.published = true
+past_broadcasts.locked = true
+past_broadcasts.page_order_position = :last if past_broadcasts.new_record?
+past_broadcasts.save!
+
+
 # People page
 # ------------------------------------------------------------------------------
 people = Heracles::Sites::WheelerCentre::People.find_or_initialize_by(url: "people")

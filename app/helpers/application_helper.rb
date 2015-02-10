@@ -151,6 +151,10 @@ module ApplicationHelper
     site.pages.find_by_url("broadcasts")
   end
 
+  def broadcasts_archive_page
+    broadcasts_page.children.of_type("broadcasts_archive").first
+  end
+
   def main_podcast
     site.pages.find_by_url("broadcasts/podcasts/the-wheeler-centre")
   end
