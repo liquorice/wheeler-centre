@@ -1023,8 +1023,8 @@
   transition-duration: 200ms;
   opacity: 1;
 }
-  .event-calendar-event__anchor:hover .event-calendar-event__flag,
-  .event-calendar-event__anchor:focus .event-calendar-event__flag {
+  a:hover .event-calendar-event__flag,
+  a:focus .event-calendar-event__flag {
     transform: scale3d(1.75,1.75,1);
     opacity: 0;
   }
