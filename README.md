@@ -75,6 +75,7 @@ environment variables. These are all optional.
   pipeline files when deploying/precompiling.
 * `FASTLY_API_KEY`, `FASTLY_SERVICE_ID`  - API keys for integration with Fastly CDN.
 * `CDN_ORIGIN` - Original site url for cache checking.
+* `FOG_PROVIDER` - Required for the fog gem, in our case this will generally be AWS and is used to generate the search engine sitemaps.
 
 ## Assets
 
