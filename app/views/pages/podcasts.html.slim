@@ -6,12 +6,16 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .podcasts
-    .column-wrapper
-      .column-narrow.copy
-        - if page.series.present?
-          ul
-            - page.series.each do |series|
-              li
-                a href=series.absolute_url
-                  = series.title
+
+  .podcasts-index
+    .podcasts-index__top
+      .podcasts-index__header
+        h1.podcasts-index__title Podcasts
+
+    .podcasts-series-highlights.clearfix
+      - if page.series.present?
+        ul
+          - page.series.each do |series|
+            li
+              a href=series.absolute_url
+                = series.title
