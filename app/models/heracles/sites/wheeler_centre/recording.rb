@@ -73,7 +73,7 @@ module Heracles
           else
             people = []
             events.each {|event| people = people + event.fields[:presenters].pages }
-            people
+            people.uniq
           end
         end
 
