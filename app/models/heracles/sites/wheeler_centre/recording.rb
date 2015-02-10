@@ -39,7 +39,7 @@ module Heracles
             audio: (fields[:audio].data_present?) ? "♫" : "×",
             youtube_video: fields[:youtube_video].value.presence || "",
             events: events.map(&:title).join(", "),
-            people: (people.any? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
+            people: (people.present? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
             published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
             publish_date: fields[:publish_date],
