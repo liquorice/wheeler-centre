@@ -64,7 +64,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             xml.itunes :explicit, human_boolean(explicit)
             xml.itunes :image, href: episode_image_url if episode_image_url.present?
             if type == "video"
-              xml.itunes :duration, duration_to_hms(episode.video_result["meta"]["duration"].presence || 0)
+              duration = episode.video_result["meta"]["duration"] if episode.video_result["meta"].present? && episode.video_result["meta"]["duration"].present?
+              xml.itunes :duration, duration_to_hms(duration || 0)
               xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
             else
               duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
