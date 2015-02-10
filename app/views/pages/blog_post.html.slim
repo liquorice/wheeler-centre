@@ -24,7 +24,7 @@
               ' In
               a href=primary_topic.absolute_url = primary_topic.title
               span.blog-post__byline-separator ·
-            time
+            time datetime=l(page.created_at, format: :rfc_3339)
               = l page.created_at, format: :day_dmy_with_full_words
           h1.blog-post__title == widont_format markdown_line page.title
       - if page.fields[:intro].data_present?
