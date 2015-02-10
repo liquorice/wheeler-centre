@@ -110,7 +110,7 @@ module Heracles
           Sunspot.search(BlogPost) do
             without :id, id
             with :site_id, site.id
-            with :presenter_ids, fields[:authors].pages.map(&:id)
+            with :author_ids, fields[:authors].pages.map(&:id)
             with :published, true
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
