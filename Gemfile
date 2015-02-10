@@ -31,6 +31,7 @@ gem "unicorn"
 
 # Rack middleware
 gem "rack-canonical-host"
+gem "rack-rewrite"
 
 # Views
 gem "jbuilder", "~> 2.0"
