@@ -78,7 +78,7 @@
                 ' Book your tickets
             h1.event__title
               == widont_format markdown_line page.title
-          .event__body.copy
+          .event__body
             = render_content_in_sections page.fields[:body]
 
         / Spit out all the topics

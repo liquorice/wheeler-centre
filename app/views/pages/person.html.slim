@@ -26,13 +26,13 @@
         .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
           .person__bio
             - if page.fields[:intro].data_present?
-              .person__intro.copy
+              .person__intro
                 = render_content_in_sections page.fields[:intro]
             - if page.fields[:biography].data_present?
-              .person__body.copy
+              .person__body
                 = render_content_in_sections page.fields[:biography]
             - elsif page.fields[:staff_bio].data_present?
-              .person__body.copy
+              .person__body
                 = render_content_in_sections page.fields[:staff_bio]
 
           / Upcoming events

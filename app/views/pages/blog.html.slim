@@ -26,17 +26,9 @@
         /       = render "partials/blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
           a.block-link.blog-index__latest-more href="#" There’s more recent writings over here on page two &#8230; &rsaquo;
 
-    - if posts[6..11]
-      .blog-index__topic.column-wrapper.gradient-top-down
-        .section-header
-          h2 #discuss
-          .intro.intro--small.column-narrow.copy
-            p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
-        .column-full
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-            - posts.first(6).each do |post|
-              = render "partials/blog_snap_block", post: post, hide_summary: true
-
+    - if page.fields[:body].data_present?
+      .content-block
+        = render_content_in_sections page.fields[:body]
     .blog-index__guest-authors.column-wrapper
       .section-header
         h2 Guest authors

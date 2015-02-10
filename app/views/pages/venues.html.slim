@@ -31,7 +31,7 @@
                 .main-venue__description.copy
                   = force_excerptify_html render_content(venue.fields[:address_formatted]), 150, "i em strong br"
     - if page.fields[:body].data_present?
-      .event-series__body.copy
+      .event-series__body
         = render_content_in_sections page.fields[:body]
     / Other venues
     - if other_venues.present?

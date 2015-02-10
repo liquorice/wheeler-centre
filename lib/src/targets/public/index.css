@@ -235,6 +235,7 @@ body {
 @import "./skip-links";
 @import "./masthead";
 @import "./masthead-contextual";
+@import "./content-block";
 @import "./footer";
 @import "./pagination";
 @import "./figure";

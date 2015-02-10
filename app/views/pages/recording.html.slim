@@ -1,22 +1,28 @@
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Broadcasts
+  ' Broadcasts
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events"
-          ' Latest broadcasts
+  - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .recording
+    .recording__header.column-wrapper
+      .column-wide
+        h1.recording__title == widont_format markdown_line page.title
     - if page.fields[:youtube_video].data_present?
       = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
     .column-wrapper
       .column-mid
-        .content.copy
+        .content
           - if page.fields[:description].data_present?
             = render_content_in_sections page.fields[:description]
+    = page.people.length
+    - if page.people.present?
+      .event__presenters
+        h2.event__presenters-header Who?
+        - page.people.each do |presenter|
+          = render "partials/presenter_horizontal", presenter: presenter
     - if page.events
       - page.events.each do |event|
         = render "partials/event_snap_block", post: event
