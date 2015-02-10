@@ -1,5 +1,7 @@
+- show_summary = show_summary || false
 - show_type = show_type || false
 - hide_summary = hide_summary || false
+- aspect = aspect || :square
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
 - elsif post.promo_image
@@ -46,3 +48,7 @@
             = pluralize(post.fields[:presenters].pages.length-3, "other")
           - else
             = post.fields[:presenters].pages.map(&:title).to_sentence
+      - if show_summary && post.fields[:body].data_present?
+          .event-snap-block__summary.snap-block__summary.copy
+            .event-snap-block__summary-inner.snap-block__summary-inner.copy
+              = force_excerptify_html render_content(post.fields[:body]), 350, "p i em strong br"
