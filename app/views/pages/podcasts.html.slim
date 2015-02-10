@@ -15,14 +15,22 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
+    / Other podcasts
+    - if page.series.present?
     .podcasts-index__other.clearfix
       .section-header
         h2 Other podcasts
       .column-wrapper
         .column-mid
-          - if page.series.present?
-            ul
-              - page.series.each do |series|
-                li
-                  a href=series.absolute_url
-                    = series.title
+          .podcasts-list
+            - page.series.each do |series|
+              .podcasts-list__block
+                a.podcasts-list__anchor href=series.absolute_url
+                  .podcasts-list__text.clearfix
+                    h3.podcasts-list__title = markdown_line series.title
+                    span.podcasts-list__action
+                      - if series.episodes.total == 1
+                        ' #{series.episodes.total} episode
+                      - else
+                        ' #{series.episodes.total} episodes
+                      i.fa.fa-angle-right
