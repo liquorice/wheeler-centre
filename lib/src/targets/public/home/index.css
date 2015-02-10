@@ -13,6 +13,14 @@
 .home__banners {
   margin-bottom: 35px;
 }
+  .home__banners:after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #fff;
+    top: -2px;
+    position: relative;
+  }
 
 .home__highlights,
 .home__user-highlights {

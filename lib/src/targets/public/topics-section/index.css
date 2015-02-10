@@ -1,9 +1,7 @@
 /* Topic list */
 
-.topics-section {}
-
-.grouper {
-  text-align: center;
+.topics-section {
+  padding-top: 35px;
 }
 
 .grouper--6 .topics-section__item {
