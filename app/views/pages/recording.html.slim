@@ -10,31 +10,35 @@
 = area :main do
   .recording
     .recording__header.column-wrapper
-      .column-wide
-        p.recording__byline
-          - if primary_topic.present?
-            ' In
-            a href=primary_topic.absolute_url = primary_topic.title
-          - if page.fields[:recording_date].data_present? || primary_topic.present?
-            span.blog-post__byline-separator ·
-          - if page.fields[:recording_date].data_present?
-            time datetime=l(page.fields[:recording_date].value, format: :rfc_3339)
-              ' Recorded on
-              = l page.fields[:recording_date].value, format: :day_dmy_with_full_words
-        h1.recording__title == widont_format markdown_line page.title
-    - if page.fields[:youtube_video].data_present?
-      .recording__video
-        = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
+      - cache ["recording-header-1", page, primary_topic] do
+        .column-wide
+          p.recording__byline
+            - if primary_topic.present?
+              ' In
+              a href=primary_topic.absolute_url = primary_topic.title
+            - if page.fields[:recording_date].data_present? || primary_topic.present?
+              span.blog-post__byline-separator ·
+            - if page.fields[:recording_date].data_present?
+              time datetime=l(page.fields[:recording_date].value, format: :rfc_3339)
+                ' Recorded on
+                = l page.fields[:recording_date].value, format: :day_dmy_with_full_words
+          h1.recording__title == widont_format markdown_line page.title
+    - cache ["recording-video-1", page] do
+      - if page.fields[:youtube_video].data_present?
+        .recording__video
+          = render "partials/video", external_video: page.fields[:youtube_video], video_poster_image: page.fields[:video_poster_image]
     .column-wrapper
       .column-wide.clearfix
         .recording__description
-          - if page.fields[:description].data_present?
-            = render_content_in_sections page.fields[:description]
-          - if page.people.present?
-            .recording__presenters
-              h2.recording__presenters-header Who?
-              - page.people.each do |presenter|
-                = render "partials/presenter_horizontal", presenter: presenter
+          - cache ["recording-description-1", page] do
+            - if page.fields[:description].data_present?
+              = render_content_in_sections page.fields[:description]
+          - cache ["recording-description-1", page, page.people] do
+            - if page.people.present?
+              .recording__presenters
+                h2.recording__presenters-header Who?
+                - page.people.each do |presenter|
+                  = render "partials/presenter_horizontal", presenter: presenter
           / Spit out all the topics
           - cache ["recording-topics-1", page, page.fields[:topics].pages] do
             - if page.fields[:topics].data_present?
@@ -46,33 +50,36 @@
                       li
                         a href=topic.absolute_url = topic.title
         .recording__meta
-          - if page.fields[:audio].data_present?
-            .recording__audio
-              = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
-          - if page.events
-            .recording__events
-              h2
-                - if page.events.length > 1
-                  ' Part of these events
-                - else
-                  ' Part of this event
-              - page.events.each do |event|
-                = render "partials/event_snap_block", post: event, show_type: true
-          - if page.fields[:audio].data_present? || page.fields[:video].data_present?
-            .recording__downloads
-              ul
-                - if page.fields[:audio].data_present?
-                  li
-                    a href=page.fields[:audio].asset.audio_mp3_url
-                      i.fa.fa-music
-                      ' Download audio file
-                - if page.fields[:video].data_present?
-                  li
-                    - version = :original
-                    - version = :video_ipad_high if page.fields[:video].asset.versions.include?(:video_ipad_high)
-                    a href=page.fields[:video].asset.send(:"#{version}_url")
-                      i.fa.fa-video-camera
-                      ' Download video file
+          - cache ["recording-audio-1", page, page.fields[:audio].asset] do
+            - if page.fields[:audio].data_present?
+              .recording__audio
+                = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
+          - cache ["recording-events-1", page.events] do
+            - if page.events
+              .recording__events
+                h2
+                  - if page.events.length > 1
+                    ' Part of these events
+                  - else
+                    ' Part of this event
+                - page.events.each do |event|
+                  = render "partials/event_snap_block", post: event, show_type: true
+          - cache ["recording-downloads-1", page.fields[:audio].asset, page.fields[:video].asset] do
+            - if page.fields[:audio].data_present? || page.fields[:video].data_present?
+              .recording__downloads
+                ul
+                  - if page.fields[:audio].data_present?
+                    li
+                      a href=page.fields[:audio].asset.audio_mp3_url
+                        i.fa.fa-music
+                        ' Download audio file
+                  - if page.fields[:video].data_present?
+                    li
+                      - version = :original
+                      - version = :video_ipad_high if page.fields[:video].asset.versions.include?(:video_ipad_high)
+                      a href=page.fields[:video].asset.send(:"#{version}_url")
+                        i.fa.fa-video-camera
+                        ' Download video file
     / Show related events
     - cache ["recording-related-1", page, page.related_recordings] do
       - if page.related_recordings.present?
