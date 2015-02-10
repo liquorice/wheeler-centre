@@ -23,4 +23,7 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   r301 '/projects/wheeler-centre-hot-desk-fellowships-2014', '/projects/projects/wheeler-centre-hot-desk-fellowships-2014'
   r301 '/projects/wheeler-centre-hot-desk-fellowships-2013', '/projects/projects/wheeler-centre-hot-desk-fellowships-2013'
   r301 '/sitemap.xml', 'http://wheeler-centre-heracles.s3.amazonaws.com/sitemaps/sitemap.xml.gz'
+  r301 '/videos/video_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=video'
+  r301 '/videos/audio_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=audio'
+  r301 '/events/program_feed/the-fifth-estate', '/broadcasts/podcasts/the-fifth-estate.rss?format=audio'
 end
