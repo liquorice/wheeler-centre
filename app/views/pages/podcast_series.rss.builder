@@ -43,7 +43,11 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
         xml.item do
           xml.title episode.title
           xml.dc :creator, (episode.fields[:people].data_present? ? episode.fields[:people].pages.map {|person| person.title} : "The Wheeler Centre")
-          xml.pubDate episode.fields[:publish_date].value.rfc2822
+          if episode.fields[:publish_date].data_present?
+            xml.pubDate episode.fields[:publish_date].value.rfc2822
+          else
+            xml.pubDate episode.created_at.rfc2822
+          end
           xml.link url_with_domain(episode.absolute_url)
           xml.guid episode.id, isPermaLink: "false"
           xml.description do
