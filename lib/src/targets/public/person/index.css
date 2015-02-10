@@ -1,5 +1,9 @@
 /* Person page */
 
+.person {
+  padding-bottom: 50px;
+}
+
 .person__image {
   margin-left: auto;
   margin-right: auto;
@@ -30,6 +34,16 @@
   margin-bottom: 50px;
   text-align: center;
 }
+  .person__title:after {
+    border-top: 2px solid #ededed;
+    content: "";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    width: 50%;
+  }
+
 .breakpoint-tablet-wide .person__title {
   font-size: 40px;
   font-size: 4.2rem;
@@ -58,6 +72,7 @@
 .person__bio {
   float: left;
   width: 60%;
+  padding-bottom: 35px;
 }
 .breakpoint-phone-wide .person__bio,
 .breakpoint-phone .person__bio {
@@ -107,13 +122,14 @@
 }
 
 .person__upcoming-events .grouper--total-items-1 .grouper-item {
-  width: 60%;
+  width: 100%;
+  padding-right: 35px;
 }
+
 
 /* Person: past events/blog posts/recordings */
 
 .person__related {
-  border-top: 1px solid #dfdfdf;
   clear: both;
   padding-top: 40px;
   padding-bottom: 50px;
@@ -126,50 +142,53 @@
 }
 
   .person__related-column {
-    float: left;
-    width: 48%;
+    text-align: left;
+    vertical-align: top;
   }
+    .person__related-column:first-child {
+      border-right: 1px solid #dfdfdf;
+    }
+    .person__related-column:last-child {
+      border-left: 1px solid #dfdfdf;
+      margin-left: -1px;
+    }
+    .person__related-column:last-child:first-child {
+      border: none;
+    }
+
+  .grouper--total-items-1 .person__related-column {
+    width: 100%;
+    max-width: 600px;
+  }
+
   .breakpoint-phone-wide .person__related-column,
   .breakpoint-phone .person__related-column {
     width: 100%;
   }
 
-  .person__related-column--first {
-    margin-right: 4%;
-  }
-  .breakpoint-phone-wide .person__related-column--first,
-  .breakpoint-phone .person__related-column--first {
-    margin-right: 0;
-    padding-bottom: 35px;
-  }
-
-  .person__related h2 {
-    color: #777;
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: subpixel-antialiased;
-    font-smoothing: subpixel-antialiased;
-    font-size: 14px;
-    font-size: 1.4rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding-bottom: 16px;
+  .person__related .section-header {
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   .person__related-block {
     font-family: var(--font-sans);
   }
     .person__related-anchor {
-      border-bottom: 1px solid #dfdfdf;
+      border-bottom: 1px solid #ededed;
       display: block;
       padding-top: 16px;
       padding-bottom: 16px;
+      margin-left: 35px;
+      margin-right: 35px;
     }
       .person__related-block:last-child .person__related-anchor {
         border-bottom: none;
       }
     .person__related-title {
-      font-size: 14px;
-      font-size: 1.4rem;
+      /*font-size: 14px;
+      font-size: 1.4rem;*/
       font-weight: bold;
       overflow: hidden;
       text-overflow: ellipsis;
