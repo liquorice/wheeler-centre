@@ -20,7 +20,7 @@
             .column-narrow.copy
               = render_content page.fields[:intro]
       / Active event series
-      - if active_series.any?
+      - if active_series.present?
         .event-series-summary.clearfix
           .section-header
             h2 Current event series
@@ -47,7 +47,7 @@
         .event-series__body.copy
           = render_content_in_sections page.fields[:body]
       / Inactive series
-      - if inactive_series.any?
+      - if inactive_series.present?
         .event-series__inactive.clearfix
           .section-header
             h2 Previous event series

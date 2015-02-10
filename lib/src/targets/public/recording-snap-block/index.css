@@ -13,6 +13,13 @@
     font-size: 14px;
     padding-bottom: 8px;
   }
+    .breakpoint-phone-wide .recording-snap__date,
+    .breakpoint-phone .recording-snap__date {
+      font-size: 11px;
+      font-size: 1.1rem;
+    }
+
+
   .recording-snap__series {
     font-family: var(--font-sans);
     font-size: 13px;
@@ -28,21 +35,22 @@
     margin-bottom: 14px;
     line-height: 1.2;
   }
+    /* NFI why this is necessary */
+    .breakpoint-phone-wide .recording-snap__title,
+    .breakpoint-phone .recording-snap__title {
+      line-height: 0.8;
+    }
     .recording-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
       line-height: 1.4;
     }
+      .breakpoint-phone-wide .recording-snap-block .title-text,
+      .breakpoint-phone .recording-snap-block .title-text {
+        font-size: 13px;
+        font-size: 1.3rem;
+      }
 
-    .recording-snap__title .title-tags {
-      font-size: 17px;
-      font-size: 1.7rem;
-    }
-    .title-tags {
-      color: #888;
-      font-family: var(--font-serif);
-      font-weight: normal;
-    }
 
     .recording-snap:hover .title-text {
       color: var(--primary-color);
@@ -72,12 +80,6 @@
     padding-bottom: 4px;
     position: relative;
   }
-  .breakpoint-phone .recording-snap__hero {
-    float: left;
-    margin-right: 25px;
-    margin-bottom: 25px;
-    width: 120px;
-  }
     .recording-snap__hero--force-square {
       position: relative;
     }
@@ -97,6 +99,10 @@
     transition-property: transform, background-color, color;
     transition-duration: 250ms, 500ms, 500ms;
   }
+    .breakpoint-phone-wide .recording-snap__hero-type,
+    .breakpoint-phone .recording-snap__hero-type {
+      padding: 5px 7px 5px 8px;
+    }
 
   a:hover .recording-snap__hero-type {
     background-color: var(--primary-color);

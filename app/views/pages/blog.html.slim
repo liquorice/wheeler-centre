@@ -53,7 +53,7 @@
           .intro.intro--small.column-narrow.copy
             p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
         .column-full
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
             - posts[6..11].each do |post|
               = render "partials/blog_snap_block", post: post, hide_summary: true
 
@@ -84,7 +84,7 @@
                       h3.blog-post-list__title
                         span.title-text == widont_format markdown_line post.title
                         - selected_primary_topics = select_primary_topics_for_page(post)
-                        - if selected_primary_topics && selected_primary_topics.any?
+                        - if selected_primary_topics && selected_primary_topics.present?
                           span.title-tags
                             '  &nbsp;/&nbsp;
                             = selected_primary_topics.first.title
@@ -95,7 +95,7 @@
             h2 Victorian Premier’s Literary Awards
             .intro.intro--small.column-narrow.copy
               p A ready-made summer reading list of the best of the best in Australian writing now.
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, phoneWide: 3, phone: 2 }}.to_json
             - posts[12..15].each do |post|
               = render "partials/blog_snap_block", post: post, hide_summary: true
 

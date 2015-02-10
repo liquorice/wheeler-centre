@@ -8,7 +8,7 @@
 
 = area :main do
   .topic-page
-    .topic-page__header
+    .column-wrapper.topic-page__header
       .topic-page__nav data-view-touch-preview={previewClassName: "topic-page__nav--hover"}.to_json
         p.topic-page__nav-label
           ' View topics
@@ -54,7 +54,7 @@
             = (params[:page] || 1)
             em &nbsp;of&nbsp;
             = random_pages.total_pages
-        .topic-page__random.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+        .topic-page__random.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
           - random_pages.each do |post|
             - if post.page_type == "blog_post"
               = render "partials/blog_snap_block", post: post, show_type: true

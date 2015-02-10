@@ -13,6 +13,11 @@
     font-size: 14px;
     padding-bottom: 8px;
   }
+    .breakpoint-phone-wide .event-snap__date,
+    .breakpoint-phone .event-snap__date {
+      font-size: 11px;
+      font-size: 1.1rem;
+    }
   .event-snap__series {
     font-family: var(--font-sans);
     font-size: 13px;
@@ -24,21 +29,20 @@
     margin-bottom: 14px;
     font-weight: bold;
   }
+    .breakpoint-phone-wide .event-snap__title,
+    .breakpoint-phone .event-snap__title {
+      line-height: 1;
+    }
+
     .event-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
-      line-height: 1.4;
     }
-
-    .event-snap__title .title-tags {
-      font-size: 17px;
-      font-size: 1.7rem;
-    }
-    .title-tags {
-      color: #888;
-      font-family: var(--font-serif);
-      font-weight: normal;
-    }
+      .breakpoint-phone-wide .event-snap-block .title-text,
+      .breakpoint-phone .event-snap-block .title-text {
+        font-size: 14px;
+        font-size: 1.4rem;
+      }
 
     .event-snap:hover .title-text {
       color: var(--primary-color);
@@ -53,6 +57,11 @@
     padding-bottom: 12px;
     margin-top: -10px;
   }
+    .breakpoint-phone-wide .event-snap__authors,
+    .breakpoint-phone .event-snap__authors {
+      font-size: 12px;
+      font-size: 1.2rem;
+    }
 
   .event-snap__summary {
     font-size: 19px;
@@ -68,12 +77,6 @@
     padding-bottom: 4px;
     position: relative;
   }
-  .breakpoint-phone .event-snap__hero {
-    float: left;
-    margin-right: 25px;
-    margin-bottom: 25px;
-    width: 120px;
-  }
     .event-snap__hero--force-square {
       position: relative;
     }
@@ -82,6 +85,7 @@
     background-color: #fff;
     font-family: var(--font-sans);
     font-size: 13px;
+    font-size: 1.3rem;
     position: absolute;
     top: 0;
     right: 0;
@@ -93,6 +97,12 @@
     transition-property: transform, background-color, color;
     transition-duration: 250ms, 500ms, 500ms;
   }
+    .breakpoint-phone-wide .event-snap__hero-type,
+    .breakpoint-phone .event-snap__hero-type {
+      font-size: 10px;
+      font-size: 1rem;
+      padding: 5px 6px 6px;
+    }
 
   a:hover .event-snap__hero-type {
     background-color: var(--primary-color);

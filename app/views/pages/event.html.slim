@@ -22,7 +22,7 @@
                   | this recording of the event
                 ' .
               / Concat a list of recordings
-              - elsif page.recordings && page.recordings.any?
+              - elsif page.recordings && page.recordings.present?
                 ' If you missed it, you can catch up on these recordings:
                 - page.recordings.each_with_index do |recording, index|
                   - if page.series
@@ -100,7 +100,7 @@
               .event__presenters.event__presenters--long
                 h2.event__presenters-header Who?
                 - page.fields[:presenters].pages.in_groups(2, false).each do |group|
-                  - if group.any?
+                  - if group.present?
                     .event__presenters-group
                       - group.each do |presenter|
                         = render "partials/presenter_horizontal", presenter: presenter
@@ -131,7 +131,8 @@
         - cache ["event-series-summary-1", page, page.series] do
           - if page.series
             .event__series-summary
-              h2.event__series-summary-header= page.series.title
+              h2.event__series-summary-header
+                a href=page.series.absolute_url = page.series.title
               - if page.series.fields[:body].data_present?
                 .event__series-summary-details.copy
                   = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
@@ -186,7 +187,7 @@
 
     / Show related events
     - cache ["event-related-1", page, page.related_events, page.fields[:sponsors].pages] do
-      - if page.related_events.any?
+      - if page.related_events.present?
         .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
           .section-header
             h2 Related events

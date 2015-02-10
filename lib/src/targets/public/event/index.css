@@ -40,6 +40,14 @@
   padding-top: 35px;
   margin-bottom: 35px;
 }
+  .event__presenters-header a:hover,
+  .event__tickets-header a:hover,
+  .event__series-summary-header a:hover,
+  .event__presenters-header a:focus,
+  .event__tickets-header a:focus,
+  .event__series-summary-header a:focus {
+    text-decoration: underline;
+  }
 
 .event__meta {
   float: left;
@@ -327,7 +335,6 @@
 .breakpoint-tablet-wide .event__presenters,
 .breakpoint-tablet .event__presenters {
   padding-bottom: 30px;
-/*  width: 60%;*/
 }
 .breakpoint-w-699 .event__presenters {
   float: none;
@@ -352,7 +359,7 @@
       padding-right: 0;
       width: 100%;
     }
-    .breakpoint-phone .event__presenters-group:not(:last-child) {
+/*    .breakpoint-phone .event__presenters-group:not(:last-child) {
       padding-bottom: 40px;
     }
     .breakpoint-phone .event__presenters-group:not(:last-child):after {
@@ -363,7 +370,7 @@
       left: 25%;
       bottom: 35px;
       border-top: 2px #ededed solid;
-    }
+    }*/
 
   .event__presenters:before {
     display: block;
@@ -388,17 +395,9 @@
   padding-bottom: 35px;
 }
   .breakpoint-phone .event-presenter {
-    padding-left: 0;
+    padding-left: 85px;
+    padding-bottom: 20px;
   }
-  .event-presenter:before,
-  .event-presenter:after {
-    content: " ";
-    display: table;
-  }
-  .event-presenter:after {
-    clear: both;
-  }
-
   .event-presenter__image {
     position: absolute;
     left: 0;
@@ -407,15 +406,11 @@
     width: 100px;
   }
   .breakpoint-phone .event-presenter__image {
-    display: block;
-    position: static;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    height: 120px;
-    width: 120px;
+    width: 60px;
+    height: 60px;
   }
-    .event-presenter__image img {
+    .event-presenter__image img,
+    .event-presenter__image-blank {
       border-radius: 50%;
       display: block;
       transform: scale3d(1, 1, 1);
@@ -424,12 +419,20 @@
       width: 100%;
   }
     a.event-presenter__image:hover img,
-    a.event-presenter__image:focus img {
+    a.event-presenter__image:focus img,
+    a.event-presenter__image:hover .event-presenter__image-blank,
+    a.event-presenter__image:focus .event-presenter__image-blank {
       transform: scale3d(1.1, 1.1, 1);
     }
     .event-presenter__image-inner {
       height: 100%;
       width: 100%;
+    }
+    .event-presenter__image-blank {
+      background-color: #dedede;
+      width: 100%;
+      height: 0;
+      padding-top: 100%; /* Make the placeholder image scale */
     }
 
   .event-presenter__title {
@@ -450,26 +453,6 @@
   .breakpoint-tablet .event-presenter__intro {
     font-size: 18px;
     font-size: 1.8rem;
-  }
-  .breakpoint-phone .event-presenter__intro {
-    margin-bottom: 40px;
-  }
-  .breakpoint-phone .event-presenter__intro:after {
-    border-bottom: 2px #ededed solid;
-    content: "";
-    width: 50%;
-    position: absolute;
-    bottom: 35px;
-    left: 25%;
-  }
-  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro {
-    margin-bottom: 0;
-  }
-  .breakpoint-phone .event-presenter--horizontal:last-child .event-presenter__intro:after {
-    display: none;
-  }
-  .event-presenter__intro p:last-child {
-    margin-bottom: 0;
   }
 
 /* Ticketing */
@@ -535,22 +518,19 @@
     font-family: var(--font-sans);
     font-weight: bold;
     padding: 8px 12px;
-    /*margin-top: -12px;*/
+    margin-top: 8px;
     margin-bottom: 25px;
     text-decoration: none;
     transform: scale(1,1);
     transition-property: transform, background-color, color;
     transition-duration: 250ms;
   }
-
   .breakpoint-tablet-wide .event__tickets-booking,
   .breakpoint-tablet .event__tickets-booking,
   .breakpoint-phone .event__tickets-booking {
     clear: left;
     float: none;
-    margin-top: 0;
   }
-
     .event__tickets-booking:hover,
     .event__tickets-booking:focus,
     .copy .event__tickets-booking:hover,
@@ -865,6 +845,7 @@
 .breakpoint-phone .event-calendar-event {
   float: none;
   margin-right: 0;
+  margin-bottom: 0;
   width: 100%;
 }
 .event-calendar-event:before {
@@ -942,6 +923,9 @@
     }
     .breakpoint-w-999 .event-calendar-event__details {
       padding-right: 0;
+    }
+    .breakpoint-phone .event-calendar-event__details {
+      padding-bottom: 20px;
     }
 
       .event-calendar-event__date,
@@ -1064,6 +1048,9 @@
   top: 50%;
   margin-top: -35px;
   z-index: 3;
+}
+.breakpoint-phone .event-calendar-event__flag-text {
+  padding: 10px 20px;
 }
 
   .breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__flag {

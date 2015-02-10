@@ -101,3 +101,17 @@
   .pagination-context em {
     font-style: italic;
   }
+
+.breakpoint-phone-wide .pagination .page,
+.breakpoint-phone .pagination .page,
+.breakpoint-phone-wide .pagination .first,
+.breakpoint-phone .pagination .first,
+.breakpoint-phone-wide .pagination .last,
+.breakpoint-phone .pagination .last {
+  display: none;
+}
+.breakpoint-phone-wide .pagination,
+.breakpoint-phone .pagination {
+  overflow: hidden;
+  zoom: 1;
+}

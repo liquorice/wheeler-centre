@@ -42,13 +42,13 @@
                 = render "partials/event_snap_block", post: event, show_type: true
 
     / Past events and other media types
-    - if past_events.results.total_pages > 0 || blog_posts.any?
+    - if past_events.results.total_pages > 0 || blog_posts.present?
       .person__related
         .column-wrapper
           .column-wide.clearfix
-            - if blog_posts.any? || past_events.results.total_pages > 0
+            - if blog_posts.present? || past_events.results.total_pages > 0
               / Blog posts
-              - if blog_posts.any?
+              - if blog_posts.present?
                 .person__related-column.person__related-column--first
                   .person__blog-posts
                     h2.person__related-header Writings
@@ -74,9 +74,9 @@
                               h3.person__related-title = event.title
                             time.person__related-date = l event.fields[:start_date].value, format: :medium_date
     / Recordings
-    - if recordings.any?
+    - if recordings.present?
       .person__recordings
-        .column-wrapper class=("gradient-top-down" if blog_posts.any? || past_events.results.total_pages > 0)
+        .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.results.total_pages > 0)
           .section-header
             h2 Recordings
           .column-full

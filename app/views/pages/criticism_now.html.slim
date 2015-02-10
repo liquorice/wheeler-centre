@@ -13,7 +13,7 @@
     .page__body.page__body--content-page.copy
       = render_content page.fields["body"]
     .events
-      - if page.events.any?
+      - if page.events.present?
         - page.events.each do |event|
           p
             a href=event.absolute_url = event.title
