@@ -17,6 +17,11 @@ class CacheBusterController < ActionController::Metal
     # It checks in the Redis DB to see when the page was last accessed
     hit = CacheBuster.find_or_create_by path: uri_path
 
+    # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
+    if hit.updated_at.nil? || hit.updated_at <= Time.now - 5.minutes
+      CacheBusterJob.enqueue hit.id
+    end
+
     render text: "console.debug('Reactive Cache Buster updated at: #{hit.updated_at}')"
   end
 
