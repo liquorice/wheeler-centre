@@ -1,8 +1,11 @@
 WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
   r301 '/videos', '/broadcasts'
+  r301 %r{/videos/video(.*)}, '/broadcasts$1'
   r301 '/dailies', '/notes'
   r301 '/search/tag_cloud', '/topics'
   r301 '/events/presenters', '/people'
+  r301 %r{/events/presenter(.*)}, '/people$1'
+  r301 %r{/events/event(.*)}, '/events$1'
   r301 '/about-us/people', '/people'
   r301 '/about-us/people/staff', '/people'
   r301 '/about-us/people/board', '/people'
