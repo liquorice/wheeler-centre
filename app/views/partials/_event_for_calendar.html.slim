@@ -1,5 +1,5 @@
 - if event.fields[:thumbnail_image].data_present?
-  - image = post.fields[:thumbnail_image].asset
+  - image = event.fields[:thumbnail_image].asset
 - elsif event.promo_image
   - image = event.promo_image
 - selected_primary_topics = select_primary_topics_for_page(event)
