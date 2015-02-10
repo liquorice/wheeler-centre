@@ -299,6 +299,10 @@
   margin-left: -20px; /* Offset the internal padding for each author */
   margin-right: -20px;
 }
+.breakpoint-phone .blog-index__guest-authors-inner {
+  margin-left: 0;
+  margin-right: 0;
+}
 
 .guest-author {
   padding-bottom: 45px;
@@ -393,7 +397,6 @@
 .blog-snap-quarters {
   float: left;
 }
-
 .breakpoint-w-799 .blog-snap-halves,
 .breakpoint-w-799 .blog-snap-quarters {
   float: none;
@@ -403,7 +406,6 @@
 .blog-snap-quarters--2 {
   width: 50%;
 }
-
 .breakpoint-w-799 .blog-snap-halves--1,
 .breakpoint-w-799 .blog-snap-quarters--2 {
   width: 100%;
@@ -413,6 +415,10 @@
 .blog-snap--quarter {
   margin-right: 35px;
   float: left;
+}
+.breakpoint-phone .blog-snap--half,
+.breakpoint-phone .blog-snap--quarter {
+  margin-right: 0;
 }
 
 .blog-snap-halves--2 .blog-snap,
@@ -436,7 +442,6 @@
 .breakpoint-phone .blog-snap-quarters--3 .blog-snap,
 .breakpoint-phone .blog-snap-quarters--4 .blog-snap {
   width: 100%;
-  width: calc(100% - 35px);
 }
 
 .blog-index__topic {
