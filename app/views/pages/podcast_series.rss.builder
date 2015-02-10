@@ -8,6 +8,11 @@ end
 
 type = (params[:type] == "video") ? "video" : "audio"
 episodes = page.episodes(type: type, per_page: 1000).results
+series_image_url = if page.fields[:itunes_image].data_present?
+  version = :original
+  version = :itunes_url if page.fields[:itunes_image].asset.versions.include?(:itunes_url)
+  page.fields[:itunes_image].asset.send(:"#{version}_url")
+end
 
 xml.instruct! :xml, :version => "1.0"
 xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc" => "http://purl.org/dc/elements/1.1/", "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd", "xmlns:media" => "http://www.rssboard.org/media-rss", "xmlns:wfw" => "http://wellformedweb.org/CommentAPI/", :version => "2.0" do
@@ -30,15 +35,15 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
       xml.itunes :email, "webmaster@wheelercentre.com"
     end
     xml.itunes :category, text: "Technology"
-    xml.itunes :image, href: page.fields[:itunes_image].asset.itunes_url if page.fields[:itunes_image].data_present?
+    xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
         # Let the series explicit value override episode one
         explicit = episode.fields[:explicit].value || page.fields[:explicit].value
-        image = if page.fields[:itunes_image].data_present?
-          episode.fields[:itunes_image].asset.itunes_url
-        elsif page.fields[:itunes_image].data_present?
-          page.fields[:itunes_image].asset.itunes_url
+        episode_image_url = if episode.fields[:itunes_image].data_present?
+          version = :original
+          version = :itunes_url if episode.fields[:itunes_image].asset.versions.include?(:itunes_url)
+          episode.fields[:itunes_image].asset.send(:"#{version}_url")
         end
         xml.item do
           xml.title episode.title
@@ -56,7 +61,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
           xml.itunes :author, "The Wheeler Centre"
           xml.itunes :summary, episode.fields[:itunes_summary].value
           xml.itunes :explicit, human_boolean(explicit)
-          xml.itunes :image, href: image if image
+          xml.itunes :image, href: episode_image_url if episode_image_url.present?
           if type == "video"
             xml.itunes :duration, duration_to_hms(episode.video_result["meta"]["duration"].presence || 0)
             xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
