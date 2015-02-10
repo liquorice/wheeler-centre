@@ -1,66 +1,70 @@
+- selected_primary_topics = select_primary_topics_for_page(page)
+
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Writings
+  ' Writings
 
 = area :masthead_contextual_navigation do
   ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/writings"
-          ' Latest writing
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Browse topics
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Guest authors
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="/writings"
+        ' Latest writing
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="#"
+        ' Browse topics
+    li.masthead-contextual__navigation-item
+      a.masthead-contextual__navigation-anchor href="#"
+        ' Guest authors
 
 = area :main do
   .blog-post.clearfix
-    .blog-post__header.column-wrapper
-      .column-wide
-        p.blog-post__byline
-          - selected_primary_topics = select_primary_topics_for_page(page)
-          - if page.fields[:authors].data_present?
-            - if page.guest_post?
-              ' Guest post by
-            - else
-              ' By
-            = page.fields[:authors].pages.map(&:title).to_sentence
-            span.blog-post__byline-separator ·
-          - if selected_primary_topics.present?
-            ' In
-            - selected_primary_topics.each_with_index do |topic, index|
-              a href=topic.absolute_url = topic.title
-              - if index < selected_primary_topics.length - 1
-                ',
-            span.blog-post__byline-separator ·
-          time
-            = l page.created_at, format: :day_dmy_with_full_words
-        h1.blog-post__title == widont_format markdown_line page.title
-    - if page.fields[:intro].data_present?
-      .blog-post__intro.column-wrapper.copy
-        = render_content_in_sections page.fields[:intro]
-    .blog-post__body.column-wrapper.copy
-      = render_content_in_sections page.fields[:body]
-    - if page.fields[:meta].data_present?
-      .blog-post__meta.column-wrapper
-        .blog-post__meta-inner.column-mid.copy
-          = render_content page.fields[:meta]
-    - if page.fields[:topics].data_present?
-      .blog-post__tags.column-wrapper
-        .column-mid
-          h2.blog-post__tag-header Topics
-          ul.blog-post__tags-list
-            - page.fields[:topics].pages.sort_by(&:title).each do |topic|
-              li
+    - cache ["blog-header-1", page, page.fields[:authors].pages, selected_primary_topics]
+      .blog-post__header.column-wrapper
+        .column-wide
+          p.blog-post__byline
+            - if page.fields[:authors].data_present?
+              - if page.guest_post?
+                ' Guest post by
+              - else
+                ' By
+              = page.fields[:authors].pages.map(&:title).to_sentence
+              span.blog-post__byline-separator ·
+            - if selected_primary_topics.present?
+              ' In
+              - selected_primary_topics.each_with_index do |topic, index|
                 a href=topic.absolute_url = topic.title
-    / Show related events
-    - cache ["blog-related-1", page, page.related_posts] do
-      - if page.related_posts.present?
-        .blog-post__related.column-wrapper.gradient-top-down
-          .section-header
-            h2 Related posts
-          .column-full
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
-              - page.related_posts.each do |post|
-                = render "partials/blog_snap_block", post: post, show_type: true
+                - if index < selected_primary_topics.length - 1
+                  ',
+              span.blog-post__byline-separator ·
+            time
+              = l page.created_at, format: :day_dmy_with_full_words
+          h1.blog-post__title == widont_format markdown_line page.title
+      - if page.fields[:intro].data_present?
+        .blog-post__intro.column-wrapper.copy
+          = render_content_in_sections page.fields[:intro]
+      .blog-post__body.column-wrapper.copy
+        = render_content_in_sections page.fields[:body]
+      - if page.fields[:meta].data_present?
+        .blog-post__meta.column-wrapper
+          .blog-post__meta-inner.column-mid.copy
+            = render_content page.fields[:meta]
+
+    / Topics
+    - cache ["blog-topics-1", page, page.fields[:topics].pages] do
+      - if page.fields[:topics].data_present?
+        .blog-post__tags.column-wrapper
+          .column-mid
+            h2.blog-post__tag-header Topics
+            ul.blog-post__tags-list
+              - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                li
+                  a href=topic.absolute_url = topic.title
+  / Show related events
+  - cache ["blog-related-1", page, page.related_posts] do
+    - if page.related_posts.present?
+      .blog-post__related.column-wrapper.gradient-top-down
+        .section-header
+          h2 Related posts
+        .column-full
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+            - page.related_posts.each do |post|
+              = render "partials/blog_snap_block", post: post, show_type: true
