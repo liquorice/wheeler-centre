@@ -1,0 +1,17 @@
+= area :masthead_title do
+  ' Broadcasts
+
+= area :masthead_contextual_navigation do
+  - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .podcasts
+    .column-wrapper
+      .column-narrow.copy
+        - if page.series.present?
+          ul
+            - page.series.each do |series|
+              li
+                a href=series.absolute_url
+                  = series.title

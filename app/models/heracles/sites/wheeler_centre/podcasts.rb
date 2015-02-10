@@ -14,7 +14,7 @@ module Heracles
         ### Accessors
 
         def series
-          children.of_type(:podcast_series)
+          children.of_type(:podcast_series).visible.published.in_order
         end
 
       end

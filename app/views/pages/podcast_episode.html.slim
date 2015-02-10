@@ -1,0 +1,19 @@
+= area :masthead_title do
+  ' Broadcasts
+
+= area :masthead_contextual_navigation do
+  - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .podcast-episode
+    .column-wrapper
+      .column-narrow.copy
+        h1= page.title
+        = render_content_in_sections page.fields[:description]
+
+        .podcast-episode__series
+          p
+            ' Part of:
+            = page.series.title
+
