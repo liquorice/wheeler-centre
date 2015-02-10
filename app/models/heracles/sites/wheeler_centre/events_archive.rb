@@ -7,6 +7,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :nav_title, type: :text},
               {name: :intro, type: :content},
               {name: :body, type: :content},
             ]
