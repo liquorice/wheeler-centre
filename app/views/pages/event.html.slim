@@ -165,7 +165,7 @@
               - if page.fields[:sponsors_intro].data_present?
                 = render_content page.fields[:sponsors_intro]
               - else
-                p Made possible with the support of:
+                p Presented in partnership with
             .event__supporters-list data-view-grouper={elementsSelector: ".event__supporters-item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 3, phone: 2 }}.to_json
               - page.fields[:sponsors].pages.each do |sponsor|
                 - if sponsor.fields[:url].data_present?
