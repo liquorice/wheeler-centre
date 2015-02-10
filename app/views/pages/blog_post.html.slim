@@ -1,19 +1,11 @@
 - selected_primary_topics = select_primary_topics_for_page(page)
 
 = area :masthead_title do
-  ' Writings
+  = blog_page.title
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="/writings"
-        ' Latest writing
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="#"
-        ' Browse topics
-    li.masthead-contextual__navigation-item
-      a.masthead-contextual__navigation-anchor href="#"
-        ' Guest authors
+  - pages = [blog_page] + blog_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .blog-post.clearfix

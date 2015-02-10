@@ -136,6 +136,32 @@ module ApplicationHelper
   end
 
   ### --------------------------------------------------------------------------
+  ### Blog
+  ### --------------------------------------------------------------------------
+
+  def blog_page
+    site.pages.find_by_url("writings")
+  end
+
+  ### --------------------------------------------------------------------------
+  ### Broadcasts
+  ### --------------------------------------------------------------------------
+
+  def broadcasts_page
+    site.pages.find_by_url("broadcasts")
+  end
+
+  def main_podcast
+    site.pages.find_by_url("broadcasts/podcasts/the-wheeler-centre")
+  end
+
+  def rss_url_for_podcast(series, options={})
+    return unless series.page_type == "podcast_series"
+    options.reverse_merge!(type: "audio")
+    "#{series.absolute_url}.rss?type=#{options[:type]}"
+  end
+
+  ### --------------------------------------------------------------------------
   ### Events
   ### --------------------------------------------------------------------------
 

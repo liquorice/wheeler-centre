@@ -2,20 +2,11 @@
 - guest_authors = page.guest_authors.results
 
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Writings
+  = blog_page.title
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="/writings"
-          ' Latest writing
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Browse topics
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Guest writers
+  - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .blog-index
