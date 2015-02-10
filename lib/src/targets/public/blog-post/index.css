@@ -419,6 +419,7 @@
   clear: both;
   overflow: hidden;
   padding-top: 35px;
+  margin-bottom: 35px;
 }
 
 .blog-index__guest-authors-inner {
