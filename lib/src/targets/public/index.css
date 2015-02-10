@@ -39,6 +39,16 @@ html {
   font-size: 62.5%;
 }
 
+.breakpoint-tablet,
+.breakpoint-tablet-wide {
+  font-size: 55%;
+}
+/* This is weirdly larger because we do some other overrides */
+.breakpoint-phone-wide,
+.breakpoint-phone {
+  font-size: 60%;
+}
+
 body {
   background-color: #fff;
   color: var(--text-color);
@@ -246,6 +256,7 @@ body {
 @import "./event-series";
 @import "./venues-index";
 @import "./venue";
+@import "./recording";
 @import "./recording-snap-block";
 @import "./topic";
 @import "./people";

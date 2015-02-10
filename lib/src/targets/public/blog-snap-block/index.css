@@ -119,7 +119,19 @@
 
 .snap-block__summary {
   position: relative;
+  overflow: hidden;
+  max-height: 300px;
 }
+
+  .breakpoint-tablet-wide .grouper--3 .snap-block__summary,
+  .breakpoint-tablet .grouper--2 .snap-block__summary {
+    max-height: 150px;
+  }
+  .breakpoint-phone-wide .grouper--2 .snap-block__summary,
+  .breakpoint-phone .grouper--2 .snap-block__summary {
+    max-height: 150px;
+  }
+
   /* Create a 1:0.8 box*/
   .snap-block__summary--no-image .snap-block__summary:before {
     display: block;

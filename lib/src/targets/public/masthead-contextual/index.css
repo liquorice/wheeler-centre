@@ -270,8 +270,6 @@
         color: #fff;
         font-family: var(--font-serif);
         font-weight: bold;
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
       }
 
       .breakpoint-w-599 .upcoming-events__item-title {

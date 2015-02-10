@@ -37,6 +37,9 @@
   float: left;
   width: 50%;
 }
+  .home__highlights .snap-wrapper {
+    margin-right: 0;
+  }
   .home__highlights--full {
     float: none;
     width: 100%;
