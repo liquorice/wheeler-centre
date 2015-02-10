@@ -77,13 +77,34 @@ module Heracles
           end
         end
 
+        def series
+          series = []
+          events.each {|event| series = series + event.fields[:series].pages }
+          series
+        end
+
+        def related_recordings(options={})
+          options[:per_page] = 6 || options[:per_page]
+          recordings = search_recordings_by_presenters({per_page: options[:per_page]}).results
+          # Try and find recordings based on topics
+          if recordings.length < options[:per_page]
+            additional_total = options[:per_page] - recordings.length
+            additional = search_recordings_by_topic({per_page: additional_total})
+            recordings = recordings + additional.results
+          end
+        end
+
         searchable do
+          string :id do |page|
+            page.id
+          end
+
           string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
+            topics_with_ancestors.map(&:id)
           end
 
           string :topic_titles, multiple: true do
-            fields[:topics].pages.map(&:title)
+            topics_with_ancestors.map(&:title)
           end
 
           string :tag_list, multiple: true do
@@ -121,7 +142,41 @@ module Heracles
           time :recording_date_time do
             fields[:recording_date].value
           end
+        end
 
+        private
+
+        def search_recordings_by_presenters(options={})
+          Sunspot.search(Recording) do
+            without :id, id
+            with :site_id, site.id
+            with :person_ids, fields[:people].pages.map(&:id)
+            with :published, true
+
+            order_by :recording_date_time, :desc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
+        end
+
+        def search_recordings_by_topic(options={})
+          Sunspot.search(Recording) do
+            without :id, id
+            with :site_id, site.id
+            with :topic_ids, fields[:topics].pages.map(&:id)
+            with :published, true
+
+            order_by :recording_date_time, :desc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
+        end
+
+        # Topics with their ancestors parents for search purposes
+        def topics_with_ancestors
+          topics = []
+          fields[:topics].pages.each do |topic|
+            topics = topics + topic.with_ancestors
+          end
+          topics
         end
       end
     end

@@ -5,7 +5,9 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :intro, label: "Introduction", type: :content}
+              {name: :intro, label: "Introduction", type: :content},
+              {name: :middle, type: :content, hint: "Sits between 'Latest' and 'Guest posts'"},
+              {name: :end, type: :content, hint: "Sits after 'Guest posts'"},
             ]
           }
         end

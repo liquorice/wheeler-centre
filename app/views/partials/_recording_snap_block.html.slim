@@ -6,7 +6,7 @@
   - image = post.fields[:hero_image].asset
 - selected_primary_topics = select_primary_topics_for_page(post)
 
-- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, selected_primary_topics] do
+- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, selected_primary_topics, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
       time.recording-snap__date

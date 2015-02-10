@@ -1,0 +1,45 @@
+= area :masthead_title do
+  ' Broadcasts
+
+= area :masthead_contextual_navigation do
+  - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+
+  .podcasts-index
+    .podcasts-index__top
+      .podcasts-index__header
+        h1.podcasts-index__title == widont_format markdown_line page.title
+      .podcast-index__intro.page__intro.intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
+
+    - if page.series.present?
+      - featured_series = page.series.select { |series| series.fields[:featured].value }.each do |series|
+      - if featured_series.present?
+        / Featured podcasts
+        .podcasts-index__highlights.clearfix
+          - featured_series.each do |series|
+            .podcasts-highlight__block
+              h1 = series.title
+      - other_series = page.series.reject { |series| series.fields[:featured].value }.each do |series|
+      - if other_series.present?
+        / All other podcasts
+        .podcasts-index__other.clearfix
+          .section-header
+            h2 Other podcasts
+          .column-wrapper
+            .column-mid
+              .podcasts-list
+                - other_series.each do |series|
+                  .podcasts-list__block
+                    a.podcasts-list__anchor href=series.absolute_url
+                      .podcasts-list__text.clearfix
+                        h3.podcasts-list__title = markdown_line series.title
+                        span.podcasts-list__action
+                          - if series.episodes.total == 1
+                            ' #{series.episodes.total} episode
+                          - else
+                            ' #{series.episodes.total} episodes
+                          i.fa.fa-angle-right

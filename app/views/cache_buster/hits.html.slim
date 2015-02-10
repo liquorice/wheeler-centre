@@ -1,0 +1,14 @@
+h1 Hits (#{@hits.size})
+
+- if @hits.size > 0
+  form action='/buster/hits' method='post'
+    input type='submit' value='Delete all hits'
+
+  table width='100%'
+    - for hit in @hits
+      tr
+        td= hit.updated_at
+        td= hit.path
+        td= hit.checksum
+- else
+  p Hits list is empty

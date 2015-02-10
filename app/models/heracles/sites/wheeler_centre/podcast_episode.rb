@@ -46,6 +46,10 @@ module Heracles
 
         ### Accessors
 
+        def series
+          parent
+        end
+
         def events
           if fields[:events].data_present?
             fields[:events].pages
@@ -96,11 +100,11 @@ module Heracles
 
         searchable do
           string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
+            topics_with_ancestors.map(&:id)
           end
 
           string :topic_titles, multiple: true do
-            fields[:topics].pages.map(&:title)
+            topics_with_ancestors.map(&:title)
           end
 
           string :tag_list, multiple: true do
@@ -138,6 +142,17 @@ module Heracles
               fields[:video].asset.id
             end
           end
+        end
+
+        private
+
+        # Topics with their ancestors parents for search purposes
+        def topics_with_ancestors
+          topics = []
+          fields[:topics].pages.each do |topic|
+            topics = topics + topic.with_ancestors
+          end
+          topics
         end
       end
     end

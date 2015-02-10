@@ -209,7 +209,7 @@
   }
   .event__tags-list li:after {
     content: ", ";
-    margin-left: -0.2em;
+    margin-left: -0.15em;
   }
     .event__tags-list li:last-child:after {
       content: "";
@@ -381,6 +381,11 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
+
+  .event__presenters.event__presenters--long:before {
+    width: 25%;
+  }
+
   .breakpoint-w-699 .event__presenters:before {
     width: 100%;
   }
@@ -489,7 +494,7 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
-  .event__presenters--long + .event__tickets:before,
+  /*.event__presenters--long + .event__tickets:before,*/
   .breakpoint-w-699 .event__tickets:before {
     width: 100%;
   }
@@ -576,7 +581,7 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
-  .event__presenters--long + .event__tickets + .event__series-summary:before,
+  /*.event__presenters--long + .event__tickets + .event__series-summary:before,*/
   .breakpoint-w-699 .event__series-summary:before {
     width: 100%;
   }
@@ -1018,8 +1023,8 @@
   transition-duration: 200ms;
   opacity: 1;
 }
-  .event-calendar-event__anchor:hover .event-calendar-event__flag,
-  .event-calendar-event__anchor:focus .event-calendar-event__flag {
+  a:hover .event-calendar-event__flag,
+  a:focus .event-calendar-event__flag {
     transform: scale3d(1.75,1.75,1);
     opacity: 0;
   }

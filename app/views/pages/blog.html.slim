@@ -2,26 +2,18 @@
 - guest_authors = page.guest_authors.results
 
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Writings
+  = blog_page.title
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor.masthead-contextual__navigation-anchor--active href="/writings"
-          ' Latest writing
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Browse topics
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Guest writers
+  - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .blog-index
-    .page__intro.intro.blog-index__intro.column-wrapper
-      .column-narrow.copy
-        = render_content page.fields[:intro]
+    - if page.fields[:intro].data_present?
+      .intro.blog-index__intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
     .blog-index__latest.column-wrapper
       h2.blog-index__latest-header Latest writing
       - if posts.present?
@@ -29,22 +21,12 @@
           .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
             - posts.first(6).each do |post|
               = render "partials/blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
-        / .column-full
-        /   .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 6, phone: 2 }}.to_json
-        /     - posts[6..posts.length-1].each do |post|
-        /       = render "partials/blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
-          a.block-link.blog-index__latest-more href="#" There’s more recent writings over here on page two &#8230; &rsaquo;
+          a.block-link.blog-index__latest-more href="#" There are more notes over here on page two &#8230; &rsaquo;
 
-    - if posts[6..11]
-      .blog-index__topic.column-wrapper.gradient-top-down
-        .section-header
-          h2 #discuss
-          .intro.intro--small.column-narrow.copy
-            p At the Wheeler Centre, we’re all about public conversations. This week, we’ll be bringing our city’s digital discussions to life. Join us. #discuss.
-        .column-full
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-            - posts.first(6).each do |post|
-              = render "partials/blog_snap_block", post: post, hide_summary: true
+    / Content area
+    - if page.fields[:middle].data_present?
+      .content-block
+        = render_content_in_sections page.fields[:middle]
 
     .blog-index__guest-authors.column-wrapper
       .section-header
@@ -77,15 +59,9 @@
                           span.title-tags
                             '  &nbsp;/&nbsp;
                             = selected_primary_topics.first.title
-    - if posts[12..15]
-      .blog-index__topic.column-wrapper
-        .column-mid.clearfix
-          .section-header
-            h2 Victorian Premier’s Literary Awards
-            .intro.intro--small.column-narrow.copy
-              p A ready-made summer reading list of the best of the best in Australian writing now.
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, phoneWide: 3, phone: 2 }}.to_json
-            - posts[12..15].each do |post|
-              = render "partials/blog_snap_block", post: post, hide_summary: true
+    / Content area
+    - if page.fields[:end].data_present?
+      .content-block
+        = render_content_in_sections page.fields[:end]
 
     = render "partials/topics_section"

@@ -186,7 +186,6 @@
     font-weight: bold;
     font-size: 15px;
     font-size: 1.5rem;
-    word-break: break-all;
   }
   .breakpoint-phone .upcoming-people__title,
   .breakpoint-phone .recent-people__title,

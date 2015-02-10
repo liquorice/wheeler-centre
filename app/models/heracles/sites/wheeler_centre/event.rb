@@ -29,7 +29,7 @@ module Heracles
               {name: :life_stage, type: :text, label: "Life stage"},
               {name: :ticketing_stage, type: :text, editor_type: 'select', option_values: [ "Booking fast", "Booked out" ] },
               {name: :promo_text, type: :text, label: "Promo text", hint: "2-3 words to highlight event in listings"},
-              {name: :sponsors_intro, type: :content, hint: "Override the 'Made possible with the support of' text"},
+              {name: :sponsors_intro, type: :content, hint: "Override the 'Presented in partnership with' text"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
@@ -139,11 +139,11 @@ module Heracles
           end
 
           string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
+            topics_with_ancestors.map(&:id)
           end
 
           string :topic_titles, multiple: true do
-            fields[:topics].pages.map(&:title)
+            topics_with_ancestors.map(&:title)
           end
 
           string :tag_list, multiple: true do
@@ -212,6 +212,15 @@ module Heracles
             order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
+        end
+
+        # Topics with their ancestors parents for search purposes
+        def topics_with_ancestors
+          topics = []
+          fields[:topics].pages.each do |topic|
+            topics = topics + topic.with_ancestors
+          end
+          topics
         end
       end
     end

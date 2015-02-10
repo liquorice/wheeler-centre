@@ -22,7 +22,7 @@
   .home
     - if page.fields[:intro].data_present?
       .home__intro.intro.column-wrapper
-        .column-mid.copy
+        .column-mid
           = render_content_in_sections page.fields[:intro]
     - if page.sorted_banners.present?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
@@ -48,9 +48,9 @@
         - if highlights.total > 0
           - no_user_highlights = (user_highlights.total == 0)
           - if no_user_highlights
-            - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 3, "phone-wide" => 2, phone: 2 }
+            - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
           - else
-            - per_group = { default: 3, "tablet-wide" => 3, tablet: 3, "phone-wide" => 2, phone: 2 }
+            - per_group = { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
           .home__highlights class=("home__highlights--full" if no_user_highlights)
             .section-header
               h2
@@ -86,7 +86,7 @@
               - if page.fields[:highlights_secondary_content].data_present?
                 .intro.copy
                   = render_content page.fields[:highlights_secondary_content]
-            .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
+            .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }}.to_json
               - user_highlights.results.each do |post|
                 - if post.page_type == "blog_post"
                   = render "partials/blog_snap_block", post: post, show_type: true
@@ -143,7 +143,7 @@
     / General content area
     - if page.fields[:body].data_present?
       .column-wrapper
-        .home__body.copy
+        .home__body
           = render_content_in_sections page.fields["body"]
 
 

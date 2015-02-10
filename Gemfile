@@ -13,8 +13,8 @@ gem "pg"
 # Heracles
 gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
 
-# Reactive Cache Buster
-gem "cache_buster", path: "lib/cache_buster"
+# Cache Buster
+gem 'varnisher'
 
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
@@ -24,7 +24,6 @@ gem "sunspot-queue", github: "timriley/sunspot-queue"
 
 # Background worker
 gem "que"
-gem 'resque', github: 'resque/resque' # Cache Buster dependency, we have to change it to que soon
 
 # Web server
 gem "unicorn"

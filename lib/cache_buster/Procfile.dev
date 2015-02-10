@@ -1,2 +1,0 @@
-web: rackup -p 4567
-worker: bundle exec resque work -q default -r ./lib/cache_buster/hit_job.rb

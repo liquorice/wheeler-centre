@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   end
 
   # Reactive Cache Buster
-  mount CacheBuster::App.new, at: '/buster', as: :buster
+  #mount CacheBuster::App.new, at: '/buster', as: :buster
+  get 'buster', to: CacheBusterController.action(:index), as: :buster
+  get 'buster/hits', to: CacheBusterController.action(:hits)
+  post 'buster/hits', to: CacheBusterController.action(:hits_clean)
 
   # Admin
   resource :admin, only: [:show]

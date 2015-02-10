@@ -176,6 +176,8 @@
   vertical-align: top;
 }
 
+  .breakpoint-tablet-wide .snap-block,
+  .breakpoint-tablet .snap-block,
   .breakpoint-phone-wide .snap-block,
   .breakpoint-phone .snap-block {
     padding-right: 15px;
@@ -213,9 +215,6 @@
   padding-right: 0;
   width: 100%;
 }
-
-
-
 
 .title-tags {
   color: #888;

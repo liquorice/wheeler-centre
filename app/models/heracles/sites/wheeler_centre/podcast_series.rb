@@ -8,6 +8,8 @@ module Heracles
               {name: :hero_image, type: :asset, asset_file_type: :image},
               {name: :description, type: :content},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark series as explicit?"},
+              {name: :featured, type: :boolean, defaults: {value: false}, question_text: "Make featured podcast"},
+              {name: :highlight_colour, type: :text, editor_type: 'code'},
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_image, type: :asset, asset_file_type: :image},
@@ -56,11 +58,11 @@ module Heracles
 
         searchable do
           string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
+            topics_with_ancestors.map(&:id)
           end
 
           string :topic_titles, multiple: true do
-            fields[:topics].pages.map(&:title)
+            topics_with_ancestors.map(&:title)
           end
 
           string :tag_list, multiple: true do
@@ -116,6 +118,15 @@ module Heracles
               children: child_tree
             }
           end
+        end
+
+        # Topics with their ancestors parents for search purposes
+        def topics_with_ancestors
+          topics = []
+          fields[:topics].pages.each do |topic|
+            topics = topics + topic.with_ancestors
+          end
+          topics
         end
       end
     end
