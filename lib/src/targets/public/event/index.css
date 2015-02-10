@@ -1037,6 +1037,9 @@
   margin-top: -35px;
   z-index: 3;
 }
+.breakpoint-phone .event-calendar-event__flag-text {
+  padding: 0 20px;
+}
 
   .breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__flag {
     font-size: 18px;
