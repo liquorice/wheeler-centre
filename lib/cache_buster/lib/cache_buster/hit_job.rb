@@ -1,6 +1,6 @@
 require 'resque'
 require 'ohm'
-require 'fastly'
+require 'varnisher'
 require 'open-uri'
 require 'nokogiri'
 require 'dotenv'
@@ -39,8 +39,8 @@ module HitJob
   end
 
   def self.purge_page
-    client = Fastly::Client.new(api_key: ENV['FASTLY_API_KEY'])
-    client.post("/service/#{ENV['FASTLY_SERVICE_ID']}/purge/#{@hit.page}")
+    client = Varnisher::Purger.new('PURGE', @hit.page, ENV['CDN_HOST'])
+    puts client.send
   end
 
   def self.update_hit

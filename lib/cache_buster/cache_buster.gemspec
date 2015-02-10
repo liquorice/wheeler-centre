@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'redis', '~> 3.2'
   s.add_runtime_dependency 'resque'
   s.add_runtime_dependency 'ohm', '~> 2.1'
-  s.add_runtime_dependency 'fastly', '~> 1.2'
+  s.add_runtime_dependency 'varnisher', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.6'
   s.add_runtime_dependency 'dotenv', '~> 1.0'
 end
