@@ -1,6 +1,5 @@
 - show_summary = show_summary || false
 - show_type = show_type || false
-- hide_summary = hide_summary || false
 - aspect = aspect || :square
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
@@ -8,7 +7,7 @@
   - image = post.promo_image
 - selected_primary_topics = select_primary_topics_for_page(post)
 
-- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, hide_summary, image, post.fields[:presenters].pages, post.recordings, selected_primary_topics, post.series] do
+- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, selected_primary_topics, post.series, aspect] do
   .snap-block
     a.event-snap.event-snap-block href=post.absolute_url
       - if post.fields[:start_date].data_present?
