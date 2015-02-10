@@ -10,7 +10,10 @@
   .podcasts-index
     .podcasts-index__top
       .podcasts-index__header
-        h1.podcasts-index__title Podcasts
+        h1.podcasts-index__title == widont_format markdown_line page.title
+      .podcast-index__intro.page__intro.intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
 
     .podcasts-series-highlights.clearfix
       - if page.series.present?
