@@ -65,6 +65,6 @@
         .section-header
           h2 Related posts
         .column-full
-          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+          .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
             - page.related_posts.each do |post|
               = render "partials/blog_snap_block", post: post, show_type: true

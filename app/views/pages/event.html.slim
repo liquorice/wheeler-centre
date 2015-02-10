@@ -192,7 +192,7 @@
           .section-header
             h2 Related events
           .column-full
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
               - page.related_events.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
             - if page.series
