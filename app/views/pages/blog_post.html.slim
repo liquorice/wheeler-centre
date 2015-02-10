@@ -1,4 +1,4 @@
-- selected_primary_topics = select_primary_topics_for_page(page)
+- primary_topic = select_primary_topics_for_page(page).first
 
 = area :masthead_title do
   = blog_page.title
@@ -9,7 +9,7 @@
 
 = area :main do
   .blog-post.clearfix
-    - cache ["blog-header-1", page, page.fields[:authors].pages, selected_primary_topics]
+    - cache ["blog-header-1", page, page.fields[:authors].pages, primary_topic]
       .blog-post__header.column-wrapper
         .column-wide
           p.blog-post__byline
@@ -20,20 +20,17 @@
                 ' By
               = page.fields[:authors].pages.map(&:title).to_sentence
               span.blog-post__byline-separator ·
-            - if selected_primary_topics.present?
+            - if primary_topic.present?
               ' In
-              - selected_primary_topics.each_with_index do |topic, index|
-                a href=topic.absolute_url = topic.title
-                - if index < selected_primary_topics.length - 1
-                  ',
+              a href=primary_topic.absolute_url = primary_topic.title
               span.blog-post__byline-separator ·
             time
               = l page.created_at, format: :day_dmy_with_full_words
           h1.blog-post__title == widont_format markdown_line page.title
       - if page.fields[:intro].data_present?
-        .blog-post__intro.column-wrapper.copy
+        .blog-post__intro.column-wrapper
           = render_content_in_sections page.fields[:intro]
-      .blog-post__body.column-wrapper.copy
+      .blog-post__body.column-wrapper
         = render_content_in_sections page.fields[:body]
       - if page.fields[:meta].data_present?
         .blog-post__meta.column-wrapper
