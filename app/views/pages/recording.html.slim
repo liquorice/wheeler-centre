@@ -15,8 +15,11 @@
           - if primary_topic.present?
             ' In
             a href=primary_topic.absolute_url = primary_topic.title
+          - if page.fields[:recording_date].data_present? || primary_topic.present?
             span.blog-post__byline-separator ·
+          - if page.fields[:recording_date].data_present?
             time datetime=l(page.fields[:recording_date].value, format: :rfc_3339)
+              ' Recorded on
               = l page.fields[:recording_date].value, format: :day_dmy_with_full_words
         h1.recording__title == widont_format markdown_line page.title
     - if page.fields[:youtube_video].data_present?
@@ -54,7 +57,7 @@
                 - else
                   ' Part of this event
               - page.events.each do |event|
-                = render "partials/event_snap_block", post: event
+                = render "partials/event_snap_block", post: event, show_type: true
           - if page.fields[:audio].data_present? || page.fields[:video].data_present?
             .recording__downloads
               ul
