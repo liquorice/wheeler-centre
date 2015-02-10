@@ -10,91 +10,90 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .page__content
-    .page__body.page__body--events
-      .event-index
-        - cache ["events-intro-1", page] do
-          .page__intro.intro.event-index__intro.column-wrapper
-            .column-narrow.copy
-              = render_content page.fields[:intro]
+  .event-index
+    - cache ["events-intro-1", page] do
+      .page__intro.intro.event-index__intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
 
-          / Output days of the week
-          .event-calendar__legend.clearfix
-            - days_for_week(Date.today.beginning_of_week).each do |day|
-              .event-calendar__legend-day
-                span= l day, format: :day_short_name
+      / Output days of the week
+      .event-calendar__legend.clearfix
+        - days_for_week(Date.today.beginning_of_week).each do |day|
+          .event-calendar__legend-day
+            span= l day, format: :day_short_name
 
-        / Group events by year
-        - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
-          - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
-            .event-calendar__year
-              h2.screenreaders-only
-                ' Upcoming events for
-                = l(year, format: :year)
-              / Group events by month in year
-              - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
-                .event-calendar__month.clearfix
-                  / Superfluous div to add a gradient (can't use a pseudo-element because of the clearfix)
-                  .event-calendar__month-gradient
-                  h3.event-calendar__month-label = l(month, format: :month_name)
-                  / Add an incrementing number to each event so that we can target different groups of events in our stylesheet
-                  - event_index = 0
-                  / Group events by weeks in month
-                  - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
-                    .event-calendar__week
-                      .event-calendar__week-inner.clearfix
-                        / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
-                        / so that we can fill them with stuff
-                        - days_with_gap = 0
-                        / Iterate over every day in the week
-                        - days_for_week(week).each_with_index do |day, index|
-                          - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
-                          - if events_for_day.present?
-                            / We have some events! If there is a preceding gap, output the gap _before_ the event
-                            - if days_with_gap > 0
-                              .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
-                                / Filler content in here
-                              / Reset gap to 0 to keep the iteration going
-                              - days_with_gap = 0
-                            / Output our found event/s
-                            .event-calendar__day
-                              - events_for_day.each do |event|
-                                / Increment the event counter
-                                - event_index += 1
-                                = render "partials/event_for_calendar", event: event, event_index: event_index
-                          - elsif index == 6
-                            / Increment the days_with_gap and, because it's the last item in a week
-                            / output the gap
-                            - days_with_gap += 1
-                            .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
-                              / Filler content in here
-                          - else
-                            / Increment the days_with_gap but output nothing
-                            - days_with_gap += 1
+    / Group events by year
+    - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
+      - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
+        .event-calendar__year
+          h2.screenreaders-only
+            ' Upcoming events for
+            = l(year, format: :year)
+          / Group events by month in year
+          - events_by_year.group_by {|e| e.fields[:start_date].value.beginning_of_month }.each do |month, events_by_month|
+            .event-calendar__month.clearfix
+              / Superfluous div to add a gradient (can't use a pseudo-element because of the clearfix)
+              .event-calendar__month-gradient
+              h3.event-calendar__month-label = l(month, format: :month_name)
+              / Add an incrementing number to each event so that we can target different groups of events in our stylesheet
+              - event_index = 0
+              / Group events by weeks in month
+              - events_by_month.group_by {|e| e.fields[:start_date].value.beginning_of_week }.each do |week, events_by_week|
+                .event-calendar__week
+                  .event-calendar__week-inner.clearfix
+                    / Instead of just iterating over empty days and output a <div> for each empty day, we keep _track_ of the gaps
+                    / so that we can fill them with stuff
+                    - days_with_gap = 0
+                    / Iterate over every day in the week
+                    - days_for_week(week).each_with_index do |day, index|
+                      - events_for_day = events_by_week.select {|event| event.fields[:start_date].value.beginning_of_day == day.beginning_of_day}
+                      - if events_for_day.present?
+                        / We have some events! If there is a preceding gap, output the gap _before_ the event
+                        - if days_with_gap > 0
+                          .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
+                            / Filler content in here
+                          / Reset gap to 0 to keep the iteration going
+                          - days_with_gap = 0
+                        / Output our found event/s
+                        .event-calendar__day
+                          - events_for_day.each do |event|
+                            / Increment the event counter
+                            - event_index += 1
+                            = render "partials/event_for_calendar", event: event, event_index: event_index
+                      - elsif index == 6
+                        / Increment the days_with_gap and, because it's the last item in a week
+                        / output the gap
+                        - days_with_gap += 1
+                        .event-calendar__day-gap class="event-calendar__day-gap--#{days_with_gap}"
+                          / Filler content in here
+                      - else
+                        / Increment the days_with_gap but output nothing
+                        - days_with_gap += 1
 
-        / Event series
-        - cache ["events-active-series-1", page, Time.current.beginning_of_day, active_series] do
-          - if active_series.present?
-            .event-series-summary.clearfix
-              .section-header
-                h2 Current event series
-                - if page.fields[:event_series_intro].data_present?
-                  .intro.intro--small.column-narrow.copy
-                    = render_content page.fields[:event_series_intro]
-              h2.screenreaders-only Current event series
-              - active_series.each do |series|
-                - cache ["event-active-series-1", series, series.fields[:hero_image].asset] do
-                  - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
-                  .event-series-summary__block style=style_for_event_series_block(highlight_color)
-                    a.event-series-summary__anchor href=series.absolute_url
-                      - if series.fields[:hero_image].data_present?
-                        img.event-series-summary__image src=series.fields[:hero_image].asset.content_small_url
-                      .event-series-summary__text
-                        h3.event-series-summary__title = series.title
-                        - if series.fields[:summary].data_present?
-                          .event-series-summary__description.copy
-                            = render_content series.fields[:summary]
-                        - else
-                          .event-series-summary__description.copy
-                            = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
-                        span.event-series-summary__action View this #{series.events.length} event series
+    / Event series
+    - cache ["events-active-series-1", page, Time.current.beginning_of_day, active_series] do
+      - if active_series.present?
+        .event-series-summary.clearfix
+          .section-header
+            h2 Current event series
+            - if page.fields[:event_series_intro].data_present?
+              .intro.intro--small.column-narrow.copy
+                = render_content page.fields[:event_series_intro]
+          h2.screenreaders-only Current event series
+          - active_series.each do |series|
+            - cache ["event-active-series-1", series, series.fields[:hero_image].asset] do
+              - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
+              .event-series-summary__block style=style_for_event_series_block(highlight_color)
+                a.event-series-summary__anchor href=series.absolute_url
+                  - if series.fields[:hero_image].data_present?
+                    img.event-series-summary__image src=series.fields[:hero_image].asset.content_small_url
+                  .event-series-summary__text
+                    h3.event-series-summary__title = series.title
+                    - if series.fields[:summary].data_present?
+                      .event-series-summary__description.copy
+                        = render_content series.fields[:summary]
+                    - else
+                      .event-series-summary__description.copy
+                        = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
+                    span.event-series-summary__action View this #{series.events.length} event series
+    = render "partials/topics_section"
