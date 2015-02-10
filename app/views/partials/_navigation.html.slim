@@ -1,6 +1,6 @@
 nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigation={toggleSelector: ".masthead__mobile-toggle", targetSelector: ".masthead-nav-main", targetActiveClassName: "masthead-nav-main--active"}.to_json
   button.masthead__mobile-toggle
-    i class="fa fa-list"
+    i.fa.fa-angle-down
   ul.masthead-nav-main.clearfix
     li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
       button.masthead-nav-main__anchor
@@ -8,7 +8,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
       .masthead-nav-main__dropdown.clearfix
         - primary_topics.in_groups(2, false).each do |group|
-          - if group.any?
+          - if group.present?
             ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
               - group.each do |topic|
                 li.masthead-nav-main__dropdown-item
@@ -28,7 +28,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
             li.masthead-nav-main__dropdown-item
               a.masthead-nav-main__dropdown-anchor href=child.absolute_url = child.title
         - active_event_series = events_page.active_series.results
-        - if active_event_series.any?
+        - if active_event_series.present?
           ul.masthead-nav-main__dropdown-list
             li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
               span Current event series
@@ -50,7 +50,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
       .masthead-nav-main__dropdown.clearfix
         - projects_for_navigation.in_groups(2, false).each do |group|
-          - if group.any?
+          - if group.present?
             ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
               - group.each do |project|
                 li.masthead-nav-main__dropdown-item

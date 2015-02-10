@@ -13,6 +13,14 @@
 .home__banners {
   margin-bottom: 35px;
 }
+  .home__banners:after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #fff;
+    top: -2px;
+    position: relative;
+  }
 
 .home__highlights,
 .home__user-highlights {
@@ -111,6 +119,14 @@
     top: 20px;
     width: 80px;
   }
+    .breakpoint-phone-wide .home-quote .event-presenter__image,
+    .breakpoint-phone .home-quote .event-presenter__image {
+      position: static;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 15px;
+    }
 
   .home-quote__quote {
     font-size: 20px;
@@ -160,6 +176,10 @@
   padding-left: 35px;
   padding-top: 30px;
 }
+  .breakpoint-phone-wide .home__writings-list,
+  .breakpoint-phone .home__writings-list {
+    padding-left: 0;
+  }
 
 .home__body {
   margin-top: 35px;

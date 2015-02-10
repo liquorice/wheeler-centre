@@ -87,6 +87,18 @@ module Heracles
           fields[:last_name].value.presence || title
         end
 
+        def all_events
+          Heracles::Page.
+            of_type("event").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "presenters",
+              :"insertions.inserted_key" => insertion_key
+            )
+        end
+
         ### Searchable
 
         searchable do

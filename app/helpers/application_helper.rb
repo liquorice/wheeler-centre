@@ -50,10 +50,14 @@ module ApplicationHelper
 
   def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
     truncate_html(
-      Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
-        :elements => Sanitize::Config::RESTRICTED[:elements] + allowed_tags.split(" "),
-      )),
+      strip_html(html, allowed_tags),
     length: length)
+  end
+
+  def strip_html(html, allowed_tags = "p i em strong br")
+    Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
+        :elements => Sanitize::Config::RESTRICTED[:elements] + allowed_tags.split(" "),
+    ))
   end
 
   # Cribbed from Padrino:

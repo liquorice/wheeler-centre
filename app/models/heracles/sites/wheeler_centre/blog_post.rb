@@ -49,6 +49,18 @@ module Heracles
           fields[:guest_post].value
         end
 
+        def related_posts(options={})
+          options[:per_page] = 6 || options[:per_page]
+          posts = search_posts_by_topic({per_page: options[:per_page]}).results
+          # Try and find posts based on topics
+          if posts.length < options[:per_page]
+            additional_total = options[:per_page] - posts.length
+            additional = search_posts_by_author({per_page: additional_total})
+            posts = posts + additional.results
+          end
+          posts
+        end
+
         searchable do
           string :id do |page|
             page.id
@@ -90,6 +102,29 @@ module Heracles
             tags.map(&:name)
           end
 
+        end
+
+        private
+
+        def search_posts_by_author(options={})
+          Sunspot.search(BlogPost) do
+            without :id, id
+            with :site_id, site.id
+            with :presenter_ids, fields[:authors].pages.map(&:id)
+            with :published, true
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
+        end
+
+        def search_posts_by_topic(options={})
+          Sunspot.search(BlogPost) do
+            without :id, id
+            with :site_id, site.id
+            with :topic_ids, fields[:topics].pages.map(&:id)
+            with :published, true
+
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          end
         end
 
       end

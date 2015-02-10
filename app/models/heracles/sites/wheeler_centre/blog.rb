@@ -28,7 +28,7 @@ module Heracles
 
             order_by :created_at, :desc
 
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 20
+            paginate page: options[:page] || 1, per_page: options[:per_page] || 6
           end
         end
 

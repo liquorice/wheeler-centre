@@ -46,6 +46,10 @@ module Heracles
 
         ### Accessors
 
+        def series
+          parent
+        end
+
         def events
           if fields[:events].data_present?
             fields[:events].pages

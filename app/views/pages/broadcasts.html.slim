@@ -1,14 +1,11 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page])
 
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title Broadcasts
+  ' Broadcasts
 
 = area :masthead_contextual_navigation do
-  ul.masthead-contextual__navigation-list
-      li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="/events"
-          ' Latest broadcasts
+  - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
   .page__content

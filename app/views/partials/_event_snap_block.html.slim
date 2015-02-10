@@ -1,5 +1,7 @@
+- show_summary = show_summary || false
 - show_type = show_type || false
 - hide_summary = hide_summary || false
+- aspect = aspect || :square
 - if post.fields[:thumbnail_image].data_present?
   - image = post.fields[:thumbnail_image].asset
 - elsif post.promo_image
@@ -19,11 +21,12 @@
               - if post.upcoming?
                 ' Upcoming event
               - else
-                - if post.recordings && post.recordings.any?
+                - if post.recordings && post.recordings.present?
                   i.fa.fa-play.event-snap__past-event-icon
                 ' Past event
           .event-snap__hero-inner
-            img src=image.content_thumbnail_url
+            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+            img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
           - if image.attribution.present?
             .event-snap__hero-caption.caption
               p = image.attribution
@@ -32,7 +35,7 @@
           = post.series.title
       h3.event-snap__title
         span.title-text == widont_format markdown_line post.title
-        - if selected_primary_topics && selected_primary_topics.any?
+        - if selected_primary_topics && selected_primary_topics.present?
           span.title-tags
             '  &nbsp;/&nbsp;
             = selected_primary_topics.first.title
@@ -45,3 +48,7 @@
             = pluralize(post.fields[:presenters].pages.length-3, "other")
           - else
             = post.fields[:presenters].pages.map(&:title).to_sentence
+      - if show_summary && post.fields[:body].data_present?
+          .event-snap-block__summary.snap-block__summary.copy
+            .event-snap-block__summary-inner.snap-block__summary-inner.copy
+              = force_excerptify_html render_content(post.fields[:body]), 350, "p i em strong br"

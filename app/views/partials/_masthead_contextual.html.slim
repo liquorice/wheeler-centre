@@ -1,5 +1,5 @@
 .masthead-contextual.masthead-contextual--events.clearfix
-  - if upcoming_events_for_navigation.results.any?
+  - if upcoming_events_for_navigation.results.present?
     .upcoming-events data-view-masthead-events={eventSelector: ".upcoming-events__item-title"}.to_json
       .upcoming-events__navigation.clearfix
         h2.upcoming-events__up-next

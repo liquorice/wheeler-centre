@@ -68,6 +68,7 @@ body {
   .breakpoint-phone .column-wrapper {
     padding-left: 15px;
     padding-right: 15px;
+    overflow-x: hidden;
   }
 
 .column-full,
@@ -133,6 +134,11 @@ body {
     padding-top: 15px;
     padding-bottom: 35px;
   }
+    .breakpoint-phone-wide .section-header,
+    .breakpoint-phone .section-header {
+      padding-top: 8px;
+      padding-bottom: 15px;
+    }
   .breakpoint-w-699 .section-header {
     padding-bottom: 20px;
   }
@@ -148,11 +154,22 @@ body {
     text-transform: uppercase;
     padding-bottom: 12px;
   }
+  .breakpoint-phone-wide .section-header h2,
+  .breakpoint-phone .section-header h2 {
+    font-size: 11px;
+    font-size: 1.1rem;
+    padding-bottom: 8px;
+  }
 
   .section-header .intro {
     font-size: 17px;
     font-size: 1.7rem;
   }
+    .breakpoint-phone-wide .intro,
+    .breakpoint-phone .intro {
+      font-size: 14px;
+      font-size: 1.4rem;
+    }
 
 .page__intro {
   padding-bottom: 35px;
@@ -219,6 +236,7 @@ body {
 @import "./social-media";
 @import "./content-page";
 @import "./topics-section";
+@import "./blog-snap-block";
 @import "./blog-post";
 @import "./event";
 @import "./event-snap-block";

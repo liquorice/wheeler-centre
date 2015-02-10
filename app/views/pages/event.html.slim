@@ -22,7 +22,7 @@
                   | this recording of the event
                 ' .
               / Concat a list of recordings
-              - elsif page.recordings && page.recordings.any?
+              - elsif page.recordings && page.recordings.present?
                 ' If you missed it, you can catch up on these recordings:
                 - page.recordings.each_with_index do |recording, index|
                   - if page.series
@@ -100,7 +100,7 @@
               .event__presenters.event__presenters--long
                 h2.event__presenters-header Who?
                 - page.fields[:presenters].pages.in_groups(2, false).each do |group|
-                  - if group.any?
+                  - if group.present?
                     .event__presenters-group
                       - group.each do |presenter|
                         = render "partials/presenter_horizontal", presenter: presenter
@@ -131,7 +131,8 @@
         - cache ["event-series-summary-1", page, page.series] do
           - if page.series
             .event__series-summary
-              h2.event__series-summary-header= page.series.title
+              h2.event__series-summary-header
+                a href=page.series.absolute_url = page.series.title
               - if page.series.fields[:body].data_present?
                 .event__series-summary-details.copy
                   = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
@@ -164,8 +165,8 @@
               - if page.fields[:sponsors_intro].data_present?
                 = render_content page.fields[:sponsors_intro]
               - else
-                p Made possible with the support of:
-            .event__supporters-list data-view-grouper={elementsSelector: ".event__supporters-item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+                p Presented in partnership with
+            .event__supporters-list data-view-grouper={elementsSelector: ".event__supporters-item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 3, phone: 2 }}.to_json
               - page.fields[:sponsors].pages.each do |sponsor|
                 - if sponsor.fields[:url].data_present?
                   a.event__supporters-item href=sponsor.fields[:url].value
@@ -186,12 +187,12 @@
 
     / Show related events
     - cache ["event-related-1", page, page.related_events, page.fields[:sponsors].pages] do
-      - if page.related_events.any?
+      - if page.related_events.present?
         .event__related.column-wrapper class=("gradient-top-down" if page.fields[:sponsors].data_present?)
           .section-header
             h2 Related events
           .column-full
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 1 }}.to_json
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
               - page.related_events.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
             - if page.series
