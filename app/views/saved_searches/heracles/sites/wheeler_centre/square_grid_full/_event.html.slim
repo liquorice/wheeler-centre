@@ -1,0 +1,40 @@
+- aspect = :square
+- if page.fields[:thumbnail_image].data_present?
+  - image = page.fields[:thumbnail_image].asset
+- elsif page.promo_image
+  - image = page.promo_image
+
+.snap-block
+  a.event-snap.event-snap-block href=page.absolute_url
+    - if page.fields[:start_date].data_present?
+      time.event-snap__date datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+        = l page.fields[:start_date].value, format: :medium_date
+    - if image
+      .event-snap__hero
+        span.event-snap__hero-type
+          - if page.upcoming?
+            ' Upcoming event
+          - else
+            - if page.recordings && page.recordings.present?
+              i.fa.fa-play.event-snap__past-event-icon
+            ' Past event
+        .event-snap__hero-inner
+          - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+          img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{page.title}")
+        - if image.attribution.present?
+          .event-snap__hero-caption.caption
+            p = image.attribution
+    - if page.series
+      p.event-snap__series
+        = page.series.title
+    h3.event-snap__title
+      span.title-text = page.title
+    - if page.fields[:presenters].data_present?
+      p.event-snap__authors
+        ' With
+        - if page.fields[:presenters].pages.length > 3
+          = page.fields[:presenters].pages[0..2].map(&:title).join(", ")
+          '  and
+          = pluralize(page.fields[:presenters].pages.length-3, "other")
+        - else
+          = page.fields[:presenters].pages.map(&:title).to_sentence

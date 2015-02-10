@@ -6,12 +6,37 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .podcasts
-    .column-wrapper
-      .column-narrow.copy
-        - if page.series.present?
-          ul
+
+  .podcasts-index
+    .podcasts-index__top
+      .podcasts-index__header
+        h1.podcasts-index__title == widont_format markdown_line page.title
+      .podcast-index__intro.page__intro.intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
+
+    / Highlight podcasts
+    .podcasts-index__highlights.clearfix
+      .podcasts-highlight__block
+        / Highlight podcast
+      .podcasts-highlight__block
+        / Highlight podcast
+    / Other podcasts
+    - if page.series.present?
+    .podcasts-index__other.clearfix
+      .section-header
+        h2 Other podcasts
+      .column-wrapper
+        .column-mid
+          .podcasts-list
             - page.series.each do |series|
-              li
-                a href=series.absolute_url
-                  = series.title
+              .podcasts-list__block
+                a.podcasts-list__anchor href=series.absolute_url
+                  .podcasts-list__text.clearfix
+                    h3.podcasts-list__title = markdown_line series.title
+                    span.podcasts-list__action
+                      - if series.episodes.total == 1
+                        ' #{series.episodes.total} episode
+                      - else
+                        ' #{series.episodes.total} episodes
+                      i.fa.fa-angle-right

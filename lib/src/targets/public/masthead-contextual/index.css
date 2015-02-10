@@ -90,7 +90,7 @@
 .upcoming-events {
   float: right;
   padding-right: 35px;
-  margin-top: -48px;
+  margin-top: -38px;
 }
 
 .breakpoint-w-599 .upcoming-events {
@@ -107,7 +107,7 @@
   }
 
   .upcoming-events__navigation {
-    height: 30px;
+    height: 20px;
   }
 
   .breakpoint-w-599 .upcoming-events__navigation {
@@ -203,7 +203,7 @@
 
     .upcoming-events__image-container {
       position: absolute;
-      top: -25%;
+      top: -28%;
       opacity: 0;
       overflow: hidden;
       pointer-events: none;
@@ -270,8 +270,6 @@
         color: #fff;
         font-family: var(--font-serif);
         font-weight: bold;
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
       }
 
       .breakpoint-w-599 .upcoming-events__item-title {

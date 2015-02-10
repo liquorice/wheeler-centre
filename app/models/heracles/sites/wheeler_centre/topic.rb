@@ -43,6 +43,11 @@ module Heracles
             page(options[:page_number] || 1).
             per(options[:per_page] || 18)
         end
+
+        # Return a list of this topic and its topic-ancestors
+        def with_ancestors
+          [self] + self.ancestors.of_type("topic").visible.published
+        end
       end
     end
   end

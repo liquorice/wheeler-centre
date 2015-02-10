@@ -83,7 +83,7 @@
     /* Needs to keep above img */
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    z-index: 1;
+    z-index: 3;
     transition-property: transform, background-color, color;
     transition-duration: 250ms, 500ms, 500ms;
   }
@@ -113,6 +113,7 @@
     padding-top: 6px;
   }
   .event-snap__hero-inner {
+    position: relative;
     overflow: hidden;
   }
     .event-snap__hero-shim {

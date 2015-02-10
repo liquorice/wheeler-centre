@@ -91,11 +91,11 @@ module Heracles
           end
 
           string :topic_ids, multiple: true do
-            fields[:topics].pages.map(&:id)
+            topics_with_ancestors.map(&:id)
           end
 
           string :topic_titles, multiple: true do
-            fields[:topics].pages.map(&:title)
+            topics_with_ancestors.map(&:title)
           end
 
           string :tag_list, multiple: true do
@@ -110,7 +110,7 @@ module Heracles
           Sunspot.search(BlogPost) do
             without :id, id
             with :site_id, site.id
-            with :presenter_ids, fields[:authors].pages.map(&:id)
+            with :author_ids, fields[:authors].pages.map(&:id)
             with :published, true
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
@@ -127,6 +127,14 @@ module Heracles
           end
         end
 
+        # Topics with their ancestors parents for search purposes
+        def topics_with_ancestors
+          topics = []
+          fields[:topics].pages.each do |topic|
+            topics = topics + topic.with_ancestors
+          end
+          topics
+        end
       end
     end
   end

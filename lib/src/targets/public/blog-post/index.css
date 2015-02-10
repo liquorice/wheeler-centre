@@ -499,26 +499,6 @@
   font-weight: bold;
 }
 
-.blog-snap__group {
-  border-bottom: 1px solid #dfdfdf;
-  margin-bottom: 35px;
-}
-  .blog-snap__group + .block-link {
-    margin-top: -36px;
-  }
-
-.breakpoint-tablet .blog-snap__group {
-  margin-bottom: 20px;
-}
-.breakpoint-phone-wide .blog-snap__group,
-.breakpoint-phone .blog-snap__group {
-  margin-bottom: 10px;
-}
-
-.breakpoint-w-799 .blog-snap__group--topic-page-latest {
-  margin-right: -35px;
-}
-
 .blog-index__topic {
   padding-top: 35px;
   padding-bottom: 35px;
