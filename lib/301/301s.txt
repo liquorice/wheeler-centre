@@ -1,0 +1,70 @@
+# Redirects
+/videos /broadcasts
+/dailies /writings
+/search/tag_cloud /topics
+/events/presenters /people
+/about-us/people /people
+/about-us/people/staff /people
+/about-us/people/board /people
+/about-us/the-wheeler-centre /about-us/who-we-are
+/about-us/support-us/corporate-partnerships /about-us/support-us/
+/about-us/support-us/corporate-partnerships/the-ministry-of-ideas /about-us/support-us/
+/about-us/support-us/individuals /about-us/support-us/
+/about-us/support-us/corporate-partnerships/sponsorship /about-us/support-us/
+/about-us/support-us /about-us/who-funds-us/support-us
+/about-us/support-us/individuals/conversation-starters /about-us/who-funds-us/support-us
+/about-us/support-us/our-partners /about-us/who-funds-us/sponsors
+/about-us/the-moat /events/venues/the-moat
+/about-us/the-building-176-little-lonsdale-street /events/venues/the-wheeler-centre
+/about-us/faq /about-us/faqs
+/fine-print/privacy-policy /about-us/privacy
+/fine-print/community-guidelines /about-us/community-guidelines
+/projects/deakin-lectures-2010/presenters /projects/deakin-lectures-2010
+/projects/wheeler-centre-hot-desk-fellowships-2014 /projects/projects/wheeler-centre-hot-desk-fellowships-2014
+/projects/wheeler-centre-hot-desk-fellowships-2013 /projects/projects/wheeler-centre-hot-desk-fellowships-2013
+
+# Removed
+
+/about-us/unesco-s-creative-cities-network
+/about-us/melbourne-a-city-of-literature
+/about-us/the-building-176-little-lonsdale-street
+/about-us/media
+/about-us/contact-us
+/about-us/visiting-us
+/about-us/employment
+/members
+/snippet-header
+/snippet-footer
+/fine-print
+/city-of-literature-calendar
+/comments
+/resources
+
+# Need to investigate or will happen in the future?
+/subscribe
+/subscribe/rss-feeds
+/subscribe/confirm
+/residents
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
