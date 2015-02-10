@@ -132,7 +132,12 @@
     content: "";
     padding-top: 80%;
   }
-  .blog-snap-block__summary-inner {
+  .breakpoint-phone .blog-snap-block__summary:before {
+    display: none;
+  }
+  .blog-snap-block__summary-inner,
+  .breakpoint-tablet .blog-snap-block__summary-inner,
+  .breakpoint-phone-wide .blog-snap-block__summary-inner {
     font-size: 16px;
     font-size: 1.6rem;
     position: absolute;
@@ -142,6 +147,9 @@
     bottom: 0;
     /*background: rgba(255,0,0,0.2);*/
     overflow: hidden;
+  }
+  .breakpoint-phone .blog-snap-block__summary-inner {
+    display: none;
   }
     .blog-snap-block__summary-inner:before {
       background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
@@ -157,4 +165,7 @@
       bottom: 0;
       height: 80px;
       z-index: 1;
+    }
+    .breakpoint-phone .blog-snap-block__summary-inner:before {
+      display: none;
     }
