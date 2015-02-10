@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204055853) do
+ActiveRecord::Schema.define(version: 20150210102620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 20150204055853) do
 
   add_index "assets", ["file_types"], name: "index_assets_on_file_types", using: :btree
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
+
+  create_table "cache_busters", force: true do |t|
+    t.string   "path",       null: false
+    t.string   "checksum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cache_busters", ["path"], name: "index_cache_busters_on_path", unique: true, using: :btree
 
   create_table "heracles_site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.uuid     "site_id",    null: false
