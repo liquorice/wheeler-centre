@@ -28,7 +28,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 23b9e7197968ce4af3abe5444ab2dc2828490545
+  revision: 1a32040d9e461c4c34c9252a99a567ae36d3b348
   branch: master
   specs:
     heracles (1.0.0)
@@ -48,6 +48,7 @@ GIT
       interactor (~> 3.1.0)
       jbuilder (~> 2.0)
       kaminari
+      memoit (~> 0.2.0)
       nestive
       nokogiri (>= 1.6.3)
       progress_bar
@@ -364,6 +365,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     memcachier (0.0.2)
+    memoit (0.2.0)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     method_source (0.8.2)
