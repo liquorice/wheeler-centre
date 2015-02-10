@@ -6,7 +6,8 @@ module Heracles
           {
             fields: [
               {name: :intro, label: "Introduction", type: :content},
-              {name: :body, type: :content},
+              {name: :middle, type: :content, hint: "Sits between 'Latest' and 'Guest posts'"},
+              {name: :end, type: :content, hint: "Sits after 'Guest posts'"},
             ]
           }
         end
