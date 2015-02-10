@@ -15,10 +15,14 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
-    .podcasts-series-highlights.clearfix
-      - if page.series.present?
-        ul
-          - page.series.each do |series|
-            li
-              a href=series.absolute_url
-                = series.title
+    .podcasts-index__other.clearfix
+      .section-header
+        h2 Other podcasts
+      .column-wrapper
+        .column-mid
+          - if page.series.present?
+            ul
+              - page.series.each do |series|
+                li
+                  a href=series.absolute_url
+                    = series.title
