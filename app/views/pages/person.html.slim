@@ -31,6 +31,9 @@
             - if page.fields[:biography].data_present?
               .person__body.copy
                 = render_content_in_sections page.fields[:biography]
+            - elsif page.fields[:staff_bio].data_present?
+              .person__body.copy
+                = render_content_in_sections page.fields[:staff_bio]
 
           / Upcoming events
           - if upcoming_events.results.total_pages > 0
