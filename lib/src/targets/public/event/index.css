@@ -381,6 +381,11 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
+
+  .event__presenters.event__presenters--long:before {
+    width: 25%;
+  }
+
   .breakpoint-w-699 .event__presenters:before {
     width: 100%;
   }
@@ -489,7 +494,7 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
-  .event__presenters--long + .event__tickets:before,
+  /*.event__presenters--long + .event__tickets:before,*/
   .breakpoint-w-699 .event__tickets:before {
     width: 100%;
   }
@@ -576,7 +581,7 @@
     top: 0;
     border-top: 3px #ededed solid;
   }
-  .event__presenters--long + .event__tickets + .event__series-summary:before,
+  /*.event__presenters--long + .event__tickets + .event__series-summary:before,*/
   .breakpoint-w-699 .event__series-summary:before {
     width: 100%;
   }
