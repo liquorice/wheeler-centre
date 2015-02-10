@@ -56,7 +56,7 @@
               - default_width = upcoming_events.results.length
             - else
               - default_width = 3
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: default_width, tablet: 3, phoneWide: 2, phone: 1 }}.to_json
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: default_width, tablet: 3, phoneWide: 3, phone: 2 }}.to_json
               - upcoming_events.results.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
       - if past_events.results.present?
@@ -80,7 +80,7 @@
               - default_width = past_events.results.length
             - else
               - default_width = 5
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => default_width, widescreen: 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => default_width, widescreen: 6, tablet: 4, "phone-wide" => 3, phone: 2 }}.to_json
               - past_events.results.each do |post|
                 - if post.recordings && post.recordings.present?
                   - post.recordings.each do |recording|

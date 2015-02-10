@@ -5,6 +5,11 @@
   color: #fff;
   padding: 25px 35px 35px;
 }
+  .breakpoint-phone-wide .footer,
+  .breakpoint-phone .footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
 .footer-nav-main {
   float: left;
@@ -37,12 +42,22 @@
       font-size: 1.7rem;
       margin-bottom: .6em;
     }
+      .breakpoint-phone-wide .footer-nav-main__group h3,
+      .breakpoint-phone .footer-nav-main__group h3 {
+        font-size: 14px;
+        font-size: 1.4rem;
+      }
     .footer-nav-main__group ul {
       color: var(--primary-color-lighter);
       font-size: 15px;
       font-size: 1.5rem;
       padding-right: 20px;
     }
+      .breakpoint-phone-wide .footer-nav-main__group ul,
+      .breakpoint-phone .footer-nav-main__group ul {
+        font-size: 13px;
+        font-size: 1.3rem;
+      }
     .footer-nav-main__group li {
       margin-bottom: 4px;
     }
