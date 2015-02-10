@@ -15,37 +15,34 @@
 
 = area :main do
   .person
-    - if page.fields[:portrait].data_present?
-      .person__image
-        .person__image-inner.clearfix
-          img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
     .column-wrapper
       .column-wide
+        - if page.fields[:portrait].data_present?
+          .person__image
+            .person__image-inner.clearfix
+              img src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
         h1.person__title
           == widont_format markdown_line page.title
-        - if page.fields[:intro].data_present?
-          .person__intro.copy
-            = render_content_in_sections page.fields[:intro]
-        - if page.fields[:biography].data_present?
-          .person__body.copy
-            = render_content_in_sections page.fields[:biography]
+        .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
+          .person__bio
+            - if page.fields[:intro].data_present?
+              .person__intro.copy
+                = render_content_in_sections page.fields[:intro]
+            - if page.fields[:biography].data_present?
+              .person__body.copy
+                = render_content_in_sections page.fields[:biography]
 
-    / Upcoming events
-    - if upcoming_events.results.total_pages > 0
-      .person__upcoming-events
-        .column-wrapper
-          .section-header
-            h2 Upcoming events
-          .column-full
-            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
-              - upcoming_events.results.each do |event|
-                = render "partials/event_snap_block", post: event, show_type: true
+          / Upcoming events
+          - if upcoming_events.results.total_pages > 0
+            .person__upcoming-events
+              .person__upcoming-events-grid.clearfix
+                .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 2, "widescreen-wide" => 2, tablet: 1, "phone-wide" => 2, phone: 2 }}.to_json
+                  - upcoming_events.results.each do |event|
+                    = render "partials/event_snap_block", post: event, show_type: true
 
-    / Past events and other media types
-    - if past_events.results.total_pages > 0 || blog_posts.present?
-      .person__related
-        .column-wrapper
-          .column-wide.clearfix
+        / Past events and other media types
+        - if past_events.results.total_pages > 0 || blog_posts.present?
+          .person__related.clearfix
             - if blog_posts.present? || past_events.results.total_pages > 0
               / Blog posts
               - if blog_posts.present?

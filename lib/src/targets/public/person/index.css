@@ -1,33 +1,22 @@
 /* Person page */
 
 .person__image {
-  float: right;
-  padding-bottom: 35px;
-  width: 40%;
-  width: calc(40% + 35px);
+  margin-left: auto;
+  margin-right: auto;
+  width: 160px;
 }
-.breakpoint-w-599 .person__image {
-  float: none;
-  padding-bottom: 20px;
-  width: 100%;
+.breakpoint-tablet-wide .person__image {
+  width: 140px;
 }
-
+.breakpoint-tablet .person__image {
+  width: 120px;
+}
+.breakpoint-phone-wide .person__image,
+.breakpoint-phone .person__image  {
+  width: 100px;
+}
   .person__image img {
-    float: right;
-    max-width: 100%;
-    max-width: calc(100% - 35px);
-    min-width: 80%;
-    margin-left: 35px;
-  }
-  .breakpoint-w-599 .person__image img {
-    float: none;
-    min-width: 0;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 400px;
-  }
-  .breakpoint-tablet-wide .person__image img {
+    border-radius: 50%;
     width: 100%;
   }
 
@@ -38,7 +27,8 @@
   font-size: 4.2rem;
   font-weight: bold;
   margin-top: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 .breakpoint-tablet-wide .person__title {
   font-size: 40px;
@@ -65,22 +55,69 @@
   margin-bottom: 15px;
 }
 
+.person__bio {
+  float: left;
+  width: 60%;
+}
+.breakpoint-phone-wide .person__bio,
+.breakpoint-phone .person__bio {
+  float: none;
+  width: 100%;
+}
+.person__bio-and-events--0 .person__bio {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+}
+.breakpoint-tablet-wide .person__bio-and-events--0 .person__bio {
+  width: 70%;
+}
+.breakpoint-tablet .person__bio-and-events--0 .person__bio {
+  width: 80%;
+}
+.breakpoint-phone-wide .person__bio-and-events--0 .person__bio,
+.breakpoint-phone .person__bio-and-events--0 .person__bio  {
+  width: 100%;
+}
+
 /* Person: upcoming events */
 
 .person__upcoming-events {
-  background-color: var(--primary-color-lighter);
-  clear: both;
+  float: right;
+  width: 35%;
+}
+.breakpoint-phone-wide .person__upcoming-events,
+.breakpoint-phone .person__upcoming-events {
   padding-top: 20px;
-  margin-bottom: 20px;
-  margin-top: 50px;
+  float: none;
+  width: 100%;
+}
+
+.person__upcoming-events .grouper {
+  text-align: left;
+}
+
+.person__upcoming-events .grouper--total-items-1 {
+  text-align: center;
+}
+.breakpoint-phone-wide .person__upcoming-events .grouper--total-items-1,
+.breakpoint-phone .person__upcoming-events .grouper--total-items-1 {
+  text-align: left;
+}
+
+.person__upcoming-events .grouper--total-items-1 .grouper-item {
+  width: 60%;
 }
 
 /* Person: past events/blog posts/recordings */
 
 .person__related {
+  border-top: 1px solid #dfdfdf;
   clear: both;
   padding-top: 40px;
   padding-bottom: 50px;
+  margin-top: 20px;
 }
 .breakpoint-phone-wide .person__related,
 .breakpoint-phone .person__related {
@@ -136,7 +173,7 @@
       font-weight: bold;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;;
+      white-space: nowrap;
       width: 100%;
     }
       .person__related-anchor:hover .person__related-title,
