@@ -11,16 +11,17 @@ class CacheBusterController < ActionController::Metal
   def index
     headers['Content-Type'] = 'application/javascript'
 
-    uri = URI.parse request.referer
-    uri_path = uri.path
+    unless request.referer.blank?
+      uri = URI.parse request.referer
+      uri_path = uri.path
 
-    # It checks in the Redis DB to see when the page was last accessed
-    hit = CacheBuster.find_or_create_by path: uri_path
+      # It checks in the Redis DB to see when the page was last accessed
+      hit = CacheBuster.find_or_create_by path: uri_path
 
-    # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
-    CacheBusterJob.enqueue hit.id if hit.updated_at <= Time.now - 5.minutes
-
-    render text: "console.debug('Reactive Cache Buster updated at: #{hit.updated_at}')"
+      # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
+      CacheBusterJob.enqueue hit.id if hit.updated_at <= Time.now - 5.minutes
+      render text: ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Reactive Cache Buster updated at: #{hit.updated_at}'); } } })();"
+    end
   end
 
   def hits
