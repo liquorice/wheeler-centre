@@ -15,28 +15,31 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
-    / Highlight podcasts
-    .podcasts-index__highlights.clearfix
-      .podcasts-highlight__block
-        / Highlight podcast
-      .podcasts-highlight__block
-        / Highlight podcast
-    / Other podcasts
     - if page.series.present?
-    .podcasts-index__other.clearfix
-      .section-header
-        h2 Other podcasts
-      .column-wrapper
-        .column-mid
-          .podcasts-list
-            - page.series.each do |series|
-              .podcasts-list__block
-                a.podcasts-list__anchor href=series.absolute_url
-                  .podcasts-list__text.clearfix
-                    h3.podcasts-list__title = markdown_line series.title
-                    span.podcasts-list__action
-                      - if series.episodes.total == 1
-                        ' #{series.episodes.total} episode
-                      - else
-                        ' #{series.episodes.total} episodes
-                      i.fa.fa-angle-right
+      - featured_series = page.series.select { |series| series.fields[:featured].value }.each do |series|
+      - if featured_series.present?
+        / Featured podcasts
+        .podcasts-index__highlights.clearfix
+          - featured_series.each do |series|
+            .podcasts-highlight__block
+              h1 = series.title
+      - other_series = page.series.reject { |series| series.fields[:featured].value }.each do |series|
+      - if other_series.present?
+        / All other podcasts
+        .podcasts-index__other.clearfix
+          .section-header
+            h2 Other podcasts
+          .column-wrapper
+            .column-mid
+              .podcasts-list
+                - other_series.each do |series|
+                  .podcasts-list__block
+                    a.podcasts-list__anchor href=series.absolute_url
+                      .podcasts-list__text.clearfix
+                        h3.podcasts-list__title = markdown_line series.title
+                        span.podcasts-list__action
+                          - if series.episodes.total == 1
+                            ' #{series.episodes.total} episode
+                          - else
+                            ' #{series.episodes.total} episodes
+                          i.fa.fa-angle-right
