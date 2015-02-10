@@ -1,5 +1,5 @@
 - cache ["masthead-navigation-1", pages, current] do
-  - if pages.any?
+  - if pages.present?
     ul.masthead-contextual__navigation-list
       - pages.each do |page|
         li.masthead-contextual__navigation-item

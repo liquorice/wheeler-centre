@@ -63,16 +63,6 @@
       font-size: 1.2rem;
     }
 
-  .event-snap__summary {
-    font-size: 19px;
-    font-size: 1.9rem;
-  }
-    .event-snap-block .event-snap__summary,
-    .event-snap--quarter .event-snap__summary {
-      font-size: 16px;
-      font-size: 1.6rem;
-    }
-
   .event-snap__hero {
     padding-bottom: 4px;
     position: relative;

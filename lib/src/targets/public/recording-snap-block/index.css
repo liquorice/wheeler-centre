@@ -66,23 +66,10 @@
     margin-top: -10px;
   }
 
-  .recording-snap__summary {
-    font-size: 19px;
-    font-size: 1.9rem;
-  }
-    .recording-snap-block .recording-snap__summary,
-    .recording-snap--quarter .recording-snap__summary {
-      font-size: 16px;
-      font-size: 1.6rem;
-    }
-
   .recording-snap__hero {
     padding-bottom: 4px;
     position: relative;
   }
-    .recording-snap__hero--force-square {
-      position: relative;
-    }
 
   .recording-snap__hero-type {
     background-color: #fff;
@@ -115,9 +102,14 @@
   .recording-snap__hero-inner {
     overflow: hidden;
   }
-    .recording-snap__hero-shim {
-      padding-top: 100%;
+    .recording-snap__hero--force-square,
+    .recording-snap__hero--force-landscape {
+      position: relative;
     }
+    .recording-snap__hero--force-landscape .recording-snap__hero-shim { padding-top: 56.934306569343%; }
+    .recording-snap__hero--force-square .recording-snap__hero-shim { padding-top: 100%; }
+
+    .recording-snap__hero--force-landscape .recording-snap__hero-inner,
     .recording-snap__hero--force-square .recording-snap__hero-inner {
       bottom: 0;
       left: 0;
@@ -136,12 +128,20 @@
       transform: scale3d(1.1, 1.1, 1);
       opacity: 0.85;
     }
+    .recording-snap__hero--force-landscape img {
+      position: absolute;
+      top: -15%;
+      width: 100%;
+    }
     .recording-snap__hero--force-square img {
       position: absolute;
       height: 100%;
       transform: translate3d(-12.5%, 0, 0);
       width: auto;
     }
+      .recording-snap:hover .recording-snap__hero--force-landscape img {
+        transform: scale3d(1.1, 1.1, 1);
+      }
       .recording-snap:hover .recording-snap__hero--force-square img {
         transform: translate3d(-12.5%, 0, 0) scale3d(1.1, 1.1, 1);
       }

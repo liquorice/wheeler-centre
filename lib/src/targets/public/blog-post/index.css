@@ -191,6 +191,7 @@
   font-family: var(--font-sans);
   padding-top: 50px;
   position: relative;
+  padding-bottom: 80px;
 }
 .breakpoint-tablet .blog-post__tags {
   padding-top: 30px;
@@ -394,48 +395,6 @@
     }
 
 
-.blog-snap-block__summary {
-    position: relative;
-}
-  /* Create a 1:0.8 box*/
-  .blog-snap-block__summary:before {
-    display: block;
-    content: "";
-    padding-top: 80%;
-  }
-  .blog-snap-block__summary-inner {
-    font-size: 16px;
-    font-size: 1.6rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /*background: rgba(255,0,0,0.2);*/
-    overflow: hidden;
-  }
-    .blog-snap-block__summary-inner:before {
-      background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-      background: -webkit-gradient(left bottom, left top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
-      background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-      background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-      background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-      background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 80px;
-      z-index: 1;
-    }
-    .breakpoint-phone-wide .blog-snap-block__summary-inner,
-    .breakpoint-phone .blog-snap-block__summary-inner {
-      font-size: 13px;
-      font-size: 1.3rem;
-    }
-
->>>>>>> d75222a... Adjust a bunch of responsive styles.
 /* Authors */
 
 .author-image {
@@ -558,57 +517,6 @@
 
 .breakpoint-w-799 .blog-snap__group--topic-page-latest {
   margin-right: -35px;
-}
-
-.blog-snap-halves,
-.blog-snap-quarters {
-  float: left;
-}
-.breakpoint-w-799 .blog-snap-halves,
-.breakpoint-w-799 .blog-snap-quarters {
-  float: none;
-}
-
-.blog-snap-halves--1,
-.blog-snap-quarters--2 {
-  width: 50%;
-}
-.breakpoint-w-799 .blog-snap-halves--1,
-.breakpoint-w-799 .blog-snap-quarters--2 {
-  width: 100%;
-}
-
-.blog-snap--half,
-.blog-snap--quarter {
-  margin-right: 35px;
-  float: left;
-}
-.breakpoint-phone .blog-snap--half,
-.breakpoint-phone .blog-snap--quarter {
-  margin-right: 0;
-}
-
-.blog-snap-halves--2 .blog-snap,
-.blog-snap-quarters--2 .blog-snap {
-  width: 50%;
-  width: calc(50% - 35px);
-}
-
-.blog-snap-quarters--3 .blog-snap {
-  width: 33%;
-  width: calc(33% - 35px);
-}
-
-.blog-snap-quarters--4 .blog-snap {
-  width: 25%;
-  width: calc(25% - 35px);
-}
-
-.breakpoint-phone .blog-snap-halves--2 .blog-snap,
-.breakpoint-phone .blog-snap-quarters--2 .blog-snap,
-.breakpoint-phone .blog-snap-quarters--3 .blog-snap,
-.breakpoint-phone .blog-snap-quarters--4 .blog-snap {
-  width: 100%;
 }
 
 .blog-index__topic {

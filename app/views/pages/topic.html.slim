@@ -28,19 +28,14 @@
       .topic-page__latest.column-wrapper
         h2.blog-index__latest-header Latest
         .column-wide.clearfix
-          .blog-snap__group.blog-snap__group--topic-page-latest.clearfix
-            .blog-snap-halves.blog-snap-halves--1
-              - latest_pages[0..0].each do |post|
-                - if post.page_type == "blog_post"
-                  = render "partials/blog_snap_quarter", post: post
-                - elsif post.page_type == "event"
-                  = render "partials/event_snap_quarter", post: post
-            .blog-snap-quarters.blog-snap-quarters--2.clearfix
-              - latest_pages[1..2].each do |post|
-                - if post.page_type == "blog_post"
-                  = render "partials/blog_snap_quarter", post: post
-                - elsif post.page_type == "event"
-                  = render "partials/event_snap_quarter", post: post
+          .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
+            - latest_pages.each do |post|
+              - if post.page_type == "blog_post"
+                = render "partials/blog_snap_block", post: post, show_type: true, aspect: :landscape, show_summary: true
+              - elsif post.page_type == "event"
+                = render "partials/event_snap_block", post: post, show_type: true, aspect: :landscape, show_summary: true
+              - elsif post.page_type == "recording"
+                = render "partials/recording_snap_block", post: post, show_type: true, aspect: :landscape, show_summary: true
     .column-wrapper
       .topic-page__random-intro.intro
         .column-narrow.copy

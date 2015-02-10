@@ -2,6 +2,7 @@
 
 .topic-page {
   padding-top: 50px;
+  padding-bottom: 50px;
 }
 .breakpoint-tablet .topic-page {
   padding-top: 40px;
@@ -135,6 +136,20 @@
     margin-right: -15px;
   }
 
+/* Turns these into alternating [2, 1, 1] [1, 1, 2] things */
+.breakpoint-widescreen-wide .snap-uneven .grouper--3 .snap-block,
+.breakpoint-widescreen .snap-uneven .grouper--3 .snap-block,
+.breakpoint-tablet-wide .snap-uneven .grouper--3 .snap-block { width: 25%; }
+
+
+.breakpoint-widescreen-wide .snap-uneven .grouper--3:nth-child(2n+1) .snap-block:first-child,
+.breakpoint-widescreen .snap-uneven .grouper--3:nth-child(2n+1) .snap-block:first-child,
+.breakpoint-tablet-wide .snap-uneven .grouper--3:nth-child(2n+1) .snap-block:first-child { width: 50%; }
+
+.breakpoint-widescreen-wide .snap-uneven .grouper--3:nth-child(2n) .snap-block:last-child,
+.breakpoint-widescreen .snap-uneven .grouper--3:nth-child(2n) .snap-block:last-child,
+.breakpoint-tablet-wide .snap-uneven .grouper--3:nth-child(2n) .snap-block:last-child { width: 50%; }
+
 /*
   widescreen-wide, 6 columns
   widescreen, 5 columns
@@ -198,6 +213,8 @@
   padding-right: 0;
   width: 100%;
 }
+
+
 
 
 .title-tags {

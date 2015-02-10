@@ -44,7 +44,7 @@
             = event.series.title
         h4.event-calendar-event__title
           span.title-text == markdown_line event.title
-          - if selected_primary_topics && selected_primary_topics.any?
+          - if selected_primary_topics && selected_primary_topics.present?
             span.title-tags
               '  &nbsp;/&nbsp;
               = selected_primary_topics.first.title
