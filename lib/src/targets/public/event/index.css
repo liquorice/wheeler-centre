@@ -209,7 +209,7 @@
   }
   .event__tags-list li:after {
     content: ", ";
-    margin-left: -0.2em;
+    margin-left: -0.15em;
   }
     .event__tags-list li:last-child:after {
       content: "";
