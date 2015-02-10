@@ -7,7 +7,7 @@
           <h2><%= data[:title] %></h2>
           <%- if data[:caption].present? %>
             <div class="intro">
-              <p><%= data[:caption] %></p>
+              <p><%= data[:caption].html_safe %></p>
             </div>
           <%- end %>
         </div>
