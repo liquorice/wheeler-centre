@@ -1,13 +1,24 @@
 /* AudioPlayer */
 
 .audio-player {
-  background-color: var(--primary-color-lighter);
+  background-color: #efefef;
+  border-radius: 4px;
   font-family: var(--font-sans);
   min-height: 130px;
   padding: 35px 35px 39px;
   position: relative;
   user-select: none;
+  transition-property: background-color;
+  transition-duration: 250ms;
 }
+  .audio-player--playing {
+    background-color: var(--primary-color-lighter);
+  }
+
+  .figure__display--full-width .audio-player {
+    border-radius: none;
+  }
+
   .audio-player__inner {
     max-width: var(--column-mid);
     margin-left: auto;
@@ -17,24 +28,30 @@
   }
 
   .audio-player__load {
-    background-color: var(--primary-color-light);
+    background-color: #ddd;
     bottom: 0;
     left: 0;
     position: absolute;
     height: 5px;
-    transition-property: width;
-    transition-duration: 20ms;
+    transition-property: width, background-color;
+    transition-duration: 20ms, 150ms;
   }
+    .audio-player--playing .audio-player__load {
+      background-color: var(--primary-color-light);
+    }
 
 .audio-player__track {
-  background-color: color(var(--primary-color) tint(15%));
+  background-color: #999;
   bottom: 0;
   left: 0;
   position: absolute;
   height: 5px;
-  transition-property: width;
-  transition-duration: 20ms;
+  transition-property: width, background-color;
+  transition-duration: 20ms, 150ms;
 }
+  .audio-player--playing .audio-player__track {
+    background-color: color(var(--primary-color) tint(15%));
+  }
 
 .audio-player__handle {
   bottom: 0;
@@ -54,14 +71,18 @@
 
 .audio-player__metadata {
   cursor: default;
-  color: var(--primary-color);
-  color: rgba(0, 158, 140, 0.8);
+  color: #999;
+  color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
   font-size: 1.4rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   z-index: 3;
 }
+  .audio-player--playing .audio-player__metadata {
+    color: var(--primary-color);
+    color: rgba(0, 158, 140, 0.8);
+  }
   .audio-player__listen,
   .audio-player__duration,
   .audio-player__play-time {
@@ -75,12 +96,16 @@
     }
 
   .audio-player__duration {
-    border-left: 1px solid rgba(0, 158, 140, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
     margin-left: 16px;
     padding-left: 20px;
     opacity: 0;
     transition: opacity 300ms;
   }
+    .audio-player--playing .audio-player__duration {
+      border-color: rgba(0, 158, 140, 0.2);
+    }
+
     .audio-player__duration.visible {
       opacity: 1;
     }
@@ -101,13 +126,18 @@
     }
 
   .audio-player__title {
-    color: var(--primary-color-darker);
+    color: #666;
     font-size: 28px;
     font-size: 2.8rem;
     line-height: 1.4;
     margin-top: 5px;
     font-weight: bold;
+    transition-property: color;
+    transition-duration: 250ms;
   }
+    .audio-player--playing .audio-player__title {
+      color: var(--primary-color-darker);
+    }
 
 .audio-player__controls {
   position: absolute;
@@ -131,10 +161,10 @@
     }
   .audio-player__play,
   .audio-player__pause {
-    border: 2px solid var(--primary-color);
+    border: 2px solid #999;
     border-radius: 50%;
     background-color: transparent;
-    color: var(--primary-color);
+    color: #999;
     cursor: pointer;
     display: block;
     height: 60px;
@@ -142,11 +172,29 @@
     position: absolute;
     left: 0;
     top: 0;
+    transition-property: color, border-color;
+    transition-duration: 250ms;
   }
+    .audio-player--playing .audio-player__play,
+    .audio-player--playing .audio-player__pause {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
     .audio-player__play:hover,
     .audio-player__play:focus,
     .audio-player__pause:hover,
     .audio-player__pause:focus {
+      color: #666;
+      background-color: #fff;
+      background-color: rgba(255,255,255,0.5);
+      border-color:  #666;
+    }
+
+    .audio-player--playing .audio-player__play:hover,
+    .audio-player--playing .audio-player__play:focus,
+    .audio-player--playing .audio-player__pause:hover,
+    .audio-player--playing .audio-player__pause:focus {
       color: var(--primary-color-darker);
       background-color: #fff;
       background-color: rgba(255,255,255,0.5);

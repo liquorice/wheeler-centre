@@ -1,3 +1,8 @@
+- title = title
+- if title.blank?
+  - title = audio.asset.title || audio.asset.file_name
+- if title.blank?
+  - title = "Listen to this track"
 - asset = audio.asset
 - if audio.data_present?
   .figure.figure__audio.figure__display--default
@@ -16,7 +21,7 @@
               .audio-player__faker-bar.audio-player__faker-bar--four format-faker-bar="currentTime"
             .audio-player__play-time format-duration="currentTime"
         .audio-player__header
-          h3.audio-player__title Don’t look back in anger
+          h3.audio-player__title = title
         .audio-player__controls
           button.audio-player__play on-click="onPlayClick" data-hidden="playing"
             i.fa.fa-play.audio-player__play-icon
