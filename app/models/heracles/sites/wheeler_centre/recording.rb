@@ -123,7 +123,7 @@ module Heracles
             fields[:description].value
           end
 
-          text :youtube_video do
+          string :youtube_video do
             fields[:youtube_video].value
           end
 
@@ -152,8 +152,6 @@ module Heracles
             with :site_id, site.id
             with :person_ids, fields[:people].pages.map(&:id)
             with :published, true
-
-            order_by :recording_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
@@ -164,8 +162,6 @@ module Heracles
             with :site_id, site.id
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
-
-            order_by :recording_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
