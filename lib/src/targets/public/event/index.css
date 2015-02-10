@@ -837,6 +837,7 @@
 .breakpoint-phone .event-calendar-event {
   float: none;
   margin-right: 0;
+  margin-bottom: 0;
   width: 100%;
 }
 .event-calendar-event:before {
@@ -914,6 +915,9 @@
     }
     .breakpoint-w-999 .event-calendar-event__details {
       padding-right: 0;
+    }
+    .breakpoint-phone .event-calendar-event__details {
+      padding-bottom: 20px;
     }
 
       .event-calendar-event__date,
@@ -1038,7 +1042,7 @@
   z-index: 3;
 }
 .breakpoint-phone .event-calendar-event__flag-text {
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 
   .breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__flag {
