@@ -1,21 +1,23 @@
 class CacheBusterController < ActionController::Metal
-  include AbstractController::Rendering
   include ActionController::MimeResponds
-  include ActionView::Layouts
   include ActionController::Redirecting
+  include AbstractController::Rendering
+  include ActionView::Layouts
   include Rails.application.routes.url_helpers
   require 'uri'
 
   append_view_path "#{Rails.root}/app/views"
 
   def index
+    headers['Content-Type'] = 'application/javascript'
+
     uri = URI.parse request.referer
     uri_path = uri.path
 
     # It checks in the Redis DB to see when the page was last accessed
-    @hit = CacheBuster.find_or_create_by path: uri_path
+    hit = CacheBuster.find_or_create_by path: uri_path
 
-    respond_to :js
+    render text: "console.debug('Reactive Cache Buster updated at: #{hit.updated_at}')"
   end
 
   def hits
