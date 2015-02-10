@@ -38,41 +38,43 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
-        # Let the series explicit value override episode one
-        explicit = episode.fields[:explicit].value || page.fields[:explicit].value
-        episode_image_url = if episode.fields[:itunes_image].data_present?
-          version = :original
-          version = :itunes_url if episode.fields[:itunes_image].asset.versions.include?(:itunes_url)
-          episode.fields[:itunes_image].asset.send(:"#{version}_url")
-        end
-        xml.item do
-          xml.title episode.title
-          xml.dc :creator, (episode.fields[:people].data_present? ? episode.fields[:people].pages.map {|person| person.title} : "The Wheeler Centre")
-          if episode.fields[:publish_date].data_present?
-            xml.pubDate episode.fields[:publish_date].value.rfc2822
-          else
-            xml.pubDate episode.created_at.rfc2822
+        cache ["podcast-episode-1", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+          # Let the series explicit value override episode one
+          explicit = episode.fields[:explicit].value || page.fields[:explicit].value
+          episode_image_url = if episode.fields[:itunes_image].data_present?
+            version = :original
+            version = :itunes_url if episode.fields[:itunes_image].asset.versions.include?(:itunes_url)
+            episode.fields[:itunes_image].asset.send(:"#{version}_url")
           end
-          xml.link url_with_domain(episode.absolute_url)
-          xml.guid episode.id, isPermaLink: "false"
-          xml.description do
-            xml.cdata! render_content episode.fields[:description]
-          end
-          xml.itunes :author, "The Wheeler Centre"
-          xml.itunes :summary, episode.fields[:itunes_summary].value
-          xml.itunes :explicit, human_boolean(explicit)
-          xml.itunes :image, href: episode_image_url if episode_image_url.present?
-          if type == "video"
-            xml.itunes :duration, duration_to_hms(episode.video_result["meta"]["duration"].presence || 0)
-            xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
-          else
-            duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
-              episode.audio_result["meta"]["duration"]
+          xml.item do
+            xml.title episode.title
+            xml.dc :creator, (episode.fields[:people].data_present? ? episode.fields[:people].pages.map {|person| person.title} : "The Wheeler Centre")
+            if episode.fields[:publish_date].data_present?
+              xml.pubDate episode.fields[:publish_date].value.rfc2822
             else
-              0
+              xml.pubDate episode.created_at.rfc2822
             end
-              xml.itunes :duration, duration_to_hms(duration)
-            xml.enclosure url: episode.audio_url, length: episode.audio_result["size"], type: "audio/mpeg"
+            xml.link url_with_domain(episode.absolute_url)
+            xml.guid episode.id, isPermaLink: "false"
+            xml.description do
+              xml.cdata! render_content episode.fields[:description]
+            end
+            xml.itunes :author, "The Wheeler Centre"
+            xml.itunes :summary, episode.fields[:itunes_summary].value
+            xml.itunes :explicit, human_boolean(explicit)
+            xml.itunes :image, href: episode_image_url if episode_image_url.present?
+            if type == "video"
+              xml.itunes :duration, duration_to_hms(episode.video_result["meta"]["duration"].presence || 0)
+              xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
+            else
+              duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
+                episode.audio_result["meta"]["duration"]
+              else
+                0
+              end
+                xml.itunes :duration, duration_to_hms(duration)
+              xml.enclosure url: episode.audio_url, length: episode.audio_result["size"], type: "audio/mpeg"
+            end
           end
         end
       end
