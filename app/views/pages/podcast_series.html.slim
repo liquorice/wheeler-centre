@@ -27,11 +27,16 @@
             .section-header
               h2 Latest episodes
             .podcast-series__latest-episodes-grid.clearfix
-                / TODO: Make a podcast snap block that shows up to 4-6 episodes here;
-                / Some placeholder boxes here to illustrate style
+              .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 5, tablet: 4, "phone-wide" => 2, phone: 2 }}.to_json
                 - page.episodes.results.first(5).each do |episode|
-                  .podcast-snap
-                    h1= episode.title
+                  .podcast-snap.snap-block
+                    a.podcast-snap__anchor href= episode.absolute_url
+                      time.podcast-snap__date datetime=l(episode.fields[:publish_date].value, format: :rfc_3339)
+                        = episode.fields[:publish_date]
+                      h3.podcast-snap__title
+                        span.title-text= episode.title
+                      .podcast-snap__summary
+                        = force_excerptify_html render_content(episode.fields[:description]), 150, "i em strong br"
 
       .column-wrapper
         .column-full.clearfix
