@@ -1,0 +1,36 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :main do
+  .content-page__main.column-wrapper
+    .content-page__header
+      h1.content-page__title == widont_format markdown_line page.title
+    .content-page__nav-wrapper
+      .content-page__nav
+        h3.content-page__nav-title
+          - unless page.root.id == page.id
+            a href=page.root.absolute_url = page.root.title
+          - else
+            = page.root.title
+        = render "partials/page_nav_children", parent: page.root, current: page
+    .content-page__content.clearfix
+      - if page.fields[:intro].data_present?
+        .content-page__intro
+          = render_content_in_sections page.fields[:intro]
+      .content-page__body
+        - if page.fields[:body].data_present?
+          = render_content_in_sections page.fields["body"]
+        - resident_orgs = page.children.of_type("resident").visible.published
+        - if resident_orgs.present?
+          section.section--normal.copy
+            .resident-orgs-list
+              - resident_orgs.each do |resident|
+                .resident-orgs-list-item
+                  - if resident.fields[:logo].data_present?
+                    .resident-orgs-list-item__logo
+                      img src=resident.fields[:logo].asset.content_small_url
+                  h2.resident-orgs-list-item__title == markdown_line resident.title
+                  - if resident.fields[:description].data_present?
+                    .resident-orgs-list-item__description.copy
+                      = render_content resident.fields[:description]
+
