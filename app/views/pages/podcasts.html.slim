@@ -23,7 +23,8 @@
           - featured_series.each do |series|
             .podcasts-index__feature-block
               a.podcasts-index__feature-anchor href=series.absolute_url
-                img.podcasts-index__feature-image src="http://fillmurray.com/600/400" alt="#{series.title}"
+                - if series.fields[:hero_image].data_present?
+                  img.podcasts-index__feature-image src=series.fields[:hero_image].asset.content_small_url alt="#{series.title}"
                 .podcasts-index__feature-text
                   h2.podcasts-index__feature-title = series.title
                   span.podcasts-index__feature-episode-count
