@@ -44,10 +44,19 @@
   font-size: 1.7rem;
 }
 
+
+.criticism-now__responses {
+  border-top: 1px solid #ededed;
+  padding-top: 35px;
+}
+
 .criticism-now__responses .grouper {
   border-top: 1px solid #ededed;
   padding-top: 35px;
 }
+  .criticism-now__responses .grouper:first-child {
+    border: none;
+  }
 
 .criticism-now-response-item {}
 .criticism-now-response-item__body {
@@ -70,3 +79,35 @@
   .criticism-now-response-item__author a:hover {
     text-decoration: underline;
   }
+
+
+.criticism-now__review-title {
+  position: relative;
+}
+  .criticism-now__review-title h2 {
+    margin-bottom: 8px;
+  }
+  .criticism-now__review-title h3 {
+    font-weight: normal;
+    font-size: 20px;
+    font-size: 2rem;
+    color: #888;
+  }
+.criticism-now__review-title:before {
+  content: "";
+  display: block;
+  border-top: 2px solid #ededed;
+  margin-bottom: 45px;
+  margin-top: 45px;
+  width: 20%;
+}
+
+
+.criticism-now__section-divider {
+  display: block;
+  border-top: 2px solid #ededed;
+  margin-bottom: 45px;
+  margin-top: 45px;
+  width: 20%;
+  margin-left: 35px;
+}
