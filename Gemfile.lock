@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 3c6b9a6337bbe26f76b7ab298696e20ecf3b6d7b
+  revision: 6f331c7250ce1867430e6787e49fb8bfb91f2ca2
   branch: master
   specs:
     heracles (1.0.0)
@@ -71,6 +71,7 @@ GIT
       sunspot_rails
       transloadit-rails
       turbolinks
+      varnisher
 
 GEM
   remote: https://rubygems.org/
@@ -109,7 +110,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (3.4.3)
+    acts-as-taggable-on (3.4.4)
       activerecord (>= 3.2, < 5)
     addressable (2.3.6)
     ancestry (2.1.0)
