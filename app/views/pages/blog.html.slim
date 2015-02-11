@@ -21,7 +21,7 @@
           .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
             - posts.first(6).each do |post|
               = render "partials/blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
-          a.block-link.blog-index__latest-more href="#" There are more notes over here on page two &#8230; &rsaquo;
+          a.block-link.blog-index__latest-more href=blog_archive_page.absolute_url There are more notes over here on page two &#8230; &rsaquo;
 
     / Content area
     - if page.fields[:middle].data_present?
