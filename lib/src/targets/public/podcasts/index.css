@@ -341,7 +341,7 @@
         font-size: 1.2rem;
         letter-spacing: .1em;
         text-transform: uppercase;
-        padding-bottom: 3px;
+        padding-bottom: 5px;
       }
 
       .podcast-series__all-episodes-title {
@@ -358,12 +358,18 @@
         text-decoration: underline;
       }
 
-      .podcast-series__all-episodes-duration {
-        color: #888;
+      .podcast-series__all-episodes-explicit {
+        background-color: #f00;
+        border-radius: 3px;
+        color: #fff;
+        display: inline-block;
         float: right;
-        font-family: "Monaco", "Courier New", "Courier", monospace;
-        font-size: 12px;
-        font-size: 1.2rem;
+        font-family: var(--font-sans);
+        font-size: 11px;
+        font-size: 1.1rem;
+        font-weight: bold;
         letter-spacing: .1em;
         text-transform: uppercase;
+        padding: 4px 4px 3px;
+        margin-top: -12px;
       }
