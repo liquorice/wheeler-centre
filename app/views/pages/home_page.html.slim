@@ -142,8 +142,8 @@
 
     / General content area
     - if page.fields[:body].data_present?
-      .column-wrapper
-        .home__body
+      .home__body
+        .content-block
           = render_content_in_sections page.fields["body"]
 
 
