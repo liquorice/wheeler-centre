@@ -87,6 +87,14 @@ module ApplicationHelper
     display_date
   end
 
+  def prefix_number(number)
+    vowels = %w( a e i o u y )
+    (vowels.include? number.humanize[0]) ? "an" : "a"
+  end
+
+  ###
+  # TOPICS
+  ###
 
   # Set of primary tags/categories that content falls under
   def topics_page

@@ -318,6 +318,7 @@ GEM
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    humanize (1.1.0)
     i18n (0.7.0)
     inflecto (0.0.2)
     interactor (3.1.0)
@@ -615,6 +616,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   heracles!
+  humanize (~> 1.1.0)
   iso8601
   jbuilder (~> 2.0)
   launchy
