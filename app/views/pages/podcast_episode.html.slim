@@ -16,6 +16,10 @@
           span.podcast-episode__byline-separator ·
           ' Published on
           = page.fields[:publish_date]
+          - if page.fields[:explicit].value
+            span.podcast-episode__byline-separator ·
+            span.podcast-episode__byline-explicit
+              ' Explicit
         h1.podcast-episode__title= page.title
 
     .podcast-episode__body.column-wrapper

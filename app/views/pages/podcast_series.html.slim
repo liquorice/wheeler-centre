@@ -39,6 +39,9 @@
                           = episode.fields[:publish_date]
                         h3.podcast-snap__title
                           span.title-text= episode.title
+                        - if episode.fields[:explicit].value
+                          span.podcast-snap__explicit
+                           ' Explicit
                         .podcast-snap__summary
                           = force_excerptify_html render_content(episode.fields[:description]), 150, "i em strong br"
 
