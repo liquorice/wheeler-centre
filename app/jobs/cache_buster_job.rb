@@ -5,31 +5,24 @@ class CacheBusterJob < Que::Job
   def run(id)
     @page_check = PageCacheCheck.find(id)
 
-    #purge_page if should_purge_page?
-    #update_page_check
+    purge_page if should_purge_page?
+    update_page_check
   end
 
   private
 
   def should_purge_page?
-    @page_check.checksum.present? && @page_check.checksum != current_page_checksum
+    Rails.env.production? && @page_check.checksum.present? && @page_check.checksum != current_page_checksum
   end
 
   def purge_page
-    client = Varnisher::Purger.new('PURGE', @page_check.edge_uri, ENV['CDN_HOST'])
-    purge = client.send
+    client = Varnisher::Purger.new('PURGE', @page_check.page_path, @page_check.edge_hostname)
+    p client.send
+    p '###'
   end
 
   def update_page_check
     @page_check.update(checksum: current_page_checksum, updated_at: Time.current)
-  end
-
-  memoize \
-  def current_page_origin_uri
-    edge_uri  = URI(@page_check.edge_uri)
-    edge_hostname   = edge_uri.port == 80 ? edge_uri.hostname : "#{edge_uri.hostname}:#{edge_uri.port}"
-    origin_hostname = Heracles::Site.find_by_hostname(edge_hostname).origin_hostname
-    "http://#{origin_hostname}#{edge_uri.path}"
   end
 
   memoize \
@@ -43,9 +36,9 @@ class CacheBusterJob < Que::Job
     basic_auth_password = ENV['BASIC_AUTH_PASSWORD']
 
     source = if basic_auth_password && basic_auth_user
-      open(current_page_origin_uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
+      open(@page_check.origin_uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
     else
-      open(current_page_origin_uri)
+      open(@page_check.origin_uri)
     end
 
     source.read

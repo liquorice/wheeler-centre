@@ -7,16 +7,20 @@ class PageCacheCheck < ActiveRecord::Base
   end
 
   def page_path
-    self.uri.path
+    uri.path
   end
 
   def edge_hostname
+    uri.port == 80 ? uri.hostname : "#{uri.hostname}:#{uri.port}"
   end
 
-  def original_hostname
+  def origin_hostname
+    site = Heracles::Site.find_by_hostname(edge_hostname)
+    site.origin_hostname.nil? ? edge_hostname : site.origin_hostname
   end
 
-  def original_uri
+  def origin_uri
+    "http://#{origin_hostname}#{page_path}"
   end
 
 end
