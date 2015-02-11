@@ -39,7 +39,8 @@
         .column-full.clearfix
           - if page.fields[:description].present?
             .podcast-series__full-description.copy
-              img src="http://placehold.it/400/350"
+              - if page.fields[:hero_image].data_present?
+                  img src=page.fields[:hero_image].asset.content_thumbnail_url alt="Portrait of #{page.title}"
               = render_content page.fields[:description]
           .podcast-series__all-episodes
             .section-header

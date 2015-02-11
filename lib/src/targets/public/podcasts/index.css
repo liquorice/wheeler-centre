@@ -285,7 +285,7 @@
   .podcast-snap {
     float: left;
     background-color: #ddd;
-    height: 200px;
+    height: 260px;
     margin-right: 2%;
     width: 18.4%;
   }
@@ -308,7 +308,7 @@
 .podcast-series__full-description img {
   float: right;
   margin-left: 35px;
-  margin-right: 35px;
+  margin-bottom: 35px;
   max-width: 40%;
 }
 
@@ -319,7 +319,7 @@
 
   .podcast-series__all-episodes-list {
     border-left: 1px solid #dfdfdf;
-    margin-top: -10px;
+    margin-top: -20px;
   }
 
     .podcast-series__all-episodes-item {
