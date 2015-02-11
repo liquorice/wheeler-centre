@@ -87,8 +87,8 @@ module ApplicationHelper
     display_date
   end
 
-  def prefix_number(number)
-    vowels = %w( a e i o u y )
+  def indefinite_article_for_number(number)
+    vowels = %w( a e i o u )
     (vowels.include? number.humanize[0]) ? "an" : "a"
   end
 
