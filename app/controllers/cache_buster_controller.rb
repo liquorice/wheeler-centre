@@ -4,19 +4,16 @@ class CacheBusterController < ActionController::Metal
   include AbstractController::Rendering
   include ActionView::Layouts
   include Rails.application.routes.url_helpers
-  require 'uri'
 
   append_view_path "#{Rails.root}/app/views"
 
   def index
     headers['Content-Type'] = 'application/javascript'
 
-    unless request.referer.blank?
-      uri = URI.parse request.referer
-      uri_path = uri.path
-
+    unless params[:edge_uri].blank?
       # It checks in the Redis DB to see when the page was last accessed
-      hit = CacheBuster.find_or_create_by path: uri_path
+      edge_uri = params[:edge_uri].gsub('/_check', '')
+      hit = CacheBuster.find_or_create_by path: edge_uri
 
       # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
       CacheBusterJob.enqueue hit.id if hit.updated_at <= 5.minutes.ago

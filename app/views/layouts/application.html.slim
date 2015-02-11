@@ -38,4 +38,4 @@ html
         = area :footer do
           = render 'partials/footer'
 
-      script async=true src="#{buster_path}"
+      script async=true src="#{cache_buster_check_url("#{request.original_url}/_check.js", domain: ENV['CDN_ORIGIN_DOMAIN'], port: ENV['CDN_ORIGIN_PORT'])}"

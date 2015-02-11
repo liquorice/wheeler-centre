@@ -1,10 +1,9 @@
-require "open-uri"
+require 'open-uri'
 require 'digest/md5'
 
 class CacheBusterJob < Que::Job
   def run(id)
     @page_check = CacheBuster.find(id)
-    @uri = "http://#{ENV['CDN_ORIGIN']}#{@page_check.path}"
 
     purge_page if should_purge_page?
     update_page_check
@@ -26,6 +25,14 @@ class CacheBusterJob < Que::Job
   end
 
   memoize \
+  def current_page_origin_uri
+    edge_uri  = URI(@page_check.path)
+    edge_hostname   = edge_uri.port == 80 ? edge_uri.hostname : "#{edge_uri.hostname}:#{edge_uri.port}"
+    origin_hostname = Heracles::Site.find_by_hostname(edge_hostname).origin_hostname
+    "http://#{origin_hostname}#{edge_uri.path}"
+  end
+
+  memoize \
   def current_page_checksum
     Digest::MD5.hexdigest(current_page_contents)
   end
@@ -36,9 +43,9 @@ class CacheBusterJob < Que::Job
     basic_auth_password = ENV['BASIC_AUTH_PASSWORD']
 
     source = if basic_auth_password && basic_auth_user
-      open(@uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
+      open(current_page_origin_uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
     else
-      open(@uri)
+      open(current_page_origin_uri)
     end
 
     source.read
