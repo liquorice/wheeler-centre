@@ -1,11 +1,13 @@
 - level = level || 1
 ul.sub-page-nav class="sub-page-nav--level-#{level}"
-  - if parent.children.visible.where(collection_id: nil).published.present?
-    - parent.children.in_order.visible.where(collection_id: nil).published.each do |child|
-      li.sub-page-nav__item class="#{((child.id == current.id) ? "sub-page-nav__item--active" : "")} (child.children.present? ? 'sub-page-nav__item--has-children' ? : '')"
+  - children = parent.children.visible.where(collection_id: nil).published
+  - if children.present?
+    - children.each do |child|
+      - child_children = child.children.visible.where(collection_id: nil).published
+      li.sub-page-nav__item class="#{((child.id == current.id) ? "sub-page-nav__item--active" : "")} (children.present? ? 'sub-page-nav__item--has-children' ? : '')"
         a.sub-page-nav__anchor class="#{((child.id == current.id) ? "sub-page-nav__anchor--active" : "")}" href=child.absolute_url
           = child.title
-          - if child.children.present?
+          - if child_children.present?
             i.sub-page-nav__item-icon.fa.fa-angle-right
-        - if (child.children.where(collection_id: nil).present? && descendant_of(current, child)) || (child.children.where(collection_id: nil).present? && child.id == current.id)
+        - if (child_children.present? && descendant_of(current, child)) || (child_children.present? && child.id == current.id)
           = render "partials/page_nav_children", parent: child, current: current, level: level + 1
