@@ -65,6 +65,59 @@
       text-transform: uppercase;
       width: 140px;
     }
+      .simple-subscribe__controls button:hover,
+      .simple-subscribe__controls button:focus {
+        background-color: #444;
+      }
     .breakpoint-phone .simple-subscribe__controls button {
       width: 100px;
+    }
+
+
+/* Subscribe in content */
+
+.subscribe-content {
+  font-family: var(--font-sans);
+  overflow: hidden;
+  zoom: 1;
+}
+
+.subscribe-content__group {
+  float: left;
+  padding-bottom: 10px;
+  width: 50%;
+}
+  .subscribe-content__group:nth-child(1n) {
+    padding-right: 15px;
+  }
+  .subscribe-content__label {
+    color: #888;
+    display: block;
+    font-size: 15px;
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+  }
+  .subscribe-content__input {
+    background-color: #e0eeec;
+    border: none;
+    display: block;
+    font-size: 17px;
+    font-size: 1.7rem;
+    padding: 1.4rem 1.8rem;
+    width: 100%;
+  }
+
+.subscribe-content__button {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  padding: 8px 12px;
+}
+    .subscribe-content__button:hover,
+    .subscribe-content__button:focus {
+      background-color: #444;
     }
