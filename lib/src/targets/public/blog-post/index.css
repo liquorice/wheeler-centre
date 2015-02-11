@@ -419,18 +419,9 @@
   clear: both;
   overflow: hidden;
   padding-top: 35px;
+  padding-bottom: 35px;
   margin-bottom: 35px;
 }
-
-.blog-index__guest-authors-inner {
-  margin-left: -20px; /* Offset the internal padding for each author */
-  margin-right: -20px;
-}
-.breakpoint-phone .blog-index__guest-authors-inner {
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .guest-author {
   padding-bottom: 45px;
 }
@@ -438,13 +429,13 @@
   .guest-author .blog-post-list__anchor {
     border-color: color(#dbfffb shade(5%));;
   }
-  .breakpoint-widescreen-wide .guest-author,
+  /*.breakpoint-widescreen-wide .guest-author,
   .breakpoint-widescreen .guest-author {
     float: left;
     width: 25%;
     padding-left: 20px;
     padding-right: 20px;
-  }
+  }*/
 
 .guest-author__title {
   font-size: 18px;

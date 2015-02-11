@@ -1,5 +1,4 @@
 - posts = page.posts(page: params[:page]).results
-- guest_authors = page.guest_authors.results
 
 = area :masthead_title do
   = blog_page.title
@@ -28,37 +27,42 @@
       .content-block
         = render_content_in_sections page.fields[:middle]
 
-    .blog-index__guest-authors.column-wrapper
-      .section-header
-        h2 Guest authors
-        .intro.intro--small.column-narrow.copy
-          p Our recent guest authors and their latest writings.
-      .column-wide
-        .blog-index__guest-authors-inner
-          - guest_authors.each do |guest_author|
-            .guest-author
-              - if guest_author.fields[:portrait].data_present?
-                - image = guest_author.fields[:portrait].asset
-              - if image
-                .author-image
-                  .author-image__inner
-                    img src=image.content_thumbnail_url
-              h3.guest-author__title
-                = guest_author.title
-              - if guest_author.fields[:intro].data_present?
-                .guest-author__intro.copy
-                  = force_excerptify_html render_content(guest_author.fields[:intro]), 150
-              ul.blog-post-list
-                - posts.sample(3).each do |post|
-                  li
-                    a.blog-post-list__anchor href=post.absolute_url
-                      h3.blog-post-list__title
-                        span.title-text == widont_format markdown_line post.title
-                        - selected_primary_topics = select_primary_topics_for_page(post)
-                        - if selected_primary_topics && selected_primary_topics.present?
-                          span.title-tags
-                            '  &nbsp;/&nbsp;
-                            = selected_primary_topics.first.title
+    - if page.fields[:highlighted_authors].data_present?
+      .blog-index__guest-authors.column-wrapper
+        .column-wide
+          .section-header
+            - if page.fields[:highlighted_authors_title].data_present?
+              h2 = markdown_line page.fields[:highlighted_authors_title].value
+            - if page.fields[:highlighted_authors_intro].data_present?
+            .intro.intro--small.column-narrow.copy
+              = render_content page.fields[:highlighted_authors_intro]
+          .blog-index__guest-authors-inner.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 4, widescreen: 4, tablet: 3, "phone-wide" => 2, phone: 1 }, fillGroups: true}.to_json
+            - page.fields[:highlighted_authors].pages.each do |guest_author|
+              - author_posts = guest_author.blog_posts(per_page: 3)
+              - if author_posts.present?
+                .snap-block.guest-author
+                  - if guest_author.fields[:portrait].data_present?
+                    - image = guest_author.fields[:portrait].asset
+                  - if image
+                    .author-image
+                      .author-image__inner
+                        img src=image.content_thumbnail_url
+                  h3.guest-author__title
+                    = guest_author.title
+                  - if guest_author.fields[:intro].data_present?
+                    .guest-author__intro.copy
+                      = force_excerptify_html render_content(guest_author.fields[:intro]), 150
+                  ul.blog-post-list
+                    - author_posts.each do |post|
+                      li
+                        a.blog-post-list__anchor href=post.absolute_url
+                          h3.blog-post-list__title
+                            span.title-text == widont_format markdown_line post.title
+                            - selected_primary_topics = select_primary_topics_for_page(post)
+                            - if selected_primary_topics && selected_primary_topics.present?
+                              span.title-tags
+                                '  &nbsp;/&nbsp;
+                                = selected_primary_topics.first.title
     / Content area
     - if page.fields[:end].data_present?
       .content-block
