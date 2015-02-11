@@ -35,7 +35,109 @@
     font-size: 2.8rem;
   }
 
-/* Podcasts index: highlights */
+/* Podcasts index: featured */
+
+.podcasts-index__featured {
+  display: flex;
+  margin-bottom: 60px;
+}
+
+  .podcasts-index__feature-block {
+    background-color: var(--primary-color);
+    border-right: 1px solid #fff;
+    color: #fff;
+    flex: 1 50%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .podcasts-index__feature-block:nth-child(2n) {
+    border-right: 0;
+  }
+  .podcasts-index__feature-block:before {
+    background-image: linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,0));
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+  }
+
+    .podcasts-index__feature-anchor {
+      display: block;
+      padding: 60px 35px;
+    }
+
+      .podcasts-index__feature-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0.1;
+        transition-property: transform, opacity;
+        transition-duration: 900ms;
+        z-index: 1;
+      }
+      .podcasts-index__feature-anchor:hover .podcasts-index__feature-image,
+      .podcasts-index__feature-anchor:focus .podcasts-index__feature-image {
+        opacity: 0.2;
+        transform: scale3d(1.05, 1.05, 1);
+      }
+
+      .podcasts-index__feature-text {
+        position: relative;
+        z-index: 2;
+      }
+
+      .podcasts-index__feature-title {
+        font-family: var(--font-sans);
+        font-size: 28px;
+        font-size: 2.8rem;
+        font-weight: bold;
+        padding-bottom: 10px;
+      }
+
+      .podcasts-index__feature-episode-count {
+        color: rgba(255,255,255,.85);
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        padding-bottom: 30px;
+      }
+        .podcasts-index__feature-episode-count span {
+          display: inline-block;
+          border-right: 1px solid rgba(255,255,255,.85);
+          margin-right: 14px;
+          padding-right: 14px;
+        }
+        .podcasts-index__feature-episode-count span i {
+          font-size: 12px;
+        }
+
+      .podcasts-index__feature-description {
+        font-family: var(--font-sans);
+        font-size: 20px;
+        font-size: 2rem;
+        padding-bottom: 40px;
+      }
+
+      .podcasts-index__feature-action {
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 18px;
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      .podcasts-index__feature-anchor:hover .podcasts-index__feature-action,
+      .podcasts-index__feature-anchor:focus .podcasts-index__feature-action {
+        text-decoration: underline;
+      }
+
 
 /* Podcasts index: other podcasts */
 

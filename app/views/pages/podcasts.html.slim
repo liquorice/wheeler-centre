@@ -19,10 +19,25 @@
       - featured_series = page.series.select { |series| series.fields[:featured].value }.each do |series|
       - if featured_series.present?
         / Featured podcasts
-        .podcasts-index__highlights.clearfix
+        .podcasts-index__featured.clearfix
           - featured_series.each do |series|
-            .podcasts-highlight__block
-              h1 = series.title
+            .podcasts-index__feature-block
+              a.podcasts-index__feature-anchor href=series.absolute_url
+                img.podcasts-index__feature-image src="http://fillmurray.com/600/400" alt="#{series.title}"
+                .podcasts-index__feature-text
+                  h2.podcasts-index__feature-title = series.title
+                  span.podcasts-index__feature-episode-count
+                    span
+                      i.fa.fa-music
+                    - if series.episodes.total == 1
+                      ' #{series.episodes.total} episode
+                    - else
+                      ' #{series.episodes.total} episodes
+                  - if series.fields[:description].data_present?
+                    .podcasts-index__feature-description.copy
+                      = force_excerptify_html render_content(series.fields[:description]), 150, "i em strong br"
+                    span.podcasts-index__feature-action
+                      ' Listen or subscribe
       - other_series = page.series.reject { |series| series.fields[:featured].value }.each do |series|
       - if other_series.present?
         / All other podcasts

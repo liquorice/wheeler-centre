@@ -9,7 +9,6 @@ module Heracles
               {name: :description, type: :content},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark series as explicit?"},
               {name: :featured, type: :boolean, defaults: {value: false}, question_text: "Make featured podcast"},
-              {name: :highlight_colour, type: :text, editor_type: 'code'},
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_image, type: :asset, asset_file_type: :image},
