@@ -1,0 +1,24 @@
+= area :masthead_title do
+  .page__title.page__title--search
+    h1.title Search
+
+= area :main do
+  .search-page
+    .column-wrapper.search-page__header
+      - if @search.results.blank?
+          h1.search-page__title Sorry, no results for &ldquo;#{params[:q]}&rdquo;
+          = render "partials/topics_section", intro: "Explore the other areas of interest across our site."
+      - else
+          h1.search-page__title Search results for &ldquo;#{params[:q]}&rdquo;
+          .search-page__latest.column-wrapper
+            h2.blog-index__latest-header Latest
+            .column-wide.clearfix
+              .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
+          .column-wrapper
+            .column-full
+              - if @search.results.present?
+                .search__results
+                  h2.events__subtitle = t('content.search.all_results')
+                  .results-list
+                    - @search.results.each do |result|
+                      = result.title
