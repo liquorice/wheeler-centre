@@ -1,45 +1,46 @@
-footer.footer role="contentinfo"
+footer.footer.clearfix role="contentinfo"
   nav.footer-nav-main.clearfix
     .footer-nav-main__group
       h3
-        a href="#" Events
+        a href=events_page.absolute_url = events_page.title
       ul
-        li
-          a href="#" Calendar
-        li
-          a href="#" Series
-        li
-          a href="#" Presenters
-        li
-          a href="#" Past events
+        - events_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
+          li
+            a href=child.absolute_url = child.title
     .footer-nav-main__group
       h3
-        a href="#" Broadcasts
+        a href=broadcasts_page.absolute_url = broadcasts_page.title
       ul
-        li
-          a href="#" Podcasts
-        li
-          a href="#" Foobar
+        - broadcasts_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
+          li
+            a href=child.absolute_url = child.title
     .footer-nav-main__group
       h3
-        a href="#" Writings
+        a href=blog_page.absolute_url Writings
       ul
-        li
-          a href="#" All writings
-        li
-          a href="#" Guest writers
+        - blog_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
+          li
+            a href=child.absolute_url = child.title
+                  = project.title
     .footer-nav-main__group
       h3
-        a href="#" Features
-      ul
-        li
-          a href="#" All writings
-    .footer-nav-main__group
-      h3
-        a href="#" People
-      ul
-        li
-          a href="#" Recently at The Wheeler Centre
+        a href="/people" People
+    .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
+      h3= projects_page.title
+      - projects_for_navigation.in_groups(2, false).each do |group|
+        - if group.present?
+          ul
+            - group.each do |child|
+              li
+                a href=child.absolute_url = child.title
+    .footer-nav-main__group.footer-nav-main__group--double
+      h3 Topics
+      - primary_topics.in_groups(2, false).each do |group|
+        - if group.present?
+          ul
+            - group.each do |child|
+              li
+                a href=child.absolute_url = child.title
   nav.footer-nav-secondary.clearfix
     ul
       li.footer-nav-secondary__search
@@ -49,11 +50,9 @@ footer.footer role="contentinfo"
           button.footer__search-button
             i.fa.fa-search
       li
-        a href="#" About us
+        a href="/about-us" About Us
       li
-        a href="#" Residents
-      li
-        a href="#" Support us
+        a href="/about-us/who-funds-us/support-us" Donate
 
   .footer__logo
     a.footer__logo-anchor  data-view-touch-preview={previewClassName: "footer__logo-anchor--hover"}.to_json href="/"

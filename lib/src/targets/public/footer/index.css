@@ -4,6 +4,7 @@
   background-color: var(--primary-color);
   color: #fff;
   padding: 25px 35px 35px;
+  position: relative;
 }
   .breakpoint-phone-wide .footer,
   .breakpoint-phone .footer {
@@ -13,9 +14,10 @@
 
 .footer-nav-main {
   float: left;
-  max-width: 900px;
+  max-width: 1200px;
   width: 60%;
 }
+
 .breakpoint-phone .footer-nav-main {
   width: 100%;
   float: none;
@@ -24,12 +26,23 @@
     float: left;
     font-family: var(--font-sans);
     padding-bottom: 20px;
-    width: 20%;
+    width: 25%;
+  }
+
+  .footer-nav-main__group--double {
+    width: 50%;
+  }
+  .footer-nav-main__group--projects {
+    clear: left;
   }
   .breakpoint-tablet-wide .footer-nav-main__group,
   .breakpoint-tablet .footer-nav-main__group {
-    width: 33%;
+    width: 50%;
   }
+    .breakpoint-tablet-wide .footer-nav-main__group:nth-child(2n+1),
+    .breakpoint-tablet .footer-nav-main__group:nth-child(2n+1) {
+      clear: left;
+    }
   .breakpoint-w-699 .footer-nav-main__group {
     width: 50%;
   }
@@ -49,10 +62,20 @@
       }
     .footer-nav-main__group ul {
       color: var(--primary-color-lighter);
-      font-size: 15px;
-      font-size: 1.5rem;
+      font-size: 14px;
+      font-size: 1.4rem;
       padding-right: 20px;
     }
+      .footer-nav-main__group--double ul {
+        float: left;
+        width: 50%;
+      }
+      .breakpoint-tablet .footer-nav-main__group--double ul,
+      .breakpoint-phone-wide .footer-nav-main__group--double ul,
+      .breakpoint-phone .footer-nav-main__group--double ul {
+        width: 100%;
+      }
+
       .breakpoint-phone-wide .footer-nav-main__group ul,
       .breakpoint-phone .footer-nav-main__group ul {
         font-size: 13px;
@@ -60,6 +83,11 @@
       }
     .footer-nav-main__group li {
       margin-bottom: 4px;
+    }
+    .footer-nav-main__group li a {
+      display: block;
+      padding-top: 1px;
+      padding-bottom: 1px;
     }
     .footer-nav-main__group a:hover,
     .footer-nav-main__group a:focus {
@@ -130,17 +158,14 @@
     background-color: #e0eeec;
     border: none;
     border-radius: 0;
+    display: block;
     float: left;
     font-size: 14px;
     height: 32px;
     padding: 6px 8px;
-    width: 208px;
+    width: calc(100% - 32px);
     transition-property: background-color;
     transition-duration: 150ms;
-  }
-
-  .breakpoint-w-879 .footer__search-input {
-    width: 75%;
   }
 
   .footer__search-input:focus {
@@ -163,8 +188,9 @@
   }
 
 .footer__logo {
-  clear: both;
-  padding-top: 50px;
+  position: absolute;
+  right: 35px;
+  bottom: 35px;
 }
 .breakpoint-phone .footer__logo {
   padding-top: 30px;
@@ -188,3 +214,4 @@
       transform: scale3d(0.85, 0.85, 1);
       opacity: 0.9;
     }
+

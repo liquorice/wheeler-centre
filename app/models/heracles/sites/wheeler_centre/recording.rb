@@ -142,6 +142,14 @@ module Heracles
           time :recording_date_time do
             fields[:recording_date].value
           end
+
+          string :event_series_ids, multiple: true do
+            series.map(&:id)
+          end
+
+          string :event_series_titles, multiple: true do
+            series.map(&:title)
+          end
         end
 
         private

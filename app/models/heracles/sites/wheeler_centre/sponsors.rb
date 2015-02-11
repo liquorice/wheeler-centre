@@ -3,7 +3,12 @@ module Heracles
     module WheelerCentre
       class Sponsors < Heracles::Page
         def self.config
-          {}
+          {
+            fields: [
+              {name: :intro, label: "Introduction", type: :content},
+              {name: :body, type: :content},
+            ]
+          }
         end
 
         def sponsors(options={})
