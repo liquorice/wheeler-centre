@@ -11,26 +11,41 @@
     .podcast-series__top
       .podcast-series__header
         h1.podcast-series__title == widont_format markdown_line page.title
+      .podcast-series__subscribe.column-wrapper
+        .podcast-series__subscribe-inner.column-narow
+          a.podcast-series__subscribe-anchor href="#"
+            i.fa.fa-rss-square
+            ' Subscribe to this podcast
+      .podcast-series__intro.page__intro.intro.column-wrapper
+        .column-mid.copy
+          = render_content page.fields[:intro]
+
 
     .column-wrapper
-      .column-full.clearfix
-        .podcast-series__description.copy
-          = render_content page.fields[:description]
-        .podcast-series__latest-episodes
-          .podcast-series__subscribe-to
-            a.podcast-series__subscribe-to-anchor href="#"
-              i.fa.fa-rss-square
-              ' Subscribe to this podcast
-          .section-header.section-header--podcast-series
-            h2 Latest episode
+      .column-full
+        .podcast-series__latest-episodes.gradient-top-down
+          .section-header
+            h2 Latest episodes
 
-  .podcast-series
-    .column-wrapper
-      .column-mid.copy
-        = page.title
-        - if page.episodes.results.present?
-          ul
-            - page.episodes.results.each do |episode|
-              li
-                a href=episode.absolute_url
-                  = episode.title
+  /   .column-wrapper
+  /     .column-full.clearfix
+  /       .podcast-series__description.copy
+  /         = render_content page.fields[:description]
+  /       .podcast-series__latest-episodes
+  /         .podcast-series__subscribe-to
+  /           a.podcast-series__subscribe-to-anchor href="#"
+  /             i.fa.fa-rss-square
+  /             ' Subscribe to this podcast
+  /         .section-header.section-header--podcast-series
+  /           h2 Latest episode
+
+  / .podcast-series
+  /   .column-wrapper
+  /     .column-mid.copy
+  /       = page.title
+  /       - if page.episodes.results.present?
+  /         ul
+  /           - page.episodes.results.each do |episode|
+  /             li
+  /               a href=episode.absolute_url
+  /                 = episode.title

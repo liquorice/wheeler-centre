@@ -242,44 +242,41 @@
     font-size: 2.8rem;
   }
 
-.podcast-series__description {
-  float: left;
-  font-size: 2.2rem;
-  margin-right: 5%;
-  width: 60%;
+.podcast-series__subscribe-inner {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-  .podcast-series__hero-image,
-  .copy .podcast-series__hero-image {
-    margin-right: 35px;
-    margin-bottom: 35px;
-    max-width: 300px;
-  }
-
-.podcast-series__latest-episodes {
-  border-left: 1px solid #dfdfdf;
-  float: right;
-  width: 30%;
-}
-
-  .podcast-series__subscribe-to {
-    border-bottom: 1px solid #dfdfdf;
-  }
-
-  .podcast-series__subscribe-to-anchor {
-    color: var(--primary-color);
-    display: block;
+  .podcast-series__subscribe-anchor {
+    background: var(--primary-color-lighter);
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
     font-family: var(--font-sans);
     font-size: 18px;
     font-size: 1.8rem;
-    padding: 22px 35px;
+    margin: -10px auto 35px;
+    padding: 18px 30px;
     text-align: center;
+    transition-property: transform, background-color;
+    transition-duration: 100ms;
   }
+  .podcast-series__subscribe-anchor:hover,
+  .podcast-series__subscribe-anchor:focus {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: scale3d(1.1,1.1,1);
+  }
+    .podcast-series__subscribe-anchor i {
+      color: #f26522;
+      margin-right: 15px;
+    }
+    .podcast-series__subscribe-anchor:hover i,
+    .podcast-series__subscribe-anchor :focus i {
+      color: #fff;
+    }
 
-  .podcast-series__subscribe-to-anchor i {
-    margin-right: 15px;
-  }
-
-  .section-header--podcast-series {
-    padding-top: 35px;
-  }
+.podcast-series__latest-episodes {
+  f:f;
+}

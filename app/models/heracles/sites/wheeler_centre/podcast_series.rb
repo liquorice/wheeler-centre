@@ -6,6 +6,7 @@ module Heracles
           {
             fields: [
               {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :intro, type: :content},
               {name: :description, type: :content},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark series as explicit?"},
               {name: :featured, type: :boolean, defaults: {value: false}, question_text: "Make featured podcast"},
