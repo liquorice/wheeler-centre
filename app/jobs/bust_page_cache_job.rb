@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'digest/md5'
 
-class CacheBusterJob < Que::Job
+class BustPageCacheJob < Que::Job
   def run(id)
     @page_check = PageCacheCheck.find(id)
 
