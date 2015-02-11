@@ -619,6 +619,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   launchy
   memcachier
+  memoit
   meta-tags
   minitest
   net-scp

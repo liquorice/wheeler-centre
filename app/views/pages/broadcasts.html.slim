@@ -8,18 +8,30 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .page__content
-    .page__body.page__body--events.copy
-      - if recordings.results.present?
-        .events
-          - recordings.results.each do |recording|
-            a href=recording.absolute_url
-              h3.event__title
-                = recording.title
-          .pagination-context.pagination-context--bottom
-            ' Page
-            = (params[:page] || 1)
-            em &nbsp;of&nbsp;
-            = recordings.results.total_pages
-          .pagination-bottom
-            = paginate recordings.results, outer_window: 4
+  .broadcasts
+    - if page.fields[:intro].data_present?
+      .intro.broadcasts__intro.column-wrapper
+        .column-narrow.copy
+          = render_content page.fields[:intro]
+
+    - if recordings.results.present?
+      .column-wrapper
+        .section-header
+          h2 Latest broadcasts
+        .column-wide
+          .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
+            - recordings.results.first(6).each do |post|
+              = render "partials/recording_snap_block", post: post, show_type: true, aspect: :landscape, show_summary: true
+          a.block-link href=broadcasts_archive_page.absolute_url Explore our full archive &rsaquo;
+
+    / Content-block
+    - if page.fields[:middle].data_present?
+      .content-block
+        = render_content_in_sections page.fields[:middle]
+
+    / Main podcasts line
+
+    / Content-block
+    - if page.fields[:end].data_present?
+      .content-block
+        = render_content_in_sections page.fields[:end]

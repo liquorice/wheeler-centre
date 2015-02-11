@@ -60,6 +60,7 @@ gem "embedly"
 
 # Application
 gem "iso8601"
+gem "memoit"
 
 # Utilities
 gem "ffaker"

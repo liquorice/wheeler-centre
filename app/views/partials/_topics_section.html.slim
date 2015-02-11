@@ -4,7 +4,7 @@
     h2 Topics
     .intro.intro--small.column-narrow.copy
       p = intro
-  .column-wide data-view-grouper={elementsSelector: ".topics-section__item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, phoneWide: 1, phone: 1 }}.to_json
+  .column-wide data-view-grouper={elementsSelector: ".topics-section__item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, "phone-wide" => 1, phone: 1 }}.to_json
     - primary_topics.each do |topic|
       .topics-section__item
         a href=topic.absolute_url = topic.title

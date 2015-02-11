@@ -7,4 +7,7 @@
           / like Events > Series, Presenter into Event, Series, Presenters
           - active = is_or_is_descendant_of(current, page) && (page.depth > 0 || page == current || page.id == current.parent.id && !pages.map(&:id).include?(current.id))
           a.masthead-contextual__navigation-anchor href=page.absolute_url class=("masthead-contextual__navigation-anchor--active" if active)
-            = page.title
+            - if page.fields[:nav_title] && page.fields[:nav_title].data_present?
+              = page.fields[:nav_title].value
+            - else
+              = page.title

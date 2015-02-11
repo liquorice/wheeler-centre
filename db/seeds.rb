@@ -348,6 +348,17 @@ guests.locked = true
 guests.page_order_position = :last if guests.new_record?
 guests.save!
 
+# Writings -> Archive
+past_writings = Heracles::Sites::WheelerCentre::BlogArchive.find_or_initialize_by(url: "writings/archive")
+past_writings.site = site
+past_writings.parent = blog_index
+past_writings.title = "Archive"
+past_writings.slug = "archive"
+past_writings.published = true
+past_writings.locked = true
+past_writings.page_order_position = :last if past_writings.new_record?
+past_writings.save!
+
 # Broadcasts index page
 # ------------------------------------------------------------------------------
 broadcasts_index = Heracles::Sites::WheelerCentre::Broadcasts.find_or_initialize_by(url: "broadcasts")
@@ -398,6 +409,18 @@ unless wheeler_podcast
   result = Heracles::CreatePage.call(site: site, page_type: "podcast_series", page_params: params)
   wheeler_podcast = result.page
 end
+
+# Broadcasts -> Past broadcasts
+past_broadcasts = Heracles::Sites::WheelerCentre::BroadcastsArchive.find_or_initialize_by(url: "broadcasts/past-broadcasts")
+past_broadcasts.site = site
+past_broadcasts.parent = broadcasts_index
+past_broadcasts.title = "Past broadcasts"
+past_broadcasts.slug = "past-broadcasts"
+past_broadcasts.published = true
+past_broadcasts.locked = true
+past_broadcasts.page_order_position = :last if past_broadcasts.new_record?
+past_broadcasts.save!
+
 
 # People page
 # ------------------------------------------------------------------------------

@@ -143,12 +143,21 @@ module ApplicationHelper
     site.pages.find_by_url("writings")
   end
 
+  def blog_archive_page
+    blog_page.children.of_type("blog_archive").first
+  end
+
+
   ### --------------------------------------------------------------------------
   ### Broadcasts
   ### --------------------------------------------------------------------------
 
   def broadcasts_page
     site.pages.find_by_url("broadcasts")
+  end
+
+  def broadcasts_archive_page
+    broadcasts_page.children.of_type("broadcasts_archive").first
   end
 
   def main_podcast
