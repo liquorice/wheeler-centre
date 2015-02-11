@@ -9,8 +9,6 @@ module Heracles
             fields: [
               {name: :intro, type: :content, hint: "Sits above everything on the page"},
               {name: :middle, type: :content, hint: "Sits between 'Latest' and 'Podcasts'"},
-              # Podcasts
-              {name: :main_podcasts, type: :associated_pages, page_type: :podcast_series},
               {name: :end, type: :content, hint: "Sits after 'Podcasts'"},
             ]
           }
