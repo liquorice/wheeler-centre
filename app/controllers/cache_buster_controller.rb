@@ -11,7 +11,7 @@ class CacheBusterController < ActionController::Metal
 
       # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
       CacheBusterJob.enqueue hit.id if hit.updated_at <= 5.minutes.ago
-      self.response_body = ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Reactive Cache Buster updated at: #{hit.updated_at}'); } } })();"
+      self.response_body = params[:debug].present? ? ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Reactive Cache Buster updated at: #{hit.updated_at}'); } } })();" : ''
     end
   end
 end
