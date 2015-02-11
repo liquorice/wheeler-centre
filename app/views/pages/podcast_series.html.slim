@@ -20,32 +20,36 @@
         .column-mid.copy
           = render_content page.fields[:intro]
 
+    - if page.episodes.results.present?
+      .column-wrapper
+        .column-full
+          .podcast-series__latest-episodes.gradient-top-down
+            .section-header
+              h2 Latest episodes
+            .podcast-series__latest-episodes-grid.clearfix
+                / TODO: Make a podcast snap block that shows up to 4-6 episodes here;
+                / Some placeholder boxes here to illustrate style
+                .podcast-snap
+                .podcast-snap
+                .podcast-snap
+                .podcast-snap
+                .podcast-snap
 
-    .column-wrapper
-      .column-full
-        .podcast-series__latest-episodes.gradient-top-down
-          .section-header
-            h2 Latest episodes
+      .column-wrapper
+        .column-full.clearfix
+          - if page.fields[:description].present?
+            .podcast-series__full-description.copy
+              = render_content page.fields[:description]
+          .podcast-series__all-episodes
+            .section-header
+              h2 All episodes
+            - if page.episodes.results.present?
+              .podcast-series__all-episodes-list
+                - page.episodes.results.each do |episode|
+                  a.podcast-series__all-episodes-item.clearfix href=episode.absolute_url
+                    span.podcast-series__all-episodes-date 1 Nov 14
+                    h3.podcast-series__all-episodes-title
+                      = episode.title
+                    span.podcast-series__all-episodes-duration
+                     ' 02:05:92
 
-  /   .column-wrapper
-  /     .column-full.clearfix
-  /       .podcast-series__description.copy
-  /         = render_content page.fields[:description]
-  /       .podcast-series__latest-episodes
-  /         .podcast-series__subscribe-to
-  /           a.podcast-series__subscribe-to-anchor href="#"
-  /             i.fa.fa-rss-square
-  /             ' Subscribe to this podcast
-  /         .section-header.section-header--podcast-series
-  /           h2 Latest episode
-
-  / .podcast-series
-  /   .column-wrapper
-  /     .column-mid.copy
-  /       = page.title
-  /       - if page.episodes.results.present?
-  /         ul
-  /           - page.episodes.results.each do |episode|
-  /             li
-  /               a href=episode.absolute_url
-  /                 = episode.title
