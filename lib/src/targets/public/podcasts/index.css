@@ -407,3 +407,80 @@
       font-size: 1.7rem;
       line-height: 1.4;
     }
+
+/* Podcast: episode */
+
+.podcast-episode {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.breakpoint-tablet .podcast-episode {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.breakpoint-phone-wide .podcast-episode,
+.breakpoint-phone .podcast-episode {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.podcast-episode__header {
+  font-family: var(--font-sans);
+  text-align: center;
+  margin-bottom: 50px;
+}
+.breakpoint-tablet .podcast-episode__header,
+.breakpoint-phone-wide .podcast-episode__header,
+.breakpoint-phone .podcast-episode__header {
+  margin-bottom: 20px;
+}
+
+  .podcast-episode__byline {
+    color: #888;
+    font-size: 15px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  .breakpoint-phone-wide .podcast-episode__byline,
+  .breakpoint-phone .podcast-episode__byline {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+    .podcast-episode__byline a {
+      text-decoration: underline;
+      color: #666;
+    }
+      .podcast-episode__byline a:hover,
+      .podcast-episode__byline a:focus {
+        color: #222;
+      }
+
+    .podcast-episode__byline-separator {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+  .podcast-episode__title {
+    color: var(--primary-color);
+    font-size: 48px;
+    font-size: 4.8rem;
+    font-weight: bold;
+    margin-top: 25px;
+  }
+  .breakpoint-tablet .podcast-episode__title {
+    font-size: 38px;
+    font-size: 3.8rem;
+  }
+  .breakpoint-phone-wide .podcast-episode__title {
+    font-size: 30px;
+    font-size: 3rem;
+  }
+  .breakpoint-phone .podcast-episode__title {
+    font-size: 28px;
+    font-size: 2.8rem;
+  }
+
+.podcast-episode__body .section--normal {
+  max-width: var(--column-mid);
+  position: relative;
+}

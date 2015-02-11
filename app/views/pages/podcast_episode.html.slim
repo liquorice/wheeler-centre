@@ -7,13 +7,16 @@
 
 = area :main do
   .podcast-episode
-    .column-wrapper
-      .column-narrow.copy
-        h1= page.title
-        = render_content_in_sections page.fields[:description]
-
-        .podcast-episode__series
-          p
-            ' Part of:
+    .podcast-episode__header.column-wrapper
+      .column-wide
+        p.podcast-episode__byline
+          ' An episode of
+          a href= page.series.absolute_url
             = page.series.title
+          span.podcast-episode__byline-separator ·
+          ' Published on
+          = page.fields[:publish_date]
+        h1.podcast-episode__title= page.title
 
+    .podcast-episode__body.column-wrapper
+      = render_content_in_sections page.fields[:description]
