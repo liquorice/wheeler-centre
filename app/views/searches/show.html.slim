@@ -4,21 +4,70 @@
 
 = area :main do
   .search-page
-    .column-wrapper.search-page__header
+    .column-wrapper
       - if @search.results.blank?
+        .search-page__header
           h1.search-page__title Sorry, no results for &ldquo;#{params[:q]}&rdquo;
-          = render "partials/topics_section", intro: "Explore the other areas of interest across our site."
+        = render "partials/topics_section", intro: "Explore the other areas of interest across our site."
       - else
+        .search-page__header
           h1.search-page__title Search results for &ldquo;#{params[:q]}&rdquo;
-          .search-page__latest.column-wrapper
-            h2.blog-index__latest-header Latest
-            .column-wide.clearfix
-              .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
-          .column-wrapper
-            .column-full
-              - if @search.results.present?
-                .search__results
-                  h2.events__subtitle = t('content.search.all_results')
-                  .results-list
-                    - @search.results.each do |result|
-                      = result.title
+        - if @search.results.total_pages > 1
+          .pagination-context.pagination-context--top
+            ' Page
+            = (params[:page] || 1)
+            em &nbsp;of&nbsp;
+            = @search.results.total_pages
+          .pagination-top
+            = paginate @search.results, outer_window: 4
+        .search-page__ordering
+          ul.search-order__navigation-list
+            li.search-order__navigation-item
+              a.search-order__navigation-anchor href=url_for(params.merge(order: ""))
+                ' Most relevant
+            li.search-order__navigation-item
+              / a.search-order__navigation-anchor href="/search?order=newest&q=#{params[:q]}"
+              a.search-order__navigation-anchor href=url_for(params.merge(order: "newest"))
+                ' Newest
+            li.search-order__navigation-item
+              a.search-order__navigation-anchor href=url_for(params.merge(order: "oldest"))
+                ' Oldest
+        .search-page__faceting
+          ul.search-facets__navigation-list
+            - if @search.facet.rows.count == 1
+              li.search-facets__navigation-item
+                a.search-facets__navigation-anchor href=url_for(params.merge(page_type: ""))
+                  ' Reset
+            - @search.facet.rows.each do |facet|
+              li.search-facets__navigation-item
+                a.search-facets__navigation-anchor href=url_for(params.merge(page_type: facet.value))
+                  = facet.value.humanize + " (#{facet.count})"
+        .column-full
+          .column-mid
+            - if @search.results.present?
+              .search-results
+                - if @search.facet.rows.count == 1
+                  / TODO Make this nicer - eg: "All Venues"
+                  h2.search-results__subtitle = t('content.search.all_results_of_type ') + @search.facet.rows.first.value.humanize
+                - else
+                  h2.search-results__subtitle = t('content.search.all_results')
+                .results-list
+                  - @search.results.each do |result|
+                    .search-results__block
+                      a.search-results__anchor href=result.url
+                        .search-results__text
+                          h3.search-results__title
+                            = result.title
+                          p.search-results__type
+                            = result.page_type.humanize
+                          span.search-results__action
+                            ' View
+                            i.fa.fa-angle-right
+          - if @search.results.total_pages > 1
+            .pagination-context.pagination-context--bottom
+              ' Page
+              = (params[:page] || 1)
+              em &nbsp;of&nbsp;
+              = @search.results.total_pages
+            .pagination-bottom
+              = paginate @search.results, outer_window: 4
