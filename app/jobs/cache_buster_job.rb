@@ -3,10 +3,10 @@ require 'digest/md5'
 
 class CacheBusterJob < Que::Job
   def run(id)
-    @page_check = CacheBuster.find(id)
+    @page_check = PageCacheCheck.find(id)
 
-    purge_page if should_purge_page?
-    update_page_check
+    #purge_page if should_purge_page?
+    #update_page_check
   end
 
   private
@@ -16,7 +16,7 @@ class CacheBusterJob < Que::Job
   end
 
   def purge_page
-    client = Varnisher::Purger.new('PURGE', @page_check.path, ENV['CDN_HOST'])
+    client = Varnisher::Purger.new('PURGE', @page_check.edge_uri, ENV['CDN_HOST'])
     purge = client.send
   end
 
@@ -26,7 +26,7 @@ class CacheBusterJob < Que::Job
 
   memoize \
   def current_page_origin_uri
-    edge_uri  = URI(@page_check.path)
+    edge_uri  = URI(@page_check.edge_uri)
     edge_hostname   = edge_uri.port == 80 ? edge_uri.hostname : "#{edge_uri.hostname}:#{edge_uri.port}"
     origin_hostname = Heracles::Site.find_by_hostname(edge_hostname).origin_hostname
     "http://#{origin_hostname}#{edge_uri.path}"

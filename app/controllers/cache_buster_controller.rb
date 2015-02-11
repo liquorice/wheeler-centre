@@ -7,7 +7,7 @@ class CacheBusterController < ActionController::Metal
     unless params[:edge_uri].blank?
       # It checks in the Redis DB to see when the page was last accessed
       edge_uri = params[:edge_uri].gsub('/_check', '')
-      hit = CacheBuster.find_or_create_by path: edge_uri
+      hit = PageCacheCheck.find_or_create_by edge_uri: edge_uri
 
       # If it was more than 5 minutes ago (or never before), then it fires off a background job to check the page
       CacheBusterJob.enqueue hit.id if hit.updated_at <= 5.minutes.ago
