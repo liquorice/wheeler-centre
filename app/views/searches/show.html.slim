@@ -32,20 +32,10 @@
             li.search-order__navigation-item
               a.search-order__navigation-anchor href=url_for(params.merge(order: "oldest"))
                 ' Oldest
-        .search-page__faceting
-          ul.search-facets__navigation-list
-            - if @search.facet.rows.count == 1
-              li.search-facets__navigation-item
-                a.search-facets__navigation-anchor href=url_for(params.merge(page_type: ""))
-                  ' Reset
-            - @search.facet.rows.each do |facet|
-              li.search-facets__navigation-item
-                a.search-facets__navigation-anchor href=url_for(params.merge(page_type: facet.value))
-                  = facet.value.humanize + " (#{facet.count})"
         .column-full
-          .column-mid
+          .column-wide.clearfix
             - if @search.results.present?
-              .search-results
+              .search-page__results
                 - if @search.facet.rows.count == 1
                   / TODO Make this nicer - eg: "All Venues"
                   h2.search-results__subtitle = t('content.search.all_results_of_type ') + @search.facet.rows.first.value.humanize
@@ -58,11 +48,22 @@
                         .search-results__text
                           h3.search-results__title
                             = result.title
-                          p.search-results__type
-                            = result.page_type.humanize
                           span.search-results__action
                             ' View
                             i.fa.fa-angle-right
+                          p.search-results__type
+                            = result.page_type.humanize
+            .search-page__faceting
+              / At the moment only one facet can be applied at any time
+              ul.search-facets__navigation-list
+                - if @search.facet.rows.count == 1
+                  li.search-facets__navigation-item
+                    a.search-facets__navigation-anchor href=url_for(params.merge(page_type: ""))
+                      ' Clear
+                - @search.facet.rows.each do |facet|
+                  li.search-facets__navigation-item
+                    a.search-facets__navigation-anchor href=url_for(params.merge(page_type: facet.value))
+                      = facet.value.humanize + " (#{facet.count})"
           - if @search.results.total_pages > 1
             .pagination-context.pagination-context--bottom
               ' Page

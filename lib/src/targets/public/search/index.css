@@ -38,7 +38,9 @@
   }
 
   .search-page__faceting {
+    float: left;
     font-family: var(--font-sans);
+    width: 30%;
   }
 
     .search-order__navigation-list {
@@ -102,6 +104,12 @@
       border-color: #d9d9d9;
       color: #4a4a4a;
     }
+
+  .search-page__results {
+    float: left;
+    padding-right: 35px;
+    width: 70%;
+  }
 
   .search-results__block {
     font-family: var(--font-sans);
