@@ -1,0 +1,32 @@
+/* Search list */
+
+.search-page {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.breakpoint-tablet .search-page {
+  padding-top: 40px;
+}
+.breakpoint-phone-wide .search-page,
+.breakpoint-phone .search-page {
+  padding-top: 25px;
+}
+
+  .search-page__header {
+    font-family: var(--font-sans);
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .breakpoint-tablet .search-page__header {
+    margin-bottom: 30px;
+  }
+  .breakpoint-phone-wide .search-page__header,
+  .breakpoint-phone .search-page__header {
+    margin-bottom: 20px;
+  }
+    .search-page__title {
+      color: var(--primary-color);
+      font-size: 48px;
+      font-size: 4.8rem;
+      font-weight: bold;
+    }
