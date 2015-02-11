@@ -5,7 +5,7 @@ class CacheBusterController < ActionController::Metal
     headers["Content-Type"] = "application/javascript"
 
     if params[:edge_url].present?
-      edge_url = params[:edge_url].gsub("/_check", "")
+      edge_url = params[:edge_url].gsub("http:/", "http://").gsub("https:/", "https://")
       page_check = PageCacheCheck.find_or_create_by(edge_url: edge_url)
 
       BustPageCacheJob.enqueue page_check.id if page_check.requires_check?

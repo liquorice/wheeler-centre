@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   # Reactive Cache Buster
-  get '_check/:edge_url' => "cache_buster#index", as: :cache_buster_check
+  get '_check/*edge_url/_check.js' => "cache_buster#index", as: :cache_buster_check
 
   # Admin
   resource :admin, only: [:show]
