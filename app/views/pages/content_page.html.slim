@@ -3,6 +3,8 @@
 
 = area :main do
   .content-page__main.column-wrapper
+    .content-page__header
+      h1.content-page__title == widont_format markdown_line page.title
     .content-page__nav-wrapper
       .content-page__nav
         h3.content-page__nav-title
@@ -12,8 +14,6 @@
             = page.root.title
         = render "partials/page_nav_children", parent: page.root, current: page
     .content-page__content.clearfix
-      .content-page__header
-        h1.content-page__title == widont_format markdown_line page.title
       - if page.fields[:intro].data_present?
         .content-page__intro
           = render_content_in_sections page.fields[:intro]
