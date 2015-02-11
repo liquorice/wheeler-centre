@@ -29,11 +29,9 @@
             .podcast-series__latest-episodes-grid.clearfix
                 / TODO: Make a podcast snap block that shows up to 4-6 episodes here;
                 / Some placeholder boxes here to illustrate style
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
+                - page.episodes.results.first(5).each do |episode|
+                  .podcast-snap
+                    h1= episode.title
 
       .column-wrapper
         .column-full.clearfix
@@ -42,12 +40,12 @@
               - if page.fields[:hero_image].data_present?
                   img src=page.fields[:hero_image].asset.content_thumbnail_url alt="Portrait of #{page.title}"
               = render_content page.fields[:description]
-          .podcast-series__all-episodes
-            .section-header
-              h2 Older episodes
-            - if page.episodes.results.present?
+          - if page.episodes.results.present? && page.episodes.total > 5
+            .podcast-series__all-episodes
+              .section-header
+                h2 Older episodes
               .podcast-series__all-episodes-list
-                - page.episodes.results.each do |episode|
+                - page.episodes.results.drop(5).each do |episode|
                   a.podcast-series__all-episodes-item.clearfix href=episode.absolute_url
                     span.podcast-series__all-episodes-date
                       = episode.fields[:publish_date]
