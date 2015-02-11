@@ -73,7 +73,6 @@
     height: 60px;
   }
   .breakpoint-tablet .podcasts-index__feature-block {
-    border: 1px solid red;
     min-height: 400px;
   }
   .breakpoint-phone-wide .podcasts-index__feature-block,
