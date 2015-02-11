@@ -6,9 +6,27 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
+
+  .podcast-series
+    .podcast-series__top
+      .podcast-series__header
+        h1.podcast-series__title == widont_format markdown_line page.title
+
+    .column-wrapper
+      .column-full.clearfix
+        .podcast-series__description.copy
+          = render_content page.fields[:description]
+        .podcast-series__latest-episodes
+          .podcast-series__subscribe-to
+            a.podcast-series__subscribe-to-anchor href="#"
+              i.fa.fa-rss-square
+              ' Subscribe to this podcast
+          .section-header.section-header--podcast-series
+            h2 Latest episode
+
   .podcast-series
     .column-wrapper
-      .column-narrow.copy
+      .column-mid.copy
         = page.title
         - if page.episodes.results.present?
           ul
