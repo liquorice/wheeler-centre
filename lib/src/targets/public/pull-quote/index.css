@@ -1,9 +1,9 @@
 .copy .figure--pull-quote.figure__display--default,
-.copy .figure--pull-quote.figure__display--full-width {
+.figure--pull-quote.figure__display--full-width {
   padding: 0;
   margin-bottom: 35px;
 }
-  .copy .figure--pull-quote.figure__display--full-width {
+  .figure--pull-quote.figure__display--full-width {
     margin-top: -35px; /* Offset the .section--full */
     padding-left: 35px;
     padding-right: 35px;
