@@ -19,11 +19,11 @@ module Heracles
         ### Accessors
 
         def reviews
-          children.of_type("review")
+          children.published.of_type("review")
         end
 
         def responses
-          children.of_type("response")
+          children.published.of_type("response")
         end
 
       end
