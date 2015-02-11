@@ -67,8 +67,8 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
       .masthead-nav-secondary__search-box
         button.masthead-nav-secondary__search-close
           i.fa.fa-times
-        form.masthead-nav-secondary__search-form.clearfix action=""
-          input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…"
+        form.masthead-nav-secondary__search-form.clearfix action=main_app.search_path method="GET"
+          input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…" name="q" value=params[:q].presence
           button.masthead-nav-secondary__search-button
             i.fa.fa-search
       a.masthead-nav-secondary__anchor.masthead-nav-secondary__anchor--search href="#"
