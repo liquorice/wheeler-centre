@@ -1,10 +1,9 @@
-require "open-uri"
+require 'open-uri'
 require 'digest/md5'
 
-class CacheBusterJob < Que::Job
+class BustPageCacheJob < Que::Job
   def run(id)
-    @page_check = CacheBuster.find(id)
-    @uri = "http://#{ENV['CDN_ORIGIN']}#{@page_check.path}"
+    @page_check = PageCacheCheck.find(id)
 
     purge_page if should_purge_page?
     update_page_check
@@ -13,12 +12,13 @@ class CacheBusterJob < Que::Job
   private
 
   def should_purge_page?
-    @page_check.checksum.present? && @page_check.checksum != current_page_checksum
+    Rails.env.production? && @page_check.checksum.present? && @page_check.checksum != current_page_checksum
   end
 
   def purge_page
-    client = Varnisher::Purger.new('PURGE', @page_check.path, ENV['CDN_HOST'])
-    purge = client.send
+    client = Varnisher::Purger.new('PURGE', @page_check.page_path, @page_check.edge_hostname)
+    p client.send
+    p '###'
   end
 
   def update_page_check
@@ -36,9 +36,9 @@ class CacheBusterJob < Que::Job
     basic_auth_password = ENV['BASIC_AUTH_PASSWORD']
 
     source = if basic_auth_password && basic_auth_user
-      open(@uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
+      open(@page_check.origin_uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
     else
-      open(@uri)
+      open(@page_check.origin_uri)
     end
 
     source.read

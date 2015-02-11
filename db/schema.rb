@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210130300) do
+ActiveRecord::Schema.define(version: 20150211085507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,15 +52,6 @@ ActiveRecord::Schema.define(version: 20150210130300) do
 
   add_index "assets", ["file_types"], name: "index_assets_on_file_types", using: :btree
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
-
-  create_table "cache_busters", force: true do |t|
-    t.string   "path",       null: false
-    t.string   "checksum"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cache_busters", ["path"], name: "index_cache_busters_on_path", unique: true, using: :btree
 
   create_table "heracles_site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.uuid     "site_id",    null: false
@@ -107,6 +98,15 @@ ActiveRecord::Schema.define(version: 20150210130300) do
   add_index "insertions", ["field"], name: "index_insertions_on_field", using: :btree
   add_index "insertions", ["inserted_key"], name: "index_insertions_on_inserted_key", using: :btree
   add_index "insertions", ["page_id"], name: "index_insertions_on_page_id", using: :btree
+
+  create_table "page_cache_checks", force: true do |t|
+    t.string   "edge_uri",   null: false
+    t.string   "checksum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "page_cache_checks", ["edge_uri"], name: "index_page_cache_checks_on_edge_uri", unique: true, using: :btree
 
   create_table "pages", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "slug",                           null: false
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20150210130300) do
     t.boolean  "published",          default: false
     t.json     "transloadit_params", default: {},    null: false
     t.string   "preview_token",                      null: false
+    t.string   "origin_hostname"
   end
 
   add_index "sites", ["hostnames"], name: "index_sites_on_hostnames", using: :gin
