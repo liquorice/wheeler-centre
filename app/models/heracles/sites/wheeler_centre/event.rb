@@ -182,6 +182,10 @@ module Heracles
             fields[:series].pages.map(&:id)
           end
 
+          string :event_series_titles, multiple: true do
+            fields[:series].pages.map(&:title)
+          end
+
           string :venue_id do
             fields[:venue].pages.first.id if fields[:venue].data_present?
           end
