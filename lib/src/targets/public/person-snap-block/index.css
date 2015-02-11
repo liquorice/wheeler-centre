@@ -28,22 +28,13 @@
   }
   .person-snap__title {
     font-family: var(--font-sans);
-    font-size: 23px;
-    font-size: 2.3rem;
     font-weight: bold;
     padding-top: 6px;
     margin-bottom: 14px;
-    line-height: 0.9;
   }
-    /* NFI why this is necessary */
-    .breakpoint-phone-wide .person-snap__title,
-    .breakpoint-phone .person-snap__title {
-      line-height: 0.8;
-    }
     .person-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
-      line-height: 1.4;
     }
       .breakpoint-phone-wide .person-snap-block .title-text,
       .breakpoint-phone .person-snap-block .title-text {

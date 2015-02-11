@@ -1,0 +1,19 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :masthead_contextual_navigation do
+  - year = page.ancestors.of_type("vpla_year").first
+  - pages = [year] + year.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .content-page__main.column-wrapper
+    .content-page__header.vpla-year__header
+      h1.content-page__title == widont_format markdown_line page.title
+    .content-page__content.clearfix
+      - if page.fields[:intro].data_present?
+        .content-page__intro
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:body].data_present?
+        .content-page__body
+          = render_content_in_sections page.fields[:body]

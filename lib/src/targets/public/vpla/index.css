@@ -1,0 +1,106 @@
+.vpla-year__header {
+  margin-bottom: 35px;
+}
+
+
+.vpla-year__nav {
+  margin-top: 45px;
+  margin-bottom: 35px
+}
+
+.vpla-categories {
+  margin-top: 35px;
+}
+
+.vpla-category__list {
+  padding-top: 24px;
+  border-top: 1px solid #ededed;
+}
+
+.vpla-book-snap__image {
+  overflow: hidden;
+}
+
+.vpla-book-snap__image img {
+  transition-property: transform, opacity;
+  transition-duration: 900ms;
+  opacity: 1;
+  width: 100%;
+}
+    .vpla-book-snap:hover .vpla-book-snap__image img {
+      transform: scale3d(1.1, 1.1, 1);
+      opacity: 0.85;
+    }
+
+.vpla-book-snap__title {
+  font-family: var(--font-sans);
+  font-weight: bold;
+  margin-bottom: 14px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+
+.vpla-year__header {
+  text-align: center;
+}
+
+
+.vpla-year__sub-title {color: #888;
+  font-size: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+.breakpoint-phone-wide .vpla-year__sub-title,
+.breakpoint-phone .vpla-year__sub-title {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+  .vpla-year__sub-title a {
+    text-decoration: underline;
+    color: #666;
+  }
+    .vpla-year__sub-title a:hover,
+    .vpla-year__sub-title a:focus {
+      color: #222;
+    }
+
+  .vpla-year__sub-title-separator {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+
+.vpla-book__image {
+  float: right;
+  width: 30%;
+}
+
+.vpla-book__links {
+  font-size: 17px;
+  font-size: 1.7rem;
+}
+
+.vpla-book__author {
+  margin-top: 35px;
+}
+  .vpla-book__author:before {
+    content: "";
+    display: block;
+    border-top: 2px solid #ededed;
+    margin-bottom: 45px;
+    width: 20%;
+  }
+
+
+.vpla-book__judges-report,
+.vpla-book__blurb {
+  border-top: 1px solid #ededed;
+  padding-bottom: 35px;
+}
+
+.vpla-book__judges-report .section-header,
+.vpla-book__blurb .section-header {
+  margin-top: 35px;
+  padding-bottom: 35px;
+}

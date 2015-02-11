@@ -1,0 +1,43 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :masthead_contextual_navigation do
+  - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .content-page__main.column-wrapper
+    .content-page__header.vpla-year__header
+      h1.content-page__title == widont_format markdown_line page.title
+    .content-page__content.clearfix
+      - if page.fields[:intro].data_present?
+        .content-page__intro
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:body].data_present?
+        .content-page__body
+          = render_content_in_sections page.fields[:body]
+
+  - if page.categories.present?
+    .column-wrapper.vpla-categories
+      .column-narrow
+        .intro.copy
+          p The Premier’s 21 Shortlist
+    - page.categories.each do |category|
+      - if category.books.present?
+        .column-wrapper.vpla-category__list
+          .column-full
+            .section-header
+              h2 = category.title
+            .vpla-category__books.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              - category.books.each do |book|
+                .snap-block
+                  a.vpla-book-snap href=book.absolute_url
+                    - if book.fields[:cover_image].data_present?
+                      .vpla-book-snap__image
+                        img src=book.fields[:cover_image].asset.content_small_url alt="Cover image for #{book.title}"
+                    h3.vpla-book-snap__title
+                      span.title-text = book.title
+                      - if book.fields[:author].data_present?
+                        span.title-tags
+                          '  &nbsp;/&nbsp;
+                          = book.fields[:author].value
