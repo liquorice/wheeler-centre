@@ -28,22 +28,14 @@
   }
   .recording-snap__title {
     font-family: var(--font-sans);
-    font-size: 23px;
-    font-size: 2.3rem;
     font-weight: bold;
     padding-top: 6px;
     margin-bottom: 14px;
-    line-height: 0.9;
+    line-height: 1.3;
   }
-    /* NFI why this is necessary */
-    .breakpoint-phone-wide .recording-snap__title,
-    .breakpoint-phone .recording-snap__title {
-      line-height: 0.8;
-    }
     .recording-snap-block .title-text {
       font-size: 17px;
       font-size: 1.7rem;
-      line-height: 1.4;
     }
       .breakpoint-phone-wide .recording-snap-block .title-text,
       .breakpoint-phone .recording-snap-block .title-text {

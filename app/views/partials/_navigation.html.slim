@@ -13,7 +13,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
               - group.each do |topic|
                 li.masthead-nav-main__dropdown-item
                   a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
-                    = topic.title
+                    == markdown_line topic.title
     li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "a"}.to_json
       a.masthead-nav-main__anchor href="/events"
         ' Events
@@ -23,10 +23,10 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
           li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
             span Our calendar
           li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href=events_page.absolute_url = events_page.title
+            a.masthead-nav-main__dropdown-anchor href=events_page.absolute_url == markdown_line events_page.title
           - events_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
             li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href=child.absolute_url = child.title
+              a.masthead-nav-main__dropdown-anchor href=child.absolute_url == markdown_line child.title
         - active_event_series = events_page.active_series.results
         - if active_event_series.present?
           ul.masthead-nav-main__dropdown-list
@@ -34,7 +34,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
               span Current event series
             - active_event_series.each do |series|
               li.masthead-nav-main__dropdown-item
-                a.masthead-nav-main__dropdown-anchor href=series.absolute_url = series.title
+                a.masthead-nav-main__dropdown-anchor href=series.absolute_url == markdown_line series.title
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href="/broadcasts"
         ' Broadcasts
@@ -55,7 +55,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-masthead-navigatio
               - group.each do |project|
                 li.masthead-nav-main__dropdown-item
                   a.masthead-nav-main__dropdown-anchor href=project.absolute_url
-                    = project.title
+                    == markdown_line project.title
   ul.masthead-nav-secondary.clearfix
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href="/about-us"

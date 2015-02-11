@@ -7,7 +7,6 @@ module Heracles
             fields: [
               # Image
               {name: :hero_image, type: :asset, asset_file_type: :image},
-              {name: :intro, label: "Introduction", type: :content},
               {name: :body, type: :content},
               # Listen
               {name: :listen, type: :content},
@@ -20,11 +19,11 @@ module Heracles
         ### Accessors
 
         def reviews
-          children.of_type("review")
+          children.published.of_type("review")
         end
 
         def responses
-          children.of_type("response")
+          children.published.of_type("response")
         end
 
       end

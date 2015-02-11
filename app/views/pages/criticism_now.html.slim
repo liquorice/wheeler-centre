@@ -5,18 +5,51 @@
 = area :masthead_contextual_navigation do
   ul.masthead-contextual__navigation-list
       li.masthead-contextual__navigation-item
-        a.masthead-contextual__navigation-anchor href="#"
-          ' Criticism Now
+        ' Criticism Now
 
 = area :main do
-  .page__content
-    .page__body.page__body--content-page.copy
-      = render_content page.fields["body"]
-    .events
-      - if page.events.present?
-        - page.events.each do |event|
-          p
-            a href=event.absolute_url = event.title
-    - page.primary_responses.each do |response|
-      .review
-        = render_content response.fields[:body]
+  .content-page__main.criticism-now
+    .column-wrapper
+      .content-page__header.criticism-now__header
+        h1.content-page__title == widont_format markdown_line page.title
+      .content-page__content.clearfix
+        - if page.fields[:intro].data_present?
+          .content-page__intro
+            = render_content_in_sections page.fields[:intro]
+        - if page.fields[:body].data_present?
+          .content-page__body
+            = render_content_in_sections page.fields["body"]
+
+    .criticism-now__events.column-wrapper
+      .column-wide.gradient-top-down
+        .section-header
+          h2 Events from this series
+        .criticism-now__events-snap.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 2, phone: 1 }}.to_json
+          - if page.events.present?
+            - page.events.each do |event|
+              .snap-block
+                .criticism-now-event-item.clearfix
+                  .criticism-now-event-item__image
+                    - if event.fields[:hero_image].data_present?
+                      a href=event.absolute_url
+                        image src=event.fields[:hero_image].asset.content_thumbnail_url alt="Hero image for #{event.title}"
+                  .criticism-now-event-item__details
+                    h3.criticism-now-event-item__title
+                      a href=event.absolute_url = event.title
+                    - if event.fields[:body].data_present?
+                      .criticism-now-event-item__summary.copy
+                        = force_excerptify_html render_content(event.fields[:body]), 300, "p i em strong br"
+    .criticism-now__responses.column-wrapper
+      .column-full
+        .section-header
+          h2 On criticism
+          .criticism-now__responses-snap.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "phone-wide" => 2, phone: 1 }}.to_json
+            - page.primary_responses.each do |response|
+              .snap-block
+                .criticism-now-response-item
+                  .criticism-now-response-item__body.copy
+                    = render_content response.fields[:body]
+                  .criticism-now-response-item__author
+                    ' —
+                    a href=response.fields[:url].value
+                      == strip_html(render_content(response.fields[:author]), "i em strong br")

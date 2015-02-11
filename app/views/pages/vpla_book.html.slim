@@ -1,0 +1,83 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :masthead_contextual_navigation do
+  - pages = [page.year] + page.year.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .content-page__main
+    .column-wrapper
+      .content-page__header.vpla-year__header
+        p.vpla-year__sub-title
+          - if page.fields[:author].data_present?
+            ' By
+            = page.fields[:author].value
+          - if page.fields[:category].data_present?
+            span.blog-post__byline-separator ·
+            = page.fields[:category].pages.first.title
+          - if page.fields[:publisher].data_present?
+            span.blog-post__byline-separator ·
+            = page.fields[:publisher].value
+        h1.content-page__title == widont_format markdown_line page.title
+    .content-block
+      .section--normal.copy
+        = render "partials/image", asset: page.fields[:cover_image].asset, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
+        - if page.fields[:links].data_present?
+        .figure.figure__display--right-aligned.copy.vpla-book__links
+          = render_content page.fields[:links]
+
+      / FIXME the data here has been imported into the wrong fields blurb <-> review
+      = render_content_in_sections page.fields[:blurb]
+
+      - if page.fields[:author].data_present?
+        .section--normal.vpla-book__author
+          .event-presenter.event-presenter--horizontal.clearfix
+            - if page.fields[:author_image].data_present?
+              .event-presenter__image
+                .event-presenter__image-inner
+                  img src=page.fields[:author_image].asset.content_thumbnail_url alt="Portrait of #{page.fields[:author].value}"
+            h3.event-presenter__title= page.fields[:author].value
+            .event-presenter__intro.copy
+              = render_content page.fields[:author_biography]
+
+    / Judge’s report
+    - if page.fields[:judges_report].data_present?
+      .content-block.vpla-book__judges-report
+        .column-mid
+          .section-header
+            h2 Judge’s report
+        = render_content_in_sections page.fields[:judges_report]
+
+    / Blurb
+    / FIXME the data here has been imported into the wrong fields blurb <-> review
+    - if page.fields[:review].data_present?
+      .content-block.vpla-book__blurb
+        .column-mid
+          .section-header
+            h2 Extract
+        = render_content_in_sections page.fields[:review]
+  - if page.year.categories.present?
+    .column-wrapper.vpla-categories
+      .column-narrow
+        .intro.copy
+          p The Premier’s 21 Shortlist
+    - page.year.categories.each do |category|
+      - if category.books.present?
+        .column-wrapper.vpla-category__list
+          .column-full
+            .section-header
+              h2 = category.title
+            .vpla-category__books.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              - category.books.each do |book|
+                .snap-block
+                  a.vpla-book-snap href=book.absolute_url
+                    - if book.fields[:cover_image].data_present?
+                      .vpla-book-snap__image
+                        img src=book.fields[:cover_image].asset.content_small_url alt="Cover image for #{book.title}"
+                    h3.vpla-book-snap__title
+                      span.title-text = book.title
+                      - if book.fields[:author].data_present?
+                        span.title-tags
+                          '  &nbsp;/&nbsp;
+                          = book.fields[:author].value
