@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: e9076e572214a871e356f7edd17d2d307e193a9e
+  revision: fd5d48876f4a15f25ca4236bec9a5442b05db0c7
   branch: master
   specs:
     heracles (1.0.0)
@@ -124,15 +124,15 @@ GEM
     autoprefixer-rails (5.1.5)
       execjs
       json
-    aws-sdk (2.0.22)
-      aws-sdk-resources (= 2.0.22)
-    aws-sdk-core (2.0.22)
+    aws-sdk (2.0.23)
+      aws-sdk-resources (= 2.0.23)
+    aws-sdk-core (2.0.23)
       builder (~> 3.0)
       jmespath (~> 1.0)
       multi_json (~> 1.0)
       multi_xml (~> 0.5)
-    aws-sdk-resources (2.0.22)
-      aws-sdk-core (= 2.0.22)
+    aws-sdk-resources (2.0.23)
+      aws-sdk-core (= 2.0.23)
     bcrypt (3.1.10)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
