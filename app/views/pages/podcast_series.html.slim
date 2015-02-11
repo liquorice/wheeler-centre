@@ -39,6 +39,7 @@
         .column-full.clearfix
           - if page.fields[:description].present?
             .podcast-series__full-description.copy
+              img src="http://placehold.it/400/350"
               = render_content page.fields[:description]
           .podcast-series__all-episodes
             .section-header
