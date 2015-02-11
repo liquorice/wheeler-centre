@@ -7,7 +7,7 @@ class GlobalSearch
     @search.results
   end
 
-  def event_results
-    @event_results ||= results.select { |result| result.kind_of?(Heracles::Page) && result.page_type == "event" }
+  def facet
+    @search.facet(:page_type)
   end
 end
