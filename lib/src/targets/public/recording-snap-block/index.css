@@ -33,7 +33,7 @@
     font-weight: bold;
     padding-top: 6px;
     margin-bottom: 14px;
-    line-height: 1.2;
+    line-height: 0.9;
   }
     /* NFI why this is necessary */
     .breakpoint-phone-wide .recording-snap__title,

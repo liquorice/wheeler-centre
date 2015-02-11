@@ -264,6 +264,7 @@ body {
 @import "./topic";
 @import "./people";
 @import "./person";
+@import "./person-snap-block";
 @import "./home";
 @import "./home-banners";
 @import "./podcasts";
