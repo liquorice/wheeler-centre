@@ -3,9 +3,8 @@
 - aspect = aspect || :square
 - if post.fields[:portrait].data_present?
   - image = post.fields[:portrait].asset
-- selected_primary_topics = select_primary_topics_for_page(post)
 
-- cache ["person-snap-block-1", post, show_type, hide_summary, image, selected_primary_topics, aspect] do
+- cache ["person-snap-block-1", post, show_type, hide_summary, image, post.fields[:topics].pages, aspect] do
   .snap-block
     a.person-snap.person-snap-block class="person-snap--#{aspect}" href=post.absolute_url
       span.person-snap__date
@@ -22,10 +21,10 @@
                 p = image.attribution
       h3.person-snap__title
         span.title-text == widont_format markdown_line post.title
-        - if selected_primary_topics && selected_primary_topics.present?
+        - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
-            = selected_primary_topics.first.title
+            = post.fields[:topics].pages.first.title
       - if show_summary && post.fields[:biography].data_present?
           .person-snap-block__summary.snap-block__summary.copy
             .person-snap-block__summary-inner.snap-block__summary-inner.copy

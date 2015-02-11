@@ -4,9 +4,8 @@
 - aspect = aspect || :square
 - if post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
-- selected_primary_topics = select_primary_topics_for_page(post)
 
-- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, selected_primary_topics, aspect] do
+- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, post.fields[:topics].pages, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
       time.recording-snap__date
@@ -39,10 +38,10 @@
 
       h3.recording-snap__title
         span.title-text == widont_format markdown_line post.title
-        - if selected_primary_topics && selected_primary_topics.present?
+        - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
-            = selected_primary_topics.first.title
+            = post.fields[:topics].pages.first.title
       - if post.fields[:people].data_present?
         p.recording-snap__authors
           ' With
