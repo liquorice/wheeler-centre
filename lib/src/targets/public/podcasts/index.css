@@ -313,6 +313,7 @@
   .podcast-series__latest-episodes-text {
     position: relative;
     z-index: 1;
+    padding-top: 20px;
   }
 
 .podcast-series__full-description {
