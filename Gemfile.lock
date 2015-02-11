@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 5a351011a91f3e9ff40478d72b82d7b21929a8dc
+  revision: 3c6b9a6337bbe26f76b7ab298696e20ecf3b6d7b
   branch: master
   specs:
     heracles (1.0.0)
@@ -330,7 +330,7 @@ GEM
       multi_json (~> 1.0)
     json (1.8.2)
     jwt (1.2.0)
-    kaminari (0.16.2)
+    kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
