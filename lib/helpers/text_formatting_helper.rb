@@ -9,6 +9,7 @@ module TextFormattingHelper
     end
   end
   def widont_format(text)
+    return unless text.present?
     # Only make the final space non-breaking if the final
     # two words fit within 20 characters.
     if text.length > 20 && text[-20..-1][/\s+\S+\s+\S+$/].nil?
