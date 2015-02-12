@@ -52,7 +52,7 @@
 
 .topic-page__nav {
   margin-top: 16px;
-  z-index: 100;
+  z-index: 30;
   margin-bottom: 15px;
   position: relative;
   margin-left: auto;

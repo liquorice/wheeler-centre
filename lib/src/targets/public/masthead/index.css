@@ -20,13 +20,17 @@
 
   .masthead__navigation {
     padding-bottom: 25px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .breakpoint-phone .masthead__navigation {
     background-color: color(var(--primary-color) shade(5%));
     height: 40px;
     padding-bottom: 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -69,8 +73,7 @@
 
     .breakpoint-phone .masthead-nav-main {
       display: none;
-      background-color: var(--primary-color-lighter);
-      border-bottom: 1px solid var(--primary-color-light);
+      background-color: var(--primary-color-darker);
       margin-left: 0;
       position: absolute;
       top: 40px;
@@ -110,7 +113,7 @@
         .breakpoint-phone .masthead-nav-main__item--break {
           padding-right: 0;
           margin-right: 0;
-          border-bottom: 1px solid var(--primary-color-light);
+          /*border-bottom: 1px solid var(--primary-color-light);*/
         }
 
           /* Little border */
@@ -198,7 +201,7 @@
         }
 
         .breakpoint-phone .masthead-nav-main__anchor {
-          color: #333;
+          color: #fff;
           display: block;
         }
 
@@ -237,6 +240,11 @@
         list-style: none;
         padding-right: 60px;
       }
+      .breakpoint-phone .masthead-nav-main__dropdown-list {
+        padding-right: 15px;
+        width: 50%;
+      }
+
         .masthead-nav-main__dropdown-list--half {
           width: 50%;
         }
@@ -482,10 +490,17 @@
     margin-left: 80px;
     width: 244px;
   }
+    .breakpoint-phone-wide.masthead__logo,
+    .breakpoint-phone .masthead__logo {
+      margin-left: auto;
+      margin-right: auto;
+      height: 40px;
+      width: 100%;
+    }
 
     .masthead__logo-anchor {
       background-image: url("wheeler-centre-logo.svg");
-      background-size: 244px 50px;
+      background-size: 100% 100%;
       color: transparent;
       display: block;
       font: 0/0 a;

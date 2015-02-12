@@ -21,7 +21,8 @@
                   img.upcoming-events__image alt="" src=image.content_thumbnail_url
               span.upcoming-events__item-text-container.clearfix
                 time.upcoming-events__item-date datetime=l(event.fields[:start_date].value, format: :rfc_3339) = l event.fields[:start_date].value, format: :medium_date
-                h3.upcoming-events__item-title = event.title
+                h3.upcoming-events__item-title
+                  = event.title
   h1.masthead-contextual__section-title
     = area :masthead_title
 .masthead-contextual.clearfix

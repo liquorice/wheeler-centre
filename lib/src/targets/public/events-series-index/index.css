@@ -187,6 +187,16 @@
     font-weight: bold;
     float: left;
   }
+  .breakpoint-phone-wide h3.event-series-list__title {
+    font-size: 16px;
+    font-size: 1.6rem;
+    max-width: 60%;
+  }
+  .breakpoint-phone h3.event-series-list__title {
+    font-size: 14px;
+    font-size: 1.4rem;
+    max-width: 50%;
+  }
     .event-series-list__anchor:hover .event-series-list__title,
     .event-series-list__anchor:focus .event-series-list__title {
       color: var(--primary-color);
@@ -198,6 +208,10 @@
     font-size: 1.4rem;
     float: right;
     padding: 5px 8px;
+  }
+  .breakpoint-phone .event-series-list__action {
+    font-size: 12px;
+    font-size: 1.2rem;
   }
     .event-series-list__action i {
       margin-left: 8px;

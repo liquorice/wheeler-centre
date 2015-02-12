@@ -2,7 +2,7 @@
 - other_venues = page.other_venues
 
 = area :masthead_title do
-  .page__title.page__title--events Events
+  == markdown_line events_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
