@@ -10,8 +10,9 @@
 - if post.fields[:ticketing_stage].data_present?
   - dasherised_stage = post.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, post.fields[:topics].pages, post.series, aspect] do
+- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
   .snap-block
     a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url
       - if post.fields[:start_date].data_present?

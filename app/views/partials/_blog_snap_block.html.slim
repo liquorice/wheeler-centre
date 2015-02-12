@@ -6,8 +6,9 @@
   - image = post.fields[:thumbnail_image].asset
 - elsif post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["blog-snap-block-1", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, post.fields[:topics].pages, aspect] do
+- cache ["blog-snap-block-1", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do
   .snap-block
     a.blog-snap.blog-snap-block href=post.absolute_url
       time.blog-snap__date

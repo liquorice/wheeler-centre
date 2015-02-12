@@ -4,8 +4,9 @@
 - aspect = aspect || :square
 - if post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, post.fields[:topics].pages, aspect] do
+- cache ["recording-snap-block-1", post, show_type, hide_summary, image, post.fields[:people].pages, first_topic, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
       time.recording-snap__date

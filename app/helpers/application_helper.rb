@@ -2,7 +2,14 @@ module ApplicationHelper
   include Heracles::ContentFieldHelper
 
   # Common helpers sit under lib/helpers
+  include TruncateHtml
   include TextFormattingHelper
+
+  def truncate_html(html, options={})
+    return '' if html.nil?
+    html_string = TruncateHtml::HtmlString.new(html)
+    TruncateHtml::HtmlTruncator.new(html_string, options).truncate.html_safe
+  end
 
   ### Heracles helpers
 
