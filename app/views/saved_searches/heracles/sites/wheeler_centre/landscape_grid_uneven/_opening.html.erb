@@ -1,4 +1,4 @@
-<div class="column-wrapper saved-search full-width-block saved-search__square-grid saved-search__square-grid--wide">
+<div class="column-wrapper saved-search full-width-block saved-search__landscape-grid-uneven">
   <div class="gradient-top-down saved-search__fake-gradient"/>
   <div class="column-wide">
     <%- if data[:title].present? || data[:caption].present? %>
@@ -11,4 +11,4 @@
         <%- end %>
       </div>
     <%- end %>
-    <div class="snap-wrapper clearfix" data-view-grouper="<%= {elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json %>">
+    <div class="snap-uneven snap-wrapper clearfix" data-view-grouper="<%= {elementsSelector: ".snap-block", perGroup: { default: 3,  phone: 2 }}.to_json %>">
