@@ -1,0 +1,33 @@
+- show_summary = show_summary || false
+- hide_summary = hide_summary || false
+- aspect = aspect || :square
+- if post.fields[:itunes_image].data_present?
+  - image = post.fields[:itunes_image].asset
+- if post.series.fields[:itunes_image].data_present?
+  - image = post.series.fields[:itunes_image].asset
+
+- cache ["podcast-episode-snap-block-1", post, show_type, hide_summary, image, post.fields[:topics].pages, post.series, aspect] do
+  .snap-block
+    a.podcast-episode-snap class="podcast-episode-snap--#{aspect}" href=post.absolute_url
+      span.podcast-episode-snap__date
+        ' &nbsp;
+      - if image
+        .podcast-episode-snap__hero
+          .podcast-episode-snap__hero-inner
+            - if show_type
+              span.podcast-episode-snap__hero-type Podcast episode
+            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+            img src=image_url alt=(image.description.present? ? image.description : "Portrait of #{post.title}")
+            - if image.attribution.present?
+              .podcast-episode-snap__hero-caption.caption
+                p = image.attribution
+      h3.podcast-episode-snap__title
+        span.title-text == widont_format markdown_line post.title
+        - if post.fields[:topics].data_present?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = post.fields[:topics].pages.first.title
+      - if show_summary && post.fields[:description].data_present?
+          .podcast-episode-snap-block__summary.snap-block__summary.copy
+            .podcast-episode-snap-block__summary-inner.snap-block__summary-inner.copy
+              = force_excerptify_html render_content(post.fields[:description]), 350, "p i em strong br"
