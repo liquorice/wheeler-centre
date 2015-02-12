@@ -50,7 +50,7 @@
       padding-top: 25px;
     }
     .search-facets__navigation-list {
-      float: right;
+      float: left;
       margin-bottom: 15px;
       padding-left: 35px;
       padding-right: 35px;
@@ -94,8 +94,14 @@
       padding-bottom: 6px;
     }
 
+    .breakpoint-phone-wide .search-facets__count {
+      display: none;
+    }
+
     .search-order__navigation-anchor:hover,
-    .search-order__navigation-anchor:focus {
+    .search-order__navigation-anchor:focus,
+    .search-facets__navigation-anchor:hover,
+    .search-facets__navigation-anchor:focus {
       color: #4a4a4a;
     }
 
