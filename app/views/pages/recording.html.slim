@@ -1,7 +1,7 @@
 - primary_topic = select_primary_topics_for_page(page).first
 
 = area :masthead_title do
-  ' Broadcasts
+  == markdown_line broadcasts_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)

@@ -151,11 +151,19 @@ module ApplicationHelper
   end
 
   ### --------------------------------------------------------------------------
+  ### People
+  ### --------------------------------------------------------------------------
+
+  def people_page
+    site.pages.of_type("people").first
+  end
+
+  ### --------------------------------------------------------------------------
   ### Blog
   ### --------------------------------------------------------------------------
 
   def blog_page
-    site.pages.find_by_url("writings")
+    site.pages.of_type("blog").first
   end
 
   def blog_archive_page
@@ -168,15 +176,11 @@ module ApplicationHelper
   ### --------------------------------------------------------------------------
 
   def broadcasts_page
-    site.pages.find_by_url("broadcasts")
+    site.pages.of_type("broadcasts").first
   end
 
   def broadcasts_archive_page
     broadcasts_page.children.of_type("broadcasts_archive").first
-  end
-
-  def main_podcast
-    site.pages.find_by_url("broadcasts/podcasts/the-wheeler-centre")
   end
 
   def rss_url_for_podcast(series, options={})
@@ -190,7 +194,7 @@ module ApplicationHelper
   ### --------------------------------------------------------------------------
 
   def events_page
-    site.pages.find_by_url("events")
+    site.pages.of_type("events").first
   end
 
   def upcoming_events_for_navigation

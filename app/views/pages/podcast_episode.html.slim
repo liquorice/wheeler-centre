@@ -1,5 +1,8 @@
+= area :head do
+  link href=url_with_domain("#{page.parent.absolute_url}.rss") rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
+
 = area :masthead_title do
-  ' Broadcasts
+  == markdown_line broadcasts_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
@@ -23,4 +26,8 @@
         h1.podcast-episode__title= page.title
 
     .podcast-episode__body.column-wrapper
+      - cache ["podcast-audio-1", page, page.fields[:audio].asset] do
+        - if page.fields[:audio].data_present?
+          .recording__audio
+            = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
       = render_content_in_sections page.fields[:description]

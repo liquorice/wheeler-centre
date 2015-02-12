@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: afca916adc3f75eac9b32d6904ae290d1267c1da
+  revision: 2af8709acfe898ee3d3c35b54dc128001f113b0d
   branch: master
   specs:
     heracles (1.0.0)
@@ -115,7 +115,7 @@ GEM
     addressable (2.3.6)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
-    api-pagination (4.1.0)
+    api-pagination (4.1.1)
     arel (5.0.1.20140414130214)
     arrayfields (4.9.2)
     autoparse (0.3.3)

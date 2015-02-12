@@ -1,5 +1,8 @@
+= area :head do
+  link href=url_with_domain("#{page.absolute_url}.rss") rel="alternate" title="#{page.title} podcast" type="application/rss+xml"
+
 = area :masthead_title do
-  ' Broadcasts
+  == markdown_line broadcasts_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
@@ -13,8 +16,7 @@
         h1.podcast-series__title == widont_format markdown_line page.title
       .podcast-series__subscribe.column-wrapper
         .podcast-series__subscribe-inner.column-narow
-          a.podcast-series__subscribe-anchor href=page.absolute_url
-            i.fa.fa-rss-square
+          a.podcast-series__subscribe-anchor href="#{page.absolute_url}.rss"
             ' Subscribe to this podcast
       .podcast-series__intro.page__intro.intro.column-wrapper
         .column-mid.copy

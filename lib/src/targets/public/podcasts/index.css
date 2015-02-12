@@ -247,18 +247,19 @@
 }
 
   .podcast-series__subscribe-anchor {
-    background: var(--primary-color-lighter);
+    border: 1px solid var(--primary-color);
     border-radius: 3px;
-    color: #333;
     display: inline-block;
+    color: var(--primary-color);
     font-family: var(--font-sans);
-    font-size: 18px;
-    font-size: 1.8rem;
-    margin: -10px auto 35px;
-    padding: 18px 30px;
-    text-align: center;
-    transition-property: transform, background-color;
-    transition-duration: 100ms;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    text-decoration: none;
+    transform: scale(1,1);
+    transition-property: transform, background-color, color;
+    transition-duration: 250ms;
   }
   .podcast-series__subscribe-anchor:hover,
   .podcast-series__subscribe-anchor:focus {

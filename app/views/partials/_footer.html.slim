@@ -16,7 +16,7 @@ footer.footer.clearfix role="contentinfo"
             a href=child.absolute_url == markdown_line child.title
     .footer-nav-main__group
       h3
-        a href=blog_page.absolute_url Writings
+        a href=blog_page.absolute_url  == markdown_line blog_page.title
       ul
         - blog_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
           li
@@ -24,7 +24,7 @@ footer.footer.clearfix role="contentinfo"
                   == markdown_line project.title
     .footer-nav-main__group
       h3
-        a href="/people" People
+        a href=people_page.absolute_url == markdown_line people_page.title
     .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
       h3= projects_page.title
       - projects_for_navigation.in_groups(2, false).each do |group|

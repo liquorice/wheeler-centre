@@ -1,7 +1,7 @@
 - posts = page.posts(page: params[:page], per_page: params[:per_page])
 
 = area :masthead_title do
-  ' Writings
+  = blog_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [blog_page] + blog_page.children.in_order.visible.published.where(collection_id: nil)
