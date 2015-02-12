@@ -129,8 +129,14 @@
         position: relative;
       }
 
-      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
-      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
+      .breakpoint-widescreen-wide .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .breakpoint-widescreen .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .breakpoint-tablet-wide .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .breakpoint-tablet .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__anchor,
+      .breakpoint-widescreen-wide .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor,
+      .breakpoint-widescreen .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor,
+      .breakpoint-tablet-wide .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor,
+      .breakpoint-tablet .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__anchor {
         background-color: var(--primary-color-darker);
         color: #fff;
       }
@@ -141,8 +147,15 @@
         color: #fff;
       }
 
-      .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
-      .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown  {
+      .breakpoint-widescreen-wide .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
+      .breakpoint-widescreen .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
+      .breakpoint-tablet-wide .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
+      .breakpoint-tablet .masthead-nav-main__item--has-dropdown--hover .masthead-nav-main__dropdown,
+      .breakpoint-widescreen-wide .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown,
+      .breakpoint-widescreen .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown,
+      .breakpoint-tablet-wide .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown,
+      .breakpoint-tablet .masthead-nav-main__item--has-dropdown:focus .masthead-nav-main__dropdown,
+      .masthead-nav-main__dropdown.masthead-nav-main__dropdown--active  {
         display: block;
       }
 
