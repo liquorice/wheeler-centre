@@ -249,66 +249,6 @@ module ApplicationHelper
   end
 
   ### --------------------------------------------------------------------------
-  ### Search page helpers
-  ### --------------------------------------------------------------------------
-
-  def pluralize_type(type)
-    case type
-    when "blog_post"
-     "Blog posts"
-    when "person"
-     "People"
-    when "event"
-     "Events"
-    when "podcast_episode"
-     "Podcast episodes"
-    when "recording"
-     "Recordings"
-    when "response"
-     "Responses"
-    when "topic"
-     "Topics"
-    when "sponsor"
-     "Sponsors"
-    when "itunes_category"
-     "iTunes categories"
-    when "vpla_book"
-     "Victorian Premier's Literary Awards books"
-    when "event_series"
-     "Event series"
-    when "venue"
-     "Venues"
-    when "content_page"
-     "Pages"
-    when "vpla_category"
-     "Victorian Premier's Literary Awards categories"
-    when "review"
-     "Reviews"
-    when "long_view_review"
-     "Long view reviews"
-    when "podcast_series"
-     "Podcast series"
-    when "criticism_now_event"
-     "Criticism now events"
-    when "texts_in_the_city_book"
-     "Texts in the city books"
-    else
-      "Pages"
-    end
-  end
-
-  def friendlyize_type(type)
-    case type
-    when "vpla_book"
-      "Victorian Premier's Literary Awards book"
-    when "content_page"
-      "Page"
-    else
-      type.humanize
-    end
-  end
-
-  ### --------------------------------------------------------------------------
   ### General page helpers
   ### --------------------------------------------------------------------------
 

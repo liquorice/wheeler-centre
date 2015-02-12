@@ -37,7 +37,7 @@
               .search-page__results
                 - if @search.facet.rows.count == 1
                   / TODO Make this nicer - eg: "All Venues"
-                  h2.search-results__subtitle = t('content.search.all ') + pluralize_type(@search.facet.rows.first.value)
+                  h2.search-results__subtitle = t('content.search.all ') + humanize_page_type_facet(@search.facet.rows.first.value)
                 - else
                   h2.search-results__subtitle
                     ' All results
@@ -52,7 +52,7 @@
                             ' View
                             i.fa.fa-angle-right
                           p.search-results__type
-                            = friendlyize_type(result.page_type)
+                            = humanize_page_type(result.page_type)
             .search-page__faceting
               / At the moment only one facet can be applied at any time
               ul.search-facets__navigation-list
@@ -63,7 +63,9 @@
                 - @search.facet.rows.each do |facet|
                   li.search-facets__navigation-item
                     a.search-facets__navigation-anchor href=url_for(params.merge(page_type: facet.value, page: "1"))
-                      = pluralize_type(facet.value) + " (#{facet.count})"
+                      = humanize_page_type_facet(facet.value)
+                      span.search-facets__count
+                       ' &nbsp;(#{facet.count})
           - if @search.results.total_pages > 1
             .pagination-context.pagination-context--bottom
               ' Page
