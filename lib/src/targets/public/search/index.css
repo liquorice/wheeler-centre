@@ -111,6 +111,10 @@
     width: 70%;
   }
 
+  .search-results__subtitle {
+    font-style: italic;
+  }
+
   .search-results__block {
     font-family: var(--font-sans);
   }
