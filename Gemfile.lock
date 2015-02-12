@@ -26,11 +26,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-<<<<<<< HEAD
-  revision: d0873e142759c71b9bf63fb70c48f3978a5b7a2b
-=======
   revision: b044031463773b35a32ff5d33ec8ab672b561669
->>>>>>> bb6fb6d... Update Heracles (change to sites to have both edge and origin hostnames)
   branch: master
   specs:
     heracles (1.0.0)
