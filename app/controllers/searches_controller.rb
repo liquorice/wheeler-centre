@@ -43,7 +43,10 @@ class SearchesController < ApplicationController
                             "zoo_fellowships_work",
                             "response",
                             "sponsor",
-                            "itunes_category"]
+                            "itunes_category",
+                            "vpla_category",
+                            "review",
+                            "long_view_review"]
 
       paginate page: params[:page] || 1, per_page: 40
     end
