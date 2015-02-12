@@ -6,7 +6,11 @@ class BustPageCacheJob < Que::Job
     @page_check = PageCacheCheck.find(page_cache_check_id)
 
     purge_page if should_purge_page?
-    touch_or_destroy_page_cache_check
+    
+    ActiveRecord::Base.transaction do
+      touch_or_destroy_page_cache_check
+      destroy
+    end
   end
 
   private
