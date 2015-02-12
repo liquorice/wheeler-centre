@@ -1,7 +1,7 @@
 /* Topic list */
 
 .topic-page {
-  padding-top: 50px;
+  padding-top: 35px;
   padding-bottom: 50px;
 }
 .breakpoint-tablet .topic-page {
@@ -23,6 +23,7 @@
   .breakpoint-phone-wide .topic-page__header,
   .breakpoint-phone .topic-page__header {
     margin-bottom: 20px;
+    overflow: visible;
   }
     .topic-page__title-label {
       color: #888;
@@ -50,12 +51,12 @@
     }
 
 .topic-page__nav {
-  position: absolute;
-  right: 35px;
-  width: 240px;
   margin-top: 16px;
   z-index: 100;
-  height: 40px;
+  margin-bottom: 15px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
   .topic-page__nav-title {
     color: #777;
@@ -76,18 +77,27 @@
   .topic-page__nav .fa-angle-up {
     display: none;
   }
-  .topic-page__nav--hover .fa-angle-down {
+  .topic-page__nav-inner--active .fa-angle-down,
+  .topic-page__nav-inner--active .fa-angle-down,
+  .topic-page__nav-inner--hover .fa-angle-down,
+  .topic-page__nav-inner--hover .fa-angle-down {
     display: none;
   }
-  .topic-page__nav--hover .fa-angle-up {
+  .topic-page__nav-inner--active .fa-angle-up,
+  .topic-page__nav-inner--hover .fa-angle-up {
     display: inline-block;
   }
   .topic-page__nav-label {
     color: #999;
     cursor: pointer;
+    padding-bottom: 15px;
   }
-    .topic-page__nav--hover .topic-page__nav-label {
+    .topic-page__nav-inner--active .topic-page__nav-label,
+    .topic-page__nav-inner--hover .topic-page__nav-label {
       color: var(--primary-color);
+    }
+    .topic-page__nav-label i {
+      margin-left: 10px;
     }
 
   .topic-page__nav-list {
@@ -95,16 +105,20 @@
     background-color: #fff;
     border: 1px solid #dedede;
     text-align: left;
-    margin-top: 15px;
     padding: 12px;
     opacity: 0;
     transform: translate3d(0,50px,0);
     transition-property: opacity, transform;
     transition-duration: 150ms, 100ms;
     pointer-events: none;
+    width: 240px;
+    position: absolute;
+    left: 50%;
+    margin-left: -120px;
   }
 
-  .topic-page__nav--hover .topic-page__nav-list {
+  .topic-page__nav-inner--active .topic-page__nav-list,
+  .topic-page__nav-inner--hover .topic-page__nav-list {
     opacity: 1;
     pointer-events: auto;
     transform: translate3d(0,0,0);

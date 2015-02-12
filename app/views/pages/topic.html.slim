@@ -9,15 +9,23 @@
 = area :main do
   .topic-page
     .column-wrapper.topic-page__header
-      .topic-page__nav data-view-touch-preview={previewClassName: "topic-page__nav--hover"}.to_json
-        p.topic-page__nav-label
-          ' View topics
-          i.fa.fa-angle-down
-          i.fa.fa-angle-up
-        .topic-page__nav-list
-          h3.topic-page__nav-title
-            a href=primary_topic.absolute_url = primary_topic.title
-          = render "partials/page_nav_children", parent: primary_topic, current: page
+      .topic-page__nav[
+        data-view-nav-toggle={toggleSelector: ".topic-page__nav-label", targetSelector: ".topic-page__nav-inner", targetActiveClassName: "topic-page__nav-inner--active"}.to_json
+        ]
+        .topic-page__nav-inner data-view-touch-preview={previewClassName: "topic-page__nav-inner--hover"}.to_json
+          p.topic-page__nav-label
+            - if primary_topic.id == page.id
+              ' View topics under
+              = primary_topic.title
+            - else
+              ' More in
+              = primary_topic.title
+            i.fa.fa-angle-down
+            i.fa.fa-angle-up
+          .topic-page__nav-list
+            h3.topic-page__nav-title
+              a href=primary_topic.absolute_url = primary_topic.title
+            = render "partials/page_nav_children", parent: primary_topic, current: page
       h1.topic-page__title
         = page.title
     - if page.fields[:intro].data_present?
