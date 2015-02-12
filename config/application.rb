@@ -16,6 +16,8 @@ module WheelerCentre
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = "Canberra"
 
+    config.exceptions_app = self.routes
+
     # Add helpers to the load path
     config.autoload_paths << Rails.root.join("lib", "helpers")
 

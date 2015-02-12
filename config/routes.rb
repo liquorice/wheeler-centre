@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # Handle 404 and 500 errors
+  match "/404", :to => "not_found#show", as: "not_found", via: :all
   # Reactive Cache Buster
   get '_check/*edge_url/_check.js' => "cache_buster#index", as: :cache_buster_check
 
