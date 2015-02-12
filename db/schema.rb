@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212100940) do
+ActiveRecord::Schema.define(version: 20150212120706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150212100940) do
   add_index "insertions", ["page_id"], name: "index_insertions_on_page_id", using: :btree
 
   create_table "page_cache_checks", force: true do |t|
-    t.string   "edge_url",   null: false
+    t.text     "edge_url",   null: false
     t.string   "checksum"
     t.datetime "created_at"
     t.datetime "updated_at"
