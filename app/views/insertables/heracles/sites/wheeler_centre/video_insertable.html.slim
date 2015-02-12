@@ -8,7 +8,7 @@
       = data[:embedData][:html].html_safe
     - if data[:caption].present?
       .caption.figure__caption.copy
-        p = data[:caption]
+        p == data[:caption]
 - else
   .figure.figure__video class=display_class
     .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
@@ -27,4 +27,4 @@
             = data[:embedData][:html].html_safe
     - if data[:caption].present?
       .caption.figure__caption.copy
-        p = data[:caption]
+        p == data[:caption]
