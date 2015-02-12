@@ -1,5 +1,8 @@
 - posts = page.posts(per_page: 6).results
 
+= area :head do
+  link href=url_with_domain("#{blog_archive_page.absolute_url}.rss") rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+
 = area :masthead_title do
   = blog_page.title
 

@@ -1,5 +1,8 @@
 - primary_topic = select_primary_topics_for_page(page).first
 
+= area :head do
+  link href=url_with_domain("#{blog_archive_page.absolute_url}.rss") rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+
 = area :masthead_title do
   = blog_page.title
 
