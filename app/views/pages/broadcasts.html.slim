@@ -9,10 +9,11 @@
 
 = area :main do
   .broadcasts
-    - if page.fields[:intro].data_present?
-      .intro.broadcasts__intro.column-wrapper
-        .column-narrow.copy
-          = render_content page.fields[:intro]
+    - cache ["broadcasts-intro-1", page] do
+      - if page.fields[:intro].data_present?
+        .intro.broadcasts__intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:intro]
 
     - if recordings.results.present?
       .column-wrapper
@@ -25,13 +26,17 @@
           a.block-link href=broadcasts_archive_page.absolute_url Explore our full archive &rsaquo;
 
     / Content-block
-    - if page.fields[:middle].data_present?
-      .content-block
-        = render_content_in_sections page.fields[:middle]
+    - cache ["broadcasts-middle-1", page] do
+      - if page.fields[:middle].data_present?
+        .content-block
+          = render_content_in_sections page.fields[:middle]
 
     / Main podcasts line
 
     / Content-block
-    - if page.fields[:end].data_present?
-      .content-block
-        = render_content_in_sections page.fields[:end]
+    - cache ["broadcasts-end-1", page] do
+      - if page.fields[:end].data_present?
+        .content-block
+          = render_content_in_sections page.fields[:end]
+
+    = render "partials/topics_section"

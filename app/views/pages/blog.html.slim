@@ -12,10 +12,11 @@
 
 = area :main do
   .blog-index
-    - if page.fields[:intro].data_present?
-      .intro.blog-index__intro.column-wrapper
-        .column-narrow.copy
-          = render_content page.fields[:intro]
+    - cache ["blog-index-intro-1", page] do
+      - if page.fields[:intro].data_present?
+        .intro.blog-index__intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:intro]
     .blog-index__latest.column-wrapper
       h2.blog-index__latest-header Latest notes
       - if posts.present?
@@ -26,9 +27,10 @@
           a.block-link.blog-index__latest-more href=blog_archive_page.absolute_url There are more notes over here on page two &#8230; &rsaquo;
 
     / Content area
-    - if page.fields[:middle].data_present?
-      .content-block
-        = render_content_in_sections page.fields[:middle]
+    - cache ["blog-index-middle-1", page] do
+      - if page.fields[:middle].data_present?
+        .content-block
+          = render_content_in_sections page.fields[:middle]
 
     - if page.fields[:highlighted_authors].data_present?
       .blog-index__guest-authors.column-wrapper
@@ -46,29 +48,32 @@
                 .snap-block.guest-author
                   - if guest_author.fields[:portrait].data_present?
                     - image = guest_author.fields[:portrait].asset
-                  - if image
-                    .author-image
-                      .author-image__inner
-                        img src=image.content_thumbnail_url
-                  h3.guest-author__title
-                    = guest_author.title
-                  - if guest_author.fields[:intro].data_present?
-                    .guest-author__intro.copy
-                      = force_excerptify_html render_content(guest_author.fields[:intro]), 150
+                  - cache ["blog-index-author-details-1", guest_author, image] do
+                    - if image
+                      .author-image
+                        .author-image__inner
+                          img src=image.content_thumbnail_url
+                    h3.guest-author__title
+                      = guest_author.title
+                    - if guest_author.fields[:intro].data_present?
+                      .guest-author__intro.copy
+                        = force_excerptify_html render_content(guest_author.fields[:intro]), 150
                   ul.blog-post-list
                     - author_posts.each do |post|
-                      li
-                        a.blog-post-list__anchor href=post.absolute_url
-                          h3.blog-post-list__title
-                            span.title-text == widont_format markdown_line post.title
-                            - selected_primary_topics = select_primary_topics_for_page(post)
-                            - if selected_primary_topics && selected_primary_topics.present?
-                              span.title-tags
-                                '  &nbsp;/&nbsp;
-                                = selected_primary_topics.first.title
+                      - cache ["blog-index-author-posts-1", post] do
+                        li
+                          a.blog-post-list__anchor href=post.absolute_url
+                            h3.blog-post-list__title
+                              span.title-text == widont_format markdown_line post.title
+                              - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
+                              - if first_topic.present?
+                                span.title-tags
+                                  '  &nbsp;/&nbsp;
+                                  = first_topic.title
     / Content area
-    - if page.fields[:end].data_present?
-      .content-block
-        = render_content_in_sections page.fields[:end]
+    - cache ["blog-index-end-1", page] do
+      - if page.fields[:end].data_present?
+        .content-block
+          = render_content_in_sections page.fields[:end]
 
     = render "partials/topics_section"

@@ -8,7 +8,7 @@
       - if @search.results.blank?
         .search-page__header
           h1.search-page__title Sorry, no results for &ldquo;#{params[:q]}&rdquo;
-        = render "partials/topics_section", intro: "Explore the other areas of interest across our site."
+        = render "partials/topics_section", intro: "Explore these subjects, across our site."
       - else
         .search-page__header
           h1.search-page__title Search results for &ldquo;#{params[:q]}&rdquo;

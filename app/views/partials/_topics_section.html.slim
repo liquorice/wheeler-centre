@@ -1,12 +1,15 @@
-- intro = intro || "Explore the areas of interest across our site."
+- intro = intro || "Explore these subjects, across our site."
 .topics-section.column-wrapper
-  .section-header
-    h2 Topics
-    .intro.intro--small.column-narrow.copy
-      p = intro
+  - cache ["topics-section-intro-1", intro] do
+    .section-header
+      h2 Topics
+      .intro.intro--small.column-narrow.copy
+        p = intro
+
   .column-wide data-view-grouper={elementsSelector: ".topics-section__item", perGroup: { default: 5, "tablet-wide" => 4, tablet: 3, "phone-wide" => 1, phone: 1 }}.to_json
     - primary_topics.each do |topic|
-      .topics-section__item
-        a href=topic.absolute_url = topic.title
+      - cache ["topics-section-nav-1", topic] do
+        .topics-section__item
+          a href=topic.absolute_url = topic.title
 
 
