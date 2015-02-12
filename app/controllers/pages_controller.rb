@@ -5,11 +5,6 @@ class PagesController < ApplicationController
   before_filter :set_page_meta_tags, only: [:show]
   before_filter :set_cache_headers_for_pages, only: [:show]
 
-  helper_method \
-  def site
-    @site ||= Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-  end
-
   protected
 
   def set_cache_headers_for_pages
