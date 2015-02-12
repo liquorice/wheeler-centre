@@ -161,14 +161,6 @@ module Heracles
           text :external_links do
             fields[:external_links].value
           end
-
-          time :created_at do
-            created_at
-          end
-
-          time :updated_at do
-            updated_at
-          end
         end
 
         private

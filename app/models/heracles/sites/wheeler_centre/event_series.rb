@@ -100,10 +100,6 @@ module Heracles
             fields[:body].value
           end
 
-          date :created_at do
-            created_at.to_s(:admin_date)
-          end
-
           boolean :archived do
             fields[:archived].value
           end

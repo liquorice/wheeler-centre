@@ -86,10 +86,6 @@ module Heracles
             fields[:authors].pages.map(&:id)
           end
 
-          time :created_at do
-            created_at
-          end
-
           string :topic_ids, multiple: true do
             topics_with_ancestors.map(&:id)
           end
