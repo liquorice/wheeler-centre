@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # Heracles admin
   mount Heracles::Admin::Engine, at: "/admin"
 
   # Additional Heracles admin routes
@@ -32,5 +31,4 @@ Rails.application.routes.draw do
   post "*path/__preview" => "pages#show", preview: true
   get "*path" => "pages#show"
   root to: "pages#show"
-
 end
