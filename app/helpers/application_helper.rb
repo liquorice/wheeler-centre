@@ -95,7 +95,7 @@ module ApplicationHelper
   end
 
   def indefinite_article_for_number(number)
-    vowels = %w( a e i o u )
+    vowels = %w( a e i u )
     (vowels.include? number.humanize[0]) ? "an" : "a"
   end
 
