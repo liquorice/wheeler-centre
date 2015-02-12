@@ -248,8 +248,8 @@ module ApplicationHelper
   ### Search page helpers
   ### --------------------------------------------------------------------------
 
-  def pluralize(page_type)
-    case page_type
+  def pluralize_type(type)
+    case type
     when "blog_post"
      "Blog posts"
     when "person"

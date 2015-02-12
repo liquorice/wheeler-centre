@@ -37,7 +37,7 @@
               .search-page__results
                 - if @search.facet.rows.count == 1
                   / TODO Make this nicer - eg: "All Venues"
-                  h2.search-results__subtitle = t('content.search.all ') + pluralize(@search.facet.rows.first.value)
+                  h2.search-results__subtitle = t('content.search.all ') + pluralize_type(@search.facet.rows.first.value)
                 - else
                   h2.search-results__subtitle
                     ' All results
@@ -63,7 +63,7 @@
                 - @search.facet.rows.each do |facet|
                   li.search-facets__navigation-item
                     a.search-facets__navigation-anchor href=url_for(params.merge(page_type: facet.value, page: "1"))
-                      = pluralize(facet.value) + " (#{facet.count})"
+                      = pluralize_type(facet.value) + " (#{facet.count})"
           - if @search.results.total_pages > 1
             .pagination-context.pagination-context--bottom
               ' Page
