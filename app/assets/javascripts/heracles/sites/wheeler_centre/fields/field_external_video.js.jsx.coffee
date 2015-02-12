@@ -36,23 +36,19 @@ FieldExternalVideo = React.createClass
     videoLabel = if @state.label.status != 'hidden'
       `<i className={videoLabelClassname} ref='fieldLabel'>{this.state.label.title}</i>`
 
-    buttonTitle = if @state.field.youtube?
+    buttonTitle = if @state.field.embed?
       'Refresh'
     else
       'Load'
 
-    videoPreview = if @state.field.youtube?
+    videoPreview = if @state.field.embed?
       `<div className="field-external-video__preview">
         <div className="field-external-video__preview-pic">
-          <img src={this.state.field.youtube.thumbnail_url} />
+          <img src={this.state.field.embed.thumbnail_url} />
         </div>
         <div className="field-external-video__preview-field field-external-video__preview-field--title">
           <b>Title:</b>
-          {this.state.field.youtube.title}
-        </div>
-        <div className="field-external-video__preview-field field-external-video__preview-field--duration">
-          <b>Duration:</b>
-          {this.state.field.youtube.duration}
+          {this.state.field.embed.title}
         </div>
         <div className="field-external-video__preview-field">
           <a className="field-external-video__preview-clear" href="#" onClick={this._handleClear}>
@@ -87,7 +83,6 @@ FieldExternalVideo = React.createClass
         status: 'loading'
       disabled: true
 
-    youTubeDataLoaded = false
     embedDataLoaded = false
 
     request = HeraclesAdmin.helpers.embedly.getUrl(_this.props.value)
@@ -99,36 +94,11 @@ FieldExternalVideo = React.createClass
         _this.props.updateField _this.state.field.field_name, newField
         _this.setState
           field: newField
-        _this._checkDataLoaded(youTubeDataLoaded, embedDataLoaded)
+        _this._checkDataLoaded(embedDataLoaded)
 
-    $.ajax
-      url: "#{HeraclesAdmin.baseURL}api/sites/#{HeraclesAdmin.siteSlug}/fields/external_video"
-      dataType: 'json'
-      contentType: 'application/json'
-      data:
-        url: _this.props.value
-      success: (data) ->
-        # Wrong data received
-        if data.length == 0 || data.error?
-          _this.setState
-            label:
-              title: 'Fetching error...'
-              status: 'loaded'
-
-        # Correct data received
-        else
-          youTubeDataLoaded = true
-          # Prepare field hash
-          newField = _.extend {}, _this.state.field,
-            youtube: data
-          _this.props.updateField _this.state.field.field_name, newField
-          _this.setState
-            field: newField
-          _this._checkDataLoaded(youTubeDataLoaded, embedDataLoaded)
-
-  _checkDataLoaded: (youTubeDataLoaded, embedDataLoaded) ->
+  _checkDataLoaded: (embedDataLoaded) ->
     _this = @
-    if youTubeDataLoaded && embedDataLoaded
+    if embedDataLoaded
       # Update field state and label
       @setState
         label:
@@ -147,7 +117,7 @@ FieldExternalVideo = React.createClass
 
   _handleClear: (event) ->
     newField = _.extend {}, @state.field,
-      youtube: undefined
+      embed: undefined
     @props.updateField @state.field.field_name, newField
     @setState field : newField
     event.preventDefault()
