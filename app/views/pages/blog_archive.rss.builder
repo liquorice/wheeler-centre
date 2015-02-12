@@ -10,7 +10,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "Notes from The Wheeler Centre"
     if posts.present?
       posts.each do |post|
-        xml.item
+        xml.item do
           content = render_content post.fields[:intro]
           content += render_content post.fields[:body]
           content += render_content post.fields[:meta]
@@ -26,6 +26,10 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
           xml.description do
             xml.cdata! content
           end
+          if post.fields[:authors].data_present?
+            xml.author post.fields[:authors].pages.map(&:title).to_sentence
+          end
+        end
       end
     end
   end
