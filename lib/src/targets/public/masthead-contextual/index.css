@@ -132,6 +132,11 @@
       text-transform: uppercase;
     }
 
+    .breakpoint-phone-wide .upcoming-events__navigation,
+    .breakpoint-phone .upcoming-events__navigation {
+      display: none;
+    }
+
     .upcoming-events__view-all {
       color: var(--primary-color-lighter);
       float: right;
@@ -266,6 +271,18 @@
         width: 22%;
       }
 
+    .breakpoint-phone-wide .upcoming-events__item-date,
+    .breakpoint-phone .upcoming-events__item-date {
+      display: inline;
+      float: none;
+      width: auto;
+    }
+
+    .breakpoint-phone-wide .upcoming-events__item-date:before,
+    .breakpoint-phone .upcoming-events__item-date:before {
+      content: "Up next —";
+    }
+
       .upcoming-events__item-title {
         color: #fff;
         font-family: var(--font-serif);
@@ -280,3 +297,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+    .breakpoint-phone-wide .upcoming-events__item-title.
+    .breakpoint-phone .upcoming-events__item-title {
+      display: inline;
+      float: none;
+      width: auto;
+    }

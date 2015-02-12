@@ -60,6 +60,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @import "./copy";
 
 .quo {
