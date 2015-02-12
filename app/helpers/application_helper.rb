@@ -293,6 +293,17 @@ module ApplicationHelper
     end
   end
 
+  def friendlyize_type(type)
+    case type
+    when "vpla_book"
+      "Victorian Premier's Literary Awards book"
+    when "content_page"
+      "Page"
+    else
+      type.humanize
+    end
+  end
+
   ### --------------------------------------------------------------------------
   ### General page helpers
   ### --------------------------------------------------------------------------

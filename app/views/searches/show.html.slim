@@ -52,7 +52,7 @@
                             ' View
                             i.fa.fa-angle-right
                           p.search-results__type
-                            = result.page_type.humanize
+                            = friendlyize_type(result.page_type)
             .search-page__faceting
               / At the moment only one facet can be applied at any time
               ul.search-facets__navigation-list
