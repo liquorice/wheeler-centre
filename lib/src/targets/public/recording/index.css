@@ -73,6 +73,17 @@
   }
 
 
+.breakpoint-phone-wide .recording__description,
+.breakpoint-phone .recording__description,
+.breakpoint-phone-wide .recording__meta,
+.breakpoint-phone .recording__meta {
+  float: none;
+  width: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
 .recording__presenters h2 {
   color: var(--primary-color);
   font-family: var(--font-sans);
@@ -168,6 +179,23 @@
 
 .recording__audio {
   margin-bottom: 35px;
+}
+
+.breakpoint-tablet-wide .recording__audio .audio-player,
+.breakpoint-tablet .recording__audio .audio-player,
+.breakpoint-phone-wide .recording__audio .audio-player,
+.breakpoint-phone .recording__audio .audio-player {
+  padding: 25px 25px 30px
+}
+.breakpoint-tablet .recording__audio .audio-player__inner {
+  padding-left: 0;
+  padding-top: 80px;
+}
+.breakpoint-tablet .recording__audio .audio-player__title,
+.breakpoint-phone-wide .recording__audio .audio-player__title,
+.breakpoint-phone .recording__audio .audio-player__title {
+  font-size: 22px;
+  font-size: 2.2rem;
 }
 
 /* Tags */

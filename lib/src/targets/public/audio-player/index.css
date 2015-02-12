@@ -5,6 +5,7 @@
   border-radius: 4px;
   font-family: var(--font-sans);
   min-height: 130px;
+  overflow: hidden;
   padding: 35px 35px 39px;
   position: relative;
   user-select: none;
