@@ -329,6 +329,7 @@ GEM
     inflecto (0.0.2)
     interactor (3.1.0)
     ipaddress (0.8.0)
+    iso8601 (0.8.4)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -623,6 +624,7 @@ DEPENDENCIES
   guard-rspec
   heracles!
   humanize (~> 1.1.0)
+  iso8601
   jbuilder (~> 2.0)
   launchy
   memcachier
