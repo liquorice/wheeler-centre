@@ -1,0 +1,23 @@
+.sponsors-list .grouper {
+  text-align: left;
+}
+
+.sponsors-list .snap-block {
+  vertical-align: middle;
+}
+.sponsors-list .snap-block img {
+  width: 100%;
+}
+
+.sponsors-list h2 {
+  color: #777;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+  font-size: 14px;
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
