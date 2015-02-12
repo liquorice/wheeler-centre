@@ -69,8 +69,8 @@
               - else
                 p
                   ' Explore the
-                  = past_events.results.length
-                  '  previous events from
+                  => pluralize(past_events.results.length, "previous event")
+                  ' from
                   em = page.title
                   '.
           .column-full
