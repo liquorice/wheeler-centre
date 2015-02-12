@@ -8,7 +8,7 @@ module Heracles
               {name: :intro, label: "Introduction", type: :content},
               {name: :body, type: :content},
               {name: :government_partners, type: :associated_pages, page_type: :sponsor},
-              {name: :patrons, type: :content},
+              {name: :patrons_content, type: :content},
               {name: :major_sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :trusts_foundations, type: :associated_pages, page_type: :sponsor},
               {name: :ministry_of_ideas, type: :associated_pages, page_type: :sponsor},
