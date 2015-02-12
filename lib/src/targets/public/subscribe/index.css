@@ -2,6 +2,12 @@
   padding-top: 30px;
   padding-bottom: 50px;
 }
+.simple-subscribe__inner strong {
+  font-weight: bold;
+}
+.simple-subscribe__inner em {
+  font-weight: italic;
+}
 
 .simple-subscribe__label,
 .simple-subscribe__controls {
