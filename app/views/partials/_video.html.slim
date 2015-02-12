@@ -14,7 +14,11 @@
       .video-player__header
         .video-player__play
           i.fa.fa-play.video-player__play-icon
-        h3.video-player__title = widont_format(external_video.youtube["title"]).html_safe
+        h3.video-player__title
+          - if external_video.youtube["title"].present?
+            = widont_format(external_video.youtube["title"]).html_safe
+          - else
+            ' Watch
       .video-player__metadata
         span.video-player__watch Watch
         span.video-player__duration format-duration="duration"
