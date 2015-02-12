@@ -1,0 +1,25 @@
+doctype 5
+html
+  head
+    meta charset="utf-8"
+    = render "partials/metaquery_breakpoints"
+    = render "partials/inline_boot_javascript"
+
+    / TODO add DNS prefetch URLs
+    link rel="dns-prefetch" href="//cdn.embedly.com"
+    link rel="dns-prefetch" href="//www.youtube.com"
+
+    title The Wheeler Centre
+  	= stylesheet_link_tag "public", media: "all"
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv", defer: true
+    = javascript_include_tag "public", async: true
+
+    = render 'partials/analytics'
+
+    body data-view-fast-click=true
+      = render "partials/static_masthead"
+      div role="main" id="main-content"
+        = yield
+      = render 'partials/subscribe_simple_wide'
+      = render 'partials/static_footer'

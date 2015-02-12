@@ -97,7 +97,9 @@ group :test do
   gem "simplecov", "~> 0.7.1" # https://github.com/colszowka/simplecov/issues/281
 end
 
+
 group :test, :development do
+  gem "dotenv", github: "bkeepers/dotenv"
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.0.0.beta2"
 end

@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/bkeepers/dotenv.git
+  revision: 434713e930199c0107d66b956b23304df21edafb
+  specs:
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
+
+GIT
   remote: git://github.com/jnicklas/capybara.git
   revision: 4161bbc560631e61e611d59bf797eeb59a6b1021
   specs:
@@ -18,7 +26,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: b99257b8c6f104fd4d3ee508328757ec147b12e1
+  revision: d0873e142759c71b9bf63fb70c48f3978a5b7a2b
   branch: master
   specs:
     heracles (1.0.0)
@@ -176,9 +184,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    dotenv (1.0.2)
-    dotenv-rails (1.0.2)
-      dotenv (= 1.0.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -604,6 +609,7 @@ DEPENDENCIES
   color
   dalli
   database_cleaner
+  dotenv!
   dotenv-rails
   embedly
   factory_girl_rails
