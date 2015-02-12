@@ -1,12 +1,11 @@
 module CacheBusterHelper
-
   def cache_buster_script(site)
-    src = if Rails.env.production?
-      "//#{site.origin_hostname}/_check/#{request.original_url}/_check.js"
-    else
-      "//#{ENV['CDN_ORIGIN_DOMAIN']}:#{ENV['CDN_ORIGIN_PORT']}/_check/#{request.original_url}/_check.js?debug=true"
-    end
+    return if !site.has_edge_delivery?
+    return if Rails.env.production? && site.edge_hostnames.include?(request.host)
+
+    host = (request.port == 80 ? request.host : request.host_with_port)
+
+    src = "//#{site.primary_origin_hostname}/_check/#{host}#{request.path}/_check.js#{('?' + request.query_string) if request.query_string.present?}"
     content_tag :script, nil, async: true, src: src
   end
-
 end

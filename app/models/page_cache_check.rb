@@ -3,11 +3,16 @@ require "uri"
 class PageCacheCheck < ActiveRecord::Base
   memoize \
   def site
-    Heracles::Site.find_by_hostname(edge_hostname)
+    Heracles::Site.find_by_edge_hostname(edge_hostname)
   end
 
   def path
     edge_uri.path
+  end
+
+  def edge_url
+    # Add back a URL scheme: edge URLs are posted without one.
+    "http://#{read_attribute(:edge_url)}"
   end
 
   def edge_hostname
@@ -15,15 +20,19 @@ class PageCacheCheck < ActiveRecord::Base
   end
 
   def origin_url
-    "http://#{origin_hostname}#{path}"
+    "http://#{origin_hostname}#{path}" if origin_hostname.present?
   end
 
   def origin_hostname
-    site.origin_hostname.presence || edge_hostname
+    site.try(:primary_origin_hostname)
   end
 
   def requires_check?
     updated_at < 5.minutes.ago
+  end
+
+  def site?
+    !!site
   end
 
   private
