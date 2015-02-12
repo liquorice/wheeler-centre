@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     set_meta_tags title: markdown_line(page.title),
                   og: {
                     title: markdown_line(page.title),
-                    url:   "http://#{site.hostnames.first}#{page.absolute_url}"
+                    url:   "http://#{site.primary_hostname}#{page.absolute_url}"
                   }
   end
 end
