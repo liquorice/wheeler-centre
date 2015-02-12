@@ -5,6 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :intro, type: :content},
               {name: :body, type: :content},
             ]
           }
@@ -12,7 +13,7 @@ module Heracles
 
         ### Accessors
 
-        def review
+        def reviews
           children.of_type("long_view_review").in_order.visible.published
         end
 

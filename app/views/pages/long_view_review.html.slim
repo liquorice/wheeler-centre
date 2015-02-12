@@ -1,0 +1,40 @@
+= area :masthead_title do
+  = projects_page.title
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        a href=page.parent.absolute_url The Long View
+
+= area :main do
+  .content-page__main
+    .column-wrapper
+      .content-page__header.vpla-year__header
+        p.vpla-year__sub-title
+          - if page.author.present?
+            ' By
+            a href=page.author.absolute_url
+              = page.author.title
+        h1.content-page__title == widont_format markdown_line page.title
+    .content-block
+      .section--normal.copy
+        = render "partials/image", asset: page.fields[:promo_image].asset, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
+        - if page.fields[:further_reading].data_present?
+
+      / FIXME the data here has been imported into the wrong fields blurb <-> review
+      = render_content_in_sections page.fields[:body]
+
+      - if page.author.present?
+        .section--normal.vpla-book__author
+          .event-presenter.event-presenter--horizontal.clearfix
+            - if page.author.fields[:portrait].data_present?
+              .event-presenter__image
+                .event-presenter__image-inner
+                  img src=page.author.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.author.title}"
+            h3.event-presenter__title= page.author.title
+            .event-presenter__intro.copy
+              = render_content page.author.fields[:biography]
+
+      section.section--normal.copy
+        h3 Further reading
+        = render_content page.fields[:further_reading]
