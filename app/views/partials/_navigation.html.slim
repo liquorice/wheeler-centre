@@ -2,7 +2,10 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
   button.masthead__mobile-toggle
     i.fa.fa-angle-down
   ul.masthead-nav-main.clearfix
-    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown[
+      data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
+      ]
       button.masthead-nav-main__anchor
         ' Topics
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
@@ -14,7 +17,10 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
                 li.masthead-nav-main__dropdown-item
                   a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
                     == markdown_line topic.title
-    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "a"}.to_json
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
+      data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
+      ]
       a.masthead-nav-main__anchor href="/events"
         ' Events
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
@@ -44,7 +50,10 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
     li.masthead-nav-main__item.masthead-nav-main__item--break
       a.masthead-nav-main__anchor href="/people"
         ' People
-    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+    li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
+      data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
+      ]
       button.masthead-nav-main__anchor
         ' Projects
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
