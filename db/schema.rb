@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211110458) do
+ActiveRecord::Schema.define(version: 20150212015762) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,12 +126,14 @@ ActiveRecord::Schema.define(version: 20150211110458) do
     t.boolean  "locked",         default: false, null: false
     t.integer  "ancestry_depth", default: 0
     t.string   "insertion_key",                  null: false
+    t.string   "page_type",                      null: false
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
   add_index "pages", ["collection_id"], name: "index_pages_on_collection_id", using: :btree
   add_index "pages", ["hidden"], name: "index_pages_on_hidden", using: :btree
   add_index "pages", ["insertion_key"], name: "index_pages_on_insertion_key", using: :btree
+  add_index "pages", ["page_type"], name: "index_pages_on_page_type", using: :btree
   add_index "pages", ["published"], name: "index_pages_on_published", using: :btree
   add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
   add_index "pages", ["type"], name: "index_pages_on_type", using: :btree
@@ -172,17 +174,18 @@ ActiveRecord::Schema.define(version: 20150211110458) do
 
   create_table "sites", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "title"
-    t.string   "hostnames",          default: [],                 array: true
+    t.string   "origin_hostnames",   default: [],                 array: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
     t.boolean  "published",          default: false
     t.json     "transloadit_params", default: {},    null: false
     t.string   "preview_token",                      null: false
-    t.string   "origin_hostname"
+    t.string   "edge_hostnames",     default: [],                 array: true
   end
 
-  add_index "sites", ["hostnames"], name: "index_sites_on_hostnames", using: :gin
+  add_index "sites", ["edge_hostnames"], name: "index_sites_on_edge_hostnames", using: :btree
+  add_index "sites", ["origin_hostnames"], name: "index_sites_on_origin_hostnames", using: :gin
   add_index "sites", ["published"], name: "index_sites_on_published", using: :btree
 
   create_table "taggings", force: true do |t|

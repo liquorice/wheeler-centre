@@ -21,7 +21,8 @@ user.update(superadmin: true)
 # Build the Heracles site
 site = Heracles::Site.find_or_initialize_by(slug: HERACLES_SITE_SLUG)
 site.title = "Wheeler Centre"
-site.hostnames = ["localhost:5000", "wheeler-centre.herokuapp.com"]
+site.origin_hostnames = ["localhost:5000", "wheeler-centre.herokuapp.com"]
+site.edge_hostnames = ["beta.wheelercentre.com"]
 site.published = true
 site.transloadit_params = {
   "steps" => {
