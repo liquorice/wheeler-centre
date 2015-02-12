@@ -3,32 +3,30 @@
 - aspect = aspect || :square
 - if post.fields[:itunes_image].data_present?
   - image = post.fields[:itunes_image].asset
-- if post.series.fields[:itunes_image].data_present?
-  - image = post.series.fields[:itunes_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["podcast-episode-snap-block-1", post, show_type, hide_summary, image, first_topic, post.series, aspect] do
+- cache ["podcast-series-snap-block-1", post, show_type, hide_summary, image, first_topic, post.episodes, aspect] do
   .snap-block
-    a.podcast-episode-snap class="podcast-episode-snap--#{aspect}" href=post.absolute_url
-      span.podcast-episode-snap__date
+    a.podcast-series-snap class="podcast-series-snap--#{aspect}" href=post.absolute_url
+      span.podcast-series-snap__date
         ' &nbsp;
       - if image
-        .podcast-episode-snap__hero
-          .podcast-episode-snap__hero-inner
+        .podcast-series-snap__hero
+          .podcast-series-snap__hero-inner
             - if show_type
-              span.podcast-episode-snap__hero-type Podcast episode
+              span.podcast-series-snap__hero-type Podcast series
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
-            img src=image_url alt=(image.description.present? ? image.description : "Cover image for of #{post.title}")
+            img src=image_url alt=(image.description.present? ? image.description : "Cover image for #{post.title}")
             - if image.attribution.present?
-              .podcast-episode-snap__hero-caption.caption
+              .podcast-series-snap__hero-caption.caption
                 p = image.attribution
-      h3.podcast-episode-snap__title
+      h3.podcast-series-snap__title
         span.title-text == widont_format markdown_line post.title
         - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
             = post.fields[:topics].pages.first.title
       - if show_summary && post.fields[:description].data_present?
-          .podcast-episode-snap-block__summary.snap-block__summary.copy
-            .podcast-episode-snap-block__summary-inner.snap-block__summary-inner.copy
+          .podcast-series-snap-block__summary.snap-block__summary.copy
+            .podcast-series-snap-block__summary-inner.snap-block__summary-inner.copy
               = force_excerptify_html render_content(post.fields[:description]), 350, "p i em strong br"

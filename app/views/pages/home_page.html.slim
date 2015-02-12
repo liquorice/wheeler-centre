@@ -100,6 +100,8 @@
                   = render "partials/person_snap_block", post: post, show_type: true
                 - elsif post.page_type == "podcast_episode"
                   = render "partials/podcast_episode_snap_block", post: post, show_type: true
+                - elsif post.page_type == "podcast_series"
+                  = render "partials/podcast_series_snap_block", post: post, show_type: true
                 - else
                   / TODO Need types for: person, podcast_episode
                   .snap-block
