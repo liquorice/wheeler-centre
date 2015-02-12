@@ -1,0 +1,26 @@
+- options = options || {}
+.figure class="#{options[:display_class]} #{options[:aspect_class]} #{options[:option_class]}" style=("width:#{options[:width]}" if options[:width].present?)
+  - if options[:link_url].present?
+    a href=options[:link_url]
+      picture
+        erb:
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+        source srcset=asset.content_large_url media="(min-width: 1200px)"
+        source srcset=asset.content_medium_url media="(min-width: 640px)"
+        erb:
+          <!--[if IE 9]></video><![endif]-->
+        img.figure__content src=asset.content_small_url alt=alt_text
+  - else
+    picture
+      erb:
+        <!--[if IE 9]><video style="display: none;"><![endif]-->
+      source srcset=asset.content_large_url media="(min-width: 1200px)"
+      source srcset=asset.content_medium_url media="(min-width: 640px)"
+      erb:
+        <!--[if IE 9]></video><![endif]-->
+      img.figure__content src=asset.content_small_url alt=(options[:alt_text] if options[:alt_text].present?)
+  - if options[:caption].present?
+    .figure__caption.caption.copy
+      p= options[:caption]
+
+

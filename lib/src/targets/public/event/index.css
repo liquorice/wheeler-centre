@@ -767,6 +767,8 @@
       text-align: center;
       padding-top: 10px;
       padding-bottom: 40px;
+      position: relative;
+      z-index: 1;
     }
 
     .event-calendar__week {

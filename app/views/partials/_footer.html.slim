@@ -2,26 +2,26 @@ footer.footer.clearfix role="contentinfo"
   nav.footer-nav-main.clearfix
     .footer-nav-main__group
       h3
-        a href=events_page.absolute_url = events_page.title
+        a href=events_page.absolute_url == markdown_line events_page.title
       ul
         - events_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
           li
-            a href=child.absolute_url = child.title
+            a href=child.absolute_url == markdown_line child.title
     .footer-nav-main__group
       h3
         a href=broadcasts_page.absolute_url = broadcasts_page.title
       ul
         - broadcasts_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
           li
-            a href=child.absolute_url = child.title
+            a href=child.absolute_url == markdown_line child.title
     .footer-nav-main__group
       h3
         a href=blog_page.absolute_url Writings
       ul
         - blog_page.children.in_order.visible.published.where(collection_id: nil).each do |child|
           li
-            a href=child.absolute_url = child.title
-                  = project.title
+            a href=child.absolute_url == markdown_line child.title
+                  == markdown_line project.title
     .footer-nav-main__group
       h3
         a href="/people" People
@@ -32,7 +32,7 @@ footer.footer.clearfix role="contentinfo"
           ul
             - group.each do |child|
               li
-                a href=child.absolute_url = child.title
+                a href=child.absolute_url == markdown_line child.title
     .footer-nav-main__group.footer-nav-main__group--double
       h3 Topics
       - primary_topics.in_groups(2, false).each do |group|
@@ -40,7 +40,7 @@ footer.footer.clearfix role="contentinfo"
           ul
             - group.each do |child|
               li
-                a href=child.absolute_url = child.title
+                a href=child.absolute_url == markdown_line child.title
   nav.footer-nav-secondary.clearfix
     ul
       li.footer-nav-secondary__search
@@ -52,7 +52,9 @@ footer.footer.clearfix role="contentinfo"
       li
         a href="/about-us" About Us
       li
-        a href="/about-us/who-funds-us/support-us" Donate
+        a href="/support-us/donate" Donate
+      li
+        a href="/subscribe" Subscribe
 
   .footer__logo
     a.footer__logo-anchor  data-view-touch-preview={previewClassName: "footer__logo-anchor--hover"}.to_json href="/"

@@ -1,0 +1,134 @@
+/* Recording snap block */
+
+.person-snap {
+  display: block;
+  padding-bottom: 15px;
+}
+
+  .person-snap__date {
+    color: #888;
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    font-size: 14px;
+    padding-bottom: 8px;
+  }
+    .breakpoint-phone-wide .person-snap__date,
+    .breakpoint-phone .person-snap__date {
+      font-size: 11px;
+      font-size: 1.1rem;
+    }
+
+
+  .person-snap__series {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-size: 1.3rem;
+    padding-top: 6px;
+  }
+  .person-snap__title {
+    font-family: var(--font-sans);
+    font-weight: bold;
+    padding-top: 6px;
+    margin-bottom: 14px;
+  }
+    .person-snap-block .title-text {
+      font-size: 17px;
+      font-size: 1.7rem;
+    }
+      .breakpoint-phone-wide .person-snap-block .title-text,
+      .breakpoint-phone .person-snap-block .title-text {
+        font-size: 13px;
+        font-size: 1.3rem;
+      }
+
+
+    .person-snap:hover .title-text {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+  .person-snap__authors {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    font-size: 14px;
+    padding-bottom: 12px;
+    margin-top: -10px;
+  }
+
+  .person-snap__hero {
+    padding-bottom: 4px;
+    position: relative;
+  }
+
+  .person-snap__hero-type {
+    background-color: #fff;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 7px 8px 8px;
+    /* Needs to keep above img */
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    z-index: 3;
+    transition-property: transform, background-color, color;
+    transition-duration: 250ms, 500ms, 500ms;
+  }
+    .breakpoint-phone-wide .person-snap__hero-type,
+    .breakpoint-phone .person-snap__hero-type {
+      font-size: 10px;
+      font-size: 1rem;
+      padding: 5px 6px 6px;
+    }
+
+
+  a:hover .person-snap__hero-type {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translate3d(0, -100%, 0);
+  }
+  .person-snap__hero-caption {
+    padding-top: 6px;
+  }
+  .person-snap__hero-inner {
+    overflow: hidden;
+  }
+
+  .person-snap__hero img {
+    width: 100%;
+  }
+
+  .person-snap--square .person-snap__hero {
+    transition-property: transform, opacity;
+    transition-duration: 900ms;
+    opacity: 1;
+  }
+    .person-snap--square .person-snap:hover .person-snap__hero {
+      transform: scale3d(1.1, 1.1, 1);
+      opacity: 0.85;
+    }
+
+  .person-snap--landscape .person-snap__hero img {
+    transition-property: transform, opacity;
+    transition-duration: 900ms;
+    opacity: 1;
+  }
+    .person-snap--landscape.person-snap:hover .person-snap__hero img {
+      transform: scale3d(1.1, 1.1, 1);
+      opacity: 0.85;
+    }
+
+
+.person-snap--square .person-snap__hero-inner {
+  border-radius: 50%;
+  margin: 30px;
+  overflow: hidden;
+}
+
+.person-snap--square .person-snap__title {
+  text-align: center;
+}

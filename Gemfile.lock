@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 5a351011a91f3e9ff40478d72b82d7b21929a8dc
+  revision: afca916adc3f75eac9b32d6904ae290d1267c1da
   branch: master
   specs:
     heracles (1.0.0)
@@ -71,6 +71,7 @@ GIT
       sunspot_rails
       transloadit-rails
       turbolinks
+      varnisher
 
 GEM
   remote: https://rubygems.org/
@@ -109,7 +110,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (3.4.3)
+    acts-as-taggable-on (3.4.4)
       activerecord (>= 3.2, < 5)
     addressable (2.3.6)
     ancestry (2.1.0)
@@ -318,6 +319,7 @@ GEM
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
+    humanize (1.1.0)
     i18n (0.7.0)
     inflecto (0.0.2)
     interactor (3.1.0)
@@ -330,7 +332,7 @@ GEM
       multi_json (~> 1.0)
     json (1.8.2)
     jwt (1.2.0)
-    kaminari (0.16.2)
+    kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
@@ -615,6 +617,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   heracles!
+  humanize (~> 1.1.0)
   iso8601
   jbuilder (~> 2.0)
   launchy

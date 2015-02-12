@@ -6,13 +6,13 @@
   - image = post.fields[:thumbnail_image].asset
 - elsif post.promo_image
   - image = post.promo_image
-- selected_primary_topics = select_primary_topics_for_page(post)
 / State classes
 - if post.fields[:ticketing_stage].data_present?
   - dasherised_stage = post.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, selected_primary_topics, post.series, aspect] do
+- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
   .snap-block
     a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url
       - if post.fields[:start_date].data_present?
@@ -42,10 +42,10 @@
           = post.series.title
       h3.event-snap__title
         span.title-text == widont_format markdown_line post.title
-        - if selected_primary_topics && selected_primary_topics.present?
+        - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
-            = selected_primary_topics.first.title
+            = post.fields[:topics].pages.first.title
       - if post.fields[:presenters].data_present?
         p.event-snap__authors
           ' With

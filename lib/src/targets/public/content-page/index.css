@@ -4,6 +4,12 @@
   padding-top: 50px;
   padding-bottom: 80px;
 }
+  .breakpoint-tablet .content-page__main,
+  .breakpoint-phone-wide .content-page__main,
+  .breakpoint-phone .content-page__main {
+    padding-top: 15px;
+    padding-bottom: 35px;
+  }
 
 .content-page__nav-wrapper {
   max-width: var(--column-mid);
@@ -15,11 +21,12 @@
 
 .content-page__nav {
   float: right;
+  margin-bottom: 35px;
   padding-left: 17px;
   width: 25%;
 }
   .content-page__nav-title {
-    border-bottom: 1px solid #dfdfdf;
+    border-bottom: 1px solid #ededed;
     color: #777;
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
@@ -31,6 +38,51 @@
     padding: 8px 12px 12px;
     margin-bottom: 12px;
   }
+
+.content-page__nav-toggle {
+  display: none;
+}
+.content-page__nav-toggle:hover,
+.content-page__nav-toggle:focus {
+  color: var(--primary-color);
+}
+
+.breakpoint-tablet .content-page__nav-toggle,
+.breakpoint-phone-wide .content-page__nav-toggle,
+.breakpoint-phone .content-page__nav-toggle {
+  border-bottom: 1px solid #ededed;
+  color: #888;
+  cursor: pointer;
+  display: block;
+  font-family: var(--font-sans);
+  text-align: center;
+  display: block;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+/* Hide the nav on mobile */
+.breakpoint-tablet .content-page__nav,
+.breakpoint-phone-wide .content-page__nav,
+.breakpoint-phone .content-page__nav {
+  float: none;
+  display: block;
+  padding-left: 0;
+  width: auto;
+}
+.breakpoint-tablet .content-page__nav-inner,
+.breakpoint-phone-wide .content-page__nav-inner,
+.breakpoint-phone .content-page__nav-inner {
+  display: none;
+}
+  .content-page__nav-inner.content-page__nav-inner--active {
+    display: block;
+    padding-top: 5px;
+  }
+
+.content-page__body {
+  padding-top: 30px;
+}
 
 .content-page__body .section--full {
   padding-bottom: 30px;
@@ -61,16 +113,33 @@
 
 .content-page__header {
   font-family: var(--font-sans);
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 45px;
 }
+  .breakpoint-tablet .content-page__title .content-page__header,
+  .breakpoint-phone-wide .content-page__header,
+  .breakpoint-phone .content-page__header {
+    margin-bottom: 25px;
+  }
+
 .content-page__title {
   color: var(--primary-color);
   font-size: 48px;
   font-size: 4.8rem;
   font-weight: bold;
+  line-height: 1.1;
 }
+  .breakpoint-tablet .content-page__title .content-page__title,
+  .breakpoint-phone-wide .content-page__title,
+  .breakpoint-phone .content-page__title {
+    font-size: 32px;
+    font-size: 3.2rem
+  }
+
 .content-page__intro {
-  padding-top: 50px;
-  padding-bottom: 15px;
+  padding-top: 8px;
+  padding-bottom: 1px;
 }
   .content-page__intro.copy {
     font-size: 24px;
@@ -81,7 +150,6 @@
     border-bottom: 2px solid #dfdfdf;
     display: block;
     margin-top: 40px;
-    margin-bottom: 35px;
     width: 30%;
   }
 .breakpoint-widescreen-wide .content-page__body .section--normal > *:not(div),

@@ -13,7 +13,7 @@
         h1.podcast-series__title == widont_format markdown_line page.title
       .podcast-series__subscribe.column-wrapper
         .podcast-series__subscribe-inner.column-narow
-          a.podcast-series__subscribe-anchor href="#"
+          a.podcast-series__subscribe-anchor href=page.absolute_url
             i.fa.fa-rss-square
             ' Subscribe to this podcast
       .podcast-series__intro.page__intro.intro.column-wrapper
@@ -23,34 +23,47 @@
     - if page.episodes.results.present?
       .column-wrapper
         .column-full
-          .podcast-series__latest-episodes.gradient-top-down
-            .section-header
-              h2 Latest episodes
-            .podcast-series__latest-episodes-grid.clearfix
-                / TODO: Make a podcast snap block that shows up to 4-6 episodes here;
-                / Some placeholder boxes here to illustrate style
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
-                .podcast-snap
+          .podcast-series__latest-episodes
+            / Using a dummy element here to control the gradient height;
+            / So that it doesn't interfere with the gradient on the summary text
+            .podcast-series__latest-episodes-gradient
+            .podcast-series__latest-episodes-text
+              .section-header
+                h2 Latest episodes
+              .podcast-series__latest-episodes-grid.clearfix
+                .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 5, tablet: 4, "phone-wide" => 2, phone: 2 }}.to_json
+                  - page.episodes.results.first(5).each do |episode|
+                    .podcast-snap.snap-block
+                      a.podcast-snap__anchor href= episode.absolute_url
+                        time.podcast-snap__date datetime=l(episode.fields[:publish_date].value, format: :rfc_3339)
+                          = episode.fields[:publish_date]
+                        h3.podcast-snap__title
+                          span.title-text= episode.title
+                        - if episode.fields[:explicit].value
+                          span.podcast-snap__explicit
+                           ' Explicit
+                        .podcast-snap__summary
+                          = force_excerptify_html render_content(episode.fields[:description]), 150, "i em strong br"
 
       .column-wrapper
         .column-full.clearfix
           - if page.fields[:description].present?
             .podcast-series__full-description.copy
-              img src="http://placehold.it/400/350"
+              - if page.fields[:hero_image].data_present?
+                  img src=page.fields[:hero_image].asset.content_thumbnail_url alt="Portrait of #{page.title}"
               = render_content page.fields[:description]
-          .podcast-series__all-episodes
-            .section-header
-              h2 All episodes
-            - if page.episodes.results.present?
+          - if page.episodes.results.present? && page.episodes.total > 5
+            .podcast-series__all-episodes
+              .section-header
+                h2 Older episodes
               .podcast-series__all-episodes-list
-                - page.episodes.results.each do |episode|
+                - page.episodes.results.drop(5).each do |episode|
                   a.podcast-series__all-episodes-item.clearfix href=episode.absolute_url
-                    span.podcast-series__all-episodes-date 1 Nov 14
+                    span.podcast-series__all-episodes-date
+                      = episode.fields[:publish_date]
                     h3.podcast-series__all-episodes-title
                       = episode.title
-                    span.podcast-series__all-episodes-duration
-                     ' 02:05:92
+                    - if episode.fields[:explicit].value
+                      span.podcast-series__all-episodes-explicit
+                       ' Explicit
 

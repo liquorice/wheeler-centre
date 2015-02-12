@@ -2,7 +2,14 @@ module ApplicationHelper
   include Heracles::ContentFieldHelper
 
   # Common helpers sit under lib/helpers
+  include TruncateHtml
   include TextFormattingHelper
+
+  def truncate_html(html, options={})
+    return '' if html.nil?
+    html_string = TruncateHtml::HtmlString.new(html)
+    TruncateHtml::HtmlTruncator.new(html_string, options).truncate.html_safe
+  end
 
   ### Heracles helpers
 
@@ -87,6 +94,14 @@ module ApplicationHelper
     display_date
   end
 
+  def indefinite_article_for_number(number)
+    vowels = %w( a e i o u )
+    (vowels.include? number.humanize[0]) ? "an" : "a"
+  end
+
+  ###
+  # TOPICS
+  ###
 
   # Set of primary tags/categories that content falls under
   def topics_page

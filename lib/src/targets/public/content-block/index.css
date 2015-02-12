@@ -41,6 +41,7 @@
     bottom: 0;
   }
 
+.saved-search__landscape-grid-uneven,
 .saved-search__square-grid {
   padding-top: 35px;
 }

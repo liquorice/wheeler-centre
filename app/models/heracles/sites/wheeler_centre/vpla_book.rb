@@ -30,6 +30,10 @@ module Heracles
           }
         end
 
+        def year
+          parent
+        end
+
         searchable do
           text :blurb do
             fields[:blurb].value

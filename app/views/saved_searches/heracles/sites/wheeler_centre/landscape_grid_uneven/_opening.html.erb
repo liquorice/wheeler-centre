@@ -1,0 +1,14 @@
+<div class="column-wrapper saved-search full-width-block saved-search__landscape-grid-uneven">
+  <div class="gradient-top-down saved-search__fake-gradient"/>
+  <div class="column-wide">
+    <%- if data[:title].present? || data[:caption].present? %>
+      <div class="section-header">
+        <h2><%= data[:title] %></h2>
+        <%- if data[:caption].present? %>
+          <div class="intro copy">
+            <p><%= data[:caption].html_safe %></p>
+          </div>
+        <%- end %>
+      </div>
+    <%- end %>
+    <div class="snap-uneven snap-wrapper clearfix" data-view-grouper="<%= {elementsSelector: ".snap-block", perGroup: { default: 3,  phone: 2 }}.to_json %>">

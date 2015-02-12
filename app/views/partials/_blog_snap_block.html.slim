@@ -6,9 +6,9 @@
   - image = post.fields[:thumbnail_image].asset
 - elsif post.fields[:hero_image].data_present?
   - image = post.fields[:hero_image].asset
-- selected_primary_topics = select_primary_topics_for_page(post)
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["blog-snap-block-1", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, selected_primary_topics, aspect] do
+- cache ["blog-snap-block-1", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do
   .snap-block
     a.blog-snap.blog-snap-block href=post.absolute_url
       time.blog-snap__date
@@ -26,10 +26,10 @@
                 p = image.attribution
       h3.blog-snap__title
         span.title-text == widont_format markdown_line post.title
-        - if selected_primary_topics && selected_primary_topics.present?
+        - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
-            = selected_primary_topics.first.title
+            = post.fields[:topics].pages.first.title
       - if post.fields[:authors].data_present?
         p.blog-snap__authors
           - if post.guest_post?

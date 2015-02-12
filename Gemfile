@@ -34,6 +34,7 @@ gem "rack-rewrite"
 
 # Views
 gem "jbuilder", "~> 2.0"
+gem 'humanize', '~> 1.1.0'
 gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"

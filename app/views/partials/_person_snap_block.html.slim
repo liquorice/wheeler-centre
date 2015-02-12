@@ -1,0 +1,32 @@
+- show_summary = show_summary || false
+- hide_summary = hide_summary || false
+- aspect = aspect || :square
+- if post.fields[:portrait].data_present?
+  - image = post.fields[:portrait].asset
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
+
+- cache ["person-snap-block-1", post, show_type, hide_summary, image, first_topic, aspect] do
+  .snap-block
+    a.person-snap.person-snap-block class="person-snap--#{aspect}" href=post.absolute_url
+      span.person-snap__date
+        ' &nbsp;
+      - if image
+        .person-snap__hero
+          .person-snap__hero-inner
+            - if show_type && aspect != :square
+              span.person-snap__hero-type Person
+            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+            img src=image_url alt=(image.description.present? ? image.description : "Portrait of #{post.title}")
+            - if image.attribution.present?
+              .person-snap__hero-caption.caption
+                p = image.attribution
+      h3.person-snap__title
+        span.title-text == widont_format markdown_line post.title
+        - if post.fields[:topics].data_present?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = post.fields[:topics].pages.first.title
+      - if show_summary && post.fields[:biography].data_present?
+          .person-snap-block__summary.snap-block__summary.copy
+            .person-snap-block__summary-inner.snap-block__summary-inner.copy
+              = force_excerptify_html render_content(post.fields[:biography]), 350, "p i em strong br"

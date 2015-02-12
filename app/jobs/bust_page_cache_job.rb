@@ -16,9 +16,8 @@ class BustPageCacheJob < Que::Job
   end
 
   def purge_page
-    client = Varnisher::Purger.new('PURGE', @page_check.page_path, @page_check.edge_hostname)
-    p client.send
-    p '###'
+    client = Varnisher::Purger.new('PURGE', @page_check.path, @page_check.edge_hostname)
+    client.send
   end
 
   def update_page_check
@@ -36,9 +35,9 @@ class BustPageCacheJob < Que::Job
     basic_auth_password = ENV['BASIC_AUTH_PASSWORD']
 
     source = if basic_auth_password && basic_auth_user
-      open(@page_check.origin_uri, http_basic_authentication: [basic_auth_user, basic_auth_password])
+      open(@page_check.origin_url, http_basic_authentication: [basic_auth_user, basic_auth_password])
     else
-      open(@page_check.origin_uri)
+      open(@page_check.origin_url)
     end
 
     source.read

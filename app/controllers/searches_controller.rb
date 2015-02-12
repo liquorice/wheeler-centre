@@ -48,13 +48,4 @@ class SearchesController < ApplicationController
       paginate page: params[:page] || 1, per_page: 40
     end
   end
-
-  private
-
-  def site
-    @site ||= Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
-  end
-
-  helper_method :site
-
 end
