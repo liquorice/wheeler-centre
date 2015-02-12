@@ -30,65 +30,29 @@
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Government partners
               - page.fields[:government_partners].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:patrons].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Patrons
               - page.fields[:patrons].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:major_sponsors].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Major sponsors
               - page.fields[:major_sponsors].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:trusts_foundations].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Trusts & foundations
               - page.fields[:trusts_foundations].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:ministry_of_ideas].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Ministry of Ideas corporate fund
               - page.fields[:ministry_of_ideas].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:venue_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h2 Venue partners
               - page.fields[:venue_partners].pages.each do |sponsor|
-                .snap-block
-                  - if sponsor.fields[:url].data_present?
-                    a href=sponsor.fields[:url].value
-                      - if sponsor.fields[:logo].data_present?
-                        img src=sponsor.fields[:logo].asset.content_small_url
-                  - elsif sponsor.fields[:logo].data_present?
-                      img src=sponsor.fields[:logo].asset.content_small_url
+                = render "partials/sponsor_list_item", sponsor: sponsor

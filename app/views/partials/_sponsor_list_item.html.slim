@@ -1,0 +1,11 @@
+.snap-block
+  - if sponsor.fields[:url].data_present?
+    a href=sponsor.fields[:url].value
+      - if sponsor.fields[:logo].data_present?
+        img src=sponsor.fields[:logo].asset.content_small_url
+      - else
+        p.sponsor-list__name = sponsor.title
+  - elsif sponsor.fields[:logo].data_present?
+      img src=sponsor.fields[:logo].asset.content_small_url
+  - else
+    p.sponsor-list__name = sponsor.title
