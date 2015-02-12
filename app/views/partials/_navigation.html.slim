@@ -21,8 +21,8 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
       data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
       data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
       ]
-      a.masthead-nav-main__anchor href="/events"
-        ' Events
+      a.masthead-nav-main__anchor href=events_page.absolute_url
+        = events_page.title
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
       .masthead-nav-main__dropdown.clearfix
         ul.masthead-nav-main__dropdown-list
@@ -42,20 +42,20 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
               li.masthead-nav-main__dropdown-item
                 a.masthead-nav-main__dropdown-anchor href=series.absolute_url == markdown_line series.title
     li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/broadcasts"
-        ' Broadcasts
+      a.masthead-nav-main__anchor href=broadcasts_page.absolute_url
+        = broadcasts_page.title
     li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/writings"
-        ' Writings
+      a.masthead-nav-main__anchor href=blog_page.absolute_url
+        = blog_page.title
     li.masthead-nav-main__item.masthead-nav-main__item--break
-      a.masthead-nav-main__anchor href="/people"
-        ' People
+      a.masthead-nav-main__anchor href=people_page.absolute_url
+        = people_page.title
     li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
       data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
       data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
       ]
       button.masthead-nav-main__anchor
-        ' Projects
+        = projects_page.title
         i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
       .masthead-nav-main__dropdown.clearfix
         - projects_for_navigation.in_groups(2, false).each do |group|
@@ -80,7 +80,7 @@ nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggle
           input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…" name="q" value=params[:q].presence
           button.masthead-nav-secondary__search-button
             i.fa.fa-search
-      a.masthead-nav-secondary__anchor.masthead-nav-secondary__anchor--search href="#"
+      button.masthead-nav-secondary__anchor.masthead-nav-secondary__anchor--search
         i.fa.fa-search
         span.screenreaders-only Search
 
