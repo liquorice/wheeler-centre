@@ -20,143 +20,151 @@
 
 = area :main do
   .home
-    - if page.fields[:intro].data_present?
-      .home__intro.intro.column-wrapper
-        .column-mid
-          = render_content_in_sections page.fields[:intro]
+    - cache ["home-page-intro-1", page.fields[:intro]] do
+      - if page.fields[:intro].data_present?
+        .home__intro.intro.column-wrapper
+          .column-mid
+            = render_content_in_sections page.fields[:intro]
     - if page.sorted_banners.present?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
-          a.home-banner href=banner.fields[:link].value
-            .home-banner__shim
-            .home-banner__image
-              img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
-            - if banner.fields[:label].data_present? || banner.fields[:category].data_present?
-              .home-banner__detail
-                - if banner.fields[:category].data_present?
-                  - category = banner.fields[:category].value
-                  p.home-banner__category
-                    = category
-                    i.fa class=icon_classnames[category]
-                - if banner.fields[:label].data_present?
-                  .home-banner__label
-                    = force_excerptify_html render_content(banner.fields[:label]), 350, "i em strong"
-                    '  ›
+          - cache ["home-page-banner-1", banner, banner.fields[:banner_image].asset] do
+            a.home-banner href=banner.fields[:link].value
+              .home-banner__shim
+              .home-banner__image
+                img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
+              - if banner.fields[:label].data_present? || banner.fields[:category].data_present?
+                .home-banner__detail
+                  - if banner.fields[:category].data_present?
+                    - category = banner.fields[:category].value
+                    p.home-banner__category
+                      = category
+                      i.fa class=icon_classnames[category]
+                  - if banner.fields[:label].data_present?
+                    .home-banner__label
+                      = force_excerptify_html render_content(banner.fields[:label]), 350, "i em strong"
+                      '  ›
     / Highlights
     .column-wrapper
       .column-full.clearfix
-        - if highlights.total > 0
-          - no_user_highlights = (user_highlights.total == 0)
-          - if no_user_highlights
-            - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
-          - else
-            - per_group = { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
-          .home__highlights class=("home__highlights--full" if no_user_highlights)
-            .section-header
-              h2
-                - if page.fields[:highlights_primary_title].data_present?
-                  = page.fields[:highlights_primary_title].value
-                - else
-                  ' Highlights
-              - if page.fields[:highlights_primary_content].data_present?
-                .intro.copy
-                  = render_content page.fields[:highlights_primary_content]
-            .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
-              - highlights.results.each do |post|
-                - if post.page_type == "blog_post"
-                  = render "partials/blog_snap_block", post: post, show_type: true
-                - elsif post.page_type == "event"
-                  = render "partials/event_snap_block", post: post, show_type: true
-                - elsif post.page_type == "recording"
-                  = render "partials/recording_snap_block", post: post, show_type: true
-                - elsif post.page_type == "person"
-                  = render "partials/person_snap_block", post: post, show_type: true
-                - else
-                  / TODO Need types for: person, podcast_episode
-                  .snap-block
-                    = post.title
-                    '  —
-                    = post.page_type
-        - if user_highlights && user_highlights.total > 0
-          .home__user-highlights
-            .section-header
-              h2
-                - if page.fields[:highlights_secondary_title].data_present?
-                  = page.fields[:highlights_secondary_title].value
-                - else
-                  ' Highlights
-              - if page.fields[:highlights_secondary_content].data_present?
-                .intro.copy
-                  = render_content page.fields[:highlights_secondary_content]
-            .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }}.to_json
-              - user_highlights.results.each do |post|
-                - if post.page_type == "blog_post"
-                  = render "partials/blog_snap_block", post: post, show_type: true
-                - elsif post.page_type == "event"
-                  = render "partials/event_snap_block", post: post, show_type: true
-                - elsif post.page_type == "recording"
-                  = render "partials/recording_snap_block", post: post, show_type: true
-                - elsif post.page_type == "person"
-                  = render "partials/person_snap_block", post: post, show_type: true
-                - elsif post.page_type == "podcast_episode"
-                  = render "partials/podcast_episode_snap_block", post: post, show_type: true
-                - elsif post.page_type == "podcast_series"
-                  = render "partials/podcast_series_snap_block", post: post, show_type: true
-                - else
-                  / TODO Need types for: person, podcast_episode
-                  .snap-block
-                    = post.title
-                    '  —
-                    = post.page_type
+        - cache ["home-page-highlights-1", page, highlights] do
+          - if highlights.total > 0
+            - no_user_highlights = (user_highlights.total == 0)
+            - if no_user_highlights
+              - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
+            - else
+              - per_group = { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
+            .home__highlights class=("home__highlights--full" if no_user_highlights)
+              .section-header
+                h2
+                  - if page.fields[:highlights_primary_title].data_present?
+                    = page.fields[:highlights_primary_title].value
+                  - else
+                    ' Highlights
+                - if page.fields[:highlights_primary_content].data_present?
+                  .intro.copy
+                    = render_content page.fields[:highlights_primary_content]
+              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
+                - highlights.results.each do |post|
+                  - if post.page_type == "blog_post"
+                    = render "partials/blog_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "event"
+                    = render "partials/event_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "recording"
+                    = render "partials/recording_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "person"
+                    = render "partials/person_snap_block", post: post, show_type: true
+                  - else
+                    / TODO Need types for: person, podcast_episode
+                    .snap-block
+                      = post.title
+                      '  —
+                      = post.page_type
+        - cache ["home-page-highlights-1", page, user_highlights] do
+          - if user_highlights && user_highlights.total > 0
+            .home__user-highlights
+              .section-header
+                h2
+                  - if page.fields[:highlights_secondary_title].data_present?
+                    = page.fields[:highlights_secondary_title].value
+                  - else
+                    ' Highlights
+                - if page.fields[:highlights_secondary_content].data_present?
+                  .intro.copy
+                    = render_content page.fields[:highlights_secondary_content]
+              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }}.to_json
+                - user_highlights.results.each do |post|
+                  - if post.page_type == "blog_post"
+                    = render "partials/blog_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "event"
+                    = render "partials/event_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "recording"
+                    = render "partials/recording_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "person"
+                    = render "partials/person_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "podcast_episode"
+                    = render "partials/podcast_episode_snap_block", post: post, show_type: true
+                  - elsif post.page_type == "podcast_series"
+                    = render "partials/podcast_series_snap_block", post: post, show_type: true
+                  - else
+                    / TODO Need types for: person, podcast_episode
+                    .snap-block
+                      = post.title
+                      '  —
+                      = post.page_type
     / Social mo'
     = render "partials/social_media_wide"
 
     / People bits
     .column-wrapper
       .column-mid.clearfix
-        .home__quotes
-          .section-header
-            - if page.fields[:quotes_title].data_present?
-              h2
-                = page.fields[:quotes_title].value
-            - if page.fields[:quotes_content].data_present?
-              .intro.copy
-                = render_content page.fields[:quotes_content]
-          .home__quotes-list
-            - if page.fields[:quotes].data_present?
-              - page.fields[:quotes].pages.each do |quote|
-                - presenter = quote.fields[:person].pages.first
-                - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
-                .home-quote
-                  - if image
-                    .event-presenter__image
-                      .event-presenter__image-inner
-                        img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
-                  .home-quote__quote.copy
-                    = render_content quote.fields[:quote]
-                  .home-quote__caption.copy
-                    = render_content quote.fields[:caption]
-        .home__writings
-          .section-header
-            - if page.fields[:writings_title].data_present?
-              h2
-                = page.fields[:writings_title].value
-            - if page.fields[:writings_content].data_present?
-              .intro.copy
-                = render_content page.fields[:writings_content]
-          .home__writings-list
-            - user_writings.results.each_with_index do |writing, index|
-              = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
+          .home__quotes
+            - cache ["home-page-quotes-header-1", page] do
+              .section-header
+                - if page.fields[:quotes_title].data_present?
+                  h2
+                    = page.fields[:quotes_title].value
+                - if page.fields[:quotes_content].data_present?
+                  .intro.copy
+                    = render_content page.fields[:quotes_content]
+            .home__quotes-list
+              - if page.fields[:quotes].data_present?
+                - page.fields[:quotes].pages.each do |quote|
+                  - presenter = quote.fields[:person].pages.first
+                  - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
+                  - cache ["home-page-quotes-1", quote, presenter, image] do
+                    .home-quote
+                      - if image
+                        .event-presenter__image
+                          .event-presenter__image-inner
+                            img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
+                      .home-quote__quote.copy
+                        = render_content quote.fields[:quote]
+                      .home-quote__caption.copy
+                        = render_content quote.fields[:caption]
+          .home__writings
+            - cache ["home-page-writings-header-1", page] do
+              .section-header
+                - if page.fields[:writings_title].data_present?
+                  h2
+                    = page.fields[:writings_title].value
+                - if page.fields[:writings_content].data_present?
+                  .intro.copy
+                    = render_content page.fields[:writings_content]
+            .home__writings-list
+              - user_writings.results.each_with_index do |writing, index|
+                = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
 
     / General content area
-    - if page.fields[:body].data_present?
-      .home__body
-        .content-block
-          = render_content_in_sections page.fields["body"]
+    - cache ["home-page-body-1", page] do
+      - if page.fields[:body].data_present?
+        .home__body
+          .content-block
+            = render_content_in_sections page.fields["body"]
 
-
-    .home__about.column-wrapper
-      .column-narrow
-        .home__about-content.copy
-          p The Wheeler Centre is Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find some of our finest local and international speakers sharing their expertise, their imaginations and their ideas.
-        a.home__about-link href="/about-us" Find out more about us ›
+    - cache ["home-page-about-1", page] do
+      .home__about.column-wrapper
+        .column-narrow
+          .home__about-content.copy
+            p The Wheeler Centre is Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find some of our finest local and international speakers sharing their expertise, their imaginations and their ideas.
+          a.home__about-link href="/about-us" Find out more about us ›
