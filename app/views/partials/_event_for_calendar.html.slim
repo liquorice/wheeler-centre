@@ -4,7 +4,7 @@
   - image = event.promo_image
 - selected_primary_topics = select_primary_topics_for_page(event)
 
-- cache ["event-for-calendar-1", event, Time.zone.now.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
+- cache ["event-for-calendar-1", event, Time.current.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
   - event_classnames = []
   / Find an event's position and assign a class
   / Useful for clearing floats in the event grid
