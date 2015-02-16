@@ -1,7 +1,7 @@
 require 'sitemap_generator'
 
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://#{ENV['CANONICAL_DOMAIN']}"
+SitemapGenerator::Sitemap.default_host = "#{ENV['CANONICAL_DOMAIN']}"
 
 # Store the sitemap on s3
 SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['ASSETS_AWS_BUCKET']}.s3.amazonaws.com/"
