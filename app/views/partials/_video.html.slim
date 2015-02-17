@@ -1,11 +1,11 @@
-- responsive_embed_div_style = "padding-bottom: #{(external_video.youtube["height"].to_f / external_video.youtube["width"].to_f) * 100}%"
+- responsive_embed_div_style = "padding-bottom: #{(external_video.embed["height"].to_f / external_video.embed["width"].to_f) * 100}%"
 
 - if video_poster_image.data_present?
   - version_name = :content_large
   - version_name = :original unless video_poster_image.asset.versions.include?(:content_large)
   - poster_image_url = video_poster_image.asset.send(:"#{version_name.to_sym}_url")
 - else
-  - poster_image_url = external_video.youtube["snippet"]["thumbnails"]["high"]["url"] if external_video.youtube["snippet"]
+  - poster_image_url = external_video.embed["thumbnail_url"] if external_video.embed
 
 .figure.figure__video.figure__display--default
   .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
@@ -15,8 +15,8 @@
         .video-player__play
           i.fa.fa-play.video-player__play-icon
         h3.video-player__title
-          - if external_video.youtube["title"].present?
-            = widont_format(external_video.youtube["title"]).html_safe
+          - if external_video.embed["title"].present?
+            = widont_format(external_video.embed["title"]).html_safe
           - else
             ' Watch
       .video-player__metadata
