@@ -12,7 +12,7 @@
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["event-snap-block-2", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
+- cache ["event-snap-block-3", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
   .snap-block itemscope=true itemtype="http://data-vocabulary.org/Event"
     a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url itemprop="url"
       - if post.fields[:start_date].data_present?

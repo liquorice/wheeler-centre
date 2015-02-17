@@ -5,7 +5,7 @@
   - image = post.fields[:itunes_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["podcast-series-snap-block-1", post, show_type, hide_summary, image, first_topic, post.episodes, aspect] do
+- cache ["podcast-series-snap-block-2", post, show_type, hide_summary, image, first_topic, post.episodes, aspect] do
   .snap-block
     a.podcast-series-snap class="podcast-series-snap--#{aspect}" href=post.absolute_url
       span.podcast-series-snap__date

@@ -5,7 +5,7 @@
   - image = post.fields[:portrait].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["person-snap-block-1", post, show_type, hide_summary, image, first_topic, aspect] do
+- cache ["person-snap-block-2", post, show_type, hide_summary, image, first_topic, aspect] do
   .snap-block
     a.person-snap.person-snap-block class="person-snap--#{aspect}" href=post.absolute_url
       span.person-snap__date
