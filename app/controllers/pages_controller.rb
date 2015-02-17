@@ -16,7 +16,10 @@ class PagesController < ApplicationController
     set_meta_tags title: markdown_line(page.title),
                   og: {
                     title: markdown_line(page.title),
-                    url:   "http://#{site.primary_hostname}#{page.absolute_url}"
-                  }
+                    url:   url_with_domain(page.absolute_url)
+                  },
+                  canonical: url_with_domain(page.absolute_url),
+                  description: I18n.t("metadata.description"),
+                  keywords: I18n.t("metadata.keywords")
   end
 end

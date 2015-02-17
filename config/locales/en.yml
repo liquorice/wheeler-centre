@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  metadata:
+    description: "Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find our speakers sharing their expertise, their imaginations and their ideas."
+    keywords: "books, writing, ideas, events, melbourne, wheeler centre, literature, talks"
   hello: "Hello world"
   views:
     pagination:
