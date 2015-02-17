@@ -1,13 +1,14 @@
-- all_letters = ("A".."Z").to_a
-.people-select-box data-view-people-select-box={selectSelector: ".people-letters-select", peoplePath: "#{page.absolute_url}", peopleOrderBy: "#{order_by}"}.to_json
-  select.people-letters-select
-    option.people-letters-select__option selected="selected" disabled="disabled" value="#"
-      | Filter people by surname
+- cache ["people-letter-nav", page, order_by] do
+  - all_letters = ("A".."Z").to_a
+  .people-select-box data-view-people-select-box={selectSelector: ".people-letters-select", peoplePath: "#{page.absolute_url}", peopleOrderBy: "#{order_by}"}.to_json
+    select.people-letters-select
+      option.people-letters-select__option selected="selected" disabled="disabled" value="#"
+        | Filter people by surname
+      - all_letters.each do |letter|
+        option.people-letters-select__option value="#{letter.downcase}"
+          = letter
+  ul.people-letters.clearfix
     - all_letters.each do |letter|
-      option.people-letters-select__option value="#{letter.downcase}"
-        = letter
-ul.people-letters.clearfix
-  - all_letters.each do |letter|
-    li.people-letter
-      a href="#{page.absolute_url}?letter=#{letter.downcase}&order_by=#{order_by}"
-        = letter
+      li.people-letter
+        a href="#{page.absolute_url}?letter=#{letter.downcase}&order_by=#{order_by}"
+          = letter
