@@ -11,9 +11,9 @@
 - else
   - open_graph_summary = strip_html(render_content(page.fields[:body]), "")
 - set_meta_tags({ \
-    type: "article", \
     description: open_graph_summary, \
     og: { \
+      type: "article", \
       description: open_graph_summary, \
       article: { \
         published_time: (page.fields[:publish_date].value.iso8601 if page.fields[:publish_date].data_present?),  \
