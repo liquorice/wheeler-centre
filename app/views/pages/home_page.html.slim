@@ -1,3 +1,11 @@
+/ Custom meta data
+- set_meta_tags({ \
+    og: { \
+      url:   url_with_domain(page.absolute_url.gsub(/^\/home/, "")) \
+    }, \
+    canonical: url_with_domain(page.absolute_url.gsub(/^\/home/, "")) \
+  })
+
 - icon_classnames = { \
   "Watch" => "fa-play-circle", \
   "Listen" => "fa-music" \
