@@ -1,5 +1,34 @@
 - primary_topic = select_primary_topics_for_page(page).first
 
+/ Custom meta data
+- if page.fields[:hero_image].data_present?
+  - open_graph_image = page.fields[:hero_image].asset
+- elsif page.fields[:thumbnail_image].data_present?
+  - open_graph_image = page.fields[:thumbnail_image].asset
+
+- if page.fields[:summary].data_present?
+  - open_graph_summary = strip_html(render_content(page.fields[:summary]))
+- else
+  - open_graph_summary = strip_html(render_content(page.fields[:body]))
+- set_meta_tags({ \
+    description: open_graph_summary, \
+    og: { \
+      description: open_graph_summary, \
+      article: { \
+        published_time: (page.fields[:publish_date].value.iso8601 if page.fields[:publish_date].data_present?),  \
+        modified_time: page.updated_at.iso8601, \
+        author: (page.fields[:authors].pages.map(&:title) if page.fields[:authors].data_present?), \
+        tags: (page.fields[:topics].pages.map(&:title) if page.fields[:topics].data_present?), \
+      }, \
+      image: { \
+        url: (open_graph_image.content_small_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+      } \
+    } \
+  })
+
 = area :head do
   link href=url_with_domain("#{blog_archive_page.absolute_url}.rss") rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
 

@@ -15,6 +15,8 @@ class PagesController < ApplicationController
   def set_page_meta_tags
     set_meta_tags title: markdown_line(page.title),
                   og: {
+                    site_name: I18n.t("metadata.site_name"),
+                    type: I18n.t("metadata.type"),
                     title: markdown_line(page.title),
                     url:   url_with_domain(page.absolute_url)
                   },
