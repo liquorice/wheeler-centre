@@ -1,62 +1,63 @@
 footer.footer.clearfix role="contentinfo"
-  nav.footer-nav-main.clearfix
-    .footer-nav-main__group
-      - cache ["footer-events-header-1", events_page] do
-        h3
-          a href=events_page.absolute_url == markdown_line events_page.title
-      - events_pages = events_page.children.in_order.visible.published.where(collection_id: nil)
-      - cache ["footer-events-nav-1", events_pages] do
-        ul
-          - events_pages.each do |child|
-            - cache ["footer-nav-item-1", child] do
-              li
-                a href=child.absolute_url == markdown_line child.title
-    .footer-nav-main__group
-      - cache ["footer-broadcasts-header-1", broadcasts_page] do
-        h3
-          a href=broadcasts_page.absolute_url = broadcasts_page.title
-      - broadcasts_pages = broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
-      - cache ["footer-broadcasts-nav-1", broadcasts_pages] do
-        ul
-          - broadcasts_pages.each do |child|
+  - cache ["footer-nav-all-1", Time.current.beginning_of_day] do
+    nav.footer-nav-main.clearfix
+      .footer-nav-main__group
+        - cache ["footer-events-header-1", events_page] do
+          h3
+            a href=events_page.absolute_url == markdown_line events_page.title
+        - events_pages = events_page.children.in_order.visible.published.where(collection_id: nil)
+        - cache ["footer-events-nav-1", events_pages] do
+          ul
+            - events_pages.each do |child|
               - cache ["footer-nav-item-1", child] do
                 li
                   a href=child.absolute_url == markdown_line child.title
-    .footer-nav-main__group
-      - cache ["footer-blog-header-1", blog_page] do
-        h3
-          a href=blog_page.absolute_url  == markdown_line blog_page.title
-      - blog_pages = blog_page.children.in_order.visible.published.where(collection_id: nil)
-      - cache ["footer-blog-nav-1", blog_pages] do
-        ul
-          - blog_pages.each do |child|
-            - cache ["footer-nav-item-1", child] do
-              li
-                a href=child.absolute_url == markdown_line child.title
-    .footer-nav-main__group
-      - cache ["footer-people-header-1", people_page] do
-        h3
-          a href=people_page.absolute_url == markdown_line people_page.title
-    .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
-      h3= projects_page.title
-      - cache ["footer-projects-nav-1", projects_for_navigation] do
-        - projects_for_navigation.in_groups(2, false).each do |group|
-          - if group.present?
-            ul
-              - group.each do |child|
+      .footer-nav-main__group
+        - cache ["footer-broadcasts-header-1", broadcasts_page] do
+          h3
+            a href=broadcasts_page.absolute_url = broadcasts_page.title
+        - broadcasts_pages = broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
+        - cache ["footer-broadcasts-nav-1", broadcasts_pages] do
+          ul
+            - broadcasts_pages.each do |child|
                 - cache ["footer-nav-item-1", child] do
                   li
                     a href=child.absolute_url == markdown_line child.title
-    .footer-nav-main__group.footer-nav-main__group--double
-      h3 Topics
-      - cache ["footer-projects-nav-1", primary_topics] do
-        - primary_topics.in_groups(2, false).each do |group|
-          - if group.present?
-            ul
-              - group.each do |child|
-                - cache ["footer-nav-item-1", child] do
-                  li
-                    a href=child.absolute_url == markdown_line child.title
+      .footer-nav-main__group
+        - cache ["footer-blog-header-1", blog_page] do
+          h3
+            a href=blog_page.absolute_url  == markdown_line blog_page.title
+        - blog_pages = blog_page.children.in_order.visible.published.where(collection_id: nil)
+        - cache ["footer-blog-nav-1", blog_pages] do
+          ul
+            - blog_pages.each do |child|
+              - cache ["footer-nav-item-1", child] do
+                li
+                  a href=child.absolute_url == markdown_line child.title
+      .footer-nav-main__group
+        - cache ["footer-people-header-1", people_page] do
+          h3
+            a href=people_page.absolute_url == markdown_line people_page.title
+      .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
+        h3= projects_page.title
+        - cache ["footer-projects-nav-1", projects_for_navigation] do
+          - projects_for_navigation.in_groups(2, false).each do |group|
+            - if group.present?
+              ul
+                - group.each do |child|
+                  - cache ["footer-nav-item-1", child] do
+                    li
+                      a href=child.absolute_url == markdown_line child.title
+      .footer-nav-main__group.footer-nav-main__group--double
+        h3 Topics
+        - cache ["footer-projects-nav-1", primary_topics] do
+          - primary_topics.in_groups(2, false).each do |group|
+            - if group.present?
+              ul
+                - group.each do |child|
+                  - cache ["footer-nav-item-1", child] do
+                    li
+                      a href=child.absolute_url == markdown_line child.title
   - cache  ["footer-search-1", params[:q]] do
     nav.footer-nav-secondary.clearfix
       ul
