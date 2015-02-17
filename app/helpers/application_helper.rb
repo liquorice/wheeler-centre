@@ -142,10 +142,12 @@ module ApplicationHelper
   ### Projects
   ### --------------------------------------------------------------------------
 
+  memoize \
   def projects_page
     site.pages.find_by_url("projects")
   end
 
+  memoize \
   def projects_for_navigation
     projects_page.children.in_order.visible.published
   end
@@ -154,6 +156,7 @@ module ApplicationHelper
   ### People
   ### --------------------------------------------------------------------------
 
+  memoize \
   def people_page
     site.pages.of_type("people").first
   end
@@ -162,10 +165,12 @@ module ApplicationHelper
   ### Blog
   ### --------------------------------------------------------------------------
 
+  memoize \
   def blog_page
     site.pages.of_type("blog").first
   end
 
+  memoize \
   def blog_archive_page
     blog_page.children.of_type("blog_archive").first
   end
@@ -175,10 +180,12 @@ module ApplicationHelper
   ### Broadcasts
   ### --------------------------------------------------------------------------
 
+  memoize \
   def broadcasts_page
     site.pages.of_type("broadcasts").first
   end
 
+  memoize \
   def broadcasts_archive_page
     broadcasts_page.children.of_type("broadcasts_archive").first
   end
@@ -193,10 +200,12 @@ module ApplicationHelper
   ### Events
   ### --------------------------------------------------------------------------
 
+  memoize \
   def events_page
     site.pages.of_type("events").first
   end
 
+  memoize \
   def upcoming_events_for_navigation
     events_page.upcoming_events(per_page: 5)
   end
