@@ -2,14 +2,7 @@ module ApplicationHelper
   include Heracles::ContentFieldHelper
 
   # Common helpers sit under lib/helpers
-  include TruncateHtml
   include TextFormattingHelper
-
-  def truncate_html(html, options={})
-    return '' if html.nil?
-    html_string = TruncateHtml::HtmlString.new(html)
-    TruncateHtml::HtmlTruncator.new(html_string, options).truncate.html_safe
-  end
 
   ### Heracles helpers
 
@@ -56,9 +49,9 @@ module ApplicationHelper
   end
 
   def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
-    truncate_html(
+    HTML_Truncator.truncate(
       strip_html(html, allowed_tags),
-    length: length)
+    length).html_safe
   end
 
   def strip_html(html, allowed_tags = "p i em strong br")

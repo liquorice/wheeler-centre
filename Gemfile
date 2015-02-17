@@ -38,7 +38,7 @@ gem 'humanize', '~> 1.1.0'
 gem "meta-tags"
 gem "redcarpet"
 gem "slim-rails"
-gem "truncate_html"
+gem "html_truncator"
 gem "sanitize"
 
 # Integrations
@@ -112,6 +112,7 @@ group :development do
   gem "foreman"
   gem "launchy"
   gem "quiet_assets"
+  # gem "rack-mini-profiler"
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr"
