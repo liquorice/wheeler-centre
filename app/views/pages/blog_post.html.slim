@@ -7,9 +7,9 @@
   - open_graph_image = page.fields[:thumbnail_image].asset
 
 - if page.fields[:summary].data_present?
-  - open_graph_summary = strip_html(render_content(page.fields[:summary]))
+  - open_graph_summary = strip_html(render_content(page.fields[:summary]), "")
 - else
-  - open_graph_summary = strip_html(render_content(page.fields[:body]))
+  - open_graph_summary = strip_html(render_content(page.fields[:body]), "")
 - set_meta_tags({ \
     description: open_graph_summary, \
     og: { \
