@@ -18,7 +18,8 @@ class PagesController < ApplicationController
                     site_name: I18n.t("metadata.site_name"),
                     type: I18n.t("metadata.type"),
                     title: markdown_line(page.title),
-                    url:   url_with_domain(page.absolute_url)
+                    url:   url_with_domain(page.absolute_url),
+                    updated_time: page.updated_at.iso8601
                   },
                   canonical: url_with_domain(page.absolute_url),
                   description: I18n.t("metadata.description"),

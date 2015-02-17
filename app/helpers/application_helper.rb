@@ -214,6 +214,15 @@ module ApplicationHelper
     (0..6).map {|d| week + d.days}
   end
 
+  def page_title_for_event(event)
+    title = ""
+    if event.series
+      title = "#{event.series.title}: "
+    end
+    title += "#{event.title}, #{format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "medium_date")}"
+    title
+  end
+
   # As heard on "Chroma Zone" talk by Lea Verou
   # Explanation @ http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140311/G18
   # @color - [r,g,b]

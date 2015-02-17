@@ -2,6 +2,22 @@
 - past_events = page.past_events(page: params[:page], per_page: params[:per_page] || 1000)
 - image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
 
+/ Custom meta data
+- open_graph_image = image
+- open_graph_summary = strip_html(render_content(page.fields[:body]), "")
+- set_meta_tags({ \
+    description: open_graph_summary, \
+    og: { \
+      description: open_graph_summary,
+      image: { \
+        url: (open_graph_image.content_small_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+      } \
+    } \
+  })
+
 = area :masthead_title do
   ' Events
 

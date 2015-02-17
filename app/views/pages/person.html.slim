@@ -3,9 +3,24 @@
 - upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
 - past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
 
+/ Custom meta data
+- open_graph_image = page.fields[:portrait].asset if page.fields[:portrait].data_present?
+- open_graph_summary = strip_html(render_content(page.fields[:intro]) + render_content(page.fields[:body]), "")
+- set_meta_tags({ \
+    description: open_graph_summary, \
+    og: { \
+      description: open_graph_summary,
+      image: { \
+        url: (open_graph_image.content_small_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+      } \
+    } \
+  })
+
 = area :masthead_title do
-  .page__title.page__title--events
-    h1.title People
+  ' People
 
 = area :masthead_contextual_navigation do
   ul.masthead-contextual__navigation-list
