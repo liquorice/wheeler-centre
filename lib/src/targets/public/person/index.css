@@ -113,15 +113,7 @@
   text-align: left;
 }
 
-.person__upcoming-events .grouper--total-items-1 {
-  text-align: center;
-}
-.breakpoint-phone-wide .person__upcoming-events .grouper--total-items-1,
-.breakpoint-phone .person__upcoming-events .grouper--total-items-1 {
-  text-align: left;
-}
-
-.person__upcoming-events .grouper--total-items-1 .grouper-item {
+.person__upcoming-events .grouper--1 .grouper-item {
   width: 100%;
   padding-right: 35px;
 }
