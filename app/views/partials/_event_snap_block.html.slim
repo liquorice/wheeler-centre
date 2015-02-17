@@ -12,11 +12,11 @@
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["event-snap-block-1", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
-  .snap-block
-    a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url
+- cache ["event-snap-block-2", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
+  .snap-block itemscope=true itemtype="http://data-vocabulary.org/Event"
+    a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url itemprop="url"
       - if post.fields[:start_date].data_present?
-        time.event-snap__date datetime=l(post.fields[:start_date].value, format: :rfc_3339)
+        time.event-snap__date itemprop="startDate" datetime=l(post.fields[:start_date].value, format: :rfc_3339)
           = l post.fields[:start_date].value, format: :medium_date
       - if image
         .event-snap__hero
@@ -33,7 +33,7 @@
               .event-calendar-event__flag
                 .event-calendar-event__flag-text = post.fields[:ticketing_stage].value
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
-            img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
+            img itemprop="photo" src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
           - if image.attribution.present?
             .event-snap__hero-caption.caption
               p = image.attribution
@@ -41,7 +41,7 @@
         p.event-snap__series
           = post.series.title
       h3.event-snap__title
-        span.title-text == widont_format markdown_line post.title
+        span.title-text itemprop="summary" == widont_format markdown_line post.title
         - if post.fields[:topics].data_present?
           span.title-tags
             '  &nbsp;/&nbsp;
@@ -57,5 +57,5 @@
             = post.fields[:presenters].pages.map(&:title).to_sentence
       - if show_summary && post.fields[:body].data_present?
           .event-snap-block__summary.snap-block__summary.copy
-            .event-snap-block__summary-inner.snap-block__summary-inner.copy
+            .event-snap-block__summary-inner.snap-block__summary-inner.copy itemprop="description"
               = force_excerptify_html render_content(post.fields[:body]), 350, "p i em strong br"

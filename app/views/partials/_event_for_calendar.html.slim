@@ -4,7 +4,7 @@
   - image = event.promo_image
 - selected_primary_topics = select_primary_topics_for_page(event)
 
-- cache ["event-for-calendar-1", event, Time.current.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
+- cache ["event-for-calendar-2", event, Time.current.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
   - event_classnames = []
   / Find an event's position and assign a class
   / Useful for clearing floats in the event grid
@@ -26,10 +26,10 @@
     - dasherised_stage = event.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
     - event_classnames << "event-calendar-event--#{dasherised_stage}"
 
-  .event-calendar-event class="#{event_classnames.join(' ')}"
-    a.event-calendar-event__anchor href=event.absolute_url
+  .event-calendar-event class="#{event_classnames.join(' ')}" itemscope=true itemtype="http://data-vocabulary.org/Event"
+    a.event-calendar-event__anchor href=event.absolute_url itemprop="url"
       - if event.fields[:start_date].data_present?
-        time.event-calendar-event__date datetime=l(event.fields[:start_date].value, format: :rfc_3339)
+        time.event-calendar-event__date itemprop="startDate" datetime=l(event.fields[:start_date].value, format: :rfc_3339)
           = l event.fields[:start_date].value, format: :day_short_name_and_date
         .event-calendar-event__hero
           .event-calendar-event__hero-inner
@@ -37,13 +37,13 @@
               .event-calendar-event__flag
                 .event-calendar-event__flag-text = event.fields[:ticketing_stage].value
             - if image
-              img src=image.content_thumbnail_url
+              img itemprop="photo" src=image.content_thumbnail_url
       .event-calendar-event__details
         - if event.series
           p.event-calendar-event__series
             = event.series.title
         h4.event-calendar-event__title
-          span.title-text == markdown_line event.title
+          span.title-text itemprop="summary" == markdown_line event.title
           - if selected_primary_topics && selected_primary_topics.present?
             span.title-tags
               '  &nbsp;/&nbsp;

@@ -9,46 +9,47 @@
 
 = area :main do
   .venue data-view-venue=true
-    .venue__header
-      h1.venue__title
-        = page.title
-    .venue-map.venue-map--large data-view-event-venue-map=page.map_data
-      .venue-map__wrapper
-        .venue-map__map data-map=true
-        .column-wrapper
-          .column-wide
-            - venue_image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
-            .venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.absolute_url
-              - if venue_image
-                img.venue-map__panel-image src=venue_image.content_thumbnail_url
-              p= render_content page.fields[:address_formatted]
-    .venue__details.column-wrapper
-      .column-wide.clearfix
-        - if page.fields[:description].data_present?
-          .venue__description
-            .venue__description-content.copy
-              = render_content page.fields[:description]
-        .venue__meta
-          .venue__meta-content
-            - if page.fields[:phone_number].data_present? || page.fields[:address_formatted].data_present?
-              .venue__contact
-                h2.venue__contact-header Contact details
-                .venue__address
-                  = render_content page.fields[:address_formatted]
-                - if page.fields[:phone_number].data_present?
-                  .venue__phone
-                    strong Phone
-                    = page.fields[:phone_number].value
-            - if page.fields[:directions].data_present?
-              .venue__directions
-                h2.venue__directions-header Directions
-                .copy
-                  = render_content page.fields[:directions]
-            - if page.fields[:parking].data_present?
-              .venue__parking
-                h2.venue__parking-header Parking
-                .copy
-                  = render_content page.fields[:parking]
+    - cache ["venue-details-1", page ] do
+      .venue__header
+        h1.venue__title
+          = page.title
+      .venue-map.venue-map--large data-view-event-venue-map=page.map_data
+        .venue-map__wrapper
+          .venue-map__map data-map=true
+          .column-wrapper
+            .column-wide
+              - venue_image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
+              .venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.absolute_url
+                - if venue_image
+                  img.venue-map__panel-image src=venue_image.content_thumbnail_url
+                p= render_content page.fields[:address_formatted]
+      .venue__details.column-wrapper
+        .column-wide.clearfix
+          - if page.fields[:description].data_present?
+            .venue__description
+              .venue__description-content.copy
+                = render_content page.fields[:description]
+          .venue__meta
+            .venue__meta-content
+              - if page.fields[:phone_number].data_present? || page.fields[:address_formatted].data_present?
+                .venue__contact
+                  h2.venue__contact-header Contact details
+                  .venue__address
+                    = render_content page.fields[:address_formatted]
+                  - if page.fields[:phone_number].data_present?
+                    .venue__phone
+                      strong Phone
+                      = page.fields[:phone_number].value
+              - if page.fields[:directions].data_present?
+                .venue__directions
+                  h2.venue__directions-header Directions
+                  .copy
+                    = render_content page.fields[:directions]
+              - if page.fields[:parking].data_present?
+                .venue__parking
+                  h2.venue__parking-header Parking
+                  .copy
+                    = render_content page.fields[:parking]
     - if events.results.present?
       .event-series__past.column-wrapper.gradient-top-down
         .section-header

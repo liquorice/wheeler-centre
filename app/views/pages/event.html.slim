@@ -6,7 +6,7 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .event data-view-event=true
+  .event data-view-event=true itemscope=true itemtype="http://data-vocabulary.org/Event"
     - cache ["event-intro-1", page, page.recordings] do
       - unless page.upcoming?
         .intro.event__intro.column-wrapper.gradient-bottom-up
@@ -55,7 +55,7 @@
             source srcset=page.promo_image.content_medium_url media="(min-width: 480px)"
             erb:
               <!--[if IE 9]></video><![endif]-->
-            img.figure__content src=page.promo_image.content_small_url itemprop="hero_image"
+            img.figure__content itemprop="photo" src=page.promo_image.content_small_url
             - if page.promo_image.attribution.present?
               .event__promo-image-caption.caption
                 p = page.promo_image.attribution
@@ -64,21 +64,21 @@
         - cache ["event-content-1", page] do
           .event__meta class=("event__meta--past" unless page.upcoming?)
             - if page.fields[:display_date].value.present?
-              time.event__date-time datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+              time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
                 = page.fields[:display_date].value
             - else
-              time.event__date-time datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+              time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
                 = format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
             - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
               span.event__ticketing-stage =page.fields[:ticketing_stage].value
             - if page.booked_out?
               span.event__booked-out-flag Booked out
             - elsif page.upcoming? && page.fields[:external_bookings].data_present?
-              a.event__tickets-booking.event__tickets-booking--small href=page.fields[:external_bookings].value
+              a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=page.fields[:external_bookings].value
                 ' Book your tickets
-            h1.event__title
+            h1.event__title itemprop="summary"
               == widont_format markdown_line page.title
-          .event__body
+          .event__body itemprop="description"
             = render_content_in_sections page.fields[:body]
 
         / Spit out all the topics
@@ -112,7 +112,7 @@
 
         - cache ["event-ticketing-1", page] do
           - if page.upcoming?
-            .event__tickets
+            .event__tickets itemprop="tickets" itemscope=true itemtype="http://data-vocabulary.org/Offer"
               h2.event__tickets-header How much?
               .event__tickets-summary.copy
                 p
@@ -125,7 +125,7 @@
                   - if page.booked_out?
                     span.event__booked-out-flag Booked out
                   - elsif page.fields[:external_bookings].data_present?
-                    a.event__tickets-booking href=page.fields[:external_bookings].value
+                    a.event__tickets-booking itemprop="offerurl" href=page.fields[:external_bookings].value
                       ' Book your tickets
 
         - cache ["event-series-summary-1", page, page.series] do
@@ -145,16 +145,17 @@
               .event__venue-more.copy
                 a href=page.venue.absolute_url More about this venue
                 ', including large map, parking, public transport and accessibility.
-          .venue-map__wrapper
+          .venue-map__wrapper itemscope=true itemtype="http://data-vocabulary.org/Organization"
             .venue-map__map data-map=true
             .column-wrapper
               .column-wide
                 - venue_image = page.venue.fields[:hero_image].asset if page.venue.fields[:hero_image].data_present?
                 a.venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.venue.absolute_url
                   - if venue_image
-                    img.venue-map__panel-image src=venue_image.content_thumbnail_url
-                  h4= page.venue.title
-                  p= render_content page.venue.fields[:address_formatted]
+                    img.venue-map__panel-image itemprop="photo" src=venue_image.content_thumbnail_url
+                  h4 itemprop="name"= page.venue.title
+                  p itemprop="address" itemscope=true itemtype="http://data-vocabulary.org/Address"
+                    = render_content page.venue.fields[:address_formatted]
 
     / Show the sponsors
     - cache ["event-sponsors-1", page, page.fields[:sponsors].pages] do
