@@ -11,6 +11,7 @@
 - else
   - open_graph_summary = strip_html(render_content(page.fields[:body]), "")
 - set_meta_tags({ \
+    type: "article", \
     description: open_graph_summary, \
     og: { \
       description: open_graph_summary, \
