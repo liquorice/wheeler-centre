@@ -2,9 +2,9 @@
   - image = event.fields[:thumbnail_image].asset
 - elsif event.promo_image
   - image = event.promo_image
-- selected_primary_topics = select_primary_topics_for_page(event)
+- first_topic = event.fields[:topics].pages.first if event.fields[:topics].data_present?
 
-- cache ["event-for-calendar-2", event, Time.current.beginning_of_day, event_index, event.series, image, selected_primary_topics] do
+- cache ["event-for-calendar-2", event, Time.current.beginning_of_day, event_index, event.series, image, first_topic] do
   - event_classnames = []
   / Find an event's position and assign a class
   / Useful for clearing floats in the event grid
@@ -44,7 +44,7 @@
             = event.series.title
         h4.event-calendar-event__title
           span.title-text itemprop="summary" == markdown_line event.title
-          - if selected_primary_topics && selected_primary_topics.present?
+          - if event.fields[:topics].data_present?
             span.title-tags
               '  &nbsp;/&nbsp;
-              = selected_primary_topics.first.title
+              = first_topic.title
