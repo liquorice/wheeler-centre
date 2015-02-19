@@ -3,6 +3,7 @@
 .masthead {
   background-color: var(--primary-color);
   font-family: var(--font-sans);
+  position: relative;
 }
   .masthead__inner {
     padding-top: 15px;
