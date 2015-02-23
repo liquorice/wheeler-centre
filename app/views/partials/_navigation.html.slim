@@ -59,7 +59,7 @@
         li.masthead-nav-main__item.masthead-nav-main__item--break
           a.masthead-nav-main__anchor href=people_page.absolute_url
             = people_page.title
-      - cache ["nav-projects-1", projects_page, projects_for_navigation] do
+      - cache ["nav-projects-2", projects_page, projects_for_navigation] do
         li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
           data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
           data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
