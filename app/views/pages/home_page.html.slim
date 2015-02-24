@@ -55,9 +55,9 @@
     / Highlights
     .column-wrapper
       .column-full.clearfix
+        - no_user_highlights = (user_highlights.blank? || user_highlights.total == 0)
         - cache ["home-page-highlights-1", page, highlights] do
           - if highlights.total > 0
-            - no_user_highlights = (user_highlights.total == 0)
             - if no_user_highlights
               - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
             - else
@@ -89,7 +89,7 @@
                       '  —
                       = post.page_type
         - cache ["home-page-highlights-1", page, user_highlights] do
-          - if user_highlights && user_highlights.total > 0
+          - unless no_user_highlights
             .home__user-highlights
               .section-header
                 h2

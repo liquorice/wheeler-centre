@@ -40,7 +40,7 @@ footer.footer.clearfix role="contentinfo"
             a href=people_page.absolute_url == markdown_line people_page.title
       .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
         h3= projects_page.title
-        - cache ["footer-projects-nav-1", projects_for_navigation] do
+        - cache ["footer-projects-nav-2", projects_for_navigation] do
           - projects_for_navigation.in_groups(2, false).each do |group|
             - if group.present?
               ul

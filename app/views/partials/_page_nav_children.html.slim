@@ -6,7 +6,7 @@ ul.sub-page-nav class="sub-page-nav--level-#{level}"
       - child_children = child.children.visible.where(collection_id: nil).published
       li.sub-page-nav__item class="#{((child.id == current.id) ? "sub-page-nav__item--active" : "")} (children.present? ? 'sub-page-nav__item--has-children' ? : '')"
         a.sub-page-nav__anchor class="#{((child.id == current.id) ? "sub-page-nav__anchor--active" : "")}" href=child.absolute_url
-          = child.title
+          == markdown_line child.title
           - if child_children.present?
             i.sub-page-nav__item-icon.fa.fa-angle-right
         - if (child_children.present? && descendant_of(current, child)) || (child_children.present? && child.id == current.id)
