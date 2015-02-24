@@ -7,6 +7,18 @@
   overflow: hidden;
 }
 
+.subscribe-popup__image {
+  background-image: url(http://c4.staticflickr.com/8/7354/16263440778_f4bccc6bb7_k.jpg);
+  background-size: cover;
+  background-position: center 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.2;
+}
+
 .subscribe-popup .simple-subscribe__inner {
   padding-top: 0;
   padding-bottom: 25px;
@@ -14,7 +26,7 @@
 }
 
 .subscribe-popup__inner {
-  max-width: var(--column-narrow);
+  max-width: var(--column-mid);
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
