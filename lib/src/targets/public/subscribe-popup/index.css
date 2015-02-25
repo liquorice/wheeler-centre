@@ -88,3 +88,32 @@
   .breakpoint-phone .subscribe-popup__close span {
     display: none;
   }
+
+
+/* Images */
+
+.subscribe-popup .copy .figure {
+  padding-bottom: 15px;
+}
+
+.subscribe-popup .copy .figure__display--left-aligned {
+  margin-left: 0;
+  width: auto;
+}
+.subscribe-popup .copy .figure__display--right-aligned {
+  margin-right: 0;
+  width: auto;
+}
+  .subscribe-popup .figure__display--left-aligned img,
+  .subscribe-popup .figure__display--right-aligned img {
+    max-height: 120px;
+    width: auto;
+  }
+
+.breakpoint-phone .subscribe-popup .copy .figure {
+  text-align: center;
+  width: auto;
+}
+  .breakpoint-phone .subscribe-popup .copy .figure img {
+    display: inline;
+  }

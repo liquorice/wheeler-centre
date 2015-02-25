@@ -16,7 +16,7 @@
 
               label.simple-subscribe__label.copy
                 - if settings_page.fields[:subscribe_popup_intro].data_present?
-                  = render_content settings_page.fields[:subscribe_popup_intro]
+                  = render_content settings_page.fields[:subscribe_popup_intro], image: {version: :content_small}
                 - else
                   p
                     ' Subscribe to the
