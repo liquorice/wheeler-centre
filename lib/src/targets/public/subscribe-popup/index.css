@@ -41,7 +41,6 @@
   transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
   .subscribe-popup--hide .subscribe-popup__inner {
-    margin-top: -300px;
     transform: translate3d(0,-100px,0);
   }
   .breakpoint-phone .subscribe-popup__inner {
