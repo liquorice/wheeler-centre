@@ -78,7 +78,7 @@
                 p = page.promo_image.attribution
     .column-wrapper
       .column-wide.clearfix
-        - cache ["event-content-1", page] do
+        - cache ["event-content-2", page] do
           .event__meta class=("event__meta--past" unless page.upcoming?)
             - if page.fields[:display_date].value.present?
               time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
@@ -86,6 +86,11 @@
             - else
               time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
                 = format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
+            - if page.venue
+              span.event__venue-name
+                ' at
+                a href=page.venue.absolute_url
+                  == widont_format page.venue.title
             - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
               span.event__ticketing-stage =page.fields[:ticketing_stage].value
             - if page.booked_out?
