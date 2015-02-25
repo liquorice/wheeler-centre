@@ -5,7 +5,7 @@
   - image = post.fields[:itunes_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["podcast-series-snap-block-2", post, show_type, hide_summary, image, first_topic, post.episodes, aspect] do
+- cache ["podcast-series-snap-block-3", post, show_type, hide_summary, image, first_topic, post.episodes, aspect] do
   .snap-block
     a.podcast-series-snap class="podcast-series-snap--#{aspect}" href=post.absolute_url
       span.podcast-series-snap__date
@@ -29,4 +29,4 @@
       - if show_summary && post.fields[:description].data_present?
           .podcast-series-snap-block__summary.snap-block__summary.copy
             .podcast-series-snap-block__summary-inner.snap-block__summary-inner.copy
-              = force_excerptify_html render_content(post.fields[:description]), 350, "p i em strong br"
+              = force_excerptify_html render_content(post.fields[:description]), 60, "p i em strong br"

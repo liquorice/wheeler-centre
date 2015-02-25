@@ -45,7 +45,7 @@
                           span.podcast-snap__explicit
                            ' Explicit
                         .podcast-snap__summary
-                          = force_excerptify_html render_content(episode.fields[:description]), 150, "i em strong br"
+                          = force_excerptify_html render_content(episode.fields[:description]), 25, "i em strong br"
 
       .column-wrapper
         .column-full.clearfix

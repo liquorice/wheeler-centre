@@ -48,10 +48,10 @@ module ApplicationHelper
     truncate(text, length: chars)
   end
 
-  def force_excerptify_html(html, length = 350, allowed_tags = "p i em strong br")
+  def force_excerptify_html(html, words = 50, allowed_tags = "p i em strong br")
     HTML_Truncator.truncate(
       strip_html(html, allowed_tags),
-    length).html_safe
+    words).html_safe
   end
 
   def strip_html(html, allowed_tags = "p i em strong br")

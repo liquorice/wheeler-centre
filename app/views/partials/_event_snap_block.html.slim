@@ -12,7 +12,7 @@
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["event-snap-block-3", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
+- cache ["event-snap-block-4", post, Time.zone.now.beginning_of_day, show_type, show_summary, image, post.fields[:presenters].pages, post.recordings, first_topic, post.series, aspect] do
   .snap-block itemscope=true itemtype="http://data-vocabulary.org/Event"
     a.event-snap.event-snap-block class="#{block_classnames.join(' ')}" href=post.absolute_url itemprop="url"
       - if post.fields[:start_date].data_present?
@@ -58,4 +58,4 @@
       - if show_summary && post.fields[:body].data_present?
           .event-snap-block__summary.snap-block__summary.copy
             .event-snap-block__summary-inner.snap-block__summary-inner.copy itemprop="description"
-              = force_excerptify_html render_content(post.fields[:body]), 350, "p i em strong br"
+              = force_excerptify_html render_content(post.fields[:body]), 60, "p i em strong br"

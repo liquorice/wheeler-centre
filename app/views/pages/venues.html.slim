@@ -29,7 +29,7 @@
               .main-venue__text
                 h3.main-venue__title = venue.title
                 .main-venue__description.copy
-                  = force_excerptify_html render_content(venue.fields[:address_formatted]), 150, "i em strong br"
+                  = force_excerptify_html render_content(venue.fields[:address_formatted]), 25, "i em strong br"
     - if page.fields[:body].data_present?
       .event-series__body
         = render_content_in_sections page.fields[:body]

@@ -94,6 +94,6 @@
                         = render_content series.fields[:summary]
                     - else
                       .event-series-summary__description.copy
-                        = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
+                        = force_excerptify_html render_content(series.fields[:body]), 25, "i em strong br"
                     span.event-series-summary__action View this #{series.events.length} event series
     = render "partials/topics_section"

@@ -37,7 +37,7 @@
                       a href=event.absolute_url = event.title
                     - if event.fields[:body].data_present?
                       .criticism-now-event-item__summary.copy
-                        = force_excerptify_html render_content(event.fields[:body]), 300, "p i em strong br"
+                        = force_excerptify_html render_content(event.fields[:body]), 50, "p i em strong br"
     .criticism-now__responses.column-wrapper
       .column-full
         .section-header

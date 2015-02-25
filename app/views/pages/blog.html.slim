@@ -48,7 +48,7 @@
                 .snap-block.guest-author
                   - if guest_author.fields[:portrait].data_present?
                     - image = guest_author.fields[:portrait].asset
-                  - cache ["blog-index-author-details-2", guest_author, image] do
+                  - cache ["blog-index-author-details-3", guest_author, image] do
                     - if image
                       .author-image
                         .author-image__inner
@@ -57,7 +57,7 @@
                       = guest_author.title
                     - if guest_author.fields[:intro].data_present?
                       .guest-author__intro.copy
-                        = force_excerptify_html render_content(guest_author.fields[:intro]), 150
+                        = force_excerptify_html render_content(guest_author.fields[:intro]), 25
                   ul.blog-post-list
                     - author_posts.each do |post|
                       - cache ["blog-index-author-posts-1", post] do

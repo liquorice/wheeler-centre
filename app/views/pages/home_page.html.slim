@@ -36,7 +36,7 @@
     - if page.sorted_banners.present?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
-          - cache ["home-page-banner-2", banner, banner.fields[:banner_image].asset] do
+          - cache ["home-page-banner-3", banner, banner.fields[:banner_image].asset] do
             a.home-banner href=banner.fields[:link].value
               .home-banner__shim
               .home-banner__image
@@ -50,7 +50,7 @@
                       i.fa class=icon_classnames[category]
                   - if banner.fields[:label].data_present?
                     .home-banner__label
-                      = force_excerptify_html render_content(banner.fields[:label]), 350, "i em strong"
+                      = force_excerptify_html render_content(banner.fields[:label]), 60, "i em strong"
                       '  ›
     / Highlights
     .column-wrapper

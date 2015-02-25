@@ -28,7 +28,7 @@
               .intro.intro--small.column-narrow.copy
                 = render_content page.fields[:active_intro]
           - active_series.each do |series|
-            - cache ["event-active-series-1", series, series.fields[:hero_image].asset] do
+            - cache ["event-active-series-2", series, series.fields[:hero_image].asset] do
               - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
               .event-series-summary__block style=style_for_event_series_block(highlight_color)
                 a.event-series-summary__anchor href=series.absolute_url
@@ -41,7 +41,7 @@
                         = render_content series.fields[:summary]
                     - else
                       .event-series-summary__description.copy
-                        = force_excerptify_html render_content(series.fields[:body]), 150, "i em strong br"
+                        = force_excerptify_html render_content(series.fields[:body]), 40, "i em strong br"
                     span.event-series-summary__action View this #{series.events.length} event series
       - if page.fields[:body].data_present?
         .event-series__body

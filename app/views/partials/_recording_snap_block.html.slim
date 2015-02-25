@@ -6,7 +6,7 @@
   - image = post.fields[:hero_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["recording-snap-block-2", post, show_type, hide_summary, image, post.fields[:people].pages, first_topic, aspect] do
+- cache ["recording-snap-block-3", post, show_type, hide_summary, image, post.fields[:people].pages, first_topic, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
       time.recording-snap__date
@@ -46,8 +46,13 @@
       - if post.fields[:people].data_present?
         p.recording-snap__authors
           ' With
-          = post.fields[:people].pages.map(&:title).to_sentence
+          - if post.fields[:people].pages.length > 3
+            = post.fields[:people].pages[0..2].map(&:title).join(", ")
+            '  and
+            = pluralize(post.fields[:people].pages.length-3, "other")
+          - else
+            = post.fields[:people].pages.map(&:title).to_sentence
       - if show_summary && post.fields[:description].data_present?
           .recording-snap-block__summary.snap-block__summary.copy
             .recording-snap-block__summary-inner.snap-block__summary-inner.copy
-              = force_excerptify_html render_content(post.fields[:description]), 350, "p i em strong br"
+              = force_excerptify_html render_content(post.fields[:description]), 60, "p i em strong br"

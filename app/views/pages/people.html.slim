@@ -54,7 +54,7 @@
                                   = person.all_events.length
                                   |&nbsp;event<em class="people-by-letter__byline--#{person.all_events.length}">s</em>
                               .person-summary__intro.people-by-letter__intro.copy
-                                span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
+                                span= force_excerptify_html render_content(person.fields[:intro]), 30, "i em strong"
       / People index page
       / /people
       - else
@@ -83,7 +83,7 @@
                               span.person-summary__image.upcoming-people__image.person-summary__image--blank.upcoming-people__image--blank
                           h3.person-summary__title.upcoming-people__title = person.title
                           .person-summary__intro.upcoming-people__intro.copy
-                            span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
+                            span= force_excerptify_html render_content(person.fields[:intro]), 30, "i em strong"
         .column-wrapper
           .column-full
             - people_from_recent_events = page.people_from_recent_events
@@ -105,4 +105,4 @@
                               span.person-summary__image.person-summary__image--blank.recent-people__image.recent-people__image--blank
                           h3.person-summary__title.recent-people__title = person.title
                           .person-summary__intro.recent-people__intro.copy
-                            span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
+                            span= force_excerptify_html render_content(person.fields[:intro]), 30, "i em strong"
