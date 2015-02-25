@@ -13,7 +13,7 @@
             <!--[if IE 9]></video><![endif]-->
           img.figure__content src=small_version_url alt=alt_text
   - else
-    - if options[:version].present? && asset.respond_to?(options[:version])
+    - if options[:version].present? && asset.versions.include?(options[:version])
       img.figure__content src=asset.send("#{options[:version]}_url") alt=alt_text
     - else
       picture

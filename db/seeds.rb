@@ -35,7 +35,8 @@ site.transloadit_params = {
       "resize_strategy" => "fillcrop",
       "gravity" => "center",
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_thumbnail" => {
       "robot" => "/image/optimize",
@@ -48,7 +49,8 @@ site.transloadit_params = {
       "height" => 720,
       "quality" => 75,
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_small" => {
       "robot" => "/image/optimize",
@@ -61,7 +63,8 @@ site.transloadit_params = {
       "height" => 960,
       "quality" => 75,
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_medium" => {
       "robot" => "/image/optimize",
@@ -74,7 +77,8 @@ site.transloadit_params = {
       "height" => 1400,
       "quality" => 75,
       "zoom" => false,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_large" => {
       "robot" => "/image/optimize",
@@ -89,7 +93,8 @@ site.transloadit_params = {
       "resize_strategy" => "crop",
       "gravity" => "center",
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_large_thumbnail" => {
       "robot" => "/image/optimize",
@@ -104,7 +109,8 @@ site.transloadit_params = {
       "resize_strategy" => "crop",
       "gravity" => "center",
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_medium_thumbnail" => {
       "robot" => "/image/optimize",
@@ -119,7 +125,8 @@ site.transloadit_params = {
       "resize_strategy" => "crop",
       "gravity" => "center",
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "content_small_thumbnail" => {
       "robot" => "/image/optimize",
@@ -134,7 +141,8 @@ site.transloadit_params = {
       "resize_strategy" => "crop",
       "gravity" => "center",
       "zoom" => true,
-      "strip" => true
+      "strip" => true,
+      "background" => "none"
     },
     "itunes" => {
       "robot" => "/image/optimize",
