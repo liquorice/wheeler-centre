@@ -10,12 +10,12 @@ module Heracles
               # Staff
               {name: :staff_info, type: :info, text: "<hr/>"},
               {name: :staff_title, type: :text},
-              {name: :staff_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :staff_content, type: :content, disable_insertables: true},
               {name: :staff_members, type: :associated_pages, page_type: :person},
               # Board
               {name: :staff_info, type: :info, text: "<hr/>"},
               {name: :board_title, type: :text},
-              {name: :board_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :board_content, type: :content, disable_insertables: true},
               {name: :board_members, type: :associated_pages, page_type: :person},
               {name: :topics, type: :associated_pages, page_type: :topic},
             ]
