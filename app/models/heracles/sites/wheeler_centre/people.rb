@@ -29,10 +29,8 @@ module Heracles
           people = []
           recent_events.results.each do |event|
             people = people + event.fields[:presenters].pages
-            # We only want 12
-            break if people.length >= (options[:per_page] || 12)
           end
-          people
+          people.uniq.first(12)
         end
 
         # Coming up
@@ -41,10 +39,8 @@ module Heracles
           people = []
           upcoming_events.results.each do |event|
             people = people + event.fields[:presenters].pages
-            # We only want 12
-            break if people.length >= (options[:per_page] || 12)
           end
-          people
+          people.uniq.first(12)
         end
 
         private
