@@ -1,0 +1,78 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :main do
+  .content-page__main.column-wrapper
+    .content-page__header
+      h1.content-page__title == widont_format markdown_line page.title
+    .content-page__nav-wrapper
+      .content-page__nav data-view-nav-toggle={toggleSelector: ".content-page__nav-toggle", targetSelector: ".content-page__nav-inner", targetActiveClassName: "content-page__nav-inner--active"}.to_json
+        button.content-page__nav-toggle
+          ' Navigate this section
+          i.fa.fa-angle-down
+        .content-page__nav-inner
+          h3.content-page__nav-title
+            - unless page.root.id == page.id
+              a href=page.root.absolute_url = page.root.title
+            - else
+              = page.root.title
+          = render "partials/page_nav_children", parent: page.root, current: page
+    .content-page__content.clearfix
+      - if page.fields[:intro].data_present?
+        .content-page__intro
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:body].data_present?
+        .content-page__body
+          = render_content_in_sections page.fields["body"]
+  - if page.fields[:staff_members].data_present?
+    .staff__staff.column-wrapper.gradient-top-down
+      .column-narrow
+        .section-header
+          - if page.fields[:staff_title].data_present?
+            h2 = page.fields[:staff_title].value
+          - if page.fields[:staff_content].data_present?
+            .intro.copy
+              = render_content page.fields[:staff_content]
+      .column-wide
+        .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+          - page.fields[:staff_members].pages.each do |person|
+            - image = person.fields[:portrait].asset
+            - cache ["staff-staff-1", person, image] do
+              .snap-block.person-summary__block
+                a.person-summary__anchor.clearfix href=person.absolute_url
+                  - if person.fields[:portrait].data_present?
+                    .person-summary__image-wrapper
+                      img.person-summary__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
+                  - else
+                    .person-summary__image-wrapper
+                      span.person-summary__image.person-summary__image--blank
+                  h3.person-summary__title = person.title
+                  .person-summary__intro.copy
+                    p= person.fields[:position_title].value
+  - if page.fields[:board_members].data_present?
+    .staff__board.column-wrapper
+      .column-narrow
+        .section-header
+          - if page.fields[:board_title].data_present?
+            h2= page.fields[:board_title].value
+          - if page.fields[:board_content].data_present?
+            .intro.copy
+              = render_content page.fields[:board_content]
+      .column-wide
+        .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+          - page.fields[:board_members].pages.each do |person|
+            - image = person.fields[:portrait].asset
+            - cache ["staff-board-1", person, image] do
+              .snap-block.person-summary__block
+                a.person-summary__anchor.clearfix href=person.absolute_url
+                  - if person.fields[:portrait].data_present?
+                    .person-summary__image-wrapper
+                      img.person-summary__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
+                  - else
+                    .person-summary__image-wrapper
+                      span.person-summary__image.person-summary__image--blank
+                  h3.person-summary__title = person.fields[:position_title].value
+                  .person-summary__intro.copy
+                    p= person.title
+
+

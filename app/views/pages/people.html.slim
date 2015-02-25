@@ -37,23 +37,23 @@
                       - people_by_letter.each do |person|
                         - image = person.fields[:portrait].asset
                         - cache ["people-person-by-letter-1", person, image, person.all_events.length] do
-                          .snap-block.people-by-letter__block
-                            a.people-by-letter__anchor.clearfix href=person.absolute_url
+                          .snap-block.person-summary__block.people-by-letter__block
+                            a.person-summary__anchor.people-by-letter__anchor.clearfix href=person.absolute_url
                               - if person.fields[:portrait].data_present?
-                                .people-by-letter__image-wrapper
-                                  img.people-by-letter__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
+                                .person-summary__block__image-wrapper.people-by-letter__image-wrapper
+                                  img.person-summary__image.people-by-letter__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
                               - else
-                                .people-by-letter__image-wrapper
-                                  span.people-by-letter__image.people-by-letter__image--blank
+                                .person-summary__image-wrapper.people-by-letter__image-wrapper
+                                  span.person-summary__image.person-summary__image--blank.people-by-letter__image.people-by-letter__image--blank
                               h3.people-by-letter__title = person.title
                               - if person.fields[:is_staff_member].value
-                                span.people-by-letter__byline
+                                span.person-summary__byline.people-by-letter__byline
                                   | Staff member
                               - if person.all_events.length > 0
-                                span.people-by-letter__byline.people-by-letter__byline--events
+                                span.person-summary__byline.person-summary__byline--events.people-by-letter__byline.people-by-letter__byline--events
                                   = person.all_events.length
                                   |&nbsp;event<em class="people-by-letter__byline--#{person.all_events.length}">s</em>
-                              .people-by-letter__intro.copy
+                              .person-summary__intro.people-by-letter__intro.copy
                                 span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
       / People index page
       / /people
@@ -73,16 +73,16 @@
                   - people_from_upcoming_events.each do |person|
                     - image = person.fields[:portrait].asset
                     - cache ["people-person-upcoming-2", person, image] do
-                      .snap-block.upcoming-people__block
-                        a.upcoming-people__anchor.clearfix href=person.absolute_url
+                      .snap-block.person-summary__block.upcoming-people__block
+                        a.person-summary__anchor.upcoming-people__anchor.clearfix href=person.absolute_url
                           - if person.fields[:portrait].data_present?
-                            .upcoming-people__image-wrapper
-                              img.upcoming-people__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
+                            .person-summary__image-wrapper.upcoming-people__image-wrapper
+                              img.person-summary__image.upcoming-people__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
                           - else
-                            .upcoming-people__image-wrapper
-                              span.upcoming-people__image.upcoming-people__image--blank
-                          h3.upcoming-people__title = person.title
-                          .upcoming-people__intro.copy
+                            .person-summary__image-wrapper.upcoming-people__image-wrapper
+                              span.person-summary__image.upcoming-people__image.person-summary__image--blank.upcoming-people__image--blank
+                          h3.person-summary__title.upcoming-people__title = person.title
+                          .person-summary__intro.upcoming-people__intro.copy
                             span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
         .column-wrapper
           .column-full
@@ -95,14 +95,14 @@
                   - people_from_recent_events.each do |person|
                     - image = person.fields[:portrait].asset
                     - cache ["people-person-recent-1", person, image] do
-                      .snap-block.recent-people__block
-                        a.recent-people__anchor.clearfix href=person.absolute_url
+                      .snap-block.person-summary__block.recent-people__block
+                        a.person-summary__anchor.recent-people__anchor.clearfix href=person.absolute_url
                           - if person.fields[:portrait].data_present?
-                            .recent-people__image-wrapper
-                              img.recent-people__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
+                            .person-summary__image-wrapper.recent-people__image-wrapper
+                              img.person-summary__image.recent-people__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
                           - else
-                            .recent-people__image-wrapper
-                              span.recent-people__image.recent-people__image--blank
-                          h3.recent-people__title = person.title
-                          .recent-people__intro.copy
+                            .person-summary__image-wrapper.recent-people__image-wrapper
+                              span.person-summary__image.person-summary__image--blank.recent-people__image.recent-people__image--blank
+                          h3.person-summary__title.recent-people__title = person.title
+                          .person-summary__intro.recent-people__intro.copy
                             span= force_excerptify_html render_content(person.fields[:intro]), 200, "i em strong"
