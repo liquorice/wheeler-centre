@@ -1,0 +1,24 @@
+/* Staff */
+
+.staff__staff {
+  margin-bottom: 35px;
+}
+
+.staff__board {
+  border-top: 1px solid #dfdfdf;
+  padding-top: 30px;
+  margin-bottom: 35px;
+}
+  .breakpoint-phone .staff__board {
+    border-top: none;
+    padding-top: 0;
+  }
+
+.staff__staff .person-summary__block,
+.staff__board .person-summary__block {
+  padding-bottom: 15px;
+}
+.staff__staff .person-summary__intro,
+.staff__board .person-summary__intro {
+  display: block;
+}
