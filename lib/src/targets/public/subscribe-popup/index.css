@@ -8,7 +8,6 @@
 }
 
 .subscribe-popup__image {
-  background-image: url(http://c4.staticflickr.com/8/7354/16263440778_f4bccc6bb7_k.jpg);
   background-size: cover;
   background-position: center 30%;
   position: absolute;
@@ -68,6 +67,8 @@
   padding-left: 3.5rem;
   padding-right: 35px;
   padding-right: 3.5rem;
+  padding-bottom: 8px;
+  padding-bottom: 0.8rem;
   text-align: left;
   width: 100%;
 }
@@ -84,9 +85,6 @@
   display: inline-block;
   padding-right: 14px;
 }
-  .breakpoint-phone .subscribe-popup__close span {
-    display: none;
-  }
 
 
 /* Images */
