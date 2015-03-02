@@ -1,0 +1,24 @@
+- cache ["campaign-banner-1", settings_page] do
+  - if settings_page.fields[:campaign_banner_enabled].value == true
+    - if settings_page.fields[:campaign_banner_link].data_present?
+      a.campaign-banner href=settings_page.fields[:campaign_banner_link].value data-view-campaign-banner={force: settings_page.fields[:campaign_banner_force].value, cookiePrefix: settings_page.fields[:campaign_banner_code].value}.to_json
+        - if settings_page.fields[:campaign_banner_background_image].data_present?
+          - image_url = settings_page.fields[:campaign_banner_background_image].asset.content_large_url
+          .campaign-banner__image style="background-image: url(#{image_url})"
+        .campaign-banner__inner
+          .column-wrapper
+            .column-wide
+              .copy
+                - if settings_page.fields[:campaign_banner_content].data_present?
+                  = render_content settings_page.fields[:campaign_banner_content], image: {version: :content_small}
+    - else
+      .campaign-banner data-view-campaign-banner={force: settings_page.fields[:campaign_banner_force].value, cookiePrefix: settings_page.fields[:campaign_banner_code].value}.to_json
+        - if settings_page.fields[:campaign_banner_background_image].data_present?
+          - image_url = settings_page.fields[:campaign_banner_background_image].asset.content_large_url
+          .campaign-banner__image style="background-image: url(#{image_url})"
+        .campaign-banner__inner
+          .column-wrapper
+            .column-wide
+              .copy
+                - if settings_page.fields[:campaign_banner_content].data_present?
+                  = render_content settings_page.fields[:campaign_banner_content], image: {version: :content_small}

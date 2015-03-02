@@ -15,7 +15,6 @@
   left: 0;
   bottom: 0;
   right: 0;
-  opacity: 0.2;
 }
 
 .subscribe-popup .simple-subscribe__inner {
@@ -93,10 +92,18 @@
   padding-bottom: 15px;
 }
 
+.subscribe-popup .copy .figure__display--default {
+  width: 100%;
+}
+  .subscribe-popup .copy .figure__display--default img {
+    width: 100%;
+  }
+
 .subscribe-popup .copy .figure__display--left-aligned {
   margin-left: 0;
   width: auto;
 }
+
 .subscribe-popup .copy .figure__display--right-aligned {
   margin-right: 0;
   width: auto;
