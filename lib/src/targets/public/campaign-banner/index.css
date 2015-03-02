@@ -41,7 +41,7 @@
 /* Images */
 
 .campaign-banner .copy .figure {
-  padding-bottom: 15px;
+  padding-bottom: 0;
 }
 
 .campaign-banner .copy .figure__display--default {

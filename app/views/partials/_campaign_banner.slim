@@ -8,7 +8,7 @@
         .campaign-banner__inner
           .column-wrapper
             .column-wide
-              .copy
+              .clearfix.copy
                 - if settings_page.fields[:campaign_banner_content].data_present?
                   = render_content settings_page.fields[:campaign_banner_content], image: {version: :content_small}
     - else
