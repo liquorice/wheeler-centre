@@ -54,7 +54,7 @@ module ApplicationHelper
     words).html_safe
   end
 
-  def strip_html(html, allowed_tags = "p i em strong br", allowed_attributes = [])
+  def strip_html(html, allowed_tags = "p i em strong br", allowed_attributes = {})
     Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
       :elements => allowed_tags.split(" "),
       :attributes => allowed_attributes
