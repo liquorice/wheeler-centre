@@ -1,4 +1,5 @@
 - cache ["campaign-banner-1", settings_page] do
+  - content_attributes = {"div" => ["class"], "img" => ["src", "alt", "class"]}
   - if settings_page.fields[:campaign_banner_enabled].value == true
     - if settings_page.fields[:campaign_banner_link].data_present?
       a.campaign-banner href=settings_page.fields[:campaign_banner_link].value data-view-campaign-banner={force: settings_page.fields[:campaign_banner_force].value, cookiePrefix: settings_page.fields[:campaign_banner_code].value}.to_json
@@ -10,7 +11,7 @@
             .column-wide
               .clearfix.copy
                 - if settings_page.fields[:campaign_banner_content].data_present?
-                  = render_content settings_page.fields[:campaign_banner_content], image: {version: :content_small}
+                  == strip_html render_content(settings_page.fields[:campaign_banner_content], image: {version: :content_small}), "div p img br i strong em", content_attributes
     - else
       .campaign-banner data-view-campaign-banner={force: settings_page.fields[:campaign_banner_force].value, cookiePrefix: settings_page.fields[:campaign_banner_code].value}.to_json
         - if settings_page.fields[:campaign_banner_background_image].data_present?
