@@ -59,6 +59,8 @@ module Heracles
           Heracles::Page.
             of_type("event").
             joins(:insertions).
+            visible.
+            published.
             where(
               :"insertions.field" => "recordings",
               :"insertions.inserted_key" => insertion_key
@@ -72,14 +74,14 @@ module Heracles
             fields[:people].pages
           else
             people = []
-            events.each {|event| people = people + event.fields[:presenters].pages }
+            events.each {|event| people = people + event.fields[:presenters].pages.visible.published }
             people.uniq
           end
         end
 
         def series
           series = []
-          events.each {|event| series = series + event.fields[:series].pages }
+          events.each {|event| series = series + event.fields[:series].pages.visible.published }
           series
         end
 
@@ -160,6 +162,7 @@ module Heracles
             with :site_id, site.id
             with :person_ids, fields[:people].pages.map(&:id)
             with :published, true
+            with :hidden, false
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
@@ -170,6 +173,7 @@ module Heracles
             with :site_id, site.id
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
+            with :hidden, false
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
@@ -177,7 +181,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

@@ -37,7 +37,7 @@ module Heracles
 
         def sorted_banners
           if fields[:banners].data_present?
-            fields[:banners].pages.first(9)
+            fields[:banners].pages.visible.published.first(9)
           end
         end
 
@@ -77,6 +77,7 @@ module Heracles
           Sunspot.search(searchable_types.flatten) do
             with :site_id, site.id
             with :published, true
+            with :hidden, false
             with :tag_list, options[:tags] if options[:tags].present?
             order_by :created_at, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 6
@@ -87,6 +88,7 @@ module Heracles
           Sunspot.search(BlogPost) do
             with :site_id, site.id
             with :published, true
+            with :hidden, false
             with :tag_list, options[:tags] if options[:tags].present?
             order_by :created_at, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 6

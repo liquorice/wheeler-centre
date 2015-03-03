@@ -38,6 +38,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
             with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
 
             order_by :start_date_time, :asc
@@ -50,6 +51,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
 
             order_by :start_date_time, :asc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)

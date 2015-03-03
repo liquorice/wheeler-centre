@@ -52,13 +52,13 @@ module Heracles
 
         def events
           if fields[:events].data_present?
-            fields[:events].pages
+            fields[:events].pages.visible.published
           end
         end
 
         def people
           if fields[:people].data_present?
-            fields[:people].pages
+            fields[:people].pages.visible.published
           end
         end
 
@@ -149,7 +149,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

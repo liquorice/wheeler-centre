@@ -47,6 +47,7 @@ module Heracles
             with :site_id, site.id
             with :venue_id, id
             with :published, true
+            with :hidden, false
 
             order_by :start_date, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 14

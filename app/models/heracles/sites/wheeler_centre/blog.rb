@@ -26,6 +26,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
 
             order_by :created_at, :desc
 

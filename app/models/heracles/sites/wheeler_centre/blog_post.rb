@@ -108,6 +108,7 @@ module Heracles
             with :site_id, site.id
             with :author_ids, fields[:authors].pages.map(&:id)
             with :published, true
+            with :hidden, false
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end
@@ -118,6 +119,7 @@ module Heracles
             with :site_id, site.id
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
+            with :hidden, false
 
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
@@ -126,7 +128,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

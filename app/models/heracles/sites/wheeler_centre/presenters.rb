@@ -23,6 +23,7 @@ module Heracles
           Sunspot.search(Person) do
             with :site_id, site.id
             with :published, true
+            with :hidden, false
 
             order_by :start_date_time, :asc
             paginate(page: 1, per_page: 1000)

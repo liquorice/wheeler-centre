@@ -112,6 +112,7 @@ module Heracles
             with :site_id, site.id
             with :event_series_ids, id
             with :published, true
+            with :hidden, false
             with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
 
             order_by :start_date, :asc
@@ -124,6 +125,7 @@ module Heracles
             with :site_id, site.id
             with :event_series_ids, id
             with :published, true
+            with :hidden, false
             with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
 
             order_by :start_date, :desc
@@ -134,7 +136,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

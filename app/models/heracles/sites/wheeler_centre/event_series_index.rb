@@ -42,6 +42,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
 
             if options[:active] == true
               with :archived, false

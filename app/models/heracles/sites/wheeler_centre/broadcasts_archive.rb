@@ -29,6 +29,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, recordings_index.id
             with :published, true
+            with :hidden, false
             without :youtube_video, nil
 
             order_by :recording_date_time, :desc

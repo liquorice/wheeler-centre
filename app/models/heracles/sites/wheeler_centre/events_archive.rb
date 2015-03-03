@@ -29,6 +29,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, events_index.id
             with :published, true
+            with :hidden, false
             with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
             without :start_date_time, nil
 

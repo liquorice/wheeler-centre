@@ -16,7 +16,7 @@ module Heracles
         ### Accessors
 
         def author
-          fields[:author].pages.first if fields[:author].data_present?
+          fields[:author].pages.visible.published.first if fields[:author].data_present?
         end
       end
     end

@@ -83,13 +83,13 @@ module Heracles
 
         def series
           if fields[:series].data_present?
-            fields[:series].pages.first
+            fields[:series].pages.visible.published.first
           end
         end
 
         def venue
           if fields[:venue].data_present?
-            fields[:venue].pages.first
+            fields[:venue].pages.visible.published.first
           end
         end
 
@@ -200,6 +200,7 @@ module Heracles
             with :site_id, site.id
             with :presenter_ids, fields[:presenters].pages.map(&:id)
             with :published, true
+            with :hidden, false
 
             order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
@@ -212,6 +213,7 @@ module Heracles
             with :site_id, site.id
             with :topic_ids, fields[:topics].pages.map(&:id)
             with :published, true
+            with :hidden, false
 
             order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
@@ -221,7 +223,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

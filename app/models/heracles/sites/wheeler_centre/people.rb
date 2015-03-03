@@ -28,7 +28,7 @@ module Heracles
           recent_events = search_recent_events options
           people = []
           recent_events.results.each do |event|
-            people = people + event.fields[:presenters].pages
+            people = people + event.fields[:presenters].pages.visible.published
           end
           people.uniq.first(12)
         end
@@ -38,7 +38,7 @@ module Heracles
           upcoming_events = search_upcoming_events options
           people = []
           upcoming_events.results.each do |event|
-            people = people + event.fields[:presenters].pages
+            people = people + event.fields[:presenters].pages.visible.published
           end
           people.uniq.first(12)
         end
@@ -50,6 +50,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
 
             # Need to sort by first_name/last_name and then title for those sans-one or the other
             if options[:order_by] == "first_name"
@@ -70,6 +71,7 @@ module Heracles
           Sunspot.search(Event) do
             with :site_id, site.id
             with :published, true
+            with :hidden, false
             with(:start_date_time).less_than_or_equal_to(Time.zone.now.beginning_of_day)
             order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 12)
@@ -80,6 +82,7 @@ module Heracles
           Sunspot.search(Event) do
             with :site_id, site.id
             with :published, true
+            with :hidden, false
             with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
             order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 12)

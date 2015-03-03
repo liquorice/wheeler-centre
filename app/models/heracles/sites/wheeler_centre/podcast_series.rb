@@ -46,7 +46,7 @@ module Heracles
         end
 
         def itunes_categories
-          # Sort the categories into a ordered tree
+          # Sort the categories into an ordered tree
           all_categories = []
           fields[:itunes_categories].pages.each do |category|
             all_categories << category
@@ -123,7 +123,7 @@ module Heracles
         # Topics with their ancestors parents for search purposes
         def topics_with_ancestors
           topics = []
-          fields[:topics].pages.each do |topic|
+          fields[:topics].pages.visible.published.each do |topic|
             topics = topics + topic.with_ancestors
           end
           topics

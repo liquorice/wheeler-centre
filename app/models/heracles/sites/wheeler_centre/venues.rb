@@ -30,6 +30,7 @@ module Heracles
           ).
           of_type("venue").
           published.
+          visible.
           order(:title)
         end
 
@@ -40,6 +41,7 @@ module Heracles
             with :site_id, site.id
             with :parent_id, id
             with :published, true
+            with :hidden, false
 
             order_by :title, :asc
             paginate(page: 1, per_page: 1000)
