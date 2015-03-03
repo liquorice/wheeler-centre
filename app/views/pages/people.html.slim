@@ -40,12 +40,12 @@
                           .snap-block.person-summary__block.people-by-letter__block
                             a.person-summary__anchor.people-by-letter__anchor.clearfix href=person.absolute_url
                               - if person.fields[:portrait].data_present?
-                                .person-summary__block__image-wrapper.people-by-letter__image-wrapper
+                                .person-summary__image-wrapper.people-by-letter__image-wrapper
                                   img.person-summary__image.people-by-letter__image src=image.content_thumbnail_url alt="Portrait of #{person.title}"
                               - else
                                 .person-summary__image-wrapper.people-by-letter__image-wrapper
                                   span.person-summary__image.person-summary__image--blank.people-by-letter__image.people-by-letter__image--blank
-                              h3.people-by-letter__title = person.title
+                              h3.person-summary__title.people-by-letter__title = person.title
                               - if person.fields[:is_staff_member].value
                                 span.person-summary__byline.people-by-letter__byline
                                   | Staff member
