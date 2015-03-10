@@ -12,7 +12,7 @@
   .snap-block
     a.blog-snap.blog-snap-block href=post.absolute_url
       time.blog-snap__date
-        = l post.created_at, format: :medium_date
+        = l post.publish_date, format: :medium_date
       - unless image.blank?
         .blog-snap__hero
           - if show_type
