@@ -1,5 +1,4 @@
 web: bundle exec unicorn -c ./config/unicorn.rb
 solr: bundle exec rake sunspot:solr:run
-watch_assets: make watch
-serve_assets: make serve
+watch_assets: nodenv exec npm run server
 worker: bundle exec rake que:work

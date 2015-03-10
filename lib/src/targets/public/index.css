@@ -8,7 +8,7 @@
   --column-narrow: 600px;
   --font-sans: "Colfax", Helvetica, sans-serif;
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
-  --primary-color: #009e8c; /* 0, 158, 140 */
+  --primary-color: #009e8c;
   --primary-color-lighter: #ccefeb;
   --primary-color-light: #b4dbd7;
   --primary-color-darker: color(var(--primary-color) shade(15%));
@@ -18,12 +18,12 @@
 
 /* Imports */
 
-@import "./utilities/reset";
-@import "./utilities/accessibility";
-@import "./utilities/clearfix";
-@import "./fonts/colfax";
-@import "./fonts/freight-text-pro";
-@import "./fonts/font-awesome";
+@import "./utilities/reset.css";
+@import "./utilities/accessibility.css";
+@import "./utilities/clearfix.css";
+@import "./fonts/colfax.css";
+@import "./fonts/freight-text-pro.css";
+@import "./fonts/font-awesome.css";
 
 /* Base */
 
@@ -64,7 +64,7 @@ a, button {
   -webkit-tap-highlight-color: transparent;
 }
 
-@import "./copy";
+/*@import "../copy/index.css";*/
 
 .quo {
   margin-left: -0.28em;
@@ -236,50 +236,49 @@ a, button {
 
 /* Components */
 
-@import "./skip-links";
-@import "./masthead";
-@import "./masthead-contextual";
-@import "./content-block";
-@import "./footer";
-@import "./pagination";
-@import "./figure";
-@import "./pull-quote";
-@import "./sub-page-nav";
-@import "./video-player";
-@import "./audio-player";
-@import "./subscribe";
-@import "./social-media";
-@import "./content-page";
-@import "./topics-section";
-@import "./blog-snap-block";
-@import "./blog-post";
-@import "./event";
-@import "./event-snap-block";
-@import "./event-venue-map";
-@import "./events-archive";
-@import "./broadcasts-archive";
-@import "./blog-archive";
-@import "./events-series-index";
-@import "./event-series";
-@import "./venues-index";
-@import "./venue";
-@import "./recording";
-@import "./recording-snap-block";
-@import "./topic";
-@import "./people";
-@import "./person";
-@import "./person-snap-block";
-@import "./home";
-@import "./home-banners";
-@import "./podcasts";
-@import "./podcast-episode-snap-block";
-@import "./podcast-series-snap-block";
-@import "./search";
-@import "./vpla";
-@import "./criticism-now";
-@import "./residents";
-@import "./sponsors";
-@import "./staff";
-@import "./favicons";
-@import "./subscribe-popup";
-@import "./campaign-banner";
+@import "./skip-links/index.css";
+@import "./masthead/index.css";
+@import "./masthead-contextual/index.css";
+@import "./content-block/index.css";
+@import "./footer/index.css";
+@import "./pagination/index.css";
+@import "./figure/index.css";
+@import "./pull-quote/index.css";
+@import "./sub-page-nav/index.css";
+@import "./video-player/index.css";
+@import "./audio-player/index.css";
+@import "./subscribe/index.css";
+@import "./social-media/index.css";
+@import "./content-page/index.css";
+@import "./topics-section/index.css";
+@import "./blog-snap-block/index.css";
+@import "./blog-post/index.css";
+@import "./event/index.css";
+@import "./event-snap-block/index.css";
+@import "./event-venue-map/index.css";
+@import "./events-archive/index.css";
+@import "./broadcasts-archive/index.css";
+@import "./blog-archive/index.css";
+@import "./events-series-index/index.css";
+@import "./event-series/index.css";
+@import "./venues-index/index.css";
+@import "./venue/index.css";
+@import "./recording/index.css";
+@import "./recording-snap-block/index.css";
+@import "./topic/index.css";
+@import "./people/index.css";
+@import "./person/index.css";
+@import "./person-snap-block/index.css";
+@import "./home/index.css";
+@import "./home-banners/index.css";
+@import "./podcasts/index.css";
+@import "./podcast-episode-snap-block/index.css";
+@import "./podcast-series-snap-block/index.css";
+@import "./search/index.css";
+@import "./vpla/index.css";
+@import "./criticism-now/index.css";
+@import "./residents/index.css";
+@import "./sponsors/index.css";
+@import "./staff/index.css";
+@import "./subscribe-popup/index.css";
+@import "./campaign-banner/index.css";

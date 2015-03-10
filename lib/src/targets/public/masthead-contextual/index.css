@@ -297,7 +297,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-    .breakpoint-phone-wide .upcoming-events__item-title.
+    .breakpoint-phone-wide .upcoming-events__item-title,
     .breakpoint-phone .upcoming-events__item-title {
       display: inline;
       float: none;

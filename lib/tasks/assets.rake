@@ -1,7 +1,7 @@
 namespace :assets do
   desc "Build the public assets with make/duo"
   task :build do
-    system 'make build'
+    system 'nodenv exec npm run build-production'
   end
 end
 
