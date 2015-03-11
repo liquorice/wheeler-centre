@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Colfax';
-  src: url('./fonts/Colfax-Medium.eot'); /* IE9 Compat Modes */
-  src: url('./fonts/Colfax-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('./fonts/Colfax-Medium.woff') format('woff'), /* Modern Browsers */
-       url('./fonts/Colfax-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('./fonts/Colfax-Medium.svg#eacadab73975123c4aee337df820bb32') format('svg'); /* Legacy iOS */
+  src: url('Colfax-Medium.eot'); /* IE9 Compat Modes */
+  src: url('Colfax-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Colfax-Medium.woff') format('woff'), /* Modern Browsers */
+       url('Colfax-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Colfax-Medium.svg#eacadab73975123c4aee337df820bb32') format('svg'); /* Legacy iOS */
 
   font-style:  normal;
   font-weight: bold;
@@ -12,11 +12,11 @@
 
 @font-face {
   font-family: 'Colfax';
-  src: url('./fonts/Colfax-MediumItalic.eot'); /* IE9 Compat Modes */
-  src: url('./fonts/Colfax-MediumItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('./fonts/Colfax-MediumItalic.woff') format('woff'), /* Modern Browsers */
-       url('./fonts/Colfax-MediumItalic.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('./fonts/Colfax-MediumItalic.svg#88cbf3e416755046bfc9f7927e113059') format('svg'); /* Legacy iOS */
+  src: url('Colfax-MediumItalic.eot'); /* IE9 Compat Modes */
+  src: url('Colfax-MediumItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Colfax-MediumItalic.woff') format('woff'), /* Modern Browsers */
+       url('Colfax-MediumItalic.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Colfax-MediumItalic.svg#88cbf3e416755046bfc9f7927e113059') format('svg'); /* Legacy iOS */
 
   font-style:  italic;
   font-weight: bold;
@@ -24,11 +24,11 @@
 
 @font-face {
   font-family: 'Colfax';
-  src: url('./fonts/Colfax-Regular.eot'); /* IE9 Compat Modes */
-  src: url('./fonts/Colfax-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('./fonts/Colfax-Regular.woff') format('woff'), /* Modern Browsers */
-       url('./fonts/Colfax-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('./fonts/Colfax-Regular.svg#baf2864d4cfcbabd96e0926e27a56f1f') format('svg'); /* Legacy iOS */
+  src: url('Colfax-Regular.eot'); /* IE9 Compat Modes */
+  src: url('Colfax-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Colfax-Regular.woff') format('woff'), /* Modern Browsers */
+       url('Colfax-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Colfax-Regular.svg#baf2864d4cfcbabd96e0926e27a56f1f') format('svg'); /* Legacy iOS */
 
   font-style:  normal;
   font-weight: normal;
@@ -36,11 +36,11 @@
 
 @font-face {
   font-family: 'Colfax';
-  src: url('./fonts/Colfax-RegularItalic.eot'); /* IE9 Compat Modes */
-  src: url('./fonts/Colfax-RegularItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('./fonts/Colfax-RegularItalic.woff') format('woff'), /* Modern Browsers */
-       url('./fonts/Colfax-RegularItalic.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('./fonts/Colfax-RegularItalic.svg#35e758e1938759df110b9568ecd0c139') format('svg'); /* Legacy iOS */
+  src: url('Colfax-RegularItalic.eot'); /* IE9 Compat Modes */
+  src: url('Colfax-RegularItalic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Colfax-RegularItalic.woff') format('woff'), /* Modern Browsers */
+       url('Colfax-RegularItalic.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Colfax-RegularItalic.svg#35e758e1938759df110b9568ecd0c139') format('svg'); /* Legacy iOS */
 
   font-style:  italic;
   font-weight: normal;

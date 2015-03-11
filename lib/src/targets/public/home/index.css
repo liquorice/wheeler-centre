@@ -198,7 +198,7 @@
 
 .home__about {
   background-color: var(--primary-color-lighter);
-  background-image: url("./home/about-bg.png");
+  background-image: url(about-bg.png);
   background-size: cover cover;
   background-position: center center;
   padding-top: 50px;

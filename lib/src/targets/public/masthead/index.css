@@ -2,7 +2,6 @@
 
 .masthead {
   background-color: var(--primary-color);
-  background-color: #f09;
   font-family: var(--font-sans);
   position: relative;
 }
@@ -501,7 +500,7 @@
     }
 
     .masthead__logo-anchor {
-      background-image: url("./masthead/wheeler-centre-logo.svg");
+      background-image: url(wheeler-centre-logo.svg);
       background-size: 100% 100%;
       color: transparent;
       display: block;

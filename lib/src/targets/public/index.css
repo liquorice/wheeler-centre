@@ -64,7 +64,7 @@ a, button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/*@import "../copy/index.css";*/
+@import "./copy/index.css";
 
 .quo {
   margin-left: -0.28em;
