@@ -41,6 +41,14 @@ module Heracles
 
         ### Accessors
 
+        def publish_date
+          if fields[:publish_date].data_present?
+            fields[:publish_date].value
+          else
+            created_at
+          end
+        end
+
         def parent_blog
           parent.try(:page_type) == "blog" ? parent : nil
         end
