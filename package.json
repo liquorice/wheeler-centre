@@ -43,7 +43,7 @@
   "scripts": {
     "clean": "rm -rf ./lib/src/build/*",
     "server": "node ./lib/src/server.js",
-    "build": "webpack --config ./lib/src/webpack.config.js -p",
+    "build": "node_modules/.bin/webpack --config ./lib/src/webpack.config.js -p",
     "precompile": "node ./lib/src/precompile.js",
     "build-production": "npm run clean && npm run build && npm run precompile"
   }
