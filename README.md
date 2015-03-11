@@ -81,15 +81,13 @@ environment variables. These are all optional.
 Assets are compiled outside of Sprockets (with the exception of Heracles admin assets). The main tasks are specified in our `Makefile`.
 
 ```
-# Compile all the targets into `lib/src/tmp`
-make dev
-# Run `make dev`, and then generate a Rails-compatible manifest that’s merged
+# Compile all the targets into `lib/src/build`
+npm run build
+# Run `npm run build`, and then generate a Rails-compatible manifest that’s merged
 # with any sprockets-compiled assets
-make build
-# Spin up the local server/proxy server to serve development files
-make serve
-# Watch the targets directory and call `make dev` whenever things change
-make watch
+npm run build-production
+# Spin up the local server/proxy server to serve/recompile development files
+npm run server
 ```
 
 You should put your assets in `lib/src/targets` as build targets are _inferred_ from their directory names. Thus a folder structure like:
