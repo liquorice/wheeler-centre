@@ -3,7 +3,7 @@
   "description": "Asset compilation for the Wheeler Centre using Webpack",
   "version": "0.0.1",
   "author": "Icelab",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer-loader": "^1.2.0",
     "component-webpack-plugin": "^0.2.1",
     "css-loader": "^0.9.1",
