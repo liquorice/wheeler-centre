@@ -217,6 +217,10 @@ module ApplicationHelper
     title
   end
 
+  def bookings_open(page)
+    !page.fields[:bookings_open_at].data_present? || page.fields[:bookings_open_at].value < Time.zone.now
+  end
+
   # As heard on "Chroma Zone" talk by Lea Verou
   # Explanation @ http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140311/G18
   # @color - [r,g,b]

@@ -1015,12 +1015,16 @@
     color: #666;
   }
 
-.event-calendar-event--booked-out .event-calendar-event__hero img {
+.event-calendar-event--booked-out .event-calendar-event__hero img,
+.event-calendar-event--booking-fast .event-calendar-event__hero img,
+.event-calendar-event--cancelled .event-calendar-event__hero img {
   filter: gray;
   filter: grayscale(1);
   -webkit-filter: grayscale(1);
 }
-  .event-calendar-event--booked-out .event-calendar-event__anchor:hover .event-calendar-event__hero img {
+  .event-calendar-event--booked-out .event-calendar-event__anchor:hover .event-calendar-event__hero img,
+  .event-calendar-event--booking-fast .event-calendar-event__anchor:hover .event-calendar-event__hero img,
+  .event-calendar-event--cancelled .event-calendar-event__anchor:hover .event-calendar-event__hero img {
     filter: none;
     filter: none;
     -webkit-filter: none;
@@ -1048,8 +1052,7 @@
     background-color: rgba(169,180,179,.85);
   }
   .event-calendar-event--booking-fast .event-calendar-event__flag {
-    /*background-color: rgba(0, 158, 140, 0.65);*/
-    background-color: rgba(199,60,48,0.55);
+    background-color: rgba(0,176,155,0.55);
   }
 
 .event-calendar-event__flag-text {
@@ -1113,6 +1116,11 @@
   border-bottom: 2px solid color(#C73C30 tint(30%));
 }
 
+
+/* Cancelled */
+.event-calendar-event--cancelled .event-calendar-event__flag {
+  background-color: rgba(199,60,48,0.55);
+}
 
 /* Content area */
 .breakpoint-widescreen-wide .event .figure__display--left-aligned {
