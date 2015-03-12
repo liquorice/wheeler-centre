@@ -1,0 +1,56 @@
+<!-- EVENT HTML for TRYBOOKING -->
+  <% venue = "" %>
+  <% venue = link_to(
+      event.venue.title,
+      url_with_domain(event.venue.absolute_url),
+      :style => "color: #009e8c;"
+    ) if event.venue.present?
+  %>
+  <% date = format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "long_date") %>
+
+  <div style="background: #fff; padding:2%; width: 96%; overflow:hidden;">
+    <div style="width: 130px; margin-top: 10px; float: left;">
+      <%= link_to(
+        image_tag(
+          "http://pockets.inventivelabs.com.au/cbwi/logo_small.png",
+          :style => "border: none;"
+        ),
+        "http://wheelercentre.com",
+        :style => "border: none;"
+      ) %>
+    </div>
+
+    <div style="float: left; width: 430px; margin: 10px 0;">
+      <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 15px 0; margin-bottom: 30px;">
+        <h1 style="font-family: Georgia, serif; font-weight: normal; font-size: 26px; line-height: 110%; margin: 0 0 6px 0;"><%= event.title %></h1>
+        <h2 style="font-family: Verdana, sans-serif; font-size: 12px; color: #333; margin: 0; line-height: 140%;">
+          <% if venue %>
+            <%= venue %>
+            <br />
+          <% end -%>
+          <% if date %>
+            <%= date %>
+            <br />
+          <% end -%>
+          <strong>Tickets:</strong> <span style="font-weight: normal"><%= event.fields[:ticket_prices].value %></span>
+        </h2>
+      </div>
+
+      <div style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; line-height: 130%">
+        <p>
+          Find out more about this event
+          <%= link_to(
+            "on our website",
+            url_with_domain(event.absolute_url)
+          ) %>
+      </div>
+
+      <div style="font-family: Helvetica, Arial, sans-serif; font-size: 11px; margin-top: 45px;">
+        <p>
+          To keep updated with news and upcoming events at The Wheeler Centre,
+          subscribe to our <%= link_to("email newsletter", "http://wheelercentre.com/subscribe") %>.
+        </p>
+      </div>
+
+    </div>
+  </div>
