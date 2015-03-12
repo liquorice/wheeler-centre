@@ -93,11 +93,12 @@
                   == widont_format page.venue.title
             - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
               span.event__ticketing-stage =page.fields[:ticketing_stage].value
-            - if page.booked_out?
-              span.event__booked-out-flag Booked out
-            - elsif page.upcoming? && page.fields[:external_bookings].data_present?
-              a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=page.fields[:external_bookings].value
-                ' Book your tickets
+            - unless page.fields[:ticketing_stage].value == "Cancelled"
+              - if page.booked_out?
+                span.event__booked-out-flag Booked out
+              - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
+                a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=page.fields[:external_bookings].value
+                  ' Book your tickets
             h1.event__title itemprop="summary"
               == widont_format markdown_line page.title
           .event__body itemprop="description"
@@ -131,24 +132,43 @@
                 h2.event__presenters-header Who?
                 - page.fields[:presenters].pages.each do |presenter|
                   = render "partials/presenter_horizontal", presenter: presenter
-
-        - cache ["event-ticketing-1", page] do
+        - cache ["event-ticketing-1", page, settings_page.fields[:events_cancelled_message], bookings_open(page)] do
           - if page.upcoming?
-            .event__tickets itemprop="tickets" itemscope=true itemtype="http://data-vocabulary.org/Offer"
-              h2.event__tickets-header How much?
-              .event__tickets-summary.copy
-                p
-                  span.event__tickets-booking-text
-                    - if page.fields[:ticket_prices].data_present?
-                      = page.fields[:ticket_prices].value
-                    - else
-                      strong This is a free event.
-                      '  Bookings are recommended.
-                  - if page.booked_out?
-                    span.event__booked-out-flag Booked out
-                  - elsif page.fields[:external_bookings].data_present?
-                    a.event__tickets-booking itemprop="offerurl" href=page.fields[:external_bookings].value
-                      ' Book your tickets
+            - if page.fields[:ticketing_stage].value == "Cancelled"
+              .event__tickets
+                h2.event__tickets-header How much?
+                .event__tickets-summary.copy
+                  - if settings_page.fields[:events_cancelled_message].data_present?
+                    = render_content settings_page.fields[:events_cancelled_message]
+                  - else
+                    p This event has been cancelled.
+            - elsif bookings_open(page)
+              .event__tickets itemprop="tickets" itemscope=true itemtype="http://data-vocabulary.org/Offer"
+                h2.event__tickets-header How much?
+                .event__tickets-summary.copy
+                  p
+                    span.event__tickets-booking-text
+                      - if page.fields[:ticket_prices].data_present?
+                        = page.fields[:ticket_prices].value
+                      - else
+                        strong This is a free event.
+                        '  Bookings are recommended.
+                    - if page.booked_out?
+                      span.event__booked-out-flag Booked out
+                    - elsif page.fields[:external_bookings].data_present?
+                      a.event__tickets-booking itemprop="offerurl" href=page.fields[:external_bookings].value
+                        ' Book your tickets
+            - elsif page.fields[:bookings_open_at].data_present?
+              .event__tickets
+                h2.event__tickets-header How much?
+                .event__tickets-summary.copy
+                  p
+                    ' Tickets for this event will be available from
+                    em= I18n.l(page.fields[:bookings_open_at].value, format: :time_only)
+                    '  on
+                    em= I18n.l(page.fields[:bookings_open_at].value, format: :medium_date)
+                    '.
+
 
         - cache ["event-series-summary-1", page, page.series] do
           - if page.series

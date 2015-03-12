@@ -20,6 +20,9 @@ module Heracles
               {name: :campaign_banner_content, type: :content, with_buttons: %i(h2 h3 bold italic link), with_insertables: %i(image)},
               {name: :campaign_banner_link, type: :text, editor_type: "code"},
               {name: :campaign_banner_code, label: "Campaign code", type: :text, editor_type: "code", hint: "Setting a new code like 'jaipur-2015' here will reset the counter and show it to everyone again."},
+              # Events
+              {name: :events_info, type: :info, text: "<h2>Events</h2><hr/>"},
+              {name: :events_cancelled_message, type: :content, disable_insertables: true}
             ]
           }
         end
