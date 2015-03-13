@@ -1,5 +1,7 @@
 WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
   r301 '/videos', '/broadcasts'
+  r301 '/videos/video_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=video'
+  r301 '/videos/audio_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=audio'
   r301 %r{/videos/video(.*)}, '/broadcasts$1'
   r301 '/dailies', '/notes'
   r301 '/dailies/today', '/notes'
@@ -35,7 +37,5 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   r301 '/fine-print/community-guidelines', '/about-us/community-guidelines'
   r301 '/projects/deakin-lectures-2010/presenters', '/projects/deakin-lectures-2010'
   r301 '/sitemap.xml', 'http://wheeler-centre-heracles.s3.amazonaws.com/sitemaps/sitemap.xml.gz'
-  r301 '/videos/video_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=video'
-  r301 '/videos/audio_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=audio'
   r301 '/events/program_feed/the-fifth-estate', '/broadcasts/podcasts/the-fifth-estate.rss?format=audio'
 end
