@@ -24,7 +24,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
 
     build_category_tree xml, page.itunes_categories
 
-    xml.itunes :"new-feed-url", "#{url_with_domain(page.absolute_url)}?type=#{type}"
+    xml.itunes :"new-feed-url", "#{url_with_domain(page.absolute_url)}.rss?type=#{type}"
     xml.itunes :author, "The Wheeler Centre"
     xml.itunes :subtitle, page.fields[:itunes_subtitle].value
     xml.itunes :summary, page.fields[:itunes_summary].value
