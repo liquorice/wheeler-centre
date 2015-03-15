@@ -1,7 +1,7 @@
 WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
   r301 '/videos', '/broadcasts'
-  r301 '/videos/video_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=video'
-  r301 '/videos/audio_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=audio'
+  # r301 '/videos/video_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=video'
+  # r301 '/videos/audio_podcast', '/broadcasts/podcasts/the-wheeler-centre.rss?format=audio'
   r301 %r{/videos/video(.*)}, '/broadcasts$1'
   r301 '/dailies', '/notes'
   r301 '/dailies/today', '/notes'
