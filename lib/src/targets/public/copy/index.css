@@ -9,7 +9,7 @@
  */
 
 .copy {
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   line-height: 1.4;
 }
 /*.breakpoint-tablet .copy {
@@ -210,11 +210,11 @@
 }
 
 .copy h1 {
-  font-size: 1.4em;
+  font-size: 1.1em;
 }
 
 .copy h2 {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .copy h3 {
