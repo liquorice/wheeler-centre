@@ -2,7 +2,7 @@
 
 .event-snap {
   display: block;
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
 }
 
   .event-snap__date {
@@ -10,40 +10,25 @@
     display: block;
     font-family: var(--font-sans);
     font-size: 1.4rem;
-    font-size: 14px;
-    padding-bottom: 8px;
+    padding-bottom: .8rem;
   }
-    .breakpoint-phone-wide .event-snap__date,
-    .breakpoint-phone .event-snap__date {
-      font-size: 11px;
-      font-size: 1.1rem;
-    }
   .event-snap__series {
     font-family: var(--font-sans);
-    font-size: 13px;
     font-size: 1.3rem;
-    padding-top: 6px;
+    padding-top: .6rem;
   }
   .event-snap__title {
-    padding-top: 6px;
-    margin-bottom: 14px;
+    padding-top: .6rem;
+    margin-bottom: 1.4rem;
     font-weight: bold;
   }
     .breakpoint-phone-wide .event-snap__title,
     .breakpoint-phone .event-snap__title {
       line-height: 1;
     }
-
     .event-snap-block .title-text {
-      font-size: 17px;
       font-size: 1.7rem;
     }
-      .breakpoint-phone-wide .event-snap-block .title-text,
-      .breakpoint-phone .event-snap-block .title-text {
-        font-size: 14px;
-        font-size: 1.4rem;
-      }
-
     .event-snap:hover .title-text {
       color: var(--primary-color);
       text-decoration: underline;
@@ -53,18 +38,11 @@
     display: block;
     font-family: var(--font-sans);
     font-size: 1.4rem;
-    font-size: 14px;
-    padding-bottom: 12px;
-    margin-top: -10px;
+    padding-bottom: 1.2rem;
+    margin-top: -1rem;
   }
-    .breakpoint-phone-wide .event-snap__authors,
-    .breakpoint-phone .event-snap__authors {
-      font-size: 12px;
-      font-size: 1.2rem;
-    }
-
   .event-snap__hero {
-    padding-bottom: 4px;
+    padding-bottom: .4rem;
     position: relative;
   }
     .event-snap__hero--force-square {
@@ -74,12 +52,11 @@
   .event-snap__hero-type {
     background-color: #fff;
     font-family: var(--font-sans);
-    font-size: 13px;
     font-size: 1.3rem;
     position: absolute;
     top: 0;
     right: 0;
-    padding: 7px 8px 8px;
+    padding: .7rem .8rem .8rem;
     /* Needs to keep above img */
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -87,12 +64,6 @@
     transition-property: transform, background-color, color;
     transition-duration: 250ms, 500ms, 500ms;
   }
-    .breakpoint-phone-wide .event-snap__hero-type,
-    .breakpoint-phone .event-snap__hero-type {
-      font-size: 10px;
-      font-size: 1rem;
-      padding: 5px 6px 6px;
-    }
 
   a:hover .event-snap__hero-type {
     background-color: var(--primary-color);
@@ -104,13 +75,13 @@
   }
 
   .event-snap__past-event-icon {
-    font-size: 11px;
-    margin-right: 10px;
-    margin-left: 4px;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    margin-left: .4rem;
   }
 
   .event-snap__hero-caption {
-    padding-top: 6px;
+    padding-top: .6rem;
   }
   .event-snap__hero-inner {
     position: relative;

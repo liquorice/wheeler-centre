@@ -62,7 +62,7 @@
 }
   .campaign-banner .figure__display--left-aligned img,
   .campaign-banner .figure__display--right-aligned img {
-    max-height: 120px;
+    max-height: 12rem;
     width: auto;
   }
 

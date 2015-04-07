@@ -47,38 +47,35 @@
     bottom: 0;
     left: 0;
     max-height: 100%;
-    padding: 50px 25px 25px;
+    padding: 5rem 2.5rem 2.5rem;
     position: absolute;
     right: 0;
   }
     .breakpoint-tablet-wide .home-banner__detail,
     .breakpoint-tablet .home-banner__detail {
-      padding: 30px 18px 18px;
+      padding: 3rem 1.8rem 1.8rem;
     }
     .breakpoint-phone-wide .home-banner__detail,
     .breakpoint-phone .home-banner__detail {
-      padding: 20px 15px 15px;
+      padding: 2rem 1.5rem 1.5rem;
     }
     .home-banner__category {
-      font-size: 13px;
       font-size: 1.3rem;
       letter-spacing: 0.15em;
-      margin-bottom: 5px;
-      padding-bottom: 5px;
+      margin-bottom: .5rem;
+      padding-bottom: .5rem;
       text-transform: uppercase;
     }
     .breakpoint-phone-wide .home-banner__category,
     .breakpoint-phone .home-banner__category {
-      font-size: 10px;
-      font-size: 1rem;
       margin-bottom: 0;
     }
 
     .home-banner__category i {
       border-left: 1px solid #fff;
       border-color: rgba(255,255,255,0.5);
-      margin-left: 14px;
-      padding-left: 14px;
+      margin-left: 1.4rem;
+      padding-left: 1.4rem;
     }
 
     .home-banner__category-icon--listen {
@@ -95,7 +92,6 @@
 
     .breakpoint-widescreen .home-banner__label,
     .breakpoint-tablet-wide .home-banner__label {
-      font-size: 15px;
       font-size: 1.5rem;
     }
 
@@ -103,7 +99,6 @@
     .breakpoint-tablet .home-banner__label,
     .breakpoint-phone-wide .home-banner__label,
     .breakpoint-phone .home-banner__label {
-      font-size: 13px;
       font-size: 1.3rem;
       display: block;
       text-overflow: ellipsis;

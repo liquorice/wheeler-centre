@@ -57,16 +57,15 @@
     position: relative;
     text-align: left;
     vertical-align: middle;
-    max-width: 700px;
+    max-width: 70rem;
     width: 80%;
     z-index: 3;
   }
     .video-player .video-player__title {
       cursor: pointer;
-      font-size: 32px;
       font-size: 3.2rem;
       line-height: 1.4;
-      margin-left: 85px;
+      margin-left: 8.5rem;
     }
     .video-player__teaser:hover .video-player__title {
       color: rgba(255,255,255,0.8);
@@ -74,9 +73,9 @@
 
       .breakpoint-phone-wide .video-player .video-player__title,
       .breakpoint-phone .video-player .video-player__title {
-        font-size: 16px;
         font-size: 1.6rem;
-        margin-left: 50px;
+        font-size: 1.6rem;
+        margin-left: 5rem;
       }
 
   .video-player__play {
@@ -88,64 +87,59 @@
     color: rgba(255,255,255,0.9);
     cursor: pointer;
     display: block;
-    height: 60px;
-    width: 60px;
+    height: 6rem;
+    width: 6rem;
     position: absolute;
     left: 0;
     top: 0;
   }
       .breakpoint-phone-wide .video-player__play,
       .breakpoint-phone .video-player__play {
-        height: 30px;
-        width: 30px;
+        height: 3rem;
+        width: 3rem;
       }
 
     .video-player__play-icon {
-      font-size: 22px;
-      height: 22px;
-      width: 22px;
+      font-size: 2.2rem;
+      height: 2.2rem;
+      width: 2.2rem;
       position: absolute;
       left: 50%;
       top: 50%;
-      margin-left: -7px;
-      margin-top: -11px;
+      margin-left: -.7rem;
+      margin-top: -1.1rem;
     }
       .breakpoint-phone-wide .video-player__play-icon,
       .breakpoint-phone .video-player__play-icon {
-        font-size: 14px;
-        margin-left: -4px;
-        margin-top: -8px;
+        font-size: 1.4rem;
+        margin-left: -.4rem;
+        margin-top: -.8rem;
       }
 
   /* Metadata */
   .video-player__metadata {
     color: rgba(255,255,255,0.8);
-    font-size: 14px;
+    font-size: 1.4rem;
     font-size: 1.4rem;
     letter-spacing: 0.18em;
-    left: 30px;
+    left: 3rem;
     position: absolute;
-    top: 24px;
+    top: 2.4rem;
     text-transform: uppercase;
     z-index: 3;
   }
-    .breakpoint-phone-wide .video-player__metadata,
-    .breakpoint-phone .video-player__metadata {
-      font-size: 11px;
-      font-size: 1.1rem;
-    }
     .video-player__watch,
     .video-player__duration {
       display: inline-block;
-      padding-bottom: 6px;
-      padding-top: 6px;
+      padding-bottom: .6rem;
+      padding-top: .6rem;
     }
 
     .video-player__duration {
       border-left: 1px solid rgba(255,255,255, 0.4);
       opacity: 0;
-      margin-left: 20px;
-      padding-left: 20px;
+      margin-left: 2rem;
+      padding-left: 2rem;
       transition: opacity 300ms;
     }
 
@@ -157,14 +151,14 @@
   .video-player__content {
     background-color: #111;
     display: block;
-    padding: 20px;
+    padding: 2rem;
   }
     /* Make sure the video doesn’t expand to be ridiculously tall */
     .video-player__content-inner {
       display: block;
       margin-left: auto;
       margin-right: auto;
-      max-width: 800px;
+      max-width: 80rem;
     }
 
 

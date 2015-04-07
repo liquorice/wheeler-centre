@@ -6,21 +6,21 @@
   position: relative;
 }
   .masthead__inner {
-    padding-top: 15px;
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-top: 1.5rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
   }
     .breakpoint-phone .masthead__inner {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
 
   .breakpoint-phone .masthead__container {
-    padding-top: 50px;
+    padding-top: 5rem;
   }
 
   .masthead__navigation {
-    padding-bottom: 25px;
+    padding-bottom: 2.5rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -29,7 +29,7 @@
 
   .breakpoint-phone .masthead__navigation {
     background-color: color(var(--primary-color) shade(5%));
-    height: 40px;
+    height: 4rem;
     padding-bottom: 0;
     position: absolute;
     top: 0;
@@ -46,9 +46,9 @@
       cursor: pointer;
       display: block;
       position: absolute;
-      top: 6px;
-      left: 5px;
-      padding: 5px;
+      top: .6rem;
+      left: .5rem;
+      padding: .5rem;
     }
 
     .masthead__mobile-toggle i {
@@ -67,7 +67,7 @@
 
     .masthead-nav-main {
       float: left;
-      margin-left: -15px;
+      margin-left: -1.5rem;
       -webkit-font-smoothing: subpixel-antialiased;
       font-smoothing: subpixel-antialiased;
     }
@@ -77,7 +77,7 @@
       background-color: var(--primary-color-darker);
       margin-left: 0;
       position: absolute;
-      top: 40px;
+      top: 4rem;
       left: 0;
       right: 0;
     }
@@ -94,21 +94,21 @@
       }
 
         .masthead-nav-main__item--break {
-          padding-right: 16px;
-          margin-right: 16px;
+          padding-right: 1.6rem;
+          margin-right: 1.6rem;
           position: relative;
         }
 
         .breakpoint-tablet-wide .masthead-nav-main__item--break,
         .breakpoint-tablet .masthead-nav-main__item--break,
         .breakpoint-phone-wide .masthead-nav-main__item--break  {
-          padding-right: 12px;
-          margin-right: 12px;
+          padding-right: 1.2rem;
+          margin-right: 1.2rem;
         }
 
         .breakpoint-w-669 .masthead-nav-main__item--break {
-          padding-right: 10px;
-          margin-right: 10px;
+          padding-right: 1rem;
+          margin-right: 1rem;
         }
 
         .breakpoint-phone .masthead-nav-main__item--break {
@@ -168,9 +168,9 @@
           border: none;
           color: var(--primary-color-lighter);
           display: inline-block;
-          font-size: 16px;
           font-size: 1.6rem;
-          padding: 18px;
+          font-size: 1.6rem;
+          padding: 1.8rem;
         }
 
         button.masthead-nav-main__anchor {
@@ -186,19 +186,19 @@
         .breakpoint-tablet-wide .masthead-nav-main__anchor,
         .breakpoint-tablet .masthead-nav-main__anchor,
         .breakpoint-phone-wide .masthead-nav-main__anchor  {
-          padding: 14px;
+          padding: 1.4rem;
         }
 
         .breakpoint-tablet .masthead-nav-main__anchor,
         .breakpoint-phone-wide .masthead-nav-main__anchor  {
-          font-size: 15px;
+          font-size: 1.5rem;
           font-size: 1.5rem;
         }
 
         .breakpoint-w-669 .masthead-nav-main__anchor {
-          font-size: 14px;
           font-size: 1.4rem;
-          padding: 12px;
+          font-size: 1.4rem;
+          padding: 1.2rem;
         }
 
         .breakpoint-phone .masthead-nav-main__anchor {
@@ -215,8 +215,8 @@
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
       display: none;
-      min-width: 500px;
-      padding: 30px 18px 20px;
+      min-width: 50rem;
+      padding: 3rem 1.8rem 2rem;
       position: absolute;
       z-index: 60;
     }
@@ -225,24 +225,24 @@
       background-color: var(--primary-color);
       min-width: 100%;
       width: 100%;
-      padding: 12px;
+      padding: 1.2rem;
       opacity: .98;
     }
 
     .masthead-nav-main__dropdown-icon {
-      font-size: 8px;
-      padding-left: 8px;
-      padding-bottom: 3px;
+      font-size: .8rem;
+      padding-left: .8rem;
+      padding-bottom: .3rem;
       vertical-align: middle;
     }
 
       .masthead-nav-main__dropdown-list {
         float: left;
         list-style: none;
-        padding-right: 60px;
+        padding-right: 6rem;
       }
       .breakpoint-phone .masthead-nav-main__dropdown-list {
-        padding-right: 15px;
+        padding-right: 1.5rem;
         width: 50%;
       }
 
@@ -256,13 +256,13 @@
 
         .masthead-nav-main__dropdown-item {
           color: var(--primary-color-lighter);
-          font-size: 15px;
           font-size: 1.5rem;
-          padding-bottom: 12px;
+          font-size: 1.5rem;
+          padding-bottom: 1.2rem;
         }
 
         .breakpoint-w-669 .masthead-nav-main__dropdown-item {
-          font-size: 14px;
+          font-size: 1.4rem;
           font-size: 1.4rem;
         }
 
@@ -273,15 +273,15 @@
           .masthead-nav-main__dropdown-item span {
             color: #fff;
             display: block;
-            font-size: 11px;
+            font-size: 1.1rem;
             font-size: 1.1rem;
             letter-spacing: .2em;
-            padding-bottom: 12px;
+            padding-bottom: 1.2rem;
             text-transform: uppercase;
           }
 
           .breakpoint-phone .masthead-nav-main__dropdown-item span {
-            padding-bottom: 6px;
+            padding-bottom: .6rem;
           }
 
           .masthead-nav-main__dropdown-anchor:hover,
@@ -290,13 +290,13 @@
           }
 
     .masthead-nav-secondary {
-      padding-top: 16px;
+      padding-top: 1.6rem;
       float: right;
     }
 
     .breakpoint-tablet-wide .masthead-nav-secondary,
     .breakpoint-tablet .masthead-nav-secondary  {
-      padding-top: 14px;
+      padding-top: 1.4rem;
     }
 
     .breakpoint-w-879 .masthead-nav-secondary {
@@ -309,20 +309,20 @@
       border-top: none;
       padding-top: 0;
       position: absolute;
-      top: 8px;
-      right: 4px;
+      top: .8rem;
+      right: .4rem;
     }
 
       .masthead-nav-secondary__item {
-        padding-right: 30px;
+        padding-right: 3rem;
       }
 
       .breakpoint-phone .masthead-nav-secondary__item {
-        padding-right: 20px;
+        padding-right: 2rem;
       }
 
       .masthead-nav-secondary__item:nth-child(2n) {
-        padding-right: 20px;
+        padding-right: 2rem;
       }
 
       .masthead-nav-secondary__item:last-child {
@@ -331,16 +331,16 @@
 
       .masthead-nav-secondary__item--search {
         color: var(--primary-color-lighter);
-        font-size: 11px;
+        font-size: 1.1rem;
         position: relative;
       }
 
         .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor {
           cursor: pointer;
           display: block;
-          width: 32px;
-          height: 32px;
-          margin-top: -4px;
+          width: 3.2rem;
+          height: 3.2rem;
+          margin-top: -.4rem;
           position: relative;
         }
 
@@ -349,8 +349,8 @@
           display: block;
           top: 50%;
           left: 50%;
-          margin-top: -5px;
-          margin-left: -5px;
+          margin-top: -.5rem;
+          margin-left: -.5rem;
         }
 
         .masthead-nav-secondary__item--search .masthead-nav-secondary__anchor:hover,
@@ -360,7 +360,7 @@
 
         .masthead-nav-secondary__anchor {
           color: var(--primary-color-lighter);
-          font-size: 11px;
+          font-size: 1.1rem;
           font-size: 1.1rem;
           font-weight: bold;
           letter-spacing: .2em;
@@ -379,25 +379,25 @@
           position: absolute;
           top: 0;
           right: 0;
-          width: 240px;
-          height: 32px;
-          margin-top: -4px;
+          width: 24rem;
+          height: 3.2rem;
+          margin-top: -.4rem;
           z-index: 20;
         }
 
         .breakpoint-tablet .masthead-nav-secondary__search-box {
-          width: 200px;
+          width: 20rem;
         }
 
         .breakpoint-w-879 .masthead-nav-secondary__search-box {
-          right: -50px;
-          width: 240px;
+          right: -5rem;
+          width: 24rem;
         }
 
         .breakpoint-phone .masthead-nav-secondary__search-box {
-          top: -4px;
-          right: -4px;
-          width: 248px;
+          top: -.4rem;
+          right: -.4rem;
+          width: 24.8rem;
         }
 
         .masthead-nav-secondary__search-box--active { display: block; }
@@ -409,14 +409,14 @@
             cursor: pointer;
             position: absolute;
             top: 0;
-            left: -36px;
-            width: 36px;
-            height: 32px;
-            font-size: 14px;
+            left: -3.6rem;
+            width: 3.6rem;
+            height: 3.2rem;
+            font-size: 1.4rem;
           }
 
           .breakpoint-phone .masthead-nav-secondary__search-close {
-            height: 40px;
+            height: 4rem;
           }
 
           .breakpoint-phone .masthead-nav-secondary__search-close {
@@ -433,24 +433,24 @@
             border: none;
             border-radius: 0;
             float: left;
-            font-size: 14px;
-            height: 32px;
-            padding: 6px 8px;
-            width: 208px; /* 240px - 32px */
+            font-size: 1.4rem;
+            height: 3.2rem;
+            padding: .6rem .8rem;
+            width: 20.8rem; /* 24rem - 3.2rem */
             transition-property: background-color;
             transition-duration: 150ms;
           }
 
           .breakpoint-tablet .masthead-nav-secondary__search-input {
-            width: 168px; /* 200px - 32px */
+            width: 16.8rem; /* 20rem - 3.2rem */
           }
 
           .breakpoint-w-879 .masthead-nav-secondary__search-input {
-            width: 208px; /* 240px - 32px */
+            width: 20.8rem; /* 24rem - 3.2rem */
           }
 
           .breakpoint-phone .masthead-nav-secondary__search-input {
-            height: 40px;
+            height: 4rem;
           }
 
 
@@ -464,15 +464,15 @@
             color: #fff;
             cursor: pointer;
             float: left;
-            width: 32px;
-            height: 32px;
+            width: 3.2rem;
+            height: 3.2rem;
           }
 
           .breakpoint-phone .masthead-nav-secondary__search-button {
             background-color: #e0eeec;
             color: var(--primary-color);
-            height: 40px;
-            width: 40px;
+            height: 4rem;
+            width: 4rem;
           }
 
           .masthead-nav-secondary__search-button:hover,
@@ -487,15 +487,15 @@
           }
 
   .masthead__logo {
-    height: 50px;
-    margin-left: 80px;
-    width: 244px;
+    height: 5rem;
+    margin-left: 8rem;
+    width: 24.4rem;
   }
     .breakpoint-phone-wide.masthead__logo,
     .breakpoint-phone .masthead__logo {
       margin-left: auto;
       margin-right: auto;
-      height: 40px;
+      height: 4rem;
       width: 100%;
     }
 

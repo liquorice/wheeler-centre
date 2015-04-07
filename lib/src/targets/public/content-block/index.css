@@ -3,13 +3,13 @@
 .content-block .section--normal {
   max-width: var(--column-mid);
   position: relative;
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
 }
 
 .content-block .section--full {
   clear: both;
-  padding-top: 15px;
+  padding-top: 1.5rem;
 }
 
 .content-block {}
@@ -31,7 +31,7 @@
     left: 0;
     right: 0;
     height: 100%;
-    max-height: 200px;
+    max-height: 20rem;
     z-index: 0;
   }
   .gradient-top-down.saved-search__fake-gradient {
@@ -43,5 +43,5 @@
 
 .saved-search__landscape-grid-uneven,
 .saved-search__square-grid {
-  padding-top: 35px;
+  padding-top: 3.5rem;
 }

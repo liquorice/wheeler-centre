@@ -1,14 +1,14 @@
 /* Content page */
 
 .content-page__main {
-  padding-top: 50px;
-  padding-bottom: 80px;
+  padding-top: 5rem;
+  padding-bottom: 8rem;
 }
   .breakpoint-tablet .content-page__main,
   .breakpoint-phone-wide .content-page__main,
   .breakpoint-phone .content-page__main {
-    padding-top: 15px;
-    padding-bottom: 35px;
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
   }
 
 .content-page__nav-wrapper {
@@ -21,8 +21,8 @@
 
 .content-page__nav {
   float: right;
-  margin-bottom: 35px;
-  padding-left: 17px;
+  margin-bottom: 3.5rem;
+  padding-left: 1.7rem;
   width: 25%;
 }
   .content-page__nav-title {
@@ -31,12 +31,11 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;
-    font-size: 14px;
     font-size: 1.4rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    padding: 8px 12px 12px;
-    margin-bottom: 12px;
+    padding: .8rem 1.2rem 1.2rem;
+    margin-bottom: 1.2rem;
   }
 
 .content-page__nav-toggle {
@@ -57,7 +56,7 @@
   font-family: var(--font-sans);
   text-align: center;
   display: block;
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
   width: 100%;
 }
 
@@ -77,18 +76,18 @@
 }
   .content-page__nav-inner.content-page__nav-inner--active {
     display: block;
-    padding-top: 5px;
+    padding-top: .5rem;
   }
 
 .content-page__body {
-  padding-top: 30px;
+  padding-top: 3rem;
 }
 
 .content-page__body .section--full {
-  padding-bottom: 30px;
-  padding-top: 30px;
-  margin-left: -35px;
-  margin-right: -35px;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+  margin-left: -3.5rem;
+  margin-right: -3.5rem;
 }
 
 .content-page__header,
@@ -107,25 +106,24 @@
 
 .content-page__content .section-normal {
   float: left;
-  padding-right: 17px;
+  padding-right: 1.7rem;
   width: 75%;
 }
 
 .content-page__header {
   font-family: var(--font-sans);
   text-align: center;
-  margin-top: 15px;
-  margin-bottom: 45px;
+  margin-top: 1.5rem;
+  margin-bottom: 4.5rem;
 }
   .breakpoint-tablet .content-page__title .content-page__header,
   .breakpoint-phone-wide .content-page__header,
   .breakpoint-phone .content-page__header {
-    margin-bottom: 25px;
+    margin-bottom: 2.5rem;
   }
 
 .content-page__title {
   color: var(--primary-color);
-  font-size: 48px;
   font-size: 4.8rem;
   font-weight: bold;
   line-height: 1.1;
@@ -133,23 +131,21 @@
   .breakpoint-tablet .content-page__title .content-page__title,
   .breakpoint-phone-wide .content-page__title,
   .breakpoint-phone .content-page__title {
-    font-size: 32px;
     font-size: 3.2rem
   }
 
 .content-page__intro {
-  padding-top: 8px;
-  padding-bottom: 1px;
+  padding-top: .8rem;
+  padding-bottom: .1rem;
 }
   .content-page__intro.copy {
-    font-size: 24px;
     font-size: 2.4rem;
   }
   .content-page__intro section:last-child:after {
     content: "";
     border-bottom: 2px solid #dfdfdf;
     display: block;
-    margin-top: 40px;
+    margin-top: 4rem;
     width: 30%;
   }
 .breakpoint-widescreen-wide .content-page__body .section--normal > *:not(div),

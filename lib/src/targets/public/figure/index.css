@@ -2,16 +2,9 @@
   color: #888;
   font-family: var(--font-sans);
   font-size: 1.4rem;
-  font-size: 14px;
-}
-.breakpoint-tablet .caption,
-.breakpoint-phone-wide .caption,
-.breakpoint-phone .caption {
-  font-size: 1.3rem;
-  font-size: 13px;
 }
 .caption p:last-child {
-  margin-bottom: -5px;
+  margin-bottom: -.5rem;
 }
 
 .figure {
@@ -34,15 +27,15 @@
     }
 
     .figure__caption {
-      padding-top: 20px;
+      padding-top: 2rem;
     }
 
     .figure__display--full-width img {
       width: 100%;
     }
     .figure__display--full-width .figure__caption {
-      padding-left: 35px;
-      padding-right: 35px;
+      padding-left: 3.5rem;
+      padding-right: 3.5rem;
     }
 
 .figure__link-content {}
@@ -58,16 +51,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 60px 35px 20px;
+  padding: 6rem 3.5rem 2rem;
 }
   .figure__link-title {
     font-family: var(--font-sans);
     font-weight: bold;
-    font-size: 17px;
     font-size: 1.7rem;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
   .figure__link-description {
-    font-size: 17px;
     font-size: 1.7rem;
   }

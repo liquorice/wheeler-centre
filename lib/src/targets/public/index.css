@@ -1,11 +1,11 @@
 /* Variables */
 
 :root {
-  --column-full: 1680px;
-  --column-wide: 1200px;
-  --column-mid: 940px;
-  --column-small: 860px;
-  --column-narrow: 600px;
+  --column-full: 168rem;
+  --column-wide: 120rem;
+  --column-mid: 94rem;
+  --column-small: 86rem;
+  --column-narrow: 60rem;
   --font-sans: "Colfax", Helvetica, sans-serif;
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c;
@@ -46,14 +46,13 @@ html {
 /* This is weirdly larger because we do some other overrides */
 .breakpoint-phone-wide,
 .breakpoint-phone {
-  font-size: 60%;
+  font-size: 50%;
 }
 
 body {
   background-color: #fff;
   color: var(--text-color);
   font-family: var(--font-serif);
-  font-size: 17px;
   font-size: 1.7rem;
   line-height: 1.3;
   font-smoothing: antialiased;
@@ -76,12 +75,12 @@ a, button {
 /* Basic layout */
 
 .column-wrapper {
-  padding-left: 35px;
-  padding-right: 35px;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
 }
   .breakpoint-phone .column-wrapper {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     overflow-x: hidden;
   }
 
@@ -115,9 +114,9 @@ a, button {
   font-family: var(--font-sans);
   font-weight: bold;
   text-align: center;
-  padding-top: 35px;
-  padding-bottom: 35px;
-  margin-bottom: 35px;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  margin-bottom: 3.5rem;
 }
   a.block-link:hover {
     color: #222;
@@ -139,22 +138,21 @@ a, button {
   .breakpoint-tablet .intro--small ,
   .breakpoint-phone-wide .intro--small ,
   .breakpoint-phone .intro--small  {
-    font-size: 17px;
     font-size: 1.7rem;
   }
 
   .section-header {
     text-align: center;
-    padding-top: 15px;
-    padding-bottom: 35px;
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
   }
     .breakpoint-phone-wide .section-header,
     .breakpoint-phone .section-header {
-      padding-top: 8px;
-      padding-bottom: 15px;
+      padding-top: .8rem;
+      padding-bottom: 1.5rem;
     }
   .breakpoint-w-699 .section-header {
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
 
   .section-header h2 {
@@ -162,34 +160,24 @@ a, button {
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;
-    font-size: 14px;
     font-size: 1.4rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    padding-bottom: 12px;
-  }
-  .breakpoint-phone-wide .section-header h2,
-  .breakpoint-phone .section-header h2 {
-    font-size: 11px;
-    font-size: 1.1rem;
-    padding-bottom: 8px;
+    padding-bottom: 1.2rem;
   }
 
   .section-header .intro {
-    font-size: 17px;
     font-size: 1.7rem;
   }
     .breakpoint-phone-wide .intro,
     .breakpoint-phone .intro {
-      font-size: 14px;
       font-size: 1.4rem;
     }
 
 .page__intro {
-  padding-bottom: 35px;
+  padding-bottom: 3.5rem;
 }
   .page__intro.copy {
-    font-size: 25px;
     font-size: 2.5rem;
   }
 
@@ -202,17 +190,17 @@ a, button {
   background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
   background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.05));
   background: linear-gradient(to right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.05) 100%);
-  padding-top: 25px;
+  padding-top: 2.5rem;
 }
   .breakpoint-tablet-wide .gradient-top-down {
-    padding-top: 20px;
+    padding-top: 2rem;
   }
   .breakpoint-tablet .gradient-top-down {
-    padding-top: 15px;
+    padding-top: 1.5rem;
   }
   .breakpoint-phone-wide .gradient-top-down,
   .breakpoint-phone .gradient-top-down {
-    padding-top: 10px;
+    padding-top: 1rem;
   }
 
 .gradient-bottom-up {
@@ -221,17 +209,17 @@ a, button {
   background: -moz-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.05) 100%);
   background: -o-linear-gradient(left, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(right, #fff 0%, rgba(250, 250, 250, 0) 20%), -o-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.05) 100%);
   background: linear-gradient(to right, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to left, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.05) 100%);
-  padding-bottom: 25px;
+  padding-bottom: 2.5rem;
 }
   .breakpoint-tablet-wide .gradient-bottom-up {
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
   }
   .breakpoint-tablet .gradient-bottom-up {
-    padding-bottom: 15px;
+    padding-bottom: 1.5rem;
   }
   .breakpoint-phone-wide .gradient-bottom-up,
   .breakpoint-phone .gradient-bottom-up {
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
   }
 
 /* Components */
