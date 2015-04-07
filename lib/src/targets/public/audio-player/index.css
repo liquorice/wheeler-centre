@@ -21,8 +21,16 @@
   }
 
   .figure__display--full-width .audio-player {
-    border-radius: none;
+    border-radius: 0;
   }
+  .column-wrapper .figure__display--full-width .audio-player {
+    margin-left: -3.5rem;
+    margin-right: -3.5rem;
+  }
+    .breakpoint-phone .column-wrapper .figure__display--full-width .audio-player {
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
 
   .audio-player__inner {
     max-width: var(--column-mid);
