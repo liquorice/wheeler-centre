@@ -43,7 +43,7 @@ html {
 .breakpoint-tablet-wide {
   font-size: 55%;
 }
-/* This is weirdly larger because we do some other overrides */
+
 .breakpoint-phone-wide,
 .breakpoint-phone {
   font-size: 50%;
