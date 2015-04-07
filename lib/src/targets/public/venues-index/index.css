@@ -1,54 +1,49 @@
 /* Venues index */
 
 .venues-index {
-  padding-bottom: 50px;
+  padding-bottom: 5rem;
 }
   .breakpoint-tablet .venues-index {
-    padding-top: 35px;
+    padding-top: 3.5rem;
   }
   .breakpoint-phone-wide .venues-index,
   .breakpoint-phone .venues-index {
-    padding-top: 25px;
+    padding-top: 2.5rem;
   }
 
 .venues-index__header {
   font-family: var(--font-sans);
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 3.5rem;
 }
 
   .venues-index__intro {
-    margin-bottom: 45px;
+    margin-bottom: 4.5rem;
   }
   .breakpoint-tablet .venues-index__header {
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
   }
   .breakpoint-phone-wide .venues-index__header,
   .breakpoint-phone .venues-index__header {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
     .venues-index__title-label {
       color: #888;
-      font-size: 15px;
       font-size: 1.5rem;
-      margin-bottom: 25px;
+      margin-bottom: 2.5rem;
     }
     .venues-index__title {
       color: var(--primary-color);
-      font-size: 48px;
       font-size: 4.8rem;
       font-weight: bold;
     }
     .breakpoint-tablet .venues-index__title {
-      font-size: 38px;
       font-size: 3.8rem;
     }
     .breakpoint-phone-wide .venues-index__title {
-      font-size: 30px;
       font-size: 3rem;
     }
     .breakpoint-phone .venues-index__title {
-      font-size: 28px;
       font-size: 2.8rem;
     }
 
@@ -60,7 +55,7 @@
   color: #fff;
   float: left;
   text-align: center;
-  height: 200px;
+  height: 20rem;
   outline: 1px solid #fff;
   overflow: hidden;
   width: 50%;
@@ -74,16 +69,16 @@
 
   .main-venue__anchor {
     display: block;
-    height: 360px;
+    height: 36rem;
     width: 100%;
     font-family: var(--font-sans);
-    padding: 60px 35px;
+    padding: 6rem 3.5rem;
     position: relative;
   }
   .breakpoint-phone-wide .main-venue__anchor,
   .breakpoint-phone .main-venue__anchor {
     height: auto;
-    padding: 30px 35px;
+    padding: 3rem 3.5rem;
   }
 
     .main-venue__image {
@@ -108,46 +103,39 @@
     }
 
     .main-venue__title {
-      font-size: 28px;
       font-size: 2.8rem;
       font-weight: bold;
-      padding-bottom: 20px;
+      padding-bottom: 2rem;
     }
     .breakpoint-tablet-wide .main-venue__title,
     .breakpoint-tablet .main-venue__title,
     .breakpoint-phone-wide .main-venue__title,
     .breakpoint-phone .main-venue__title {
-      font-size: 24px;
       font-size: 2.4rem;
     }
     .breakpoint-w-799 .main-venue__title {
-      font-size: 22px;
       font-size: 2rem;
     }
 
     .main-venue__description {
-      font-size: 20px;
       font-size: 2rem;
       margin-left: auto;
       margin-right: auto;
-      max-width: 510px;
-      padding-bottom: 50px;
+      max-width: 51rem;
+      padding-bottom: 5rem;
     }
     .breakpoint-tablet-wide .main-venue__description,
     .breakpoint-tablet .main-venue__description {
-      font-size: 18px;
       font-size: 1.8rem;
-      padding-bottom: 40px;
+      padding-bottom: 4rem;
     }
     .breakpoint-w-799 .main-venue__description {
-      font-size: 16px;
       font-size: 1.6rem;
-      padding-bottom: 30px;
+      padding-bottom: 3rem;
     }
 
     .main-venue__action {
       display: block;
-      font-size: 16px;
       font-size: 1.6rem;
       font-weight: bold;
     }
@@ -159,17 +147,17 @@
 /* Other venues list */
 
 .venues-index__other {
-  margin-top: 35px;
+  margin-top: 3.5rem;
 }
 
 .venues-list:first-child {
   float: left;
-  padding-right: 17px;
+  padding-right: 1.7rem;
   width: 50%;
 }
 .venues-list:last-child {
   float: right;
-  padding-left: 17px;
+  padding-left: 1.7rem;
   width: 50%;
 }
 
@@ -179,14 +167,13 @@
   .venues-list__anchor {
     border-bottom: 1px solid #dfdfdf;
     display: block;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
   }
     .venues-list__block:last-child .venues-list__anchor {
       border-bottom: none;
     }
   .venues-list__title {
-    font-size: 14px;
     font-size: 1.4rem;
     font-weight: bold;
     overflow: hidden;
@@ -202,7 +189,6 @@
   .venues-list__address {
     color: #999;
     display: block;
-    font-size: 14px;
     font-size: 1.4rem;
     overflow: hidden;
     text-overflow: ellipsis;

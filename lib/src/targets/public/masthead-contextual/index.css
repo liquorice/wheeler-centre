@@ -12,17 +12,15 @@
     background-color: var(--primary-color);
     color: var(--primary-color-lighter);
     float: left;
-    font-size: 17px;
     font-size: 1.7rem;
     font-weight: bold;
     letter-spacing: 0.1em;
-    padding-left: 35px;
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-left: 3.5rem;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
     text-transform: uppercase;
   }
     .breakpoint-tablet .masthead-contextual__section-title {
-      font-size: 15px;
       font-size: 1.5rem;
     }
     .breakpoint-phone-wide .masthead-contextual__section-title,
@@ -30,49 +28,48 @@
       display: none;
     }
     .breakpoint-phone .masthead-contextual__section-title {
-      padding-left: 15px;
+      padding-left: 1.5rem;
     }
 
   .breakpoint-w-599 .masthead-contextual__section-title {
-    padding-top: 20px;
-    padding-bottom: 15px;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
   }
 
   .masthead-contextual__navigation-list {
     float: left;
-    margin-bottom: 15px;
-    padding-left: 35px;
-    padding-right: 35px;
-    padding-top: 25px;
+    margin-bottom: 1.5rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    padding-top: 2.5rem;
   }
     .breakpoint-phone .masthead-contextual__navigation-list {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
 
   .masthead-contextual__navigation-item {
     float: left;
-    padding-right: 40px;
-    padding-bottom: 5px;
+    padding-right: 4rem;
+    padding-bottom: .5rem;
   }
   .breakpoint-phone-wide .masthead-contextual__navigation-item {
-    padding-right: 20px;
+    padding-right: 2rem;
   }
   .breakpoint-phone .masthead-contextual__navigation-item {
-    padding-right: 12px;
+    padding-right: 1.2rem;
   }
 
   .masthead-contextual__navigation-anchor {
     border-bottom: 2px solid #fff;
     color: var(--primary-color);
     display: inline-block;
-    padding-bottom: 6px;
+    padding-bottom: .6rem;
   }
 
   .breakpoint-phone .masthead-contextual__navigation-anchor {
-    font-size: 15px;
     font-size: 1.5rem;
-    padding-bottom: 6px;
+    padding-bottom: .6rem;
   }
 
   .masthead-contextual__navigation-anchor:hover,
@@ -89,32 +86,32 @@
 /* Upcoming events */
 .upcoming-events {
   float: right;
-  padding-right: 35px;
-  margin-top: -38px;
+  padding-right: 3.5rem;
+  margin-top: -3.8rem;
 }
 
 .breakpoint-w-599 .upcoming-events {
   clear: left;
   float: none;
   margin-top: 0;
-  padding: 10px 35px;
-  margin-top: 15px;
-  margin-bottom: 15px
+  padding: 1rem 3.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem
 }
   .breakpoint-phone .upcoming-events {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .upcoming-events__navigation {
-    height: 20px;
+    height: 2rem;
   }
 
   .breakpoint-w-599 .upcoming-events__navigation {
     border-bottom: 1px solid rgba(255,255,255,0.2);
-    height: 25px;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
   }
 
     .upcoming-events__up-next {
@@ -125,7 +122,6 @@
       color: var(--primary-color-lighter);
       display: block;
       float: left;
-      font-size: 13px;
       font-size: 1.3rem;
       font-weight: bold;
       letter-spacing: 0.1em;
@@ -140,7 +136,6 @@
     .upcoming-events__view-all {
       color: var(--primary-color-lighter);
       float: right;
-      font-size: 14px;
       font-size: 1.4rem;
     }
 
@@ -154,13 +149,13 @@
     }
 
     .upcoming-events__view-all i {
-      font-size: 8px;
-      padding-left: 12px;
+      font-size: .8rem;
+      padding-left: 1.2rem;
       vertical-align: middle;
     }
 
   .upcoming-events__list {
-    padding-top: 15px;
+    padding-top: 1.5rem;
   }
 
   .breakpoint-w-599 .upcoming-events__list {
@@ -170,8 +165,8 @@
   .upcoming-events__item {
     border-left: 1px solid rgba(255,255,255,0.2);
     float: left;
-    height: 95px;
-    width: 195px;
+    height: 9.5rem;
+    width: 19.5rem;
   }
 
   /* Hide events on smaller screens */
@@ -225,7 +220,7 @@
 
     .upcoming-events__item-anchor:hover .upcoming-events__image-container,
     .upcoming-events__item-anchor:focus .upcoming-events__image-container {
-      transform: translateY(-15px);
+      transform: translateY(-1.5rem);
       opacity: 1;
     }
 
@@ -240,14 +235,13 @@
 
 
     .upcoming-events__item-text-container {
-      font-size: 16px;
       font-size: 1.6rem;
       display: block;
-      height: 95px;
-      padding-left: 25px;
-      padding-right: 25px;
-      padding-bottom: 15px;
-      padding-top: 10px;
+      height: 9.5rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      padding-bottom: 1.5rem;
+      padding-top: 1rem;
       position: relative;
       z-index: 5;
     }
@@ -259,7 +253,6 @@
 
       .upcoming-events__item-date {
         color: var(--primary-color-lighter);
-        font-size: 13px;
         font-size: 1.3rem;
         padding-bottom: .6em;
       }

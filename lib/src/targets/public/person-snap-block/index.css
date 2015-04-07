@@ -2,7 +2,7 @@
 
 .person-snap {
   display: block;
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
 }
 
   .person-snap__date {
@@ -10,38 +10,23 @@
     display: block;
     font-family: var(--font-sans);
     font-size: 1.4rem;
-    font-size: 14px;
-    padding-bottom: 8px;
+    padding-bottom: .8rem;
   }
-    .breakpoint-phone-wide .person-snap__date,
-    .breakpoint-phone .person-snap__date {
-      font-size: 11px;
-      font-size: 1.1rem;
-    }
-
 
   .person-snap__series {
     font-family: var(--font-sans);
-    font-size: 13px;
     font-size: 1.3rem;
-    padding-top: 6px;
+    padding-top: .6rem;
   }
   .person-snap__title {
     font-family: var(--font-sans);
     font-weight: bold;
-    padding-top: 6px;
-    margin-bottom: 14px;
+    padding-top: .6rem;
+    margin-bottom: 1.4rem;
   }
     .person-snap-block .title-text {
-      font-size: 17px;
       font-size: 1.7rem;
     }
-      .breakpoint-phone-wide .person-snap-block .title-text,
-      .breakpoint-phone .person-snap-block .title-text {
-        font-size: 13px;
-        font-size: 1.3rem;
-      }
-
 
     .person-snap:hover .title-text {
       color: var(--primary-color);
@@ -52,25 +37,24 @@
     display: block;
     font-family: var(--font-sans);
     font-size: 1.4rem;
-    font-size: 14px;
-    padding-bottom: 12px;
-    margin-top: -10px;
+    padding-bottom: 1.2rem;
+    margin-top: -1rem;
   }
 
   .person-snap__hero {
-    padding-bottom: 4px;
+    padding-bottom: .4rem;
     position: relative;
   }
 
   .person-snap__hero-type {
     background-color: #fff;
     font-family: var(--font-sans);
-    font-size: 13px;
+    font-size: 1.3rem;
     font-size: 1.3rem;
     position: absolute;
     top: 0;
     right: 0;
-    padding: 7px 8px 8px;
+    padding: .7rem .8rem .8rem;
     /* Needs to keep above img */
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -78,13 +62,6 @@
     transition-property: transform, background-color, color;
     transition-duration: 250ms, 500ms, 500ms;
   }
-    .breakpoint-phone-wide .person-snap__hero-type,
-    .breakpoint-phone .person-snap__hero-type {
-      font-size: 10px;
-      font-size: 1rem;
-      padding: 5px 6px 6px;
-    }
-
 
   a:hover .person-snap__hero-type {
     background-color: var(--primary-color);
@@ -92,7 +69,7 @@
     transform: translate3d(0, -100%, 0);
   }
   .person-snap__hero-caption {
-    padding-top: 6px;
+    padding-top: .6rem;
   }
   .person-snap__hero-inner {
     overflow: hidden;
@@ -125,7 +102,7 @@
 
 .person-snap--square .person-snap__hero-inner {
   border-radius: 50%;
-  margin: 30px;
+  margin: 3rem;
   overflow: hidden;
 }
 

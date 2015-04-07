@@ -2,7 +2,7 @@
 
 .social-media {
   background-color: var(--primary-color-lighter);
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 }
   .social-media__account {
     float: left;
@@ -15,25 +15,24 @@
       color: color(var(--primary-color) shade(25%));
       display: block;
       font-family: var(--font-sans);
-      font-size: 16px;
       font-size: 1.6rem;
       -webkit-font-smoothing: antialiased;
       font-smoothing: antialiased;
-      padding-right: 17px;
-      padding-left: 17px;
-      padding-top: 20px;
-      padding-bottom: 28px;
+      padding-right: 1.7rem;
+      padding-left: 1.7rem;
+      padding-top: 2rem;
+      padding-bottom: 2.8rem;
       text-align: center;
       transition-property: color;
       transition-duration: 120ms;
     }
     .social-media__account i {
       color: var(--primary-color);
-      font-size: 28px;
+      font-size: 2.8rem;
       font-size: 2.8rem;
       position: relative;
-      top: 3px;
-      margin-right: 15px;
+      top: .3rem;
+      margin-right: 1.5rem;
       transition-property: transform;
       transition-duration: 120ms;
     }

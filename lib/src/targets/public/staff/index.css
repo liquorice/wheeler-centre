@@ -1,13 +1,13 @@
 /* Staff */
 
 .staff__staff {
-  margin-bottom: 35px;
+  margin-bottom: 3.5rem;
 }
 
 .staff__board {
   border-top: 1px solid #dfdfdf;
-  padding-top: 30px;
-  margin-bottom: 35px;
+  padding-top: 3rem;
+  margin-bottom: 3.5rem;
 }
   .breakpoint-phone .staff__board {
     border-top: none;
@@ -16,7 +16,7 @@
 
 .staff__staff .person-summary__block,
 .staff__board .person-summary__block {
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
 }
 .staff__staff .person-summary__intro,
 .staff__board .person-summary__intro {

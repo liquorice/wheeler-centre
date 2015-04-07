@@ -19,7 +19,6 @@
 
 .subscribe-popup .simple-subscribe__inner {
   padding-top: 0;
-  padding-bottom: 25px;
   padding-bottom: 2.5rem;
 }
 
@@ -28,9 +27,9 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
-  padding-top: 30px;
+  padding-top: 3.0rem;
   padding-top: 3rem;
-  padding-bottom: 35px;
+  padding-bottom: 3.5rem;
   padding-bottom: 3.5rem;
   position: relative;
   transform: translate3d(0,0,0);
@@ -60,13 +59,9 @@
   cursor: pointer;
   display: block;
   font-family: var(--font-sans);
-  font-size: 15px;
   font-size: 1.5rem;
-  padding-left: 35px;
   padding-left: 3.5rem;
-  padding-right: 35px;
   padding-right: 3.5rem;
-  padding-bottom: 8px;
   padding-bottom: 0.8rem;
   text-align: left;
   width: 100%;
@@ -82,14 +77,14 @@
 
 .subscribe-popup__close span {
   display: inline-block;
-  padding-right: 14px;
+  padding-right: 1.4rem;
 }
 
 
 /* Images */
 
 .subscribe-popup .copy .figure {
-  padding-bottom: 15px;
+  padding-bottom: 1.5rem;
 }
 
 .subscribe-popup .copy .figure__display--default {
@@ -110,7 +105,7 @@
 }
   .subscribe-popup .figure__display--left-aligned img,
   .subscribe-popup .figure__display--right-aligned img {
-    max-height: 120px;
+    max-height: 12.0rem;
     width: auto;
   }
 
