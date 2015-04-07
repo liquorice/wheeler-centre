@@ -114,7 +114,7 @@ public.css
 admin.js
 ```
 
-We’re using [Duo](http://duojs.org/) to build the assets, which means you can use CommonJS syntax to `require` dependencies throughout your JavaScript, and `@import` directives to require dependencies throughout your CSS. In the structure above, we could `require` or `@import` the `navigation` component into the `public/index.css/js` files thusly:
+We’re using [Webpack](http://webpack.github.io/) to build the assets, which means you can use CommonJS syntax to `require` dependencies throughout your JavaScript, and `@import` directives to require dependencies throughout your CSS. In the structure above, we could `require` or `@import` the `navigation` component into the `public/index.css/js` files thusly:
 
 ```
 // JS
