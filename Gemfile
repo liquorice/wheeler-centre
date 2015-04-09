@@ -26,7 +26,7 @@ gem "sunspot-queue", github: "timriley/sunspot-queue"
 gem "que"
 
 # Web server
-gem "unicorn"
+gem "passenger"
 
 # Rack middleware
 gem "rack-canonical-host"
@@ -68,14 +68,14 @@ gem "ffaker"
 
 # Temporary for the Blueprint import
 # gem "syck", "1.0.1"
-gem "rdiscount"
-gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
-gem "trollop"
-gem "aws-sdk"
-gem "net-scp"
-gem "thin"
-gem "nokogiri"
-gem "progress_bar"
+# gem "rdiscount"
+# gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
+# gem "trollop"
+# gem "aws-sdk"
+# gem "net-scp"
+# gem "thin"
+# gem "nokogiri"
+# gem "progress_bar"
 
 # Sitemap
 gem "sitemap_generator"
