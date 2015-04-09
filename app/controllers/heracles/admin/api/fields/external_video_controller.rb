@@ -1,5 +1,3 @@
-require "#{Rails.root}/lib/video_migration/oauth_util"
-
 module Heracles
   module Admin
     module Api
