@@ -1,9 +1,9 @@
-require "heracles/content_field/filter"
+require "heracles/content_field_rendering/filter"
 
 module Heracles
   module Sites
     module WheelerCentre
-      class SectionFilter < Heracles::ContentField::Filter
+      class SectionFilter < Heracles::ContentFieldRendering::Filter
         def call
           html_doc.css('.figure__display--full-width').wrap("<section class='section--full'></section>")
           html_doc.css('.saved-search > .full-width-block').each do |node|
