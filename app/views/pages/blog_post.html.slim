@@ -1,4 +1,4 @@
-- primary_topic = select_primary_topics_for_page(page).first
+- first_topic = page.fields[:topics].pages.first if page.fields[:topics].data_present?
 
 / Custom meta data
 - if page.fields[:hero_image].data_present?
@@ -42,7 +42,7 @@
 
 = area :main do
   .blog-post.clearfix
-    - cache ["blog-header-2", page, page.fields[:authors].pages, primary_topic]
+    - cache ["blog-header-2", page, page.fields[:authors].pages, first_topic]
       .blog-post__header.column-wrapper
         .column-wide
           p.blog-post__byline
@@ -53,9 +53,9 @@
                 ' By
               = page.fields[:authors].pages.map(&:title).to_sentence
               span.blog-post__byline-separator ·
-            - if primary_topic.present?
+            - if first_topic.present?
               ' In
-              a href=primary_topic.absolute_url = primary_topic.title
+              a href=first_topic.absolute_url = first_topic.title
               span.blog-post__byline-separator ·
             time datetime=l(page.publish_date, format: :rfc_3339)
               = l page.publish_date, format: :day_dmy_with_full_words
