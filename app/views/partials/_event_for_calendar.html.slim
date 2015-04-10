@@ -44,7 +44,7 @@
             = event.series.title
         h4.event-calendar-event__title
           span.title-text itemprop="summary" == markdown_line event.title
-          - if event.fields[:topics].data_present?
+          - if first_topic.present?
             span.title-tags
               '  &nbsp;/&nbsp;
               = first_topic.title
