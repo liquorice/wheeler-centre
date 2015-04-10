@@ -62,3 +62,30 @@
   .figure__link-description {
     font-size: 1.7rem;
   }
+
+/* Special pages */
+
+.figure__pages-header,
+.copy .figure__pages-header {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  font-smoothing: subpixel-antialiased;
+  font-weight: normal;
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+  .figure__pages-header:after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 50%;
+    left: 0;
+    bottom: 0;
+    border-top: 3px #ededed solid;
+  }

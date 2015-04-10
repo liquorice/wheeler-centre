@@ -254,14 +254,22 @@
 /* Links
 ---------------------------------------- */
 
-.copy a {
+.copy p a,
+.copy blockquote a,
+.copy li a {
   color: var(--primary-color);
   text-decoration: underline;
 }
 
-.copy a:visited {}
+.copy p a:visited,
+.copy blockquote a:visited,
+.copy li a:visited {}
 
-.copy a:hover,
-.copy a:focus {
+.copy p a:hover,
+.copy p a:focus,
+.copy blockquote a:hover,
+.copy blockquote a:focus,
+.copy li a:hover,
+.copy li a:focus {
   color: #222;
 }

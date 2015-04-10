@@ -24,6 +24,10 @@
     padding-top: .6rem;
     margin-bottom: 1.4rem;
   }
+    .copy .person-snap__title {
+      padding-top: 0;
+    }
+
     .person-snap-block .title-text {
       font-size: 1.7rem;
     }
