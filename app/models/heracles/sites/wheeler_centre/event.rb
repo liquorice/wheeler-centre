@@ -92,6 +92,12 @@ module Heracles
           end
         end
 
+        def presenters
+          if fields[:presenters].data_present?
+            fields[:presenters].pages.visible.published
+          end
+        end
+
         def related_events(options={})
           options[:per_page] = 6 || options[:per_page]
           if series
