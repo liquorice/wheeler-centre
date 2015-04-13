@@ -229,6 +229,45 @@
       color: var(--primary-color);
     }
 
+.blog-post__guest-author {
+  border-bottom: 1px solid #dfdfdf;
+  margin-bottom: 3rem;
+}
+
+.blog-post__guest-author-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -8.6rem;
+  height: 12rem;
+  width: 12rem;
+}
+  .blog-post__guest-author-image img {
+    border-radius: 50%;
+    display: block;
+    transform: scale3d(1, 1, 1);
+    transition-property: transform;
+    transition-duration: 250ms;
+    width: 100%;
+  }
+    a.blog-post__guest-author-image:hover img,
+    a.blog-post__guest-author-image:focus img {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  .blog-post__guest-author-image-inner {
+    height: 100%;
+    width: 100%;
+  }
+
+.blog-post__guest-author-intro {
+  color: #888;
+  font-size: 1.6rem;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  text-align: center;
+}
 
 
 /*Index*/
@@ -358,7 +397,7 @@
     }
 
 
-/* Authors */
+/* Blog index: Authors */
 
 .author-image {
   margin-left: auto;
@@ -413,7 +452,6 @@
   font-size: 1.6rem;
   text-align: center;
 }
-
 
 /* Blog post list */
 

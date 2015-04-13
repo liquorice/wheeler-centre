@@ -57,6 +57,16 @@ module Heracles
           fields[:guest_post].value
         end
 
+        def authors
+          if fields[:authors].data_present?
+            fields[:authors].pages.visible.published
+          end
+        end
+
+        def authors_posts
+          search_posts_by_author({per_page: 4}).results
+        end
+
         def related_posts(options={})
           options[:per_page] = 6 || options[:per_page]
           posts = search_posts_by_topic({per_page: options[:per_page]}).results
