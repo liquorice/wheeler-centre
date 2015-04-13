@@ -116,13 +116,13 @@
                       a href=topic.absolute_url = topic.title
 
         / Show all the presenters
-        - cache ["event-presenters-1", page.fields[:presenters].pages] do
-          - if page.fields[:presenters].data_present?
+        - cache ["event-presenters-2", page.presenters] do
+          - if page.presenters.present?
             / Split the presenters into two groups if there are more than 5
-            - if page.fields[:presenters].pages.length > 6
+            - if page.presenters.length > 6
               .event__presenters.event__presenters--long
                 h2.event__presenters-header Who?
-                - page.fields[:presenters].pages.in_groups(2, false).each do |group|
+                - page.presenters.in_groups(2, false).each do |group|
                   - if group.present?
                     .event__presenters-group
                       - group.each do |presenter|
@@ -130,7 +130,7 @@
             - else
               .event__presenters
                 h2.event__presenters-header Who?
-                - page.fields[:presenters].pages.each do |presenter|
+                - page.presenters.each do |presenter|
                   = render "partials/presenter_horizontal", presenter: presenter
         - cache ["event-ticketing-1", page, settings_page.fields[:events_cancelled_message], bookings_open(page)] do
           - if page.upcoming?
