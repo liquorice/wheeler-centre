@@ -2,7 +2,7 @@
 / We only show the guest author block if there’s a singular author
 - show_guest_block = page.guest_post? && page.fields[:authors].data_present? && page.fields[:authors].pages.visible.published.length == 1
 - author = page.fields[:authors].pages.visible.published.first
-- author_image = author.fields[:portrait].asset if author.fields[:portrait].data_present?
+- author_image = author.fields[:portrait].asset if author.present? && author.fields[:portrait].data_present?
 
 / Custom meta data
 - if page.fields[:hero_image].data_present?
