@@ -98,7 +98,7 @@
         );
       } else {
         return (
-          <p>No events selected</p>
+          <p className="insertable-display-pages__empty">No events selected</p>
         );
       }
     }
