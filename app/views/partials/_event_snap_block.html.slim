@@ -7,7 +7,7 @@
 - elsif post.promo_image
   - image = post.promo_image
 / State classes
-- if post.fields[:ticketing_stage].data_present?
+- if post.upcoming? && post.fields[:ticketing_stage].data_present?
   - dasherised_stage = post.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
