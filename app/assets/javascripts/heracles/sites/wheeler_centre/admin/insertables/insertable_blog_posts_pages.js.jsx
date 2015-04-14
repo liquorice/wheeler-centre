@@ -98,7 +98,7 @@
         );
       } else {
         return (
-          <p>No blog posts selected</p>
+          <p className="insertable-display-pages__empty">No blog posts selected</p>
         );
       }
     }

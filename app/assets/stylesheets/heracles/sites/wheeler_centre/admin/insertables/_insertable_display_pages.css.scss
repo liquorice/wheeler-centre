@@ -1,7 +1,7 @@
 .insertable-display-pages__details {
   border: 1px solid $green-mid;
   overflow: hidden;
-  min-height: 30px;
+  min-height: 60px;
 }
 
   .insertable-display-pages__controls {
@@ -48,4 +48,9 @@
   @include pad(all, mid);
   border-left: 1px solid $green-mid;
   flex: 0.5;
+}
+
+.insertable-display-pages__empty {
+  @include pad(horz, normal);
+  @include pad(vert, smaller);
 }

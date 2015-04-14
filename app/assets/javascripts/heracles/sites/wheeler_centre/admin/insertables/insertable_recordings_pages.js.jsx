@@ -98,7 +98,7 @@
         );
       } else {
         return (
-          <p>No recordings selected</p>
+          <p className="insertable-display-pages__empty">No recordings selected</p>
         );
       }
     }
@@ -197,8 +197,8 @@
 
   HeraclesAdmin.availableInsertables.add({
     type:    "recordings_pages",
-    label:   "recordings",
-    icon:    "file-audio-o",
+    label:   "Recordings",
+    icon:    "microphone",
     display: InsertableRecordingsPagesDisplay,
     edit:    InsertableRecordingsPagesEdit
   });
