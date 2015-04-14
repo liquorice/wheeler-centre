@@ -75,6 +75,9 @@
   .breakpoint-widescreen-wide .copy .figure__display--right-aligned {
     margin-right: -25%;
   }
+  .breakpoint-widescreen-wide .copy .figure__display--right-aligned-narrow {
+    margin-right: 0;
+  }
 
 
 /* Block Elements

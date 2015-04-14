@@ -23,9 +23,10 @@
 
   .copy .pull-quote.figure__display--left-aligned,
   .copy .pull-quote.figure__display--right-aligned {
-    text-align: center;
-    position: relative;
     margin-bottom: 3.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+    text-align: center;
   }
 
     .pull-quote.figure__display--left-aligned:before,

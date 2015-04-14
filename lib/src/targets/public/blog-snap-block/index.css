@@ -25,6 +25,7 @@
       padding-top: 0;
     }
 
+    .blog-snap__title .title-text,
     .blog-snap__title .title-tags {
       font-size: 1.7rem;
     }
@@ -62,6 +63,7 @@
   .blog-snap__hero-type {
     background-color: #fff;
     font-family: var(--font-sans);
+    font-size: 1.3rem;
     position: absolute;
     top: 0;
     right: 0;
