@@ -15,7 +15,7 @@
   var PagesSelector = HeraclesAdmin.components.PagesSelector;
 
   // Override the standard insertable display mixin
-  var InsertableBlogPostsPagesDisplayMixin = _.extend({}, InsertableDisplayMixin, {
+  var InsertableRecordingsPagesDisplayMixin = _.extend({}, InsertableDisplayMixin, {
 
     getInitialState: function() {
       var value = _.extend({}, {pages: [], page_ids: []}, this.props.value);
@@ -39,9 +39,9 @@
    *
    */
 
-  var InsertableBlogPostsPagesDisplay = React.createClass({
+  var InsertableRecordingsPagesDisplay = React.createClass({
 
-    mixins: [InsertableBlogPostsPagesDisplayMixin],
+    mixins: [InsertableRecordingsPagesDisplayMixin],
 
     render: function() {
       return (
@@ -50,7 +50,7 @@
             <div className="insertable-display-pages__controls">
               <div className="button-group">
                 <button className="button insertable-display__edit button button--soft" onClick={this.editValue}>
-                  Edit blog posts
+                  Edit recordings
                 </button>
                 <button className="button insertable-display__remove button button--soft" onClick={this.remove}>
                   <i className="fa fa-times"/>
@@ -78,7 +78,7 @@
           <div className="insertable-display-pages__content">
             <div className="insertable-display-pages__pages">
               <dl className="field-details-list">
-                <dt>Selected blog posts</dt>
+                <dt>Selected recordings</dt>
                 <dd>
                   <ul className="insertable-display-pages__list">
                     {pages}
@@ -98,7 +98,7 @@
         );
       } else {
         return (
-          <p>No blog posts selected</p>
+          <p>No recordings selected</p>
         );
       }
     }
@@ -107,7 +107,7 @@
 
 
   // Override the standard insertable edit mixin
-  var InsertableBlogPostsPagesEditMixin = _.extend({}, InsertableEditMixin, {
+  var InsertableRecordingsPagesEditMixin = _.extend({}, InsertableEditMixin, {
     getInitialState: function() {
       var value = _.extend({}, {pages: [], page_ids: []}, this.props.value);
       return {
@@ -126,21 +126,21 @@
    *    display_position: "left/right/full-width"
    */
 
-  var InsertableBlogPostsPagesEdit = React.createClass({
+  var InsertableRecordingsPagesEdit = React.createClass({
 
-    mixins: [InsertableBlogPostsPagesEditMixin],
+    mixins: [InsertableRecordingsPagesEditMixin],
 
     render: function() {
       return (
         <div className="insertable-edit fields--reversed">
           <form onSubmit={this.onSubmit}>
-            <h2 className="insertable-edit__title">Edit insertable blog posts</h2>
+            <h2 className="insertable-edit__title">Edit insertable recordings</h2>
             <div className="field">
               <div className="field-header">
-                <label className="field-label" htmlFor="edit__caption">Blog posts</label>
+                <label className="field-label" htmlFor="edit__caption">Recordings</label>
               </div>
               <div className="field-main">
-                <PagesSelector pageTypeLabel="blog post" pageType="blog_post" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
+                <PagesSelector pageTypeLabel="recording" pageType="recording" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
               </div>
             </div>
             <div className="field">
@@ -168,7 +168,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" className="button button--highlight">Save changes to blog posts insertable</button>
+            <button type="submit" className="button button--highlight">Save changes to recordings insertable</button>
           </form>
         </div>
       );
@@ -196,11 +196,11 @@
    */
 
   HeraclesAdmin.availableInsertables.add({
-    type:    "blog_posts_pages",
-    label:   "Blog posts",
-    icon:    "file-text",
-    display: InsertableBlogPostsPagesDisplay,
-    edit:    InsertableBlogPostsPagesEdit
+    type:    "recordings_pages",
+    label:   "recordings",
+    icon:    "file-audio-o",
+    display: InsertableRecordingsPagesDisplay,
+    edit:    InsertableRecordingsPagesEdit
   });
 
 }).call(this);

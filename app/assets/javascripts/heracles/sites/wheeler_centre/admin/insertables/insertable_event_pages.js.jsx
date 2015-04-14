@@ -45,9 +45,9 @@
 
     render: function() {
       return (
-        <div className="insertable-display insertable-display-event-pages" contentEditable="false">
-          <div className="insertable-display-event-pages__details">
-            <div className="insertable-display-event-pages__controls">
+        <div className="insertable-display insertable-display-pages" contentEditable="false">
+          <div className="insertable-display-pages__details">
+            <div className="insertable-display-pages__controls">
               <div className="button-group">
                 <button className="button insertable-display__edit button button--soft" onClick={this.editValue}>
                   Edit events
@@ -65,28 +65,28 @@
 
     formatPages: function() {
       if (this.state.value.pages && this.state.value.pages.length > 0) {
-        var events =  _.map(this.state.value.pages, function(page) {
+        var pages =  _.map(this.state.value.pages, function(page) {
           return (
             <li>
-             <p className="insertable-display-event-pages__page-title">{page.title}</p>
-             <p className="insertable-display-event-pages__page-url">/{page.url}</p>
+             <p className="insertable-display-pages__page-title">{page.title}</p>
+             <p className="insertable-display-pages__page-url">/{page.url}</p>
             </li>
           );
         });
         var displayValue = this.state.value.display || "Default";
         return (
-          <div className="insertable-display-event-pages__content">
-            <div className="insertable-display-event-pages__events">
+          <div className="insertable-display-pages__content">
+            <div className="insertable-display-pages__pages">
               <dl className="field-details-list">
                 <dt>Selected events</dt>
                 <dd>
-                  <ul className="insertable-display-event-pages__list">
-                    {events}
+                  <ul className="insertable-display-pages__list">
+                    {pages}
                   </ul>
                 </dd>
               </dl>
             </div>
-            <div className="insertable-display-event-pages__meta">
+            <div className="insertable-display-pages__meta">
               <dl className="field-details-list">
                 <dt>Display</dt>
                 <dd>{this.state.value.display || "—"}</dd>
