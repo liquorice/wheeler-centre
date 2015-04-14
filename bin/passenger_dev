@@ -1,0 +1,3 @@
+#!/bin/bash
+trap "passenger stop" SIGINT
+passenger start -p $PORT --max-pool-size 3

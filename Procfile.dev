@@ -1,4 +1,4 @@
-web: bundle exec passenger start -p $PORT --max-pool-size 3
+web: bin/passenger_dev
 solr: bundle exec rake sunspot:solr:run
 watch_assets: nodenv exec npm run server
 worker: bundle exec rake que:work
