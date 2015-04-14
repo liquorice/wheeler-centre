@@ -1,10 +1,10 @@
-.insertable-display-event-pages__details {
+.insertable-display-pages__details {
   border: 1px solid $green-mid;
   overflow: hidden;
   min-height: 30px;
 }
 
-  .insertable-display-event-pages__controls {
+  .insertable-display-pages__controls {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -12,7 +12,7 @@
   }
 
 
-.insertable-display-event-pages__list-header {
+.insertable-display-pages__list-header {
   @include font-size(13);
   @include inset(bottom, small);
   font-weight: normal;
@@ -20,28 +20,31 @@
   text-transform: uppercase;
 }
 
-.insertable-display-event-pages__list {
+.insertable-display-pages__list {
   @include font-size(16);
   li {
     @include inset(bottom, tiny);
   }
 }
 
- .insertable-display-event-pages__page-url {
+ .insertable-display-pages__page-url {
   font-family: $font-mono;
  }
 
 
-.insertable-display-event-pages__content {
+.insertable-display-pages__content {
   display: flex;
 }
 
-.insertable-display-event-pages__events {
+.insertable-display-pages__pages {
   @include pad(all, mid);
   background-color: $green-light;
   flex: 1;
+  dt {
+    @include pad(bottom, small);
+  }
 }
-.insertable-display-event-pages__meta {
+.insertable-display-pages__meta {
   @include pad(all, mid);
   border-left: 1px solid $green-mid;
   flex: 0.5;
