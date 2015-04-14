@@ -160,6 +160,7 @@
                   <option/>
                   <option value="Left-aligned">Left column</option>
                   <option value="Right-aligned">Right column</option>
+                  <option value="Right-aligned-narrow">Right column (narrow)</option>
                   <option>Grid narrow</option>
                   <option>Grid mid</option>
                   <option>Grid wide</option>

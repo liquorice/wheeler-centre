@@ -64,6 +64,9 @@
   padding-bottom: 3.5rem;
   padding-top: .4rem;
 }
+  .copy .figure__display--right-aligned-narrow {
+    width: 25%;
+  }
 .breakpoint-phone .copy .figure__display--right-aligned {
   float: none;
   margin-left: 0;

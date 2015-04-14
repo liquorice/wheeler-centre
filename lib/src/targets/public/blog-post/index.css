@@ -91,6 +91,12 @@
     margin-left: -3.5rem;
     margin-right: -3.5rem;
   }
+    .breakpoint-phone .blog-post__intro .section--full,
+    .breakpoint-phone .blog-post__body .section--full {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      overflow-x: hidden;
+    }
 
   .blog-post__intro .section--normal,
   .blog-post__body .section--normal {
@@ -170,6 +176,9 @@
   padding-bottom: 3.5rem;
   padding-top: .4rem;
 }
+  .blog-post .figure__display--right-aligned-narrow {
+    width: 25%;
+  }
 .breakpoint-phone .figure__display--right-aligned {
   float: none;
   margin-left: 0;
@@ -177,6 +186,9 @@
 }
   .breakpoint-widescreen-wide .blog-post .figure__display--right-aligned {
     margin-right: -25%;
+  }
+  .breakpoint-widescreen-wide .blog-post .figure__display--right-aligned-narrow {
+    margin-right: 0;
   }
 
 /* Tags */
