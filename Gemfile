@@ -11,7 +11,7 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "features/page-insertables"
+gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
 
 # Cache Buster
 gem 'varnisher'
