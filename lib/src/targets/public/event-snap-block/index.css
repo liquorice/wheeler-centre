@@ -16,12 +16,18 @@
     font-family: var(--font-sans);
     font-size: 1.3rem;
     padding-top: .6rem;
+    margin-bottom: 0;
   }
   .event-snap__title {
     padding-top: .6rem;
     margin-bottom: 1.4rem;
     font-weight: bold;
+    line-height: 1.2;
   }
+    .copy .event-snap__title {
+      padding-top: 0;
+    }
+
     .breakpoint-phone-wide .event-snap__title,
     .breakpoint-phone .event-snap__title {
       line-height: 1;
@@ -42,7 +48,7 @@
     margin-top: -1rem;
   }
   .event-snap__hero {
-    padding-bottom: .4rem;
+    padding-bottom: 0.6rem;
     position: relative;
   }
     .event-snap__hero--force-square {

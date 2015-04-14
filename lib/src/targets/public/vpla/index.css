@@ -37,6 +37,9 @@
   margin-top: 1.6rem;
   width: 100%;
 }
+    .copy .vpla-book-snap__title {
+      padding-top: 0;
+    }
 
 
 .vpla-year__header {

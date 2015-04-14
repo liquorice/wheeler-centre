@@ -21,9 +21,14 @@
   .person-snap__title {
     font-family: var(--font-sans);
     font-weight: bold;
-    padding-top: .6rem;
+    line-height: 1.2;
     margin-bottom: 1.4rem;
+    padding-top: .6rem;
   }
+    .copy .person-snap__title {
+      padding-top: 0;
+    }
+
     .person-snap-block .title-text {
       font-size: 1.7rem;
     }
@@ -42,7 +47,7 @@
   }
 
   .person-snap__hero {
-    padding-bottom: .4rem;
+    padding-bottom: 0.6rem;
     position: relative;
   }
 

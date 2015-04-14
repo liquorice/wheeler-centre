@@ -386,7 +386,7 @@
     width: 50%;
     left: 0;
     top: 0;
-    border-top: .3rem #ededed solid;
+    border-top: 3px #ededed solid;
   }
 
   .event__presenters.event__presenters--long:before {
