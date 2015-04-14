@@ -134,6 +134,7 @@
       return (
         <div className="insertable-edit fields--reversed">
           <form onSubmit={this.onSubmit}>
+            <h2 className="insertable-edit__title">Edit insertable events</h2>
             <div className="field">
               <div className="field-header">
                 <label className="field-label" htmlFor="edit__caption">Events</label>
@@ -166,7 +167,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" className="button button--highlight">Save changes to event</button>
+            <button type="submit" className="button button--highlight">Save changes to events insertable</button>
           </form>
         </div>
       );
