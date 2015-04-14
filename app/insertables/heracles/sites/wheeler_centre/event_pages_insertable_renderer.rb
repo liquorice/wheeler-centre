@@ -19,6 +19,8 @@ module Heracles
             "figure__display--full-width"
           when "Grid wide"
             "figure__display--full-width"
+          when "Right-aligned-narrow"
+            "figure__display--right-aligned figure__display--right-aligned-narrow"
           else
             "figure__display--#{(data[:display].presence || "default").downcase}"
           end
