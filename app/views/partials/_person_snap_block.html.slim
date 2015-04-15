@@ -1,11 +1,10 @@
 - show_summary = show_summary || false
-- hide_summary = hide_summary || false
 - aspect = aspect || :square
 - if post.fields[:portrait].data_present?
   - image = post.fields[:portrait].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["person-snap-block-2", post, show_type, hide_summary, image, first_topic, aspect] do
+- cache ["person-snap-block-2", post, show_type, show_summary, image, first_topic, aspect] do
   .snap-block
     a.person-snap.person-snap-block class="person-snap--#{aspect}" href=post.absolute_url
       span.person-snap__date

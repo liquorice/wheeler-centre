@@ -248,6 +248,7 @@ a, button {
 @import "./broadcasts-archive/index.css";
 @import "./blog-archive/index.css";
 @import "./events-series-index/index.css";
+@import "./event-series-snap-block/index.css";
 @import "./event-series/index.css";
 @import "./venues-index/index.css";
 @import "./venue/index.css";

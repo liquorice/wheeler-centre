@@ -1,0 +1,25 @@
+- show_summary = show_summary || false
+- show_type = show_type || false
+- hide_image = hide_image || false
+- aspect = aspect || :square
+
+- if post.page_type == "blog_post"
+  = render "partials/blog_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "event"
+  = render "partials/event_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "recording"
+  = render "partials/recording_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "person"
+  = render "partials/person_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "podcast_episode"
+  = render "partials/podcast_episode_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "podcast_series"
+  = render "partials/podcast_series_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "event_series"
+  = render "partials/event_series_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- else
+  / TODO Need types for: person, podcast_episode
+  .snap-block
+    = post.title
+    '  —
+    = post.page_type
