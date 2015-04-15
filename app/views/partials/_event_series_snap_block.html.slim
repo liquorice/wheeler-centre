@@ -1,0 +1,31 @@
+- show_summary = show_summary || false
+- aspect = aspect || :square
+- if post.fields[:hero_image].data_present?
+  - image = post.fields[:hero_image].asset
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
+
+- cache ["event-series-snap-block-1", post, show_type, show_summary, image, first_topic, aspect] do
+  .snap-block
+    a.event-series-snap class="event-series-snap--#{aspect}" href=post.absolute_url
+      span.event-series-snap__date
+        ' &nbsp;
+      - if image
+        .event-series-snap__hero
+          .event-series-snap__hero-inner
+            - if show_type
+              span.event-series-snap__hero-type Event series
+            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+            img src=image_url alt=(image.description.present? ? image.description : "Cover image for #{post.title}")
+            - if image.attribution.present?
+              .event-series-snap__hero-caption.caption
+                p = image.attribution
+      h3.event-series-snap__title
+        span.title-text == widont_format markdown_line post.title
+        - if first_topic.present?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = first_topic.title
+      - if show_summary && post.fields[:summary].data_present?
+          .event-series-snap-block__summary.snap-block__summary.copy
+            .event-series-snap-block__summary-inner.snap-block__summary-inner.copy
+              = force_excerptify_html render_content(post.fields[:summary]), 60, "p i em strong br"

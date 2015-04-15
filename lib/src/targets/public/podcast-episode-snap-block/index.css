@@ -45,14 +45,6 @@
       text-decoration: underline;
     }
 
-  .podcast-episode-snap__authors {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 1.4rem;
-    padding-bottom: 1.2rem;
-    margin-top: -1.0rem;
-  }
-
   .podcast-episode-snap__hero {
     padding-bottom: .4rem;
     position: relative;
