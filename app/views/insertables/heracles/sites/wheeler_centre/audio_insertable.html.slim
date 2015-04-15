@@ -30,10 +30,12 @@
           / source src=ogg_url type="audio/ogg"
     - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
       .figure__caption.caption.copy
-        p
-          - if data[:caption].present?
-            == data[:caption]
-            - if (data[:caption].present? && asset.attribution.present? && data[:show_attribution] == true)
-              '  —
-          - if asset.attribution.present? && data[:show_attribution] == true
-            = asset.attribution
+        - caption = []
+        - if data[:caption].present?
+          - caption << data[:caption]
+          - if (data[:caption].present? && asset.attribution.present? && data[:show_attribution] == true)
+            - caption << " — "
+        - if asset.attribution.present? && data[:show_attribution] == true
+          - caption << asset.attribution
+        == markdown caption.join
+

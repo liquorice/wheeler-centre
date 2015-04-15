@@ -8,7 +8,7 @@
       = data[:embedData][:html].html_safe
     - if data[:caption].present?
       .caption.figure__caption.copy
-        p == data[:caption]
+        == markdown data[:caption]
 - elsif display_type == "link"
   .figure.figure__link class=display_class
     .figure__link-content class=("figure__link-content--with-image" if poster_image_url)
@@ -45,4 +45,4 @@
             = data[:embedData][:html].html_safe
     - if data[:caption].present?
       .caption.figure__caption.copy
-        p == data[:caption]
+        == markdown data[:caption]

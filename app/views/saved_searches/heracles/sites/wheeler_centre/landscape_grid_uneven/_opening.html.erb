@@ -6,7 +6,7 @@
         <h2><%= data[:title] %></h2>
         <%- if data[:caption].present? %>
           <div class="intro copy">
-            <p><%= data[:caption].html_safe %></p>
+            <%= markdown(data[:caption]).html_safe %>
           </div>
         <%- end %>
       </div>
