@@ -20,7 +20,7 @@ module TextFormattingHelper
   end
 
   def markdown(text)
-    md = Redcarpet::Markdown.new(Redcarpet::Render::HTMLSmartyPants)
+    md = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     md.render(text || '').html_safe
   end
 
