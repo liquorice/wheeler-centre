@@ -12,6 +12,9 @@
     font-size: 1.4rem;
     padding-bottom: .8rem;
   }
+  .figure .person-snap__date {
+    display: none;
+  }
 
   .person-snap__series {
     font-family: var(--font-sans);
@@ -50,6 +53,9 @@
     padding-bottom: 0.6rem;
     position: relative;
   }
+    .figure .person-snap__hero {
+      padding-bottom: 0;
+    }
 
   .person-snap__hero-type {
     background-color: #fff;
@@ -109,6 +115,10 @@
   border-radius: 50%;
   margin: 3rem;
   overflow: hidden;
+}
+.figure .person-snap--square .person-snap__hero-inner {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 .person-snap--square .person-snap__title {
