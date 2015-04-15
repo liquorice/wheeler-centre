@@ -1,0 +1,15 @@
+.figure.figure__pages.figure__pages--people class=display_class
+  - if data[:display].blank? || data[:display].match(/^grid|full/i).present?
+    .column-wrapper
+      div class=column_class
+        - unless data[:title].blank?
+          .section-header
+            h2 = markdown_line data[:title]
+        .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: grouper_config}.to_json
+          - people.each do |person|
+            = render "partials/person_snap_block", post: person, show_type: true
+  - else
+    - unless data[:title].blank?
+      h2.figure__pages-header = markdown_line data[:title]
+    - people.each do |person|
+      = render "partials/person_snap_block", post: person, show_type: true
