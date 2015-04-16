@@ -140,7 +140,7 @@
                 <label className="field-label" htmlFor="edit__caption">Podcast episodes</label>
               </div>
               <div className="field-main">
-                <PagesSelector pageTypeLabel="espiode" pageType="podcast_episode" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
+                <PagesSelector pageTypeLabel="episode" pageType="podcast_episode" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
               </div>
             </div>
             <div className="field">
