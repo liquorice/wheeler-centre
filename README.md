@@ -27,9 +27,9 @@ You can pull production data down using the following commands:
 
 ```
 heroku pgbackups:capture --expire
-wget `heroku pgbackups:url` -O dump.sql
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < dump.sql
-rm dump.sql
+curl -o latest_backup `heroku pgbackups:url`
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < latest_backup
+rm latest_backup
 ```
 
 ### Running the Application Locally
