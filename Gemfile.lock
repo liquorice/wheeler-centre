@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 6fd86a7b68003b75601f4760097658808354a15b
+  revision: 563584eb4c0030ff7b5d7b7654b546a68d8a4716
   branch: master
   specs:
     heracles (1.0.0)
@@ -125,7 +125,7 @@ GEM
     api-pagination (4.1.1)
     arel (5.0.1.20140414130214)
     arrayfields (4.9.2)
-    autoprefixer-rails (5.1.10)
+    autoprefixer-rails (5.1.11)
       execjs
       json
     aws-sdk (2.0.39)
