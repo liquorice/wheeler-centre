@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: f0dc49fdbf8fa55ba8a691f83a97bc2ddd38ae36
+  revision: 6fd86a7b68003b75601f4760097658808354a15b
   branch: master
   specs:
     heracles (1.0.0)
@@ -35,7 +35,7 @@ GIT
       ancestry
       api-pagination (~> 4.1.0)
       autoprefixer-rails (~> 5.1.8)
-      aws-sdk (~> 2.0.33)
+      aws-sdk
       bourbon
       coffee-rails
       contracts (~> 0.8)
@@ -125,17 +125,17 @@ GEM
     api-pagination (4.1.1)
     arel (5.0.1.20140414130214)
     arrayfields (4.9.2)
-    autoprefixer-rails (5.1.9)
+    autoprefixer-rails (5.1.10)
       execjs
       json
-    aws-sdk (2.0.38)
-      aws-sdk-resources (= 2.0.38)
-    aws-sdk-core (2.0.38)
+    aws-sdk (2.0.39)
+      aws-sdk-resources (= 2.0.39)
+    aws-sdk-core (2.0.39)
       builder (~> 3.0)
       jmespath (~> 1.0)
       multi_json (~> 1.0)
-    aws-sdk-resources (2.0.38)
-      aws-sdk-core (= 2.0.38)
+    aws-sdk-resources (2.0.39)
+      aws-sdk-core (= 2.0.39)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -175,7 +175,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    domain_name (0.5.23)
+    domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -442,7 +442,7 @@ GEM
     rails-assets-select2 (3.5.2)
       rails-assets-jquery (>= 1.7.1)
     rails-assets-selectivizr (1.0.2)
-    rails-assets-speakingurl (1.1.1)
+    rails-assets-speakingurl (1.1.5)
     rails-assets-viewloader (2.1.0)
       rails-assets-jquery (>= 1.4.3)
     rails-observers (0.1.2)
@@ -572,7 +572,7 @@ GEM
       json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.6)
+    unf_ext (0.0.7.1)
     varnisher (1.1.0)
       main (~> 6.0)
       nokogiri (~> 1.6)
