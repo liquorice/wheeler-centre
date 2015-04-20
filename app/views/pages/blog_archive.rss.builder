@@ -5,7 +5,14 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
   xml.channel do
     xml.title blog_page.title
     xml.link url_with_domain(blog_page.absolute_url)
-    xml.lastBuildDate posts.first.fields[:publish_date].value.rfc2822 if posts.present?
+    if posts.present?
+      first = posts.first
+      if first.fields[:publish_date].data_present?
+        xml.lastBuildDate first.fields[:publish_date].value.rfc2822
+      else
+        xml.lastBuildDate first.created_at.rfc2822
+      end
+    end
     xml.language "en-AU"
     xml.description "Notes from The Wheeler Centre"
     if posts.present?
