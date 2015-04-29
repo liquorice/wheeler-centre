@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+
+<channel>
+  <itunes:new-feed-url>http://www.wheelercentre.com/broadcasts/podcasts/criticism-now.rss</itunes:new-feed-url>
+  <title>Criticism Now</title>
+  <link>http://wheelercentre.com/videos</link>
+  <language>en-us</language>
+  <copyright>&#x2117; &amp; &#xA9; 2015 The Wheeler Centre</copyright>
+  <itunes:subtitle></itunes:subtitle>
+  <itunes:author>The Wheeler Centre</itunes:author>
+  <itunes:summary>Events from the program "Criticism Now", presented by The Wheeler Centre</itunes:summary>
+
+  <description>Events and interviews from the world of books, writing and ideas, presented by The Wheeler Centre</description>
+
+  <itunes:owner>
+
+  <itunes:name>The Wheeler Centre</itunes:name>
+
+  <itunes:email>webmaster@wheelercentre.com</itunes:email>
+
+  </itunes:owner>
+
+  <itunes:image href="http://wheelercentre.com/static/images/podcast_image.png" />
+
+  <itunes:category text="Arts">
+    <itunes:category text="Literature" />
+  </itunes:category>
+  <itunes:category text="Society &amp; Culture" />
+  <itunes:category text="Government &amp; Organisations" />
+
+  
+    
+    
+
+  
+    
+    
+      <item>
+
+        <title>The Morning After - Quartets at Sunset</title>
+
+        <itunes:author>The Wheeler Centre</itunes:author>
+
+        <itunes:summary>Sometimes, the best part of seeing a show is the conversation it sparks. Our series of ‘morning after’ breakfast events invites you to join a selection of writers, critics and arts lovers to dissec...</itunes:summary>
+
+        <enclosure url="http://download.wheelercentre.com/131022_MorningAfter_Quartets.mp3" length="58:21" type="audio/mp3" />
+
+        <guid>http://download.wheelercentre.com/131022_MorningAfter_Quartets.mp3</guid>
+
+        <pubDate>
+          Fri, 16 Aug 2013 12: 000 AEST
+        </pubDate>
+
+                                                                                                                                                                                                                            
+        <itunes:duration>
+          58:21
+        </itunes:duration>
+
+        <itunes:keywords>malcolm knox, writers, melbourne festival, criticism, arts, chloe hooper, the morning after, michael williams</itunes:keywords>
+
+        </item>
+    
+
+  
+    
+    
+      <item>
+
+        <title>The Morning After - The Shadow King</title>
+
+        <itunes:author>The Wheeler Centre</itunes:author>
+
+        <itunes:summary>Sometimes, the best part of seeing a show is the conversation it sparks. Our series of ‘morning after’ breakfast events invites you to join a selection of writers, critics and arts lovers to dissec...</itunes:summary>
+
+        <enclosure url="http://download.wheelercentre.com/131023_MorningAfter_ShadowKing.mp3" length="53:47" type="audio/mp3" />
+
+        <guid>http://download.wheelercentre.com/131023_MorningAfter_ShadowKing.mp3</guid>
+
+        <pubDate>
+          Fri, 16 Aug 2013 12: 000 AEST
+        </pubDate>
+
+                                                                                                                                                                                                                                                  
+        <itunes:duration>
+          53:47
+        </itunes:duration>
+
+        <itunes:keywords>melissa lucashenko, shane maloney, melbourne festival, criticism, arts, writers, the morning after, simon abrahams, alison croggon</itunes:keywords>
+
+        </item>
+    
+
+  
+    
+    
+      <item>
+
+        <title>The Morning After - PUSH</title>
+
+        <itunes:author>The Wheeler Centre</itunes:author>
+
+        <itunes:summary>Sometimes, the best part of seeing a show is the conversation it sparks. Our series of ‘morning after’ breakfast events invites you to join a selection of writers, critics and arts lovers to dissec...</itunes:summary>
+
+        <enclosure url="http://download.wheelercentre.com/131024_MorningAfter_PUSH.mp3" length="56:47" type="audio/mp3" />
+
+        <guid>http://download.wheelercentre.com/131024_MorningAfter_PUSH.mp3</guid>
+
+        <pubDate>
+          Fri, 16 Aug 2013 12: 000 AEST
+        </pubDate>
+
+                                                                                                                                                                                                                                                                        
+        <itunes:duration>
+          56:47
+        </itunes:duration>
+
+        <itunes:keywords>malcolm knox, shane maloney, arts, criticism, melbourne festival, writers, the morning after, simon abrahams, jordan vincent, dance</itunes:keywords>
+
+        </item>
+    
+
+  
+    
+    
+      <item>
+
+        <title>The Morning After - Making Models: The Collaborative Art of Wendy Ewald, The Somali Peace Band and Disarm</title>
+
+        <itunes:author>The Wheeler Centre</itunes:author>
+
+        <itunes:summary>Sometimes, the best part of seeing a show is the conversation it sparks. Our series of ‘morning after’ breakfast events invites you to join a selection of writers, critics and arts lovers to dissec...</itunes:summary>
+
+        <enclosure url="http://download.wheelercentre.com/131025_MorningAfter_Exhibitions.mp3" length="55:30" type="audio/mp3" />
+
+        <guid>http://download.wheelercentre.com/131025_MorningAfter_Exhibitions.mp3</guid>
+
+        <pubDate>
+          Thu, 29 Aug 2013 12: 000 AEST
+        </pubDate>
+
+                                                                                                                                                                                                                                                                        
+        <itunes:duration>
+          55:30
+        </itunes:duration>
+
+        <itunes:keywords>chloe hooper, amanda lohrey, writers, arts, criticism, melbourne festival, the morning after, highlights, simon abrahams, dylan rainforth</itunes:keywords>
+
+        </item>
+    
+
+  
+    
+    
+      <item>
+
+        <title>The Morning After - Minsk, 2011: A Reply to Kathy Acker</title>
+
+        <itunes:author>The Wheeler Centre</itunes:author>
+
+        <itunes:summary>Sometimes, the best part of seeing a show is the conversation it sparks. Our series of ‘morning after’ breakfast events invites you to join a selection of writers, critics and arts lovers to dissec...</itunes:summary>
+
+        <enclosure url="http://download.wheelercentre.com/131026_MorningAfter_Minsk2011.mp3" length="52:54" type="audio/mp3" />
+
+        <guid>http://download.wheelercentre.com/131026_MorningAfter_Minsk2011.mp3</guid>
+
+        <pubDate>
+          Wed, 14 Aug 2013 12: 000 AEST
+        </pubDate>
+
+                                                                                                                                                                                                                                                                        
+        <itunes:duration>
+          52:54
+        </itunes:duration>
+
+        <itunes:keywords>arts, writers, criticism, melbourne festival, amanda lohrey, melissa lucashenko, highlights, the morning after, michael williams, cameron woodhead</itunes:keywords>
+
+        </item>
+    
+
+  
+
+
+</channel>
+
+</rss>
