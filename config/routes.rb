@@ -11,6 +11,9 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :sites do
+        resource :bulk_publication
+      end
     end
   end
 
