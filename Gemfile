@@ -11,7 +11,8 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
+#gem "heracles", git: "git@bitbucket.org:icelab/heracles.git", branch: "master"
+gem "heracles", path: "/Users/query-string/src/heracles-icelab", branch: "features/append_to"
 
 # Cache Buster
 gem 'varnisher'

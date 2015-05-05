@@ -24,10 +24,8 @@ GIT
     sunspot-queue (0.10.2)
       sunspot_rails (>= 1.3.0)
 
-GIT
-  remote: git@bitbucket.org:icelab/heracles.git
-  revision: 563584eb4c0030ff7b5d7b7654b546a68d8a4716
-  branch: master
+PATH
+  remote: /Users/query-string/src/heracles-icelab
   specs:
     heracles (1.0.0)
       activejob
