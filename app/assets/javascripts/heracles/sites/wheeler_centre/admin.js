@@ -4,6 +4,7 @@
 
 //= require_tree ./admin/insertables
 //= require heracles/sites/wheeler_centre/fields/field_external_video
+//= require ./admin/components/bulk_publication_controller
 
 window.HeraclesAdmin.options = {
   embedlyParams: {
