@@ -1,0 +1,52 @@
+// Variables --------------------------
+@import "heracles/admin/components/globals";
+
+
+.bulk-publication-search {
+  background-color: $green-light;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+  padding-right: 5rem;
+  position: relative;
+}
+.bulk-publication-search-label {
+  color: $green-mid-dark;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  right: 0rem;
+  padding: 0rem 1rem;
+  cursor: text;
+  .fa {
+    position: relative;
+    top: 35%;
+  }
+}
+.bulk-publication-search-input {
+  @include font-size(17);
+  background-color: $green-light;
+  border: 0;
+  color: $green-mid-dark;
+  font-family: $font-main;
+  padding: 0.5rem 0rem 0.4rem 1.5rem;
+  &::-webkit-search-cancel-button {
+    color: $green-mid-dark;
+  }
+  &::placeholder {
+    color: $green-mid-dark;
+  }
+}
+.bulk-publication-scope {
+  max-width: 600px;
+  margin: 10px auto 0 auto;
+  text-align: center;
+}
+.bulk-publication-scope-label {
+  display: inline-block;
+  margin-left: 15px;
+  cursor: pointer;
+  input {
+    margin-right: 5px;
+  }
+}
