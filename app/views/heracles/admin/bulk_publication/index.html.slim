@@ -18,13 +18,18 @@
 
       - if params[:q]
         - if @search.results.blank?
-          | 123
+          | Nothing found
         - else
           - for result in @search.results do
-            p style="float:right;"= humanize_page_type result.page_type
+            div style="float:right; text-align:right;"
+              p= humanize_page_type result.page_type
+              p= result.created_at.strftime("%d %B %Y")
             p= result.title
-            p= result.created_at.strftime("%d %B %Y")
+            p= result.tags.join(", ")
             hr
 
-        .bulk-publication-button
-          button.button.button--highlight Publish selected
+          .bulk-publication-paginator
+            = paginate @search.results, outer_window: 3
+
+          .bulk-publication-button
+            button.button.button--highlight Publish selected
