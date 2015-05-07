@@ -1,22 +1,23 @@
 .admin-page.bulk-publication data-view-bulk-publication-controller=""
   h1.admin-page__title Bulk publication
 
-  form
-    .bulk-publication-search
-      input#bulk-publication-search.field-text-input.bulk-publication-search-input name="q" value="#{params[:q]}" placeholder="Search for publications by tag ..." type="search"
-      label.bulk-publication-search-label for="bulk-publication-search"
-        i.fa.fa-search
+  form.bulk-publication-search
+    input#bulk-publication-search.field-text-input.bulk-publication-search-input name="q" value="#{params[:q]}" placeholder="Search for publications by tag ..." type="search"
+    label.bulk-publication-search-label for="bulk-publication-search"
+      i.fa.fa-search
 
-    - if params[:q]
-      .bulk-publication-results
-        - if @search.results.blank?
-          | No records found
-        - else
+  - if params[:q]
+    .bulk-publication-results
+      - if @search.results.blank?
+        | No records found
+      - else
+
+        form method="post"
 
           .bulk-publication-facets
             .bulk-publication-button.bulk-publication-button--top
-              button.button.button--highlight Publish
-              button.button.button--highlight Unpublish
+              button.button.button--highlight type="submit" name="publish" Publish
+              button.button.button--highlight type="submit" name="unpublish" Unpublish
             .bulk-publication-stats
               h2.bulk-publication-title You have found  #{pluralize(@search.total, "record")}
               = @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
@@ -40,6 +41,6 @@
 
           .bulk-publication-paginator
             .bulk-publication-button
-              button.button.button--highlight Publish
-              button.button.button--highlight Unpublish
+              button.button.button--highlight type="submit" name="publish" Publish
+              button.button.button--highlight type="submit" name="unpublish" Unpublish
             = paginate @search.results, outer_window: 3
