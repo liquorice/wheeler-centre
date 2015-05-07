@@ -7,14 +7,6 @@
         input#bulk-publication-search.field-text-input.bulk-publication-search-input name="q" value="#{params[:q]}" placeholder="Search for publications by tag ..." type="search"
         label.bulk-publication-search-label for="bulk-publication-search"
           i.fa.fa-search
-      .bulk-publication-scope
-        | search among
-        label.bulk-publication-scope-label
-          = radio_button_tag :scope, :unpublished, (params[:scope].nil? || params[:scope] == "unpublished" ? true : false)
-          | unpublished
-        label.bulk-publication-scope-label
-          = radio_button_tag :scope, :published, (params[:scope] == "published" ? true : false)
-          | published
 
       - if params[:q]
         - if @search.results.blank?
@@ -32,4 +24,5 @@
             = paginate @search.results, outer_window: 3
 
           .bulk-publication-button
-            button.button.button--highlight Publish selected
+            button.button.button--highlight Publish
+            button.button.button--highlight Unpublish
