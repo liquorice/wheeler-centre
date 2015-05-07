@@ -1,5 +1,20 @@
 .admin-page data-view-bulk-publication-controller=""
   h1.admin-page__title Bulk publication
 
-  .form
-  .list
+  .bulk-publication
+    form
+      .bulk-publication-search
+        input#bulk-publication-search.field-text-input.bulk-publication-search-input placeholder="Search for publications by tag ..." type="search"
+        label.bulk-publication-search-label for="bulk-publication-search"
+          i.fa.fa-search
+      .bulk-publication-scope
+        | among
+        label.bulk-publication-scope-label
+          input type="radio" name="scope" value="unpublished" checked="checked"
+          | unpublished
+        label.bulk-publication-scope-label
+          input type="radio" name="scope" value="published"
+          | published
+
+      .bulk-publication-button
+        button.button.button--highlight Publish selected
