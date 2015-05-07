@@ -1,6 +1,9 @@
 // Variables --------------------------
 @import "heracles/admin/components/globals";
 
+.bulk-publication {
+  width: 90%;
+}
 
 .bulk-publication-search {
   background-color: $green-light;
@@ -9,6 +12,7 @@
   max-width: 600px;
   padding-right: 5rem;
   position: relative;
+  margin-bottom: 2.5rem;
 }
 .bulk-publication-search-label {
   color: $green-mid-dark;
@@ -51,17 +55,24 @@
   }
 }
 
-.bulk-publication-paginator, .bulk-publication-button {
-  text-align: center;
-  margin-top: 2.5rem;
+.bulk-publication-title {
+  @include font-size(24);
+  @include standard-links;
 }
-.bulk-publication-paginator {
-  nav {
-    display: inline-block;
-  }
+
+.bulk-publication-facets, .bulk-publication-results, .bulk-publication-paginator {
+  float: left;
+  width: 100%;
+  margin-bottom: 2.5rem;
 }
+.bulk-publication-stats {
+  margin-right: 200px;
+  color: #777777;
+}
+
 .bulk-publication-button {
+  float: right;
   button {
-    margin-right: 1rem;
+    margin-left: 1rem;
   }
 }
