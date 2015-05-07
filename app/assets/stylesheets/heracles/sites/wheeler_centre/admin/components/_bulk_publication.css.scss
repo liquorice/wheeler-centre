@@ -1,6 +1,9 @@
 // Variables --------------------------
 @import "heracles/admin/components/globals";
 
+.collection-posts__list-summary--type {
+  flex: 0.5;
+}
 .collection-posts__list-summary--url {
   flex: 2;
 }
