@@ -10,14 +10,21 @@
 
       - if params[:q]
         - if @search.results.blank?
-          | Nothing found
+          | No records found
         - else
+
+          h2 You have found  #{pluralize(@search.total, "record")}:
+
+          = @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
+
+          hr
+
           - for result in @search.results do
             div style="float:right; text-align:right;"
               p= humanize_page_type result.page_type
               p= result.created_at.strftime("%d %B %Y")
             p= result.title
-            p= result.tags.join(", ")
+            p= result.slug
             hr
 
           .bulk-publication-paginator
