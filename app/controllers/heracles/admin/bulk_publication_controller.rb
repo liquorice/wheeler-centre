@@ -11,6 +11,7 @@ module Heracles
           @search = Sunspot.search(Heracles::Site.first.page_classes) do
             with :tags, tags
             with :published, search_scope
+            with :site_id, current_site.id
             order_by :created_at, :desc
             paginate page: params[:page] || 1, per_page: 40
           end
