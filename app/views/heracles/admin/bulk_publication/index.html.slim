@@ -26,15 +26,15 @@
               li.collection-posts__list-header
                 .collection-posts__list-summary.collection-posts__list-summary--title Title
                 .collection-posts__list-summary.collection-posts__list-summary--url URL
-                .collection-posts__list-summary.collection-posts__list-summary--series Type
+                .collection-posts__list-summary.collection-posts__list-summary--type Type
                 .collection-posts__list-summary.collection-posts__list-summary--published Published
                 .collection-posts__list-summary.collection-posts__list-summary--created_at Created at
               - for result in @search.results do
                 li.collection-posts__list-item
-                  a href="#"
+                  = link_to edit_site_collection_page_path(current_site, result.collection, result)
                     .collection-posts__list-summary.collection-posts__list-summary--title= result.title
                     .collection-posts__list-summary.collection-posts__list-summary--url= result.url
-                    .collection-posts__list-summary.collection-posts__list-summary--series= humanize_page_type result.page_type
+                    .collection-posts__list-summary.collection-posts__list-summary--type= humanize_page_type result.page_type
                     .collection-posts__list-summary.collection-posts__list-summary--published #{result.published? ? "✔" : "•"}
                     .collection-posts__list-summary.collection-posts__list-summary--created_at= result.created_at.strftime("%d %B %Y")
 
