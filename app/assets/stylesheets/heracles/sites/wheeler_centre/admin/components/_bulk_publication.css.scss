@@ -1,6 +1,10 @@
 // Variables --------------------------
 @import "heracles/admin/components/globals";
 
+.collection-posts__list-summary--url {
+  flex: 2;
+}
+
 .bulk-publication {
   width: 90%;
 }
@@ -67,7 +71,6 @@
 }
 .bulk-publication-stats {
   margin-right: 200px;
-  color: #777777;
 }
 
 .bulk-publication-button {
@@ -75,4 +78,7 @@
   button {
     margin-left: 1rem;
   }
+}
+.bulk-publication-button--top {
+ margin-top: 2.5rem;
 }
