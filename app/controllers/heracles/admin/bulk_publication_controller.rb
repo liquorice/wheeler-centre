@@ -20,6 +20,10 @@ module Heracles
         end
       end
 
+      def create
+        p params
+      end
+
     end
   end
 end
