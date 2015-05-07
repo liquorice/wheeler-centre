@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         end
       end
       resources :sites do
-        resources :bulk_publication
+        resources :bulk_publication, only: [:index]
       end
     end
   end
