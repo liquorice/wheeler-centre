@@ -1,35 +1,36 @@
-.admin-page data-view-bulk-publication-controller=""
+.admin-page.bulk-publication data-view-bulk-publication-controller=""
   h1.admin-page__title Bulk publication
 
-  .bulk-publication
-    form
-      .bulk-publication-search
-        input#bulk-publication-search.field-text-input.bulk-publication-search-input name="q" value="#{params[:q]}" placeholder="Search for publications by tag ..." type="search"
-        label.bulk-publication-search-label for="bulk-publication-search"
-          i.fa.fa-search
+  form
+    .bulk-publication-search
+      input#bulk-publication-search.field-text-input.bulk-publication-search-input name="q" value="#{params[:q]}" placeholder="Search for publications by tag ..." type="search"
+      label.bulk-publication-search-label for="bulk-publication-search"
+        i.fa.fa-search
 
-      - if params[:q]
+    - if params[:q]
+      .bulk-publication-results
         - if @search.results.blank?
           | No records found
         - else
 
-          h2 You have found  #{pluralize(@search.total, "record")}:
+          .bulk-publication-facets
+            .bulk-publication-button
+              button.button.button--highlight Publish
+              button.button.button--highlight Unpublish
+            .bulk-publication-stats
+              h2.bulk-publication-title You have found  #{pluralize(@search.total, "record")}
+              = @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
 
-          = @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
-
-          hr
-
-          - for result in @search.results do
-            div style="float:right; text-align:right;"
+          .bulk-publication-results
+            - for result in @search.results do
               p= humanize_page_type result.page_type
               p= result.created_at.strftime("%d %B %Y")
-            p= result.title
-            p= result.slug
-            hr
+              p= result.title
+              p= result.slug
+              hr
 
           .bulk-publication-paginator
+            .bulk-publication-button
+              button.button.button--highlight Publish
+              button.button.button--highlight Unpublish
             = paginate @search.results, outer_window: 3
-
-          .bulk-publication-button
-            button.button.button--highlight Publish
-            button.button.button--highlight Unpublish
