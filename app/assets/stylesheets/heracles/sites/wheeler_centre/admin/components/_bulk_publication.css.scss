@@ -48,18 +48,15 @@
     color: $green-mid-dark;
   }
 }
-.bulk-publication-scope {
-  max-width: 600px;
-  margin: 10px auto 0 auto;
-  text-align: center;
-}
-.bulk-publication-scope-label {
-  display: inline-block;
-  margin-left: 15px;
+.bulk-publication-search-button {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  opacity: 0;
   cursor: pointer;
-  input {
-    margin-right: 5px;
-  }
 }
 
 .bulk-publication-title {
