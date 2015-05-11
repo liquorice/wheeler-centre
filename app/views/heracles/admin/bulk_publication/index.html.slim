@@ -7,7 +7,7 @@
       i.fa.fa-search
     button.bulk-publication-search-button type="submit"
 
-  - if params[:q]
+  - if params[:q] && params[:q].present?
     .bulk-publication-results
       - if @search.results.blank?
         | No records found
