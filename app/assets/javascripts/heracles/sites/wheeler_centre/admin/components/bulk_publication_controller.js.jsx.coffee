@@ -10,7 +10,7 @@ formatTagSelection = (tag) ->
   """
 
 HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
-  search = $el.find("#bulk-publication-search")
+  search = $el.find("#bulk-publication-search input")
 
   $(search).select2
     tags: true
@@ -56,3 +56,6 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
           tag.id = tag.name
           tag
         more: (page * response.perPage < response.total)
+
+  $(search).on "change", (e) ->
+    $("#bulk-publication-search").submit()
