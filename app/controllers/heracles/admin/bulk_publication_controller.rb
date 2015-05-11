@@ -4,7 +4,7 @@ module Heracles
       helper SearchesHelper
 
       def index
-        if params[:q]
+        if params[:q] && params[:q].present?
           @search = query params, 40
           @facets = @search.facet(:page_type).rows
         end
