@@ -25,11 +25,15 @@ module Heracles
 
           if action.save
             BulkPublicationJob.enqueue action.id
-            redirect_to :back, flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
+            redirect_to actions_site_bulk_publication_index_path(current_site), flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
           end
         else
           redirect_to :back, flash: {alert: "Query parameter must be defined"}
         end
+      end
+
+      def actions
+        @actions = BulkPublicationAction.order("id DESC")
       end
 
     private

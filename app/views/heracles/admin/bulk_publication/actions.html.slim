@@ -1,0 +1,10 @@
+.admin-page.bulk-publication
+  h1.admin-page__title Bulk publish
+
+  ul
+    - for action in @actions
+      li
+        = action.created_at
+        = action.tags
+        = action.action
+        = action.completed_at
