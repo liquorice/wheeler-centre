@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212120706) do
+ActiveRecord::Schema.define(version: 20150512051819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20150212120706) do
 
   add_index "assets", ["file_types"], name: "index_assets_on_file_types", using: :btree
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
+
+  create_table "bulk_publication_actions", force: true do |t|
+    t.integer  "user_id"
+    t.text     "tags"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "completed_at"
+  end
 
   create_table "heracles_site_administrations", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.uuid     "site_id",    null: false
@@ -126,14 +134,12 @@ ActiveRecord::Schema.define(version: 20150212120706) do
     t.boolean  "locked",         default: false, null: false
     t.integer  "ancestry_depth", default: 0
     t.string   "insertion_key",                  null: false
-    t.string   "page_type",                      null: false
   end
 
   add_index "pages", ["ancestry"], name: "index_pages_on_ancestry", using: :btree
   add_index "pages", ["collection_id"], name: "index_pages_on_collection_id", using: :btree
   add_index "pages", ["hidden"], name: "index_pages_on_hidden", using: :btree
   add_index "pages", ["insertion_key"], name: "index_pages_on_insertion_key", using: :btree
-  add_index "pages", ["page_type"], name: "index_pages_on_page_type", using: :btree
   add_index "pages", ["published"], name: "index_pages_on_published", using: :btree
   add_index "pages", ["site_id"], name: "index_pages_on_site_id", using: :btree
   add_index "pages", ["type"], name: "index_pages_on_type", using: :btree
