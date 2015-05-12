@@ -12,7 +12,8 @@ html
     = display_meta_tags site: I18n.t("metadata.site_name"),
                         separator: "—",
                         reverse: true
-  	= stylesheet_link_tag "public", media: "all"
+    = stylesheet_link_tag "public", media: "screen"
+  	= stylesheet_link_tag "print", media: "print"
     /[if lt IE 9]
       = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true

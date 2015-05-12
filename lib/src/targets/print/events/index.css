@@ -1,0 +1,173 @@
+/* Events */
+
+.event-calendar-event {
+  float: left;
+  padding-right: 1rem;
+  padding-bottom: 2rem;
+  width: 25%;
+}
+.nth-child-4n-plus-1 {
+  clear: both;
+}
+
+.event-calendar__month {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.event-calendar__week,
+.event-calendar__week-inner {
+  clear: none;
+  display: inline;
+}
+
+.event-calendar__month-label {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.event-calendar-event__date {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+}
+
+.event-calendar-event__flag {
+  display: none;
+}
+
+.event-series-summary__image {
+  float: left;
+  margin-right: 2rem;
+  width: 5cm;
+}
+.event-series-summary__block {
+  clear: both;
+}
+
+.event-series-summary__title {
+  font-family: var(--font-sans);
+  font-weight: bold;
+  padding-top: 2rem;
+}
+
+
+/* Show */
+.event__promo-image {
+  float: right;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  width: 7cm;
+}
+
+.event__series-header-inner {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  padding-bottom: 1rem;
+}
+.event__series-header-inner p {
+  display: inline;
+}
+.event__venue-name {
+  display: block;
+}
+
+.event__title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.event__series-summary-header,
+.event__tickets-header,
+.event__venue-header,
+.event__presenters-header {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.event-presenter {
+  position: relative;
+  min-height: 12rem;
+  zoom: 1;
+  padding-left: 12.5rem;
+  padding-top: .4rem;
+  padding-bottom: 3.5rem;
+}
+  .breakpoint-phone .event-presenter {
+    padding-left: 8.5rem;
+    padding-bottom: 2rem;
+  }
+  .event-presenter__image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 10rem;
+    width: 10rem;
+  }
+  .breakpoint-phone .event-presenter__image {
+    width: 6rem;
+    height: 6rem;
+  }
+    .event-presenter__image img,
+    .event-presenter__image-blank {
+      border-radius: 50%;
+      display: block;
+      transform: scale3d(1, 1, 1);
+      transition-property: transform;
+      transition-duration: 250ms;
+      width: 100%;
+  }
+    a.event-presenter__image:hover img,
+    a.event-presenter__image:focus img,
+    a.event-presenter__image:hover .event-presenter__image-blank,
+    a.event-presenter__image:focus .event-presenter__image-blank {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+    .event-presenter__image-inner {
+      height: 100%;
+      width: 100%;
+    }
+    .event-presenter__image-blank {
+      background-color: #dedede;
+      width: 100%;
+      height: 0;
+      padding-top: 100%; /* Make the placeholder image scale */
+    }
+
+  .event-presenter__title {
+    font-family: var(--font-sans);
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+  }
+
+.venue-map__wrapper {
+  margin-bottom: 2rem;
+}
+
+.event__supporters-image {
+  max-width: 5cm;
+  display: block;
+}
+
+
+/* Hide */
+
+.event__related,
+.event__tags,
+p.event__series-call-to-action,
+.event__tickets-booking,
+.venue-map__panel-image,
+.event__venue-more,
+/* Kill the clearfix to remove any concept of a "week" layout */
+.event-calendar__week-inner.clearfix:before,
+.event-calendar__week-inner.clearfix:after {
+  display: none;
+}
