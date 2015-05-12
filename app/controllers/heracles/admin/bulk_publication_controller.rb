@@ -13,6 +13,19 @@ module Heracles
 
       def create
         if query_defined?
+          status = params.has_key?(:publish) ? "publish" : "unpublish"
+
+          action = BulkPublicationAction.new(
+            user_id: current_user.id,
+            site_id: current_site.id,
+            tags: params[:q],
+            action: status
+          )
+
+          if action.save
+            redirect_to :back, flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
+          end
+=begin
           # Get all available records count (otherwise Sunspot returns only 40 per page)
           total_records = Heracles::Site.first.page_classes.map{ |item| item.all.count }.inject(:+)
           # Feed total records size to Sunspot
@@ -21,6 +34,7 @@ module Heracles
           total_search.each{ |record| record.update(published: params.has_key?(:publish) ? true : false) } if total_search.size > 0
           # Redirect
           redirect_to :back, flash: {success: "Status changed for #{pluralize(total_search.size, "record")}"}
+=end
         else
           redirect_to :back, flash: {alert: "Query parameter must be defined"}
         end
