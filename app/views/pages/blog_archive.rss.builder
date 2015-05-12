@@ -17,24 +17,26 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "Crib notes, reflections and ephemera from the world of books, writing and ideas."
     if posts.present?
       posts.each do |post|
-        xml.item do
-          content = render_content post.fields[:intro]
-          content += render_content post.fields[:body]
-          content += render_content post.fields[:meta]
+        cache ["blog-rss-1", post] do
+          xml.item do
+            content = render_content post.fields[:intro]
+            content += render_content post.fields[:body]
+            content += render_content post.fields[:meta]
 
-          xml.title post.title
-          xml.link url_with_domain(post.absolute_url)
-          xml.guid page.id
-          if post.fields[:publish_date].data_present?
-            xml.pubDate post.fields[:publish_date].value.rfc2822
-          else
-            xml.pubDate post.created_at.rfc2822
-          end
-          xml.description do
-            xml.cdata! content
-          end
-          if post.fields[:authors].data_present?
-            xml.author post.fields[:authors].pages.map(&:title).to_sentence
+            xml.title post.title
+            xml.link url_with_domain(post.absolute_url)
+            xml.guid page.id
+            if post.fields[:publish_date].data_present?
+              xml.pubDate post.fields[:publish_date].value.rfc2822
+            else
+              xml.pubDate post.created_at.rfc2822
+            end
+            xml.description do
+              xml.cdata! content
+            end
+            if post.fields[:authors].data_present?
+              xml.author post.fields[:authors].pages.map(&:title).to_sentence
+            end
           end
         end
       end

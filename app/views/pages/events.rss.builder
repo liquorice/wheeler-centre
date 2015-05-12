@@ -17,18 +17,20 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "All our events, with online booking."
     if posts.present?
       posts.each do |post|
-        xml.item do
-          xml.title post.title
-          xml.link url_with_domain(post.absolute_url)
-          xml.guid page.id
-          if post.fields[:start_date].data_present?
-            xml.pubDate post.fields[:start_date].value.rfc2822
-          end
-          xml.description do
-            xml.cdata! render_content post.fields[:body]
-          end
-          if post.presenters.present?
-            xml.author post.presenters.map(&:title).to_sentence
+        cache ["event-rss-1", post] do
+          xml.item do
+            xml.title post.title
+            xml.link url_with_domain(post.absolute_url)
+            xml.guid page.id
+            if post.fields[:start_date].data_present?
+              xml.pubDate post.fields[:start_date].value.rfc2822
+            end
+            xml.description do
+              xml.cdata! render_content post.fields[:body]
+            end
+            if post.presenters.present?
+              xml.author post.presenters.map(&:title).to_sentence
+            end
           end
         end
       end
