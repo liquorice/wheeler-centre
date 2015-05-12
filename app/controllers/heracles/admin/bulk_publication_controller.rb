@@ -23,6 +23,7 @@ module Heracles
           )
 
           if action.save
+            BulkPublicationJob.enqueue action.id
             redirect_to :back, flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
           end
 =begin
