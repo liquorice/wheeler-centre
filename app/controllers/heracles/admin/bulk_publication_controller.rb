@@ -36,7 +36,9 @@ module Heracles
         tags = params[:q].split(",")
 
         Sunspot.search(Heracles::Site.first.page_classes) do
-          with :tags, tags
+          all_of do
+            tags.each{ |tag| with :tags, tag }
+          end
           with :site_id, current_site.id
           order_by :created_at, :desc
           facet :page_type
