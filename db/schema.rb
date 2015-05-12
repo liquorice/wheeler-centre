@@ -54,7 +54,8 @@ ActiveRecord::Schema.define(version: 20150512051819) do
   add_index "assets", ["site_id"], name: "index_assets_on_site_id", using: :btree
 
   create_table "bulk_publication_actions", force: true do |t|
-    t.integer  "user_id"
+    t.uuid     "user_id"
+    t.uuid     "site_id"
     t.text     "tags"
     t.string   "action"
     t.datetime "created_at"

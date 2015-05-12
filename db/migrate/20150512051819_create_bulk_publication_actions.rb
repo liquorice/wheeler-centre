@@ -1,7 +1,8 @@
 class CreateBulkPublicationActions < ActiveRecord::Migration
   def change
     create_table :bulk_publication_actions do |t|
-      t.integer :user_id
+      t.uuid :user_id
+      t.uuid :site_id
       t.text :tags
       t.string :action
 
