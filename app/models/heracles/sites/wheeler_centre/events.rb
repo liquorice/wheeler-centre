@@ -53,7 +53,7 @@ module Heracles
             with :published, true
             with :hidden, false
 
-            order_by :start_date_time, :asc
+            order_by :start_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)
           end
         end
