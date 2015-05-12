@@ -1,5 +1,8 @@
 - events = page.events(page: params[:page], per_page: params[:per_page])
 
+= area :head do
+  link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
+
 = area :masthead_title do
   .page__title.page__title--events Events
 
