@@ -15,6 +15,9 @@
     } \
   })
 
+= area :head do
+  link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
+
 = area :masthead_title do
   ' Events
 
