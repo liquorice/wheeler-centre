@@ -1,10 +1,21 @@
 .admin-page.bulk-publication
   h1.admin-page__title Bulk publish
 
-  ul
-    - for action in @actions
-      li
-        = action.created_at
-        = action.tags
-        = action.action
-        = action.completed_at
+  .bulk-publication-facets
+    h2.bulk-publication-title Changing publication status...
+    | #{pluralize(@inprogress, "job")} in progress, #{pluralize(@completed, "job")} completed
+
+  .bulk-publication-results
+    ul.collection-posts__list
+      li.collection-posts__list-header
+        .collection-posts__list-summary Tags
+        .collection-posts__list-summary Change to
+        .collection-posts__list-summary Created at
+        .collection-posts__list-summary Completed at
+      - for action in @actions
+        li.collection-posts__list-item
+          = link_to "#" do
+            .collection-posts__list-summary= action.tags.split(",").join(", ")
+            .collection-posts__list-summary= action.action
+            .collection-posts__list-summary= action.created_at
+            .collection-posts__list-summary= action.completed_at.nil? ? "•" : action.completed_at
