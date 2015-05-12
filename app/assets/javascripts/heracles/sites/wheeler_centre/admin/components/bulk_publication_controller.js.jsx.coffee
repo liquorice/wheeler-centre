@@ -57,5 +57,6 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
           tag
         more: (page * response.perPage < response.total)
 
-  $(search).on "change", (e) ->
-    $("#bulk-publication-search").submit()
+  $(".select2-input").on 'keyup', (e) ->
+    if e.keyCode == 13
+      $("#bulk-publication-search").submit()
