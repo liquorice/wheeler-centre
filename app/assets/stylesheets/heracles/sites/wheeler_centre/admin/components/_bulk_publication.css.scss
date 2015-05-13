@@ -12,6 +12,24 @@
   width: 90%;
 }
 
+.bulk-publication__actions {
+  @include font-size(13);
+  padding: 1rem 3.5rem 0 3.5rem;
+  background-color: $green-mid;
+}
+.bulk-publication__actions-label {
+  display: block;
+  float: left;
+  font-weight: bold;
+  width: 15rem;
+}
+.bulk-publication__actions-items {
+  margin-left: 15rem;
+  li {
+    padding-bottom: 1rem;
+  }
+}
+
 .bulk-publication-search {
   position: relative;
   margin-left: auto;
