@@ -1,3 +1,10 @@
+- if @inprogress.size > 0
+  .bulk-publication__actions
+    b.bulk-publication__actions-label #{pluralize(@inprogress.size, "in progress action")}
+    ul.bulk-publication__actions-items
+      - for item in @inprogress
+        li data={action: "#{item.id}"} #{item.action} items tagged as #{item.readable_tags} (#{distance_of_time_in_words(Time.now, item.created_at, false)} ago)
+
 .admin-page.bulk-publication data-view-bulk-publication-controller=""
   h1.admin-page__title Bulk publish
 

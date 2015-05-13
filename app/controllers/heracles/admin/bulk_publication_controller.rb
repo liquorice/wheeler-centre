@@ -6,6 +6,8 @@ module Heracles
       helper SearchesHelper
 
       def index
+        @inprogress = BulkPublicationAction.inprogress(current_site.id, current_user.id)
+
         if query_defined?
           @search = sunpot_query params, current_site.id, 40
           @facets = @search.facet(:page_type).rows
@@ -25,7 +27,7 @@ module Heracles
 
           if action.save
             BulkPublicationJob.enqueue action.id
-            redirect_to actions_site_bulk_publication_index_path(current_site), flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
+            redirect_to :back, flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
           end
         else
           redirect_to :back, flash: {alert: "Query parameter must be defined"}
