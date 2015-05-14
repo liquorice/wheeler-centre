@@ -13,21 +13,32 @@
 }
 
 .bulk-publication__actions {
-  @include font-size(13);
   padding: 1rem 3.5rem 0 3.5rem;
   background-color: $green-mid;
+  cursor: pointer;
+  &:hover {
+    .bulk-publication__actions-label {
+      text-decoration: none;
+    }
+  }
 }
 .bulk-publication__actions-label {
   display: block;
   float: left;
   font-weight: bold;
-  width: 15rem;
+  width: 16rem;
+  text-decoration: underline;
 }
 .bulk-publication__actions-items {
-  margin-left: 15rem;
+  margin-top: 0.2rem;
+  margin-left: 16rem;
+  @include font-size(13);
   li {
     padding-bottom: 1rem;
   }
+}
+.bulk-publication__actions-regular {
+  display: none;
 }
 
 .bulk-publication-search {
