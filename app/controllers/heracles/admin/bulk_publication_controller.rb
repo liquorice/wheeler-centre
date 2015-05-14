@@ -5,8 +5,9 @@ module Heracles
       include ActionView::Helpers::TextHelper
       helper SearchesHelper
 
+      before_filter :check_processing_queue, only: :index
+
       def index
-        @inprogress = BulkPublicationAction.inprogress(current_site.id, current_user.id)
 
         if query_defined?
           @search = sunpot_query params, current_site.id, 40
@@ -26,8 +27,9 @@ module Heracles
           )
 
           if action.save
+            session[:inprogress_actions] = BulkPublicationAction.inprogress(current_site.id, current_user.id).pluck(:id)
             BulkPublicationJob.enqueue action.id
-            redirect_to :back, flash: {success: "Status of selected records will be changed to #{status}ed very soon..."}
+            redirect_to :back
           end
         else
           redirect_to :back, flash: {alert: "Query parameter must be defined"}
@@ -38,6 +40,20 @@ module Heracles
 
       def query_defined?
         true if params[:q] && params[:q].present?
+      end
+
+      def check_processing_queue
+        @inprogress = BulkPublicationAction.inprogress(current_site.id, current_user.id)
+
+        if session[:inprogress_actions]
+          inprogress_actions           = @inprogress.pluck(:id)
+          processed_actions            = session[:inprogress_actions] - inprogress_actions
+          session[:inprogress_actions] = inprogress_actions
+
+          BulkPublicationAction.where("id IN (?)", processed_actions).each do |item|
+            flash[:success] = "Bulk action ##{item.id} (#{item.action} items tagged as #{item.readable_tags}) has been succesfully processed!"
+          end
+        end
       end
 
     end
