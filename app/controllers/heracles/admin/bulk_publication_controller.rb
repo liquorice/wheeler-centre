@@ -51,7 +51,7 @@ module Heracles
           session[:inprogress_actions] = inprogress_actions
 
           BulkPublicationAction.where("id IN (?)", processed_actions).each do |item|
-            flash[:success] = "Bulk action ##{item.id} (#{item.action} items tagged as #{item.readable_tags}) has been succesfully processed!"
+            flash.now[:success] = "Bulk action ##{item.id} (#{item.action} items tagged as #{item.readable_tags}) has been succesfully processed!"
           end
         end
       end

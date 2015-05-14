@@ -61,5 +61,5 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
     if e.keyCode == 13
       $("#bulk-publication-search").submit()
 
-  $(".bulk-publication__actions-items").click (e) ->
+  $(".bulk-publication__actions").click (e) ->
     $(e.target).parent().find("li.bulk-publication__actions-regular").fadeToggle()
