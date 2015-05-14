@@ -60,3 +60,6 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
   $(".select2-input").on 'keyup', (e) ->
     if e.keyCode == 13
       $("#bulk-publication-search").submit()
+
+  $(".bulk-publication__actions-items").click (e) ->
+    $(e.target).parent().find("li.bulk-publication__actions-regular").fadeToggle()
