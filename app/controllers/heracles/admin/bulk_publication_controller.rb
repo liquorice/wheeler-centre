@@ -34,12 +34,6 @@ module Heracles
         end
       end
 
-      def actions
-        @actions    = BulkPublicationAction.where("site_id = ? AND user_id = ?", current_site.id, current_user.id).order("id DESC")
-        @completed  = @actions.select{ |job| job.completed_at.present? }.size
-        @inprogress = @actions.select{ |job| job.completed_at.nil? }.size
-      end
-
     private
 
       def query_defined?
