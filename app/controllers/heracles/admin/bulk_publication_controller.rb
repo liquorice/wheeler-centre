@@ -5,10 +5,10 @@ module Heracles
       include ActionView::Helpers::TextHelper
       helper SearchesHelper
 
-      before_filter :check_processing_queue, only: :index
+      before_filter :assign_bulk_publication_actions_in_progress, only: :index
+      before_filter :assign_bulk_publication_actions_completed, only: :index
 
       def index
-
         if query_defined?
           @search = sunpot_query params, current_site.id, 40
           @facets = @search.facet(:page_type).rows
@@ -18,7 +18,6 @@ module Heracles
       def create
         if query_defined?
           status = params.has_key?(:publish) ? "publish" : "unpublish"
-
           action = BulkPublicationAction.new(
             user_id: current_user.id,
             site_id: current_site.id,
@@ -27,35 +26,38 @@ module Heracles
           )
 
           if action.save
-            session[:in_progress_actions_ids] = BulkPublicationAction.in_progress(current_site.id, current_user.id).pluck(:id)
+            session[:in_progress_bulk_publication_action_ids] ||= []
+            session[:in_progress_bulk_publication_action_ids] << action.id
             BulkPublicationJob.enqueue action.id
             redirect_to :back
           end
         else
-          redirect_to :back, flash: {alert: "Query parameter must be defined"}
+          redirect_to :back, flash: {alert: "Please select some tags to search"}
         end
       end
 
-    private
+      private
 
-    def query_defined?
-      params[:q].present?
-    end
+      def query_defined?
+        params[:q].present?
+      end
 
-    def check_processing_queue
-      @in_progress = BulkPublicationAction.in_progress(current_site.id, current_user.id)
+      def assign_bulk_publication_actions_in_progress
+        @bulk_publication_actions_in_progress = BulkPublicationAction.in_progress(current_site.id, current_user.id)
+      end
 
-      if session[:in_progress_actions_ids]
-        in_progress_actions               = @in_progress.pluck(:id)
-        processed_actions                 = session[:in_progress_actions_ids] - in_progress_actions
-        session[:in_progress_actions_ids] = in_progress_actions
+      def assign_bulk_publication_actions_completed
+        # Find the IDs for publication actions that _used_ to be in-progress, but are now completed
+        completed_ids = session[:in_progress_bulk_publication_action_ids] - @bulk_publication_actions_in_progress.map(&:id) if session[:in_progress_bulk_publication_action_ids]
 
-        BulkPublicationAction.where("id IN (?)", processed_actions).each do |item|
-          flash.now[:success] = "Bulk action ##{item.id} (#{item.action} items tagged as #{item.readable_tags}) has been succesfully processed!"
+        if completed_ids
+          # Assign the completed bulk publication actions to the view, so we can display a "done" notice
+          @bulk_publication_actions_completed = BulkPublicationAction.find(completed_ids)
+
+          # Then remove them from the session
+          session[:in_progress_bulk_publication_action_ids] -= completed_ids
         end
       end
-    end
-
     end
   end
 end

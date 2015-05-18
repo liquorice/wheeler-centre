@@ -12,33 +12,17 @@
   width: 90%;
 }
 
-.bulk-publication__actions {
-  padding: 1rem 3.5rem 0 3.5rem;
-  background-color: $green-mid;
-  cursor: pointer;
-  &:hover {
-    .bulk-publication__actions-label {
-      text-decoration: none;
-    }
+.bulk-publication__progress {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.bulk-publication__progress-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid $grey-light;
+  b {
+    font-weight: bold;
+    margin-right: 0.5rem;
   }
-}
-.bulk-publication__actions-label {
-  display: block;
-  float: left;
-  font-weight: bold;
-  width: 16rem;
-  text-decoration: underline;
-}
-.bulk-publication__actions-items {
-  margin-top: 0.2rem;
-  margin-left: 16rem;
-  @include font-size(13);
-  li {
-    padding-bottom: 1rem;
-  }
-}
-.bulk-publication__actions-regular {
-  display: none;
 }
 
 .bulk-publication-search {
