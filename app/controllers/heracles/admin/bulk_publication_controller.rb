@@ -27,7 +27,7 @@ module Heracles
           )
 
           if action.save
-            session[:in_progress_actions] = BulkPublicationAction.in_progress(current_site.id, current_user.id).pluck(:id)
+            session[:in_progress_actions_ids] = BulkPublicationAction.in_progress(current_site.id, current_user.id).pluck(:id)
             BulkPublicationJob.enqueue action.id
             redirect_to :back
           end
@@ -39,16 +39,16 @@ module Heracles
     private
 
     def query_defined?
-      true if params[:q] && params[:q].present?
+      params[:q].present?
     end
 
     def check_processing_queue
       @in_progress = BulkPublicationAction.in_progress(current_site.id, current_user.id)
 
-      if session[:in_progress_actions]
-        in_progress_actions           = @in_progress.pluck(:id)
-        processed_actions             = session[:in_progress_actions] - in_progress_actions
-        session[:in_progress_actions] = in_progress_actions
+      if session[:in_progress_actions_ids]
+        in_progress_actions               = @in_progress.pluck(:id)
+        processed_actions                 = session[:in_progress_actions_ids] - in_progress_actions
+        session[:in_progress_actions_ids] = in_progress_actions
 
         BulkPublicationAction.where("id IN (?)", processed_actions).each do |item|
           flash.now[:success] = "Bulk action ##{item.id} (#{item.action} items tagged as #{item.readable_tags}) has been succesfully processed!"
