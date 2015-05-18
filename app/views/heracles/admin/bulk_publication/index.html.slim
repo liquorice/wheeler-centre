@@ -1,11 +1,14 @@
-- if @in_progress.size > 0
-  .bulk-publication__actions
-    b.bulk-publication__actions-label #{pluralize(@in_progress.size, "action")} in progress
-    ul.bulk-publication__actions-items
-      - @in_progress.each do |item|
-        li class="#{item == @in_progress.first ? "bulk-publication__actions-first" : "bulk-publication__actions-regular"}" #{item.action} items tagged as #{item.readable_tags} (started #{distance_of_time_in_words(Time.now, item.created_at, false)} ago)
-
 .admin-page.bulk-publication data-view-bulk-publication-controller=""
+
+  - if @bulk_publication_actions_in_progress
+    .bulk-publication__progress
+      h1.admin-page__title #{pluralize(@bulk_publication_actions_in_progress.size, "action")} in progress
+      ul
+        - @bulk_publication_actions_in_progress.each do |item|
+          li.bulk-publication__progress-item
+            b #{item.action.capitalize}
+            | items tagged as #{item.readable_tags} (started #{distance_of_time_in_words(Time.now, item.created_at, false)} ago)
+
   h1.admin-page__title Bulk publish
 
   form.bulk-publication-search#bulk-publication-search
