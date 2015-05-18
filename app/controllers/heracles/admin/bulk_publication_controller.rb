@@ -8,8 +8,8 @@ module Heracles
 
       def index
         if query_defined?
-          @search         = BulkPublicationSearch.new(params: params, site_id: current_site.id).results
-          @search_results = @search.page(params[:page]).per(40)
+          @search           = BulkPublicationSearch.new(tags: params[:q], site_id: current_site.id).results
+          @paginated_search = @search.page(params[:page]).per(40)
         end
       end
 

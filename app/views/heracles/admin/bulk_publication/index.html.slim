@@ -41,7 +41,7 @@
               .collection-posts__list-summary.collection-posts__list-summary--type Type
               .collection-posts__list-summary.collection-posts__list-summary--published Published
               .collection-posts__list-summary.collection-posts__list-summary--created_at Created at
-            - @search_results.each do |result|
+            - @paginated_search.each do |result|
               li.collection-posts__list-item
                 = link_to edit_site_collection_page_path(current_site, result.collection, result) do
                   .collection-posts__list-summary.collection-posts__list-summary--title= result.title
@@ -54,4 +54,4 @@
           .bulk-publication-button
             button.button.button--highlight type="submit" name="publish" Publish
             button.button.button--highlight type="submit" name="unpublish" Unpublish
-          = paginate @search_results
+          = paginate @paginated_search
