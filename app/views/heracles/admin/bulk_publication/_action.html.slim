@@ -1,4 +1,5 @@
 li class="bulk-publication__actions-item bulk-publication__actions-item--#{action_status}"
   - if action_status == :completed
-    b Action has completed:
-  | #{item.action.capitalize} items tagged as #{item.readable_tags} (started #{distance_of_time_in_words(Time.now, item.created_at, false)} ago)
+    strong Completed
+    ' —
+  ' #{item.action.capitalize} items tagged with #{item.readable_tags} (started #{distance_of_time_in_words(Time.now, item.created_at, false)} ago)

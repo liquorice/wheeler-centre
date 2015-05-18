@@ -1,13 +1,15 @@
 .admin-page.bulk-publication data-view-bulk-publication-controller=""
 
-  - if @bulk_publication_actions_completed || @bulk_publication_actions_in_progress
+  - if @bulk_publication_actions_completed.present? || @bulk_publication_actions_in_progress.present?
     .bulk-publication__actions
-      h1.admin-page__title #{pluralize(@bulk_publication_actions_in_progress.size, "action")} in progress
+      h2.bulk-publication__actions-title #{pluralize(@bulk_publication_actions_in_progress.size, "action")} in progress
       ul
-        - @bulk_publication_actions_completed.each do |item|
-          = render "action", {item: item, action_status: :completed }
-        - @bulk_publication_actions_in_progress.each do |item|
-          = render "action", {item: item, action_status: :in_progress }
+        - if @bulk_publication_actions_completed.present?
+          - @bulk_publication_actions_completed.each do |item|
+            = render "action", {item: item, action_status: :completed }
+        - if @bulk_publication_actions_in_progress.present?
+          - @bulk_publication_actions_in_progress.each do |item|
+            = render "action", {item: item, action_status: :in_progress }
 
   h1.admin-page__title Bulk publish
 
