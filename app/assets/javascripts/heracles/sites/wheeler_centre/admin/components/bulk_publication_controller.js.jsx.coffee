@@ -61,5 +61,8 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
     if e.keyCode == 13
       $("#bulk-publication-search").submit()
 
-  $(".bulk-publication__actions").click (e) ->
-    $(e.target).parent().find("li.bulk-publication__actions-regular").fadeToggle()
+  $(".bulk-publication__actions-item--completed").each ->
+    $el = $(@)
+    setTimeout (->
+      $el.css backgroundColor: "#ffff99"
+    ), 1000

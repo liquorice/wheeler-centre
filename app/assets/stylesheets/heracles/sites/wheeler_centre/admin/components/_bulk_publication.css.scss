@@ -12,15 +12,16 @@
   width: 90%;
 }
 
-.bulk-publication__progress {
+.bulk-publication__actions {
   text-align: center;
   margin-bottom: 2.5rem;
 }
-.bulk-publication__progress-item {
+.bulk-publication__actions-item {
   padding: 1rem 0;
   border-bottom: 1px solid $grey-light;
   b {
     font-weight: bold;
+    color: green;
     margin-right: 0.5rem;
   }
 }
