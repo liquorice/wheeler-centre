@@ -61,8 +61,4 @@ HeraclesAdmin.views.bulkPublicationController = ($el, el) ->
     if e.keyCode == 13
       $("#bulk-publication-search").submit()
 
-  $(".bulk-publication__actions-item--completed").each ->
-    $el = $(@)
-    setTimeout (->
-      $el.css backgroundColor: "#ffff99"
-    ), 1000
+  $(".bulk-publication__actions-item--completed").addClass "bulk-publication__actions-item--highlight"

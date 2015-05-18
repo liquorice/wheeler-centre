@@ -14,14 +14,18 @@
 
 .bulk-publication__actions {
   text-align: center;
-  margin-bottom: 2.5rem;
+  padding-bottom: 4.5rem;
 }
 .bulk-publication__actions-item {
   padding: 1rem 0;
-  border-bottom: 1px solid $grey-light;
-  b {
+  border-top: 1px solid $grey-light;
+  background-color: transparent;
+  transition-property: background-color, border-color;
+  transition-duration: 400ms;
+  transition-delay: 100ms;
+  strong {
     font-weight: bold;
-    color: green;
+    color: darken($green-highlight, 15%);
     margin-right: 0.5rem;
   }
   i {
@@ -30,6 +34,12 @@
     color: $green-mid-dark;
     padding: 0.4rem 0.5rem 0.2rem 0.5rem;
   }
+}
+
+.bulk-publication__actions-item--highlight {
+  background-color: lighten($green-highlight, 35%);
+  border-color: transparent;
+  border-radius: 3px;
 }
 
 .bulk-publication-search {
@@ -115,4 +125,11 @@
 }
 .bulk-publication-button--top {
  margin-top: 2.5rem;
+}
+
+.bulk-publication__actions-title {
+  @include inset(bottom, normal);
+  @include font-size(12);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
