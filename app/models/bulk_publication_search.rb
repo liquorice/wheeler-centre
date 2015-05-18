@@ -2,13 +2,12 @@ class BulkPublicationSearch
   attr_reader :params, :site_id, :tags
 
   def initialize(options = {})
-    @params  = options.fetch(:params)
+    @tags    = options.fetch(:tags).split(",")
     @site_id = options.fetch(:site_id)
-    @tags    = @params[:q].split(",")
   end
 
   def results
-    Heracles::Page.tagged_with(@tags)
+    Heracles::Page.tagged_with(@tags).order("created_at DESC")
   end
 
   private
