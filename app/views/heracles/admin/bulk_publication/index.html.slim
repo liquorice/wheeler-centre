@@ -19,7 +19,7 @@
 
   - if params[:q] && params[:q].present?
 
-    - if @search.results.blank?
+    - if @search.size == 0
       | No records found
     - else
 
@@ -30,8 +30,8 @@
             button.button.button--highlight type="submit" name="publish" Publish
             button.button.button--highlight type="submit" name="unpublish" Unpublish
           .bulk-publication-stats
-            h2.bulk-publication-title You have found  #{pluralize(@search.total, "record")}
-            = @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
+            h2.bulk-publication-title You have found  #{pluralize(@search.size, "record")}
+            -#= @facets.map{ |facet| pluralize(facet.count, facet.value.humanize.downcase) }.join(", ")
 
         .bulk-publication-results
           ul.collection-posts__list
@@ -41,9 +41,9 @@
               .collection-posts__list-summary.collection-posts__list-summary--type Type
               .collection-posts__list-summary.collection-posts__list-summary--published Published
               .collection-posts__list-summary.collection-posts__list-summary--created_at Created at
-            - for result in @search.results do
+            - @search_results.each do |result|
               li.collection-posts__list-item
-                = link_to edit_site_collection_page_path(current_site, result.collection, result)
+                = link_to edit_site_collection_page_path(current_site, result.collection, result) do
                   .collection-posts__list-summary.collection-posts__list-summary--title= result.title
                   .collection-posts__list-summary.collection-posts__list-summary--url= result.url
                   .collection-posts__list-summary.collection-posts__list-summary--type= humanize_page_type result.page_type
@@ -54,4 +54,4 @@
           .bulk-publication-button
             button.button.button--highlight type="submit" name="publish" Publish
             button.button.button--highlight type="submit" name="unpublish" Unpublish
-          = paginate @search.results, outer_window: 3
+          = paginate @search_results

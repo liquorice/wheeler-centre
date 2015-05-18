@@ -1,6 +1,4 @@
 class BulkPublicationJob < Que::Job
-  include BulkPublicationSearch
-
   def run(bulk_publication_id)
     @action = BulkPublicationAction.find(bulk_publication_id)
 

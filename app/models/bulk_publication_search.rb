@@ -1,17 +1,20 @@
-module BulkPublicationSearch
+class BulkPublicationSearch
+  attr_reader :params, :site_id, :tags
 
-  def sunpot_query(params, site_id, per_page)
-    tags = params[:q].split(",")
+  def initialize(options = {})
+    @params  = options.fetch(:params)
+    @site_id = options.fetch(:site_id)
+    @tags    = @params[:q].split(",")
+  end
 
-    Sunspot.search(Heracles::Site.first.page_classes) do
-      all_of do
-        tags.each{ |tag| with :tags, tag }
-      end
-      with :site_id, site_id
-      order_by :created_at, :desc
-      facet :page_type
-      paginate page: params[:page] || 1, per_page: per_page
-    end
+  def results
+    Heracles::Page.tagged_with(@tags)
+  end
+
+  private
+
+  def page_classes
+    Heracles::Site.find(@site_id).page_classes
   end
 
 end
