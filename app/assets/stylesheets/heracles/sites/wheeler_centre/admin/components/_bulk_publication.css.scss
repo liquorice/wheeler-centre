@@ -24,6 +24,12 @@
     color: green;
     margin-right: 0.5rem;
   }
+  i {
+    font-style: normal;
+    background-color: $green-light;
+    color: $green-mid-dark;
+    padding: 0.4rem 0.5rem 0.2rem 0.5rem;
+  }
 }
 
 .bulk-publication-search {

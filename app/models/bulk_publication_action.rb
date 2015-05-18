@@ -4,6 +4,6 @@ class BulkPublicationAction < ActiveRecord::Base
   scope :in_progress, ->(site_id, user_id) { where("site_id = ? AND user_id = ? AND completed_at IS ?", site_id, user_id, nil).order("id DESC") }
 
   def readable_tags
-    tags.split(",").join(", ")
+    tags.split(",").map{|tag| "<i>#{tag}</i>"}.join(", ").html_safe
   end
 end
