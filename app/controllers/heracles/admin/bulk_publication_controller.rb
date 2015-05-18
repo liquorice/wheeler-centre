@@ -1,8 +1,6 @@
 module Heracles
   module Admin
     class BulkPublicationController < Heracles::Admin::ApplicationController
-      include BulkPublicationSearch
-      include ActionView::Helpers::TextHelper
       helper SearchesHelper
 
       before_filter :assign_bulk_publication_actions_in_progress, only: :index
@@ -10,8 +8,8 @@ module Heracles
 
       def index
         if query_defined?
-          @search = sunpot_query params, current_site.id, 40
-          @facets = @search.facet(:page_type).rows
+          @search         = BulkPublicationSearch.new(params: params, site_id: current_site.id).results
+          @search_results = @search.page(params[:page]).per(40)
         end
       end
 
