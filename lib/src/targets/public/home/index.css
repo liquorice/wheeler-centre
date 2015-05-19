@@ -151,7 +151,6 @@
     .home-quote__caption.copy,
     .home-quote__caption.copy a {
       color: #999;
-      text-decoration: none;
     }
       .home-quote__caption.copy a:hover,
       .home-quote__caption.copy a:focus {
