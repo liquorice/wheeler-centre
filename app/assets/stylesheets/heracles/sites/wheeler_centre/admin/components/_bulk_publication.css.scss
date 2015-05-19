@@ -1,0 +1,135 @@
+// Variables --------------------------
+@import "heracles/admin/components/globals";
+
+.collection-posts__list-summary--type {
+  flex: 0.5;
+}
+.collection-posts__list-summary--url {
+  flex: 2;
+}
+
+.bulk-publication {
+  width: 90%;
+}
+
+.bulk-publication__actions {
+  text-align: center;
+  padding-bottom: 4.5rem;
+}
+.bulk-publication__actions-item {
+  padding: 1rem 0;
+  border-top: 1px solid $grey-light;
+  background-color: transparent;
+  transition-property: background-color, border-color;
+  transition-duration: 400ms;
+  transition-delay: 100ms;
+  strong {
+    font-weight: bold;
+    color: darken($green-highlight, 15%);
+    margin-right: 0.5rem;
+  }
+  i {
+    font-style: normal;
+    background-color: $green-light;
+    color: $green-mid-dark;
+    padding: 0.4rem 0.5rem 0.2rem 0.5rem;
+  }
+}
+
+.bulk-publication__actions-item--highlight {
+  background-color: lighten($green-highlight, 35%);
+  border-color: transparent;
+  border-radius: 3px;
+}
+
+.bulk-publication-search {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+  padding-right: 5rem;
+  max-width: 600px;
+  min-height: 60px;
+  background-color: $green-light;
+  .select2-choices {
+    border: none;
+    padding-left: 0;
+    .select2-search-choice {
+      background-color: $green-mid;
+      color: $green-mid-dark;
+      @include font-size(17);
+    }
+    .select2-search-choice-focus {
+      background-color: #FFF;
+    }
+  }
+  .select2-container-multi .select2-choices .select2-search-field input.select2-active {
+    background-color: $green-light !important;
+    background-image: none !important;
+  }
+}
+.bulk-publication-search-label {
+  color: $green-mid-dark;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  right: 0rem;
+  padding: 0rem 1rem;
+  cursor: text;
+  .fa {
+    position: relative;
+    top: 35%;
+  }
+}
+.bulk-publication-search-input {
+  font-family: $font-main;
+  @include font-size(17);
+  background-color: $green-light;
+  color: $green-mid-dark;
+  padding: 0.5rem 0rem 0.4rem 1.5rem;
+  border: 0;
+  &::-webkit-search-cancel-button {
+    color: $green-mid-dark;
+  }
+}
+.bulk-publication-search-button {
+  display: block;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 15px;
+  right: 7px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.bulk-publication-title {
+  @include font-size(24);
+  @include standard-links;
+}
+
+.bulk-publication-facets, .bulk-publication-results, .bulk-publication-paginator {
+  float: left;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+.bulk-publication-stats {
+  margin-right: 200px;
+}
+
+.bulk-publication-button {
+  float: right;
+  button {
+    margin-left: 1rem;
+  }
+}
+.bulk-publication-button--top {
+ margin-top: 2.5rem;
+}
+
+.bulk-publication__actions-title {
+  @include inset(bottom, normal);
+  @include font-size(12);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
