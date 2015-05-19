@@ -12,6 +12,14 @@ module Heracles
             ]
           }
         end
+
+        ### Accessors
+
+        def author
+          if fields[:author].data_present?
+            fields[:author].pages.first
+          end
+        end
       end
     end
   end

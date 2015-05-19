@@ -5,6 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :intro, type: :content},
               {name: :body, type: :content},
             ]
           }
