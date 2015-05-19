@@ -69,6 +69,7 @@ module Heracles
             BlogPost,
             Event,
             Recording,
+            PodcastEpisode,
             Person
           ]
         end
