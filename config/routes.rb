@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Embed assets point
+  get "/embed/:asset_type/:asset_id" => "embed_asset#show", as: :embed_asset
+
   # Handle 404 and 500 errors
   match "/404", :to => "not_found#show", as: "not_found", via: :all
   match "/500", :to => "exceptions#show", as: "exception", via: :all
