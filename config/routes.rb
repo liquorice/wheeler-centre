@@ -11,6 +11,9 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :sites do
+        resources :bulk_publication, only: [:index, :create]
+      end
     end
   end
 

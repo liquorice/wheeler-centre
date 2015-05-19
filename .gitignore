@@ -47,3 +47,6 @@ lib/video_migration/credentials_youtube.json
 lib/video_migration/credentials_youtube.upload.json
 lib/video_migration/encodes
 lib/video_migration/credentials_file.json
+
+# Ignore temporary Passenger files
+passenger.*
