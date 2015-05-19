@@ -1,0 +1,10 @@
+doctype 5
+html
+  head
+    meta charset="utf-8"
+    = render "partials/inline_boot_javascript"
+    = stylesheet_link_tag "embed", media: "screen"
+    = javascript_include_tag "embed", async: true
+
+  body
+    = yield

@@ -1,0 +1,54 @@
+:root {
+  --font-sans: "Colfax", Helvetica, sans-serif;
+  --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
+  --primary-color: #009e8c;
+  --primary-color-lighter: #ccefeb;
+  --primary-color-light: #b4dbd7;
+  --primary-color-darker: color(var(--primary-color) shade(15%));
+  --text-color: #333;
+}
+
+@import "../public/utilities/reset.css";
+@import "../public/utilities/accessibility.css";
+@import "../public/utilities/clearfix.css";
+@import "../public/fonts/colfax.css";
+@import "../public/fonts/freight-text-pro.css";
+@import "../public/fonts/font-awesome.css";
+
+@page {
+  padding: 1.5cm
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: var(--font-serif);
+  max-width: auto;
+}
+body, button, input, textarea {
+  font-size: 1.6rem;
+  line-height: 1.4em
+}
+
+.subscribe-popup,
+.masthead__navigation,
+.masthead-contextual,
+.footer,
+.simple-subscribe,
+.topics-section,
+.blog-post__related,
+.blog-post__tags,
+.event-calendar__legend,
+.title-tags,
+.figure__video {
+  display: none
+}
+
+@import "../public/figure/index.css";
+@import "../public/audio-player/index.css";
