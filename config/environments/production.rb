@@ -72,7 +72,7 @@ Rails.application.configure do
   # Set frontend caching to a day
   config.action_dispatch.default_headers = {
     "Surrogate-Control" => "max-age=86400",
-    "Cache-Control" => "max-age=86400, public",
+    "Cache-Control" => "max-age=300, public",
   }
 
   # Precompile additional assets.
