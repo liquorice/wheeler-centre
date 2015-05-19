@@ -35,6 +35,8 @@
             .event-presenter__intro.copy
               = render_content page.author.fields[:biography]
 
-      section.section--normal.copy
-        h3 Further reading
-        = render_content page.fields[:further_reading]
+      - if page.fields[:further_reading].data_present?
+      .section--normal.vpla-book__author
+        h3.event-presenter__title Further reading
+        .event-presenter__intro.copy
+          = render_content page.fields[:further_reading]

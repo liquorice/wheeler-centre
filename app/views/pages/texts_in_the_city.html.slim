@@ -1,0 +1,42 @@
+= area :masthead_title do
+  = projects_page.title
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+      li.masthead-contextual__navigation-item
+        = page.title
+
+= area :main do
+  .content-page__main.criticism-now
+    .column-wrapper
+      .content-page__header.criticism-now__header
+        h1.content-page__title == widont_format markdown_line page.title
+      .content-page__content.clearfix
+        - if page.fields[:intro].data_present?
+          .content-page__intro
+            = render_content_in_sections page.fields[:intro]
+        - if page.fields[:body].data_present?
+          .content-page__body
+            = render_content_in_sections page.fields["body"]
+
+    .criticism-now__events.column-wrapper
+      .column-wide.gradient-top-down
+        .section-header
+          h2 Featured texts
+        .criticism-now__events-snap.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 2, phone: 1 }}.to_json
+          - if page.books.present?
+            - page.books.each do |book|
+              .snap-block
+                .criticism-now-event-item.clearfix
+                  .criticism-now-event-item__image
+                    - if book.fields[:cover_image].data_present?
+                      a href=book.absolute_url
+                        image src=book.fields[:cover_image].asset.content_thumbnail_url alt="Hero image for #{book.title}"
+                  .criticism-now-event-item__details
+                    h3.criticism-now-event-item__title
+                      a href=book.absolute_url = book.title
+                    h4.texts-in-the-city-book-item__subtitle
+                      = book.fields[:author]
+                    - if book.fields[:body].data_present?
+                      .criticism-now-event-item__summary.copy
+                        = force_excerptify_html render_content(book.fields[:body]), 50, "p i em strong br"
