@@ -1,7 +1,7 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page])
 
 = area :masthead_title do
-  ' Broadcasts
+  | Broadcasts
 
 = area :masthead_contextual_navigation do
   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
