@@ -1,5 +1,6 @@
 class EmbedAssetController < ApplicationController
   layout "embed"
+  after_filter :allow_x_frame_options
 
   def show
     @asset_type = params[:asset_type].to_sym
@@ -17,6 +18,10 @@ class EmbedAssetController < ApplicationController
 
   def available_asset_types
     %i(audio)
+  end
+
+  def allow_x_frame_options
+    response.headers.delete "X-Frame-Options"
   end
 
 end
