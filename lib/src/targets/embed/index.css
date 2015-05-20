@@ -31,23 +31,41 @@ body {
   font-family: var(--font-serif);
   max-width: auto;
 }
-body, button, input, textarea {
+body {
   font-size: 1.6rem;
   line-height: 1.4em
 }
 
-.subscribe-popup,
-.masthead__navigation,
-.masthead-contextual,
-.footer,
-.simple-subscribe,
-.topics-section,
-.blog-post__related,
-.blog-post__tags,
-.event-calendar__legend,
-.title-tags,
-.figure__video {
-  display: none
+.asset-embed__header a {
+  background-color: #666;
+  display: block;
+  height: 6.4rem;
+  padding: 1.2rem 3.4rem 1.4rem;
+  margin-top: -3.5rem;
+  margin-left: -3.5rem;
+  margin-right: -3.5rem;
+  margin-bottom: 2.5rem;
+  transition-property: background-color;
+  transition-duration: 150ms;
+}
+  .asset-embed__header a:hover {
+    background-color: #444
+  }
+
+  .audio-player--playing .asset-embed__header a {
+    background-color: var(--primary-color);
+  }
+
+.asset-embed__header span {
+  background-image: url(../public/masthead/wheeler-centre-logo.svg);
+  background-size: auto 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  color: transparent;
+  display: block;
+  font: 0/0 a;
+  height: 100%;
+  width: 100%;
 }
 
 @import "../public/figure/index.css";

@@ -1,1 +1,2 @@
-= render "partials/audio", audio: @asset, title: "Listen to #{@title}"
+.asset-embed.asset-embed--audio
+  = render "partials/audio", asset: @asset, title: "Listen to #{@title}", embed_header: true

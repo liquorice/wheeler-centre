@@ -1,12 +1,17 @@
+- embed_header = embed_header || false
 - title = title
 - if title.blank?
   - title = audio.asset.title || audio.asset.file_name
 - if title.blank?
   - title = "Listen to this track"
-- asset = audio.asset
-- if audio.data_present?
+- asset = asset || audio.asset
+- if asset
   .figure.figure__audio.figure__display--default
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true data-audio-player-duration=asset.file_meta["duration"]
+      - if embed_header
+        h1.asset-embed__header
+          a href="http://www.wheelercentre.com"
+            span The Wheeler Centre
       .audio-player__load format-load-position="loadProgress"
       .audio-player__track format-track-position="trackPosition"
       .audio-player__inner
