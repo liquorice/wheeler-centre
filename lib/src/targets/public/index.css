@@ -6,6 +6,7 @@
   --column-mid: 94rem;
   --column-small: 86rem;
   --column-narrow: 60rem;
+  --font-mono: "monaco", monospace;
   --font-sans: "Colfax", Helvetica, sans-serif;
   --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c;
