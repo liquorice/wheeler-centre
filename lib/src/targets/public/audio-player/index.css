@@ -322,6 +322,13 @@
     color: var(--primary-color);
   }
 
+  .audio-player__embed-toggle .hidden {
+    display: none;
+  }
+  .audio-player__embed-toggle .visible {
+    display: block;
+  }
+
 .audio-player__embed-code {
   background-color: #ddd;
   background-color: rgba(239,239,239,0.8);
