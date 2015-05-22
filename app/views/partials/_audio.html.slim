@@ -14,7 +14,8 @@
             span The Wheeler Centre
       - else
         button.audio-player__embed-toggle on-click="toggleEmbedVisibility"
-          i.fa.fa-code
+          i.fa.fa-code data-hidden="embedVisible"
+          i.fa.fa-times data-visible="embedVisible"
         .audio-player__embed-code data-visible="embedVisible"
           textarea
             iframe src=url_with_domain(embed_asset_path(:audio, asset)) width="100%" height="300" frameborder="0" scrolling="no"
