@@ -67,7 +67,7 @@
                       li
                         a href=topic.absolute_url = topic.title
         .recording__meta
-          - cache ["recording-audio-1", page, page.fields[:audio].asset] do
+          - cache ["recording-audio-2", page, page.fields[:audio].asset] do
             - if page.fields[:audio].data_present?
               .recording__audio
                 = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
