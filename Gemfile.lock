@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git@bitbucket.org:icelab/heracles.git
-  revision: 80ee878c650e6926716bb4f0b2f165b32f44e85f
+  revision: b22947f84dd453c8a31dd0796cbcaf7aa6087ad5
   branch: master
   specs:
     heracles (1.0.0)
@@ -128,14 +128,14 @@ GEM
     autoprefixer-rails (5.1.11)
       execjs
       json
-    aws-sdk (2.0.44)
-      aws-sdk-resources (= 2.0.44)
-    aws-sdk-core (2.0.44)
+    aws-sdk (2.0.45)
+      aws-sdk-resources (= 2.0.45)
+    aws-sdk-core (2.0.45)
       builder (~> 3.0)
       jmespath (~> 1.0)
       multi_json (~> 1.0)
-    aws-sdk-resources (2.0.44)
-      aws-sdk-core (= 2.0.44)
+    aws-sdk-resources (2.0.45)
+      aws-sdk-core (= 2.0.45)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -160,7 +160,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     color (1.7.1)
     contracts (0.9)
     crass (1.0.1)
@@ -190,7 +190,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     excon (0.45.1)
-    execjs (2.5.1)
+    execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -332,7 +332,7 @@ GEM
     interactor (3.1.0)
     ipaddress (0.8.0)
     iso8601 (0.8.5)
-    jbuilder (2.2.12)
+    jbuilder (2.2.16)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jmespath (1.0.2)
@@ -361,9 +361,9 @@ GEM
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     method_source (0.8.2)
-    mime-types (2.4.3)
+    mime-types (2.6.1)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.1)
     multi_json (1.11.0)
     nenv (0.2.0)
     nestive (0.6.0)
@@ -382,7 +382,7 @@ GEM
     oauth (0.4.7)
     options (2.3.2)
     orm_adapter (0.5.0)
-    parallel (1.4.1)
+    parallel (1.6.0)
     passenger (5.0.6)
       rack
       rake (>= 0.8.1)
@@ -404,7 +404,7 @@ GEM
     querystring (0.1.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.5.2)
+    rack (1.5.3)
     rack-canonical-host (0.1.0)
       addressable
       rack (~> 1.0)
@@ -508,10 +508,10 @@ GEM
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.2.0)
     sass (3.2.19)
-    sass-rails (4.0.5)
+    sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.2)
-      sprockets (~> 2.8, < 3.0)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
     shellany (0.0.1)
     shoulda-matchers (2.8.0)
@@ -537,12 +537,12 @@ GEM
     spring (1.3.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (2.12.3)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.4)
+    sprockets-rails (2.3.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
