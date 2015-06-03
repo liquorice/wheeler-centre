@@ -7,3 +7,5 @@
           | The Wheeler Centre
   = area :masthead_contextual
     = render 'partials/masthead_contextual'
+.search data-view-search=true
+  input.search__input.hidden name="q" value=params[:q].presence
