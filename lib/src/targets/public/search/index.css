@@ -153,4 +153,8 @@
       margin-right: .5rem;
     }
 
+.search__input.hidden {
+  display: none;
+}
+
 
