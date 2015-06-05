@@ -1,7 +1,7 @@
 .masthead-contextual.masthead-contextual--events.clearfix
   / Since some of these requests are expensive through Solr, we're just caching
   / the entire upcoming block for a whole day
-  - cache ["upcoming-events-2", Time.current.beginning_of_day] do
+  - cache ["upcoming-events-2", Time.current.beginning_of_day, upcoming_events_for_navigation.results.length] do
     - if upcoming_events_for_navigation.results.present?
       .upcoming-events data-view-masthead-events={eventSelector: ".upcoming-events__item-title"}.to_json
         .upcoming-events__navigation.clearfix
