@@ -16,9 +16,6 @@
               span.event-series-snap__hero-type Event series
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
             img src=image_url alt=(image.description.present? ? image.description : "Cover image for #{post.title}")
-            - if image.attribution.present?
-              .event-series-snap__hero-caption.caption
-                p = image.attribution
       h3.event-series-snap__title
         span.title-text == widont_format markdown_line post.title
         - if first_topic.present?
