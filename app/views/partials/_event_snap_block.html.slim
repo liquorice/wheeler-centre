@@ -34,9 +34,6 @@
                 .event-calendar-event__flag-text = post.fields[:ticketing_stage].value
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
             img itemprop="photo" src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
-          - if image.attribution.present?
-            .event-snap__hero-caption.caption
-              p = image.attribution
       - if post.series
         p.event-snap__series
           = post.series.title
