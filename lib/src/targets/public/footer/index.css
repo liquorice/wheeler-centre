@@ -188,6 +188,7 @@
 
   .footer__logo-anchor {
     background-image: url("w-mark.svg");
+    background-repeat: no-repeat;
     background-size: 100% 100%;
     display: block;
     color: transparent;
