@@ -26,10 +26,10 @@ Add the heroku git remote:
 You can pull production data down using the following commands:
 
 ```
-heroku pgbackups:capture --expire
-curl -o latest_backup `heroku pgbackups:url`
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < latest_backup
-rm latest_backup
+heroku pg:backups capture
+curl -o latest.dump `heroku pg:backups public-url`
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < latest.dump
+rm latest.dump
 ```
 
 ### Running the Application Locally
