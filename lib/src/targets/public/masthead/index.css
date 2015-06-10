@@ -501,6 +501,7 @@
 
     .masthead__logo-anchor {
       background-image: url(wheeler-centre-logo.svg);
+      background-repeat: no-repeat;
       background-size: 100% 100%;
       color: transparent;
       display: block;
