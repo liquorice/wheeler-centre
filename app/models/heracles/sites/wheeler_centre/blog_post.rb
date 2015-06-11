@@ -116,6 +116,10 @@ module Heracles
             tags.map(&:name)
           end
 
+          time :publish_date do
+            fields[:publish_date].value
+          end
+
         end
 
         private
