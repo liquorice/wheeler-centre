@@ -225,28 +225,42 @@
   text-align: center;
 }
 
-  .home__logos-list-item {
-    display: inline-block;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-bottom: 2rem;
+  .home__logos-list {
+    margin-left: auto;
+    margin-right: auto;
   }
 
-    .home__logos-list-anchor {
-      background-color: #eee;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      color: transparent;
-      display: block;
-      font: 0/0 a;
-      height: 100%;
-      width: 100%;
-      height: 7rem;
-      width: 14rem;
-      opacity: .8;
-      transition: 300ms opacity linear;
+    .home__logos-list-item {
+      display: inline-block;
+      padding-bottom: 2rem;
     }
-    .home__logos-list-anchor:hover,
-    .home__logos-list-anchor:focus {
-      opacity: 1;
+    .home__logos-list-item:first-child {
+      padding-right: 3rem;
     }
+    .home__logos-list-item:last-child {
+      padding-left: 3rem;
+    }
+    .breakpoint-phone .home__logos-list-item {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+      .home__logos-list-span {
+        background-color: #eee;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        color: transparent;
+        display: block;
+        font: 0/0 a;
+      }
+      .home__logos-list-span--creative-victoria {
+        background-image: url('creative-victoria.jpg');
+        width: 28.8rem;
+        height: 5rem;
+      }
+      .home__logos-list-span--unesco {
+        background-image: url('unesco-city-of-literature.jpg');
+        width: 24.5rem;
+        height: 8rem;
+      }
+
