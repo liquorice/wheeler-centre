@@ -146,3 +146,20 @@
           .home__about-content.copy
             = render_content page.fields[:about_blurb]
           a.home__about-link href="/about-us" Find out more about us ›
+
+    / - cache ["home-page-logos", page] do
+    /   .home__logos.column-wrapper
+    /     .column-mid
+    /       ul.home__logos-list
+    /         li.home__logos-list-item
+    /           a.home__logos-list-anchor href="#"
+    /             ' Creative Victoria
+    /         li.home__logos-list-item
+    /           a.home__logos-list-anchor href="#"
+    /             ' UNESCO
+    /         li.home__logos-list-item
+    /           a.home__logos-list-anchor href="#"
+    /             ' City of Literature
+    /         li.home__logos-list-item
+    /           a.home__logos-list-anchor href="#"
+    /             ' Victorian Government

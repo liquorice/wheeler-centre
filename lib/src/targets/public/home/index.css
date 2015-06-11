@@ -217,3 +217,36 @@
       color: #333;
       text-decoration: underline;
     }
+
+/* Logos */
+
+.home__logos {
+  padding-top: 5rem;
+  text-align: center;
+}
+
+  .home__logos-list-item {
+    display: inline-block;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+  }
+
+    .home__logos-list-anchor {
+      background-color: #eee;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      color: transparent;
+      display: block;
+      font: 0/0 a;
+      height: 100%;
+      width: 100%;
+      height: 7rem;
+      width: 14rem;
+      opacity: .8;
+      transition: 300ms opacity linear;
+    }
+    .home__logos-list-anchor:hover,
+    .home__logos-list-anchor:focus {
+      opacity: 1;
+    }
