@@ -51,6 +51,15 @@
     width: 25%;
   }
 
+.copy .figure__display--center-aligned {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3.5rem;
+  padding-top: .4rem;
+  text-align: center;
+}
+
 
 /* Block Elements
 ---------------------------------------- */
