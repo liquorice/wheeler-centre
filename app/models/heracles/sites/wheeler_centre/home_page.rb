@@ -94,7 +94,7 @@ module Heracles
             with :published, true
             with :hidden, false
             with :tag_list, options[:tags] if options[:tags].present?
-            order_by :created_at, :desc
+            order_by :publish_date, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 6
           end
         end
