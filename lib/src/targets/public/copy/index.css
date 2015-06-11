@@ -78,6 +78,17 @@
   .breakpoint-widescreen-wide .copy .figure__display--right-aligned-narrow {
     margin-right: 0;
   }
+.copy .figure__display--center-aligned {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3.5rem;
+  padding-top: .4rem;
+  text-align: center;
+}
+  .breakpoint-phone .copy .figure__display--center-aligned {
+    width: 100%;
+  }
 
 
 /* Block Elements
