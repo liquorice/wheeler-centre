@@ -29,6 +29,9 @@ module Heracles
               # Body
               {name: :body_info, type: :info, text: "<hr/>"},
               {name: :body, type: :content},
+              # About blurb
+              {name: :about_info, type: :info, text: "<hr/>"},
+              {name: :about_blurb, label: "About blurb", type: :content}
             ]
           }
         end

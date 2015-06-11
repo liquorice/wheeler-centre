@@ -144,5 +144,5 @@
       .home__about.column-wrapper
         .column-narrow
           .home__about-content.copy
-            p The Wheeler Centre is Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find some of our finest local and international speakers sharing their expertise, their imaginations and their ideas.
+            = render_content page.fields[:about_blurb]
           a.home__about-link href="/about-us" Find out more about us ›
