@@ -50,6 +50,9 @@ class SearchesController < ApplicationController
                             "review",
                             "long_view_review"]
 
+      # Exclude hidden items
+      with :hidden, false
+
       paginate page: params[:page] || 1, per_page: 40
     end
   end
