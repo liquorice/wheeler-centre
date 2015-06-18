@@ -103,44 +103,23 @@
 
 .copy > blockquote,
 .copy > .section--normal > blockquote {
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
-  color: #111;
-  font-size: 2.5rem;
-  padding-top: 3.5rem;
-  padding-bottom: 1.5rem;
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
+  border-left: 2px solid #ddd;
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
   line-height: 1.45;
-  margin-left: -3.5rem;
-  margin-right: -3.5rem;
+  padding-left: 3rem;
+  margin-left: -3.2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 .breakpoint-tablet .copy > blockquote,
-.breakpoint-tablet .copy > .section--normal > blockquote {
-  font-size: 2.2rem;
-  margin-top: 2rem;
-  margin-bottom: 2.5rem;
-  padding-top: 2.5rem;
-  padding-bottom: .5rem;
-}
+.breakpoint-tablet .copy > .section--normal > blockquote,
 .breakpoint-phone-wide .copy > blockquote,
-.breakpoint-phone-wide .copy > .section--normal > blockquote {
-  font-size: 2rem;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 0;
-}
+.breakpoint-phone-wide .copy > .section--normal > blockquote,
 .breakpoint-phone .copy > blockquote,
-.breakpoint-phone .copy > .section--normal > blockquote {
-  font-size: 1.8rem;
-  font-size: 1.8rem;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 0;
+.breakpoint-phone .copy > .section--normal > blockquote  {
+  margin-left: 0;
 }
 
 .copy hr {
