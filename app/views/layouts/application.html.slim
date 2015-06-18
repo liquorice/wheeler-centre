@@ -40,6 +40,8 @@ html
 
         = area :footer_before do
           = render 'partials/subscribe_simple_wide'
+          - if current_page?(root_path)
+            = render 'partials/home_logos'
         = area :footer do
           = render 'partials/footer'
 
