@@ -19,6 +19,11 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
+      .page__body.event-index__body
+        .column-wrapper
+          .column-wide
+            = render_content page.fields[:body]
+
       / Output days of the week
       .event-calendar__legend.clearfix
         - days_for_week(Date.today.beginning_of_week).each do |day|

@@ -691,6 +691,11 @@
   padding-top: 3.5rem;
   padding-bottom: 5rem;
 }
+
+.event-index__body {
+  padding-bottom: 5rem;
+}
+
 .breakpoint-tablet .event-index {
   padding-top: 1.5rem;
   padding-bottom: 2rem;
