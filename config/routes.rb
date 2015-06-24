@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '_check/*edge_url/_check.js' => "cache_buster#index", as: :cache_buster_check
 
   # Admin
-  resource :admin, only: [:show]
+  # resource :admin, only: [:show]
 
   # Search pages
   resource :search, only: [:show]
