@@ -1,10 +1,10 @@
 - embeded = embeded || false
+- asset = asset || audio.asset
 - title = title
 - if title.blank?
-  - title = audio.asset.title || audio.asset.file_name
+  - title = asset.title || asset.file_meta["title"] || asset.file_name
 - if title.blank?
   - title = "Listen to this track"
-- asset = asset || audio.asset
 - if asset
   .figure.figure__audio.figure__display--default
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true data-audio-player-duration=asset.file_meta["duration"]
