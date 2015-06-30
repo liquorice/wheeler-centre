@@ -21,6 +21,11 @@ class PagesController < ApplicationController
                     url:   url_with_domain(page.absolute_url),
                     updated_time: page.updated_at.iso8601
                   },
+                  twitter: {
+                    card: 'summary',
+                    title: markdown_line(page.title),
+                    site: '@wheelercentre'
+                  },
                   canonical: url_with_domain(page.absolute_url),
                   description: I18n.t("metadata.description"),
                   keywords: I18n.t("metadata.keywords")
