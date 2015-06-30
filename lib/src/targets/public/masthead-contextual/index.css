@@ -257,6 +257,12 @@
         padding-bottom: .6em;
       }
 
+      .upcoming-events__item-series {
+        color: var(--primary-color-lighter);
+        font-size: 1.3rem;
+        /*padding-top: .6em;*/
+      }
+
       .breakpoint-w-599 .upcoming-events__item-date {
         float: left;
         margin-right: 5%;
