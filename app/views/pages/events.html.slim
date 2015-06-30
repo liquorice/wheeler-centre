@@ -19,11 +19,18 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
+      - if page.fields[:body].data_present?
+        .page__body.event-index__body
+          .column-wrapper
+            .column-wide
+              = render_content page.fields[:body]
+
       / Output days of the week
-      .event-calendar__legend.clearfix
-        - days_for_week(Date.today.beginning_of_week).each do |day|
-          .event-calendar__legend-day
-            span= l day, format: :day_short_name
+      - if upcoming_events.results.present?
+        .event-calendar__legend.clearfix
+          - days_for_week(Date.today.beginning_of_week).each do |day|
+            .event-calendar__legend-day
+              span= l day, format: :day_short_name
 
     / Group events by year
     - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
