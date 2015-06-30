@@ -28,6 +28,14 @@
     .podcast-episode__body.column-wrapper
       - cache ["podcast-audio-1", page, page.fields[:audio].asset] do
         - if page.fields[:audio].data_present?
-          .recording__audio
+          .recording__audio.recording__audio-podcast
             = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
+          .recording__downloads-podcast
+            ul
+              li
+                a href=page.fields[:audio].asset.audio_mp3_url
+                  i.fa.fa-music
+                  ' Download audio file
+
+
       = render_content_in_sections page.fields[:description]
