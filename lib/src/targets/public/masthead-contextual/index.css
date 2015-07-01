@@ -212,6 +212,7 @@
       transition-timing-function: cubic-bezier(.10, .10, .25, .90);
       width: 100%;
       z-index: 6;
+      visibility: hidden;
     }
 
     .breakpoint-w-599 .upcoming-events__image-container {
@@ -222,6 +223,9 @@
     .upcoming-events__item-anchor:focus .upcoming-events__image-container {
       transform: translateY(-1.5rem);
       opacity: 1;
+      visibility: visible;
+
+
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
