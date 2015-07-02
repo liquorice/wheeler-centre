@@ -66,7 +66,6 @@
   a:hover .recording-snap__hero-type {
     background-color: var(--primary-color);
     color: #fff;
-    transform: translate3d(0, -100%, 0);
   }
   .recording-snap__hero-caption {
     padding-top: 0.6rem;
