@@ -22,7 +22,7 @@
             a href="http://twitter.com/#{presenter.fields[:twitter_name]}" = "@#{presenter.fields[:twitter_name]}"
         - if presenter.fields[:url].data_present?
           li
-            a href="http://#{presenter.fields[:url]}" =presenter.fields[:url]
+            a href="#{presenter.fields[:url]}" =presenter.fields[:url].to_s.sub(/^https?\:\/\/(www.)?/,'')
 
     .event-presenter__intro.copy
       = render_content presenter.fields[:intro]
