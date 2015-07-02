@@ -39,12 +39,21 @@
   padding-top: 3.5rem;
   margin-bottom: 3.5rem;
 }
+  .event__series-secondary-summary-header {
+    font-family: var(--font-sans);
+    font-size: 1.8rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+  }
+
   .event__presenters-header a:hover,
   .event__tickets-header a:hover,
   .event__series-summary-header a:hover,
   .event__presenters-header a:focus,
   .event__tickets-header a:focus,
-  .event__series-summary-header a:focus {
+  .event__series-summary-header a:focus,
+  .event__series-secondary-summary-header a:focus {
     text-decoration: underline;
   }
 

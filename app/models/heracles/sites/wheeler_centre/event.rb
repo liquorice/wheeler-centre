@@ -23,7 +23,7 @@ module Heracles
               {name: :external_bookings, type: :text, label: "External bookings URL"},
               # Other
               {name: :presenters, type: :associated_pages, page_type: :person},
-              {name: :series, type: :associated_pages, page_type: :event_series, editor_type: 'singular'},
+              {name: :series, type: :associated_pages, page_type: :event_series},
               {name: :recordings, type: :associated_pages, page_type: :recording, editor_columns: 6},
               {name: :podcast_episodes, type: :associated_pages, page_type: :podcast_episode, editor_columns: 6},
               {name: :ticketing_stage, type: :text, editor_type: 'select', option_values: [ "Booking fast", "Booked out", "Cancelled" ] },
@@ -82,6 +82,12 @@ module Heracles
         def series
           if fields[:series].data_present?
             fields[:series].pages.visible.published.first
+          end
+        end
+
+        def secondary_series
+          if fields[:series].data_present? && fields[:series].pages.visible.published.count > 1
+            fields[:series].pages.visible.published.to_a.drop(1)
           end
         end
 
