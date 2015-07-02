@@ -22,7 +22,9 @@
           span.title-tags
             '  &nbsp;/&nbsp;
             = post.fields[:topics].pages.first.title
-      - if show_summary && post.fields[:biography].data_present?
           .person-snap-block__summary.snap-block__summary.copy
             .person-snap-block__summary-inner.snap-block__summary-inner.copy
-              = force_excerptify_html render_content(post.fields[:biography]), 350, "p i em strong br"
+              - if post.fields[:url].data_present?
+                a.person-snap-block__url = post.fields[:url]
+              - if post.fields[:biography].data_present?
+                = force_excerptify_html render_content(post.fields[:biography]), 350, "p i em strong br"
