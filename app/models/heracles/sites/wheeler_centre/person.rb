@@ -11,6 +11,7 @@ module Heracles
               {name: :intro, type: :content},
               {name: :biography, type: :content},
               {name: :url, type: :text},
+              {name: :twitter_name, type: :text},
               {name: :reviews, type: :content},
               {name: :external_links, type: :content},
               {name: :is_staff_member, type: :boolean, defaults: {value: false}, question_text: "Is a Wheeler Centre staff member?"},
