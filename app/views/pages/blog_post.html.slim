@@ -88,6 +88,11 @@
               - page.fields[:topics].pages.sort_by(&:title).each do |topic|
                 li
                   a href=topic.absolute_url = topic.title
+    / Social icons
+    - cache ["socal-icons-1", page, page.title] do
+      .blog-post__sharing
+        .column-narrow
+          = render "partials/social_sharing_icons", page: post
 
   - cache ["blog-guest-author-1", author, author_image, page.authors_posts] do
     - if show_guest_block

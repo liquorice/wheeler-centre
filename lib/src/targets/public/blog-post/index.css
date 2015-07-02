@@ -211,6 +211,7 @@
   padding-top: 5rem;
   position: relative;
   padding-bottom: 8rem;
+  float: left;
 }
 .breakpoint-tablet .blog-post__tags {
   padding-top: 3rem;
@@ -255,6 +256,9 @@
       color: var(--primary-color);
     }
 
+.blog-post__share {
+  float: left;
+}
 .blog-post__guest-author {
   border-bottom: 1px solid #dfdfdf;
   margin-bottom: 3rem;
