@@ -82,7 +82,7 @@
     - cache ["blog-topics-1", page, page.fields[:topics].pages] do
       - if page.fields[:topics].data_present?
         .blog-post__tags.column-wrapper
-          .column-mid
+          .column-narrow
             h2.blog-post__tag-header Topics
             ul.blog-post__tags-list
               - page.fields[:topics].pages.sort_by(&:title).each do |topic|
