@@ -13,5 +13,16 @@
           span.event-presenter__image-blank
     h3.event-presenter__title
       a itemprop="name" href=presenter.absolute_url = presenter.title
+
+    - if presenter.fields[:url].data_present? || presenter.fields[:twitter_name].data_present?
+      ul.event-presenter__meta.copy
+        - if presenter.fields[:twitter_name].data_present?
+          li
+            span.ss-icon &#xF611;
+            a href="http://twitter.com/#{presenter.fields[:twitter_name]}" = "@#{presenter.fields[:twitter_name]}"
+        - if presenter.fields[:url].data_present?
+          li
+            a href="http://#{presenter.fields[:url]}" =presenter.fields[:url]
+
     .event-presenter__intro.copy
       = render_content presenter.fields[:intro]

@@ -58,6 +58,8 @@
     padding-top: 2.5rem;
   }
 
+
+
 .event__meta {
   float: left;
   width: 50%;
@@ -417,6 +419,25 @@
     height: 10rem;
     width: 10rem;
   }
+
+  .event-presenter__meta li {
+    font-size: 1.5rem;
+    float: left;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    color: var(--primary-color);
+
+  }
+  .event-presenter__meta li:first-child {
+    border-right: 1px #ededed solid;;
+  }
+  .event-presenter__meta li a {
+    text-decoration: none;
+    font-family: "Colfax", Helvetica, sans-serif;
+  }
+  .event-presenter__meta .ss-icon {
+    margin-right: 0.5rem;
+  }
   .breakpoint-phone .event-presenter__image {
     width: 6rem;
     height: 6rem;
@@ -464,6 +485,7 @@
   .breakpoint-tablet-wide .event-presenter__intro,
   .breakpoint-tablet .event-presenter__intro {
     font-size: 1.8rem;
+    clear: both;
   }
 
 /* Ticketing */
