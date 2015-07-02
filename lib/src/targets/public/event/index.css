@@ -423,13 +423,15 @@
   .event-presenter__meta li {
     font-size: 1.5rem;
     float: left;
-    padding-right: 1rem;
+    padding-left: 1rem;
     margin-right: 1rem;
     color: var(--primary-color);
+    border-left: 1px #ededed solid;
 
   }
   .event-presenter__meta li:first-child {
-    border-right: 1px #ededed solid;;
+    border-left: none;
+    padding-left: 0;
   }
   .event-presenter__meta li a {
     text-decoration: none;
