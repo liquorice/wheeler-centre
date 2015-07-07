@@ -107,6 +107,8 @@
           .event__body itemprop="description"
             = render_content_in_sections page.fields[:body]
 
+    .column-wrapper
+      .column-wide.clearfix
         / Spit out all the topics
         - cache ["event-topics-1", page, page.fields[:topics].pages] do
           - if page.fields[:topics].data_present?
@@ -117,7 +119,12 @@
                   - cache ["event-topics-item-1", topic] do
                     li
                       a href=topic.absolute_url = topic.title
+        - cache ["event-socal-icons-1", page, page.title] do
+          .event__sharing
+            = render "partials/social_sharing_icons", page: page
 
+    .column-wrapper
+      .column-wide.clearfix
         / Show all the presenters
         - cache ["event-presenters-2", page.presenters] do
           - if page.presenters.present?

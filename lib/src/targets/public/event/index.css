@@ -182,8 +182,9 @@
   padding-bottom: 5.5rem;
   color: #888;
   font-family: var(--font-sans);
-  padding-top: 5rem;
-  position: relative;
+  padding-right: 1.7rem;
+  float: left;
+  width: 50%;
 }
 .breakpoint-tablet .event__tags {
   padding-top: 3rem;
@@ -197,8 +198,7 @@
     letter-spacing: 0.15em;
     padding-right: 2rem;
     padding-top: .2rem;
-    margin-left: -8.1rem;
-    position: absolute;
+    padding-bottom: 1rem;
     text-transform: uppercase;
   }
   .breakpoint-widescreen .event__tag-header,
@@ -232,6 +232,12 @@
     .event__tags-list a:hover {
       color: var(--primary-color);
     }
+
+/* Sharing Links */
+.event__sharing {
+  float: right;
+  width: 50%;
+}
 
 /* Series header */
 
