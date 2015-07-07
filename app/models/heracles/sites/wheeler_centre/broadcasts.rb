@@ -31,7 +31,7 @@ module Heracles
 
             without :youtube_video, nil
 
-            order_by :recording_date_time, :desc
+            order_by :publish_date_time, :desc
             paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
           end
         end

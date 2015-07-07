@@ -8,11 +8,6 @@
 - cache ["recording-snap-block-3", post, show_type, show_summary, image, post.fields[:people].pages, first_topic, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
-      time.recording-snap__date
-        - if post.fields[:recording_date].data_present?
-          = l post.fields[:recording_date].value, format: :medium_date
-        - else
-          ' &nbsp;
       / If we don't have hero images for recordings (which is most of the old ones)
       / we want to use the YouTube thumbnail instead
       - if image
