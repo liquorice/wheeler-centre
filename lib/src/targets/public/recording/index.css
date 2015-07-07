@@ -74,6 +74,7 @@
   width: auto;
   padding-left: 0;
   padding-right: 0;
+  clear: both;
 }
 
 
@@ -209,7 +210,8 @@
   color: #888;
   font-family: var(--font-sans);
   padding-top: 0;
-  position: relative;
+  float:left;
+  width: 60%;
 }
 .breakpoint-tablet .recording__tags {
   padding-top: 3rem;
@@ -223,8 +225,9 @@
     letter-spacing: 0.15em;
     padding-right: 2rem;
     padding-top: .2rem;
-    margin-left: -8.1rem;
-    position: absolute;
+    padding-bottom: 1rem;
+/*    margin-left: -8.1rem;*/
+    /*position: absolute;*/
     text-transform: uppercase;
   }
   .breakpoint-widescreen .recording__tag-header,
@@ -257,5 +260,17 @@
     .recording__tags-list a:hover {
       color: var(--primary-color);
     }
+
+/* Share links */
+.recording__sharing {
+  float: right;
+  width: 40%;
+  padding-left: 1.7rem;
+}
+
+.recording__sharing h2.social-links__header{
+  /*float:left;*/
+  padding-right: 2rem;
+}
 
 

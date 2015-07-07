@@ -58,6 +58,8 @@
     padding-top: 2.5rem;
   }
 
+
+
 .event__meta {
   float: left;
   width: 50%;
@@ -180,8 +182,9 @@
   padding-bottom: 5.5rem;
   color: #888;
   font-family: var(--font-sans);
-  padding-top: 5rem;
-  position: relative;
+  padding-right: 1.7rem;
+  float: left;
+  width: 50%;
 }
 .breakpoint-tablet .event__tags {
   padding-top: 3rem;
@@ -195,8 +198,7 @@
     letter-spacing: 0.15em;
     padding-right: 2rem;
     padding-top: .2rem;
-    margin-left: -8.1rem;
-    position: absolute;
+    padding-bottom: 1rem;
     text-transform: uppercase;
   }
   .breakpoint-widescreen .event__tag-header,
@@ -230,6 +232,12 @@
     .event__tags-list a:hover {
       color: var(--primary-color);
     }
+
+/* Sharing Links */
+.event__sharing {
+  float: right;
+  width: 50%;
+}
 
 /* Series header */
 
@@ -397,7 +405,6 @@
     width: 100%;
   }
 
-
 .event-presenter {
   position: relative;
   min-height: 12rem;
@@ -416,6 +423,27 @@
     top: 0;
     height: 10rem;
     width: 10rem;
+  }
+
+  .event-presenter__meta li {
+    font-size: 1.5rem;
+    float: left;
+    padding-left: 1rem;
+    margin-right: 1rem;
+    color: var(--primary-color);
+    border-left: 1px #ededed solid;
+
+  }
+  .event-presenter__meta li:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+  .event-presenter__meta li a {
+    text-decoration: none;
+    font-family: "Colfax", Helvetica, sans-serif;
+  }
+  .event-presenter__meta .ss-icon {
+    margin-right: 0.5rem;
   }
   .breakpoint-phone .event-presenter__image {
     width: 6rem;
@@ -464,6 +492,7 @@
   .breakpoint-tablet-wide .event-presenter__intro,
   .breakpoint-tablet .event-presenter__intro {
     font-size: 1.8rem;
+    clear: both;
   }
 
 /* Ticketing */
