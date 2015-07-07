@@ -188,6 +188,16 @@
               - if page.series.fields[:body].data_present?
                 .event__series-summary-details.copy
                   = render_content page.series.fields[:body], {image: {version: :content_small, class: "event__series-summary-image"}}
+          - if page.secondary_series
+            .event__series-summary
+              - page.secondary_series.each do |series|
+                h3.event__series-secondary-summary-header
+                  a href=series.absolute_url = series.title
+                .event__series-summary-details.copy
+                  - if series.fields[:summary].data_present?
+                    = render_content series.fields[:summary]
+                  - elsif series.fields[:body].data_present?
+                     = force_excerptify_html render_content(series.fields[:body])
     - cache ["event-venue-1", page, page.venue] do
       - if page.venue
         .event__venue data-view-event-venue-map=page.venue.map_data
