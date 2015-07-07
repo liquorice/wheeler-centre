@@ -211,6 +211,9 @@
   padding-top: 5rem;
   position: relative;
   padding-bottom: 8rem;
+  width: 50%;
+  float: left;
+  padding-right: 2rem;
 }
 .breakpoint-tablet .blog-post__tags {
   padding-top: 3rem;
@@ -255,6 +258,16 @@
       color: var(--primary-color);
     }
 
+/* Share links */
+.blog-post__sharing {
+  float: right;
+  width: 50%;
+  padding-top: 5rem;
+}
+.blog-post__sharing h2.social-links__header {
+  padding-right: 2rem;
+  float: left;
+}
 .blog-post__guest-author {
   border-bottom: 1px solid #dfdfdf;
   margin-bottom: 3rem;
@@ -429,4 +442,5 @@
 .breakpoint-w-879 .blog-index__topic {
   padding-bottom: 1.5rem;
 }
+
 
