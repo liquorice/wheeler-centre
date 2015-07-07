@@ -112,6 +112,7 @@
   margin-left: -3.2rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
+  clear: both;
 }
 .breakpoint-tablet .copy > blockquote,
 .breakpoint-tablet .copy > .section--normal > blockquote,
@@ -125,6 +126,7 @@
 .copy hr {
   border: none;
   border-bottom: 1px solid #ddd;
+  clear: both;
 }
 
 
