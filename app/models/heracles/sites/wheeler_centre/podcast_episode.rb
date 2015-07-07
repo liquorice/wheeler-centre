@@ -35,11 +35,13 @@ module Heracles
         def to_summary_hash
           {
             title: title,
-            people: fields[:people].pages.map(&:title).join(", "),
             video: (fields[:video].data_present?) ? "✔" : "×",
             audio: (fields[:audio].data_present?) ? "♫" : "×",
-            recording_date: fields[:recording_date],
+            events: events.map(&:title).join(", "),
+            people: fields[:people].pages.map(&:title).join(", "),
             published: (published) ? "✔" : "•",
+            recording_date: fields[:recording_date],
+            publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)
           }
         end
@@ -51,9 +53,15 @@ module Heracles
         end
 
         def events
-          if fields[:events].data_present?
-            fields[:events].pages.visible.published
-          end
+          Heracles::Page.
+            of_type("event").
+            joins(:insertions).
+            visible.
+            published.
+            where(
+              :"insertions.field" => "podcast_episodes",
+              :"insertions.inserted_key" => insertion_key
+            )
         end
 
         def people
