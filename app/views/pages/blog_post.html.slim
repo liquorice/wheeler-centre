@@ -90,7 +90,7 @@
                 - page.fields[:topics].pages.sort_by(&:title).each do |topic|
                   li
                     a href=topic.absolute_url = topic.title
-        - cache ["socal-icons-1", page, page.title] do
+        - cache ["blog-socal-icons-1", page, page.title] do
           .blog-post__sharing
             = render "partials/social_sharing_icons", page: page
 

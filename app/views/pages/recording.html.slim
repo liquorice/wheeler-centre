@@ -56,7 +56,8 @@
                 h2.recording__presenters-header Who?
                 - page.people.each do |presenter|
                   = render "partials/presenter_horizontal", presenter: presenter
-          / Spit out all the topics
+
+            / Spit out all the topics
           - cache ["recording-topics-1", page, page.fields[:topics].pages] do
             - if page.fields[:topics].data_present?
               .recording__tags
@@ -66,6 +67,10 @@
                     - cache ["recording-topics-item-1", topic] do
                       li
                         a href=topic.absolute_url = topic.title
+          - cache ["blog-socal-icons-1", page, page.title] do
+            .recording__sharing
+              = render "partials/social_sharing_icons", page: page
+
         .recording__meta
           - cache ["recording-audio-2", page, page.fields[:audio].asset] do
             - if page.fields[:audio].data_present?
@@ -97,6 +102,10 @@
                       a href=page.fields[:video].asset.send(:"#{version}_url")
                         i.fa.fa-video-camera
                         ' Download video file
+    .column-wrapper
+      .column-wide.clearfix
+
+
     / Show related events
     - cache ["recording-related-1", page, page.related_recordings] do
       - if page.related_recordings.present?
