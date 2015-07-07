@@ -79,20 +79,21 @@
             = render_content page.fields[:meta]
 
     / Topics
-    - cache ["blog-topics-1", page, page.fields[:topics].pages] do
-      - if page.fields[:topics].data_present?
-        .blog-post__tags.column-wrapper
-          .column-narrow
-            h2.blog-post__tag-header Topics
-            ul.blog-post__tags-list
-              - page.fields[:topics].pages.sort_by(&:title).each do |topic|
-                li
-                  a href=topic.absolute_url = topic.title
-    / Social icons
-    - cache ["socal-icons-1", page, page.title] do
-      .blog-post__sharing
-        .column-narrow
-          = render "partials/social_sharing_icons", page: post
+    .column-wrapper.clearfix
+      .column-mid
+        / Social icons
+        - cache ["blog-topics-1", page, page.fields[:topics].pages] do
+          - if page.fields[:topics].data_present?
+            .blog-post__tags
+              h2.blog-post__tag-header Topics
+              ul.blog-post__tags-list
+                - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                  li
+                    a href=topic.absolute_url = topic.title
+        - cache ["socal-icons-1", page, page.title] do
+          .blog-post__sharing
+            = render "partials/social_sharing_icons", page: page
+
 
   - cache ["blog-guest-author-1", author, author_image, page.authors_posts] do
     - if show_guest_block
