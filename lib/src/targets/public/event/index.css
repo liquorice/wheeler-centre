@@ -587,7 +587,7 @@
 /* Series summary */
 
 .event__series-summary {
-  float: right;
+  float: left;
   padding-bottom: 3.5rem;
   padding-right: 3.5rem;
   position: relative;
