@@ -45,7 +45,7 @@
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1.2rem;
-    padding-top: 3.5rem;
+    padding-top: 2rem;
   }
 
   .event__presenters-header a:hover,
@@ -587,11 +587,18 @@
 /* Series summary */
 
 .event__series-summary {
-  float: left;
+  float: right;
   padding-bottom: 3.5rem;
   padding-right: 3.5rem;
   position: relative;
   width: 50%;
+}
+.event__series-secondary-summary-rule {
+  width: 50%;
+  border: none;
+  border-top: 3px #ededed solid;
+  display: inline-block;
+  margin-top: 3.5rem;
 }
 .breakpoint-tablet-wide .event__series-summary,
 .breakpoint-tablet .event__series-summary {
@@ -641,6 +648,7 @@
   float: left;
   width: 45%;
 }
+
 
 /* Venue */
 
