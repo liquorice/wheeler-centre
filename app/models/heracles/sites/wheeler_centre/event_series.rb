@@ -58,7 +58,7 @@ module Heracles
               :"insertions.inserted_key" => insertion_key
             ).
             page(options[:page_number] || 1).
-            per(options[:per_page] || 18)
+            per(options[:per_page] || 1000)
         end
 
         def upcoming_events(options={})
