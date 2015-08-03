@@ -68,7 +68,9 @@ Rails.application.configure do
   ]
 
   # Use custom asset_host for development
-  config.action_controller.asset_host = ENV['ASSET_HOST_DEVELOPMENT']
+  config.action_controller.asset_host = "#{ENV['ASSETS_DEVELOPMENT_HOST']}:#{ENV['ASSETS_DEVELOPMENT_PORT']}"
+
+  config.assets.precompile += Dir["assets/build/**/*.*"]
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
