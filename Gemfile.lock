@@ -25,8 +25,8 @@ GIT
       sunspot_rails (>= 1.3.0)
 
 GIT
-  remote: git@bitbucket.org:icelab/heracles.git
-  revision: c2af884adec694cd0211abf54ee5a94fbccc298a
+  remote: git@github.com:icelab/heracles.git
+  revision: 6ae91477aeea6bd8ab44d1ac24fceb48efc8bf79
   branch: master
   specs:
     heracles (1.0.0)
@@ -128,14 +128,14 @@ GEM
     autoprefixer-rails (5.1.11)
       execjs
       json
-    aws-sdk (2.0.45)
-      aws-sdk-resources (= 2.0.45)
-    aws-sdk-core (2.0.45)
+    aws-sdk (2.0.48)
+      aws-sdk-resources (= 2.0.48)
+    aws-sdk-core (2.0.48)
       builder (~> 3.0)
       jmespath (~> 1.0)
       multi_json (~> 1.0)
-    aws-sdk-resources (2.0.45)
-      aws-sdk-core (= 2.0.45)
+    aws-sdk-resources (2.0.48)
+      aws-sdk-core (= 2.0.48)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -162,7 +162,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     color (1.7.1)
-    contracts (0.9)
+    contracts (0.11.0)
     crass (1.0.1)
     dalli (2.7.4)
     database_cleaner (1.4.1)
@@ -427,7 +427,7 @@ GEM
       rails-assets-filament-fixed (>= 0.1.1)
       rails-assets-jquery (>= 1.9.1)
       rails-assets-qunit (>= 1.12.0)
-    rails-assets-html5shiv (3.7.2)
+    rails-assets-html5shiv (3.7.3)
     rails-assets-jquery (1.9.1)
     rails-assets-jquery-timepicker-jt (1.5.3)
       rails-assets-jquery (>= 1.7)
@@ -437,7 +437,7 @@ GEM
     rails-assets-lodash (3.6.0)
     rails-assets-momentjs (2.9.0)
     rails-assets-nprogress (0.1.6)
-    rails-assets-pikaday (1.3.2)
+    rails-assets-pikaday (1.3.3)
     rails-assets-qunit (1.18.0)
     rails-assets-react (0.4.2)
     rails-assets-react-radio-group (0.1.2)
@@ -652,6 +652,3 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   varnisher
-
-BUNDLED WITH
-   1.10.4

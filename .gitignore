@@ -29,14 +29,9 @@
 # Ignore custom lib/src stuff
 node_modules
 npm-debug.log
-lib/src/tmp/*
-!lib/src/tmp/.gitkeep
-lib/src/build/*
-!lib/src/build/.gitkeep
-lib/src/targets/**/components/*
-# !lib/src/targets/**/components/duo.json
+/assets/build/*
+/assets/build/.keep
 public/assets/*
-!public/assets/.gitkeep
 
 # Ignore Video migration config file
 /lib/video_migration/config.yml

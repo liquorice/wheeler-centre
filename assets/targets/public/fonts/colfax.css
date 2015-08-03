@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfax-medium.eot'); /* ie9 compat modes */
+  src: url('colfax-medium.eot?#iefix') format('embedded-opentype'), /* ie6-ie8 */
+       url('colfax-medium.woff') format('woff'), /* modern browsers */
+       url('colfax-medium.ttf')  format('truetype'), /* safari, android, ios */
+       url('colfax-medium.svg#eacadab73975123c4aee337df820bb32') format('svg'); /* legacy ios */
+
+  font-style:  normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfax-mediumitalic.eot'); /* ie9 compat modes */
+  src: url('colfax-mediumitalic.eot?#iefix') format('embedded-opentype'), /* ie6-ie8 */
+       url('colfax-mediumitalic.woff') format('woff'), /* modern browsers */
+       url('colfax-mediumitalic.ttf')  format('truetype'), /* safari, android, ios */
+       url('colfax-mediumitalic.svg#88cbf3e416755046bfc9f7927e113059') format('svg'); /* legacy ios */
+
+  font-style:  italic;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfax-regular.eot'); /* ie9 compat modes */
+  src: url('colfax-regular.eot?#iefix') format('embedded-opentype'), /* ie6-ie8 */
+       url('colfax-regular.woff') format('woff'), /* modern browsers */
+       url('colfax-regular.ttf')  format('truetype'), /* safari, android, ios */
+       url('colfax-regular.svg#baf2864d4cfcbabd96e0926e27a56f1f') format('svg'); /* legacy ios */
+
+  font-style:  normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfax-regularitalic.eot'); /* ie9 compat modes */
+  src: url('colfax-regularitalic.eot?#iefix') format('embedded-opentype'), /* ie6-ie8 */
+       url('colfax-regularitalic.woff') format('woff'), /* modern browsers */
+       url('colfax-regularitalic.ttf')  format('truetype'), /* safari, android, ios */
+       url('colfax-regularitalic.svg#35e758e1938759df110b9568ecd0c139') format('svg'); /* legacy ios */
+
+  font-style:  italic;
+  font-weight: normal;
+}
+
