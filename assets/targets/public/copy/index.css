@@ -1,0 +1,273 @@
+/* Define styles for blocks of content scoped within the .copy rather than
+ * making them global. Global styles will be constantly overridden.
+ *
+ *      <div class="copy content-area">
+ */
+
+/* Set the baseline on all elements directly inside a copy block
+ * Margin won't work on inline elements anyway
+ */
+
+.copy {
+  font-size: 2.1rem;
+  line-height: 1.4;
+}
+/*.breakpoint-tablet .copy {
+  font-size: 2rem;
+}
+.breakpoint-phone-wide .copy {
+  font-size: 1.8rem;
+}
+.breakpoint-phone .copy {
+  font-size: 1.6rem;
+}*/
+
+.copy > *,
+.copy > blockquote > *,
+.copy section > *,
+.copy section > blockquote > * {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.copy > hr {
+  margin-top: 1.7rem;
+  margin-bottom: 1em;
+}
+
+/* Figures */
+
+.copy .figure__display--default {
+  padding-bottom: 3rem;
+  padding-top: 2rem;
+}
+.copy .figure__display--left-aligned {
+  float: left;
+  margin-right: 3.5rem;
+  padding-bottom: 3.5rem;
+  padding-top: .4rem;
+  width: 35%;
+}
+  .breakpoint-phone .copy .figure__display--left-aligned {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+  .breakpoint-widescreen-wide .copy .figure__display--left-aligned {
+    margin-left: -25%;
+    width: 50%;
+  }
+.copy .figure__display--right-aligned {
+  float: right;
+  width: 50%;
+  margin-left: 3.5rem;
+  padding-bottom: 3.5rem;
+  padding-top: .4rem;
+}
+  .copy .figure__display--right-aligned-narrow {
+    width: 25%;
+  }
+.breakpoint-phone .copy .figure__display--right-aligned {
+  float: none;
+  margin-left: 0;
+  width: 100%;
+}
+  .breakpoint-widescreen-wide .copy .figure__display--right-aligned {
+    margin-right: -25%;
+  }
+  .breakpoint-widescreen-wide .copy .figure__display--right-aligned-narrow {
+    margin-right: 0;
+  }
+.copy .figure__display--center-aligned {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3.5rem;
+  padding-top: .4rem;
+  text-align: center;
+}
+  .breakpoint-phone .copy .figure__display--center-aligned {
+    width: 100%;
+  }
+
+
+/* Block Elements
+---------------------------------------- */
+
+.copy p {
+}
+
+.copy address {
+
+}
+
+.copy > blockquote,
+.copy > .section--normal > blockquote {
+  border-left: 2px solid #ddd;
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  line-height: 1.45;
+  padding-left: 3rem;
+  margin-left: -3.2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  clear: both;
+}
+.breakpoint-tablet .copy > blockquote,
+.breakpoint-tablet .copy > .section--normal > blockquote,
+.breakpoint-phone-wide .copy > blockquote,
+.breakpoint-phone-wide .copy > .section--normal > blockquote,
+.breakpoint-phone .copy > blockquote,
+.breakpoint-phone .copy > .section--normal > blockquote  {
+  margin-left: 0;
+}
+
+.copy hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  clear: both;
+}
+
+
+/* Lists
+---------------------------------------- */
+
+.copy ul,
+.copy ol {
+  margin-left: 1.6em;
+}
+.copy ul > li {
+  list-style-type: disc;
+}
+
+.copy ol {
+  margin-left: 1.6em;
+}
+.copy ol > li {
+  list-style-type:decimal;
+}
+
+.copy li {
+  display: list-item;
+}
+
+.copy dl {}
+.copy dt {}
+.copy dd {}
+
+/* Code Blocks
+---------------------------------------- */
+.copy pre {}
+
+.copy code {}
+
+/* Headings
+---------------------------------------- */
+
+.copy h1,
+.copy h2,
+.copy h3,
+.copy h4,
+.copy h5,
+.copy h6 {
+  font-family: "Colfax", Helvetica, sans-serif;
+  font-weight: bold;
+}
+  .copy h1 a,
+  .copy h2 a,
+  .copy h3 a,
+  .copy h4 a,
+  .copy h5 a,
+  .copy h6 a {
+    text-decoration: none;
+  }
+  .copy h1 a:hover,
+  .copy h1 a:focus,
+  .copy h2 a:hover,
+  .copy h2 a:focus,
+  .copy h3 a:hover,
+  .copy h3 a:focus,
+  .copy h4 a:hover,
+  .copy h4 a:focus,
+  .copy h5 a:hover,
+  .copy h5 a:focus,
+  .copy h6 a:hover,
+  .copy h6 a:focus {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+
+.copy p + h1,
+.copy p + h2,
+.copy p + h3,
+.copy p + h4,
+.copy p + h5,
+.copy p + h6 {
+  padding-top: 0.5em;
+}
+
+.copy h1 {
+  font-size: 1.1em;
+}
+
+.copy h2 {
+  font-size: 1em;
+}
+
+.copy h3 {
+  font-size: 1em;
+}
+
+.copy h4 {
+  font-size: 1em;
+}
+
+.copy h5 {}
+.copy h6 {}
+
+
+/* Inline Elements
+---------------------------------------- */
+
+.copy em {
+  font-style: italic;
+}
+
+.copy strong {
+  font-weight: bold;
+}
+
+.copy abbr {
+
+}
+
+.copy img,
+.copy video,
+.copy embed,
+.copy iframe {
+  max-width: 100%;
+}
+
+/* Links
+---------------------------------------- */
+
+.copy p a,
+.copy blockquote a,
+.copy li a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.copy p a:visited,
+.copy blockquote a:visited,
+.copy li a:visited {}
+
+.copy p a:hover,
+.copy p a:focus,
+.copy blockquote a:hover,
+.copy blockquote a:focus,
+.copy li a:hover,
+.copy li a:focus {
+  color: #222;
+}

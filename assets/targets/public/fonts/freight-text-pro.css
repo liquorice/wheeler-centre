@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'FreightTextPro';
+  src: url('freighttextprobold-italic.eot');
+  src: url('freighttextprobold-italic.eot?#iefix') format('embedded-opentype'),
+       url('freighttextprobold-italic.woff') format('woff'),
+       url('freighttextprobold-italic.ttf')  format('truetype'),
+       url('freighttextprobold-italic.svg#0981c7e4aac694eacf79da99cdbcab05') format('svg');
+  font-style: italic;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'FreightTextPro';
+  src: url('freighttextprobold-regular.eot');
+  src: url('freighttextprobold-regular.eot?#iefix') format('embedded-opentype'),
+       url('freighttextprobold-regular.woff') format('woff'),
+       url('freighttextprobold-regular.ttf')  format('truetype'),
+       url('freighttextprobold-regular.svg#2d47676828a72ef468efe3a042ec24f6') format('svg');
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'FreightTextPro';
+  src: url('freighttextprobook-italic.eot');
+  src: url('freighttextprobook-italic.eot?#iefix') format('embedded-opentype'),
+       url('freighttextprobook-italic.woff') format('woff'),
+       url('freighttextprobook-italic.ttf')  format('truetype'),
+       url('freighttextprobook-italic.svg#c8da8fd957572b328fb29fbc2fd39e49') format('svg');
+  font-style: italic;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'FreightTextPro';
+  src: url('freighttextprobook-regular.eot');
+  src: url('freighttextprobook-regular.eot?#iefix') format('embedded-opentype'),
+       url('freighttextprobook-regular.woff') format('woff'),
+       url('freighttextprobook-regular.ttf')  format('truetype'),
+       url('freighttextprobook-regular.svg#567fec1ea62e7808c5a092cb9f4bb8eb') format('svg');
+  font-style: normal;
+  font-weight: normal;
+}

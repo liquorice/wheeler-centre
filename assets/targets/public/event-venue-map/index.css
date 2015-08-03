@@ -1,0 +1,60 @@
+.venue-map__wrapper {
+  position: relative;
+  background: var(--primary-color-lighter);
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+  .venue-map--large .venue-map__wrapper {
+    padding-top: 10.0rem;
+    padding-bottom: 10.0rem;
+  }
+  .venue-map__panel {
+    box-shadow: .5rem .5rem 0 rgba(0,0,0,0.05);
+    background: #fff;
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 1.7rem;
+    line-height: 1.5;
+    max-width: 34.0rem;
+    padding: 3.5rem 4.5rem 3.5rem 3.5rem;
+    position: relative;
+    transform: scale(1,1);
+    transition-property: transform, background-color, color;
+    transition-duration: 250ms;
+  }
+    a.venue-map__panel:hover,
+    a.venue-map__panel:focus {
+      color: var(--primary-color-darker);
+      transform: scale(1.1, 1.1);
+    }
+    .venue-map__panel-image {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      bottom: 0;
+      height: 100%;
+    }
+    .breakpoint-phone-wide .venue-map__panel-image,
+    .breakpoint-phone .venue-map__panel-image {
+      display: none;
+    }
+
+  .breakpoint-widescreen-wide .venue-map__panel {
+    margin-left: -3.5rem;
+  }
+  .breakpoint-w-699 .venue-map__panel {
+    font-size: 1.5rem;
+    padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+  }
+    .venue-map__panel h4 {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+  .venue-map__map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }

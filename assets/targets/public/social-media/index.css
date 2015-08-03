@@ -1,0 +1,52 @@
+/* Social media */
+
+.social-media {
+  background-color: var(--primary-color-lighter);
+  margin-bottom: 5rem;
+}
+  .social-media__account {
+    float: left;
+    width: 25%;
+  }
+    .breakpoint-tablet .social-media__account {
+      width: 50%;
+    }
+    .social-media__account a {
+      color: color(var(--primary-color) shade(25%));
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 1.6rem;
+      -webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+      padding-right: 1.7rem;
+      padding-left: 1.7rem;
+      padding-top: 2rem;
+      padding-bottom: 2.8rem;
+      text-align: center;
+      transition-property: color;
+      transition-duration: 120ms;
+    }
+    .social-media__account i {
+      color: var(--primary-color);
+      font-size: 2.8rem;
+      font-size: 2.8rem;
+      position: relative;
+      top: .3rem;
+      margin-right: 1.5rem;
+      transition-property: transform;
+      transition-duration: 120ms;
+    }
+    .social-media__account a:hover,
+    .social-media__account a:focus {
+      color: color(var(--primary-color) shade(40%));
+      text-decoration: underline;
+    }
+    .social-media__account a:hover i,
+    .social-media__account a:focus i {
+      transform: scale(1.25);
+    }
+
+    .breakpoint-phone-wide .social-media__account span,
+    .breakpoint-phone .social-media__account span {
+      display: none;
+    }

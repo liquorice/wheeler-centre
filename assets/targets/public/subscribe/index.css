@@ -1,0 +1,115 @@
+.simple-subscribe__inner {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+.simple-subscribe__label,
+.simple-subscribe__controls {
+  display: block;
+  float: left;
+  width: 50%;
+}
+.breakpoint-w-799 .simple-subscribe__label,
+.breakpoint-w-799 .simple-subscribe__controls {
+  padding-left: 0;
+  padding-right: 0;
+  float: none;
+  width: 100%;
+}
+.breakpoint-w-799 .simple-subscribe__label {
+  padding-bottom: 2rem;
+}
+  .simple-subscribe__label {
+    line-height: 1.5;
+    padding-right: 1.5rem;
+    font-size: 1.7rem;
+  }
+  .breakpoint-phone .simple-subscribe__label {
+    line-height: 1.4;
+    font-size: 1.6rem;
+  }
+  .simple-subscribe__controls {
+    padding-left: 1.5rem;
+  }
+
+  .simple-subscribe__controls {
+    display: flex;
+    font-family: var(--font-sans);
+  }
+    .simple-subscribe__controls input {
+      background-color: #e0eeec;
+      border: none;
+      flex: 1;
+      font-size: 1.7rem;
+      padding: 1.4rem 1.8rem;
+    }
+    .breakpoint-tablet .simple-subscribe__controls input {
+      font-size: 1.5rem;
+    }
+    .breakpoint-phone-wide .simple-subscribe__controls input ,
+    .breakpoint-phone .simple-subscribe__controls input  {
+      font-size: 1.4rem;
+    }
+    .simple-subscribe__controls button {
+      background-color: var(--primary-color);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      width: 14rem;
+    }
+      .simple-subscribe__controls button:hover,
+      .simple-subscribe__controls button:focus {
+        background-color: #444;
+      }
+    .breakpoint-phone .simple-subscribe__controls button {
+      width: 10rem;
+    }
+
+
+/* Subscribe in content */
+
+.subscribe-content {
+  font-family: var(--font-sans);
+  overflow: hidden;
+  zoom: 1;
+}
+
+.subscribe-content__group {
+  float: left;
+  padding-bottom: 1rem;
+  width: 50%;
+}
+  .subscribe-content__group:nth-child(1n) {
+    padding-right: 1.5rem;
+  }
+  .subscribe-content__label {
+    color: #888;
+    display: block;
+    font-size: 1.5rem;
+    padding-bottom: .5rem;
+  }
+  .subscribe-content__input {
+    background-color: #e0eeec;
+    border: none;
+    display: block;
+    font-size: 1.7rem;
+    padding: 1.4rem 1.8rem;
+    width: 100%;
+  }
+
+.subscribe-content__button {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  padding: .8rem 1.2rem;
+}
+    .subscribe-content__button:hover,
+    .subscribe-content__button:focus {
+      background-color: #444;
+    }

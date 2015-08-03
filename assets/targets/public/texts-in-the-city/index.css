@@ -1,0 +1,13 @@
+.texts-in-the-city-book-item__subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.texts-in-they-city__book-cover img {
+  margin-left: 2rem;
+  max-width: 200px;
+  margin-bottom: 1rem;
+  float: right;
+}

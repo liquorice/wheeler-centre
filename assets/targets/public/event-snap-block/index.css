@@ -1,0 +1,125 @@
+/* Event snap block */
+
+.event-snap {
+  display: block;
+  padding-bottom: 1.5rem;
+}
+
+  .event-snap__date {
+    color: #888;
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    padding-bottom: .8rem;
+  }
+  .event-snap__series {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    padding-top: .6rem;
+    margin-bottom: 0;
+  }
+  .event-snap__title {
+    padding-top: .6rem;
+    margin-bottom: 1.4rem;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+    .copy .event-snap__title {
+      padding-top: 0;
+    }
+
+    .breakpoint-phone-wide .event-snap__title,
+    .breakpoint-phone .event-snap__title {
+      line-height: 1;
+    }
+    .event-snap-block .title-text {
+      font-size: 1.7rem;
+    }
+    .event-snap:hover .title-text {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+  .event-snap__authors {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    padding-bottom: 1.2rem;
+    margin-top: -1rem;
+  }
+  .event-snap__hero {
+    padding-bottom: 0.6rem;
+    position: relative;
+  }
+    .event-snap__hero--force-square {
+      position: relative;
+    }
+
+  .event-snap__hero-type {
+    background-color: #fff;
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .7rem .8rem .8rem;
+    /* Needs to keep above img */
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    z-index: 3;
+    transition-property: transform, background-color, color;
+    transition-duration: 250ms, 500ms, 500ms;
+  }
+
+  a:hover .event-snap__hero-type {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translate3d(0, -100%, 0);
+  }
+  .breakpoint-phone a:hover .event-snap__hero-type {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .event-snap__past-event-icon {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    margin-left: .4rem;
+  }
+
+  .event-snap__hero-caption {
+    padding-top: .6rem;
+  }
+  .event-snap__hero-inner {
+    position: relative;
+    overflow: hidden;
+  }
+    .event-snap__hero-shim {
+      padding-top: 100%;
+    }
+    .event-snap__hero--force-square .event-snap__hero-inner {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+  .event-snap__hero img {
+    transition-property: transform, opacity;
+    transition-duration: 900ms;
+    opacity: 1;
+    width: 100%;
+  }
+    .event-snap:hover .event-snap__hero img {
+      transform: scale3d(1.1, 1.1, 1);
+      opacity: 0.85;
+    }
+    .event-snap__hero--force-square img {
+      position: absolute;
+      height: 100%;
+      transform: translate3d(-12.5%, 0, 0);
+      width: auto;
+    }
+      .event-snap:hover .event-snap__hero--force-square img {
+        transform: translate3d(-12.5%, 0, 0) scale3d(1.1, 1.1, 1);
+      }

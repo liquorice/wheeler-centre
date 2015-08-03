@@ -1,0 +1,118 @@
+.subscribe-popup {
+  background-color: #1b1b1c;
+  color: #fff;
+  display: none;
+  position: relative;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.subscribe-popup__image {
+  background-size: cover;
+  background-position: center 30%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.subscribe-popup .simple-subscribe__inner {
+  padding-top: 0;
+  padding-bottom: 2.5rem;
+}
+
+.subscribe-popup__inner {
+  max-width: var(--column-mid);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  padding-top: 3.0rem;
+  padding-top: 3rem;
+  padding-bottom: 3.5rem;
+  padding-bottom: 3.5rem;
+  position: relative;
+  transform: translate3d(0,0,0);
+  transition-property: transform, margin-top;
+  transition-duration: 380ms;
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+  .subscribe-popup--hide .subscribe-popup__inner {
+    transform: translate3d(0,-100px,0);
+  }
+  .breakpoint-phone .subscribe-popup__inner {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+
+.subscribe-popup .simple-subscribe__label,
+.subscribe-popup .simple-subscribe__controls {
+  padding-left: 0;
+  padding-right: 0;
+  float: none;
+  width: 100%;
+}
+
+.subscribe-popup__close {
+  color: #dedede;
+  cursor: pointer;
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  padding-bottom: 0.8rem;
+  text-align: left;
+  width: 100%;
+}
+  .subscribe-popup__close:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .breakpoint-phone .subscribe-popup__close {
+    text-align: center;
+  }
+
+.subscribe-popup__close span {
+  display: inline-block;
+  padding-right: 1.4rem;
+}
+
+
+/* Images */
+
+.subscribe-popup .copy .figure {
+  padding-bottom: 1.5rem;
+}
+
+.subscribe-popup .copy .figure__display--default {
+  width: 100%;
+}
+  .subscribe-popup .copy .figure__display--default img {
+    width: 100%;
+  }
+
+.subscribe-popup .copy .figure__display--left-aligned {
+  margin-left: 0;
+  width: auto;
+}
+
+.subscribe-popup .copy .figure__display--right-aligned {
+  margin-right: 0;
+  width: auto;
+}
+  .subscribe-popup .figure__display--left-aligned img,
+  .subscribe-popup .figure__display--right-aligned img {
+    max-height: 12.0rem;
+    width: auto;
+  }
+
+.breakpoint-phone .subscribe-popup .copy .figure {
+  text-align: center;
+  width: auto;
+}
+  .breakpoint-phone .subscribe-popup .copy .figure img {
+    display: inline;
+  }
