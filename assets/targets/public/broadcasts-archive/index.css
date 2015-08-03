@@ -1,0 +1,52 @@
+/*Archive */
+
+.broadcasts-archive {
+  padding-top: 4.0rem;
+}
+  .breakpoint-tablet .broadcasts-archive {
+    padding-top: 3.5rem;
+  }
+  .breakpoint-phone-wide .broadcasts-archive,
+  .breakpoint-phone .broadcasts-archive {
+    padding-top: 1.5rem;
+  }
+
+.broadcasts-archive__top.gradient-bottom-up {
+  margin-bottom: 3.5rem;
+}
+
+.broadcasts-archive__header {
+  font-family: var(--font-sans);
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+  .broadcasts-archive__intro {
+    margin-bottom: 4.5rem;
+  }
+  .breakpoint-tablet .broadcasts-archive__header {
+    margin-bottom: 3rem;
+  }
+  .breakpoint-phone-wide .broadcasts-archive__header,
+  .breakpoint-phone .broadcasts-archive__header {
+    margin-bottom: 2rem;
+  }
+    .broadcasts-archive__title-label {
+      color: #888;
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .broadcasts-archive__title {
+      color: var(--primary-color);
+      font-size: 4.8rem;
+      font-weight: bold;
+    }
+    .breakpoint-tablet .broadcasts-archive__title {
+      font-size: 3.8rem;
+    }
+    .breakpoint-phone-wide .broadcasts-archive__title {
+      font-size: 3rem;
+    }
+    .breakpoint-phone .broadcasts-archive__title {
+      font-size: 2.8rem;
+    }

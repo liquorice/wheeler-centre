@@ -1,0 +1,106 @@
+.criticism-now {
+  padding-top: 0;
+}
+
+.criticism-now__sub-title {
+  color: #888;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.breakpoint-phone .criticism-now__events-snap .snap-block {
+  padding-right: 1.5rem;
+}
+
+.criticism-now__events {
+  margin-top: 3.5rem;
+}
+
+.criticism-now-event-item {
+  position: relative;
+  padding-left: 25%;
+  padding-left: calc(22% + 3.0rem);
+  padding-bottom: 1.5rem;
+}
+.criticism-now-event-item__image {
+  position: absolute;
+  width: 22%;
+  top: 0;
+  left: 0;
+}
+  .criticism-now-event-item__image img {
+    width: 100%;
+  }
+
+.criticism-now-event-item__title {
+  font-family: var(--font-sans);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+.criticism-now-event-item__summary {
+  font-size: 1.7rem;
+}
+
+.criticism-now__responses {
+  border-top: 1px solid #ededed;
+  padding-top: 3.5rem;
+}
+
+.criticism-now__responses .grouper {
+  border-top: 1px solid #ededed;
+  padding-top: 3.5rem;
+}
+  .criticism-now__responses .grouper:first-child {
+    border: none;
+  }
+
+.criticism-now-response-item {}
+.criticism-now-response-item__body {
+  font-size: 1.7rem;
+  border-left: .2rem #ededed solid;
+  padding: 1.5rem 2.5rem .1rem;
+  margin-bottom: 1.5rem;
+}
+.criticism-now-response-item__author {
+  font-size: 1.5rem;
+}
+  .criticism-now-response-item__author strong {
+    font-weight: bold;
+  }
+  .criticism-now-response-item__author em {
+    font-style: italic;
+  }
+  .criticism-now-response-item__author a:hover {
+    text-decoration: underline;
+  }
+
+.criticism-now__review-title {
+  position: relative;
+}
+  .criticism-now__review-title h2 {
+    margin-bottom: .8rem;
+  }
+  .criticism-now__review-title h3 {
+    font-weight: normal;
+    font-size: 2.0rem;
+    font-size: 2rem;
+    color: #888;
+  }
+.criticism-now__review-title:before {
+  content: "";
+  display: block;
+  border-top: 2px solid #ededed;
+  margin-bottom: 4.5rem;
+  margin-top: 4.5rem;
+  width: 20%;
+}
+
+
+.criticism-now__section-divider {
+  display: block;
+  border-top: 2px solid #ededed;
+  margin-bottom: 4.5rem;
+  margin-top: 4.5rem;
+  width: 20%;
+  margin-left: 3.5rem;
+}
