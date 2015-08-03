@@ -76,69 +76,96 @@ environment variables. These are all optional.
 * `CDN_ORIGIN_DOMAIN`, `CDN_ORIGIN_PORT` - i.e. the non-CDN-ed URL (and port)
 * `FOG_PROVIDER` - Required for the fog gem, in our case this will generally be AWS and is used to generate the search engine sitemaps.
 
-## Assets
+### Assets
 
-Assets are compiled outside of Sprockets (with the exception of Heracles admin assets). The main tasks are specified in our `Makefile`.
+Assets live outside the standard sprockets-based asset pipeline. We’re using webpack to (almost) entirely replace the asset pipeline, though it works in a similar way to the asset pipeline in practice: we’re not creating fancy bundles, just normal static JavaScript and CSS.
+
+Assets live in `./assets/targets`. Creating a folder there will create a named target that matches. This:
 
 ```
-# Compile all the targets into `lib/src/build`
+./assets/targets/public —> public.js, public.css
+```
+
+To add a new target, you can use the `asset_target` generator:
+
+```
+rails generate asset_target target-name
+```
+
+This would generate the following files:
+
+```
+./assets/targets
+  /target-name
+    - target.js        # Configuration file, sets up our target output
+    - index.css        # Base CSS file, where your CSS originates from
+    - index.js         # Base JS file, where your JS originates from
+```
+
+Asset tasks are run using npm. They’re listed in the `package.json` in the `scripts` block. The main scripts are:
+
+```
+npm run start
+```
+
+This will spin up the webpack development-server. In development we send all asset requests through this server by setting a custom `asset_host` in `development.rb`. The webpack development-server will attempt to proxy any requests it cannot fill back to the Rails apps, so any normal asset-pipeline requests should work.
+
+```
 npm run build
-# Run `npm run build`, and then generate a Rails-compatible manifest that’s merged
-# with any sprockets-compiled assets
-npm run build-production
-# Spin up the local server/proxy server to serve/recompile development files
-npm run server
 ```
 
-You should put your assets in `lib/src/targets` as build targets are _inferred_ from their directory names. Thus a folder structure like:
+This will build a development version of the webpack assets into `./assets/build` so you can inspect them.
+
+#### JavaScript
+
+Dependencies are managed through [npm](http://npmjs.com). To add a dependency you’ll want to:
 
 ```
-lib/
-  src/
-    targets/
-      public/
-        navigation/
-          index.js
-          index.css
-        index.js
-        index.css
-      admin/
-        index.js
+npm install --save my-new-dependency
 ```
 
-Will produce the following build targets:
+This will add the dependency to the `package.json` (née `Gemfile`) in the root directory. If you do not include `--save` then your dependency will not be installed on deployment.
+
+**Note**: We’re building assets on the fly for deployment and so any compilation process will need both the `devDependencies` and the `dependencies` hash in `package.json` to be installed. On Heroku this means [you’ll need to set a config variable](https://github.com/heroku/heroku-buildpack-nodejs#enable-or-disable-devdependencies-installation):
 
 ```
-public.js
-public.css
-admin.js
+heroku config:set NPM_CONFIG_PRODUCTION=false
 ```
 
-We’re using [Webpack](http://webpack.github.io/) to build the assets, which means you can use CommonJS syntax to `require` dependencies throughout your JavaScript, and `@import` directives to require dependencies throughout your CSS. In the structure above, we could `require` or `@import` the `navigation` component into the `public/index.css/js` files thusly:
+JavaScript is loaded using the CommonJS module pattern — the same as npm — which means each file is encapsulated (much like CoffeeScript). This also means *there is no shared scope*; each file must require dependencies to have access to them. This is done by calling `require("dependency-name")`.
 
-```
-// JS
-var navigation = require('./navigation');
+CommonJS modules _should_ export a default object that gets returned as the value of a `require`. For example, if you want to use jQuery in one of your files you’ll need to explicitly require it like this (assuming you have it included in your `package.json`):
 
-/* CSS */
-@import './navigation';
+```js
+var $ = require("jquery");
 ```
 
-JavaScript files will be processed through a JSX compiler and minified in production. CSS files are processed through [myth](https://github.com/segmentio/myth) in lieu of Sass.
+Local dependencies should follow the same pattern:
 
-### Development
+```js
+// ./foo/index.js
+var privateVariable = "foo";
+function Foo() {
+  console.log(privateVariable);
+}
+module.exports = Foo;
 
-In development, `foreman` will take care of booting the watcher and building your files as long as you’re booting it using the `Procfile.dev` command above. It will also spin up the `make serve` server that will serve your generated assets out of `/lib/src/tmp` over `localhost:1234`. To ensure it works with existing Rails assets (like the Heracles admin) that server will proxy through to the Rails application at `localhost:5000` for any assets that are not in that `tmp/` directory.
-
-We’re using Rails’ standard support for custom assets hosts in development, so you’ll need to make sure this `ENV` variable is set correctly:
-
+// ./index.js
+var Foo = require("./foo"); // Will look for index.js automatically
+var fooInstance = new Foo();
 ```
-ASSET_HOST_DEVELOPMENT=localhost:1234
+
+#### Debugging
+
+We inject a special constant into the JavaScript environment at build time: `DEVELOPMENT`. This is a boolean that allows you to add *persistent* code you’d only like to run in development:
+
+```js
+if (DEVELOPMENT) {
+  console.warn(obj.property);
+}
 ```
 
-### Production
-
-Assets should compile in production as you’d expect for any other sprockets-like Rails app. We do some overloading of the `rake assets:precompile` task to ensure that our generated assets are properly served.
+^ This will `warn` in development, and *won’t even been compiled* into the production build.
 
 #### Buildpacks
 
