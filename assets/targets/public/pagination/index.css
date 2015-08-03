@@ -1,0 +1,101 @@
+/* Pagination */
+
+.pagination {
+  clear: both;
+  font-family: var(--font-sans);
+  margin-bottom: 3.5rem;
+  text-align: center;
+  font-size: 0;
+}
+  .pagination-bottom .pagination {
+    background: linear-gradient(to left, #fff 0%, rgba(250, 250, 250, 0) 20%),
+                linear-gradient(to right, #fff 0%, rgba(250, 250, 250, 0) 20%),
+                linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.03) 100%);
+    border-top: 1px solid #e9e9e9;
+  }
+
+  .pagination-top .pagination {
+    background: linear-gradient(to left, #fff 0%, rgba(250, 250, 250, 0) 20%),
+                linear-gradient(to right, #fff 0%, rgba(250, 250, 250, 0) 20%),
+                linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.02) 100%);
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .pagination a,
+  .pagination .gap,
+  .pagination .current {
+    display: inline-block;
+    font-size: 1.4rem;
+    padding: 1.6rem 2.0rem;
+    position: relative;
+  }
+  .pagination a:before,
+  .pagination .gap:before,
+  .pagination .current:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: .1rem;
+    top: 0;
+    bottom: 0;
+  }
+
+  .pagination-bottom .pagination a:before,
+  .pagination-bottom .pagination .gap:before,
+  .pagination-bottom .pagination .current:before {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .pagination-top .pagination a:before,
+  .pagination-top .pagination .gap:before,
+  .pagination-top .pagination .current:before {
+    background: linear-gradient(to top, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .pagination .current {
+    color: #aaa;
+  }
+
+  .pagination a:hover {
+    background-color: #fff;
+    color: var(--primary-color);
+  }
+
+  .pagination .prev {
+    float: left;
+  }
+    .pagination .prev a:before {
+      left: auto;
+      right: 0;
+    }
+  .pagination .next {
+    float: right;
+  }
+
+.pagination-context {
+  color: #666;
+  font-size: 1.6rem;
+  text-align: center;
+  padding: 1.2rem 0;
+}
+  .pagination-context--top {
+    margin-top: -3.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .pagination-context em {
+    font-style: italic;
+  }
+
+.breakpoint-phone-wide .pagination .page,
+.breakpoint-phone .pagination .page,
+.breakpoint-phone-wide .pagination .first,
+.breakpoint-phone .pagination .first,
+.breakpoint-phone-wide .pagination .last,
+.breakpoint-phone .pagination .last {
+  display: none;
+}
+.breakpoint-phone-wide .pagination,
+.breakpoint-phone .pagination {
+  overflow: hidden;
+  zoom: 1;
+}
