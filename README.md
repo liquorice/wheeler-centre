@@ -6,7 +6,13 @@ Rails + Heracles app for the Wheeler Centre
 
 ### First-time setup
 
-Check out the app :
+Ensure you have access Icelab's [Gemfury](http://fury.io) organization. Log in and visit the [repos page](https://manage.fury.io/dashboard/icelab#/repos) to find your private repo token (it's listed at the top of the page as `https://your-token-here@repo.fury.io/icelab/`). Let bundler know about your token:
+
+```
+bundle config https://gem.fury.io/icelab/ put-your-token-here
+```
+
+Then check out the app:
 
     $ git clone git@bitbucket.org:icelab/wheeler-centre.git
     $ cd ~/src/wheeler-centre
