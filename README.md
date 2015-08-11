@@ -167,10 +167,13 @@ if (DEVELOPMENT) {
 
 ^ This will `warn` in development, and *won’t even been compiled* into the production build.
 
-#### Buildpacks
+# Deployment
 
-In production, we rely on `node` to build our assets, so we need a multi-buildpack setup. If you’re setting up a new app you’ll need to ensure that this custom buildpack is set:
+The site runs on Heroku, behind a [Fastly](https://www.fastly.com) CDN.
+
+Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the main app). When setting up a new Heroku app, add them as follows:
 
 ```
-heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 ```
