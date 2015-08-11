@@ -199,3 +199,11 @@ Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the mai
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 ```
+
+Add a Gemfury repo token config var so bundler on Heroku can install the private heracles gem:
+
+```
+heroku config:set BUNDLE_GEM__FURY__IO="your-token-here"
+```
+
+You can find the token on your [Gemfury repos page](https://manage.fury.io/dashboard/icelab#/repos).
