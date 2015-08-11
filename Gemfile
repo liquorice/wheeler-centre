@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-source "https://rails-assets.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
 ruby "2.1.5"
@@ -11,7 +10,7 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", git: "git@github.com:icelab/heracles.git", branch: "master"
+gem "heracles", "~> 1.0.0", source: "https://gem.fury.io/icelab/"
 
 # Cache Buster
 gem 'varnisher'
@@ -20,7 +19,7 @@ gem 'varnisher'
 # this patch goes upstream, we can remove this, since Heracles is the right
 # place to require sunspot-queue (but we can't use github dependencies in its
 # gemspec).
-gem "sunspot-queue", github: "timriley/sunspot-queue"
+gem "sunspot-queue", github: "timriley/sunspot-queue", ref: "649af734420db481fd0421dde152bbb9e7499bde"
 
 # Background worker
 gem "que"
@@ -54,9 +53,11 @@ gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 
 # Rails assets
-gem "rails-assets-jquery"
-gem "rails-assets-jquery-ujs-standalone"
-gem "rails-assets-viewloader"
+source "https://rails-assets.org" do
+  gem "rails-assets-jquery"
+  gem "rails-assets-jquery-ujs-standalone"
+  gem "rails-assets-viewloader"
+end
 gem "embedly"
 
 # Application
