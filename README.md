@@ -14,20 +14,28 @@ bundle config https://gem.fury.io/icelab/ put-your-token-here
 
 Then check out the app:
 
-    $ git clone git@bitbucket.org:icelab/wheeler-centre.git
-    $ cd ~/src/wheeler-centre
+```
+$ git clone git@bitbucket.org:icelab/wheeler-centre.git
+$ cd ~/src/wheeler-centre
+```
 
 To install the required gems & prepare the database:
 
-    $ bin/setup
+```
+bin/setup
+```
 
 May also need to run the database migration in the process:
 
-    rake db:migrate
+```
+rake db:migrate
+```
 
 Add the heroku git remote:
 
-    git remote add heroku git@heroku.com:wheeler-centre.git
+```
+git remote add heroku git@heroku.com:wheeler-centre.git
+```
 
 You can pull production data down using the following commands:
 
@@ -40,25 +48,33 @@ rm latest.dump
 
 ### Running the Application Locally
 
-    $ foreman start -f Procfile.dev
-    $ open http://localhost:5000
+```
+foreman start -f Procfile.dev
+open http://localhost:5000
+```
 
 ### Running the Specs
 
 To run all ruby and javascript specs:
 
-    $ rake
+```
+rake
+```
 
 Again, with coverage for the ruby specs:
 
-    $ rake spec:coverage
+```
+rake spec:coverage
+```
 
 ### Using Guard
 
 Guard is configured to run ruby and jasmine specs, and also listen for
 livereload connections. Growl is used for notifications.
 
-    $ guard
+```
+guard
+```
 
 ### Environment Variables
 
