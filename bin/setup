@@ -5,6 +5,9 @@
 # Set up Ruby dependencies
 bundle install -j4
 
+# Set up node dependencies
+npm install
+
 # Set up staging and production git remotes
 if [ `git remote | egrep -q "^production$"` ]; then
   git remote add production git@heroku.com:wheeler-centre.git
