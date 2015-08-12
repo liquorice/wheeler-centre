@@ -5,6 +5,18 @@
   .content-page__main.column-wrapper
     .content-page__header
       h1.content-page__title == widont_format markdown_line page.title
+    .content-page__nav-wrapper
+      .content-page__nav data-view-nav-toggle={toggleSelector: ".content-page__nav-toggle", targetSelector: ".content-page__nav-inner", targetActiveClassName: "content-page__nav-inner--active"}.to_json
+        button.content-page__nav-toggle
+          ' Navigate this section
+          i.fa.fa-angle-down
+        .content-page__nav-inner
+          h3.content-page__nav-title
+            - unless page.root.id == page.id
+              a href=page.root.absolute_url = page.root.title
+            - else
+              = page.root.title
+          = render "partials/page_nav_children", parent: page.root, current: page
     .content-page__content.clearfix
       - if page.fields[:intro].data_present?
         .content-page__intro
