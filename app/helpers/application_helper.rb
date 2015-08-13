@@ -270,7 +270,7 @@ module ApplicationHelper
 
   memoize \
   def campaign_words(page)
-    page.children.of_type("campaign_word").published.visible.order(:title)
+    page.children.of_type("campaign_word").published.order(:title)
   end
 
   ### --------------------------------------------------------------------------
