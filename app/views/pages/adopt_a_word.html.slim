@@ -1,0 +1,42 @@
+= area :masthead_title do
+  = page.root.title
+
+= area :main do
+  .adopt-a-word__main.column-wrapper
+    .adopt-a-word__header
+      h1.adopt-a-word__title == widont_format markdown_line page.title
+    .adopt-a-word__content.clearfix
+      - if page.fields[:intro].data_present?
+        .adopt-a-word__intro
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:campaign_image].data_present?
+        .adopt-a-word__campaign-image
+          = page.fields[:campaign_image].asset.content_small_url
+      .adopt-a-word__description-wrapper
+        .adopt-a-word__description-left
+          = render_content_in_sections page.fields[:description_left]
+        .adopt-a-word__description-right
+           = render_content_in_sections page.fields[:description_right]
+
+      .adopt-a-word__words-header
+        h1.adopt-a-word__words-title
+          'Adopt your word
+        .adopt-a-word__list-description
+          = page.fields[:list_description]
+      - if page.words.present?
+        ul.adopt-a-word__words
+        - page.words.each do |word|
+          - available_class = (word.fields['is_available'] ? 'adopt-a-word-page__word-available' : 'adopt-a-word-page__word-unavailable')
+          li class=["adopt-a-word-page__word", available_class]
+            - if word.fields['is_available']
+              a href="http://www.everydayhero.com.au/event/adopt-a-word?answer_1=#{word.title}"= word.title
+            - else
+              = word.title
+
+            = word.fields[:definition]
+
+
+      .adopt-a-word__donation-info
+        h2.adopt-a-word__donation-info-title How the money is used
+
+        = render_content_in_sections page.fields[:donation_info]
