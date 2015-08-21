@@ -177,6 +177,19 @@
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 2px;
+  margin-right: 1.5rem;
+}
+
+.adopt-a-word__word-button--adopted {
+  display: none;
+  font-family: var(--font-sans);
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 2px;
+  margin-right: 1.5rem;
+  color: #999;
+  border: 1px solid #CCC;
 }
 
 .adopt-a-word__definition-word {
@@ -189,7 +202,6 @@
   color: #333;
   font-family: var(--font-sans);
   font-size: 1.2rem;
-  margin-left: 1.5rem;
 }
 
 .adopt-a-word__word-close:hover {
@@ -213,8 +225,13 @@
 }
 
 .adopt-a-word-page__word-unavailable .adopt-a-word__word-button {
-  color: #999;
-  border: 1px solid #CCC;
+/*  color: #999;
+  border: 1px solid #CCC;*/
+  display: none;
+}
+
+.adopt-a-word-page__word-unavailable .adopt-a-word__word-button--adopted {
+  display: inline-block;
 }
 
 
