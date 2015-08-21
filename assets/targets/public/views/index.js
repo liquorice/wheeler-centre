@@ -109,4 +109,10 @@ views.search = function(el) {
   new Search(el);
 };
 
+// Adopt a word toggle
+var AdoptAWordToggle = require("../adopt-a-word");
+views.adoptWordToggle = function(el, props) {
+  new AdoptAWordToggle(el, props);
+};
+
 module.exports = views;

@@ -5,6 +5,7 @@
   "author": "Icelab",
   "dependencies": {
     "component-cookie": "^1.1.1",
+    "component-emitter": "^1.2.0",
     "draggabilly": "^1.2.0",
     "es5-shim": "^4.1.0",
     "eventie": "^1.0.6",

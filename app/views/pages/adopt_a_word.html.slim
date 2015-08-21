@@ -1,0 +1,75 @@
+- image = page.fields[:campaign_image].asset
+
+= area :masthead_title do
+  = page.root.title
+
+= area :main do
+
+  .adopt-a-word__main
+    .adopt-a-word__content.column-wrapper
+      .column-wide.clearfix
+        - if image
+          .adopt-a-word__campaign-image
+            /= page.fields[:campaign_image].asset.content_small_url
+            picture
+              erb:
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+              source srcset=image.content_medium_url media="(min-width: 480px)"
+              erb:
+                <!--[if IE 9]></video><![endif]-->
+              img src=image.content_small_url itemprop="hero_image"
+        / a.adopt-a-word__browse-button href="" Browse the list
+
+        .adopt-a-word__content-left
+          h1.adopt-a-word__title == widont_format markdown_line page.title
+          - if page.fields[:intro].data_present?
+            .adopt-a-word__intro.copy
+              = render_content page.fields[:intro]
+          - if page.fields[:campaign_image].data_present?
+
+
+
+
+  .adopt-a-word__description-wrapper.column-wrapper
+    .adopt-a-word__description-content.column-small.clearfix
+      .adopt-a-word__description-left.copy
+        = render_content page.fields[:description_left]
+      .adopt-a-word__description-right.copy
+        p.adopt-a-word__list-description
+          = page.fields[:list_description]
+        = render_content page.fields[:description_right]
+
+  .adopt-a-word__words-header.column-wrapper
+    .column-small
+      h1.adopt-a-word__words-title
+        'Adopt your word
+      .adopt-a-word__words-text
+        | Browse the list of words, once you find a word you would like to adopt, not only will you support the Wheeler Centre but you will be ensuring that your word doesn't end up in a dusty disused dictionary.
+
+  .adopt-a-word__words-wrapper.column-wrapper
+    .column-wide
+      - if page.words.present?
+        ul.adopt-a-word__words.clearfix
+          - page.words.each do |word|
+            - available_class = (word.fields['is_available'].value ? 'adopt-a-word-page__word-available' : 'adopt-a-word-page__word-unavailable')
+            li class=["adopt-a-word-page__word-item", available_class] data-view-adopt-word-toggle={toggleSelector: ".adopt-a-word__word-toggle", targetSelector: ".adopt-a-word__definition-wrapper"}.to_json
+
+              - if word.fields['is_available'].value
+                button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
+              - else
+                button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
+
+              .adopt-a-word__definition-wrapper
+                .adopt-a-word__definition-word= word.title
+                .adopt-a-word__word-definition= word.fields[:definition]
+                a.adopt-a-word__word-button href="https://heroix.everydayhero.com.au/event/adopt-a-word/donate?answer_1=#{word.title}"
+                  ' Adopt this word
+                .adopt-a-word__word-button--adopted
+                  ' Word adopted
+                a.adopt-a-word__word-toggle.adopt-a-word__word-close href="#" close
+
+
+  .adopt-a-word__donation-info.column-wrapper
+    .column-narrow
+      h2.adopt-a-word__donation-info-title How the money is used
+      .adopt-a-word__donation-text.copy= render_content page.fields[:donation_info]
