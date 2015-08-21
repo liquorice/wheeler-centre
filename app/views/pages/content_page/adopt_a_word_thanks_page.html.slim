@@ -5,12 +5,19 @@
   .content-page__main.column-wrapper
     .content-page__header
       h1.content-page__title == widont_format markdown_line page.title
-    .content-page__content.clearfix
-      - if page.fields[:intro].data_present?
-        .content-page__intro.adopt-a-word__intro
-          = render_content_in_sections page.fields[:intro]
-      .adopt-a-word__adpoted-word
-          = request.query_parameters[:answer_1]
-      - if page.fields[:body].data_present?
-        .content-page__body.adopt-a-word__body
-          = render_content_in_sections page.fields["body"]
+
+
+
+    .content-page__content.column-wrapper.clearfix
+        .column-small
+          - if page.fields[:intro].data_present?
+            .content-page__intro.copy
+              p.adopt-a-word__intro 
+                /= page.fields[:intro]
+                /= request.query_parameters[:answer_1]
+
+                == strip_html(render_content(page.fields[:intro]), "i em strong br")
+                span.adopt-a-word__intro-word= request.query_parameters[:answer_1]
+
+          - if page.fields[:body].data_present?
+            = render_content_in_sections page.fields["body"]
