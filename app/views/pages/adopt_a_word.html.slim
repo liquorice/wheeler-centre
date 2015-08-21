@@ -18,7 +18,6 @@
               erb:
                 <!--[if IE 9]></video><![endif]-->
               img src=image.content_small_url itemprop="hero_image"
-        / a.adopt-a-word__browse-button href="" Browse the list
 
         .adopt-a-word__content-left
           h1.adopt-a-word__title == widont_format markdown_line page.title
@@ -26,8 +25,6 @@
             .adopt-a-word__intro.copy
               = render_content page.fields[:intro]
           - if page.fields[:campaign_image].data_present?
-
-
 
 
   .adopt-a-word__description-wrapper.column-wrapper
@@ -42,9 +39,9 @@
   .adopt-a-word__words-header.column-wrapper
     .column-small
       h1.adopt-a-word__words-title
-        'Adopt your word
+        ' Adopt your word
       .adopt-a-word__words-text
-        | Browse the list of words, once you find a word you would like to adopt, not only will you support the Wheeler Centre but you will be ensuring that your word doesn't end up in a dusty disused dictionary.
+        = render_content page.fields[:donation_intro]
 
   .adopt-a-word__words-wrapper.column-wrapper
     .column-wide
