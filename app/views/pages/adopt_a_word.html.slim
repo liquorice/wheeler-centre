@@ -64,7 +64,10 @@
                 .adopt-a-word__word-definition= word.fields[:definition]
                 a.adopt-a-word__word-button href="https://heroix.everydayhero.com.au/event/adopt-a-word/donate?answer_1=#{word.title}"
                   ' Adopt this word
+                .adopt-a-word__word-button--adopted
+                  ' Word adopted
                 a.adopt-a-word__word-toggle.adopt-a-word__word-close href="#" close
+
 
   .adopt-a-word__donation-info.column-wrapper
     .column-narrow
