@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512051819) do
+ActiveRecord::Schema.define(version: 20150827233751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,21 +19,21 @@ ActiveRecord::Schema.define(version: 20150512051819) do
   enable_extension "uuid-ossp"
 
   create_table "assets", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.string   "file_name",                              null: false
-    t.string   "file_basename",                          null: false
-    t.string   "file_ext",                               null: false
-    t.integer  "file_size",                              null: false
-    t.string   "file_mime",                              null: false
-    t.string   "assembly_id",                            null: false
-    t.string   "assembly_url",                           null: false
+    t.string   "file_name",                                        null: false
+    t.string   "file_basename",                                    null: false
+    t.string   "file_ext",                                         null: false
+    t.integer  "file_size",                 limit: 8,              null: false
+    t.string   "file_mime",                                        null: false
+    t.string   "assembly_id",                                      null: false
+    t.string   "assembly_url",                                     null: false
     t.float    "upload_duration"
     t.float    "execution_duration"
     t.string   "assembly_message"
-    t.json     "file_meta",                 default: {}, null: false
-    t.json     "results",                   default: {}, null: false
+    t.json     "file_meta",                           default: {}, null: false
+    t.json     "results",                             default: {}, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.uuid     "site_id",                                null: false
+    t.uuid     "site_id",                                          null: false
     t.string   "title"
     t.text     "description"
     t.string   "attribution"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150512051819) do
     t.string   "blueprint_caption"
     t.string   "blueprint_assoc"
     t.integer  "recording_id"
-    t.string   "file_types",                default: [],              array: true
+    t.string   "file_types",                          default: [],              array: true
   end
 
   add_index "assets", ["file_types"], name: "index_assets_on_file_types", using: :btree
