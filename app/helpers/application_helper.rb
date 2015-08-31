@@ -27,8 +27,12 @@ module ApplicationHelper
     render_content content_field, options, filters
   end
 
+  def canonical_domain
+    (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}")
+  end
+
   def url_with_domain(url)
-    (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}") + "/" + url.gsub(/^\//, '')
+    canonical_domain + "/" + url.gsub(/^\//, '')
   end
 
   def human_boolean(bool)
@@ -54,11 +58,25 @@ module ApplicationHelper
     words).html_safe
   end
 
-  def strip_html(html, allowed_tags = "p i em strong br", allowed_attributes = {})
+  def strip_html(html, allowed_tags = "p i em strong br", allowed_attributes = {}, allowed_protocols = {})
     Sanitize.fragment(html, Sanitize::Config.merge(Sanitize::Config::RESTRICTED,
       :elements => allowed_tags.split(" "),
-      :attributes => allowed_attributes
+      :attributes => allowed_attributes,
+      :protocols => allowed_protocols
     ))
+  end
+
+  def replace_absolute_links_with_canonical_domain(html)
+    doc = Nokogiri::HTML::DocumentFragment.parse html
+    links = doc.css("[href^='/']:not([href^='//'])")
+    links.each do |link|
+      link.attributes["href"].value = canonical_domain + link.attributes["href"].value
+    end
+    srcs = doc.css("[src^='/']:not([src^='//'])")
+    srcs.each do |src|
+      src.attributes["src"].value = canonical_domain + src.attributes["src"].value
+    end
+    doc.to_html
   end
 
   # Cribbed from Padrino:
