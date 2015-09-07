@@ -42,7 +42,7 @@ module ApplicationHelper
   def duration_to_hms(duration, options={})
     trim_hours = options[:trim_hours] || false
     format = trim_hours ? "%M:%S" : "%H:%M:%S"
-    Time.at(duration).gmtime.strftime(format)
+    Time.at(duration).utc.strftime(format)
   end
 
   ### Application specific helpers

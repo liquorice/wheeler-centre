@@ -49,7 +49,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
           end
           xml.item do
             xml.title episode.title
-            xml.dc :creator, (episode.fields[:people].data_present? ? episode.fields[:people].pages.map {|person| person.title} : "The Wheeler Centre")
+            xml.dc :creator, (episode.fields[:people].data_present? ? episode.fields[:people].pages.map {|person| person.title}.to_sentence : "The Wheeler Centre")
             if episode.fields[:publish_date].data_present?
               xml.pubDate episode.fields[:publish_date].value.rfc2822
             else
@@ -74,7 +74,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               else
                 0
               end
-                xml.itunes :duration, duration_to_hms(duration)
+              xml.itunes :duration, duration_to_hms(duration)
               xml.enclosure url: episode.audio_url, length: episode.audio_result["size"], type: "audio/mpeg"
             end
           end
