@@ -175,11 +175,12 @@
     },
 
     onPagesSelectorUpdate: function(pages) {
+      var value = _.extend({}, this.state.value, {
+        page_ids: _.map(pages, function(page) { return page.id; }),
+        pages: pages
+      });
       this.setState({
-        value: {
-          page_ids: _.map(pages, function(page) { return page.id; }),
-          pages: pages
-        }
+        value: value
       });
     },
 
