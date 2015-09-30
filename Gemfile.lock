@@ -108,7 +108,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     color (1.7.1)
-    contracts (0.11.0)
+    contracts (0.12.0)
     crass (1.0.1)
     dalli (2.7.4)
     database_cleaner (1.4.1)
@@ -264,7 +264,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    heracles (1.0.0)
+    heracles (1.0.2)
       activejob
       acts-as-taggable-on (~> 3.4.3)
       ancestry (~> 2.1.0)
@@ -314,7 +314,7 @@ GEM
       transloadit-rails (~> 1.1.1)
       turbolinks (~> 2.5.3)
       varnisher (~> 1.1.0)
-    highline (1.6.21)
+    highline (1.7.7)
     hike (1.2.3)
     hitimes (1.2.2)
     html_truncator (0.4.1)
@@ -331,8 +331,7 @@ GEM
     jbuilder (2.2.16)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jmespath (1.0.2)
-      multi_json (~> 1.0)
+    jmespath (1.1.3)
     json (1.8.3)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -389,8 +388,8 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     pr_geohash (1.0.0)
-    progress_bar (1.0.3)
-      highline (~> 1.6.1)
+    progress_bar (1.0.5)
+      highline (~> 1.6)
       options (~> 2.3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -434,11 +433,11 @@ GEM
     rails-assets-momentjs (2.9.0)
     rails-assets-nprogress (0.1.6)
     rails-assets-pikaday (1.3.3)
-    rails-assets-qunit (1.18.0)
+    rails-assets-qunit (1.19.0)
     rails-assets-react (0.4.2)
     rails-assets-react-radio-group (0.1.2)
       rails-assets-react (~> 0.4.0)
-    rails-assets-select2 (3.5.2)
+    rails-assets-select2 (3.5.4)
       rails-assets-jquery (>= 1.7.1)
     rails-assets-selectivizr (1.0.2)
     rails-assets-speakingurl (1.1.5)
@@ -468,7 +467,7 @@ GEM
       react-source (= 0.9.0)
     react-source (0.9.0)
     redcarpet (3.2.3)
-    render_anywhere (0.0.11)
+    render_anywhere (0.0.12)
       rails (>= 3.0.7)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
@@ -608,7 +607,7 @@ DEPENDENCIES
   guard (~> 2)
   guard-livereload
   guard-rspec
-  heracles (~> 1.0.0)!
+  heracles (~> 1.0.2)!
   html_truncator
   humanize (~> 1.1.0)
   iso8601
@@ -648,6 +647,3 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   varnisher
-
-BUNDLED WITH
-  1.10.6
