@@ -4,6 +4,12 @@ module ApplicationHelper
   # Common helpers sit under lib/helpers
   include TextFormattingHelper
 
+  def development_javascript
+    javascript_include_tag(
+      "http://#{ENV['ASSETS_DEVELOPMENT_HOST']}:#{ENV['ASSETS_WEBPACK_PORT']}/webpack-dev-server.js",
+      "data-turbolinks-track" => true)
+  end
+
   ### Heracles helpers
 
   # Use "content_small" by default when rendering image insertables. This can
@@ -301,7 +307,5 @@ module ApplicationHelper
   def is_or_is_descendant_of(page, ancestor)
     (page.id == ancestor.id || descendant_of(page, ancestor))
   end
-
-
 
 end

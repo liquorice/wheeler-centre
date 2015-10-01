@@ -1,3 +1,14 @@
-.flarum-discussion
-  / Script kids!
-  p If I were a Flarum Discussion, I would totes be here.
+.flarum-discussion.flarum-discussion--inline
+  h2.flarum-discussion__title = discussion_title
+  .flarum-discussion__before.gradient-top-down
+  .flarum-discussion__inner
+    iframe.flarum-discussion__embed src=discussion_embed_url frameborder="none" data-view-iframe-resizer={maxHeight: max_height, scrolling: true}.to_json
+  .flarum-discussion__after.gradient-bottom-up
+  .column-small
+    .flarum-discussion__footer
+      p
+        ' Head over this way and
+        = link_to "join the discussion", discussion_url
+        '.
+    .flarum-discussion__disclaimer
+      p = I18n.t("discussion.inline_disclaimer")
