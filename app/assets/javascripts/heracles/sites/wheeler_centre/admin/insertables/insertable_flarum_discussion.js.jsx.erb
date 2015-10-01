@@ -5,9 +5,12 @@
 //= stub lodash
 //= stub jquery
 //= stub react
+//= stub select2
 //= stub heracles/admin/components/available_insertables
 
 (function() {
+
+  var FLARUM_AUTH_TOKEN = '<%= ENV["FLARUM_AUTH_TOKEN"] %>';
 
   /**
    * Insertable display class
@@ -42,6 +45,18 @@
 
 
   /**
+   * Format the discussions for the Select2
+   * @param  {Object} discussion As returned by the Flarum API
+   * @return {String}            A string of HTML
+   */
+  function formatDiscussions(discussion) {
+    return (
+      "<div class=\"select2-result__primary\">\n  " + discussion.attributes.title + "<span class=\"field-mono\">(?)</span>\n</div>"
+    )
+  }
+
+
+  /**
    * Insertable edit class
    * Rendered into the sidebar
    *
@@ -53,7 +68,15 @@
 
   var InsertableFlarumDiscussionEdit = React.createClass({
 
+    /**
+     * Mixin the global-Heracles InsertableEditMixin. This is React's (old)
+     * method for sharing common methods and properties between components.
+     */
     mixins: [InsertableEditMixin],
+
+    componentDidMount: function() {
+      // var discussionEl = this.refs.getDOMNode();
+    },
 
     render: function() {
       return (
@@ -65,6 +88,8 @@
                 <label className="field-label" htmlFor="edit__caption">Events</label>
               </div>
               <div className="field-main">
+                <input className="field-select2 field-addon-input" type="hidden" ref="discussion"/>
+                <input ref="discussion_id" id="edit__discussion-id" className="field-text-input" value={this.state.value.discussion_id} onChange={this.handleChange.bind(this, "discussion_id")} placeholder="Discussion ID"/>
               </div>
             </div>
             <div className="field">
@@ -77,19 +102,10 @@
             </div>
             <div className="field">
               <div className="field-header">
-                <label className="field-label" htmlFor="edit__display">Display</label>
+                <label className="field-label" htmlFor="edit__max_height">Max-height (in pixels)</label>
               </div>
               <div className="field-main">
-                <select ref="alt" id="edit__display" className="field-select" value={this.state.value.display} onChange={this.handleChange.bind(this, "display")}>
-                  <option/>
-                  <option value="Left-aligned">Left column</option>
-                  <option value="Right-aligned">Right column</option>
-                  <option value="Right-aligned-narrow">Right column (narrow)</option>
-                  <option>Grid narrow</option>
-                  <option>Grid mid</option>
-                  <option>Grid wide</option>
-                  <option value="Full-width">Grid full-width</option>
-                </select>
+                <input ref="max_height" id="edit__max_height" className="field-text-input" type="number" value={this.state.value.max_height} onChange={this.handleChange.bind(this, "max_height")} placeholder="Maximum height"/>
               </div>
             </div>
             <button type="submit" className="button button--highlight">Save changes to events insertable</button>
@@ -98,8 +114,13 @@
       );
     },
 
-    handleChange: function(ref, e) {
-      this.state.value[ref] = e.target.value;
+    /**
+     * Handle changing data from the form into the `state` object
+     * @param  {String} property The property on `state` to change the value of.
+     * @param  {Event} e         The event object from React.
+     */
+    handleChange: function(property, e) {
+      this.state.value[property] = e.target.value;
       this.setState({value: this.state.value});
     }
 
@@ -107,7 +128,7 @@
 
 
   /**
-   * Register the insertable in Heracles
+   * Register the insertable in the HeraclesAdmin global
    */
 
   HeraclesAdmin.availableInsertables.add({

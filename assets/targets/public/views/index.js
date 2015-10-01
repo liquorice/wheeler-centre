@@ -115,4 +115,8 @@ views.adoptWordToggle = function(el, props) {
   new AdoptAWordToggle(el, props);
 };
 
+var iframeResizer = require("../vendor/iframe-resizer.js");
+views.iframeResizer = function(el, props) {
+  var iframe = iframeResizer(props, el);
+};
 module.exports = views;
