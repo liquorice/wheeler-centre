@@ -19,9 +19,6 @@
     @include pad(all, mid);
     background-color: $green-light;
     flex: 1;
-    dt {
-      @include pad(bottom, small);
-    }
   }
   .insertable-display-flarum__meta {
     @include pad(all, mid);

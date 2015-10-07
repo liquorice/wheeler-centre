@@ -24,6 +24,12 @@
     mixins: [InsertableDisplayMixin],
 
     render: function() {
+      var discussionTitle;
+      var discussionURL;
+      if (this.state.value.discussion_id) {
+        discussionTitle = "#" + this.state.value.discussion_id + " — " + this.state.value.discussion_title;
+        discussionURL = "http://" + FLARUM_HOST + "/d/" + this.state.value.discussion_id;
+      }
       return (
         <div className="insertable-display insertable-display-flarum" contentEditable="false">
           <div className="insertable-display-flarum__details">
@@ -41,7 +47,7 @@
               <div className="insertable-display-flarum__pages">
                 <dl className="field-details-list">
                   <dt>Embedded discussion</dt>
-                  <dd>#{this.state.value.discussion_id} — {this.state.value.discussion_title}</dd>
+                  <dd>{(discussionURL) ? <a href={discussionURL} target="_blank">{discussionTitle}</a> : discussionTitle}</dd>
                   <dt>Date</dt>
                   <dd>{moment(this.state.value.discussion_start_time).format("D MMM YYYY")}</dd>
                 </dl>
