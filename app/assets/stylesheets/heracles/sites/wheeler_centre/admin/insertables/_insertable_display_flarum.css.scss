@@ -1,0 +1,30 @@
+.insertable-display-flarum__details {
+  border: 1px solid $green-mid;
+  overflow: hidden;
+  min-height: 60px;
+}
+
+  .insertable-display-flarum__controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+  }
+
+  .insertable-display-flarum__content {
+    display: flex;
+  }
+
+  .insertable-display-flarum__pages {
+    @include pad(all, mid);
+    background-color: $green-light;
+    flex: 1;
+    dt {
+      @include pad(bottom, small);
+    }
+  }
+  .insertable-display-flarum__meta {
+    @include pad(all, mid);
+    border-left: 1px solid $green-mid;
+    flex: 1;
+  }
