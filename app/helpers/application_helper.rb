@@ -86,7 +86,8 @@ module ApplicationHelper
     tag(:link, options)
   end
 
-  def format_date(start_date,end_date,options={})
+  def format_date(start_date, end_date, options={})
+    return "" unless start_date.present?
     format = options[:format].to_sym
     date_only = false || options[:date_only]
     if !end_date.present?
@@ -230,7 +231,10 @@ module ApplicationHelper
     if event.series
       title = "#{event.series.title}: "
     end
-    title += "#{event.title}, #{format_date(event.fields[:start_date].value_in_time_zone, event.fields[:end_date].value_in_time_zone, format: "medium_date")}"
+    title += "#{event.title}"
+    if event.fields[:start_date].data_present?
+      title += ", #{format_date(event.fields[:start_date].value_in_time_zone, event.fields[:end_date].value_in_time_zone, format: "medium_date")}"
+    end
     title
   end
 
