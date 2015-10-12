@@ -541,6 +541,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    staccato (0.4.2)
     sunspot (2.1.1)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
@@ -642,8 +643,12 @@ DEPENDENCIES
   slim-rails
   spring
   spring-commands-rspec
+  staccato
   sunspot-queue!
   sunspot_solr
   turbolinks
   uglifier (>= 1.3.0)
   varnisher
+
+BUNDLED WITH
+   1.10.6
