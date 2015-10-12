@@ -1,23 +1,25 @@
-/ metaQuery breakpoints should come _before_ metaQuery is called in the
-/ inline_boot_javascript partial
-meta name="viewport" content="width=device-width, initial-scale=1.0"
-meta name="breakpoint" content="phone" media="(max-width: 479px)"
-meta name="breakpoint" content="phone-wide" media="(min-width: 480px) and (max-width: 639px)"
-meta name="breakpoint" content="tablet" media="(min-width: 640px) and (max-width: 989px)"
-meta name="breakpoint" content="tablet-wide" media="(min-width: 990px) and (max-width: 1079px)"
-meta name="breakpoint" content="widescreen" media="(min-width: 1080px) and (max-width: 1419px)"
-meta name="breakpoint" content="widescreen-wide" media="(min-width: 1420px)"
-meta name="breakpoint" content="retina" media="only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx)"
+- cache ["metaquery-breakpoints-1"] do
 
-/ Micro breakpoints
-meta name="breakpoint" content="w-1600" media="(max-width: 1600px)"
-meta name="breakpoint" content="w-1450" media="(max-width: 1450px)"
-meta name="breakpoint" content="w-1200" media="(max-width: 1200px)"
-meta name="breakpoint" content="w-999" media="(max-width: 999px)"
-meta name="breakpoint" content="w-879" media="(max-width: 879px)"
-meta name="breakpoint" content="w-799" media="(max-width: 799px)"
-meta name="breakpoint" content="w-730" media="(max-width: 730px)"
-meta name="breakpoint" content="w-699" media="(max-width: 699px)"
-meta name="breakpoint" content="w-669" media="(max-width: 669px)"
-meta name="breakpoint" content="w-599" media="(max-width: 599px)"
+  / metaQuery breakpoints should come _before_ metaQuery is called in the
+  / inline_boot_javascript partial
+  meta name="viewport" content="width=device-width, initial-scale=1.0"
+  meta name="breakpoint" content="phone" media="(max-width: 479px)"
+  meta name="breakpoint" content="phone-wide" media="(min-width: 480px) and (max-width: 639px)"
+  meta name="breakpoint" content="tablet" media="(min-width: 640px) and (max-width: 989px)"
+  meta name="breakpoint" content="tablet-wide" media="(min-width: 990px) and (max-width: 1079px)"
+  meta name="breakpoint" content="widescreen" media="(min-width: 1080px) and (max-width: 1419px)"
+  meta name="breakpoint" content="widescreen-wide" media="(min-width: 1420px)"
+  meta name="breakpoint" content="retina" media="only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (   min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx)"
+
+  / Micro breakpoints
+  meta name="breakpoint" content="w-1600" media="(max-width: 1600px)"
+  meta name="breakpoint" content="w-1450" media="(max-width: 1450px)"
+  meta name="breakpoint" content="w-1200" media="(max-width: 1200px)"
+  meta name="breakpoint" content="w-999" media="(max-width: 999px)"
+  meta name="breakpoint" content="w-879" media="(max-width: 879px)"
+  meta name="breakpoint" content="w-799" media="(max-width: 799px)"
+  meta name="breakpoint" content="w-730" media="(max-width: 730px)"
+  meta name="breakpoint" content="w-699" media="(max-width: 699px)"
+  meta name="breakpoint" content="w-669" media="(max-width: 669px)"
+  meta name="breakpoint" content="w-599" media="(max-width: 599px)"
 
