@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # Stat tracking
+  get "_track/event", to: "tracking#event"
+  get "_track/pageview", to: "tracking#pageview"
+  get "_track/social", to: "tracking#social"
+
   # Embed assets point
   get "/embed/:asset_type/:asset_id" => "embed_asset#show", as: :embed_asset
 
