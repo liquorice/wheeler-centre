@@ -27,7 +27,7 @@ module Heracles
 
         helper_method \
         def discussion_title
-          markdown_line(data[:title]).html_safe || "Join the discussion"
+          data[:title].present? ? markdown_line(data[:title]).html_safe : "Join the discussion"
         end
 
         helper_method \
