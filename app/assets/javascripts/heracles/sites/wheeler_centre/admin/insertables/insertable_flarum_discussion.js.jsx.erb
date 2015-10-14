@@ -255,7 +255,7 @@
     handleChange: function(property, e) {
       var value = _.extend({}, this.state.value);
       value[property] = e.target.value;
-      this.setState({value: this.state.value});
+      this.setState({value: value});
     },
 
     /**
