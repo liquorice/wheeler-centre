@@ -29,7 +29,7 @@ module Heracles
 
         def poster_image_aspect_class
           poster_aspect_class = "video-player__poster--landscape"
-          if @poster_asset && @poster_asset.file_meta["aspect_ratio"] <= 1.333333
+          if @poster_asset && @poster_asset.file_meta["aspect_ratio"].to_f <= 1.333333
             poster_aspect_class = "video-player__poster--portrait"
           end
           poster_aspect_class

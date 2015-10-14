@@ -6,7 +6,7 @@
       :style => "color: #009e8c;"
     ) if event.venue.present?
   %>
-  <% date = format_date(event.fields[:start_date].value, event.fields[:end_date].value, format: "long_date") %>
+  <% date = format_date(event.fields[:start_date].value_in_time_zone, event.fields[:end_date].value_in_time_zone, format: "long_date") %>
 
   <div style="background: #fff; padding:2%; width: 96%; overflow:hidden;">
     <div style="width: 130px; margin-top: 10px; float: left;">

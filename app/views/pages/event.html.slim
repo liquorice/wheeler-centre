@@ -19,22 +19,26 @@
   link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
+
   ' Events
 
 = area :masthead_contextual_navigation do
+
   - pages = [events_page] + events_page.children.in_order.visible.published.where(collection_id: nil)
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
+
   .event data-view-event=true itemscope=true itemtype="http://data-vocabulary.org/Event"
     - cache ["event-intro-1", page, page.recordings] do
       - unless page.upcoming?
         .intro.event__intro.column-wrapper.gradient-bottom-up
           .column-narrow.copy
             p
-              ' This is an event from
-              em = time_ago_in_words page.fields[:start_date].value
-              '  ago.
+              - page.fields[:start_date].data_present?
+                ' This is an event from
+                em = time_ago_in_words page.fields[:start_date].value_in_time_zone
+                '  ago.
               / Show a link to the single recording
               - if page.recordings && page.recordings.length == 1
                 ' If you missed it, you can catch up on
@@ -84,11 +88,11 @@
         - cache ["event-content-2", page] do
           .event__meta class=("event__meta--past" unless page.upcoming?)
             - if page.fields[:display_date].value.present?
-              time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
+              time.event__date-time itemprop="startDate" datetime=(l(page.fields[:start_date].value_in_time_zone, format: :rfc_3339) if page.fields[:start_date].data_present?)
                 = page.fields[:display_date].value
             - else
-              time.event__date-time itemprop="startDate" datetime=l(page.fields[:start_date].value, format: :rfc_3339)
-                = format_date(page.fields[:start_date].value, page.fields[:end_date].value, format: "long_date")
+              time.event__date-time itemprop="startDate" datetime=(l(page.fields[:start_date].value_in_time_zone, format: :rfc_3339) if page.fields[:start_date].data_present?)
+                = format_date(page.fields[:start_date].value_in_time_zone, page.fields[:end_date].value_in_time_zone, format: "long_date")
             - if page.venue
               span.event__venue-name
                 ' at

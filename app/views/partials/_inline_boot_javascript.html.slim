@@ -4,7 +4,8 @@
 /
 / Files referenced via `Rails.application.assets.find_asset` must be in one
 / of the sprockets lookup paths, so _not_ in our custom asset setup
-script
-  = Rails.application.assets.find_asset('domready-legacy').to_s.html_safe
-  = Rails.application.assets.find_asset('matchmedia').to_s.html_safe
-  = Rails.application.assets.find_asset('metaquery').to_s.html_safe
+- cache ["inline-boot-javascript-1"] do
+  script
+    = Rails.application.assets.find_asset('domready-legacy').to_s.html_safe
+    = Rails.application.assets.find_asset('matchmedia').to_s.html_safe
+    = Rails.application.assets.find_asset('metaquery').to_s.html_safe
