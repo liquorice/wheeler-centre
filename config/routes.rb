@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # Stat tracking
   get "_track/event", to: "tracking#event"
-  match "/_track.png", to: "tracking#pageview", via: :get
+  get "_track.png", to: "tracking#pageview"
   get "_track/social", to: "tracking#social"
 
   # Embed assets point
