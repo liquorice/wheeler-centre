@@ -1,5 +1,6 @@
 .flarum-discussion {
   padding-bottom: 2rem;
+  clear: both;
 }
   .flarum-discussion__embed {
     border: none;
