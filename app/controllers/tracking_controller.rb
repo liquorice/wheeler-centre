@@ -18,7 +18,8 @@ class TrackingController < ActionController::Metal
     tracker.pageview(
       location: params[:location],
       title: params[:title],
-      path: params[:path])
+      path: params[:path],
+      data_source: params[:data_source]) # Data source not reporting
   end
 
   def social

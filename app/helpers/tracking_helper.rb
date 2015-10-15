@@ -6,8 +6,9 @@ module TrackingHelper
   end
 
   def pageview_url(target)
-    track_pageview_path(location: target, title: page.title,
-      path: page.absolute_url)
+    url = track_pageview_path(location: url_with_domain(page.absolute_url),
+    title: page.title, path: page.absolute_url, data_source: "png")
+    raw("<img src=#{url}, width=1, height=1>")
   end
 
   def social_url(target, options={})
