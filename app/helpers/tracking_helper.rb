@@ -8,7 +8,7 @@ module TrackingHelper
 
   def pageview_url(target)
     url = track_pageview_path(location: url_with_domain(page.absolute_url),
-      title: page.title, path: page.absolute_url, data_source: "png")
+      title: page.title, path: page.absolute_url, campaign_id: "png")
     raw("<img src=#{url}, width=1, height=1>")
   end
 

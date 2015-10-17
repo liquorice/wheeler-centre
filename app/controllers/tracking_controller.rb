@@ -20,7 +20,7 @@ class TrackingController < ActionController::Metal
       location: params[:location],
       title: params[:title],
       path: params[:path],
-      data_source: params[:data_source]) # Data source not reporting
+      campaign_id: params[:campaign_id])
   end
 
   def social
