@@ -9,7 +9,8 @@ class TrackingController < ActionController::Metal
       document_title: params[:title],
       document_path: params[:path],
       category: params[:category],
-      action: params[:track_action])
+      action: params[:track_action],
+      label: params[:label])
     redirect_to params[:target]
   end
 
