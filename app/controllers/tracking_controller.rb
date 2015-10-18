@@ -1,7 +1,6 @@
 class TrackingController < ActionController::Metal
   include ActionController::Redirecting
   include AbstractController::Callbacks
-  include Rails.application.routes.url_helpers
 
   before_action :setup_tracker
 
