@@ -17,9 +17,9 @@ class TrackingController < ActionController::Metal
   def pageview
     tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
     tracker.pageview(
-      location: params[:location],
-      title: params[:title],
-      path: params[:path],
+      document_location: params[:location],
+      document_title: params[:title],
+      document_path: params[:path],
       campaign_id: params[:campaign_id])
   end
 
