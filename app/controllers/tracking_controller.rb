@@ -1,10 +1,12 @@
 class TrackingController < ActionController::Metal
   include ActionController::Redirecting
+  include AbstractController::Callbacks
   include Rails.application.routes.url_helpers
 
+  before_action :setup_tracker
+
   def event
-    tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
-    tracker.event(
+    @tracker.event(
       document_location: params[:location],
       document_title: params[:title],
       document_path: params[:path],
@@ -15,8 +17,7 @@ class TrackingController < ActionController::Metal
   end
 
   def pageview
-    tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
-    tracker.pageview(
+    @tracker.pageview(
       document_location: params[:location],
       document_title: params[:title],
       document_path: params[:path],
@@ -24,8 +25,7 @@ class TrackingController < ActionController::Metal
   end
 
   def social
-    tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
-    tracker.social(
+    @tracker.social(
       document_location: params[:location],
       document_title: params[:title],
       document_path: params[:path],
@@ -33,5 +33,11 @@ class TrackingController < ActionController::Metal
       network: params[:network],
       target: params[:target])
     redirect_to params[:target]
+  end
+
+  private
+
+  def setup_tracker
+    @tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
   end
 end
