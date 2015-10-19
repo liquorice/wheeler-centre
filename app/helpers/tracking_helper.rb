@@ -20,7 +20,7 @@ module TrackingHelper
   #
   # Returns an event tracking URL
   def track_event_url(target, options = {})
-    if PERMITTED_HOSTS.any? { |h| target.include? h }
+    if permitted_host?(target)
       track_event_path(
         target: target,
         location: options[:location],
@@ -50,7 +50,7 @@ module TrackingHelper
   #
   # Returns a pageview tracking pixel for use where the Google Analytics JS can't be executed (eg in an RSS reader)
   def track_pageview_url(target)
-    if PERMITTED_HOSTS.any? { |h| target.include? h }
+    if permitted_host?(target)
       url = track_pageview_path(
         location: options[:location],
         title: options[:title],
@@ -79,7 +79,7 @@ module TrackingHelper
   #
   # Returns a social interaction tracking URL
   def track_social_url(target, options = {})
-    if PERMITTED_HOSTS.any? { |h| target.include? h }
+    if permitted_host?(target)
       track_social_path(
         target: target,
         location: options[:location],
@@ -90,5 +90,9 @@ module TrackingHelper
     else
       target
     end
+  end
+
+  def permitted_host?(target)
+    PERMITTED_HOSTS.any? { |h| target.include? h }
   end
 end
