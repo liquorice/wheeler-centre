@@ -1,8 +1,4 @@
 module TrackingHelper
-  PERMITTED_HOSTS = %w(
-    localhost
-  ).freeze
-
   DEFAULT_CAMPAIGN_ID = "external_tracking"
 
   # Generate a tracking URL for an event such as a file download or podcast subscription
@@ -52,7 +48,7 @@ module TrackingHelper
   #   location: http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
   #   path: "/broadcasts/podcasts/the-fifth-estate", campaign_id: "external_tracking"
   #
-  # Returns a pageview tracking pixel for use where the Google Analytics JS can't be executed (eg in an RSS reader)
+  # Returns a pageview tracking URL for use where the Google Analytics JS can't be executed (eg in an RSS reader)
   def track_pageview_url(target, options = {})
     if permitted_host?(target)
       path = page.absolute_url
@@ -67,7 +63,6 @@ module TrackingHelper
       target
     end
   end
-
   # Generate a tracking URL for a social interaction
   #
   # target - The URL for which you want to track social interactions
@@ -101,6 +96,6 @@ module TrackingHelper
   end
 
   def permitted_host?(target)
-    PERMITTED_HOSTS.any? { |h| target.include? h }
+    ENV["PERMITTED_TRACKING_HOSTS"].split(",").any? { |h| target.include? h }
   end
 end
