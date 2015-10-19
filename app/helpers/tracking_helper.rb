@@ -3,6 +3,8 @@ module TrackingHelper
     localhost
   ).freeze
 
+  DEFAULT_CAMPAIGN_ID = "external_tracking"
+
   # Generate a tracking URL for an event such as a file download or podcast subscription
   #
   # target - The URL for which you want to track events
@@ -21,11 +23,13 @@ module TrackingHelper
   # Returns an event tracking URL
   def track_event_url(target, options = {})
     if permitted_host?(target)
+      path = page.absolute_url
+      url = url_with_domain(path)
       track_event_path(
         target: target,
-        location: options[:location],
-        title: options[:title],
-        path: options[:path],
+        location: url,
+        title: options[:title] || page.title,
+        path: path,
         category: options[:category],
         track_action: options[:track_action],
         label: target)
@@ -49,14 +53,16 @@ module TrackingHelper
   #   path: "/broadcasts/podcasts/the-fifth-estate", campaign_id: "external_tracking"
   #
   # Returns a pageview tracking pixel for use where the Google Analytics JS can't be executed (eg in an RSS reader)
-  def track_pageview_url(target)
+  def track_pageview_url(target, options = {})
     if permitted_host?(target)
-      url = track_pageview_path(
-        location: options[:location],
-        title: options[:title],
-        path: options[:path],
-        campaign_id: options[:campaign_id])
-      raw("<img src=#{url} width=1 height=1>")
+      path = page.absolute_url
+      url = url_with_domain(path)
+      tracking_url = track_pageview_path(
+        location: url,
+        title: options[:title] || page.title,
+        path: path,
+        campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID)
+      raw("<img src=#{tracking_url} width=1 height=1>")
     else
       target
     end
@@ -80,11 +86,13 @@ module TrackingHelper
   # Returns a social interaction tracking URL
   def track_social_url(target, options = {})
     if permitted_host?(target)
+      path = page.absolute_url
+      url = url_with_domain(path)
       track_social_path(
         target: target,
-        location: options[:location],
-        title: options[:title],
-        path: options[:path],
+        location: url,
+        title: options[:title] || page.title,
+        path: path,
         track_action: options[:action],
         network: options[:network])
     else
