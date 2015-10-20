@@ -7,10 +7,10 @@
     og: { \
       description: open_graph_summary,
       image: { \
-        url: (open_graph_image.content_small_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+        url: (open_graph_image.content_medium_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
       } \
     } \
   })
