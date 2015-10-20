@@ -28,7 +28,8 @@ module TrackingHelper
           path: options[:path],
           category: options[:category],
           track_action: options[:track_action],
-          label: url)
+          label: url
+        )
       else
         track_event_path(
           target: url,
@@ -37,7 +38,8 @@ module TrackingHelper
           path: options[:path],
           category: options[:category],
           track_action: options[:track_action],
-          label: url)
+          label: url
+        )
       end
     else
       url
@@ -48,10 +50,8 @@ module TrackingHelper
     url = asset.original_url
     track_event(
       url,
-      {
-        format: options[:format],
-        location: url
-      }
+      format: options[:format],
+      location: url
     )
   end
 
@@ -59,11 +59,9 @@ module TrackingHelper
     url = url_with_domain(page.absolute_url)
     track_event(
       url,
-      {
-        format: options[:format],
-        location: url,
-        title: options[:title] || page.title
-      }
+      format: options[:format],
+      location: url,
+      title: options[:title] || page.title
     )
   end
 
@@ -90,13 +88,15 @@ module TrackingHelper
           location: options[:location],
           title: options[:title],
           path: options[:path],
-          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID)
+          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
+        )
       else
         track_pageview_path(
           location: options[:location],
           title: options[:title],
           path: options[:path],
-          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID)
+          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
+        )
       end
     else
       url
@@ -107,10 +107,8 @@ module TrackingHelper
     url = asset.original_url
     track_pageview(
       url,
-      {
-        format: options[:format],
-        location: url
-      }
+      format: options[:format],
+      location: url
     )
   end
 
@@ -118,11 +116,9 @@ module TrackingHelper
     url = url_with_domain(page.absolute_url)
     track_pageview(
       url,
-      {
-        format: options[:format],
-        location: url,
-        title: options[:title] || page.title
-      }
+      format: options[:format],
+      location: url,
+      title: options[:title] || page.title
     )
   end
 
@@ -152,7 +148,8 @@ module TrackingHelper
           title: options[:title],
           path: options[:path],
           track_action: options[:action],
-          network: options[:network])
+          network: options[:network]
+        )
       else
         track_social_path(
           target: url,
@@ -160,7 +157,8 @@ module TrackingHelper
           title: options[:title],
           path: options[:path],
           track_action: options[:action],
-          network: options[:network])
+          network: options[:network]
+        )
       end
     else
       url
@@ -171,10 +169,8 @@ module TrackingHelper
     url = asset.original_url
     track_social(
       url,
-      {
-        format: options[:format],
-        location: url
-      }
+      format: options[:format],
+      location: url
     )
   end
 
