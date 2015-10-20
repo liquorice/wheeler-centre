@@ -48,21 +48,19 @@ module TrackingHelper
 
   def track_event_for_asset(asset, options = {})
     url = asset.original_url
-    track_event(
-      url,
-      format: options[:format],
+    options = {
       location: url
-    )
+    }.merge(options)
+    track_event(url, options)
   end
 
   def track_event_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_event(
-      url,
-      format: options[:format],
+    options = {
       location: url,
       title: options[:title] || page.title
-    )
+    }.merge(options)
+    track_event(url, options)
   end
 
   # Generate a tracking URL for a pageview
@@ -105,21 +103,19 @@ module TrackingHelper
 
   def track_pageview_for_asset(asset, options = {})
     url = asset.original_url
-    track_pageview(
-      url,
-      format: options[:format],
+    options = {
       location: url
-    )
+    }.merge(options)
+    track_pageview(url, options)
   end
 
   def track_pageview_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_pageview(
-      url,
-      format: options[:format],
+    options = {
       location: url,
       title: options[:title] || page.title
-    )
+    }.merge(options)
+    track_pageview(url, options)
   end
 
   # Generate a tracking URL for a social interaction
@@ -167,23 +163,19 @@ module TrackingHelper
 
   def track_social_for_asset(asset, options = {})
     url = asset.original_url
-    track_social(
-      url,
-      format: options[:format],
+    options = {
       location: url
-    )
+    }.merge(options)
+    track_social(url, options)
   end
 
   def track_social_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_social(
-      url,
-      {
-        format: options[:format],
-        location: url,
-        title: options[:title] || page.title
-      }
-    )
+    options = {
+      location: url,
+      title: options[:title] || page.title
+    }.merge(options)
+    track_social(url, options)
   end
 
   def permitted_tracking_host?(url)
