@@ -18,14 +18,12 @@ module TrackingHelper
   #
   # Returns an event tracking URL
   def track_event_url(target, options = {})
-    if permitted_host?(target)
-      path = page.absolute_url
-      url = url_with_domain(path)
+    if permitted_tracking_host?(target)
       track_event_path(
         target: target,
-        location: url,
-        title: options[:title] || page.title,
-        path: path,
+        location: options[:location],
+        title: options[:title],
+        path: options[:path],
         category: options[:category],
         track_action: options[:track_action],
         label: target)
@@ -50,19 +48,39 @@ module TrackingHelper
   #
   # Returns a pageview tracking URL for use where the Google Analytics JS can't be executed (eg in an RSS reader)
   def track_pageview_url(target, options = {})
-    if permitted_host?(target)
-      path = page.absolute_url
-      url = url_with_domain(path)
+    if permitted_tracking_host?(target)
       tracking_url = track_pageview_path(
-        location: url,
-        title: options[:title] || page.title,
-        path: path,
+        location: options[:location],
+        title: options[:title],
+        path: options[:path],
         campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID)
       raw("<img src=#{tracking_url} width=1 height=1>")
     else
       target
     end
   end
+
+  def track_pageview_url_for_asset(asset, options = {})
+    url = asset.original_url
+    track_pageview_url(
+      url,
+      {
+        location: url
+      }
+    )
+  end
+
+  def track_pageview_url_for_page(page, options = {})
+    url = url_with_domain(page.absolute_url)
+    track_pageview_url(
+      url,
+      {
+        location: url,
+        title: options[:title] || page.title,
+      }
+    )
+  end
+
   # Generate a tracking URL for a social interaction
   #
   # target - The URL for which you want to track social interactions
@@ -80,14 +98,12 @@ module TrackingHelper
   #
   # Returns a social interaction tracking URL
   def track_social_url(target, options = {})
-    if permitted_host?(target)
-      path = page.absolute_url
-      url = url_with_domain(path)
+    if permitted_tracking_host?(target)
       track_social_path(
         target: target,
-        location: url,
-        title: options[:title] || page.title,
-        path: path,
+        location: options[:location],
+        title: options[:title],
+        path: options[:path],
         track_action: options[:action],
         network: options[:network])
     else
@@ -95,7 +111,7 @@ module TrackingHelper
     end
   end
 
-  def permitted_host?(target)
-    ENV["PERMITTED_TRACKING_HOSTS"].split(",").any? { |h| target.include? h }
+  def permitted_tracking_host?(target)
+    ENV["PERMITTED_TRACKING_HOSTS"].to_s.split(",").any? { |h| target.include? h }
   end
 end
