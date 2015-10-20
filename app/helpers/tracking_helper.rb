@@ -62,7 +62,7 @@ module TrackingHelper
       {
         format: options[:format],
         location: url,
-        title: options[:title] || page.title,
+        title: options[:title] || page.title
       }
     )
   end
@@ -121,7 +121,7 @@ module TrackingHelper
       {
         format: options[:format],
         location: url,
-        title: options[:title] || page.title,
+        title: options[:title] || page.title
       }
     )
   end
@@ -185,7 +185,7 @@ module TrackingHelper
       {
         format: options[:format],
         location: url,
-        title: options[:title] || page.title,
+        title: options[:title] || page.title
       }
     )
   end
