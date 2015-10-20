@@ -44,21 +44,23 @@ module TrackingHelper
     end
   end
 
-  def track_event_url_for_asset(asset, options = {})
+  def track_event_for_asset(asset, options = {})
     url = asset.original_url
-    track_event_url(
+    track_event(
       url,
       {
+        format: options[:format],
         location: url
       }
     )
   end
 
-  def track_event_url_for_page(page, options = {})
+  def track_event_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_event_url(
+    track_event(
       url,
       {
+        format: options[:format],
         location: url,
         title: options[:title] || page.title,
       }
@@ -101,21 +103,23 @@ module TrackingHelper
     end
   end
 
-  def track_pageview_url_for_asset(asset, options = {})
+  def track_pageview_for_asset(asset, options = {})
     url = asset.original_url
-    track_pageview_url(
+    track_pageview(
       url,
       {
+        format: options[:format],
         location: url
       }
     )
   end
 
-  def track_pageview_url_for_page(page, options = {})
+  def track_pageview_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_pageview_url(
+    track_pageview(
       url,
       {
+        format: options[:format],
         location: url,
         title: options[:title] || page.title,
       }
@@ -163,21 +167,23 @@ module TrackingHelper
     end
   end
 
-  def track_social_url_for_asset(asset, options = {})
+  def track_social_for_asset(asset, options = {})
     url = asset.original_url
-    track_social_url(
+    track_social(
       url,
       {
+        format: options[:format],
         location: url
       }
     )
   end
 
-  def track_social_url_for_page(page, options = {})
+  def track_social_for_page(page, options = {})
     url = url_with_domain(page.absolute_url)
-    track_social_url(
+    track_social(
       url,
       {
+        format: options[:format],
         location: url,
         title: options[:title] || page.title,
       }
