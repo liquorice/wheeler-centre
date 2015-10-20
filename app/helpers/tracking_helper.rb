@@ -32,6 +32,27 @@ module TrackingHelper
     end
   end
 
+  def track_event_url_for_asset(asset, options = {})
+    url = asset.original_url
+    track_event_url(
+      url,
+      {
+        location: url
+      }
+    )
+  end
+
+  def track_event_url_for_page(page, options = {})
+    url = url_with_domain(page.absolute_url)
+    track_event_url(
+      url,
+      {
+        location: url,
+        title: options[:title] || page.title,
+      }
+    )
+  end
+
   # Generate a tracking URL for a pageview
   #
   # target - The URL for which you want to track pageviews
@@ -109,6 +130,27 @@ module TrackingHelper
     else
       target
     end
+  end
+
+  def track_social_url_for_asset(asset, options = {})
+    url = asset.original_url
+    track_social_url(
+      url,
+      {
+        location: url
+      }
+    )
+  end
+
+  def track_social_url_for_page(page, options = {})
+    url = url_with_domain(page.absolute_url)
+    track_social_url(
+      url,
+      {
+        location: url,
+        title: options[:title] || page.title,
+      }
+    )
   end
 
   def permitted_tracking_host?(target)
