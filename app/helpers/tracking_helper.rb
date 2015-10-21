@@ -49,7 +49,8 @@ module TrackingHelper
   def track_event_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url
+      location: url,
+      title: options[:title] || asset.title
     }.merge(options)
     track_event(url, options)
   end
@@ -58,7 +59,8 @@ module TrackingHelper
     url = url_with_domain(page.absolute_url)
     options = {
       location: url,
-      title: options[:title] || page.title
+      title: options[:title] || page.title,
+      path: options[:path] || page.absolute_url
     }.merge(options)
     track_event(url, options)
   end
@@ -104,7 +106,8 @@ module TrackingHelper
   def track_pageview_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url
+      location: url,
+      title: options[:title] || asset.title
     }.merge(options)
     track_pageview(url, options)
   end
@@ -113,7 +116,8 @@ module TrackingHelper
     url = url_with_domain(page.absolute_url)
     options = {
       location: url,
-      title: options[:title] || page.title
+      title: options[:title] || page.title,
+      path: options[:path] || page.absolute_url
     }.merge(options)
     track_pageview(url, options)
   end
@@ -164,7 +168,8 @@ module TrackingHelper
   def track_social_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url
+      location: url,
+      title: options[:title] || asset.title
     }.merge(options)
     track_social(url, options)
   end
@@ -173,7 +178,8 @@ module TrackingHelper
     url = url_with_domain(page.absolute_url)
     options = {
       location: url,
-      title: options[:title] || page.title
+      title: options[:title] || page.title,
+      path: options[:path] || page.absolute_url
     }.merge(options)
     track_social(url, options)
   end
