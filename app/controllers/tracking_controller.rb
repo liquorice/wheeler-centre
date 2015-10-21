@@ -37,6 +37,14 @@ class TrackingController < ActionController::Metal
   private
 
   def setup_tracker
-    @tracker = Staccato.tracker(ENV["GA_TRACKING_ID"])
+    @tracker = Staccato.tracker(ENV["GA_TRACKING_ID"], ga_client_id)
+  end
+
+  def ga_client_id
+    ga_cookie.split(".").last(2).join(".") if ga_cookie.present?
+  end
+
+  def ga_cookie
+    request.cookies["_ga"]
   end
 end
