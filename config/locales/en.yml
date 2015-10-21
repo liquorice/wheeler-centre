@@ -42,7 +42,7 @@ en:
       more_pages:
         display_entries: "You’re viewing <strong>%{first}&nbsp;-&nbsp;%{last}</strong> of <strong>%{total}</strong>"
   discussion:
-    inline_disclaimer: "All messages as part of this discussion and any opinions, advice, statements, or other information contained in any messages or transmitted by any third party are the responsibility of the author of that message and not The Wheeler Centre."
+    inline_disclaimer: "All messages as part of this discussion and any opinions, advice, statements, or other information contained in any messages or transmitted by any third party are the responsibility of the author of that message and not the Wheeler Centre."
   date:
     formats:
       default: '%-d/%m/%y'
