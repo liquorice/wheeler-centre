@@ -28,7 +28,7 @@ module TrackingHelper
           path: options[:path],
           category: options[:category],
           track_action: options[:track_action],
-          label: url
+          label: options[:label] || url
         )
       else
         track_event_path(
@@ -38,7 +38,7 @@ module TrackingHelper
           path: options[:path],
           category: options[:category],
           track_action: options[:track_action],
-          label: url
+          label: options[:label] || url
         )
       end
     else
