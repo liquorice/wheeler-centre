@@ -7,12 +7,6 @@
     display: block;
     width: 100%;
   }
-
-  .flarum-discussion__before,
-  .flarum-discussion__after {
-    height: 2rem;
-    opacity: 0.5
-  }
   .flarum-discussion__inner {
     border-top: 1px solid #dfdfdf;
     border-bottom: 1px solid #dfdfdf;
@@ -35,7 +29,7 @@
     .flarum-discussion__inner:after {
       background: radial-gradient(center bottom, ellipse farthest-side, rgba(0,0,0,0.1), rgba(0,0,0,0));
       bottom: 0;
-      /*height: 3.5rem;*/
+      height: 2rem;
     }
 
   .flarum-discussion__title,
