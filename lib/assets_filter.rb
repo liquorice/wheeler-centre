@@ -14,10 +14,12 @@ module Heracles
             if asset
               asset_version = asset.has_version?(:asset_link_version) ? :asset_link_version : :original
 
-              link_node["href"] = track_pageview(
+              link_node["href"] = track_event(
                 asset.results[asset_version]["url"],
                 {
-                  title: (asset.title.blank?) ? asset.file_name : asset.title
+                  title: (asset.title.blank?) ? asset.file_name : asset.title,
+                  category: "asset",
+                  track_action: "download"
                 }
               )
               link_node.remove_attribute("data-asset-id")
