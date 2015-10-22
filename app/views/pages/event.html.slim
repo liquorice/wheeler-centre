@@ -105,8 +105,8 @@
                 span.event__booked-out-flag Booked out
               - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
                 - track_booking_url = track_event(page.fields[:external_bookings].value, {\
-                  category: "booking", \
-                  track_action: "external",
+                  event_category: "booking", \
+                  event_action: "external",
                 })
                 a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=track_booking_url
                   ' Book your tickets

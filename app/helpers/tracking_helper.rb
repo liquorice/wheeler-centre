@@ -12,12 +12,12 @@ module TrackingHelper
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
   #   - category: the category of the event (eg file, podcast)
-  #   - track_action: the action being tracked (eg download, subscribe)
+  #   - event_action: the action being tracked (eg download, subscribe)
   #
   # Example:
   # track_event(http://localhost:5000/broadcasts/podcasts/the-fifth-estate.rss,
   #   location: "http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
-  #   path: "/broadcasts/podcasts/the-fifth-estate", category: "podcast", track_action: "subscribe")
+  #   path: "/broadcasts/podcasts/the-fifth-estate", category: "podcast", event_action: "subscribe")
   #
   # Returns an event tracking URL
   def track_event(url, options = {})
@@ -28,9 +28,9 @@ module TrackingHelper
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
-          category: options[:category],
-          track_action: options[:track_action],
-          label: options[:label] || url
+          event_category: options[:event_category],
+          event_action: options[:event_action],
+          event_label: options[:event_label] || url
         )
       else
         track_event_path(
@@ -38,9 +38,9 @@ module TrackingHelper
           location: options[:location],
           title: options[:title],
           path: options[:path] || path_for_url(url),
-          category: options[:category],
-          track_action: options[:track_action],
-          label: options[:label] || url
+          event_category: options[:event_category],
+          event_action: options[:event_action],
+          event_label: options[:event_label] || url
         )
       end
     else
@@ -134,13 +134,13 @@ module TrackingHelper
   #   - location: notionally the full URL (eg http://localhost:5000/broadcasts/podcasts/the-fifth-estate/the-fifth-estate)
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
-  #   - track_action (REQUIRED) - the action being tracked (eg share, like)
-  #   - network (REQUIRED) - social network (eg twitter, facebook)
+  #   - event_action (REQUIRED) - the action being tracked (eg share, like)
+  #   - social_network (REQUIRED) - social network (eg twitter, facebook)
   #
   # Example:
   # track_social(https://twitter.com/home?status=http://localhost:5000/broadcasts/podcasts/the-fifth-estate,
   #   location: http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
-  #   path: "/broadcasts/podcasts/the-fifth-estate", track_action: "share", network: "twitter"
+  #   path: "/broadcasts/podcasts/the-fifth-estate", event_action: "share", network: "twitter"
   #
   # Returns a social interaction tracking URL
   def track_social(url, options = {})
@@ -151,8 +151,8 @@ module TrackingHelper
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
-          track_action: options[:action],
-          network: options[:network]
+          social_action: options[:social_action],
+          social_network: options[:social_network]
         )
       else
         track_social_path(
@@ -160,8 +160,8 @@ module TrackingHelper
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
-          track_action: options[:action],
-          network: options[:network]
+          social_action: options[:social_action],
+          social_network: options[:social_network]
         )
       end
     else
