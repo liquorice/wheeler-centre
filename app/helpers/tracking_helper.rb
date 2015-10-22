@@ -1,3 +1,5 @@
+require 'uri'
+
 module TrackingHelper
   DEFAULT_CAMPAIGN_ID = "external_tracking"
 
@@ -23,9 +25,9 @@ module TrackingHelper
       if options[:format] == "image"
         track_event_image_path(
           target: url,
-          location: options[:location],
+          location: options[:location] || url,
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           category: options[:category],
           track_action: options[:track_action],
           label: options[:label] || url
@@ -35,7 +37,7 @@ module TrackingHelper
           target: url,
           location: options[:location],
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           category: options[:category],
           track_action: options[:track_action],
           label: options[:label] || url
@@ -49,18 +51,18 @@ module TrackingHelper
   def track_event_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url,
-      title: options[:title] || asset.title
+      title: options[:title] || title_for_asset(asset),
+      path: options[:path] || path_for_url(url)
     }.merge(options)
     track_event(url, options)
   end
 
   def track_event_for_page(page, options = {})
-    url = url_with_domain(page.absolute_url)
+    path = page.absolute_url
+    url = url_with_domain(path)
     options = {
-      location: url,
       title: options[:title] || page.title,
-      path: options[:path] || page.absolute_url
+      path: options[:path] || path
     }.merge(options)
     track_event(url, options)
   end
@@ -85,16 +87,18 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       if options[:format] == "image"
         track_pageview_image_path(
-          location: options[:location],
+          target: url,
+          location: options[:location] || url,
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
         )
       else
         track_pageview_path(
-          location: options[:location],
+          target: url,
+          location: options[:location] || url,
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
         )
       end
@@ -106,18 +110,18 @@ module TrackingHelper
   def track_pageview_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url,
-      title: options[:title] || asset.title
+      title: options[:title] || title_for_asset(asset),
+      path: options[:path] || path_for_url(url)
     }.merge(options)
     track_pageview(url, options)
   end
 
   def track_pageview_for_page(page, options = {})
-    url = url_with_domain(page.absolute_url)
+    path = page.absolute_url
+    url = url_with_domain(path)
     options = {
-      location: url,
       title: options[:title] || page.title,
-      path: options[:path] || page.absolute_url
+      path: options[:path] || path
     }.merge(options)
     track_pageview(url, options)
   end
@@ -144,18 +148,18 @@ module TrackingHelper
       if options[:format] == "image"
         track_social_image_path(
           target: url,
-          location: options[:location],
+          location: options[:location] || url,
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           track_action: options[:action],
           network: options[:network]
         )
       else
         track_social_path(
           target: url,
-          location: options[:location],
+          location: options[:location] || url,
           title: options[:title],
-          path: options[:path],
+          path: options[:path] || path_for_url(url),
           track_action: options[:action],
           network: options[:network]
         )
@@ -168,23 +172,37 @@ module TrackingHelper
   def track_social_for_asset(asset, options = {})
     url = asset.original_url
     options = {
-      location: url,
-      title: options[:title] || asset.title
+      title: options[:title] || title_for_asset(asset),
+      path: options[:path] || path_for_url(url)
     }.merge(options)
     track_social(url, options)
   end
 
   def track_social_for_page(page, options = {})
-    url = url_with_domain(page.absolute_url)
+    path = page.absolute_url
+    url = url_with_domain(path)
     options = {
-      location: url,
       title: options[:title] || page.title,
-      path: options[:path] || page.absolute_url
+      path: options[:path] || path
     }.merge(options)
     track_social(url, options)
   end
 
   def permitted_tracking_host?(url)
     ENV["PERMITTED_TRACKING_HOSTS"].to_s.split(",").any? { |h| url.include? h }
+  end
+
+  private
+
+  def path_for_url(url)
+    URI::parse(url).path
+  end
+
+  def title_for_asset(asset)
+    unless asset.title.blank?
+      asset.title
+    else
+      asset.file_name
+    end
   end
 end
