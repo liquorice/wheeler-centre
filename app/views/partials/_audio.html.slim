@@ -45,14 +45,14 @@
         - if asset.versions.include?(:audio_mp3)
           - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
             title: asset.title || asset.file_name, \
-            category: "audio", \
-            track_action: "listen" \
+            event_category: "audio", \
+            event_action: "listen" \
           })
           source src=mp3_tracking_url type="audio/mpeg"
         - if asset.versions.include?(:audio_ogg)
           - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
             title: asset.title || asset.file_name, \
-            category: "audio", \
-            track_action: "listen" \
+            event_category: "audio", \
+            event_action: "listen" \
             })
           source src=ogg_tracking_url type="audio/ogg"

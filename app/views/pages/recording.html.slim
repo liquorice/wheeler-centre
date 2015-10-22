@@ -95,8 +95,8 @@
                     - if asset.versions.include?(:audio_mp3)
                       - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                         title: asset.title || asset.file_name, \
-                        category: "audio", \
-                        track_action: "download" \
+                        event_category: "audio", \
+                        event_action: "download" \
                       })
                       li
                         a href=mp3_tracking_url
@@ -109,8 +109,8 @@
                       - version = :video_ipad_high if asset.versions.include?(:video_ipad_high)
                       - video_tracking_url = track_event(asset.send(:"#{version}_url"), { \
                         title: asset.title || asset.file_name, \
-                        category: "video", \
-                        track_action: "download" \
+                        event_category: "video", \
+                        event_action: "download" \
                       })
                       a href=video_tracking_url
                         i.fa.fa-video-camera

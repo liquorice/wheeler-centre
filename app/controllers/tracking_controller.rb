@@ -11,9 +11,9 @@ class TrackingController < ActionController::Metal
       document_location: params[:location],
       document_title: params[:title],
       document_path: params[:path],
-      category: params[:category],
-      action: params[:track_action],
-      label: params[:label])
+      category: params[:event_category],
+      action: params[:event_action],
+      label: params[:event_label])
     if params[:format] == "png"
       send_blank_image
     else
@@ -39,7 +39,7 @@ class TrackingController < ActionController::Metal
       document_location: params[:location],
       document_title: params[:title],
       document_path: params[:path],
-      action: params[:track_action],
+      action: params[:social_action],
       network: params[:network],
       target: params[:target])
     redirect_to params[:target]

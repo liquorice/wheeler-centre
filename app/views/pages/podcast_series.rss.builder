@@ -61,7 +61,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               content = render_content episode.fields[:description]
               # Add tracking pixels
               content += image_tag(track_pageview_for_page(episode, {format: "image"}), alt: "")
-              content += image_tag(track_event_for_page(episode, {format: "image", category: "podcast", track_action: "episode - read"}), alt: "")
+              content += image_tag(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"}), alt: "")
               xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
@@ -72,8 +72,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               duration = episode.video_result["meta"]["duration"] if episode.video_result["meta"].present? && episode.video_result["meta"]["duration"].present?
               xml.itunes :duration, duration_to_hms(duration || 0)
               tracking_url = url_with_domain(track_event(episode.video_url, {
-                category: "podcast",
-                track_action: "episode - watch",
+                event_category: "podcast",
+                event_action: "episode - watch",
                 label: "#{page.title}: #{episode.title}"
               }))
               xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
@@ -85,8 +85,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               end
               xml.itunes :duration, duration_to_hms(duration)
               tracking_url = url_with_domain(track_event(episode.audio_url, {
-                category: "podcast",
-                track_action: "episode - listen",
+                event_category: "podcast",
+                event_action: "episode - listen",
                 label: "#{page.title}: #{episode.title}"
               }))
               xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
