@@ -19,17 +19,19 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
       posts.each do |post|
         cache ["broadcasts-rss-1", post] do
           xml.item do
-            xml.title post.title
-            xml.link url_with_domain(post.absolute_url)
-            xml.guid page.id
-            if post.fields[:publish_date].data_present?
-              xml.pubDate post.fields[:publish_date].value.rfc2822
-            end
             description = []
             if post.fields[:youtube_video].data_present?
               description << post.fields[:youtube_video].embed["html"]
             end
-            description << render_content(post.fields[:description])
+            description << replace_absolute_links_with_canonical_domain(render_content(post.fields[:description]))
+            # Add tracking pixels
+            description << image_tag(track_pageview_for_page(post, {format: "image"}), alt: "")
+            description << image_tag(track_event_for_page(post, {format: "image", event_category: "rss", event_action: "read - broadcast"}), alt: "")
+
+            xml.title post.title
+            xml.link url_with_domain(post.absolute_url)
+            xml.guid page.id
+
             xml.description do
               xml.cdata! description.join("").html_safe
             end
