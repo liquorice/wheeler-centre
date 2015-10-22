@@ -11,13 +11,14 @@ module TrackingHelper
   #   - location: notionally the full URL for the page (eg http://localhost:5000/broadcasts/podcasts/the-fifth-estate/the-fifth-estate)
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
-  #   - category: the category of the event (eg file, podcast)
+  #   - event_category: the category of the event (eg file, podcast)
   #   - event_action: the action being tracked (eg download, subscribe)
+  #   - event_label: the label being tracked (default to url)
   #
   # Example:
   # track_event(http://localhost:5000/broadcasts/podcasts/the-fifth-estate.rss,
   #   location: "http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
-  #   path: "/broadcasts/podcasts/the-fifth-estate", category: "podcast", event_action: "subscribe")
+  #   path: "/broadcasts/podcasts/the-fifth-estate", event_category: "podcast", event_action: "subscribe")
   #
   # Returns an event tracking URL
   def track_event(url, options = {})
@@ -134,7 +135,7 @@ module TrackingHelper
   #   - location: notionally the full URL (eg http://localhost:5000/broadcasts/podcasts/the-fifth-estate/the-fifth-estate)
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
-  #   - event_action (REQUIRED) - the action being tracked (eg share, like)
+  #   - social_action (REQUIRED) - the action being tracked (eg share, like)
   #   - social_network (REQUIRED) - social network (eg twitter, facebook)
   #
   # Example:
