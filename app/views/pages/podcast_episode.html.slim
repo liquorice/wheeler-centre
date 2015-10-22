@@ -1,5 +1,11 @@
+- tracking_link = track_event("#{url_with_domain(page.parent.absolute_url)}.rss", { \
+  event_category: "podcast", \
+  event_action: "subscribe", \
+  title: "Podcast: #{page.title}" \
+})
+
 = area :head do
-  link href=url_with_domain("#{page.parent.absolute_url}.rss") rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
+  link href=tracking_link rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
 
 = area :masthead_title do
   == markdown_line broadcasts_page.title
