@@ -1,7 +1,12 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page])
+- broadcasts_rss_tracking_link = track_event("#{url_with_domain(broadcasts_page.absolute_url)}.rss", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{broadcasts_page.title}" \
+})
 
 = area :head do
-  link href=url_with_domain("#{broadcasts_page.absolute_url}.rss") rel="alternate" title="Broadcasts from The Wheeler Centre" type="application/rss+xml"
+  link href=broadcasts_rss_tracking_link rel="alternate" title="Broadcasts from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
   | Recordings
