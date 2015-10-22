@@ -17,7 +17,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "All our events, with online booking."
     if posts.present?
       posts.each do |post|
-        cache ["event-rss-1", post] do
+        cache ["event-rss-2", post] do
           xml.item do
             content = replace_absolute_links_with_canonical_domain render_content post.fields[:body]
             # Add tracking pixels
