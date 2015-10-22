@@ -1,6 +1,8 @@
 class TrackingController < ActionController::Metal
   include ActionController::Redirecting
+  include ActionController::DataStreaming
   include AbstractController::Callbacks
+  include AbstractController::Rendering
 
   before_action :setup_tracker
 
@@ -12,7 +14,11 @@ class TrackingController < ActionController::Metal
       category: params[:category],
       action: params[:track_action],
       label: params[:label])
-    redirect_to params[:target]
+    if params[:format] == "png"
+      send_blank_image
+    else
+      redirect_to params[:target]
+    end
   end
 
   def pageview
@@ -21,6 +27,11 @@ class TrackingController < ActionController::Metal
       document_title: params[:title],
       document_path: params[:path],
       campaign_id: params[:campaign_id])
+    if params[:format] == "png"
+      send_blank_image
+    else
+      redirect_to params[:target]
+    end
   end
 
   def social
@@ -46,5 +57,12 @@ class TrackingController < ActionController::Metal
 
   def ga_cookie
     request.cookies["_ga"]
+  end
+
+  def send_blank_image
+    send_data(
+      Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="),
+      type: "image/png", disposition: "inline"
+    )
   end
 end
