@@ -18,13 +18,21 @@ module ApplicationHelper
     }
     options = defaults.deep_merge(options.deep_symbolize_keys)
 
-    filters ||= standard_content_filters
+    filters ||= custom_filters
     render_content_with_filters(content_field, filters, options)
   end
 
   def render_content_in_sections(content_field, options={})
-    filters = standard_content_filters + [Heracles::Sites::WheelerCentre::SectionFilter]
+    filters = custom_filters + [Heracles::Sites::WheelerCentre::SectionFilter]
     render_content content_field, options, filters
+  end
+
+  def custom_filters
+    [
+      Heracles::ContentFieldRendering::InsertablesFilter,
+      Heracles::Sites::WheelerCentre::AssetsFilter,
+      Heracles::ContentFieldRendering::PageLinkFilter
+    ]
   end
 
   def canonical_domain
