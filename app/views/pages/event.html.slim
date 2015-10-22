@@ -15,8 +15,14 @@
     } \
   })
 
+- events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{events_page.title}" \
+})
+
 = area :head do
-  link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
+  link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
 
