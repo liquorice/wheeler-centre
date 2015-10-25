@@ -1,5 +1,11 @@
+- tracking_link = track_event("#{url_with_domain(page.absolute_url)}.rss", { \
+  event_category: "podcast", \
+  event_action: "subscribe", \
+  title: "Podcast: #{page.title}" \
+})
+
 = area :head do
-  link href=url_with_domain("#{page.absolute_url}.rss") rel="alternate" title="#{page.title} podcast" type="application/rss+xml"
+  link href=tracking_link rel="alternate" title="#{page.title} podcast" type="application/rss+xml"
 
 = area :masthead_title do
   == markdown_line broadcasts_page.title
@@ -16,7 +22,7 @@
         h1.podcast-series__title == widont_format markdown_line page.title
       .podcast-series__subscribe.column-wrapper
         .podcast-series__subscribe-inner.column-narow
-          a.podcast-series__subscribe-anchor href=("#{url_with_domain(page.absolute_url)}.rss".gsub(/^http|https/, 'feed'))
+          a.podcast-series__subscribe-anchor href=(tracking_link.gsub(/^http|https/, 'feed'))
             ' Subscribe to this podcast
       .podcast-series__intro.page__intro.intro.column-wrapper
         .column-mid.copy

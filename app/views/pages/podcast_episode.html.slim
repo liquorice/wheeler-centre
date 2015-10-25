@@ -1,5 +1,11 @@
+- tracking_link = track_event("#{url_with_domain(page.parent.absolute_url)}.rss", { \
+  event_category: "podcast", \
+  event_action: "subscribe", \
+  title: "Podcast: #{page.title}" \
+})
+
 = area :head do
-  link href=url_with_domain("#{page.parent.absolute_url}.rss") rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
+  link href=tracking_link rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
 
 = area :masthead_title do
   == markdown_line broadcasts_page.title
@@ -30,12 +36,19 @@
         - if page.fields[:audio].data_present?
           .recording__audio.recording__audio-podcast
             = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
-          .recording__downloads-podcast
-            ul
-              li
-                a href=page.fields[:audio].asset.audio_mp3_url
-                  i.fa.fa-music
-                  ' Download audio file
+          - asset = page.fields[:audio].asset
+          - if asset.versions.include?(:audio_mp3)
+            .recording__downloads-podcast
+              ul
+                li
+                  - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
+                    title: asset.title || asset.file_name, \
+                    event_category: "audio", \
+                    event_action: "download" \
+                  })
+                  a href=mp3_tracking_url
+                    i.fa.fa-music
+                    ' Download audio file
 
 
       = render_content_in_sections page.fields[:description]

@@ -43,6 +43,16 @@
         .audio-player__handle-nub
       audio preload="metadata"
         - if asset.versions.include?(:audio_mp3)
-          source src=asset.audio_mp3_url type="audio/mpeg"
+          - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
+            title: asset.title || asset.file_name, \
+            event_category: "audio", \
+            event_action: "listen" \
+          })
+          source src=mp3_tracking_url type="audio/mpeg"
         - if asset.versions.include?(:audio_ogg)
-          source src=asset.audio_ogg_url type="audio/ogg"
+          - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
+            title: asset.title || asset.file_name, \
+            event_category: "audio", \
+            event_action: "listen" \
+            })
+          source src=ogg_tracking_url type="audio/ogg"

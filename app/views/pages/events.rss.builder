@@ -17,8 +17,13 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "All our events, with online booking."
     if posts.present?
       posts.each do |post|
-        cache ["event-rss-1", post] do
+        cache ["event-rss-2", post] do
           xml.item do
+            content = replace_absolute_links_with_canonical_domain render_content post.fields[:body]
+            # Add tracking pixels
+            content += image_tag(track_pageview_for_page(post, {format: "image"}), alt: "")
+            content += image_tag(track_event_for_page(post, {format: "image", event_category: "rss", event_action: "read - note"}), alt: "")
+
             xml.title post.title
             xml.link url_with_domain(post.absolute_url)
             xml.guid page.id
@@ -26,7 +31,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               xml.pubDate post.fields[:start_date].value.rfc2822
             end
             xml.description do
-              xml.cdata! render_content post.fields[:body]
+              xml.cdata! Sanitize.fragment(content, Sanitize::Config::RELAXED)
             end
             if post.presenters.present?
               xml.author post.presenters.map(&:title).to_sentence

@@ -58,7 +58,11 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             xml.link url_with_domain(episode.absolute_url)
             xml.guid episode.id, isPermaLink: "false"
             xml.description do
-              xml.cdata! render_content episode.fields[:description]
+              content = render_content episode.fields[:description]
+              # Add tracking pixels
+              content += image_tag(track_pageview_for_page(episode, {format: "image"}), alt: "")
+              content += image_tag(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"}), alt: "")
+              xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
             xml.itunes :summary, episode.fields[:itunes_summary].value
@@ -67,7 +71,12 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             if type == "video"
               duration = episode.video_result["meta"]["duration"] if episode.video_result["meta"].present? && episode.video_result["meta"]["duration"].present?
               xml.itunes :duration, duration_to_hms(duration || 0)
-              xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
+              tracking_url = url_with_domain(track_event(episode.video_url, {
+                event_category: "podcast",
+                event_action: "episode - watch",
+                label: "#{page.title}: #{episode.title}"
+              }))
+              xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
             else
               duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
                 episode.audio_result["meta"]["duration"]
@@ -75,7 +84,12 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
                 0
               end
               xml.itunes :duration, duration_to_hms(duration)
-              xml.enclosure url: episode.audio_url, length: episode.audio_result["size"], type: "audio/mpeg"
+              tracking_url = url_with_domain(track_event(episode.audio_url, {
+                event_category: "podcast",
+                event_action: "episode - listen",
+                label: "#{page.title}: #{episode.title}"
+              }))
+              xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
             end
           end
         end
