@@ -112,7 +112,7 @@
               - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
                 - track_booking_url = track_event(page.fields[:external_bookings].value, {\
                   event_category: "booking", \
-                  event_action: "external",
+                  event_action: "external - click",
                 })
                 a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=track_booking_url
                   ' Book your tickets
