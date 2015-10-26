@@ -18,7 +18,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "Crib notes, reflections and ephemera from the world of books, writing and ideas."
     if posts.present?
       posts.each do |post|
-        cache ["blog-rss-4", post] do
+        cache ["blog-rss-5", post] do
           xml.item do
             content =  replace_absolute_links_with_canonical_domain render_content post.fields[:intro]
             content += replace_absolute_links_with_canonical_domain render_content post.fields[:body]
