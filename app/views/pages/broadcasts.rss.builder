@@ -17,7 +17,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "All our events, with online booking."
     if posts.present?
       posts.each do |post|
-        cache ["broadcasts-rss-2", post] do
+        cache ["broadcasts-rss-3", post] do
           xml.item do
             description = []
             if post.fields[:youtube_video].data_present?
@@ -25,8 +25,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             end
             description << replace_absolute_links_with_canonical_domain(render_content(post.fields[:description]))
             # Add tracking pixels
-            description << image_tag(track_pageview_for_page(post, {format: "image"}), alt: "")
-            description << image_tag(track_event_for_page(post, {format: "image", event_category: "rss", event_action: "read - broadcast"}), alt: "")
+            description << image_tag(track_pageview_for_page(post, {format: "image"}), alt: "", width: 1, height: 1)
+            description << image_tag(track_event_for_page(post, {format: "image", event_category: "rss", event_action: "read - broadcast"}), alt: "", width: 1, height: 1)
 
             xml.title post.title
             xml.link url_with_domain(post.absolute_url)

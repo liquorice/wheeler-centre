@@ -39,7 +39,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
-        cache ["podcast-episode-2", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+        cache ["podcast-episode-4", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
           # Let the series explicit value override episode one
           explicit = episode.fields[:explicit].value || page.fields[:explicit].value
           episode_image_url = if episode.fields[:itunes_image].data_present?
@@ -60,8 +60,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             xml.description do
               content = render_content episode.fields[:description]
               # Add tracking pixels
-              content += image_tag(track_pageview_for_page(episode, {format: "image"}), alt: "")
-              content += image_tag(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"}), alt: "")
+              content += image_tag(track_pageview_for_page(episode, {format: "image"}), alt: "", width: 1, height: 1)
+              content += image_tag(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"}), alt: "", width: 1, height: 1)
               xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
