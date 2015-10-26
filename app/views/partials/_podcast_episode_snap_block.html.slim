@@ -1,5 +1,4 @@
 - show_summary = show_summary || false
-- hide_summary = hide_summary || false
 - aspect = aspect || :square
 - if post.fields[:itunes_image].data_present?
   - image = post.fields[:itunes_image].asset
@@ -7,7 +6,7 @@
   - image = post.series.fields[:itunes_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["podcast-episode-snap-block-", post, show_type, hide_summary, image, first_topic, post.series, aspect] do
+- cache ["podcast-episode-snap-block-1", post, show_type, show_summary, image, first_topic, post.series, aspect] do
   .snap-block
     a.podcast-episode-snap class="podcast-episode-snap--#{aspect}" href=post.absolute_url
       span.podcast-episode-snap__date
