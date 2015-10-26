@@ -17,7 +17,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.description "All our events, with online booking."
     if posts.present?
       posts.each do |post|
-        cache ["broadcasts-rss-3", post] do
+        cache ["broadcasts-rss-4", post] do
           xml.item do
             description = []
             if post.fields[:youtube_video].data_present?

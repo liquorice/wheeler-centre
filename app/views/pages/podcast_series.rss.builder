@@ -39,7 +39,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
-        cache ["podcast-episode-4", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+        cache ["podcast-episode-5", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
           # Let the series explicit value override episode one
           explicit = episode.fields[:explicit].value || page.fields[:explicit].value
           episode_image_url = if episode.fields[:itunes_image].data_present?
