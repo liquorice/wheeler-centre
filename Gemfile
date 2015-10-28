@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby "2.1.5"
+ruby "2.1.6"
 
 # Rails
 gem "rails", "~> 4.1.0"
@@ -10,7 +10,7 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", "~> 1.0.2", source: "https://gem.fury.io/icelab/"
+gem "heracles", "~> 1.0.3", source: "https://gem.fury.io/icelab/"
 
 # Cache Buster
 gem 'varnisher'

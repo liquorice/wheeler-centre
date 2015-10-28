@@ -121,7 +121,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    domain_name (0.5.24)
+    domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     dotiw (2.0)
       actionpack (>= 3)
@@ -264,7 +264,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    heracles (1.0.2)
+    heracles (1.0.3)
       activejob
       acts-as-taggable-on (~> 3.4.3)
       ancestry (~> 2.1.0)
@@ -314,7 +314,7 @@ GEM
       transloadit-rails (~> 1.1.1)
       turbolinks (~> 2.5.3)
       varnisher (~> 1.1.0)
-    highline (1.7.7)
+    highline (1.7.8)
     hike (1.2.3)
     hitimes (1.2.2)
     html_truncator (0.4.1)
@@ -608,7 +608,7 @@ DEPENDENCIES
   guard (~> 2)
   guard-livereload
   guard-rspec
-  heracles (~> 1.0.2)!
+  heracles (~> 1.0.3)!
   html_truncator
   humanize (~> 1.1.0)
   iso8601
