@@ -1,5 +1,5 @@
 .lightbox-flarum-discussion {
-  max-width: 50rem;
+  max-width: 60rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -7,4 +7,31 @@
   .lightbox-flarum-discussion__title {
     @include inset(bottom, normal);
     @include font-size(24);
+  }
+
+
+  .lightbox-flarum-discussion__loading {
+    @include pad(vert, huge);
+    @include font-size(24);
+    text-align: center;
+    i {
+      animation: spin 1000ms infinite;
+      margin-top: 7px;
+      margin-left: 15px;
+    }
+  }
+
+
+  .lightbox-flarum-discussion__complete {
+    @include font-size(24);
+    margin-top: 40%;
+  }
+
+  .flarum-discussion__form {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 300ms;
+  }
+  .flarum-discussion__form--disabled {
+    opacity: 0.5;
   }

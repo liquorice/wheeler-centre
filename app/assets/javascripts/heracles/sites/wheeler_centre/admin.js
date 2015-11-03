@@ -20,12 +20,7 @@ function initialise() {
     createDiscussion: function($el, el, props) {
       $el.on("click", function(e) {
         e.preventDefault();
-
-        HeraclesAdmin.availableLightboxes.helper("FlarumDiscussionLightbox", {
-          pageID: props.pageID,
-          pageTitle: props.pageTitle,
-        });
-
+        HeraclesAdmin.availableLightboxes.helper("FlarumDiscussionLightbox", props);
       })
     }
   };
