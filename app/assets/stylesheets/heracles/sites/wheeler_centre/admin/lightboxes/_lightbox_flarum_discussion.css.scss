@@ -1,0 +1,10 @@
+.lightbox-flarum-discussion {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  .lightbox-flarum-discussion__title {
+    @include inset(bottom, normal);
+    @include font-size(24);
+  }

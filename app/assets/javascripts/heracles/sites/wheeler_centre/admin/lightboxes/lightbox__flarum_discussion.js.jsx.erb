@@ -1,0 +1,206 @@
+/** @jsx React.DOM */
+
+// Stub out the dependencies. These are all filled by stuff in the
+// heracles_admin engine.
+//= stub lodash
+//= stub jquery
+//= stub react
+//= stub heracles/admin/lightboxes/lightbox
+
+(function() {
+
+  // var FLARUM_HOST = '<%= ENV["FLARUM_HOST"] %>';
+  var FLARUM_AUTH_TOKEN = '<%= ENV["FLARUM_AUTH_TOKEN"] %>';
+
+  /**
+   * Add the `Authorization` header and token to the request
+   * @param {Object} request A jQuery AJAX request object
+   */
+  function amendHeaders(request) {
+    request.setRequestHeader("Authorization", "Token " + FLARUM_AUTH_TOKEN);
+    request.setRequestHeader("Content-Type", "application/json");
+  }
+
+  /**
+   * Fetch tags from Flarum
+   * @return {Deferred} jQuery deferred object
+   */
+  function fetchFlarumTags() {
+    var request = $.ajax({
+      beforeSend: amendHeaders,
+      url: "/flarum/api/forum",
+      dataType: "json"
+    });
+    return request;
+  }
+
+  /**
+   * Create discussion in Flarum
+   * @param  {Object} data Discussion params
+   * @return {Deferred} jQuery deferred object
+   */
+  function createFlarumDiscussion(params) {
+    // Flarum conforms to the JSON-API spec
+    var data = {
+      "data": {
+        "type": "discussions",
+        "attributes": {
+          "title": params.title,
+          "content": params.content
+        },
+        "relationships": {
+          "tags": {
+            "data": [
+              {
+                "type": "tags",
+                "id": params.tag
+              }
+            ]
+          }
+        }
+      }
+    }
+
+    var request = $.ajax({
+      beforeSend: amendHeaders,
+      url: "/flarum/api/discussions",
+      dataType: "json",
+      method: "POST",
+      data: JSON.stringify(data)
+    });
+    return request;
+  }
+
+  /**
+   * Get the tags from the raw JSON-API response object that Flarum returns.
+   * We pluck the ones we care about and normalise them with the attributes
+   * we want.
+   *
+   * @param  {Object} response Raw JSON-API spec response object.
+   * @return {Array} An array of plucked and normalised tags objects.
+   */
+  function getTagsFromResponse(response) {
+    var rawTags = _.filter(response.included, function(item) {
+      return item.type === "tags" && item.attributes.canStartDiscussion === true;
+    });
+    return _.map(rawTags, function(item) {
+      var tag = {
+        id: item.id,
+        name: item.attributes.name
+      }
+      return tag;
+    });
+  }
+
+
+  /**
+   * Flarum Discussion lightbox
+   */
+
+  var FlarumDiscussionLightbox = React.createClass({
+
+    propTypes: {
+      pageID: React.PropTypes.string,
+      pageTitle: React.PropTypes.string,
+    },
+
+    getInitialState: function() {
+      return {
+        tags: []
+      }
+    },
+
+    componentWillMount: function() {
+      var _this = this;
+      var request = fetchFlarumTags();
+      request.then(function(response) {
+        _this.setState({tags: getTagsFromResponse(response)})
+      });
+    },
+
+    createDiscussion: function(e) {
+      e.preventDefault();
+      var params = {
+        title: this.refs.title.getDOMNode().value,
+        content: this.refs.content.getDOMNode().value,
+        tag: this.refs.tag.getDOMNode().value
+      };
+
+      createFlarumDiscussion(params).then(function(rsp) {
+        console.log(rsp);
+      });
+
+    },
+
+    tagOption: function(tag) {
+      return (
+        <option value={tag.id}>{tag.name}</option>
+      )
+    },
+
+    renderForm: function() {
+      return (
+        <form onSubmit={this.createDiscussion}>
+          <div className="field">
+            <div className="field-header">
+              <label className="field-label" htmlFor="flarum-discussion__title">Discussion title</label>
+            </div>
+            <div className="field-main">
+              <input
+                ref="title"
+                defaultValue={this.props.pageTitle}
+                className="field-text-input"
+                id="flarum-discussion__title"/>
+            </div>
+          </div>
+          <div className="field">
+            <div className="field-header">
+              <label className="field-label" htmlFor="flarum-discussion__content">Content</label>
+            </div>
+            <div className="field-main">
+              <textarea ref="content"
+                placeholder="Enter your content"
+                className="field-text-input field-size--medium"
+                id="flarum-discussion__content"/>
+            </div>
+          </div>
+          <div className="field">
+            <div className="field-header">
+              <label className="field-label" htmlFor="flarum-discussion__tags">Tag</label>
+              <span className="field-hint">Select a tag from the forum</span>
+            </div>
+            <div className="field-main">
+              <select ref="tag" className="field-select" id="flarum-discussion__tags">
+                {_.map(this.state.tags, this.tagOption)}
+              </select>
+            </div>
+          </div>
+          <button className="button button--bright">Create discussion</button>
+        </form>
+      )
+    },
+
+    render: function() {
+
+      var hasTags = (this.state.tags.length > 0);
+
+      return (
+        <div className="lightbox-flarum-discussion">
+          <p className="lightbox-flarum-discussion__sub-title">Create a discussion for</p>
+          <p className="lightbox-flarum-discussion__title lightbox-title" dangerouslySetInnerHTML={{__html: this.props.pageTitle}}/>
+          {(hasTags) ? this.renderForm() : <p>No tags, dudes!</p> }
+        </div>
+      )
+    }
+  });
+
+
+  /**
+   * Register the lightbox in Heracles
+   */
+  HeraclesAdmin.availableLightboxes.add({
+    type: "FlarumDiscussionLightbox",
+    component: FlarumDiscussionLightbox
+  });
+
+}).call(this);

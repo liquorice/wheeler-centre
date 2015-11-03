@@ -312,4 +312,32 @@ module ApplicationHelper
     (page.id == ancestor.id || descendant_of(page, ancestor))
   end
 
+  ### --------------------------------------------------------------------------
+  ### Flarum discussions
+  ### --------------------------------------------------------------------------
+
+  def discussion_title_for(page)
+    if page.page_type == "blog_post"
+      discussion_title_for_blog_post(page)
+    end
+  end
+
+  def discussion_title_for_blog_post(page)
+    "Notes: #{page.title}"
+  end
+
+  # Returns Markdown
+  def discussion_content_for(page)
+    content = ""
+    if page.page_type == "blog_post"
+      content += discussion_content_for_blog_post(page)
+    end
+    content += "\n\n"
+    content += "This is a companion discussion to the [original post on our website](#{url_with_domain(page.absolute_url)})."
+  end
+
+  def discussion_content_for_blog_post(page)
+    "> #{strip_tags(page.fields[:summary].value)}"
+  end
+
 end
