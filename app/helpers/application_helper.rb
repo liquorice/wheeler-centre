@@ -323,17 +323,18 @@ module ApplicationHelper
   end
 
   def discussion_title_for_blog_post(page)
-    "Notes: #{page.title}"
+    CGI.unescapeHTML(truncate("Notes: #{strip_tags(page.title)}", length: 80).to_str)
   end
 
   # Returns Markdown
   def discussion_content_for(page)
     content = ""
     if page.page_type == "blog_post"
-      content += discussion_content_for_blog_post(page)
+      content += discussion_content_for_blog_post(page).gsub(/&nbsp;/, " ")
     end
     content += "\n\n"
     content += "This is a companion discussion to the [original post on our website](#{url_with_domain(page.absolute_url)})."
+    CGI.unescapeHTML(content.to_str)
   end
 
   def discussion_content_for_blog_post(page)

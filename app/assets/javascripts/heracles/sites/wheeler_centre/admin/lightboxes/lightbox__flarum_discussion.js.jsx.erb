@@ -9,7 +9,7 @@
 
 (function() {
 
-  // var FLARUM_HOST = '<%= ENV["FLARUM_HOST"] %>';
+  var FLARUM_HOST = '<%= ENV["FLARUM_HOST"] %>';
   var FLARUM_AUTH_TOKEN = '<%= ENV["FLARUM_AUTH_TOKEN"] %>';
 
   /**
@@ -81,7 +81,7 @@
    */
   function getTagsFromResponse(response) {
     var rawTags = _.filter(response.included, function(item) {
-      return item.type === "tags" && item.attributes.canStartDiscussion === true;
+      return item.type === "tags" && item.attributes.position !== null;
     });
     return _.map(rawTags, function(item) {
       var tag = {
@@ -95,6 +95,11 @@
 
   /**
    * Flarum Discussion lightbox
+   * Has various UI states:
+   * - Waiting for tags to load from Flarum
+   * - Posting data to Flarum
+   * - Saving data locally to page record
+   * - Complete
    */
 
   var FlarumDiscussionLightbox = React.createClass({
@@ -104,9 +109,20 @@
       pageTitle: React.PropTypes.string,
     },
 
+    /**
+     * Initial state
+     *
+     * `tags` — empty array we populate with data from Flarum
+     * `discussion` — null object we replace with the successful discussion response
+     *
+     * @return {Object} Initial state
+     */
     getInitialState: function() {
       return {
-        tags: []
+        tags: [],
+        discussion: null,
+        sending: false,
+        complete: false
       }
     },
 
@@ -119,15 +135,28 @@
     },
 
     createDiscussion: function(e) {
+      var _this = this;
       e.preventDefault();
+      if (this.state.sending) return;
+
       var params = {
         title: this.refs.title.getDOMNode().value,
         content: this.refs.content.getDOMNode().value,
         tag: this.refs.tag.getDOMNode().value
       };
 
+      this.setState({sending: true});
+
       createFlarumDiscussion(params).then(function(rsp) {
-        console.log(rsp);
+        _this.setState({
+          sending: false,
+          complete: true,
+          discussion: rsp
+        })
+      }).fail(function(rsp) {
+        _this.setState({
+          sending: false
+        });
       });
 
     },
@@ -139,8 +168,15 @@
     },
 
     renderForm: function() {
+      var sending = this.state.sending;
+
+      var formClassNames = React.addons.classSet({
+        "flarum-discussion__form": true,
+        "flarum-discussion__form--disabled": sending
+      });
+
       return (
-        <form onSubmit={this.createDiscussion}>
+        <form className={formClassNames} onSubmit={this.createDiscussion}>
           <div className="field">
             <div className="field-header">
               <label className="field-label" htmlFor="flarum-discussion__title">Discussion title</label>
@@ -148,29 +184,38 @@
             <div className="field-main">
               <input
                 ref="title"
-                defaultValue={this.props.pageTitle}
+                defaultValue={this.props.discussionTitle}
                 className="field-text-input"
+                disabled={sending}
                 id="flarum-discussion__title"/>
             </div>
           </div>
           <div className="field">
             <div className="field-header">
-              <label className="field-label" htmlFor="flarum-discussion__content">Content</label>
+              <label className="field-label" htmlFor="lightbox-flarum-discussion__content">Content</label>
+              <span className="field-hint">Uses Markdown formatting</span>
             </div>
             <div className="field-main">
-              <textarea ref="content"
+              <textarea
+                ref="content"
+                defaultValue={this.props.discussionContent}
                 placeholder="Enter your content"
-                className="field-text-input field-size--medium"
-                id="flarum-discussion__content"/>
+                disabled={sending}
+                className="field-text-input field-size--large"
+                id="lightbox-flarum-discussion__content"/>
             </div>
           </div>
           <div className="field">
             <div className="field-header">
-              <label className="field-label" htmlFor="flarum-discussion__tags">Tag</label>
-              <span className="field-hint">Select a tag from the forum</span>
+              <label className="field-label" htmlFor="lightbox-flarum-discussion__tags">Tag</label>
+              <span className="field-hint">Select a primary tag from the forum</span>
             </div>
             <div className="field-main">
-              <select ref="tag" className="field-select" id="flarum-discussion__tags">
+              <select
+                ref="tag"
+                className="field-select"
+                id="lightbox-flarum-discussion__tags"
+                disabled={sending}>
                 {_.map(this.state.tags, this.tagOption)}
               </select>
             </div>
@@ -180,17 +225,46 @@
       )
     },
 
-    render: function() {
-
-      var hasTags = (this.state.tags.length > 0);
-
+    renderLoadingIndicator: function(message) {
+      message = message || "Loading";
       return (
-        <div className="lightbox-flarum-discussion">
-          <p className="lightbox-flarum-discussion__sub-title">Create a discussion for</p>
-          <p className="lightbox-flarum-discussion__title lightbox-title" dangerouslySetInnerHTML={{__html: this.props.pageTitle}}/>
-          {(hasTags) ? this.renderForm() : <p>No tags, dudes!</p> }
+        <div className="lightbox-flarum-discussion__loading">
+          {message} <i className="fa fa-refresh"/>
         </div>
-      )
+      );
+    },
+
+    render: function() {
+      var hasTags = (this.state.tags.length > 0);
+      if (!hasTags) {
+        return (
+          <div className="lightbox-flarum-discussion">
+            {this.renderLoadingIndicator("Loading tag data")}
+          </div>
+        )
+      } else if (this.state.complete) {
+        var discussionURL = "http://" + FLARUM_HOST + "/d/" + this.state.discussion.data.id;
+        return (
+          <div className="lightbox-flarum-discussion">
+            <div className="lightbox-flarum-discussion__complete copy">
+              <p>
+                Success — your discussion has been created!
+              </p>
+              <p>
+                You can <a href={discussionURL}>head over to the forum</a> and view it now.
+              </p>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="lightbox-flarum-discussion">
+            <p className="lightbox-flarum-discussion__sub-title">Create a discussion for</p>
+            <p className="lightbox-flarum-discussion__title lightbox-title" dangerouslySetInnerHTML={{__html: this.props.pageTitle}}/>
+            { this.renderForm() }
+          </div>
+        )
+      }
     }
   });
 
