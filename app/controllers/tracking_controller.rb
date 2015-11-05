@@ -17,7 +17,7 @@ class TrackingController < ActionController::Metal
     if params[:format] == "png"
       send_blank_image
     else
-      redirect_to params[:target]
+      redirect_to params[:target], status: params[:status].presence || 302
     end
   end
 
@@ -30,7 +30,7 @@ class TrackingController < ActionController::Metal
     if params[:format] == "png"
       send_blank_image
     else
-      redirect_to params[:target]
+      redirect_to params[:target], status: params[:status].presence || 302
     end
   end
 
@@ -42,7 +42,7 @@ class TrackingController < ActionController::Metal
       action: params[:social_action],
       network: params[:network],
       target: params[:target])
-    redirect_to params[:target]
+    redirect_to params[:target], status: params[:status].presence || 302
   end
 
   private
