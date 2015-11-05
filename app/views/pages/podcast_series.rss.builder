@@ -39,7 +39,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
-        cache ["podcast-episode-5", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+        cache ["podcast-episode-6", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
           # Let the series explicit value override episode one
           explicit = episode.fields[:explicit].value || page.fields[:explicit].value
           episode_image_url = if episode.fields[:itunes_image].data_present?
@@ -74,7 +74,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               tracking_url = url_with_domain(track_event(episode.video_url, {
                 event_category: "podcast",
                 event_action: "episode - watch",
-                label: "#{page.title}: #{episode.title}"
+                label: "#{page.title}: #{episode.title}",
+                status: 301
               }))
               xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
             else
@@ -87,7 +88,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               tracking_url = url_with_domain(track_event(episode.audio_url, {
                 event_category: "podcast",
                 event_action: "episode - listen",
-                label: "#{page.title}: #{episode.title}"
+                label: "#{page.title}: #{episode.title}",
+                status: 301
               }))
               xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
             end
