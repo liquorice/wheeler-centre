@@ -26,6 +26,7 @@ module TrackingHelper
       if options[:format] == "image"
         track_event_image_path(
           target: url,
+          status: options[:status],
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
@@ -36,6 +37,7 @@ module TrackingHelper
       else
         track_event_path(
           target: url,
+          status: options[:status],
           location: options[:location],
           title: options[:title],
           path: options[:path] || path_for_url(url),
@@ -89,6 +91,7 @@ module TrackingHelper
       if options[:format] == "image"
         track_pageview_image_path(
           target: url,
+          status: options[:status],
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
@@ -97,6 +100,7 @@ module TrackingHelper
       else
         track_pageview_path(
           target: url,
+          status: options[:status],
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
@@ -149,6 +153,7 @@ module TrackingHelper
       if options[:format] == "image"
         track_social_image_path(
           target: url,
+          status: options[:status],
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
@@ -158,6 +163,7 @@ module TrackingHelper
       else
         track_social_path(
           target: url,
+          status: options[:status],
           location: options[:location] || url,
           title: options[:title],
           path: options[:path] || path_for_url(url),
