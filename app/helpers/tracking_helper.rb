@@ -23,28 +23,24 @@ module TrackingHelper
   # Returns an event tracking URL
   def track_event(url, options = {})
     if permitted_tracking_host?(url)
+      tracking_params = {
+        target: url,
+        status: options[:status],
+        location: options[:location] || url,
+        title: options[:title],
+        path: options[:path] || path_for_url(url),
+        event_category: options[:event_category],
+        event_action: options[:event_action],
+        event_label: options[:event_label] || url
+      }
       if options[:format] == "image"
-        track_event_image_path(
-          target: url,
-          status: options[:status],
-          location: options[:location] || url,
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          event_category: options[:event_category],
-          event_action: options[:event_action],
-          event_label: options[:event_label] || url
-        )
+        track_event_image_path(tracking_params)
+      elsif options[:format] == "audio"
+        track_event_audio_path(tracking_params)
+      elsif options[:format] == "video"
+        track_event_video_path(tracking_params)
       else
-        track_event_path(
-          target: url,
-          status: options[:status],
-          location: options[:location],
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          event_category: options[:event_category],
-          event_action: options[:event_action],
-          event_label: options[:event_label] || url
-        )
+        track_event_path(tracking_params)
       end
     else
       url
@@ -88,24 +84,22 @@ module TrackingHelper
   # Returns a pageview tracking URL for use where the Google Analytics JS can't be executed (eg in an RSS reader)
   def track_pageview(url, options = {})
     if permitted_tracking_host?(url)
+      tracking_params =  {
+        target: url,
+        status: options[:status],
+        location: options[:location] || url,
+        title: options[:title],
+        path: options[:path] || path_for_url(url),
+        campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
+      }
       if options[:format] == "image"
-        track_pageview_image_path(
-          target: url,
-          status: options[:status],
-          location: options[:location] || url,
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
-        )
+        track_pageview_image_path(tracking_params)
+      elsif options[:format] == "audio"
+        track_pageview_audio_path(tracking_params)
+      elsif options[:format] == "video"
+        track_pageview_video_path(tracking_params)
       else
-        track_pageview_path(
-          target: url,
-          status: options[:status],
-          location: options[:location] || url,
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
-        )
+        track_pageview_path(tracking_params)
       end
     else
       url
@@ -150,26 +144,23 @@ module TrackingHelper
   # Returns a social interaction tracking URL
   def track_social(url, options = {})
     if permitted_tracking_host?(url)
+      tracking_params = {
+        target: url,
+        status: options[:status],
+        location: options[:location] || url,
+        title: options[:title],
+        path: options[:path] || path_for_url(url),
+        social_action: options[:social_action],
+        social_network: options[:social_network]
+      }
       if options[:format] == "image"
-        track_social_image_path(
-          target: url,
-          status: options[:status],
-          location: options[:location] || url,
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          social_action: options[:social_action],
-          social_network: options[:social_network]
-        )
+        track_social_image_path(tracking_params)
+      elsif options[:format] == "audio"
+        track_social_audio_path(tracking_params)
+      elsif options[:format] == "video"
+        track_social_video_path(tracking_params)
       else
-        track_social_path(
-          target: url,
-          status: options[:status],
-          location: options[:location] || url,
-          title: options[:title],
-          path: options[:path] || path_for_url(url),
-          social_action: options[:social_action],
-          social_network: options[:social_network]
-        )
+        track_social_path(tracking_params)
       end
     else
       url
