@@ -10,7 +10,7 @@ type = (params[:type] == "video") ? "video" : "audio"
 episodes = page.episodes(type: type, per_page: 100).results
 series_image_url = if page.fields[:itunes_image].data_present?
   version = :original
-  version = :itunes_url if page.fields[:itunes_image].asset.versions.include?(:itunes_url)
+  version = :itunes if page.fields[:itunes_image].asset.versions.include?(:itunes)
   page.fields[:itunes_image].asset.send(:"#{version}_url")
 end
 
