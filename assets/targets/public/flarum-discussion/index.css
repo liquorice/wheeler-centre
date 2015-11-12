@@ -8,29 +8,21 @@
     width: 100%;
   }
   .flarum-discussion__inner {
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
+    border-top: 1px solid #d2eae7;
+    border-bottom: 1px solid #d2eae7;
     border-radius: 3px;
     overflow: hidden;
     position: relative;
   }
-  .flarum-discussion__inner:before,
   .flarum-discussion__inner:after {
+    background: radial-gradient(center bottom, ellipse farthest-side, rgba(210,234,231,0.7), rgba(210,234,231,0));
+    bottom: 0;
     content: "";
+    height: 2rem;
     left: 0;
     position: absolute;
     right: 0;
-    height: 2rem;
   }
-    .flarum-discussion__inner:before {
-      background: radial-gradient(center top, ellipse farthest-side, rgba(0,0,0,0.08), rgba(0,0,0,0));
-      top: 0;
-    }
-    .flarum-discussion__inner:after {
-      background: radial-gradient(center bottom, ellipse farthest-side, rgba(0,0,0,0.1), rgba(0,0,0,0));
-      bottom: 0;
-      height: 2rem;
-    }
 
   .flarum-discussion__title,
   .copy .flarum-discussion__title {
