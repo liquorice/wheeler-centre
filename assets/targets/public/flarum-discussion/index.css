@@ -11,7 +11,9 @@
     border-top: 1px solid #d2eae7;
     border-bottom: 1px solid #d2eae7;
     border-radius: 3px;
-    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    overflow-y: scroll;
     position: relative;
   }
   .flarum-discussion__inner:after {
