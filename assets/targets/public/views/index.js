@@ -119,4 +119,8 @@ var iframeResizer = require("../vendor/iframe-resizer.js");
 views.iframeResizer = function(el, props) {
   var iframe = iframeResizer(props, el);
 };
+
+var flarumCommentCount = require("../flarum-comment-count");
+views.flarumCommentCount = flarumCommentCount;
+
 module.exports = views;
