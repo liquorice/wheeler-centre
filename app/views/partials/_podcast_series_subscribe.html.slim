@@ -1,0 +1,27 @@
+.podcast-series__subscribe.column-wrapper
+  .column-mid
+    .podcast-series__subscribe-header
+      a name="subscribe"
+        ' Subscribe to
+      i = markdown_line page.title
+    .podcast-series__subscribe-text
+      ' Subscribe in iTunes, listen online using the available links, or copy and paste the feed URL into your favourite podcast app.
+    .podcast-series__subscribe_methods.clearfix
+      .podcast-series__subscribe-itunes
+        a href= page.fields[:itunes_url]
+          img src="link-badge-itunes.png"
+      - if page.fields[:soundcloud_url].data_present? || page.fields[:stitcher_url].data_present?
+        .podcast-series__listen-links
+          ' Listen on: &nbsp;
+          - if page.fields[:soundcloud_url].data_present?
+            a href= page.fields[:soundcloud_url]
+              ' Soundcloud
+            ' ∙
+          - if page.fields[:stitcher_url].data_present?
+            a href= page.fields[:stitcher_url]
+              ' Stitcher
+      .podcast-series__feed-url
+        span.podcast-series__feed-url-title
+          ' Feed URL
+        span.podcast-series__feed-url-box
+          = "#{url_with_domain(page.absolute_url)}.rss".gsub(/^http|https/, 'feed')
