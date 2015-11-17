@@ -9,7 +9,19 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
+
   .podcast-episode
+    - cache ["podcast-series-intro-1", page, page.series] do
+      - if page.series
+        - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
+        a.podcast-episode__series-header.column-wrapper href="#{page.series.absolute_url}?show_all=true" style=style_for_event_series_block(highlight_color)
+          .column-full.clearfix
+            .podcast-episode__series-header-inner
+              p.podcast-episode__series-meta Part of a podcast series
+              p.podcast-episode__series-title = page.series.title
+              p.podcast-episode__series-call-to-action
+                | <em><span>View</span> all <span>episodes</span> in this series</em>
+                i.fa.fa-chevron-right
     .podcast-episode__header.column-wrapper
       .column-wide
         p.podcast-episode__byline
@@ -30,12 +42,20 @@
         - if page.fields[:audio].data_present?
           .recording__audio.recording__audio-podcast
             = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
-          .recording__downloads-podcast
+          .recording__downloads-podcast.clearfix
             ul
               li
                 a href=page.fields[:audio].asset.audio_mp3_url
                   i.fa.fa-music
                   ' Download audio file
+              li
+                a href="#subscribe"
+                  i.fa.fa-rss
+                  ' Subscribe to podcast
 
 
       = render_content_in_sections page.fields[:description]
+
+    = render "partials/podcast_series_subscribe", page: page.series
+
+    = render "partials/podcast_series_header", page: page.series

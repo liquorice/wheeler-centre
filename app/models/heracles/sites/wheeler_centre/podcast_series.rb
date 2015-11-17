@@ -6,6 +6,7 @@ module Heracles
           {
             fields: [
               {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :highlight_colour, type: :text, defaults: {value: '#F8F59E'}},
               {name: :intro, type: :content},
               {name: :description, type: :content},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark series as explicit?"},
@@ -18,6 +19,9 @@ module Heracles
               {name: :itunes_description, type: :text},
               {name: :itunes_keywords, type: :text},
               {name: :itunes_categories, type: :associated_pages, page_type: :itunes_category},
+              # Other sound links
+              {name: :soundcloud_url, type: :text},
+              {name: :stitcher_url, type: :text},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :people, type: :associated_pages, page_type: :person},
@@ -43,6 +47,12 @@ module Heracles
 
         def episodes(options={})
           search_podcast_episodes(options)
+        end
+
+        def people
+          if fields[:people].data_present?
+            fields[:people].pages.visible.published
+          end
         end
 
         def itunes_categories
