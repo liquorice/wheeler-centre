@@ -12,7 +12,6 @@
     border-bottom: 1px solid #d2eae7;
     border-radius: 3px;
     -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
     overflow-y: scroll;
     position: relative;
   }
