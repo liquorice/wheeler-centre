@@ -141,6 +141,10 @@
   padding-bottom: 3.5rem;
   margin: auto;
 }
+  .recording__downloads-podcast li {
+    float: left;
+    margin-right: 2rem;
+  }
   .breakpoint-widescreen-wide .recording__downloads,
   .breakpoint-widescreen .recording__downloads {
     float: left;
