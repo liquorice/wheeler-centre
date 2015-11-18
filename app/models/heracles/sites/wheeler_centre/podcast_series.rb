@@ -13,6 +13,7 @@ module Heracles
               {name: :featured, type: :boolean, defaults: {value: false}, question_text: "Make featured podcast"},
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
+              {name: :itunes_url, type: :text},
               {name: :itunes_image, type: :asset, asset_file_type: :image},
               {name: :itunes_subtitle, type: :text},
               {name: :itunes_summary, type: :text},
