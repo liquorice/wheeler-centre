@@ -5,7 +5,7 @@
   - episodes = page.episodes
 
 = area :head do
-  link href=url_with_domain("#{page.absolute_url}.rss") rel="alternate" title="#{page.title} podcast" type="application/rss+xml"
+  link href=podcast_tracking_link(page) rel="alternate" title="#{page.title} podcast" type="application/rss+xml"
 
 = area :masthead_title do
   == markdown_line broadcasts_page.title
@@ -95,5 +95,6 @@
         .column-mid
           - page.people.each do |person|
             = render "partials/presenter_horizontal", presenter: person
+
 
 

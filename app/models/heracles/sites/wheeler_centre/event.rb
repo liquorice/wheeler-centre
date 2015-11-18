@@ -66,7 +66,7 @@ module Heracles
         ### Accessors
 
         def upcoming?
-          (fields[:start_date].value >= Time.zone.now.beginning_of_day)
+          (fields[:start_date].data_present? && fields[:start_date].value >= Time.zone.now.beginning_of_day)
         end
 
         def booked_out?

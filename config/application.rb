@@ -31,5 +31,7 @@ end
 require "heracles-admin"
 require "heracles-admin-user-auth"
 require "heracles_single_site_shim"
-require "section_filter"
 require "helpers/redcarpet_renderers"
+require Rails.root.join("app/helpers/tracking_helper")
+require "section_filter"
+require "assets_filter"

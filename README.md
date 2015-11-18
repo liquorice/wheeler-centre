@@ -40,8 +40,8 @@ git remote add heroku git@heroku.com:wheeler-centre.git
 You can pull production data down using the following commands:
 
 ```
-heroku pg:backups capture
-curl -o latest.dump `heroku pg:backups public-url`
+heroku pg:backups capture --app=wheeler-centre
+curl -o latest.dump `heroku pg:backups --app=wheeler-centre public-url`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -d wheeler_centre_development < latest.dump
 rm latest.dump
 ```

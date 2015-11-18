@@ -17,6 +17,20 @@ Rails.application.routes.draw do
     end
   end
 
+  # Stat tracking
+  get "_track/event",        to: "tracking#event",     as: :track_event
+  get "_track/event.png",    to: "tracking#event",     as: :track_event_image
+  get "_track/event.mp3",    to: "tracking#event",     as: :track_event_audio
+  get "_track/event.mov",    to: "tracking#event",     as: :track_event_video
+  get "_track/pageview",     to: "tracking#pageview",  as: :track_pageview
+  get "_track/pageview.png", to: "tracking#pageview",  as: :track_pageview_image
+  get "_track/pageview.mp3", to: "tracking#pageview",  as: :track_pageview_audio
+  get "_track/pageview.mov", to: "tracking#pageview",  as: :track_pageview_video
+  get "_track/social",       to: "tracking#social",    as: :track_social
+  get "_track/social.png",   to: "tracking#social",    as: :track_social_image
+  get "_track/social.mp3",   to: "tracking#social",    as: :track_social_audio
+  get "_track/social.mov",   to: "tracking#social",    as: :track_social_video
+
   # Embed assets point
   get "/embed/:asset_type/:asset_id" => "embed_asset#show", as: :embed_asset
 
