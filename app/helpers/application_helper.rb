@@ -216,6 +216,14 @@ module ApplicationHelper
     "#{series.absolute_url}.rss?type=#{options[:type]}"
   end
 
+  def podcast_tracking_link(series)
+    track_event("#{url_with_domain(series.absolute_url)}.rss", { \
+      event_category: "podcast", \
+      event_action: "subscribe", \
+      title: "Podcast: #{series.title}" \
+    })
+  end
+
   ### --------------------------------------------------------------------------
   ### Events
   ### --------------------------------------------------------------------------
