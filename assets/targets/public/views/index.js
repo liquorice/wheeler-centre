@@ -109,6 +109,12 @@ views.search = function(el) {
   new Search(el);
 };
 
+// Select on focus
+var selectOnFocus = require("../select-on-focus");
+views.selectOnFocus = function(el) {
+  selectOnFocus(el);
+};
+
 // Adopt a word toggle
 var AdoptAWordToggle = require("../adopt-a-word");
 views.adoptWordToggle = function(el, props) {

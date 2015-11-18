@@ -242,6 +242,11 @@
   margin-bottom: 4rem;
   margin-right: 4rem;
 }
+.breakpoint-phone .podcast-series__hero-image,
+.breakpoint-phone-wide .podcast-series__hero-image {
+  float: none;
+  width: auto;
+}
   .podcast-series__hero-image img {
     max-width: 100%;
     min-width: 70%;
@@ -253,6 +258,12 @@
     width: calc(48% - 4rem);
     text-align: left;
     margin-bottom: 4rem;
+  }
+
+  .breakpoint-phone .podcast-series__header-right,
+  .breakpoint-phone-wide .podcast-series__header-right {
+    float: none;
+    width: auto;
   }
     .podcast-series__title {
       color: #333;
@@ -332,7 +343,6 @@
   .podcast-series__subscribe-itunes {
     float: left;
     margin-right: 7rem;
-    padding-top: 1.1rem;
   }
 
   .podcast-series__feed-url {
@@ -352,8 +362,7 @@
       padding-top: 1.1rem;
       padding-bottom: 1.1rem;
     }
-    span.podcast-series__feed-url-box {
-      display: block;
+    input.podcast-series__feed-url-box {
       float: right;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -362,14 +371,12 @@
       font-size: 1.4rem;
       width: 37rem;
       height: 4rem;
-      overflow: hidden;
       margin-left: 2rem;
-      white-space: nowrap;
     }
     .breakpoint-phone-wide span.podcast-series__feed-url-title ,
     .breakpoint-phone span.podcast-series__feed-url-title,
-    .breakpoint-phone-wide span.podcast-series__feed-url-box ,
-    .breakpoint-phone span.podcast-series__feed-url-box {
+    .breakpoint-phone-wide input.podcast-series__feed-url-box ,
+    .breakpoint-phone input.podcast-series__feed-url-box {
       float: none;
       width: 100%;
       margin-left: 0;
@@ -608,12 +615,10 @@
   padding-bottom: 5rem;
 }
 .breakpoint-tablet .podcast-episode {
-  padding-top: 4rem;
   padding-bottom: 2rem;
 }
 .breakpoint-phone-wide .podcast-episode,
 .breakpoint-phone .podcast-episode {
-  padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
@@ -729,6 +734,7 @@
 .breakpoint-phone-wide .podcast-episode__header,
 .breakpoint-phone .podcast-episode__header {
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
   .podcast-episode__byline {
@@ -790,13 +796,16 @@
     font-size: 2.8rem;
   }
 
+.podcast-episode__body {
+  margin-bottom: 5rem;
+}
+
 .podcast-episode__body .section--normal {
   max-width: var(--column-mid);
   position: relative;
 }
 
-.podcast-episode .podcast-series__subscribe {
+.podcast-episode .podcast-series__subscribe .column-mid {
   padding-top: 5rem;
   border-top: 1px solid #ddd;
-
 }

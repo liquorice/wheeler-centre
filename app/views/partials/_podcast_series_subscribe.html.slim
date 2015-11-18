@@ -24,5 +24,4 @@
       .podcast-series__feed-url
         span.podcast-series__feed-url-title
           ' Feed URL
-        span.podcast-series__feed-url-box
-          = "#{url_with_domain(page.absolute_url)}.rss".gsub(/^http|https/, 'feed')
+        input.podcast-series__feed-url-box type="text" readonly="readonly" value= "#{url_with_domain(page.absolute_url)}.rss" data-view-select-on-focus=true
