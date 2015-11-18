@@ -10,7 +10,7 @@ type = (params[:type] == "video") ? "video" : "audio"
 episodes = page.episodes(type: type, per_page: 100).results
 series_image_url = if page.fields[:itunes_image].data_present?
   version = :original
-  version = :itunes_url if page.fields[:itunes_image].asset.versions.include?(:itunes_url)
+  version = :itunes if page.fields[:itunes_image].asset.versions.include?(:itunes)
   page.fields[:itunes_image].asset.send(:"#{version}_url")
 end
 
@@ -39,7 +39,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
     xml.itunes :image, href: series_image_url if series_image_url.present?
     if episodes.present?
       episodes.each do |episode|
-        cache ["podcast-episode-1", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+        cache ["podcast-episode-7", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
           # Let the series explicit value override episode one
           explicit = episode.fields[:explicit].value || page.fields[:explicit].value
           episode_image_url = if episode.fields[:itunes_image].data_present?
@@ -58,7 +58,11 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             xml.link url_with_domain(episode.absolute_url)
             xml.guid episode.id, isPermaLink: "false"
             xml.description do
-              xml.cdata! render_content episode.fields[:description]
+              content = render_content episode.fields[:description]
+              # Add tracking pixels
+              content += image_tag(url_with_domain(track_pageview_for_page(episode, {format: "image"})), alt: "", width: 1, height: 1)
+              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"})), alt: "", width: 1, height: 1)
+              xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
             xml.itunes :summary, episode.fields[:itunes_summary].value
@@ -67,7 +71,14 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             if type == "video"
               duration = episode.video_result["meta"]["duration"] if episode.video_result["meta"].present? && episode.video_result["meta"]["duration"].present?
               xml.itunes :duration, duration_to_hms(duration || 0)
-              xml.enclosure url: episode.video_url, length: episode.video_result["size"], type: "video/m4a"
+              tracking_url = url_with_domain(track_event(episode.video_url, {
+                event_category: "podcast",
+                event_action: "episode - watch",
+                label: "#{page.title}: #{episode.title}",
+                format: "video",
+                status: 301
+              }))
+              xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
             else
               duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
                 episode.audio_result["meta"]["duration"]
@@ -75,7 +86,14 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
                 0
               end
               xml.itunes :duration, duration_to_hms(duration)
-              xml.enclosure url: episode.audio_url, length: episode.audio_result["size"], type: "audio/mpeg"
+              tracking_url = url_with_domain(track_event(episode.audio_url, {
+                event_category: "podcast",
+                event_action: "episode - listen",
+                label: "#{page.title}: #{episode.title}",
+                format: "audio",
+                status: 301
+              }))
+              xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
             end
           end
         end
