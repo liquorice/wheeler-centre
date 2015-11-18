@@ -7,9 +7,10 @@
     .podcast-series__subscribe-text
       ' Subscribe in iTunes, listen online using the available links, or copy and paste the feed URL into your favourite podcast app.
     .podcast-series__subscribe_methods.clearfix
-      .podcast-series__subscribe-itunes
-        a href= page.fields[:itunes_url]
-          img src="link-badge-itunes.png"
+      - if page.fields[:itunes_url].data_present?
+        .podcast-series__subscribe-itunes
+          a href= page.fields[:itunes_url]
+            img src= image_path("public/podcasts/link-badge-itunes.png")
       - if page.fields[:soundcloud_url].data_present? || page.fields[:stitcher_url].data_present?
         .podcast-series__listen-links
           ' Listen on: &nbsp;
