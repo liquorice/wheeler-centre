@@ -1,4 +1,4 @@
-.flarum-discussion.flarum-discussion--inline
+.flarum-discussion.flarum-discussion--inline data-view-flarum-embed=true
   h2.flarum-discussion__title = discussion_title
   .flarum-discussion__inner style=("max-height: #{max_height}px" if max_height.present?)
     iframe.flarum-discussion__embed src=discussion_embed_url frameborder="none" data-view-iframe-resizer={maxHeight: max_height, scrolling: true}.to_json
