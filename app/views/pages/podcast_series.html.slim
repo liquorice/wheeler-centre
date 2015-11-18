@@ -45,39 +45,41 @@
             = force_excerptify_html render_content(first_episode.fields[:description]), 100, "i em strong br"
 
     - if !show_all && episodes.results.present? && episodes.total > 1
-      .podcast-series__older-episodes.column-small
-        .section-header
-          h2
-            a name= "episode_list" Older episodes
+      .podcast-series__older-episodes.column_wrapper
+        .column-small
+          .section-header
+            h2
+              a name= "episode_list" Older episodes
 
-        .podcast-series__episodes-list
-          - episodes.results.drop(1).each do |episode|
-            = render "partials/podcast_series_episode", episode: episode
+          .podcast-series__episodes-list
+            - episodes.results.drop(1).each do |episode|
+              = render "partials/podcast_series_episode", episode: episode
 
 
-        - if page.episodes.total > 30
-          .podcast-series__view-all-wrapper
-            a.podcast-series__view-all href= "#{page.absolute_url}?show_all=true"
-              ' View all episodes from this series
+          - if page.episodes.total > 30
+            .podcast-series__view-all-wrapper
+              a.podcast-series__view-all href= "#{page.absolute_url}?show_all=true"
+                ' View all episodes from this series
 
     - elsif show_all
-      .podcast-series__all-episodes.column-small name= "episode_list"
-        .section-header
-          h2
-            a name= "episode_list" All episodes in this series
+      .podcast-series__all-episodes.column-wrapper
+        .column-small
+          .section-header
+            h2
+              a name= "episode_list" All episodes in this series
 
-        .podcast-series__episodes-list
-          - episodes.results.each do |episode|
-            = render "partials/podcast_series_episode", episode: episode
+          .podcast-series__episodes-list
+            - episodes.results.each do |episode|
+              = render "partials/podcast_series_episode", episode: episode
 
-        - if episodes.results.total_pages > 1
-          .pagination-context.pagination-context--bottom
-            ' Page
-            = (params[:page] || 1)
-            em &nbsp;of&nbsp;
-            = episodes.results.total_pages
-          .pagination-bottom
-            = paginate episodes.results, outer_window: 3
+          - if episodes.results.total_pages > 1
+            .pagination-context.pagination-context--bottom
+              ' Page
+              = (params[:page] || 1)
+              em &nbsp;of&nbsp;
+              = episodes.results.total_pages
+            .pagination-bottom
+              = paginate episodes.results, outer_window: 3
 
 
     - if !show_all && page.fields[:description].data_present?
