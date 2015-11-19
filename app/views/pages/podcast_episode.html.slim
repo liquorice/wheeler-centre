@@ -29,9 +29,10 @@
           ' An episode of
           a href= page.series.absolute_url
             = page.series.title
-          span.podcast-episode__byline-separator ·
-          ' Published on
-          = page.fields[:publish_date]
+          - if page.fields[:publish_date].data_present?
+            span.podcast-episode__byline-separator ·
+            ' Published on
+            = page.fields[:publish_date]
           - if page.fields[:explicit].value
             span.podcast-episode__byline-separator ·
             span.podcast-episode__byline-explicit
