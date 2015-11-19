@@ -1,3 +1,4 @@
+- context ||= "series"
 - hero_image = page.fields[:hero_image].try(:asset)
 - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
 .podcast-series__top.column-wrapper style=style_for_event_series_block(highlight_color)
@@ -20,5 +21,8 @@
           = force_excerptify_html render_content(page.fields[:description]), 200, "i em strong br a"
       .podcast-series__more
         ' More:
-        a href="#episode_list" Episode List
-        a href="#about" Show information
+        - if context == "series"
+          a href="#episode_list" Episode List
+          a href="#about" Show information
+        - else
+          a href="#{page.absolute_url}?show_all=true" View all episodes in series
