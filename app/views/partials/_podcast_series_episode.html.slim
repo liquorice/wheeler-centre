@@ -3,8 +3,9 @@ a.podcast-series__episode href= episode.absolute_url
     i.fa.fa-play.podcast-series__episode-play-icon
   .podcast-series__episode-info
     .podcast-series__episode-meta
-      time.podcast-series__episode-date datetime=l(episode.fields[:publish_date].value, format: :rfc_3339)
-        = episode.fields[:publish_date]
+      - if episode.fields[:publish_date].data_present?
+        time.podcast-series__episode-date datetime=l(episode.fields[:publish_date].value, format: :rfc_3339)
+          = episode.fields[:publish_date]
       - if episode.fields[:audio].data_present?
         ' &nbsp;&nbsp;∙&nbsp;
         span.podcast-series__episode-duration

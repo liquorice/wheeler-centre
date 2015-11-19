@@ -36,8 +36,9 @@
         - cache ["podcast-series-info-1", page, first_episode] do
           .column-small
             .podcast-series__latest-inner
-              time.podcast-series__latest-date datetime=l(first_episode.fields[:publish_date].value, format: :rfc_3339)
-                = first_episode.fields[:publish_date]
+              - if first_episode.fields[:publish_date].data_present?
+                time.podcast-series__latest-date datetime=l(first_episode.fields[:publish_date].value, format: :rfc_3339)
+                  = first_episode.fields[:publish_date]
               .podcast-series__latest-title
                 a href= first_episode.absolute_url
                   = first_episode.title
