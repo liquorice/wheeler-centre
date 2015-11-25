@@ -224,6 +224,14 @@ module ApplicationHelper
     })
   end
 
+  def page_title_for_podcast(podcast)
+    title = ""
+    if podcast.series.present?
+      title = "#{podcast.series.title}: "
+    end
+    "#{title}#{podcast.title}"
+  end
+
   ### --------------------------------------------------------------------------
   ### Events
   ### --------------------------------------------------------------------------

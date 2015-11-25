@@ -18,6 +18,7 @@
           - if page.fields[:soundcloud_url].data_present?
             a href= page.fields[:soundcloud_url]
               ' Soundcloud
+          - if page.fields[:soundcloud_url].data_present? && page.fields[:stitcher_url].data_present?
             ' ∙
           - if page.fields[:stitcher_url].data_present?
             a href= page.fields[:stitcher_url]
