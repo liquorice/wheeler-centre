@@ -163,7 +163,7 @@ module Heracles
             fields[:external_links].value
           end
 
-         time :sort_field do
+         time :date_sort_field do
             created_at
           end
         end
