@@ -152,6 +152,10 @@ module Heracles
           string :event_series_titles, multiple: true do
             series.map(&:title)
           end
+
+          time :sort_field do
+            fields[:publish_date].value
+          end
         end
 
         private
