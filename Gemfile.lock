@@ -30,7 +30,7 @@ GIT
   revision: 79255d58418616147253647de389372ed7a0a537
   branch: page-actions-v1
   specs:
-    heracles (1.0.3)
+    heracles (1.0.4)
       activejob
       acts-as-taggable-on (~> 3.4.3)
       ancestry (~> 2.1.0)
