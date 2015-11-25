@@ -37,5 +37,11 @@
                   i.fa.fa-music
                   ' Download audio file
 
-
       = render_content_in_sections page.fields[:description]
+
+
+    - cache ["podcast-episode-comments-1", page.fields[:flarum_discussion_id]] do
+      - if page.fields[:flarum_discussion_id].data_present?
+        .podcast-episode__comments.column-wrapper
+          .column-mid.clearfix
+            = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }

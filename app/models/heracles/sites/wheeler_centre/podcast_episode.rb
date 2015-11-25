@@ -26,6 +26,7 @@ module Heracles
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :legacy_recording_id, type: :integer, label: "Legacy recording ID"},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :flarum_discussion_id, type: :text, editor_type: :code},
             ]
           }
         end

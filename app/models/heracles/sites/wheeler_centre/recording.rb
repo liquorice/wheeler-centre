@@ -26,6 +26,7 @@ module Heracles
               {name: :transcript, type: :content},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :recording_id, type: :integer, label: "Legacy recording ID"},
+              {name: :flarum_discussion_id, type: :text, editor_type: :code},
             ]
           }
         end

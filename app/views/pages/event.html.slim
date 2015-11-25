@@ -251,7 +251,11 @@
                       img.event__supporters-image src=sponsor_image.content_small_url
                     - else
                       = sponsor.title
-
+    - cache ["event-comments-1", page.fields[:flarum_discussion_id]] do
+      - if page.fields[:flarum_discussion_id].data_present?
+        .event__comments.column-wrapper
+          .column-mid.clearfix
+            = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }
     / Show related events
     - cache ["event-related-1", page, page.related_events, page.fields[:sponsors].pages] do
       - if page.related_events.present?
