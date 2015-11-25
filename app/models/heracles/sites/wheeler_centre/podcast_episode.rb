@@ -40,6 +40,7 @@ module Heracles
             audio: (fields[:audio].data_present?) ? "♫" : "×",
             events: events.map(&:title).join(", "),
             people: fields[:people].pages.map(&:title).join(", "),
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
             publish_date: fields[:publish_date],
