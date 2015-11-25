@@ -1,3 +1,22 @@
+/ Custom meta data
+- open_graph_image = page.fields[:hero_image].asset if page.fields[:hero_image].present?
+- open_graph_summary = strip_html(render_content(page.fields[:body]), "")
+- if open_graph_image.present?
+  - puts "SETTING META"
+  - set_meta_tags({ \
+      title: page.title, \
+      description: open_graph_summary, \
+      og: { \
+        description: open_graph_summary,
+        image: { \
+          url: (open_graph_image.content_medium_url if open_graph_image), \
+          secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
+          width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
+          height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        } \
+      } \
+    })
+
 - show_all = !!params[:show_all]
 - if show_all
   - episodes = page.episodes(page: params[:page], per_page: params[:per_page])
