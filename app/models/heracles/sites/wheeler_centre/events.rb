@@ -9,6 +9,9 @@ module Heracles
             fields: [
               {name: :intro, type: :content},
               {name: :body, type: :content},
+              # Content for off season when there are no events published
+              {name: :off_season_info, type: :info, text: "<hr/>"},
+              {name: :body_off_season, type: :content, hint: "This content will display when there are no upcoming events."},
               # Even series intro
               {name: :event_series_info, type: :info, text: "<hr/>"},
               {name: :event_series_intro, type: :content, hint: "A line or two to introduce the current event series"},
