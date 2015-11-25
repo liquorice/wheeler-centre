@@ -10,7 +10,8 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", "~> 1.0.2", source: "https://gem.fury.io/icelab/"
+# gem "heracles", "~> 1.0.2", source: "https://gem.fury.io/icelab/"
+gem "heracles", git: "git@github.com:icelab/heracles.git", branch: "page-actions-v1"
 
 # Cache Buster
 gem 'varnisher'
