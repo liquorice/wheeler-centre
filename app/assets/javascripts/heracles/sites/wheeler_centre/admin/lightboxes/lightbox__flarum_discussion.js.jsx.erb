@@ -72,6 +72,21 @@
   }
 
   /**
+   * Save discussion ID that Flarum API returns
+   * @pageID       {String} Current page ID
+   * @discussionID {String} Created discussion ID
+   * @return       {Deferred} jQuery deferred object
+   */
+  function saveFlarumDiscussionId(pageID, discussionID) {
+    var request = $.ajax({
+      url: "/admin/api/pages/" +pageID+ "/fields/flarum_discussion/" +discussionID,
+      dataType: "json",
+      method: "PUT"
+    });
+    return request;
+  }
+
+  /**
    * Get the tags from the raw JSON-API response object that Flarum returns.
    * We pluck the ones we care about and normalise them with the attributes
    * we want.
@@ -148,6 +163,7 @@
       this.setState({sending: true});
 
       createFlarumDiscussion(params).then(function(rsp) {
+        saveFlarumDiscussionId(_this.props.pageID, rsp.data.id);
         _this.setState({
           sending: false,
           complete: true,

@@ -26,7 +26,7 @@ gem "sunspot-queue", github: "timriley/sunspot-queue", ref: "649af734420db481fd0
 gem "que"
 
 # Web server
-gem "passenger"
+gem "passenger", "~> 5.0.7"
 
 # Rack middleware
 gem "rack-canonical-host"
