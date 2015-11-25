@@ -17,7 +17,7 @@ module Heracles
 
         helper_method \
         def discussion_id
-          data[:discussion_id] || 1
+          data[:discussion_id]
         end
 
         helper_method \

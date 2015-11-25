@@ -443,4 +443,8 @@
   padding-bottom: 1.5rem;
 }
 
-
+.blog-post__comments {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+}
