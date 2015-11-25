@@ -229,7 +229,6 @@ module ApplicationHelper
     if podcast.series.present?
       title = "#{podcast.series.title}: "
     end
-    puts "PODCAST TITLE: _______#{title}#{podcast.title}"
     "#{title}#{podcast.title}"
   end
 
