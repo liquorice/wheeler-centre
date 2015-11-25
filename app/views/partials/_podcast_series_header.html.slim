@@ -1,5 +1,5 @@
 - context ||= "series"
-- hero_image = page.fields[:hero_image].try(:asset)
+- hero_image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
 - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
 .podcast-series__top.column-wrapper style=style_for_event_series_block(highlight_color)
   .podcast-series__header.column-wide.clearfix
