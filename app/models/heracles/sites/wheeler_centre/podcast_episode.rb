@@ -151,7 +151,7 @@ module Heracles
             end
           end
 
-          time :sort_field do
+          time :date_sort_field do
             fields[:publish_date].value
           end
         end

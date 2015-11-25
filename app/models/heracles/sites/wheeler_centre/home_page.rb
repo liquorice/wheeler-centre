@@ -83,7 +83,7 @@ module Heracles
             with :published, true
             with :hidden, false
             with :tag_list, options[:tags] if options[:tags].present?
-            order_by :sort_field, :desc
+            order_by :date_sort_field, :desc
             paginate page: options[:page] || 1, per_page: options[:per_page] || 6
           end
         end

@@ -199,7 +199,7 @@ module Heracles
             fields[:venue].pages.first.id if fields[:venue].data_present?
           end
 
-          time :sort_field do
+          time :date_sort_field do
             created_at
           end
 
