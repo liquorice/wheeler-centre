@@ -140,7 +140,6 @@ module Heracles
           end
         end
 
-
         ### Searchable attrs
 
         searchable do
@@ -198,6 +197,10 @@ module Heracles
 
           string :venue_id do
             fields[:venue].pages.first.id if fields[:venue].data_present?
+          end
+
+          time :date_sort_field do
+            created_at
           end
 
         end
