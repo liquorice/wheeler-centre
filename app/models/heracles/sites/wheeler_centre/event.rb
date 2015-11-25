@@ -46,6 +46,7 @@ module Heracles
             promo_image: (fields[:promo_image].data_present?) ? "✔" : "•",
             booking: (fields[:external_bookings].data_present?) ? "✔" : "•",
             recordings: fields[:recordings],
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•"
           }
         end

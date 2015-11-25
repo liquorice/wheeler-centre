@@ -34,6 +34,7 @@ module Heracles
           {
             title: title,
             authors: fields[:authors].pages.map(&:title).join(", "),
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•",
             publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)
