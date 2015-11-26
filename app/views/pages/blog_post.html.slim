@@ -112,7 +112,7 @@
                 = render "partials/blog_snap_block", post: post, show_type: true, aspect: :landscape
   - cache ["blog-comments-1", page.fields[:flarum_discussion_id]] do
     - if page.fields[:flarum_discussion_id].data_present?
-      .blog-post__comments.column-wrapper
+      .blog-post__comments.column-wrapper class=("blog-post__comments--with-guest" if show_guest_block)
         .column-mid.clearfix
           = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }
 
