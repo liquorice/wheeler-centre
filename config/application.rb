@@ -22,7 +22,7 @@ module WheelerCentre
     config.autoload_paths << Rails.root.join("lib", "helpers")
 
     config.middleware.insert_before(Rack::Runtime, Rack::ReverseProxy) do
-      reverse_proxy_options preserve_host: true
+      reverse_proxy_options preserve_host: (Rails.env.development?)
       reverse_proxy  /^\/flarum(\/.*)$/, "http://#{ENV['FLARUM_HOST']}/$1"
     end
 
