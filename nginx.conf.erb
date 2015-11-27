@@ -202,7 +202,6 @@ http {
 
         # Proxy to Flarum
         location /flarum/ {
-            proxy_set_header Authorization "<%= ENV["FLARUM_AUTH_TOKEN"] %>";
             proxy_set_header Host <%= ENV["FLARUM_HOST"] %>;
             proxy_pass http://<%= ENV["FLARUM_HOST"] %>/;
         }

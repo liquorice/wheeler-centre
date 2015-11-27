@@ -10,12 +10,14 @@
 (function() {
 
   var FLARUM_HOST = '<%= ENV["FLARUM_HOST"] %>';
+  var FLARUM_AUTH_TOKEN = '<%= ENV["FLARUM_AUTH_TOKEN"] %>';
 
   /**
    * Add the `Authorization` header and token to the request
    * @param {Object} request A jQuery AJAX request object
    */
   function amendHeaders(request) {
+    request.setRequestHeader("Authorization", "Token " + FLARUM_AUTH_TOKEN);
     request.setRequestHeader("Content-Type", "application/json");
   }
 
