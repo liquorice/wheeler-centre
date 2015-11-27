@@ -11,7 +11,6 @@
 (function() {
 
   var FLARUM_HOST = '<%= ENV["FLARUM_HOST"] %>';
-  var FLARUM_AUTH_TOKEN = '<%= ENV["FLARUM_AUTH_TOKEN"] %>';
 
   /**
    * Insertable display class
@@ -152,9 +151,6 @@
         var url = (query.context && query.context.next) ? substituteProxyPath(query.context.next) : "/flarum/api/discussions";
 
         var request = $.ajax({
-          beforeSend: function(request) {
-            request.setRequestHeader("Authentication", "Token " + FLARUM_AUTH_TOKEN);
-          },
           url: url,
           dataType: "json"
         });

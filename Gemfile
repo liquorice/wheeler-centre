@@ -30,8 +30,6 @@ gem "passenger", "~> 5.0.7"
 # Rack middleware
 gem "rack-canonical-host"
 gem "rack-rewrite"
-# TEMP
-gem "rack-reverse-proxy", require: "rack/reverse_proxy"
 
 # Views
 gem "jbuilder", "~> 2.0"

@@ -403,11 +403,6 @@ GEM
     rack-canonical-host (0.1.0)
       addressable
       rack (~> 1.0)
-    rack-proxy (0.5.17)
-      rack
-    rack-reverse-proxy (0.9.1)
-      rack (>= 1.0.0)
-      rack-proxy (~> 0.5)
     rack-rewrite (1.5.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -628,7 +623,6 @@ DEPENDENCIES
   que
   quiet_assets
   rack-canonical-host
-  rack-reverse-proxy
   rack-rewrite
   rails (~> 4.1.0)
   rails-assets-jquery!
