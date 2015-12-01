@@ -38,7 +38,7 @@ module Heracles
         private
 
         def discussion_base_url
-          "http://#{ENV["FLARUM_HOST"]}" || "http://discuss.wheelercentre.com"
+          "http://#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com"
         end
       end
     end

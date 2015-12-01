@@ -28,7 +28,7 @@
       var discussionURL;
       if (this.state.value.discussion_id) {
         discussionTitle = "#" + this.state.value.discussion_id + " — " + this.state.value.discussion_title;
-        discussionURL = "http://" + FLARUM_HOST + "/d/" + this.state.value.discussion_id;
+        discussionURL = FLARUM_HOST + "/d/" + this.state.value.discussion_id;
       }
       return (
         <div className="insertable-display insertable-display-flarum" contentEditable="false">
@@ -102,7 +102,7 @@
    * @return {String}     The substituted URL
    */
   function substituteProxyPath(url) {
-    var urlRe = new RegExp("^http://" + FLARUM_HOST);
+    var urlRe = new RegExp("^" + FLARUM_HOST);
     // BUG
     // Flarum doesn't include the `/api` portion of this URL
     return url.replace(urlRe, "/flarum/api");
