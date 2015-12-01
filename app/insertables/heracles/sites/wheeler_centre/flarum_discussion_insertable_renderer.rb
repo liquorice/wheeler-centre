@@ -12,7 +12,11 @@ module Heracles
 
         helper_method \
         def discussion_embed_url
-          "#{discussion_base_url}/embed/#{discussion_id}"
+          url = "#{discussion_base_url}/embed/#{discussion_id}"
+          if data[:hide_first_post].present? && data[:hide_first_post]
+            url = "#{url}?hideFirstPost=1"
+          end
+          url
         end
 
         helper_method \
@@ -38,7 +42,7 @@ module Heracles
         private
 
         def discussion_base_url
-          "http://#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com"
+          "#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com"
         end
       end
     end

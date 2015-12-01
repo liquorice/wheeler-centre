@@ -58,6 +58,8 @@
                   <dd>{this.state.value.title || "—"}</dd>
                   <dt>Max-height (in pixels)</dt>
                   <dd>{this.state.value.max_height || "—"}</dd>
+                  <dt>Hide first post?</dt>
+                  <dd>{(this.state.value.hide_first_post) ? "Yes" : "No"}</dd>
                 </dl>
               </div>
             </div>
@@ -241,6 +243,14 @@
                 <input ref="max_height" id="edit__max_height" className="field-text-input" type="number" value={this.state.value.max_height} onChange={this.handleChange.bind(this, "max_height")} placeholder="Maximum height"/>
               </div>
             </div>
+            <div className="field">
+              <div className="field-main">
+                <div className="field-checkbox">
+                  <input ref="hide_first_post" className="field-checkbox-input" type="checkbox" defaultChecked={this.props.value.hide_first_post} id="edit__show-page-link" onChange={this.handleCheckboxChange.bind(this, "hide_first_post")}/>
+                  <label className="field-checkbox-label" htmlFor="edit__show-page-link">Hide first post?</label>
+                </div>
+              </div>
+            </div>
             <button type="submit" className="button button--highlight">Save changes to discussion insertable</button>
           </form>
         </div>
@@ -255,6 +265,12 @@
     handleChange: function(property, e) {
       var value = _.extend({}, this.state.value);
       value[property] = e.target.value;
+      this.setState({value: value});
+    },
+
+    handleCheckboxChange: function(ref, e) {
+      var value = _.extend({}, this.state.value);
+      value[ref] = this.refs[ref].getDOMNode().checked;
       this.setState({value: value});
     },
 
