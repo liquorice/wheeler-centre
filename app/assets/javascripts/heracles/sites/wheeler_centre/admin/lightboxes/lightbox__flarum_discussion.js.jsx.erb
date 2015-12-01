@@ -259,7 +259,7 @@
           </div>
         )
       } else if (this.state.complete) {
-        var discussionURL = "http://" + FLARUM_HOST + "/d/" + this.state.discussion.data.id;
+        var discussionURL = FLARUM_HOST + "/d/" + this.state.discussion.data.id;
         return (
           <div className="lightbox-flarum-discussion">
             <div className="lightbox-flarum-discussion__complete copy">

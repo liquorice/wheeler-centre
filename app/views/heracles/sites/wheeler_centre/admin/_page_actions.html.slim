@@ -6,7 +6,7 @@
 ul
   / Flarum Discussion
   - if page.fields[:flarum_discussion_id] && page.fields[:flarum_discussion_id].data_present?
-    - flarum_link = "http://#{ENV["FLARUM_HOST"]}" || "http://discuss.wheelercentre.com"
+    - flarum_link = "http://#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com"
     - flarum_link = "#{flarum_link}/d/#{page.fields[:flarum_discussion_id].value}"
     li
       a href=flarum_link target="_blank" View discussion

@@ -380,11 +380,11 @@ module ApplicationHelper
   end
 
   def discussion_url(id)
-    "#{("http://#{ENV["FLARUM_HOST"]}" || "http://discuss.wheelercentre.com")}/d/#{id}"
+    "#{("#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com")}/d/#{id}"
   end
 
   def discussion_embed_url(id)
-    "#{("http://#{ENV["FLARUM_HOST"]}" || "http://discuss.wheelercentre.com")}/embed/#{id}"
+    "#{("#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com")}/embed/#{id}?hideFirstPost=1"
   end
 
 end
