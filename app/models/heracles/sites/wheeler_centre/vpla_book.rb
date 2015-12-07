@@ -26,6 +26,7 @@ module Heracles
               {name: :library_website, type: :text},
               # Judges report
               {name: :judges_report, type: :content, label: "Judge’s report"},
+              {name: :sort_name, type: :text},
             ]
           }
         end
