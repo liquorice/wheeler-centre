@@ -31,6 +31,19 @@ module Heracles
           }
         end
 
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            category: (fields[:category].data_present?) ? fields[:category].pages.first.title : "—",
+            author: fields[:author],
+            published: (published) ? "✔" : "•"
+          }
+        end
+
+        ### Accessors
+
         def year
           parent
         end
