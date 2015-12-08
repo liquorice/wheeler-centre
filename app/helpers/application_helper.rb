@@ -309,6 +309,30 @@ module ApplicationHelper
     end
   end
 
+
+  def ical_entry(event)
+    entry = Icalendar::Event.new
+    entry.dtstart = event.fields[:start_date].value.strftime("%Y%m%dT%H%M%S")
+    entry.dtend = event.fields[:end_date].value.strftime("%Y%m%dT%H%M%S")
+    entry.summary = event.title
+    entry.description = force_excerptify_html(event.fields[:body], 100, "") if event.fields[:body].data_present?
+    entry.location = event.venue.title if event.venue.present?
+    entry.created = event.created_at
+    entry.last_modified = event.updated_at
+    entry.url = event.url = url_with_domain(event.absolute_url)
+    entry
+  end
+
+  def ical_calendar(events)
+    calendar = Icalendar::Calendar.new
+    events.each do |event|
+      entry = ical_entry(event)
+      calendar.add_event(entry)
+    end
+    calendar.publish
+    calendar.to_ical
+  end
+
   ### --------------------------------------------------------------------------
   ### Settings page
   ### --------------------------------------------------------------------------
