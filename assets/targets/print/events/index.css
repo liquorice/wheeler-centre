@@ -10,6 +10,10 @@
   clear: both;
 }
 
+.event-calendar__ical-subscribe {
+  display: none;
+}
+
 .event-calendar__month {
   border-bottom: 1px solid #ccc;
   margin-bottom: 2rem;
