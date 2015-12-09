@@ -24,13 +24,21 @@ module ApplicationHelper
     }
     options = defaults.deep_merge(options.deep_symbolize_keys)
 
-    filters ||= standard_content_filters
+    filters ||= custom_filters
     render_content_with_filters(content_field, filters, options)
   end
 
   def render_content_in_sections(content_field, options={})
-    filters = standard_content_filters + [Heracles::Sites::WheelerCentre::SectionFilter]
+    filters = custom_filters + [Heracles::Sites::WheelerCentre::SectionFilter]
     render_content content_field, options, filters
+  end
+
+  def custom_filters
+    [
+      Heracles::ContentFieldRendering::InsertablesFilter,
+      Heracles::Sites::WheelerCentre::AssetsFilter,
+      Heracles::ContentFieldRendering::PageLinkFilter
+    ]
   end
 
   def canonical_domain
@@ -212,6 +220,22 @@ module ApplicationHelper
     return unless series.page_type == "podcast_series"
     options.reverse_merge!(type: "audio")
     "#{series.absolute_url}.rss?type=#{options[:type]}"
+  end
+
+  def podcast_tracking_link(series)
+    track_event("#{url_with_domain(series.absolute_url)}.rss", { \
+      event_category: "podcast", \
+      event_action: "subscribe", \
+      title: "Podcast: #{series.title}" \
+    })
+  end
+
+  def page_title_for_podcast(podcast)
+    title = ""
+    if podcast.series.present?
+      title = "#{podcast.series.title}: "
+    end
+    "#{title}#{podcast.title}"
   end
 
   ### --------------------------------------------------------------------------

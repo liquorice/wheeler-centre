@@ -8,10 +8,10 @@
     og: { \
       description: open_graph_summary,
       image: { \
-        url: (open_graph_image.content_small_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+        url: (open_graph_image.content_medium_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
       } \
     } \
   })
@@ -91,15 +91,28 @@
               .recording__downloads
                 ul
                   - if page.fields[:audio].data_present?
-                    li
-                      a href=page.fields[:audio].asset.audio_mp3_url
-                        i.fa.fa-music
-                        ' Download audio file
+                    - asset = page.fields[:audio].asset
+                    - if asset.versions.include?(:audio_mp3)
+                      - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
+                        title: asset.title || asset.file_name, \
+                        event_category: "audio", \
+                        event_action: "download" \
+                      })
+                      li
+                        a href=mp3_tracking_url
+                          i.fa.fa-music
+                          ' Download audio file
                   - if page.fields[:video].data_present?
                     li
+                      - asset = page.fields[:video].asset
                       - version = :original
-                      - version = :video_ipad_high if page.fields[:video].asset.versions.include?(:video_ipad_high)
-                      a href=page.fields[:video].asset.send(:"#{version}_url")
+                      - version = :video_ipad_high if asset.versions.include?(:video_ipad_high)
+                      - video_tracking_url = track_event(asset.send(:"#{version}_url"), { \
+                        title: asset.title || asset.file_name, \
+                        event_category: "video", \
+                        event_action: "download" \
+                      })
+                      a href=video_tracking_url
                         i.fa.fa-video-camera
                         ' Download video file
 

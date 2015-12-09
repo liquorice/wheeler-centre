@@ -16,7 +16,7 @@ module Heracles
 
         def to_summary_hash
           {
-            person: fields[:person],
+            person: (fields[:person].data_present?) ? fields[:person].pages.first.title : "None selected",
             quote: fields[:quote],
             published: (published) ? "✔" : "•",
             created_at:  created_at.to_s(:admin_date)

@@ -122,6 +122,10 @@ module Heracles
             fields[:publish_date].value
           end
 
+          time :date_sort_field do
+            fields[:publish_date].value
+          end
+
         end
 
         private

@@ -1,12 +1,17 @@
 - upcoming_events = page.upcoming_events
 - events = page.upcoming_events(page: params[:page], per_page: params[:per_page])
 - active_series = page.active_series.results
+- events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{events_page.title}" \
+})
 
 = area :head do
-  link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
+  link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
-  ' Events
+  | Events
 
 = area :masthead_contextual_navigation do
   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
@@ -19,18 +24,22 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
-      - if page.fields[:body].data_present?
-        .page__body.event-index__body
-          .column-wrapper
-            .column-wide
-              = render_content page.fields[:body]
-
-      / Output days of the week
       - if upcoming_events.results.present?
+        - if page.fields[:body].data_present?
+          .page__body.event-index__body
+            .column-wrapper
+              .column-wide
+                = render_content page.fields[:body]
+        / Output days of the week
         .event-calendar__legend.clearfix
           - days_for_week(Date.today.beginning_of_week).each do |day|
             .event-calendar__legend-day
               span= l day, format: :day_short_name
+
+      - elsif page.fields[:body_off_season].data_present?
+        .page__body.event-index__body
+          .content-block
+            = render_content_in_sections page.fields[:body_off_season]
 
     / Group events by year
     - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do

@@ -31,7 +31,7 @@
       = render_content_in_sections page.fields[:blurb]
 
       - if page.fields[:author].data_present?
-        .section--normal.vpla-book__author
+        .section--normal.vpla-book__author.vpla-book__clear-float
           .event-presenter.event-presenter--horizontal.clearfix
             - if page.fields[:author_image].data_present?
               .event-presenter__image
@@ -43,16 +43,16 @@
 
     / Judge’s report
     - if page.fields[:judges_report].data_present?
-      .content-block.vpla-book__judges-report
+      .content-block.vpla-book__judges-report.vpla-book__clear-float
         .column-mid
           .section-header
-            h2 Judge’s report
+            h2 Judges’ report
         = render_content_in_sections page.fields[:judges_report]
 
     / Blurb
     / FIXME the data here has been imported into the wrong fields blurb <-> review
     - if page.fields[:review].data_present?
-      .content-block.vpla-book__blurb
+      .content-block.vpla-book__blurb.vpla-book__clear-float
         .column-mid
           .section-header
             h2 Extract

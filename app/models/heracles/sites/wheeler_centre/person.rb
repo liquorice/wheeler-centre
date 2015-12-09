@@ -162,6 +162,10 @@ module Heracles
           text :external_links do
             fields[:external_links].value
           end
+
+         time :date_sort_field do
+            created_at
+          end
         end
 
         private

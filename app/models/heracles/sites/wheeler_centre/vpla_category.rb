@@ -19,7 +19,7 @@ module Heracles
               :"insertions.inserted_key" => insertion_key
             ).
             group("pages.id"). # we can't use `distinct` here since it fails for queries returning JSON column
-            order("created_at DESC")
+            order("fields_data->'sort_name'->>'value' ASC, created_at DESC")
         end
       end
     end
