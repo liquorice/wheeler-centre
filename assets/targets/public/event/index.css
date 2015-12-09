@@ -752,6 +752,9 @@
   padding-top: .5rem;
   padding-bottom: 2rem;
 }
+  .event-calendar__year {
+    position: relative;
+  }
 
   .event-calendar__legend {
     padding-left: 3.5rem;
@@ -775,6 +778,23 @@
       padding-left: 1rem;
       padding-right: 1rem;
       text-transform: uppercase;
+    }
+
+  .event-calendar__ical-subscribe {
+    position: absolute;
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    right: 11rem;
+    top: 5.5rem;
+    z-index: 1000;
+  }
+    .event-calendar__ical-subscribe i.fa {
+      font-size: 1.1rem;
+    }
+
+    .event-calendar__ical-subscribe a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
     }
 
   .event-calendar__month {

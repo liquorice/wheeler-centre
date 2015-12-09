@@ -6,6 +6,11 @@
   event_action: "subscribe", \
   title: "RSS: #{events_page.title}" \
 })
+- events_ical_tracking_link = track_event("#{webcal_url_with_domain(events_page.absolute_url)}.ics", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{events_page.title}" \
+})
 
 = area :head do
   link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
@@ -45,6 +50,10 @@
     - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
       - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
         .event-calendar__year
+          .event-calendar__ical-subscribe
+            a href=events_ical_tracking_link
+              i.fa.fa-calendar
+              '&nbsp;Subscribe to iCal
           h2.screenreaders-only
             ' Upcoming events for
             = l(year, format: :year)
