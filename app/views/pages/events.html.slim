@@ -6,11 +6,17 @@
   event_action: "subscribe", \
   title: "RSS: #{events_page.title}" \
 })
-- events_ical_tracking_link = track_event("#{webcal_url_with_domain(events_page.absolute_url)}.ics", { \
-  event_category: "rss", \
+- events_ical_subscribe_tracking_link = track_event("#{webcal_url_with_domain(events_page.absolute_url)}.ics", { \
+  event_category: "ics", \
   event_action: "subscribe", \
-  title: "RSS: #{events_page.title}" \
+  title: "ICS: #{events_page.title}" \
 })
+- events_ical_download_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.ics", { \
+  event_category: "ics", \
+  event_action: "download", \
+  title: "ICS: #{events_page.title}" \
+})
+
 
 = area :head do
   link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
@@ -51,9 +57,14 @@
       - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
         .event-calendar__year
           .event-calendar__ical-subscribe
-            a href=events_ical_tracking_link
-              i.fa.fa-calendar
-              '&nbsp;Subscribe to iCal
+            i.fa.fa-calendar
+            '&nbsp;&nbsp;iCal:
+            a href=events_ical_subscribe_tracking_link
+              '&nbsp;Subscribe
+            ' |
+            a href=events_ical_download_tracking_link
+              '&nbsp;Download
+
           h2.screenreaders-only
             ' Upcoming events for
             = l(year, format: :year)
