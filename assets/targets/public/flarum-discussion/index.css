@@ -1,0 +1,73 @@
+.flarum-discussion {
+  padding-bottom: 2rem;
+  clear: both;
+}
+  .flarum-discussion__embed {
+    border: none;
+    display: block;
+    width: 100%;
+  }
+  .flarum-discussion__inner {
+    border-bottom: 1px solid #d2eae7;
+    border-radius: 3px;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    position: relative;
+  }
+
+    .flarum-discussion--inline .flarum-discussion__inner {
+      border-top: 1px solid #d2eae7;
+    }
+
+  .flarum-discussion__inner:after {
+    background: radial-gradient(center bottom, ellipse farthest-side, rgba(210,234,231,0.7), rgba(210,234,231,0));
+    bottom: 0;
+    content: "";
+    height: 2rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .flarum-discussion__title,
+  .copy .flarum-discussion__title {
+    font-weight: normal;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .flarum-discussion__title {
+    color: #777;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .flarum-discussion--inline .flarum-discussion__title {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .flarum-discussion__footer,
+  .copy .flarum-discussion__footer {
+    /*color: #888;*/
+    font-size: 1.5rem;
+    font-family: var(--font-sans);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+    .flarum-discussion__footer a {
+      text-decoration: underline;
+    }
+      .flarum-discussion__footer a:hover,
+      .flarum-discussion__footer a:focus {
+        color: var(--primary-color);
+      }
+
+  .flarum-discussion__disclaimer {
+    color: #888;
+    font-style: italic;
+    font-size: 1.7rem;
+  }

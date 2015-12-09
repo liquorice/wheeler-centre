@@ -802,7 +802,10 @@
   max-width: var(--column-mid);
   position: relative;
 }
-
+.podcast-episode__comments {
+  border-top: 1px solid #dfdfdf;
+  padding-top: 3rem;
+}
 .podcast-episode .podcast-series__subscribe .column-mid {
   padding-top: 5rem;
   border-top: 1px solid #ddd;

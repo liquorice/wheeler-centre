@@ -10,7 +10,7 @@ gem "rails", "~> 4.1.0"
 gem "pg"
 
 # Heracles
-gem "heracles", "~> 1.0.3", source: "https://gem.fury.io/icelab/"
+gem "heracles", "~> 1.0.4", source: "https://gem.fury.io/icelab/"
 
 # Cache Buster
 gem 'varnisher'
@@ -25,7 +25,7 @@ gem "sunspot-queue", github: "timriley/sunspot-queue", ref: "649af734420db481fd0
 gem "que"
 
 # Web server
-gem "passenger"
+gem "passenger", "~> 5.0.7"
 
 # Rack middleware
 gem "rack-canonical-host"

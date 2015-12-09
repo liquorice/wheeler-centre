@@ -1,0 +1,24 @@
+/ Expects an unordered list of `button` or `a` elements
+/ `page` is passed as a local variable
+/ HACK to make our helpers available
+- av = Class.new(ActionView::Base) { include ::ApplicationHelper }.new
+
+ul
+  / Flarum Discussion
+  - if page.fields[:flarum_discussion_id] && page.fields[:flarum_discussion_id].data_present?
+    - flarum_link = "http://#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com"
+    - flarum_link = "#{flarum_link}/d/#{page.fields[:flarum_discussion_id].value}"
+    li
+      a href=flarum_link target="_blank" View discussion
+  - elsif page.fields[:flarum_discussion_id]
+    li
+      button data-view-create-discussion={ \
+        pageID: page.id, \
+        pageTitle: page.title, \
+        discussionTitle: av.discussion_title_for(page), \
+        discussionContent: av.discussion_content_for(page) \
+        }.to_json
+          ' Create discussion
+  - else
+    li
+      span No actions available

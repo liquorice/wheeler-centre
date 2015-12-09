@@ -278,3 +278,8 @@
 }
 
 
+.recording__comments {
+  border-top: 1px solid #dfdfdf;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}

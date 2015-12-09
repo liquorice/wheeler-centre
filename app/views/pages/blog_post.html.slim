@@ -99,7 +99,6 @@
           .blog-post__sharing
             = render "partials/social_sharing_icons", page: page
 
-
   - cache ["blog-guest-author-1", author, author_image, page.authors_posts] do
     - if show_guest_block
       .blog-post__guest-author.column-wrapper.gradient-top-down
@@ -116,6 +115,11 @@
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
               - page.authors_posts.each do |post|
                 = render "partials/blog_snap_block", post: post, show_type: true, aspect: :landscape
+  - cache ["blog-comments-1", page.fields[:flarum_discussion_id]] do
+    - if page.fields[:flarum_discussion_id].data_present?
+      .blog-post__comments.column-wrapper class=("blog-post__comments--with-guest" if show_guest_block)
+        .column-mid.clearfix
+          = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }
 
   / Show related events
   - cache ["blog-related-1", page, page.related_posts] do
