@@ -31,6 +31,7 @@ module Heracles
               {name: :sponsors_intro, type: :content, hint: "Override the 'Presented in partnership with' text"},
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :flarum_discussion_id, type: :text, editor_type: :code},
             ]
           }
         end
@@ -45,22 +46,13 @@ module Heracles
             promo_image: (fields[:promo_image].data_present?) ? "✔" : "•",
             booking: (fields[:external_bookings].data_present?) ? "✔" : "•",
             recordings: fields[:recordings],
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•"
           }
         end
 
         def summary_title
           fields[:short_title].data_present? ? fields[:short_title] : title
-        end
-
-        def summary
-          if fields[:summary].data_present?
-            fields[:summary]
-          elsif fields[:intro].data_present?
-            fields[:intro]
-          else
-            fields[:body]
-          end
         end
 
         ### Accessors

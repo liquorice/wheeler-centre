@@ -26,6 +26,7 @@ module Heracles
               {name: :transcript, type: :content},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :recording_id, type: :integer, label: "Legacy recording ID"},
+              {name: :flarum_discussion_id, type: :text, editor_type: :code},
             ]
           }
         end
@@ -40,6 +41,7 @@ module Heracles
             youtube_video: fields[:youtube_video].data_present? ? "✔" : "×",
             events: events.map(&:title).join(", "),
             people: (people.present? ? "#{people.length} #{(people.length > 1) ? 'people' : 'person'}" : "·"),
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•",
             recording_date: fields[:recording_date],
             publish_date: fields[:publish_date],

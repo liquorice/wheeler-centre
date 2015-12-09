@@ -8,8 +8,7 @@
 
 @import "heracles/sites/wheeler_centre/admin/components/bulk_publication";
 @import "heracles/sites/wheeler_centre/admin/fields/field_external_video";
-
-
+@import "heracles/sites/wheeler_centre/admin/lightboxes/lightbox_flarum_discussion";
 
 // Collapse some of the common things we know are small in the collection indices
 .collection-posts__list-summary--asset {
@@ -19,5 +18,10 @@
 
 .collection-posts__list-summary--date_time {
   flex: 0.75;
+}
+
+.collection-posts__list-summary--discussion {
+  flex: 0.25;
+  text-align: center;
 }
 

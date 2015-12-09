@@ -1,0 +1,12 @@
+.flarum-discussion data-view-flarum-embed=true
+  .flarum-discussion__inner
+    h2.flarum-discussion__title Discussion
+    iframe.flarum-discussion__embed src=discussion_embed_url(flarum_discussion_id) frameborder="none" data-view-iframe-resizer={maxHeight: 800, scrolling: true}.to_json
+  .column-small
+    .flarum-discussion__footer
+      p
+        ' More to say?
+        = link_to "Talk it out", discussion_url(flarum_discussion_id)
+        '  with the Wheeler Centre community.
+    .flarum-discussion__disclaimer
+      p = I18n.t("discussion.inline_disclaimer")

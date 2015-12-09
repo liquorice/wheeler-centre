@@ -10,6 +10,11 @@ Rails.application.routes.draw do
             resources :external_video, only: :index
           end
         end
+        resources :pages do
+          namespace :fields do
+            resources :flarum_discussion, only: :update
+          end
+        end
       end
       resources :sites do
         resources :bulk_publication, only: [:index, :create]
