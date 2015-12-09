@@ -245,8 +245,34 @@
 
 /* Sharing Links */
 .event__sharing {
-  float: right;
-  width: 50%;
+  float: left;
+  width: 20%;
+}
+
+/* Add to calendar Link */
+.event__ics-download {
+  float: left;
+  width: 20%;
+}
+
+.event__ics-download a {
+  color: #ccc;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+  .event__ics-download a:hover {
+    color: var(--primary-color);
+  }
+
+.event__ics-download-header {
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  padding-right: 2rem;
+  padding-top: .2rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
 }
 
 /* Series header */
@@ -788,9 +814,6 @@
     top: 5.5rem;
     z-index: 1000;
   }
-    .event-calendar__ical-subscribe i.fa {
-      font-size: 1.1rem;
-    }
 
     .event-calendar__ical-subscribe a:hover {
       color: var(--primary-color);
