@@ -1,7 +1,12 @@
 - posts = page.posts(page: params[:page], per_page: params[:per_page])
+- blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{blog_archive_page.title}" \
+})
 
 = area :head do
-  link href=url_with_domain("#{blog_archive_page.absolute_url}.rss") rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+  link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
   = blog_page.title

@@ -7,16 +7,22 @@
     og: { \
       description: open_graph_summary,
       image: { \
-        url: (open_graph_image.content_small_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_small][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_small][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_small][:meta][:height] if open_graph_image), \
+        url: (open_graph_image.content_medium_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
       } \
     } \
   })
 
+- events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
+  event_category: "rss", \
+  event_action: "subscribe", \
+  title: "RSS: #{events_page.title}" \
+})
+
 = area :head do
-  link href=url_with_domain("#{events_page.absolute_url}.rss") rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
+  link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
 
@@ -104,7 +110,11 @@
               - if page.booked_out?
                 span.event__booked-out-flag Booked out
               - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
-                a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=page.fields[:external_bookings].value
+                - track_booking_url = track_event(page.fields[:external_bookings].value, {\
+                  event_category: "booking", \
+                  event_action: "external - click",
+                })
+                a.event__tickets-booking.event__tickets-booking--small itemprop="offerurl" href=track_booking_url
                   ' Book your tickets
             h1.event__title itemprop="summary"
               == widont_format markdown_line page.title

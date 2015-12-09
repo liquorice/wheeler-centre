@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby "2.1.5"
+ruby "2.1.6"
 
 # Rails
 gem "rails", "~> 4.1.0"
@@ -64,6 +64,7 @@ gem "embedly"
 gem "iso8601"
 gem "memoit"
 gem "dotiw"
+gem "staccato"
 
 # Utilities
 gem "ffaker"
