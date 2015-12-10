@@ -25,7 +25,6 @@ en:
     site_name: "The Wheeler Centre"
     description: "Melbourne’s home for smart, passionate and entertaining public talks on every topic. Across 200+ events each year, you’ll find our speakers sharing their expertise, their imaginations and their ideas."
     keywords: "books, writing, ideas, events, melbourne, wheeler centre, literature, talks"
-  hello: "Hello world"
   views:
     pagination:
       first: "First"
@@ -42,7 +41,8 @@ en:
           other: "Displaying <b>all %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "You’re viewing <strong>%{first}&nbsp;-&nbsp;%{last}</strong> of <strong>%{total}</strong>"
-
+  discussion:
+    inline_disclaimer: "All messages as part of this discussion and any opinions, advice, statements, or other information contained in any messages or transmitted by any third party are the responsibility of the author of that message and not the Wheeler Centre."
   date:
     formats:
       default: '%-d/%m/%y'

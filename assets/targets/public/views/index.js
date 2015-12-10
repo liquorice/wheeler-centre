@@ -121,4 +121,15 @@ views.adoptWordToggle = function(el, props) {
   new AdoptAWordToggle(el, props);
 };
 
+var iframeResizer = require("../vendor/iframe-resizer.js");
+views.iframeResizer = function(el, props) {
+  var iframe = iframeResizer(props, el);
+};
+
+var flarumEmbed = require("../flarum-embed");
+views.flarumEmbed = flarumEmbed;
+
+var flarumCommentCount = require("../flarum-comment-count");
+views.flarumCommentCount = flarumCommentCount;
+
 module.exports = views;
