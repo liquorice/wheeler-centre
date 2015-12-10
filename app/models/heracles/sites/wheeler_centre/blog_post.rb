@@ -23,6 +23,7 @@ module Heracles
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :publish_date, type: :date_time, label: "Publish date"},
               {name: :topics, type: :associated_pages, page_type: :topic},
+              {name: :flarum_discussion_id, type: :text, editor_type: :code},
             ]
           }
         end
@@ -33,6 +34,7 @@ module Heracles
           {
             title: title,
             authors: fields[:authors].pages.map(&:title).join(", "),
+            discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•",
             publish_date: fields[:publish_date],
             created_at:  created_at.to_s(:admin_date)

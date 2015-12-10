@@ -115,9 +115,12 @@
                       a href=video_tracking_url
                         i.fa.fa-video-camera
                         ' Download video file
-    .column-wrapper
-      .column-wide.clearfix
 
+    - cache ["recording-comments-1", page.fields[:flarum_discussion_id]] do
+      - if page.fields[:flarum_discussion_id].data_present?
+        .recording__comments.column-wrapper
+          .column-mid.clearfix
+            = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }
 
     / Show related events
     - cache ["recording-related-1", page, page.related_recordings] do

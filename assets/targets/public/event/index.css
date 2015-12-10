@@ -1194,3 +1194,9 @@
 .breakpoint-widescreen-wide .event .figure__display--right-aligned {
   margin-right: 0;
 }
+
+.event__comments {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+}

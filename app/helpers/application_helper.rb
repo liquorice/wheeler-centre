@@ -4,6 +4,12 @@ module ApplicationHelper
   # Common helpers sit under lib/helpers
   include TextFormattingHelper
 
+  def development_javascript
+    javascript_include_tag(
+      "http://#{ENV['ASSETS_DEVELOPMENT_HOST']}:#{ENV['ASSETS_WEBPACK_PORT']}/webpack-dev-server.js",
+      "data-turbolinks-track" => true)
+  end
+
   ### Heracles helpers
 
   # Use "content_small" by default when rendering image insertables. This can
@@ -358,6 +364,79 @@ module ApplicationHelper
     (page.id == ancestor.id || descendant_of(page, ancestor))
   end
 
+  ### --------------------------------------------------------------------------
+  ### Flarum discussions
+  ### --------------------------------------------------------------------------
 
+  def discussion_title_for(page)
+    if page.page_type == "blog_post"
+      discussion_title_for_blog_post(page)
+    elsif page.page_type == "event"
+      discussion_title_for_event(page)
+    elsif page.page_type == "recording"
+      discussion_title_for_recording(page)
+    elsif page.page_type == "podcast_episode"
+      discussion_title_for_podcast_episode(page)
+    else
+      CGI.unescapeHTML(truncate(page.title, length: 80).to_str)
+    end
+  end
+
+  def discussion_title_for_blog_post(page)
+    CGI.unescapeHTML(truncate("Notes: #{strip_tags(page.title)}", length: 80).to_str)
+  end
+
+  def discussion_title_for_event(page)
+    CGI.unescapeHTML(truncate("Events: #{strip_tags(page.title)}", length: 80).to_str)
+  end
+
+  def discussion_title_for_recording(page)
+    CGI.unescapeHTML(truncate("Recording: #{strip_tags(page.title)}", length: 80).to_str)
+  end
+
+  def discussion_title_for_podcast_episode(page)
+    CGI.unescapeHTML(truncate("Podcast: #{strip_tags(page.title)}", length: 80).to_str)
+  end
+
+  # Returns Markdown
+  def discussion_content_for(page)
+    content = ""
+    if page.page_type == "blog_post"
+      content += discussion_content_for_blog_post(page)
+    elsif page.page_type == "event"
+      content += discussion_content_for_event(page)
+    elsif page.page_type == "recording"
+      content += discussion_content_for_recording(page)
+    elsif page.page_type == "podcast_episode"
+      content += discussion_content_for_podcast_episode(page)
+    end
+    content += "\n\n"
+    content += "This is a companion discussion to the [original post on our website](#{url_with_domain(page.absolute_url)})."
+    CGI.unescapeHTML(content.to_str)
+  end
+
+  def discussion_content_for_blog_post(page)
+    "> #{strip_tags(page.fields[:summary].value)}".gsub(/&nbsp;/, " ")
+  end
+
+  def discussion_content_for_event(page)
+    "> #{strip_tags(force_excerptify_html(page.fields[:body].value))}".gsub(/&nbsp;/, " ")
+  end
+
+  def discussion_content_for_recording(page)
+    "> #{strip_tags(force_excerptify_html(page.fields[:description].value))}".gsub(/&nbsp;/, " ")
+  end
+
+  def discussion_content_for_podcast_episode(page)
+    "> #{strip_tags(force_excerptify_html(page.fields[:description].value))}".gsub(/&nbsp;/, " ")
+  end
+
+  def discussion_url(id)
+    "#{("#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com")}/d/#{id}"
+  end
+
+  def discussion_embed_url(id)
+    "#{("#{ENV["FLARUM_HOST"]}" || "https://discussions.wheelercentre.com")}/embed/#{id}?hideFirstPost=1"
+  end
 
 end
