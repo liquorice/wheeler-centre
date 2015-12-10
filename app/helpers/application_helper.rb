@@ -358,7 +358,7 @@ module ApplicationHelper
     CGI.unescapeHTML(truncate("Notes: #{strip_tags(page.title)}", length: 80).to_str)
   end
 
-  def discussion_title_for_event_post(page)
+  def discussion_title_for_event(page)
     CGI.unescapeHTML(truncate("Events: #{strip_tags(page.title)}", length: 80).to_str)
   end
 
