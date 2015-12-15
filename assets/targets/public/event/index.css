@@ -825,6 +825,15 @@
       color: #666;
     }
 
+    .breakpoint-w-799 .event-calendar__ical-subscribe {
+      width: 100%;
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+      top: inherit;
+      right: inherit;
+    }
+
   .event-calendar__month {
     margin-bottom: 5rem;
     padding-top: 3.5rem;
