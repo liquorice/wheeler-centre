@@ -58,12 +58,14 @@
         .event-calendar__year
           .event-calendar__ical-subscribe
             i.fa.fa-calendar
-            '&nbsp;&nbsp;iCal:
+            '&nbsp;&nbsp;
             a href=events_ical_subscribe_tracking_link
-              '&nbsp;Subscribe
-            ' |
-            a href=events_ical_download_tracking_link
-              '&nbsp;Download
+              '&nbsp;Subscribe to iCal feed
+            span.event-calendar__ical-or-download
+              ' (or
+              a href="#{url_with_domain(events_page.absolute_url)}.ics"
+                ' get the direct link
+              ')
 
           h2.screenreaders-only
             ' Upcoming events for
