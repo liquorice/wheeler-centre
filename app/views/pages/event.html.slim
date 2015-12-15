@@ -61,10 +61,10 @@
                   - else
                     a href=recording.absolute_url
                       = recording.title.gsub(/#{page.title}\:/, '')
-                    - if index == page.recordings.length - 1
-                      '.
-                    - else
-                      ',
+                  - if index == page.recordings.length - 1
+                    '.
+                  - else
+                    ',
     - cache ["event-series-intro-1", page, page.series] do
       - if page.series
         - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
