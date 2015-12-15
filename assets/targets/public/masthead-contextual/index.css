@@ -94,10 +94,11 @@
   clear: left;
   float: none;
   margin-top: 0;
-  padding: 1rem 3.5rem;
-  margin-top: 1.5rem;
+  padding: 0 3.5rem 1rem 3.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem
 }
+
   .breakpoint-phone .upcoming-events {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
