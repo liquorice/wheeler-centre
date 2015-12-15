@@ -492,10 +492,10 @@
     margin-left: 8rem;
     width: 24.4rem;
   }
-    .breakpoint-phone-wide.masthead__logo,
-    .breakpoint-phone .masthead__logo {
+    .breakpoint-w-599 .masthead__logo{
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 2rem;
       height: 4rem;
       width: 100%;
     }
