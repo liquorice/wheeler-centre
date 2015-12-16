@@ -813,7 +813,14 @@
     right: 11rem;
     top: 5.5rem;
     z-index: 1000;
+    vertical-align: top;
   }
+     .event-calendar__ical-subscribe i {
+      display: inline-block;
+      height: 2.3rem;
+      vertical-align: top;
+      padding-right: 0.8rem;
+     }
 
     .event-calendar__ical-subscribe a:hover {
       color: var(--primary-color);
@@ -823,6 +830,10 @@
     .event-calendar__ical-or-download {
       font-size: 1.1rem;
       color: #666;
+      padding-top: 0.2rem;
+    }
+    .event-calendar__ical-subscribe-block {
+      display: inline-block;
     }
 
     .breakpoint-w-799 .event-calendar__ical-subscribe {
