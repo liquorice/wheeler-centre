@@ -339,6 +339,7 @@ module ApplicationHelper
       entry = ical_entry(event)
       calendar.add_event(entry)
     end
+    calendar.append_custom_property("X-WR-CALNAME", "Wheeler Centre events calendar")
     calendar.publish
     calendar.to_ical
   end
