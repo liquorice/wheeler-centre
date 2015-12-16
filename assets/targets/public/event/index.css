@@ -837,10 +837,11 @@
     }
 
     .breakpoint-w-799 .event-calendar__ical-subscribe {
-      width: 100%;
-      text-align: center;
       position: relative;
+      width: 100%;
+      text-align: left;
       margin-bottom: 2rem;
+      margin-left: 3.5rem;
       top: inherit;
       right: inherit;
     }
