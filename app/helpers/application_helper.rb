@@ -49,6 +49,10 @@ module ApplicationHelper
     canonical_domain + "/" + url.gsub(/^\//, '')
   end
 
+  def webcal_url_with_domain(url)
+    url_with_domain(url).gsub(/^https?/, "webcal")
+  end
+
   def human_boolean(bool)
     bool ? "yes" : "no"
   end
@@ -313,6 +317,30 @@ module ApplicationHelper
       text_color = Color::RGB.by_hex(highlight_color)
       text_color.darken_by(55).adjust_saturation(100).css_rgb
     end
+  end
+
+
+  def ical_entry(event)
+    entry = Icalendar::Event.new
+    entry.dtstart = event.fields[:start_date].value.strftime("%Y%m%dT%H%M%S")
+    entry.dtend = event.fields[:end_date].value.strftime("%Y%m%dT%H%M%S")
+    entry.summary = event.title
+    entry.description = force_excerptify_html(event.fields[:body], 100, "") if event.fields[:body].data_present?
+    entry.location = event.venue.title if event.venue.present?
+    entry.created = event.created_at
+    entry.last_modified = event.updated_at
+    entry.url = event.url = url_with_domain(event.absolute_url)
+    entry
+  end
+
+  def ical_calendar(events)
+    calendar = Icalendar::Calendar.new
+    events.each do |event|
+      entry = ical_entry(event)
+      calendar.add_event(entry)
+    end
+    calendar.publish
+    calendar.to_ical
   end
 
   ### --------------------------------------------------------------------------

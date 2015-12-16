@@ -324,6 +324,7 @@ GEM
     http_parser.rb (0.6.0)
     humanize (1.1.0)
     i18n (0.7.0)
+    icalendar (2.3.0)
     inflecto (0.0.2)
     interactor (3.1.0)
     ipaddress (0.8.0)
@@ -611,6 +612,7 @@ DEPENDENCIES
   heracles (~> 1.0.4)!
   html_truncator
   humanize (~> 1.1.0)
+  icalendar (~> 2.3)
   iso8601
   jbuilder (~> 2.0)
   launchy
