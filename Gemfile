@@ -61,6 +61,7 @@ end
 gem "embedly"
 
 # Application
+gem 'icalendar', '~> 2.3'
 gem "iso8601"
 gem "memoit"
 gem "dotiw"

@@ -21,6 +21,12 @@
   title: "RSS: #{events_page.title}" \
 })
 
+- event_ics_tracking_link = track_event("#{url_with_domain(page.absolute_url)}.ics", { \
+  event_category: "ics", \
+  event_action: "subscribe", \
+  title: "ICS: #{events_page.title}" \
+})
+
 = area :head do
   link href=events_rss_tracking_link rel="alternate" title="Events from The Wheeler Centre" type="application/rss+xml"
 
@@ -136,6 +142,11 @@
         - cache ["event-socal-icons-1", page, page.title] do
           .event__sharing
             = render "partials/social_sharing_icons", page: page
+          .event__ics-download
+            h2.event__ics-download-header
+              ' Add to calendar
+            a href=event_ics_tracking_link
+              i.fa.fa-calendar
 
     .column-wrapper
       .column-wide.clearfix

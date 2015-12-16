@@ -245,8 +245,34 @@
 
 /* Sharing Links */
 .event__sharing {
-  float: right;
-  width: 50%;
+  float: left;
+  width: 20%;
+}
+
+/* Add to calendar Link */
+.event__ics-download {
+  float: left;
+  width: 20%;
+}
+
+.event__ics-download a {
+  color: #ccc;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+  .event__ics-download a:hover {
+    color: var(--primary-color);
+  }
+
+.event__ics-download-header {
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  padding-right: 2rem;
+  padding-top: .2rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
 }
 
 /* Series header */
@@ -752,6 +778,9 @@
   padding-top: .5rem;
   padding-bottom: 2rem;
 }
+  .event-calendar__year {
+    position: relative;
+  }
 
   .event-calendar__legend {
     padding-left: 3.5rem;
@@ -775,6 +804,46 @@
       padding-left: 1rem;
       padding-right: 1rem;
       text-transform: uppercase;
+    }
+
+  .event-calendar__ical-subscribe {
+    position: absolute;
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    right: 11rem;
+    top: 5.5rem;
+    z-index: 1000;
+    vertical-align: top;
+  }
+     .event-calendar__ical-subscribe i {
+      display: inline-block;
+      height: 2.3rem;
+      vertical-align: top;
+      padding-right: 0.8rem;
+     }
+
+    .event-calendar__ical-subscribe a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .event-calendar__ical-or-download {
+      font-size: 1.1rem;
+      color: #666;
+      padding-top: 0.2rem;
+    }
+    .event-calendar__ical-subscribe-block {
+      display: inline-block;
+    }
+
+    .breakpoint-w-799 .event-calendar__ical-subscribe {
+      position: relative;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 2rem;
+      margin-left: 3.5rem;
+      top: inherit;
+      right: inherit;
     }
 
   .event-calendar__month {
