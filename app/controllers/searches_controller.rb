@@ -21,6 +21,7 @@ class SearchesController < ApplicationController
       without :page_type, [ "blog",
                             "broadcasts",
                             "criticism_now",
+                            "collection",
                             "event_series_index",
                             "events",
                             "events_archive",
@@ -41,6 +42,7 @@ class SearchesController < ApplicationController
                             "home_banner",
                             "vpla_year",
                             "zoo_fellowships_work",
+                            "book_review",
                             "review",
                             "response",
                             "resident",
@@ -48,7 +50,8 @@ class SearchesController < ApplicationController
                             "itunes_category",
                             "vpla_category",
                             "review",
-                            "long_view_review"]
+                            "long_view_review",
+                            "campaign_word"]
 
       # Exclude hidden items
       with :hidden, false
