@@ -1,4 +1,4 @@
-var viewloader = require("viewloader-icelab");
+var viewloader = require("viewloader");
 
 // App specific components
 var views = require("./views");
