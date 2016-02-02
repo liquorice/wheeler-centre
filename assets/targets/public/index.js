@@ -1,6 +1,6 @@
 require("es5-shim");
 var picturefill = require("picturefill");
-var viewloader = require("viewloader-icelab");
+var viewloader = require("viewloader");
 
 // App specific components
 var views = require("./views");
