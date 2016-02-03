@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
 
+  before_filter :set_cache_headers_for_page, only: [:show]
+
   def show
     @search = GlobalSearch.new do
       fulltext params[:q]
@@ -59,4 +61,16 @@ class SearchesController < ApplicationController
       paginate page: params[:page] || 1, per_page: 40
     end
   end
+
+  protected
+
+  def set_cache_headers_for_page
+    if Rails.env.production?
+      response.headers["Surrogate-Control"] = "max-age=#{1.day.to_i}"
+      response.headers["Cache-Control"] = "max-age=300, public"
+      # Remove "Set-Cookie" header
+      request.session_options[:skip] = true
+    end
+  end
+
 end

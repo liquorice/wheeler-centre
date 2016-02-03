@@ -5,6 +5,8 @@ class TrackingController < ActionController::Metal
   include AbstractController::Rendering
 
   before_action :setup_tracker
+  before_filter :set_cache_headers_for_page
+
 
   def event
     @tracker.event(
@@ -64,5 +66,14 @@ class TrackingController < ActionController::Metal
       Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="),
       type: "image/png", disposition: "inline"
     )
+  end
+
+  def set_cache_headers_for_page
+    if Rails.env.production?
+      response.headers["Surrogate-Control"] = "max-age=#{1.day.to_i}"
+      response.headers["Cache-Control"] = "max-age=300, public"
+      # Remove "Set-Cookie" header
+      request.session_options[:skip] = true
+    end
   end
 end
