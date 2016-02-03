@@ -8,8 +8,15 @@ class PagesController < ApplicationController
   protected
 
   def set_cache_headers_for_page
-    response.headers["Surrogate-Key"] = page.cache_key
-    headers.delete 'Set-Cookie'
+    expires = request.format == :rss ? 1.hour.to_i : 1.day.to_i
+
+    if Rails.env.production?
+      response.headers["Surrogate-Control"] = "max-age=#{expires}"
+      response.headers["Cache-Control"] = "max-age=300, public"
+      response.headers["Surrogate-Key"] = page.cache_key
+      # Remove "Set-Cookie" header
+      request.session_options[:skip] = true
+    end
   end
 
   def set_page_meta_tags
