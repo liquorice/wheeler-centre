@@ -1,0 +1,15 @@
+li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown[
+  data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+  data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
+  ]
+  button.masthead-nav-main__anchor
+    ' Topics
+    i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+  .masthead-nav-main__dropdown.clearfix
+    - primary_topics.in_groups(2, false).each do |group|
+      - if group.present?
+        ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+          - group.each do |topic|
+            li.masthead-nav-main__dropdown-item
+              a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
+                == markdown_line topic.title
