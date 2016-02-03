@@ -1,6 +1,7 @@
 class EmbedAssetController < ApplicationController
   layout "embed"
   after_filter :allow_x_frame_options
+  before_filter :set_cache_headers_for_page, only: [:show]
 
   def show
     @asset_type = params[:asset_type].to_sym
@@ -21,6 +22,15 @@ class EmbedAssetController < ApplicationController
 
   def allow_x_frame_options
     response.headers.delete "X-Frame-Options"
+  end
+
+  def set_cache_headers_for_page
+    if Rails.env.production?
+      response.headers["Surrogate-Control"] = "max-age=#{1.day.to_i}"
+      response.headers["Cache-Control"] = "max-age=300, public"
+      # Remove "Set-Cookie" header
+      request.session_options[:skip] = true
+    end
   end
 
 end
