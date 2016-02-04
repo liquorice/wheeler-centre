@@ -323,15 +323,14 @@ module ApplicationHelper
   def add_ical_entry(event, cal)
     require 'icalendar/tzinfo'
 
-    event_start = event.fields[:start_date].value
-    event_end = event.fields[:end_date].value
-
-    tzid = "Australia/Melbourne"
+    tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
     tz = TZInfo::Timezone.get tzid
-    timezone = tz.ical_timezone event_start
+    timezone = tz.ical_timezone event.fields[:start_date].value_in_time_zone
     cal.add_timezone timezone
 
     cal.event do |entry|
+      event_start = event.fields[:start_date].value_in_time_zone
+      event_end = event.fields[:end_date].value_in_time_zone
       entry.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
       entry.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid
       entry.summary = event.title
