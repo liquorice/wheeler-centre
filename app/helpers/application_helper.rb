@@ -322,17 +322,19 @@ module ApplicationHelper
 
   def add_timezone_entry(event, cal)
     require 'icalendar/tzinfo'
-    tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
+    event_start = event.fields[:start_date].value_in_time_zone
+    tzid =  event_start.time_zone.tzinfo.name
     tz = TZInfo::Timezone.get tzid
-    timezone = tz.ical_timezone event.fields[:start_date].value_in_time_zone
+    timezone = tz.ical_timezone event_start
     cal.add_timezone timezone if !cal.find_timezone(tzid)
   end
 
   def add_ical_entry(event, cal)
     cal.event do |entry|
-      tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
       event_start = event.fields[:start_date].value_in_time_zone
       event_end = event.fields[:end_date].value_in_time_zone
+      tzid = event_start.time_zone.tzinfo.name
+
       entry.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
       entry.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid
       entry.summary = event.title
