@@ -320,15 +320,17 @@ module ApplicationHelper
   end
 
 
-  def add_ical_entry(event, cal)
+  def add_timezone_entry(event, cal)
     require 'icalendar/tzinfo'
-
     tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
     tz = TZInfo::Timezone.get tzid
     timezone = tz.ical_timezone event.fields[:start_date].value_in_time_zone
     cal.add_timezone timezone if !cal.find_timezone(tzid)
+  end
 
+  def add_ical_entry(event, cal)
     cal.event do |entry|
+      tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
       event_start = event.fields[:start_date].value_in_time_zone
       event_end = event.fields[:end_date].value_in_time_zone
       entry.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
@@ -345,6 +347,7 @@ module ApplicationHelper
   def ical_calendar(events)
     calendar = Icalendar::Calendar.new
     events.each do |event|
+      add_timezone_entry(event, calendar)
       add_ical_entry(event, calendar)
     end
     calendar.append_custom_property("X-WR-CALNAME", "Wheeler Centre events calendar")
