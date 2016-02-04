@@ -65,4 +65,5 @@ class TrackingController < ActionController::Metal
       type: "image/png", disposition: "inline"
     )
   end
+
 end
