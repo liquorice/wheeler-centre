@@ -320,24 +320,37 @@ module ApplicationHelper
   end
 
 
-  def ical_entry(event)
-    entry = Icalendar::Event.new
-    entry.dtstart = event.fields[:start_date].value.strftime("%Y%m%dT%H%M%S")
-    entry.dtend = event.fields[:end_date].value.strftime("%Y%m%dT%H%M%S")
-    entry.summary = event.title
-    entry.description = force_excerptify_html(event.fields[:body], 100, "") if event.fields[:body].data_present?
-    entry.location = event.venue.title if event.venue.present?
-    entry.created = event.created_at
-    entry.last_modified = event.updated_at
-    entry.url = event.url = url_with_domain(event.absolute_url)
-    entry
+  def add_timezone_entry(event, cal)
+    require 'icalendar/tzinfo'
+    event_start = event.fields[:start_date].value_in_time_zone
+    tzid =  event_start.time_zone.tzinfo.name
+    tz = TZInfo::Timezone.get tzid
+    timezone = tz.ical_timezone event_start
+    cal.add_timezone timezone if !cal.find_timezone(tzid)
+  end
+
+  def add_ical_entry(event, cal)
+    cal.event do |entry|
+      event_start = event.fields[:start_date].value_in_time_zone
+      event_end = event.fields[:end_date].value_in_time_zone
+      tzid = event_start.time_zone.tzinfo.name
+
+      entry.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
+      entry.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid
+      entry.summary = event.title
+      entry.description = force_excerptify_html(event.fields[:body], 100, "") if event.fields[:body].data_present?
+      entry.location = event.venue.title if event.venue.present?
+      entry.created = event.created_at
+      entry.last_modified = event.updated_at
+      entry.url = event.url = url_with_domain(event.absolute_url)
+    end
   end
 
   def ical_calendar(events)
     calendar = Icalendar::Calendar.new
     events.each do |event|
-      entry = ical_entry(event)
-      calendar.add_event(entry)
+      add_timezone_entry(event, calendar)
+      add_ical_entry(event, calendar)
     end
     calendar.append_custom_property("X-WR-CALNAME", "Wheeler Centre events calendar")
     calendar.publish
