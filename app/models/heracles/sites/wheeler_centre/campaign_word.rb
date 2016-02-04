@@ -6,7 +6,8 @@ module Heracles
           {
             fields: [
               {name: :definition, type: :text},
-              {name: :is_available, type: :boolean, defaults: {value: true}, question_text: "Available for purchase?"}
+              {name: :is_available, type: :boolean, defaults: {value: true}, question_text: "Available for purchase?"},
+              {name: :thankyou_image, type: :asset, asset_file_type: :image }
             ]
           }
         end
@@ -21,7 +22,21 @@ module Heracles
             created_at:  created_at.to_s(:admin_date)
           }
         end
+
+        ### Searchable attrs
+
+        searchable do
+          string :title do
+            title
+          end
+
+          boolean :available do
+            fields[:is_available].value
+          end
+        end
       end
+
+
     end
   end
 end
