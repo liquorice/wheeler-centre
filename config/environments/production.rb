@@ -70,10 +70,10 @@ Rails.application.configure do
   config.static_cache_control = "public, max-age=#{1.year.to_i}"
 
   # Set frontend caching to a day
-  config.action_dispatch.default_headers = {
-    "Surrogate-Control" => "max-age=86400",
-    "Cache-Control" => "max-age=300, public",
-  }
+  # config.action_dispatch.default_headers = {
+  #   "Surrogate-Control" => "max-age=86400",
+  #   "Cache-Control" => "max-age=300, public",
+  # }
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
