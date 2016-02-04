@@ -336,7 +336,7 @@ module ApplicationHelper
       tzid = event_start.time_zone.tzinfo.name
 
       entry.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
-      entry.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid
+      entry.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid if event_end.present?
       entry.summary = event.title
       entry.description = force_excerptify_html(event.fields[:body], 100, "") if event.fields[:body].data_present?
       entry.location = event.venue.title if event.venue.present?
