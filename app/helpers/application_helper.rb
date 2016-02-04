@@ -326,7 +326,7 @@ module ApplicationHelper
     tzid =  event.fields[:start_date].value_in_time_zone.time_zone.tzinfo.name
     tz = TZInfo::Timezone.get tzid
     timezone = tz.ical_timezone event.fields[:start_date].value_in_time_zone
-    cal.add_timezone timezone
+    cal.add_timezone timezone if !cal.find_timezone(tzid)
 
     cal.event do |entry|
       event_start = event.fields[:start_date].value_in_time_zone
