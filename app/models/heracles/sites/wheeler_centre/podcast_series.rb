@@ -99,6 +99,7 @@ module Heracles
           Sunspot.search(PodcastEpisode) do
             with :site_id, site.id
             with :parent_id, id
+            with :hidden, false
             with :published, true
 
             if options[:type] == "video"
