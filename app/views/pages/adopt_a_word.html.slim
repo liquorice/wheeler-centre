@@ -30,9 +30,10 @@
   .adopt-a-word__main
     .adopt-a-word__content.column-wrapper
       .column-wide.clearfix
+        h1.adopt-a-word__title == widont_format markdown_line page.title
+
         - if image
           .adopt-a-word__campaign-image
-            /= page.fields[:campaign_image].asset.content_small_url
             picture
               erb:
                 <!--[if IE 9]><video style="display: none;"><![endif]-->
@@ -42,7 +43,6 @@
               img src=image.content_small_url itemprop="hero_image"
 
         .adopt-a-word__content-left
-          h1.adopt-a-word__title == widont_format markdown_line page.title
           - if page.fields[:intro].data_present?
             .adopt-a-word__intro.copy
               = render_content page.fields[:intro]
@@ -50,42 +50,52 @@
 
 
   .adopt-a-word__description-wrapper.column-wrapper
-    .adopt-a-word__description-content.column-small.clearfix
+    .adopt-a-word__description-content.column-wide.clearfix
       .adopt-a-word__description-left.copy
         = render_content page.fields[:description_left]
+
+        .adopt-a-word__find-your-word
+          a href="#words" Find your word
       .adopt-a-word__description-right.copy
-        p.adopt-a-word__list-description
+        p.adopt-a-word__list-amount
+          - if page.fields[:donation_amount].data_present?
+            = "FOR $#{page.fields[:donation_amount].value},"
+        p.adopt-a-word__list-title
           = page.fields[:list_description]
         = render_content page.fields[:description_right]
+      .adopt-a-word__stories
+        h1.adopt-a-word__stories-header
+          'Stories
+        - if page.stories.present?
+          - page.stories.each_with_index do |story, i|
+            h2.adopt-a-word__story-title
+              = story.title
+            - if story.fields[:summary].data_present?
+              .adopt-a-word__story-summary
+                = force_excerptify_html render_content(story.fields[:summary]), 35, "p i em strong br"
+
+  .adopt-a-word__recent-wrapper
+    .adopt-a-word__recent-content.column-wide.clearfix
+      h1.adopt-a-word__recent-header
+        ' Recently adopted words
+      - if page.recent_adopted_words.results.present?
+        ul.adopt-a-word__recent-word-list
+          - page.recent_adopted_words.results.each do |word|
+            li =word.title
 
   .adopt-a-word__words-header.column-wrapper
     .column-small
       h1.adopt-a-word__words-title
-        ' Adopt your word
-      .adopt-a-word__words-text
+        a name="words" Adopt your word
+      .adopt-a-word__words-text.copy
         = render_content page.fields[:donation_intro]
 
   .adopt-a-word__words-wrapper.column-wrapper
     .column-wide
       - if page.words.results.present?
-        ul.adopt-a-word__words.clearfix
-          - page.words.results.each do |word|
-            - available_class = (word.fields['is_available'].value ? 'adopt-a-word-page__word-available' : 'adopt-a-word-page__word-unavailable')
-            li class=["adopt-a-word-page__word-item", available_class] data-view-adopt-word-toggle={toggleSelector: ".adopt-a-word__word-toggle", targetSelector: ".adopt-a-word__definition-wrapper"}.to_json
+        = render "partials/adopt_a_word_words"
 
-              - if word.fields['is_available'].value
-                button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
-              - else
-                button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
-
-              .adopt-a-word__definition-wrapper
-                .adopt-a-word__definition-word= word.title
-                .adopt-a-word__word-definition= word.fields[:definition]
-                a.adopt-a-word__word-button href="https://heroix.everydayhero.com.au/event/adopt-a-word/donate?answer_1=#{word.title}"
-                  ' Adopt this word
-                .adopt-a-word__word-button--adopted
-                  ' Word adopted
-                a.adopt-a-word__word-toggle.adopt-a-word__word-close href="#" close
-
-
+        .adopt-a-word__archive-button-wrapper
+          a.adopt-a-word__archive-button href=archive_page.absolute_url
+            ' View adopted words
   = render "partials/adopt_a_word_footer"
