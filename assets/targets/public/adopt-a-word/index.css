@@ -3,29 +3,34 @@
 /* Main section at top ------------------------ */
 
 .adopt-a-word__main {
-  background-color: #E2EBFE;
+  background-color: #667AA9;
   padding-top: 6rem;
   padding-bottom: 5rem;
 }
 
 .adopt-a-word__content {
   margin: 0 auto;
-}
-
-.adopt-a-word__content-left {
-  float: left;
-  width: 40%;
-  padding-right: 1.7rem;
+  color: #fff;
 }
 
 .adopt-a-word__title {
   font-family: var(--font-sans);
-  color: var(--text-color);
   font-size: 4.8rem;
   font-weight: bold;
   line-height: 1.1;
   margin-bottom: 3.5rem;
 }
+
+.adopt-a-word__content-left {
+  float: left;
+  width: 60%;
+  padding-right: 1.7rem;
+}
+
+.adopt-a-word__intro {
+  font-size: 2.8rem;
+}
+
 
 .adopt-a-word__browse-button {
   font-family: var(--font-sans);
@@ -41,7 +46,8 @@
 .adopt-a-word__campaign-image {
   padding-left: 1.7rem;
   float: right;
-  width: 60%;
+  width: 30%;
+
 }
 
 .adopt-a-word__campaign-image img {
@@ -50,10 +56,9 @@
 
 
 
-/* Desciption section (in green) -------------- */
+/* Description section  -------------- */
 
 .adopt-a-word__description-wrapper {
-  background-color: var(--primary-color);
   padding-top: 6rem;
   padding-bottom: 4rem;
   margin-bottom: 6rem;
@@ -65,28 +70,77 @@
 
 .adopt-a-word__description-left {
   float: left;
-  width: 50%;
-  padding-right: 1.7rem;
-  font-style: italic;
+  width: calc(42% - 3.2rem);
+  margin-right: 1.6rem;
+  line-height: 3rem;
+}
+.adopt-a-word__description-left {
+  margin-bottom: 2.4rem;
 }
 
-.adopt-a-word__description-left {
-  color: #fff;
-  font-size: 2.8rem;
+.adopt-a-word__find-your-word a {
+  border: 1px solid var(--primary-color);
+  border-radius: 2px;
+  padding: 9px 18px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.adopt-a-word__find-your-word a:hover {
+  color: #eee;
 }
 
 .adopt-a-word__description-right {
+  float: left;
+  width: calc(33% - 1.6rem);
+  margin-left: 1.6rem;
+  margin-right: 1.6rem;
+  padding-left: 2.8rem;
+  padding-right: 2.8rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border: 2px solid #eee;
+  border-radius: 4px;
+}
+
+.breakpoint-phone .adopt-a-word__description-right,
+.breakpoint-tablet .adopt-a-word__description-right {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.adopt-a-word__list-amount {
+  color: var(--primary-color);
   font-family: var(--font-sans);
-  color: #fff;
-  float: right;
-  width: 50%;
-  padding-left: 1.7rem;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.adopt-a-word__list-title {
+  font-style: italic;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
 }
 
 .adopt-a-word__description-right ul {
   font-family: var(--font-sans);
-  color: #fff;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-bottom: 0;
+}
+
+.adopt-a-word__description-right li {
+  padding-left: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.adopt-a-word__description-right li:last-child {
+  margin-bottom: 0;
 }
 
 .adopt-a-word__list-description {
@@ -98,6 +152,88 @@
 }
 
 
+.adopt-a-word__stories {
+  float: left;
+  width: calc(25% - 1.6rem);
+  margin-left: 1.6rem;
+}
+
+.breakpoint-phone .adopt-a-word__stories,
+.breakpoint-tablet .adopt-a-word__stories {
+  margin-left: auto;
+  width: 100%;
+}
+
+.adopt-a-word__stories-header {
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.1rem;
+  margin-top: 3rem;
+}
+
+h2.adopt-a-word__story-title {
+  font-family: var(--font-sans);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.adopt-a-word__story-summary {
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  padding-bottom: 2rem;
+}
+
+.adopt-a-word__story-summary:first-of-type {
+  border-bottom: 1px solid #eee;
+}
+
+
+/* Recently adpoted words section ----------------------- */
+
+.adopt-a-word__recent-wrapper {
+  background-color: var(--primary-color);
+  margin-bottom: 5rem;
+}
+
+.adopt-a-word__recent-content {
+  font-family: var(--font-sans);
+  color: #fff;
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.adopt-a-word__recent-header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+.adopt-a-word__recent-word-list li {
+  display: inline-block;
+  margin-right: 4rem;
+  font-size: 1.6rem;
+}
+
+.breakpoint-phone .adopt-a-word__recent-word-list li,
+.breakpoint-tablet .adopt-a-word__recent-word-list li {
+  float: left;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+}
+
+.adopt-a-word__recent-word-list li:last-child {
+  margin-right: 0;
+}
 
 /* Adopt a word section ----------------------- */
 
@@ -125,7 +261,7 @@
 
 /* adopt a word ul */
 .adopt-a-word__words {
-  margin: 0 auto 6rem;
+  margin: 0 auto 7rem;
 }
 
 /* list item */
@@ -213,11 +349,6 @@
   color: var(--primary-color);
 }
 
-.adopt-a-word-page__word-unavailable .adopt-a-word__word {
-  color: #999;
-  text-decoration: line-through;
-}
-
 .adopt-a-word-page__word-available .adopt-a-word__word-button:hover {
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
@@ -234,7 +365,25 @@
   display: inline-block;
 }
 
+.adopt-a-word__archive-button-wrapper {
+  text-align: center;
+  margin-bottom: 7rem;
+}
 
+a.adopt-a-word__archive-button {
+  border: 1px solid #323232;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.9rem 1.4rem;
+  display: inline-block;
+}
+
+a.adopt-a-word__archive-button:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
 
 /* Donation section at bottom ----------------- */
 
@@ -299,16 +448,100 @@
   width: 50%;
 }
 
+/* Archive page styles ---------------------- */
 
+
+.adopt-a-word-archive__header,
+.adopt-a-word-thanks__main {
+  text-align: center;
+  margin-top: 6rem;
+  margin-bottom: 2.5rem;
+}
+
+h1.adopt-a-word-archive__title,
+h1.adopt-a-word-thanks__title {
+  font-family: var(--font-sans);
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+  font-size: 4.8rem;
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+.adopt-a-word-archive__intro,
+.adopt-a-word-thanks__intro
+ {
+  margin: 0 auto 5rem;
+  font-size: 2.1rem;
+  text-align: center;
+}
 
 /* Thank you page styles ---------------------- */
 
-
-.content-page__intro {
-/*  outline: 1px solid;
-*/}
-
-.adopt-a-word__intro-word {
-  font-weight: bold;
-  text-transform: capitalize;
+.adopt-a-word-archive__content {
+  margin: 0 auto 5rem;
 }
+
+h2.adopt-a-word-thanks__share-title {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.adopt-a-word-thanks__share-icons li {
+  display: inline-block;
+  margin-right: 2rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.6rem;
+}
+.adopt-a-word-thanks__share-icons li:last-child {
+  margin-right: 0;
+}
+
+li.adopt-a-word-thanks__twitter {
+  color: #59ADEC;
+}
+li.adopt-a-word-thanks__facebook {
+  color: #3C5A96;
+}
+li.adopt-a-word-thanks__email {
+  color: var(--primary-color);
+}
+li.adopt-a-word-thanks__whatsapp {
+  color: #56B53E;
+  display: none;
+}
+
+.breakpoint-phone li.adopt-a-word-thanks__whatsapp {
+  display: inline-block;
+}
+
+.adopt-a-word-thanks__certificate {
+  border: 1px solid #ccc;
+  padding: 3rem;
+  text-align: center;
+  width: 44rem;
+  display: inline-block;
+}
+
+.adopt-a-word-thanks__certificate-copy {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.adopt-a-word-thanks__certificate-copy a {
+  color: var(--primary-color);
+}
+
+.adopt-a-word-thanks__certificate-copy a:hover {
+  color: #333;
+}
+
+.adopt-a-word-thanks__certificate-image img {
+  width: 38rem;
+}
+
+
