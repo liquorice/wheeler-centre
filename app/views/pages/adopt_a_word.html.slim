@@ -1,4 +1,26 @@
+/ Custom meta data
+- word = request.query_parameters[:adopted_word]
+- word_page = page.word_page(word) if word.present?
+- adopted_word_image = word_page.fields[:thankyou_image].asset if word_page.present?
+
+- open_graph_image = adopted_word_image || page.fields[:campaign_image].asset
+- open_graph_summary = strip_html(render_content(page.fields[:intro]), "")
+- set_meta_tags({ \
+    title: page.title, \
+    description: open_graph_summary, \
+    og: { \
+      description: open_graph_summary,
+      image: { \
+        url: (open_graph_image.content_medium_url if open_graph_image), \
+        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
+        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
+        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+      } \
+    } \
+  })
+
 - image = page.fields[:campaign_image].asset
+- archive_page = page.children.of_type("adopt_a_word_archive").first
 
 = area :masthead_title do
   = page.root.title
