@@ -176,6 +176,11 @@
   margin-top: 3rem;
 }
 
+.adopt-a-word__story-hero img {
+  width: 100%;
+}
+
+
 h2.adopt-a-word__story-title {
   font-family: var(--font-sans);
   font-weight: bold;
