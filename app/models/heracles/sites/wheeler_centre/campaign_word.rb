@@ -27,7 +27,7 @@ module Heracles
 
         searchable do
           string :title do
-            title
+            title.downcase.strip
           end
 
           boolean :available do
