@@ -65,10 +65,10 @@
           = page.fields[:list_description]
         = render_content page.fields[:description_right]
 
-      .adopt-a-word__stories
-        h1.adopt-a-word__stories-header
-          'Stories
-        - if page.stories.present?
+      - if page.stories.present?
+        .adopt-a-word__stories
+          h1.adopt-a-word__stories-header
+            'Stories
           - show_image = (page.stories.count == 1)
 
           - page.stories.each do |story|
@@ -77,15 +77,16 @@
             - elsif story.fields[:hero_image].data_present?
               - image = story.fields[:hero_image].asset
 
-            - if show_image && image
-              .adopt-a-word__story-hero
-                - image_url = image.content_small_thumbnail_url
-                img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{story.title}")
-            h2.adopt-a-word__story-title
-              = story.title
-            - if story.fields[:summary].data_present?
-              .adopt-a-word__story-summary
-                = force_excerptify_html render_content(story.fields[:summary]), 35, "p i em strong br"
+            a.adopt-a-word__story href=story.absolute_url
+              - if show_image && image
+                .adopt-a-word__story-hero
+                  - image_url = image.content_small_thumbnail_url
+                  img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{story.title}")
+              h2.adopt-a-word__story-title
+                = story.title
+              - if story.fields[:summary].data_present?
+                .adopt-a-word__story-summary
+                  = force_excerptify_html render_content(story.fields[:summary]), 35, "p i em strong br"
 
   .adopt-a-word__recent-wrapper
     .adopt-a-word__recent-content.column-wide.clearfix

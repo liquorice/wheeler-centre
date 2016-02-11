@@ -176,6 +176,8 @@
   margin-top: 3rem;
 }
 
+
+
 .adopt-a-word__story-hero img {
   width: 100%;
 }
@@ -190,6 +192,11 @@ h2.adopt-a-word__story-title {
   margin-bottom: 1rem;
 }
 
+a.adopt-a-word__story:hover h2.adopt-a-word__story-title {
+  color: var(--primary-color);
+}
+
+
 .adopt-a-word__story-summary {
   font-size: 1.4rem;
   line-height: 1.8rem;
@@ -199,6 +206,7 @@ h2.adopt-a-word__story-title {
 .adopt-a-word__story-summary:first-of-type {
   border-bottom: 1px solid #eee;
 }
+
 
 
 /* Recently adpoted words section ----------------------- */
