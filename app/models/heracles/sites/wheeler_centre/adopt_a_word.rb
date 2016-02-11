@@ -10,9 +10,10 @@ module Heracles
               {name: :description_left, type: :content, disable_insertables: true},
               {name: :description_right, type: :content, disable_insertables: true},
               {name: :list_description, type: :text },
+              {name: :donation_amount, type: :integer },
               {name: :donation_intro, type: :content, disable_insertables: true},
               {name: :donation_info, type: :content, disable_insertables: true},
-              {name: :articles, type: :associated_pages, page_type: :blog_post}
+              {name: :stories, type: :associated_pages, page_type: :blog_post}
             ]
           }
         end
