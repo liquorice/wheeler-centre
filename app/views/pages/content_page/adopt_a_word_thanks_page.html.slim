@@ -42,7 +42,7 @@
 
         .adopt-a-word-thanks__certificate
           .adopt-a-word-thanks__certificate-copy
-            = "I just adopted \"#{word.titlecase}\"!"
+            = "I just adopted \"#{word.downcase}\"!"
             ' &nbsp; Adopt your own at
             a href="support-us/adopt-a-word" wheelercentre.com/support-us/adopt-a-word
           - if image
@@ -65,6 +65,6 @@
             p
               ' You tried to view the adoption certificate for
               strong
-                = "\"#{word}\""
+                = "\"#{word.try(:downcase)}\""
             p It looks like this word is not available for adoption. Check the URL was copied correctly, and get in touch if you are still having issues viewing this certificate.
 
