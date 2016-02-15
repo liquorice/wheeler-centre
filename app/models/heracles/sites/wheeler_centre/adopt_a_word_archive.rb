@@ -16,10 +16,6 @@ module Heracles
           search_words(options)
         end
 
-        def words_index
-          parent
-        end
-
         private
 
         def words_index
