@@ -1,0 +1,24 @@
+
+= area :masthead_title do
+  = page.root.title
+
+= area :main do
+
+  .adopt-a-word-archive__header.column-wrapper
+    .column-small
+      h1.adopt-a-word-archive__title == widont_format markdown_line page.title
+      - if page.fields[:intro].data_present?
+        .adopt-a-word-archive__intro.copy
+          = render_content page.fields[:intro]
+
+  .adopt-a-word-archive__words-wrapper.column-wrapper
+    .column-wide
+      - if page.words.results.present?
+        = render "partials/adopt_a_word_words"
+
+      .adopt-a-word__archive-button-wrapper
+        a.adopt-a-word__archive-button href=page.parent.absolute_url
+          ' Find your word
+
+
+  = render "partials/adopt_a_word_footer", page: page.parent

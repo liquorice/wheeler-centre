@@ -1,0 +1,18 @@
+ul.adopt-a-word__words.clearfix
+  - page.words.results.each do |word|
+    - available_class = (word.fields['is_available'].value ? 'adopt-a-word-page__word-available' : 'adopt-a-word-page__word-unavailable')
+    li class=["adopt-a-word-page__word-item", available_class] data-view-adopt-word-toggle={toggleSelector: ".adopt-a-word__word-toggle", targetSelector: ".adopt-a-word__definition-wrapper"}.to_json
+
+      - if word.fields['is_available'].value
+        button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
+      - else
+        button.adopt-a-word__word-toggle.adopt-a-word__word= word.title
+
+      .adopt-a-word__definition-wrapper
+        .adopt-a-word__definition-word= word.title
+        .adopt-a-word__word-definition= word.fields[:definition]
+        a.adopt-a-word__word-button href="https://heroix.everydayhero.com.au/event/adopt-a-word/donate?answer_1=#{word.title}"
+          ' Adopt this word
+        .adopt-a-word__word-button--adopted
+          ' Word adopted
+        a.adopt-a-word__word-toggle.adopt-a-word__word-close href="#" close
