@@ -31,6 +31,7 @@ module Heracles
             with :available, false
 
             order_by :title, :asc
+            paginate(page: options[:page] || 1, per_page: options[:per_page] || 1000)
           end
         end
       end
