@@ -7,7 +7,7 @@ class PageCacheCheck < ActiveRecord::Base
   end
 
   def path
-    edge_uri.path
+    edge_uri.request_uri
   end
 
   def edge_url
