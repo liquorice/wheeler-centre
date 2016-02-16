@@ -1,23 +1,70 @@
+- word = request.query_parameters[:answer_1]
+- word_page = page.parent.word_page(word) if word.present?
+- word_valid = word_page.present?
+
+- image = word_page.fields[:thankyou_image].asset if word_valid
+
+- if word_valid
+  - share_link = "#{url_with_domain(page.parent.absolute_url)}?adopted_word=#{word.downcase}"
+  - share_text = "I adopted '#{word.downcase}', adopt yours too: #{share_link}"
+
 = area :masthead_title do
   = page.root.title
 
 = area :main do
-  .content-page__main.column-wrapper
-    .content-page__header
-      h1.content-page__title == widont_format markdown_line page.title
+  - if word_valid
+    .adopt-a-word-thanks__main.column-wrapper
+      .column-mid
+        h1.adopt-a-word-thanks__title == widont_format markdown_line page.title
+        - if page.fields[:intro].data_present?
+          .adopt-a-word-thanks__intro.copy
+            == strip_html(render_content(page.fields[:intro]), "i em strong br")
 
+        - if page.fields[:body].data_present?
+          .adopt-a-word-thanks__body.copy
+              = render_content_in_sections page.fields["body"]
 
+        .adopt-a-word-thanks__share
+          h2.adopt-a-word-thanks__share-title Share your adoption
+          ul.adopt-a-word-thanks__share-icons.clearfix
+            li.adopt-a-word-thanks__twitter
+              / twitter
+              a.ss-icon target="_blank" href="https://twitter.com/home?status=#{share_text}" &#xF611;
+            li.adopt-a-word-thanks__facebook
+              / facebook
+              a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{share_text}" &#xF610;
+            li.adopt-a-word-thanks__email
+              / email
+              a.ss-icon href="mailto:?subject=I adopted a word from The Wheeler Centre! &body=#{u(share_text)}  " &#x2709;
+            li.adopt-a-word-thanks__whatsapp
+              a href="whatsapp://send?text=#{share_text}" data-action="share/whatsapp/share"
+                i.fa.fa-whatsapp
 
-    .content-page__content.column-wrapper.clearfix
-        .column-small
-          - if page.fields[:intro].data_present?
-            .content-page__intro.copy
-              p.adopt-a-word__intro 
-                /= page.fields[:intro]
-                /= request.query_parameters[:answer_1]
+        .adopt-a-word-thanks__certificate
+          .adopt-a-word-thanks__certificate-copy
+            = "I just adopted \"#{word.downcase}\"!"
+            ' &nbsp; Adopt your own at
+            a href="support-us/adopt-a-word" wheelercentre.com/support-us/adopt-a-word
+          - if image
+            .adopt-a-word-thanks__certificate-image
+              picture
+                erb:
+                  <!--[if IE 9]><video style="display: none;"><![endif]-->
+                source srcset=image.content_small_url media="(min-width: 380px)"
+                erb:
+                  <!--[if IE 9]></video><![endif]-->
+                img src=image.content_small_url itemprop="thankyou_image"
 
-                == strip_html(render_content(page.fields[:intro]), "i em strong br")
-                span.adopt-a-word__intro-word= request.query_parameters[:answer_1]
+  - else
+    .content-page__main.column-wrapper
+      .content-page__header
+        h1.content-page__title Oops!
+      .content-page__content.clearfix
+        .content-page__intro
+          section.section--normal.copy
+            p
+              ' You tried to view the adoption certificate for
+              strong
+                = "\"#{word.try(:downcase)}\""
+            p It looks like this word is not available for adoption. Check the URL was copied correctly, and get in touch if you are still having issues viewing this certificate.
 
-          - if page.fields[:body].data_present?
-            = render_content_in_sections page.fields["body"]
