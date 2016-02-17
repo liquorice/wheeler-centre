@@ -13,7 +13,7 @@ class CacheBusterController < ActionController::Metal
       BustPageCacheJob.enqueue page_check.id if page_check.requires_check?
 
       #self.response_body = Rails.env.development? ? debug_response_js(page_check) : ""
-      debug_response_js(page_check)
+      self.response_body = debug_response_js(page_check)
     end
   end
 
