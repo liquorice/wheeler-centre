@@ -13,13 +13,13 @@ class CacheBusterController < ActionController::Metal
       BustPageCacheJob.enqueue page_check.id if page_check.requires_check?
 
       #self.response_body = Rails.env.development? ? debug_response_js(page_check) : ""
-      self.response_body = debug_response_js(page_check)
+      self.response_body = debug_response_js(page_check, edge_url)
     end
   end
 
   private
 
-  def debug_response_js(page_check)
+  def debug_response_js(page_check, edge_url)
     ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Page cache check registered #{page_check.edge_url} (#{edge_url}) at #{page_check.updated_at}'); } } })();"
   end
 end
