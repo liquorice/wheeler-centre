@@ -20,6 +20,6 @@ class CacheBusterController < ActionController::Metal
   private
 
   def debug_response_js(page_check)
-    ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Page cache check registered #{page_check.edge_url} at #{page_check.updated_at}'); } } })();"
+    ";(function() { if (typeof console !== 'undefined' && console !== null) { if (typeof console.debug === 'function') { console.debug('Page cache check registered #{page_check.edge_url} (#{edge_url}) at #{page_check.updated_at}'); } } })();"
   end
 end
