@@ -201,10 +201,10 @@ http {
         }
 
         # Proxy to Flarum
-        location /flarum/ {
-            proxy_set_header Host <%= ENV["FLARUM_HOST"].gsub(/^https?:\/\//,"") %>;
-            proxy_pass <%= ENV["FLARUM_HOST"] %>/;
-        }
+        #location /flarum/ {
+        #    proxy_set_header Host <%= ENV["FLARUM_HOST"].gsub(/^https?:\/\//,"") %>;
+        #    proxy_pass <%= ENV["FLARUM_HOST"] %>/;
+        #}
 
         location @dynamic_request {
             passenger_enabled on;
