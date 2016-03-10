@@ -53,7 +53,7 @@
             title: asset.title || asset.file_name, \
             event_label: event_label + ", #{audio_url_without_basename(asset.audio_mp3_url)}", \
             event_category: "audio", \
-            event_action: "listen" \
+            event_action: "accessed-file" \
           })
           source src=mp3_tracking_url type="audio/mpeg"
         - if asset.versions.include?(:audio_ogg)
@@ -61,6 +61,6 @@
             title: asset.title || asset.file_name, \
             event_label: event_label + ", #{audio_url_without_basename(asset.audio_ogg_url)}", \
             event_category: "audio", \
-            event_action: "listen" \
+            event_action: "accessed-file" \
             })
           source src=ogg_tracking_url type="audio/ogg"
