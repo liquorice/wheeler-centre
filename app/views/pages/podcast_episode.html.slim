@@ -62,7 +62,7 @@
       - cache ["podcast-audio-1", page, page.fields[:audio].asset] do
         - if page.fields[:audio].data_present?
           .recording__audio.recording__audio-podcast
-            = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
+            = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}", podcast_episode: page.title, podcast_series: page.series.title
           - asset = page.fields[:audio].asset
           - if asset.versions.include?(:audio_mp3)
             .recording__downloads-podcast
