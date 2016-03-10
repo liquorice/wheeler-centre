@@ -49,7 +49,7 @@
           - cache ["podcast-series-audio-1", page, first_episode.fields[:audio].asset] do
             - if first_episode.fields[:audio].data_present?
               .recording__audio.recording__audio-podcast
-                = render "partials/audio", audio: first_episode.fields[:audio], title: "Listen to #{first_episode.title}"
+                = render "partials/audio", audio: first_episode.fields[:audio], title: "Listen to #{first_episode.title}", podcast_episode: first_episode.title, podcast_series: page.title
 
         - cache ["podcast-series-info-1", page, first_episode] do
           .column-small
