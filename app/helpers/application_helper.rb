@@ -242,6 +242,10 @@ module ApplicationHelper
     "#{title}#{podcast.title}"
   end
 
+  def audio_url_without_basename(episode)
+    episode = URI(episode).path.split('/').last
+  end
+
   ### --------------------------------------------------------------------------
   ### Events
   ### --------------------------------------------------------------------------
