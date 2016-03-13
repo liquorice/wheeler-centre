@@ -1,6 +1,7 @@
 - embeded = embeded || false
 - asset = asset || audio.asset
 - title = title
+- tracking_event_label = tracking_event_label
 - if title.blank?
   - title = asset.title || asset.file_meta["title"] || asset.file_name
 - if title.blank?
@@ -43,24 +44,23 @@
         .audio-player__handle-nub
       audio preload="metadata"
         - if asset.versions.include?(:audio_mp3) || asset.versions.include?(:audio_ogg)
-          / See if the podcast series + episode titles have been passed in
-          - if podcast_series && podcast_episode
-            - event_label = "#{podcast_series}, #{podcast_episode}"
+          - if tracking_event_label
+            - event_label = tracking_event_label
           - else
-            - event_label = "#{page.title}"
-        - if asset.versions.include?(:audio_mp3)
-          - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
-            title: asset.title || asset.file_name, \
-            event_label: event_label + ", #{audio_url_without_basename(asset.audio_mp3_url)}", \
-            event_category: "audio", \
-            event_action: "accessed-file" \
-          })
-          source src=mp3_tracking_url type="audio/mpeg"
-        - if asset.versions.include?(:audio_ogg)
-          - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
-            title: asset.title || asset.file_name, \
-            event_label: event_label + ", #{audio_url_without_basename(asset.audio_ogg_url)}", \
-            event_category: "audio", \
-            event_action: "accessed-file" \
+            - event_label = asset.title || asset.file_name
+          - if asset.versions.include?(:audio_mp3)
+            - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
+              title: asset.title || asset.file_name, \
+              event_label: event_label + ", #{url_basename(asset.audio_mp3_url)}", \
+              event_category: "audio", \
+              event_action: "accessed-file" \
             })
-          source src=ogg_tracking_url type="audio/ogg"
+            source src=mp3_tracking_url type="audio/mpeg"
+          - if asset.versions.include?(:audio_ogg)
+            - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
+              title: asset.title || asset.file_name, \
+              event_label: event_label + ", #{url_basename(asset.audio_ogg_url)}", \
+              event_category: "audio", \
+              event_action: "accessed-file" \
+              })
+            source src=ogg_tracking_url type="audio/ogg"
