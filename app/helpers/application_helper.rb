@@ -53,6 +53,10 @@ module ApplicationHelper
     url_with_domain(url).gsub(/^https?/, "webcal")
   end
 
+  def url_basename(url)
+    episode = URI(url).path.split('/').last
+  end
+
   def human_boolean(bool)
     bool ? "yes" : "no"
   end
@@ -241,10 +245,6 @@ module ApplicationHelper
       title = "#{podcast.series.title}: "
     end
     "#{title}#{podcast.title}"
-  end
-
-  def audio_url_without_basename(episode)
-    episode = URI(episode).path.split('/').last
   end
 
   ### --------------------------------------------------------------------------
