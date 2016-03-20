@@ -1,11 +1,16 @@
 - embeded = embeded || false
 - asset = asset || audio.asset
-- title = title
 - tracking_event_label = tracking_event_label
+- title = title
 - if title.blank?
-  - title = asset.title || asset.file_meta["title"] || asset.file_name
-- if title.blank?
-  - title = "Listen to this track"
+  - if asset.title.present?
+    - title = asset.title
+  - elsif asset.file_meta["title"].present?
+    - title = asset.file_meta["title"]
+  - elsif asset.file_name.present?
+    - title = asset.file_name
+  - else
+    - title = "Listen to this track"
 - if asset
   .figure.figure__audio.figure__display--default
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=true data-audio-player-duration=asset.file_meta["duration"]
@@ -47,10 +52,10 @@
           - if tracking_event_label
             - event_label = tracking_event_label
           - else
-            - event_label = asset.title || asset.file_name
+            - event_label = title
           - if asset.versions.include?(:audio_mp3)
             - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
-              title: asset.title || asset.file_name, \
+              title: title, \
               event_label: event_label + ", #{url_basename(asset.audio_mp3_url)}", \
               event_category: "audio", \
               event_action: "accessed-file" \
@@ -58,7 +63,7 @@
             source src=mp3_tracking_url type="audio/mpeg"
           - if asset.versions.include?(:audio_ogg)
             - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
-              title: asset.title || asset.file_name, \
+              title: title, \
               event_label: event_label + ", #{url_basename(asset.audio_ogg_url)}", \
               event_category: "audio", \
               event_action: "accessed-file" \
