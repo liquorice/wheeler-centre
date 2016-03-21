@@ -87,7 +87,7 @@ AudioPlayer.prototype.onEnded = function(e) {
   this.view.set("trackPosition", 0);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "ended"
+    action: "audio, ended"
   });
 };
 
@@ -164,7 +164,7 @@ AudioPlayer.prototype.onPauseClick = function(e) {
   this.view.set("playing", false);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "pause"
+    action: "audio, pause — click"
   });
 };
 
