@@ -16,6 +16,7 @@ function AudioPlayer(el, props) {
     currentTime: 0,
     metaDataLoaded: (duration > 0),
     playing: false,
+    has_played: false,
     loadStarted: false,
     loadProgress: 0,
     playProgress: 0,
@@ -82,6 +83,7 @@ AudioPlayer.prototype.onMetadataLoaded = function(e) {
 
 AudioPlayer.prototype.onEnded = function(e) {
   this.view.set("playing", false);
+  this.view.set("has_played", false);
   this.view.set("currentTime", 0);
   this.view.set("playProgress", 0);
   this.view.set("trackPosition", 0);
@@ -139,10 +141,17 @@ AudioPlayer.prototype.onPlayClick = function(e) {
     this.view.set("loadStarted", true);
     this.loadInterval = setInterval(this.watchLoadProgress.bind(this), 200);
   }
-  trackEvent({
-    category: EVENT_CATEGORY,
-    action: "play"
-  });
+  if ( this.model.has_played === true ) {
+    trackEvent({
+      category: EVENT_CATEGORY,
+      action: "audio, play — click"
+    });
+  } else {
+    trackEvent({
+      category: EVENT_CATEGORY,
+      action: "audio, started"
+    });
+  }
 };
 
 AudioPlayer.prototype.watchLoadProgress = function() {
@@ -162,6 +171,7 @@ AudioPlayer.prototype.onPauseClick = function(e) {
   e.preventDefault();
   this.player.pause();
   this.view.set("playing", false);
+  this.view.set("has_played", true);
   trackEvent({
     category: EVENT_CATEGORY,
     action: "audio, pause — click"
