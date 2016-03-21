@@ -88,7 +88,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               xml.itunes :duration, duration_to_hms(duration)
               tracking_url = url_with_domain(track_event(episode.audio_url, {
                 event_category: "podcast",
-                event_action: "episode - listen",
+                event_action: "episode - accessed-file",
                 label: "#{page.title}: #{episode.title}",
                 format: "audio",
                 status: 301
