@@ -141,15 +141,14 @@ AudioPlayer.prototype.onPlayClick = function(e) {
     this.view.set("loadStarted", true);
     this.loadInterval = setInterval(this.watchLoadProgress.bind(this), 200);
   }
-  if ( this.model.has_played === true ) {
+  trackEvent({
+    category: EVENT_CATEGORY,
+    action: "play — click"
+  });
+  if ( this.model.has_played === false ) {
     trackEvent({
       category: EVENT_CATEGORY,
-      action: "audio, play — click"
-    });
-  } else {
-    trackEvent({
-      category: EVENT_CATEGORY,
-      action: "audio, started"
+      action: "started"
     });
   }
 };
