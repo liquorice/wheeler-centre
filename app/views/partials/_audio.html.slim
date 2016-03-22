@@ -60,7 +60,7 @@
               event_category: "audio", \
               event_action: "accessed-file" \
             })
-            source src=mp3_tracking_url type="audio/mpeg"
+            source src=mp3_tracking_url data-raw=asset.audio_mp3_url type="audio/mpeg"
           - if asset.versions.include?(:audio_ogg)
             - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
               title: title, \
@@ -68,4 +68,4 @@
               event_category: "audio", \
               event_action: "accessed-file" \
               })
-            source src=ogg_tracking_url type="audio/ogg"
+            source src=ogg_tracking_url data-raw=asset.audio_ogg_url type="audio/ogg"
