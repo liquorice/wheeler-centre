@@ -230,9 +230,11 @@ module ApplicationHelper
     "#{series.absolute_url}.rss?type=#{options[:type]}"
   end
 
-  def podcast_tracking_link(series)
-    track_event("#{url_with_domain(series.absolute_url)}.rss", { \
-      event_label: "#{series.title}, #{url_with_domain(series.absolute_url)}.rss", \
+  def podcast_tracking_link(series, type = nil)
+    url = "#{url_with_domain(series.absolute_url)}.rss"
+    url = "#{url}?type=#{type}" if type
+    track_event(url, { \
+      event_label: "#{series.title}, #{url}", \
       event_category: "podcast", \
       event_action: "subscribe", \
       title: "Podcast: #{series.title}" \
