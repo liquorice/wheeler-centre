@@ -6,8 +6,11 @@ var trackEvent = require("../track-event");
 
 var EVENT_CATEGORY = "audio";
 
-function AudioPlayer(el, props) {
+function AudioPlayer(el, title) {
   this.el = el;
+  this.title = title;
+  this.fileName = this.extractFileName();
+
   this.handleEl = this.el.querySelector(".audio-player__handle");
   // Extract the duration from a data-attr if we can
   var duration = this.el.getAttribute("data-audio-player-duration") || 0;
@@ -16,6 +19,7 @@ function AudioPlayer(el, props) {
     currentTime: 0,
     metaDataLoaded: (duration > 0),
     playing: false,
+    hasPlayed: false,
     loadStarted: false,
     loadProgress: 0,
     playProgress: 0,
@@ -82,12 +86,14 @@ AudioPlayer.prototype.onMetadataLoaded = function(e) {
 
 AudioPlayer.prototype.onEnded = function(e) {
   this.view.set("playing", false);
+  this.view.set("hasPlayed", false);
   this.view.set("currentTime", 0);
   this.view.set("playProgress", 0);
   this.view.set("trackPosition", 0);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "ended"
+    action: "ended",
+    label: this.title + ", " + this.fileName
   });
 };
 
@@ -141,8 +147,17 @@ AudioPlayer.prototype.onPlayClick = function(e) {
   }
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "play"
+    action: "play - click",
+    label: this.title + ", " + this.fileName
   });
+  if (this.model.hasPlayed === false) {
+    trackEvent({
+      category: EVENT_CATEGORY,
+      action: "started",
+      label: this.title + ", " + this.fileName
+    });
+  }
+  this.view.set("hasPlayed", true);
 };
 
 AudioPlayer.prototype.watchLoadProgress = function() {
@@ -164,7 +179,8 @@ AudioPlayer.prototype.onPauseClick = function(e) {
   this.view.set("playing", false);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "pause"
+    action: "pause - click",
+    label: this.title + ", " + this.fileName
   });
 };
 
@@ -216,6 +232,18 @@ AudioPlayer.prototype.toggleEmbedVisibility = function(e) {
 };
 
 
+/**
+ * extractFileName
+ */
+AudioPlayer.prototype.extractFileName = function() {
+  // Extract the MP3 url for tracking purposes
+  var source = this.el.querySelector("source[type='audio/mpeg']");
+  var url = source.getAttribute("data-raw");
+  var urlParts = url.split("/");
+  return urlParts[urlParts.length - 1];
+};
+
+
 
 // Event tracking
 // Track watch progress
@@ -223,21 +251,13 @@ var lastWatchedPercentage = 0;
 var lastWatchedPercentageRounded = 0;
 AudioPlayer.prototype.trackWatchProgress = function(e) {
   var watchedPercentage = Math.round(this.player.currentTime / this.model.duration * 100);
-  if (watchedPercentage > lastWatchedPercentage) {
-    // Track all % changes
-    trackEvent({
-      category: EVENT_CATEGORY,
-      action: "watched percentage",
-      value: watchedPercentage
-    });
-  }
-  lastWatchedPercentage = watchedPercentage;
   // Track 10% increments in a more obvious format
   var watchedPercentageRounded = Math.floor(watchedPercentage / 10) * 10;
   if (watchedPercentageRounded > lastWatchedPercentageRounded) {
     trackEvent({
       category: EVENT_CATEGORY,
-      action: "watched " + watchedPercentageRounded + "%"
+      action: "watched " + watchedPercentageRounded + "%",
+      label: this.title + ", " + this.fileName
     });
   }
   lastWatchedPercentageRounded = watchedPercentageRounded;

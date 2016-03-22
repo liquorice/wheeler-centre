@@ -53,6 +53,10 @@ module ApplicationHelper
     url_with_domain(url).gsub(/^https?/, "webcal")
   end
 
+  def url_basename(url)
+    episode = URI(url).path.split('/').last
+  end
+
   def human_boolean(bool)
     bool ? "yes" : "no"
   end
@@ -226,8 +230,11 @@ module ApplicationHelper
     "#{series.absolute_url}.rss?type=#{options[:type]}"
   end
 
-  def podcast_tracking_link(series)
-    track_event("#{url_with_domain(series.absolute_url)}.rss", { \
+  def podcast_tracking_link(series, type = nil)
+    url = "#{url_with_domain(series.absolute_url)}.rss"
+    url = "#{url}?type=#{type}" if type
+    track_event(url, { \
+      event_label: "#{series.title}, #{url}", \
       event_category: "podcast", \
       event_action: "subscribe", \
       title: "Podcast: #{series.title}" \
