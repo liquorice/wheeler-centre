@@ -74,7 +74,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               tracking_url = url_with_domain(track_event(episode.video_url, {
                 event_category: "podcast",
                 event_action: "episode - accessed-file",
-                event_label: "#{page.title}: #{episode.title}",
+                event_label: "#{page.title}: #{episode.title}, #{url_basename(episode.video_url)}",
                 format: "video",
                 status: 301
               }))
@@ -89,7 +89,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               tracking_url = url_with_domain(track_event(episode.audio_url, {
                 event_category: "podcast",
                 event_action: "episode - accessed-file",
-                event_label: "#{page.title}: #{episode.title}",
+                event_label: "#{page.title}: #{episode.title}, #{url_basename(episode.audio_url)}",
                 format: "audio",
                 status: 301
               }))
