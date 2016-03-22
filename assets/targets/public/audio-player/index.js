@@ -251,16 +251,6 @@ var lastWatchedPercentage = 0;
 var lastWatchedPercentageRounded = 0;
 AudioPlayer.prototype.trackWatchProgress = function(e) {
   var watchedPercentage = Math.round(this.player.currentTime / this.model.duration * 100);
-  if (watchedPercentage > lastWatchedPercentage) {
-    // Track all % changes
-    trackEvent({
-      category: EVENT_CATEGORY,
-      action: "watched percentage",
-      label: this.title + ", " + this.fileName,
-      value: watchedPercentage
-    });
-  }
-  lastWatchedPercentage = watchedPercentage;
   // Track 10% increments in a more obvious format
   var watchedPercentageRounded = Math.floor(watchedPercentage / 10) * 10;
   if (watchedPercentageRounded > lastWatchedPercentageRounded) {
