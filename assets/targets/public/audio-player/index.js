@@ -6,8 +6,9 @@ var trackEvent = require("../track-event");
 
 var EVENT_CATEGORY = "audio";
 
-function AudioPlayer(el, props) {
+function AudioPlayer(el, title) {
   this.el = el;
+  this.title = title;
   this.handleEl = this.el.querySelector(".audio-player__handle");
   // Extract the duration from a data-attr if we can
   var duration = this.el.getAttribute("data-audio-player-duration") || 0;
@@ -89,7 +90,8 @@ AudioPlayer.prototype.onEnded = function(e) {
   this.view.set("trackPosition", 0);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "ended"
+    action: "ended",
+    label: this.title
   });
 };
 
@@ -143,12 +145,14 @@ AudioPlayer.prototype.onPlayClick = function(e) {
   }
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "play — click"
+    action: "play — click",
+    label: this.title
   });
   if ( this.model.has_played === false ) {
     trackEvent({
       category: EVENT_CATEGORY,
-      action: "started"
+      action: "started",
+      label: this.title
     });
   }
 };
@@ -173,7 +177,8 @@ AudioPlayer.prototype.onPauseClick = function(e) {
   this.view.set("has_played", true);
   trackEvent({
     category: EVENT_CATEGORY,
-    action: "pause — click"
+    action: "pause — click",
+    label: this.title
   });
 };
 
@@ -237,6 +242,7 @@ AudioPlayer.prototype.trackWatchProgress = function(e) {
     trackEvent({
       category: EVENT_CATEGORY,
       action: "watched percentage",
+      label: this.title,
       value: watchedPercentage
     });
   }
@@ -246,7 +252,8 @@ AudioPlayer.prototype.trackWatchProgress = function(e) {
   if (watchedPercentageRounded > lastWatchedPercentageRounded) {
     trackEvent({
       category: EVENT_CATEGORY,
-      action: "watched " + watchedPercentageRounded + "%"
+      action: "watched " + watchedPercentageRounded + "%",
+      label: this.title
     });
   }
   lastWatchedPercentageRounded = watchedPercentageRounded;
