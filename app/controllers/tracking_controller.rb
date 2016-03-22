@@ -17,7 +17,7 @@ class TrackingController < ActionController::Metal
     if params[:format] == "png"
       send_blank_image
     else
-      redirect_to params[:target], status: params[:status].presence || 302
+      redirect_to target, status: params[:status].presence || 302
     end
   end
 
@@ -30,7 +30,7 @@ class TrackingController < ActionController::Metal
     if params[:format] == "png"
       send_blank_image
     else
-      redirect_to params[:target], status: params[:status].presence || 302
+      redirect_to target, status: params[:status].presence || 302
     end
   end
 
@@ -41,8 +41,8 @@ class TrackingController < ActionController::Metal
       document_path: params[:path],
       action: params[:social_action],
       network: params[:network],
-      target: params[:target])
-    redirect_to params[:target], status: params[:status].presence || 302
+      target: target)
+    redirect_to target, status: params[:status].presence || 302
   end
 
   private
@@ -64,6 +64,15 @@ class TrackingController < ActionController::Metal
       Base64.decode64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="),
       type: "image/png", disposition: "inline"
     )
+  end
+
+  # We changed the `target` param to `_target` to ensure it's sorted first
+  # by Rails' URL helpers. We want it first because these tracking URLs get
+  # truncated occasionally by stupid systems that assume URLs can only be 255
+  # character. With the _target first they'll at least redirect correctly even
+  # if they don't get tracked.
+  def target
+    params[:_target] || params[:target]
   end
 
 end
