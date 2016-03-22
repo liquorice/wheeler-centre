@@ -70,9 +70,9 @@
                 li
                   - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                     title: asset.title || asset.file_name, \
-                    event_label: "#{page.series.title}, #{page.title}, #{url_basename(asset.audio_mp3_url)}", \
                     event_category: "audio", \
                     event_action: "download" \
+                    event_label: "#{page.series.title}, #{page.title}, #{url_basename(asset.audio_mp3_url)}", \
                   })
                   a href=mp3_tracking_url
                     i.fa.fa-music
