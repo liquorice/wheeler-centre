@@ -108,16 +108,6 @@ var lastWatchedPercentage = 0;
 var lastWatchedPercentageRounded = 0;
 VideoPlayer.prototype.trackWatchProgress = function(data) {
   var watchedPercentage = Math.round(data.seconds / data.duration * 100);
-  if (watchedPercentage > lastWatchedPercentage) {
-    // Track all % changes
-    trackEvent({
-      category: EVENT_CATEGORY,
-      action: "watched percentage",
-      label: this.iframe.src,
-      value: watchedPercentage
-    });
-  }
-  lastWatchedPercentage = watchedPercentage;
   // Track 10% increments in a more obvious format
   var watchedPercentageRounded = Math.floor(watchedPercentage / 10) * 10;
   if (watchedPercentageRounded > lastWatchedPercentageRounded) {
