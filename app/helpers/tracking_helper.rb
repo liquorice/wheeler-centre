@@ -24,7 +24,7 @@ module TrackingHelper
   def track_event(url, options = {})
     if permitted_tracking_host?(url)
       tracking_params = {
-        target: url,
+        _target: url,
         status: options[:status],
         location: options[:location] || url,
         title: options[:title],
@@ -85,7 +85,7 @@ module TrackingHelper
   def track_pageview(url, options = {})
     if permitted_tracking_host?(url)
       tracking_params =  {
-        target: url,
+        _target: url,
         status: options[:status],
         location: options[:location] || url,
         title: options[:title],
@@ -145,7 +145,7 @@ module TrackingHelper
   def track_social(url, options = {})
     if permitted_tracking_host?(url)
       tracking_params = {
-        target: url,
+        _target: url,
         status: options[:status],
         location: options[:location] || url,
         title: options[:title],
