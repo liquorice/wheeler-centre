@@ -1,4 +1,4 @@
-- if mp3_url.present? || ogg_url.present?
+- if mp3_tracking_url.present? || ogg_tracking_url.present?
   .figure.figure__audio class=display_class
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"]
       button.audio-player__embed-toggle on-click="toggleEmbedVisibility"
@@ -30,10 +30,10 @@
       .audio-player__handle format-handle-position="trackPosition"
         .audio-player__handle-nub
       audio preload="metadata"
-        - if mp3_url.present?
-          source src=mp3_url type="audio/mpeg"
-        - if ogg_url.present?
-          source src=ogg_url type="audio/ogg"
+        - if mp3_tracking_url.present?
+          source src=mp3_tracking_url data-raw=mp3_url type="audio/mpeg"
+        - if ogg_tracking_url.present?
+          source src=ogg_tracking_url data-raw=ogg_url type="audio/ogg"
     - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
       .figure__caption.caption.copy
         - caption = []

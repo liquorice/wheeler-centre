@@ -7,7 +7,7 @@ module Heracles
         ### Helpers
 
         helper_method \
-        def mp3_url
+        def mp3_tracking_url
           if mp3_version
             url = asset.send(:"#{mp3_version[:name]}_url")
             path = File.path(url)
@@ -24,7 +24,7 @@ module Heracles
         end
 
         helper_method \
-        def ogg_url
+        def ogg_tracking_url
           if ogg_version
             url = asset.send(:"#{ogg_version[:name]}_url")
             path = File.path(url)
