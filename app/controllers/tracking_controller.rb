@@ -6,6 +6,18 @@ class TrackingController < ActionController::Metal
 
   before_action :setup_tracker
 
+  HTTP_ERRORS = [
+    EOFError,
+    Errno::ECONNABORTED,
+    Errno::ECONNRESET,
+    Errno::EINVAL,
+    Errno::ENETUNREACH,
+    Net::HTTPBadResponse,
+    Net::HTTPHeaderSyntaxError,
+    Net::ProtocolError,
+    Timeout::Error
+  ].freeze
+
   def event
     begin
       @tracker.event(
@@ -15,8 +27,8 @@ class TrackingController < ActionController::Metal
         category: params[:event_category],
         action: params[:event_action],
         label: params[:event_label])
-    rescue => e
-      Rails.logger.error "Google Analytics unreachable - #{e}"
+    rescue *HTTP_ERRORS => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
     end
     if params[:format] == "png"
       send_blank_image
@@ -32,8 +44,8 @@ class TrackingController < ActionController::Metal
         document_title: params[:title],
         document_path: params[:path],
         campaign_id: params[:campaign_id])
-    rescue => e
-      Rails.logger.error "Google Analytics unreachable - #{e}"
+    rescue *HTTP_ERRORS => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
     end
     if params[:format] == "png"
       send_blank_image
@@ -51,8 +63,8 @@ class TrackingController < ActionController::Metal
         action: params[:social_action],
         network: params[:network],
         target: target)
-    rescue => e
-      Rails.logger.error "Google Analytics unreachable - #{e}"
+    rescue *HTTP_ERRORS => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
     end
     redirect_to target, status: params[:status].presence || 302
   end
