@@ -7,13 +7,17 @@ class TrackingController < ActionController::Metal
   before_action :setup_tracker
 
   def event
-    @tracker.event(
-      document_location: params[:location],
-      document_title: params[:title],
-      document_path: params[:path],
-      category: params[:event_category],
-      action: params[:event_action],
-      label: params[:event_label])
+    begin
+      @tracker.event(
+        document_location: params[:location],
+        document_title: params[:title],
+        document_path: params[:path],
+        category: params[:event_category],
+        action: params[:event_action],
+        label: params[:event_label])
+    rescue => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
+    end
     if params[:format] == "png"
       send_blank_image
     else
@@ -22,11 +26,15 @@ class TrackingController < ActionController::Metal
   end
 
   def pageview
-    @tracker.pageview(
-      document_location: params[:location],
-      document_title: params[:title],
-      document_path: params[:path],
-      campaign_id: params[:campaign_id])
+    begin
+      @tracker.pageview(
+        document_location: params[:location],
+        document_title: params[:title],
+        document_path: params[:path],
+        campaign_id: params[:campaign_id])
+    rescue => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
+    end
     if params[:format] == "png"
       send_blank_image
     else
@@ -35,13 +43,17 @@ class TrackingController < ActionController::Metal
   end
 
   def social
-    @tracker.social(
-      document_location: params[:location],
-      document_title: params[:title],
-      document_path: params[:path],
-      action: params[:social_action],
-      network: params[:network],
-      target: target)
+    begin
+      @tracker.social(
+        document_location: params[:location],
+        document_title: params[:title],
+        document_path: params[:path],
+        action: params[:social_action],
+        network: params[:network],
+        target: target)
+    rescue => e
+      Rails.logger.error "An error occurred connecting to Google Analytics - #{e}"
+    end
     redirect_to target, status: params[:status].presence || 302
   end
 
