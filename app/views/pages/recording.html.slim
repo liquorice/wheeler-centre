@@ -96,7 +96,8 @@
                       - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                         title: asset.title || asset.file_name, \
                         event_category: "audio", \
-                        event_action: "download" \
+                        event_action: "download", \
+                        event_label: asset.title + ", #{url_basename(asset.audio_mp3_url)}" \
                       })
                       li
                         a href=mp3_tracking_url
@@ -110,7 +111,8 @@
                       - video_tracking_url = track_event(asset.send(:"#{version}_url"), { \
                         title: asset.title || asset.file_name, \
                         event_category: "video", \
-                        event_action: "download" \
+                        event_action: "download", \
+                        event_label: asset.title + ", #{url_basename(asset.send(:"#{version}_url"))}" \
                       })
                       a href=video_tracking_url
                         i.fa.fa-video-camera
