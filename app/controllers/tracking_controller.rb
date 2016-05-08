@@ -84,7 +84,13 @@ class TrackingController < ActionController::Metal
   # character. With the _target first they'll at least redirect correctly even
   # if they don't get tracked.
   def target
-    params[:_target] || params[:target]
+    target = params[:_target] || params[:target]
+    # This is a temporary hack because stupid podcast systems that can't handle
+    # 255 characters also seem to cache data *forever*
+    if !target.present? && params[:event_label].match(/^(http|\/)/)
+      target = params[:event_label]
+    end
+    target
   end
 
 end
