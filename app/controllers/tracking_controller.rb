@@ -87,7 +87,7 @@ class TrackingController < ActionController::Metal
     target = params[:_target] || params[:target]
     # This is a temporary hack because stupid podcast systems that can't handle
     # 255 characters also seem to cache data *forever*
-    if !target.present? && params[:event_label].match(/^(http|\/)/)
+    if !target.present? && params[:event_label].present? && params[:event_label].match(/^(http|\/)/)
       target = params[:event_label]
     end
     target
