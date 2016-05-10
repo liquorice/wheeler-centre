@@ -1169,6 +1169,10 @@
 .breakpoint-phone .event-calendar-event__flag-text {
   padding: 2rem;
 }
+.breakpoint-phone .event-calendar-event--cancelled .event-calendar-event__flag-text {
+  font-size: 1.3rem;
+  padding: 2rem 1rem;
+}
 
   .breakpoint-phone-wide .event-calendar-event--booked-out .event-calendar-event__flag {
     font-size: 1.8rem;
