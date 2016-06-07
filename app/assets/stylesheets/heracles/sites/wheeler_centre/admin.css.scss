@@ -25,3 +25,11 @@
   text-align: center;
 }
 
+// Force the collection lists to full width
+.collection-posts__list-item a {
+  max-width: calc(100% - 2.4rem);
+}
+
+.select2-container {
+  max-width: 100%
+}
