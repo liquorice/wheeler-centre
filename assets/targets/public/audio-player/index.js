@@ -10,6 +10,7 @@ function AudioPlayer(el, title) {
   this.el = el;
   this.title = title;
   this.fileName = this.extractFileName();
+  this.eventPrefix = this.el.getAttribute("data-audio-player-event-prefix") || "";
 
   this.handleEl = this.el.querySelector(".audio-player__handle");
   // Extract the duration from a data-attr if we can
@@ -93,7 +94,7 @@ AudioPlayer.prototype.onEnded = function(e) {
   trackEvent({
     category: EVENT_CATEGORY,
     action: "ended",
-    label: this.title + ", " + this.fileName
+    label: this.eventPrefix + ", " + this.title + ", " + this.fileName
   });
 };
 
@@ -148,13 +149,13 @@ AudioPlayer.prototype.onPlayClick = function(e) {
   trackEvent({
     category: EVENT_CATEGORY,
     action: "play - click",
-    label: this.title + ", " + this.fileName
+    label: this.eventPrefix + ", " + this.title + ", " + this.fileName
   });
   if (this.model.hasPlayed === false) {
     trackEvent({
       category: EVENT_CATEGORY,
       action: "started",
-      label: this.title + ", " + this.fileName
+      label: this.eventPrefix + ", " + this.title + ", " + this.fileName
     });
   }
   this.view.set("hasPlayed", true);
@@ -180,7 +181,7 @@ AudioPlayer.prototype.onPauseClick = function(e) {
   trackEvent({
     category: EVENT_CATEGORY,
     action: "pause - click",
-    label: this.title + ", " + this.fileName
+    label: this.eventPrefix + ", " + this.title + ", " + this.fileName
   });
 };
 
@@ -257,7 +258,7 @@ AudioPlayer.prototype.trackWatchProgress = function(e) {
     trackEvent({
       category: EVENT_CATEGORY,
       action: "watched " + watchedPercentageRounded + "%",
-      label: this.title + ", " + this.fileName
+      label: this.eventPrefix + ", " + this.title + ", " + this.fileName
     });
   }
   lastWatchedPercentageRounded = watchedPercentageRounded;

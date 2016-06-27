@@ -11,9 +11,13 @@
     - title = asset.file_name
   - else
     - title = "Listen to this track"
+- if tracking_event_label
+  - event_label = tracking_event_label
+- else
+  - event_label = title
 - if asset
   .figure.figure__audio.figure__display--default
-    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"]
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"] data-audio-player-event-prefix=event_label
       - if embeded
         h1.asset-embed__header
           a href="http://www.wheelercentre.com"
@@ -49,10 +53,6 @@
         .audio-player__handle-nub
       audio preload="metadata"
         - if asset.versions.include?(:audio_mp3) || asset.versions.include?(:audio_ogg)
-          - if tracking_event_label
-            - event_label = tracking_event_label
-          - else
-            - event_label = title
           - if asset.versions.include?(:audio_mp3)
             - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
               title: title, \
