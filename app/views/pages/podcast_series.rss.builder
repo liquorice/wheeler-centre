@@ -60,7 +60,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               content = render_content episode.fields[:description]
               # Add tracking pixels
               content += image_tag(url_with_domain(track_pageview_for_page(episode, {format: "image"})), alt: "", width: 1, height: 1)
-              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read"})), alt: "", width: 1, height: 1)
+              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read", event_label: "#{page.title}: #{episode.title}"})), alt: "", width: 1, height: 1)
               xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
