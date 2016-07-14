@@ -31,6 +31,15 @@
       margin-left: -2rem;
       margin-right: -2rem;
     }
+  /* Undo the above for section-fulls */
+  .column-wrapper .section--full .figure__display--full-width .audio-player {
+    margin-left: 0;
+    margin-right: 0;
+  }
+    .breakpoint-phone .column-wrapper .section--full  .figure__display--full-width .audio-player {
+      margin-left: 0;
+      margin-right: 0;
+    }
 
   .audio-player__inner {
     max-width: var(--column-mid);
