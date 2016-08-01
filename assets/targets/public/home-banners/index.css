@@ -122,53 +122,33 @@
   float: left;
 }
 
+/* 1 */
+
 .home-banner__group--layout-1 {
   width: 100%;
 }
+
+/* 2 */
 
 .home-banner__group--layout-2 {
   width: 50%;
 }
 
+/* 3 */
 .home-banner__group--layout-3.home-banner__group--max-width-two {
   width: 66.66666%;
 }
 .home-banner__group--layout-3.home-banner__group--max-width-one {
   width: 33.33333%;
 }
-  /* Phone wide */
-  .breakpoint-phone-wide .home-banner__group--layout-3,
-  .breakpoint-phone .home-banner__group--layout-3 {
-    width: 100%;
-  }
-  .breakpoint-phone-wide .home-banner__group--layout-3 .home-banner--width-two .home-banner__shim,
-  .breakpoint-phone .home-banner__group--layout-3 .home-banner--width-two .home-banner__shim {
-    padding-top: 40%;
-  }
-  .breakpoint-phone-wide .home-banner__group--layout-3 .home-banner--width-one,
-  .breakpoint-phone .home-banner__group--layout-3 .home-banner--width-one {
-    width: 50%;
-  }
 
+/* 4 */
 .home-banner__group--layout-4.home-banner__group--max-width-two {
   width: 40%;
 }
 .home-banner__group--layout-4.home-banner__group--max-width-one {
   width: 20%;
 }
-  /* Phone wide */
-  .breakpoint-phone-wide .home-banner__group--layout-4,
-  .breakpoint-phone .home-banner__group--layout-4 {
-    width: 100%;
-  }
-  .breakpoint-phone-wide .home-banner__group--layout-4 .home-banner--width-two .home-banner__shim,
-  .breakpoint-phone .home-banner__group--layout-4 .home-banner--width-two .home-banner__shim {
-    padding-top: 40%;
-  }
-  .breakpoint-phone-wide .home-banner__group--layout-4 .home-banner--width-one,
-  .breakpoint-phone .home-banner__group--layout-4 .home-banner--width-one {
-    width: 50%;
-  }
 
 /* 5 */
 .home-banner__group--layout-5.home-banner__group--max-width-two {
@@ -217,17 +197,6 @@
   .home-banner__group--layout-7:last-child .home-banner {
     width: 33.333333%;
   }
-  .breakpoint-phone-wide .home-banner__group--layout-7:first-child .home-banner,
-  .breakpoint-phone .home-banner__group--layout-7:first-child .home-banner,
-  .breakpoint-phone-wide .home-banner__group--layout-7:last-child .home-banner,
-  .breakpoint-phone .home-banner__group--layout-7:last-child .home-banner {
-    width: 50%;
-  }
-  /* We have a list of three, so we make the first one full width */
-  .breakpoint-phone-wide .home-banner__group--layout-7:last-child .home-banner:first-child,
-  .breakpoint-phone .home-banner__group--layout-7:last-child .home-banner:first-child {
-    width: 100%;
-  }
 
 /* 8 */
 .home-banner__group--layout-8.home-banner__group--max-width-two {
@@ -236,19 +205,6 @@
 .home-banner__group--layout-8.home-banner__group--max-width-one {
   width: 27.3%;
 }
-  /* Phone */
-  .breakpoint-phone-wide .home-banner__group--layout-8,
-  .breakpoint-phone .home-banner__group--layout-8 {
-    width: 100%;
-  }
-    .breakpoint-phone-wide .home-banner__group--layout-8:last-child .home-banner,
-    .breakpoint-phone .home-banner__group--layout-8:last-child .home-banner {
-      width: 50%;
-    }
-  .breakpoint-phone-wide .home-banner__group--layout-8 .home-banner--width-two .home-banner__shim,
-  .breakpoint-phone .home-banner__group--layout-8 .home-banner--width-two .home-banner__shim {
-    padding-top: 40%;
-  }
 
 /* 9 */
 .home-banner__group--layout-9.home-banner__group--max-width-two,
@@ -266,13 +222,27 @@
     .breakpoint-tablet .home-banner__group--layout-9:last-child .home-banner {
       width: 33.333333%;
     }
-  /* Phone */
-  .breakpoint-phone-wide .home-banner__group--layout-9,
-  .breakpoint-phone .home-banner__group--layout-9 {
-    width: 100%;
-  }
-  .breakpoint-phone-wide .home-banner__group--layout-9 .home-banner--width-two .home-banner__shim,
-  .breakpoint-phone .home-banner__group--layout-9 .home-banner--width-two .home-banner__shim {
-    padding-top: 40%;
-  }
 
+/* Phone widths all set to full */
+.breakpoint-phone-wide [class^="home-banner__group--layout"],
+.breakpoint-phone-wide [class*=" home-banner__group--layout"],
+.breakpoint-phone [class^="home-banner__group--layout"],
+.breakpoint-phone [class*=" home-banner__group--layout"] {
+  width: 100%;
+}
+.breakpoint-phone-wide [class^="home-banner__group--layout"] [class^="home-banner--width"],
+.breakpoint-phone-wide [class*=" home-banner__group--layout"] [class*=" home-banner--width"],
+.breakpoint-phone [class^="home-banner__group--layout"] [class^="home-banner--width"],
+.breakpoint-phone [class*=" home-banner__group--layout"] [class*=" home-banner--width"] {
+  width: 100%;
+}
+.breakpoint-phone-wide .home-banner__image img,
+.breakpoint-phone .home-banner__image img {
+  margin-top: -10%;
+}
+.breakpoint-phone-wide [class^="home-banner__group--layout"] [class^="home-banner--width"]  .home-banner__shim,
+.breakpoint-phone-wide [class*=" home-banner__group--layout"] [class*=" home-banner--width"]  .home-banner__shim,
+.breakpoint-phone [class^="home-banner__group--layout"] [class^="home-banner--width"]  .home-banner__shim,
+.breakpoint-phone [class*=" home-banner__group--layout"] [class*=" home-banner--width"]  .home-banner__shim {
+  padding-top: 38%;
+}
