@@ -2,7 +2,7 @@
 - aspect = aspect || :square
 - if post.fields[:itunes_image].data_present?
   - image = post.fields[:itunes_image].asset
-- if post.series.fields[:itunes_image].data_present?
+- elsif post.series.fields[:itunes_image].data_present?
   - image = post.series.fields[:itunes_image].asset
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
