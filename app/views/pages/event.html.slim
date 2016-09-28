@@ -110,10 +110,10 @@
                 ' at
                 a href=page.venue.absolute_url
                   == widont_format page.venue.title
-            - if page.fields[:ticketing_stage].data_present? && !page.booked_out?
+            - if page.fields[:ticketing_stage].data_present? && !page.booked_out? && page.upcoming?
               span.event__ticketing-stage =page.fields[:ticketing_stage].value
             - unless page.fields[:ticketing_stage].value == "Cancelled"
-              - if page.booked_out?
+              - if page.booked_out? && page.upcoming?
                 span.event__booked-out-flag Booked out
               - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
                 - track_booking_url = track_event(page.fields[:external_bookings].value, {\
