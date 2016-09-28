@@ -63,7 +63,7 @@
                 - if first_episode.fields[:explicit].value
                   span.podcast-series__latest-explicit.podcast-series__explicit Explicit
               .podcast-series__latest-description
-                = force_excerptify_html render_content(first_episode.fields[:description]), 100, "i em strong br"
+                = force_excerptify_html render_content(first_episode.fields[:description]), 100, "i em strong br div"
 
     - if !show_all
       - cache ["podcast-series-older-episodes-1", page, episodes] do
