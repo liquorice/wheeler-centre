@@ -432,6 +432,9 @@
   .podcast-series__latest-description {
     font-size: 1.8rem;
   }
+    .podcast-series__latest-description div {
+      display: none;
+    }
 .podcast-series__older-episodes {
   margin-bottom: 8rem;
 }
