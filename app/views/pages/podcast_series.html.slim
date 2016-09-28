@@ -62,7 +62,7 @@
                   = first_episode.title
                 - if first_episode.fields[:explicit].value
                   span.podcast-series__latest-explicit.podcast-series__explicit Explicit
-              .podcast-series__latest-description
+              .podcast-series__latest-description.copy
                 = force_excerptify_html render_content(first_episode.fields[:description]), 100, "i em strong br div"
 
     - if !show_all
