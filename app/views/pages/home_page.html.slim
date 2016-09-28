@@ -108,8 +108,9 @@
             .home__quotes-list
               - if page.fields[:quotes].data_present?
                 - page.fields[:quotes].pages.each do |quote|
-                  - presenter = quote.fields[:person].pages.first
-                  - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
+                  - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
+                  - if presenter
+                    - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
                   - cache ["home-page-quotes-1", quote, presenter, image] do
                     .home-quote
                       - if image
