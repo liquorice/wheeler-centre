@@ -79,3 +79,38 @@ body {
 
 @import "../public/figure/index.css";
 @import "../public/audio-player/index.css";
+
+/* Override and adjust audio player styles in embed context */
+
+@media all and (max-width: 700px) {
+  .asset-embed .audio-player__title {
+    font-size: 2.2rem;
+  }
+}
+@media all and (max-width: 499px) {
+  .audio-player__listen {
+    display: none;
+  }
+  .audio-player__duration {
+    border-left: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+@media all and (max-width: 460px) {
+  .asset-embed .audio-player {
+    padding: 3.5rem 2.5rem 2.9rem;
+  }
+    .asset-embed .audio-player__title {
+      font-size: 2rem;
+    }
+}
+@media all and (max-width: 399px) {
+  .asset-embed .audio-player {
+    padding: 3.5rem 1.5rem 1.9rem;
+  }
+    .asset-embed .audio-player__title {
+      font-size: 1.8rem;
+    }
+}
+
