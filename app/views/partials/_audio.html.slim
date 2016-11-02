@@ -5,10 +5,10 @@
 - if title.blank?
   - if asset.title.present?
     - title = asset.title
-  - elsif asset.file_meta["title"].present?
-    - title = asset.file_meta["title"]
   - elsif asset.file_name.present?
     - title = asset.file_name
+  - elsif asset.file_meta["title"].present?
+    - title = asset.file_meta["title"]
   - else
     - title = "Listen to this track"
 - if tracking_event_label
