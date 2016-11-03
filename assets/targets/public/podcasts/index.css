@@ -381,6 +381,17 @@
       width: 100%;
       margin-left: 0;
     }
+    .podcast-series__feed-url-app {
+      clear: left;
+      text-align: left;
+      padding-top: 1rem;
+    }
+      .podcast-series__feed-url-app a i {
+        padding-right: 0.6rem;
+      }
+      .podcast-series__feed-url-app a span {
+        text-decoration: underline;
+      }
 
 
 .podcast-series__explicit {
