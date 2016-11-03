@@ -27,3 +27,7 @@
         span.podcast-series__feed-url-title
           ' Feed URL
         input.podcast-series__feed-url-box type="text" readonly="readonly" value= url_with_domain(podcast_tracking_link(page)) data-view-select-on-focus=true
+        .podcast-series__feed-url-app
+          a href=pcast_url_with_domain("#{series_absolute_url}.rss")
+            i.fa.fa-podcast
+            span Open feed in my podcast app

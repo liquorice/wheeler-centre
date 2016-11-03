@@ -37,7 +37,7 @@
   .podcast-series
     = render "partials/podcast_series_header"
 
-    = render "partials/podcast_series_subscribe"
+    = render "partials/podcast_series_subscribe", series_absolute_url: page.absolute_url
 
     - first_episode = episodes.results.first
     - if !show_all && first_episode.present?
