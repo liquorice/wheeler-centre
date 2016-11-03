@@ -7,6 +7,10 @@
       i = markdown_line page.title
     .podcast-series__subscribe-text
       ' Subscribe in iTunes, listen online using the available links, or copy and paste the feed URL into your favourite podcast app.
+    .podcast-series__open-in-app
+      a href=pcast_url_with_domain(podcast_tracking_link(page))
+        i.fa.fa-podcast
+        | Open in my podcast app
     .podcast-series__subscribe_methods.clearfix
       - if page.fields[:itunes_url].data_present?
         .podcast-series__subscribe-itunes
@@ -27,7 +31,3 @@
         span.podcast-series__feed-url-title
           ' Feed URL
         input.podcast-series__feed-url-box type="text" readonly="readonly" value= url_with_domain(podcast_tracking_link(page)) data-view-select-on-focus=true
-        .podcast-series__feed-url-app
-          a href=pcast_url_with_domain(podcast_tracking_link(page))
-            i.fa.fa-podcast
-            span Open feed in my podcast app
