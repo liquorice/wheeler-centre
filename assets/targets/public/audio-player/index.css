@@ -325,6 +325,18 @@
   transition-property: opacity;
   z-index: 11;
 }
+.figure__display--right-aligned .audio-player__embed-toggle,
+.figure__display--left-aligned .audio-player__embed-toggle,
+.breakpoint-tablet .figure__display--right-aligned .audio-player__embed-toggle,
+.breakpoint-tablet .figure__display--left-aligned .audio-player__embed-toggle,
+.breakpoint-phone-wide .figure__display--right-aligned .audio-player__embed-toggle,
+.breakpoint-phone-wide .figure__display--left-aligned .audio-player__embed-toggle,
+.breakpoint-phone .figure__display--right-aligned .audio-player__embed-toggle,
+.breakpoint-phone .figure__display--left-aligned .audio-player__embed-toggle {
+  top: auto;
+  bottom: 1.2rem;
+  right: 0;
+}
   .audio-player__embed-toggle:hover {
     color: #333;
   }
@@ -364,6 +376,10 @@
   }
   .breakpoint-phone-wide .audio-player__embed-toggle span em,
   .breakpoint-phone .audio-player__embed-toggle span em {
+    display: none;
+  }
+  .figure__display--right-aligned .audio-player__embed-toggle span em,
+  .figure__display--left-aligned .audio-player__embed-toggle span em {
     display: none;
   }
 

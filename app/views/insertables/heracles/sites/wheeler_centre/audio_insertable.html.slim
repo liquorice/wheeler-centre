@@ -2,7 +2,7 @@
   .figure.figure__audio class=display_class
     .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"]
       button.audio-player__embed-toggle on-click="toggleEmbedVisibility"
-        i.fa.fa-code data-hidden="embedVisible"
+        span data-hidden="embedVisible" Embed<em> player</em>
         i.fa.fa-times data-visible="embedVisible"
       .audio-player__embed-code data-visible="embedVisible"
         textarea
