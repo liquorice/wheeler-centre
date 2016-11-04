@@ -49,6 +49,10 @@ module ApplicationHelper
     canonical_domain + "/" + url.gsub(/^\//, '')
   end
 
+  def pcast_url_with_domain(url)
+    url_with_domain(url).gsub(/^https?/, "pcast")
+  end
+
   def webcal_url_with_domain(url)
     url_with_domain(url).gsub(/^https?/, "webcal")
   end
