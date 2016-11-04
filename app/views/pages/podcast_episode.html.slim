@@ -66,7 +66,7 @@
           - asset = page.fields[:audio].asset
           - if asset.versions.include?(:audio_mp3)
             .recording__downloads-podcast
-              ul
+              ul.clearfix
                 li
                   - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                     title: asset.title || asset.file_name, \
@@ -78,9 +78,13 @@
                     i.fa.fa-music
                     ' Download audio file
                 li
-                a href="#subscribe"
-                  i.fa.fa-rss
-                  ' Subscribe to podcast
+                  a href=pcast_url_with_domain(podcast_tracking_link(page))
+                    i.fa.fa-podcast
+                    ' Open in my podcast app
+                li
+                  a href= url_with_domain(podcast_tracking_link(page))
+                    i.fa.fa-rss
+                    ' Podcast RSS feed
 
       = render_content_in_sections page.fields[:description]
 
