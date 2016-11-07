@@ -42,7 +42,6 @@ gem "sanitize"
 
 # Integrations
 gem "bugsnag"
-gem "skylight"
 
 # Frontend
 gem "color"
