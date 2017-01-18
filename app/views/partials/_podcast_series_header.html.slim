@@ -14,7 +14,7 @@
           img.figure__content itemprop="photo" src=hero_image.content_small_url
     .podcast-series__header-right
       h1.podcast-series__title == widont_format markdown_line page.title
-      .podcast-series__intro-text
+      .podcast-series__intro-text.copy
         - if page.fields[:intro].data_present?
           = render_content page.fields[:intro]
         - else
