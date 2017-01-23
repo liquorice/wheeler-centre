@@ -1,2 +1,3 @@
-.asset-embed.asset-embed--audio
-  = render "partials/audio", asset: @asset, title: @title, embeded: true
+- cache ['embed-asset', @asset, @title] do
+  .asset-embed.asset-embed--audio
+    = render "partials/audio", asset: @asset, title: @title, embeded: true
