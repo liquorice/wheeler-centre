@@ -345,6 +345,7 @@
       margin-top: .8rem;
       margin-bottom: 2.5rem;
       padding: 1rem 1.2rem;
+      position: relative;
       text-align: center;
       text-decoration: none;
       transition: background-color 150ms ease-in-out,
