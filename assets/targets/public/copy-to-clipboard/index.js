@@ -9,7 +9,7 @@ function CopyToClipboard(el, props) {
     }
   });
   clipboard.on('success', function(e) {
-    console.info('Action:', e.action);
+    e.clearSelection();
   });
 }
 
