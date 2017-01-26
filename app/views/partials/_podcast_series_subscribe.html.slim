@@ -1,5 +1,4 @@
-
-.podcast-series__subscribe.column-wrapper
+.podcast-series__subscribe.column-wrapper data-view-copy-to-clipboard={triggerElement: ".podcast-series__open-in-app-and-copy__button--copy", targetElement: ".podcast-feed-url"}.to_json
   .column-mid
     .podcast-series__subscribe-header
       a name="subscribe"
@@ -7,10 +6,13 @@
       i = markdown_line page.title
     .podcast-series__subscribe-text
       ' Subscribe in iTunes, listen online using the available links, or copy and paste the feed URL into your favourite podcast app.
-    .podcast-series__open-in-app
-      a href=pcast_url_with_domain(podcast_tracking_link(page))
+    .podcast-series__open-in-app-and-copy
+      a.podcast-series__open-in-app-and-copy__button.podcast-series__open-in-app-and-copy__button--open href=pcast_url_with_domain(podcast_tracking_link(page))
         i.fa.fa-podcast
-        | Open in my podcast app
+        | Open in Podcasts app
+      button.podcast-series__open-in-app-and-copy__button.podcast-series__open-in-app-and-copy__button--copy
+        i.fa.fa-rss
+        | Copy feed URL
     .podcast-series__subscribe_methods.clearfix
       - if page.fields[:itunes_url].data_present?
         .podcast-series__subscribe-itunes
@@ -30,4 +32,4 @@
       .podcast-series__feed-url
         span.podcast-series__feed-url-title
           ' Feed URL
-        input.podcast-series__feed-url-box type="text" readonly="readonly" value= url_with_domain(podcast_tracking_link(page)) data-view-select-on-focus=true
+        input.podcast-series__feed-url-box.podcast-feed-url type="text" readonly="readonly" value= url_with_domain(podcast_tracking_link(page)) data-view-select-on-focus=true

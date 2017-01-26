@@ -318,13 +318,13 @@
     font-size: 1.8rem;
     margin-bottom: 3rem;
   }
-  .podcast-series__open-in-app {
+  .podcast-series__open-in-app-and-copy {
     border-bottom: 1px solid #dfdfdf;
     text-align: center;
     margin-bottom: 1.5rem;
     position: relative;
   }
-  .podcast-series__open-in-app:after {
+  .podcast-series__open-in-app-and-copy:after {
     content: "";
     background-color: #dfdfdf;
     left: 50%;
@@ -333,27 +333,49 @@
     width: 1px;
     position: absolute;
   }
-    .podcast-series__open-in-app a {
+    .podcast-series__open-in-app-and-copy__button {
       border: 1px solid var(--primary-color);
       border-radius: .3rem;
       display: inline-block;
       color: var(--primary-color);
+      cursor: pointer;
       font-family: var(--font-sans);
       font-weight: bold;
       line-height: 1;
       margin-top: .8rem;
       margin-bottom: 2.5rem;
-      padding: .8rem 1.2rem;
+      padding: 1rem 1.2rem;
+      text-align: center;
       text-decoration: none;
       transition: background-color 150ms ease-in-out,
                   color 150ms ease-in-out;
+      width: 24rem;
     }
-    .podcast-series__open-in-app a:hover,
-    .podcast-series__open-in-app a:focus {
+    .podcast-series__open-in-app-and-copy__button--open {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .podcast-series__open-in-app-and-copy__button--copy {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px;
+    }
+    .breakpoint-phone .podcast-series__open-in-app-and-copy__button {
+      border-radius: .3rem;
+      padding-top: 1.4rem;
+      padding-bottom: 1.4rem;
+      margin-left: 0;
+      width: 100%;
+    }
+    .breakpoint-phone .podcast-series__open-in-app-and-copy__button--open {
+      margin-bottom: 0;
+    }
+    .podcast-series__open-in-app-and-copy__button:hover,
+    .podcast-series__open-in-app-and-copy__button:focus {
       background-color: var(--primary-color);
       color: #fff;
     }
-      .podcast-series__open-in-app a i {
+      .podcast-series__open-in-app-and-copy__button i {
         padding-right: 0.6rem;
       }
   .podcast-series__subscribe_methods {

@@ -132,4 +132,10 @@ views.flarumEmbed = flarumEmbed;
 var flarumCommentCount = require("../flarum-comment-count");
 views.flarumCommentCount = flarumCommentCount;
 
+// Copy to clipboard
+var CopyToClipboard = require("../copy-to-clipboard");
+views.copyToClipboard = function(el, props) {
+  new CopyToClipboard(el, props);
+};
+
 module.exports = views;
