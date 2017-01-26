@@ -2,7 +2,7 @@ var Clipboard = require("clipboard");
 
 /**
  * Copy the contents of an element to the clipboard
- * @param  {Node}   el    The element we want to hold our count
+ * @param  {Node}   el    The parent element
  * @param  {Object} props Various options:
  *                        - {String} triggerEl
  *                        - {String} targetEl
