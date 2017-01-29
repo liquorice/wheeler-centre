@@ -40,7 +40,7 @@ function createTooltip(targetEl, text) {
   targetEl.appendChild(tooltipEl);
   setTimeout(function(){
     targetEl.removeChild(tooltipEl);
-  },1000);
+  },600);
 }
 
 module.exports = copyToClipboard;
