@@ -1,0 +1,30 @@
+/* Copy to clipboard */
+
+.copy-tooltip {
+  background-color: #000;
+  border-radius: 2px;
+  color: #fff;
+  display: block;
+  font-size: 1.4rem;
+  margin-left: -4rem;
+  padding: 1rem 0.4rem 0.9rem;
+  position: absolute;
+  bottom: -2.6rem;
+  left: 50%;
+  opacity: 0.9;
+  text-align: center;
+  width: 8rem;
+  z-index: 20;
+}
+.copy-tooltip:before {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -3px;
+  width: 0;
+  height: 0;
+}
