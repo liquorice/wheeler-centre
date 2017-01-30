@@ -1,4 +1,6 @@
 var Clipboard = require("clipboard");
+var addClass = require("../utilities/add-class");
+var removeClass = require("../utilities/remove-class");
 
 /**
  * Copy the contents of an element to the clipboard
@@ -12,7 +14,7 @@ var Clipboard = require("clipboard");
 function copyToClipboard(el, props) {
   var triggerEl = el.querySelector(props.triggerElement);
   var targetEl = el.querySelector(props.targetElement);
-  var showTooltip = props.showTooltip;
+  var tooltipEl = el.querySelector(props.tooltipElement);
   var clipboard = new Clipboard(triggerEl, {
     target: function() {
       return targetEl;
@@ -21,26 +23,26 @@ function copyToClipboard(el, props) {
   clipboard.on("success", function(e) {
     e.clearSelection();
     // Should we show a confirmation tooltip?
-    if (showTooltip) {
-      createTooltip(triggerEl, "Copied");
+    if (tooltipEl) {
+       toggleTooltip(tooltipEl);
     }
   });
 }
 
 /**
- * Create a tooltip
- * @param  {Node}   targetEl The element to append the tooltip
- * @param  {String} text     Contents of the tooltip
+ * Toogle the tooltip element
+ * @param  {Node} el The tooltip element
  * @return {Void}
  */
-function createTooltip(targetEl, text) {
-  var tooltipEl = document.createElement("span");
-  tooltipEl.className = "copy-tooltip";
-  tooltipEl.innerHTML = text;
-  targetEl.appendChild(tooltipEl);
+function toggleTooltip(el) {
+  var activeClass = "copy-tooltip--active";
+  var hiddenClass = "copy-tooltip--hidden";
+  removeClass(el, hiddenClass);
+  addClass(el, activeClass);
   setTimeout(function(){
-    targetEl.removeChild(tooltipEl);
-  },600);
+    addClass(el, hiddenClass);
+    removeClass(el, activeClass);
+  },400);
 }
 
 module.exports = copyToClipboard;
