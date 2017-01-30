@@ -15,6 +15,8 @@ function copyToClipboard(el, props) {
   var triggerEl = el.querySelector(props.triggerElement);
   var targetEl = el.querySelector(props.targetElement);
   var tooltipEl = el.querySelector(props.tooltipElement);
+  var activeClass = props.activeClass;
+  var hiddenClass = props.hiddenClass;
   var clipboard = new Clipboard(triggerEl, {
     target: function() {
       return targetEl;
@@ -24,19 +26,19 @@ function copyToClipboard(el, props) {
     e.clearSelection();
     // Should we show a confirmation tooltip?
     if (tooltipEl) {
-       toggleTooltip(tooltipEl);
+       toggleTooltip(tooltipEl, activeClass, hiddenClass);
     }
   });
 }
 
 /**
  * Toogle the tooltip element
- * @param  {Node} el The tooltip element
+ * @param  {Node}   el          The tooltip element
+ * @param  {string} activeClass Tooltip is visible class
+ * @param  {string} hiddenClass Tooltip is hidden class
  * @return {Void}
  */
-function toggleTooltip(el) {
-  var activeClass = "copy-tooltip--active";
-  var hiddenClass = "copy-tooltip--hidden";
+function toggleTooltip(el, activeClass, hiddenClass) {
   removeClass(el, hiddenClass);
   addClass(el, activeClass);
   setTimeout(function(){
