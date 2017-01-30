@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Icelab",
   "dependencies": {
+    "clipboard": "^1.5.16",
     "component-cookie": "1.1.1",
     "component-emitter": "1.2.0",
     "draggabilly": "1.2.0",
