@@ -134,7 +134,7 @@ GEM
       oauth
       querystring
     erubis (2.7.0)
-    eventmachine (1.0.7)
+    eventmachine (1.2.2)
     excon (0.45.1)
     execjs (2.5.2)
     factory_girl (4.5.0)
@@ -647,5 +647,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   varnisher
 
+RUBY VERSION
+   ruby 2.1.6p336
+
 BUNDLED WITH
-   1.10.6
+   1.14.3
