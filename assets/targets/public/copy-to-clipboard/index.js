@@ -8,7 +8,7 @@ var removeClass = require("../utilities/remove-class");
  * @param  {Object} props Various options:
  *                        - {String} triggerEl
  *                        - {String} targetEl
-                          - {Bool}   showTooltip
+                          - {String} tooltipEl
  * @return {Void}
  */
 function copyToClipboard(el, props) {
