@@ -41,10 +41,10 @@ function copyToClipboard(el, props) {
 function toggleTooltip(el, activeClass, hiddenClass) {
   removeClass(el, hiddenClass);
   addClass(el, activeClass);
-  setTimeout(function(){
+  setTimeout(function() {
     addClass(el, hiddenClass);
     removeClass(el, activeClass);
-  },400);
+  }, 400);
 }
 
 module.exports = copyToClipboard;
