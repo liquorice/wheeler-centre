@@ -13,6 +13,8 @@
   left: 50%;
   opacity: 0.9;
   text-align: center;
+  transition: opacity 150ms ease-in-out,
+              transform 150ms ease-in-out;
   width: 8rem;
   z-index: 20;
 }
@@ -27,4 +29,12 @@
   margin-left: -3px;
   width: 0;
   height: 0;
+}
+.copy-tooltip--hidden {
+  opacity: 0;
+  transform: translateY(0.8rem);
+}
+.copy-tooltip--active {
+  opacity: 0.9;
+  transform: translate(0);
 }
