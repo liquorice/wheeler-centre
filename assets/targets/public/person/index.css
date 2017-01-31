@@ -69,9 +69,10 @@
   width: 60%;
   padding-bottom: 3.5rem;
 }
-
-  .person__bio__image-credits{
-
+  .person__image-attribution {
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
   }
 
 
@@ -227,3 +228,5 @@
     padding-left: 1.2rem;
     padding-right: 1.2rem;
   }
+
+

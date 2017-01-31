@@ -61,10 +61,14 @@
               - if page.fields[:biography].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:biography]
+
               - elsif page.fields[:staff_bio].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:staff_bio]
-                  /IMAGE CREDITS TO INSERT HERE
+              - if page.fields[:portrait].asset.attribution
+                .person__image-attribution
+                  | Image: 
+                  = page.fields[:portrait].asset.attribution
           - if upcoming_events.results.total_pages > 0
             .person__upcoming-events
               .person__upcoming-events-grid.clearfix
