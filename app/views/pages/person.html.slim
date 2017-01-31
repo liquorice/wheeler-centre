@@ -44,14 +44,15 @@
               .person__social-links
                 - if page.fields[:twitter_name].data_present?
                   a.person__social-links__link href="http://twitter.com/#{page.fields[:twitter_name]}"
-                    span.hide-text Follow #{page.title} on
-                    | Twitter
+                    i.fa.fa-twitter
+                    |@#{page.fields[:twitter_name]}
+                    span.hide-text Follow #{page.title} on Twitter
                 - if page.fields[:twitter_name].data_present? && page.fields[:url].data_present?
                   span.person__social-links__byline-separator ·
                 - if page.fields[:url].data_present?
                   a.person__social-links__link href="#{page.fields[:url]}"
-                    span.hide-text #{page.title}‘s
-                    | Website
+                    = page.fields[:url]
+                    span.hide-text #{page.title}‘s website
         .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
           - cache ["person-bio-1", page] do
             .person__bio

@@ -224,6 +224,9 @@
     font-weight: normal;
     text-decoration: underline;
   }
+    .person__social-links__link i {
+      padding-right: .5rem;
+    }
   .person__social-links__link:hover,
   .person__social-links__link:focus {
     color: #222;
