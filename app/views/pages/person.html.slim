@@ -40,19 +40,18 @@
         - cache ["person-title-1", page] do
           h1.person__title itemprop="name"
             == widont_format markdown_line page.title
-            .person__social-links
-              - if page.fields[:twitter_name].data_present? || page.fields[:url].data_present?
-                .person__social-links
-                  - if page.fields[:twitter_name].data_present?
-                    a.person__social-links__link href="http://twitter.com/#{page.fields[:twitter_name]}"
-                      span.hide-text Follow #{page.title} on
-                      | Twitter
-                  - if page.fields[:twitter_name].data_present? && page.fields[:url].data_present?
-                    span.person__social-links__byline-separator ·
-                  - if page.fields[:url].data_present?
-                    a.person__social-links__link href="#{page.fields[:url]}"
-                      span.hide-text #{page.title}‘s
-                      | Website
+            - if page.fields[:twitter_name].data_present? || page.fields[:url].data_present?
+              .person__social-links
+                - if page.fields[:twitter_name].data_present?
+                  a.person__social-links__link href="http://twitter.com/#{page.fields[:twitter_name]}"
+                    span.hide-text Follow #{page.title} on
+                    | Twitter
+                - if page.fields[:twitter_name].data_present? && page.fields[:url].data_present?
+                  span.person__social-links__byline-separator ·
+                - if page.fields[:url].data_present?
+                  a.person__social-links__link href="#{page.fields[:url]}"
+                    span.hide-text #{page.title}‘s
+                    | Website
         .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
           - cache ["person-bio-1", page] do
             .person__bio
