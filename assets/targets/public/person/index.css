@@ -69,6 +69,12 @@
   width: 60%;
   padding-bottom: 3.5rem;
 }
+
+  .person__bio__image-credits{
+
+  }
+
+
 .breakpoint-phone-wide .person__bio,
 .breakpoint-phone .person__bio {
   float: none;
@@ -206,12 +212,17 @@
 
 .person__social-links {
   color: #888;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   text-align: center;
 
 }
   .person__social-links__link {
-
+    font-weight: normal;
+    text-decoration: underline;
+  }
+    .person__social-links__link:hover, 
+    .person__social-links__link:focus {
+      color: #222;
     }
 
   .person__social-links__byline-separator{
