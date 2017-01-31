@@ -51,7 +51,7 @@
                   span.person__social-links__byline-separator ·
                 - if page.fields[:url].data_present?
                   a.person__social-links__link href="#{page.fields[:url]}"
-                    = page.fields[:url]
+                    = page.fields[:url].to_s.sub(/^https?\:\/\/(www.)?/,'')
                     span.hide-text #{page.title}‘s website
         .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
           - cache ["person-bio-1", page] do
