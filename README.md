@@ -15,7 +15,7 @@ bundle config https://gem.fury.io/icelab/ put-your-token-here
 Then check out the app:
 
 ```
-$ git clone git@bitbucket.org:icelab/wheeler-centre.git
+$ git clone git@github.com:icelab/wheeler-centre.git
 $ cd ~/src/wheeler-centre
 ```
 
