@@ -214,18 +214,16 @@
   color: #888;
   font-size: 1.5rem;
   text-align: center;
-
 }
   .person__social-links__link {
     font-weight: normal;
     text-decoration: underline;
   }
-    .person__social-links__link:hover, 
-    .person__social-links__link:focus {
-      color: #222;
-    }
-
-  .person__social-links__byline-separator{
+  .person__social-links__link:hover,
+  .person__social-links__link:focus {
+    color: #222;
+  }
+  .person__social-links__byline-separator {
     padding-left: 1.2rem;
     padding-right: 1.2rem;
-    }
+  }
