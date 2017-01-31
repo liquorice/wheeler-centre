@@ -204,3 +204,17 @@
   margin-bottom: 0;
 }
 
+.person__social-links {
+  color: #888;
+  font-size: 1.4rem;
+  text-align: center;
+
+}
+  .person__social-links__link {
+
+    }
+
+  .person__social-links__byline-separator{
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    }
