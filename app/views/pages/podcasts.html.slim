@@ -37,7 +37,7 @@
                         ' #{series.episodes.total} episodes
                     - if series.fields[:intro].data_present?
                       .podcasts-index__feature-description.copy
-                        = render_content series.fields[:intro]
+                        = force_excerptify_html render_content(series.fields[:intro]), 25, "i em strong br"
                     span.podcasts-index__feature-action
                       ' Listen or subscribe
       - other_series = page.series.reject { |series| series.fields[:featured].value }.each do |series|
