@@ -42,7 +42,11 @@ module ApplicationHelper
   end
 
   def canonical_domain
-    (ENV["CANONICAL_DOMAIN"] || "#{request.protocol}#{request.host_with_port}")
+    if ENV["CANONICAL_PROTOCOL"] && ENV["CANONICAL_HOSTNAME"] && ENV["CANONICAL_PORT"]
+      "#{ENV["CANONICAL_PROTOCOL"]}#{ENV["CANONICAL_HOSTNAME"]}#{':' + ENV["CANONICAL_PORT"] unless ENV["CANONICAL_PORT"].blank?}"
+    else
+      "#{request.protocol}#{request.host_with_port}"
+    end
   end
 
   def url_with_domain(url)

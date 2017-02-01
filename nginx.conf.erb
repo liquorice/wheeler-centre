@@ -180,6 +180,11 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
+        # Ensure only the canonical hostname is indexed
+        if ($host != "<%= ENV["CANONICAL_HOSTNAME"] %>") {
+          rewrite ^/robots.txt$ /robots.disallow.txt last;
+        }
+
         # Rails asset pipeline support.
         location ~ "^/assets/.+-([0-9a-f]{32}|[0-9a-f]{64})\..+" {
             error_page 490 = @static_asset;
