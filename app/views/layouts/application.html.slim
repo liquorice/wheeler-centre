@@ -9,7 +9,7 @@ html
     link rel="dns-prefetch" href="//cdn.embedly.com"
     link rel="dns-prefetch" href="//www.youtube.com"
 
-    link rel="canonical" href="#{ENV['CANONICAL_DOMAIN']}#{request.fullpath}"
+    link rel="canonical" href="#{canonical_domain}#{request.fullpath}"
 
     = display_meta_tags site: I18n.t("metadata.site_name"),
                         separator: "—",
