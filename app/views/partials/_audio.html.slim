@@ -1,6 +1,6 @@
 - embeded = embeded || false
 - asset = asset || audio.asset
-- tracking_event_label = tracking_event_label
+- tracking_label = tracking_label
 - title = title
 - if title.blank?
   - if asset.title.present?
@@ -11,13 +11,13 @@
     - title = asset.file_meta["title"]
   - else
     - title = "Listen to this track"
-- if tracking_event_label
-  - event_label = tracking_event_label
+- if tracking_label
+  - label = tracking_label
 - else
-  - event_label = title
+  - label = title
 - if asset
   .figure.figure__audio.figure__display--default
-    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"] data-audio-player-event-prefix=event_label
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"] data-audio-player-event-prefix=label
       - if embeded
         h1.asset-embed__header
           a href="http://www.wheelercentre.com"
@@ -56,16 +56,16 @@
           - if asset.versions.include?(:audio_mp3)
             - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
               title: title, \
-              event_label: event_label + ", #{url_basename(asset.audio_mp3_url)}", \
-              event_category: "audio", \
-              event_action: "accessed-file" \
+              label: label + ", #{url_basename(asset.audio_mp3_url)}", \
+              category: "audio", \
+              action: "accessed-file" \
             })
             source src=mp3_tracking_url data-raw=asset.audio_mp3_url type="audio/mpeg"
           - if asset.versions.include?(:audio_ogg)
             - ogg_tracking_url = track_event(asset.audio_ogg_url, { \
               title: title, \
-              event_label: event_label + ", #{url_basename(asset.audio_ogg_url)}", \
-              event_category: "audio", \
-              event_action: "accessed-file" \
+              label: label + ", #{url_basename(asset.audio_ogg_url)}", \
+              category: "audio", \
+              action: "accessed-file" \
               })
             source src=ogg_tracking_url data-raw=asset.audio_ogg_url type="audio/ogg"

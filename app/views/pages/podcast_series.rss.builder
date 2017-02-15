@@ -60,7 +60,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               content = render_content episode.fields[:description]
               # Add tracking pixels
               content += image_tag(url_with_domain(track_pageview_for_page(episode, {format: "image"})), alt: "", width: 1, height: 1)
-              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", event_category: "podcast", event_action: "episode - read", event_label: "#{page.title}: #{episode.title}"})), alt: "", width: 1, height: 1)
+              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", category: "podcast", action: "episode - read", label: "#{page.title}: #{episode.title}"})), alt: "", width: 1, height: 1)
               xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
@@ -71,9 +71,9 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               duration = episode.video_result["meta"]["duration"] if episode.video_result["meta"].present? && episode.video_result["meta"]["duration"].present?
               xml.itunes :duration, duration_to_hms(duration || 0)
               tracking_url = url_with_domain(track_event(episode.video_url, {
-                event_category: "podcast",
-                event_action: "episode - accessed-file",
-                event_label: "#{page.title}: #{episode.title}, #{url_basename(episode.video_url)}",
+                category: "podcast",
+                action: "episode - accessed-file",
+                label: "#{page.title}: #{episode.title}, #{url_basename(episode.video_url)}",
                 format: "video",
                 status: 301
               }))
@@ -86,9 +86,9 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
               end
               xml.itunes :duration, duration_to_hms(duration)
               tracking_url = url_with_domain(track_event(episode.audio_url, {
-                event_category: "podcast",
-                event_action: "episode - accessed-file",
-                event_label: "#{page.title}: #{episode.title}, #{url_basename(episode.audio_url)}",
+                category: "podcast",
+                action: "episode - accessed-file",
+                label: "#{page.title}: #{episode.title}, #{url_basename(episode.audio_url)}",
                 format: "audio",
                 status: 301
               }))

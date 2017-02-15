@@ -16,9 +16,9 @@ module Heracles
               target: url,
               location: url,
               path: path,
-              event_category: "audio",
-              event_action: "accessed-file",
-              event_label: "#{title}, #{file_name}"
+              category: "audio",
+              action: "accessed-file",
+              label: "#{title}, #{file_name}"
             })
           end
         end
@@ -33,9 +33,9 @@ module Heracles
               target: url,
               location: url,
               path: path,
-              event_category: "audio",
-              event_action: "accessed-file",
-              event_label: "#{title}, #{file_name}"
+              category: "audio",
+              action: "accessed-file",
+              label: "#{title}, #{file_name}"
             })
           end
         end
@@ -49,4 +49,3 @@ module Heracles
     end
   end
 end
-

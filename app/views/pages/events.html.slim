@@ -2,18 +2,18 @@
 - events = page.upcoming_events(page: params[:page], per_page: params[:per_page])
 - active_series = page.active_series.results
 - events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
-  event_category: "rss", \
-  event_action: "subscribe", \
+  category: "rss", \
+  action: "subscribe", \
   title: "RSS: #{events_page.title}" \
 })
 - events_ical_subscribe_tracking_link = track_event("#{webcal_url_with_domain(events_page.absolute_url)}.ics", { \
-  event_category: "ics", \
-  event_action: "subscribe", \
+  category: "ics", \
+  action: "subscribe", \
   title: "ICS: #{events_page.title}" \
 })
 - events_ical_download_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.ics", { \
-  event_category: "ics", \
-  event_action: "download", \
+  category: "ics", \
+  action: "download", \
   title: "ICS: #{events_page.title}" \
 })
 

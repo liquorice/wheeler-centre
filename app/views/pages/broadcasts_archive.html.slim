@@ -1,7 +1,7 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page])
 - broadcasts_rss_tracking_link = track_event("#{url_with_domain(broadcasts_page.absolute_url)}.rss", { \
-  event_category: "rss", \
-  event_action: "subscribe", \
+  category: "rss", \
+  action: "subscribe", \
   title: "RSS: #{broadcasts_page.title}" \
 })
 
