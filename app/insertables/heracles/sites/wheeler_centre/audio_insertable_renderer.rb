@@ -2,7 +2,7 @@ module Heracles
   module Sites
     module WheelerCentre
       class AudioInsertableRenderer < ::Heracles::AudioInsertableRenderer
-        include Rails.application.routes.url_helpers
+        include TrackingHelper
 
         ### Helpers
 
@@ -12,7 +12,7 @@ module Heracles
             url = asset.send(:"#{mp3_version[:name]}_url")
             path = File.path(url)
             file_name = File.basename(url)
-            track_event_path({
+            track_event_url({
               target: url,
               location: url,
               path: path,
@@ -29,7 +29,7 @@ module Heracles
             url = asset.send(:"#{ogg_version[:name]}_url")
             path = File.path(url)
             file_name = File.basename(url)
-            track_event_path({
+            track_event_url({
               target: url,
               location: url,
               path: path,
