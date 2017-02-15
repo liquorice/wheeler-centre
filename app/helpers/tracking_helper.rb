@@ -33,8 +33,6 @@ module TrackingHelper
         action: options[:action],
         label: options[:label] || url
       }
-
-      tracking_params =
       if options[:format] == "image"
         track_event_image_url(tracking_params)
       elsif options[:format] == "audio"
