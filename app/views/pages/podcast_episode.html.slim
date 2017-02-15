@@ -62,7 +62,7 @@
       - cache ["podcast-audio-1", page, page.fields[:audio].asset] do
         - if page.fields[:audio].data_present?
           .recording__audio.recording__audio-podcast
-            = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}", tracking_event_label: "#{page.series.title}, #{page.title}"
+            = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}", tracking_label: "#{page.series.title}, #{page.title}"
           - asset = page.fields[:audio].asset
           - if asset.versions.include?(:audio_mp3)
             .recording__downloads-podcast
@@ -70,9 +70,9 @@
                 li
                   - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                     title: asset.title || asset.file_name, \
-                    event_category: "podcast", \
-                    event_action: "download", \
-                    event_label: "#{page.series.title}, #{page.title}, #{url_basename(asset.audio_mp3_url)}", \
+                    category: "podcast", \
+                    action: "download", \
+                    label: "#{page.series.title}, #{page.title}, #{url_basename(asset.audio_mp3_url)}", \
                   })
                   a href=mp3_tracking_url
                     i.fa.fa-music

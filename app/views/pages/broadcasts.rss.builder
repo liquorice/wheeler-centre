@@ -26,7 +26,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             description << replace_absolute_links_with_canonical_domain(render_content(post.fields[:description]))
             # Add tracking pixels
             description << image_tag(url_with_domain(track_pageview_for_page(post, {format: "image"})), alt: "", width: 1, height: 1)
-            description << image_tag(url_with_domain(track_event_for_page(post, {format: "image", event_category: "rss", event_action: "read - broadcast"})), alt: "", width: 1, height: 1)
+            description << image_tag(url_with_domain(track_event_for_page(post, {format: "image", category: "rss", action: "read - broadcast"})), alt: "", width: 1, height: 1)
 
             xml.title post.title
             xml.link url_with_domain(post.absolute_url)

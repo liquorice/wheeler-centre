@@ -242,9 +242,9 @@ module ApplicationHelper
     url = "#{url_with_domain(series.absolute_url)}.rss"
     url = "#{url}?type=#{type}" if type
     track_event(url, { \
-      event_label: "#{series.title}, #{url}", \
-      event_category: "podcast", \
-      event_action: "subscribe", \
+      label: "#{series.title}, #{url}", \
+      category: "podcast", \
+      action: "subscribe", \
       title: "Podcast: #{series.title}" \
     })
   end
