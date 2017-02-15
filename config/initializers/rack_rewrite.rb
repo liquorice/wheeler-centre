@@ -39,4 +39,33 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   r301 '/fine-print/community-guidelines', '/about-us/community-guidelines'
   r301 '/projects/deakin-lectures-2010/presenters', '/projects/deakin-lectures-2010'
   r301 '/sitemap.xml', 'http://wheeler-centre-heracles.s3.amazonaws.com/sitemaps/sitemap.xml.gz'
+
+  # Rewrite tracking URLs
+  params_pairs = [
+    ["_target", "target"],
+    ["status", "redirect"],
+    ["location", "location"],
+    ["title", "title"],
+    ["path", "path"],
+    ["event_category", "category"],
+    ["event_action", "action"],
+    ["event_label", "label"],
+    ["campaign_id", "campaign_id"],
+    ["social_action", "action"],
+    ["social_network", "network"]
+  ]
+
+  params_rewrite = params_pairs.map {|pair| "#{pair[0]}=([^&]*)" }.join("|")
+
+  r301 %r{/_track/([\w\.]+)(.*)}, lambda { |match, rack_env|
+    expected_params = params_pairs.map(&:first)
+    parsed_params = Rack::Utils.parse_nested_query(rack_env["QUERY_STRING"]).select {|p|
+      expected_params.include? p
+    }
+    updated_params = parsed_params.map {|key, value|
+      updated_key = params_pairs[expected_params.index key][1]
+      [updated_key, value]
+    }
+    "#{ENV["TRACKING_SERVER_BASE_URL"]}/#{match[1]}?#{URI.encode_www_form(updated_params)}"
+  }
 end
