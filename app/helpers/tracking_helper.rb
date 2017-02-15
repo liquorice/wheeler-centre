@@ -11,37 +11,30 @@ module TrackingHelper
   #   - location: notionally the full URL for the page (eg http://localhost:5000/broadcasts/podcasts/the-fifth-estate/the-fifth-estate)
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
-  #   - event_category: the category of the event (eg file, podcast)
-  #   - event_action: the action being tracked (eg download, subscribe)
-  #   - event_label: the label being tracked (default to url)
+  #   - category: the category of the event (eg file, podcast)
+  #   - action: the action being tracked (eg download, subscribe)
+  #   - label: the label being tracked (default to url)
   #
   # Example:
   # track_event(http://localhost:5000/broadcasts/podcasts/the-fifth-estate.rss,
   #   location: "http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
-  #   path: "/broadcasts/podcasts/the-fifth-estate", event_category: "podcast", event_action: "subscribe")
+  #   path: "/broadcasts/podcasts/the-fifth-estate", category: "podcast", action: "subscribe")
   #
   # Returns an event tracking URL
   def track_event(url, options = {})
     if permitted_tracking_host?(url)
       tracking_params = {
-        _target: url,
-        status: options[:status],
+        target: url,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
-        event_category: options[:event_category],
-        event_action: options[:event_action],
-        event_label: options[:event_label] || url
+        category: options[:category],
+        action: options[:action],
+        label: options[:label] || url
       }
-      if options[:format] == "image"
-        track_event_image_path(tracking_params)
-      elsif options[:format] == "audio"
-        track_event_audio_path(tracking_params)
-      elsif options[:format] == "video"
-        track_event_video_path(tracking_params)
-      else
-        track_event_path(tracking_params)
-      end
+
+      track_event_url(tracking_params, options[:format])
     else
       url
     end
@@ -84,23 +77,16 @@ module TrackingHelper
   # Returns a pageview tracking URL for use where the Google Analytics JS can't be executed (eg in an RSS reader)
   def track_pageview(url, options = {})
     if permitted_tracking_host?(url)
-      tracking_params =  {
-        _target: url,
-        status: options[:status],
+      tracking_params = {
+        target: url,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
         campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
       }
-      if options[:format] == "image"
-        track_pageview_image_path(tracking_params)
-      elsif options[:format] == "audio"
-        track_pageview_audio_path(tracking_params)
-      elsif options[:format] == "video"
-        track_pageview_video_path(tracking_params)
-      else
-        track_pageview_path(tracking_params)
-      end
+
+      track_pageview_url(tracking_params, options[:format])
     else
       url
     end
@@ -133,35 +119,28 @@ module TrackingHelper
   #   - location: notionally the full URL (eg http://localhost:5000/broadcasts/podcasts/the-fifth-estate/the-fifth-estate)
   #   - title: notionally the page title (eg The Fifth Estate)
   #   - path: notionally the page path (eg /broadcasts/podcasts/the-fifth-estate)
-  #   - social_action (REQUIRED) - the action being tracked (eg share, like)
-  #   - social_network (REQUIRED) - social network (eg twitter, facebook)
+  #   - action (REQUIRED) - the action being tracked (eg share, like)
+  #   - network (REQUIRED) - social network (eg twitter, facebook)
   #
   # Example:
   # track_social(https://twitter.com/home?status=http://localhost:5000/broadcasts/podcasts/the-fifth-estate,
   #   location: http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
-  #   path: "/broadcasts/podcasts/the-fifth-estate", event_action: "share", network: "twitter"
+  #   path: "/broadcasts/podcasts/the-fifth-estate", action: "share", network: "twitter"
   #
   # Returns a social interaction tracking URL
   def track_social(url, options = {})
     if permitted_tracking_host?(url)
       tracking_params = {
-        _target: url,
-        status: options[:status],
+        target: url,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
-        social_action: options[:social_action],
-        social_network: options[:social_network]
+        action: options[:action],
+        network: options[:network]
       }
-      if options[:format] == "image"
-        track_social_image_path(tracking_params)
-      elsif options[:format] == "audio"
-        track_social_audio_path(tracking_params)
-      elsif options[:format] == "video"
-        track_social_video_path(tracking_params)
-      else
-        track_social_path(tracking_params)
-      end
+
+      track_social_url(tracking_params, options[:format])
     else
       url
     end
@@ -202,5 +181,60 @@ module TrackingHelper
     else
       asset.file_name
     end
+  end
+
+  def tracking_server_base_url
+    ENV["TRACKING_SERVER_BASE_URL"]
+  end
+
+  def track_event_url(params, format = nil)
+    params = URI.encode_www_form(params.compact)
+    path =
+      case format
+      when "image"
+        "event.png"
+      when "audio"
+        "event.mp3"
+      when "video"
+        "event.mov"
+      else
+        "event"
+      end
+
+    "#{tracking_server_base_url}/#{path}?#{params}"
+  end
+
+  def track_pageview_url(params, format = nil)
+    params = URI.encode_www_form(params.compact)
+    path =
+      case format
+      when "image"
+        "pageview.png"
+      when "audio"
+        "pageview.mp3"
+      when "video"
+        "pageview.mov"
+      else
+        "pageview"
+      end
+
+    "#{tracking_server_base_url}/#{path}?#{params}"
+  end
+
+  def track_social_url(params, format = nil)
+    params = URI.encode_www_form(params.compact)
+    path =
+      case format
+      when "image"
+        "social.png"
+      when "audio"
+        "social.mp3"
+      when "video"
+        "social.mov"
+      else
+        "social"
+      end
+
+    "#{tracking_server_base_url}/#{path}?#{params}"
   end
 end
