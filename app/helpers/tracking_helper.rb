@@ -36,13 +36,13 @@ module TrackingHelper
 
       tracking_params =
       if options[:format] == "image"
-        track_event_image_path(tracking_params)
+        track_event_image_url(tracking_params)
       elsif options[:format] == "audio"
-        track_event_audio_path(tracking_params)
+        track_event_audio_url(tracking_params)
       elsif options[:format] == "video"
-        track_event_video_path(tracking_params)
+        track_event_video_url(tracking_params)
       else
-        track_event_path(tracking_params)
+        track_event_url(tracking_params)
       end
     else
       url
@@ -95,13 +95,13 @@ module TrackingHelper
         campaign_id: options[:campaign_id] || DEFAULT_CAMPAIGN_ID
       }
       if options[:format] == "image"
-        track_pageview_image_path(tracking_params)
+        track_pageview_image_url(tracking_params)
       elsif options[:format] == "audio"
-        track_pageview_audio_path(tracking_params)
+        track_pageview_audio_url(tracking_params)
       elsif options[:format] == "video"
-        track_pageview_video_path(tracking_params)
+        track_pageview_video_url(tracking_params)
       else
-        track_pageview_path(tracking_params)
+        track_pageview_url(tracking_params)
       end
     else
       url
@@ -156,13 +156,13 @@ module TrackingHelper
         network: options[:network]
       }
       if options[:format] == "image"
-        track_social_image_path(tracking_params)
+        track_social_image_url(tracking_params)
       elsif options[:format] == "audio"
-        track_social_audio_path(tracking_params)
+        track_social_audio_url(tracking_params)
       elsif options[:format] == "video"
-        track_social_video_path(tracking_params)
+        track_social_video_url(tracking_params)
       else
-        track_social_path(tracking_params)
+        track_social_url(tracking_params)
       end
     else
       url
@@ -210,65 +210,65 @@ module TrackingHelper
     ENV["TRACKING_SERVER_BASE_URL"]
   end
 
-  # Track event path helpers
-  def track_event_path(params)
+  # Track event URL helpers
+  def track_event_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/event?#{params}"
   end
 
-  def track_event_image_path(params)
+  def track_event_image_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/event.png?#{params}"
   end
 
-  def track_event_audio_path(params)
+  def track_event_audio_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/event.mp3?#{params}"
   end
 
-  def track_event_video_path(params)
+  def track_event_video_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/event.mov?#{params}"
   end
 
-  # Track pageview path helpers
-  def track_pageview_path(params)
+  # Track pageview URL helpers
+  def track_pageview_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/pageview?#{params}"
   end
 
-  def track_pageview_image_path(params)
+  def track_pageview_image_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/pageview.png?#{params}"
   end
 
-  def track_pageview_audio_path(params)
+  def track_pageview_audio_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/pageview.mp3?#{params}"
   end
 
-  def track_pageview_video_path(params)
+  def track_pageview_video_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/pageview.mov?#{params}"
   end
 
-  # Track social path helpers
-  def track_social_path(params)
+  # Track social URL helpers
+  def track_social_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/social?#{params}"
   end
 
-  def track_social_image_path(params)
+  def track_social_image_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/social.png?#{params}"
   end
 
-  def track_social_audio_path(params)
+  def track_social_audio_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/social.mp3?#{params}"
   end
 
-  def track_social_video_path(params)
+  def track_social_video_url(params)
     params = URI.encode_www_form(params)
     "#{tracking_server_base_url}/social.mov?#{params}"
   end
