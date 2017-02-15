@@ -61,7 +61,7 @@
           subscribe to our <%= link_to("email newsletter", "http://wheelercentre.com/subscribe", style: "color:#009e8c;") %>.
         </p>
       </div>
-      <%= image_tag(url_with_domain(track_event_for_page(event, { format: "image", event_category: "booking", event_action: "external - view"})), alt: "", width: 1, height: 1) %>
+      <%= image_tag(track_event_for_page(event, { format: "image", category: "booking", action: "external - view"}), alt: "", width: 1, height: 1) %>
 
     </div>
   </div>

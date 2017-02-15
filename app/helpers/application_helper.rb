@@ -57,6 +57,10 @@ module ApplicationHelper
     url_with_domain(url).gsub(/^https?/, "pcast")
   end
 
+  def pcast_url(url)
+    url.gsub(/^https?/, "pcast")
+  end
+
   def webcal_url_with_domain(url)
     url_with_domain(url).gsub(/^https?/, "webcal")
   end
@@ -242,9 +246,9 @@ module ApplicationHelper
     url = "#{url_with_domain(series.absolute_url)}.rss"
     url = "#{url}?type=#{type}" if type
     track_event(url, { \
-      event_label: "#{series.title}, #{url}", \
-      event_category: "podcast", \
-      event_action: "subscribe", \
+      label: "#{series.title}, #{url}", \
+      category: "podcast", \
+      action: "subscribe", \
       title: "Podcast: #{series.title}" \
     })
   end

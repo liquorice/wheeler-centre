@@ -1,7 +1,7 @@
 - events = page.events(page: params[:page], per_page: params[:per_page])
 - events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
-  event_category: "rss", \
-  event_action: "subscribe", \
+  category: "rss", \
+  action: "subscribe", \
   title: "RSS: #{events_page.title}" \
 })
 
