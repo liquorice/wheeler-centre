@@ -18,8 +18,8 @@ module Heracles
                 asset.results[asset_version]["url"],
                 {
                   title: (asset.title.blank?) ? asset.file_name : asset.title,
-                  event_category: "asset",
-                  event_action: "download"
+                  category: "asset",
+                  action: "download"
                 }
               )
               link_node.remove_attribute("data-asset-id")
