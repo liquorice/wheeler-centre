@@ -39,4 +39,35 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   r301 '/fine-print/community-guidelines', '/about-us/community-guidelines'
   r301 '/projects/deakin-lectures-2010/presenters', '/projects/deakin-lectures-2010'
   r301 '/sitemap.xml', 'http://wheeler-centre-heracles.s3.amazonaws.com/sitemaps/sitemap.xml.gz'
+
+  # Rewrite tracking URLs
+  params_pairs = [
+    ["_target", "target"],
+    ["status", "redirect"],
+    ["location", "location"],
+    ["title", "title"],
+    ["path", "path"],
+    ["event_category", "category"],
+    ["event_action", "action"],
+    ["event_label", "label"],
+    ["campaign_id", "campaign_id"],
+    ["social_action", "action"],
+    ["social_network", "network"]
+  ]
+
+  params_rewrite = params_pairs.map {|pair| "#{pair[0]}=([^&]*)" }.join("|")
+
+  r301 %r{/_track/([\w\.]+)(?:[?&](?:#{params_rewrite}|[^&]*))+$}, lambda { |match, rack_env|
+    params_match_offset = 2
+    destination = [ENV["TRACKING_SERVER_BASE_URL"]]
+    destination << "/#{match[1]}?" # Format
+    params = []
+    params_pairs.each_with_index do |pair, index|
+      index_with_offset = index + params_match_offset
+      value = match[index_with_offset]
+      params << "#{pair[1]}=#{value}" if value
+    end
+    destination << params.join("&")
+    destination.join("")
+  }
 end
