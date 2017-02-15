@@ -59,8 +59,8 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
             xml.description do
               content = render_content episode.fields[:description]
               # Add tracking pixels
-              content += image_tag(url_with_domain(track_pageview_for_page(episode, {format: "image"})), alt: "", width: 1, height: 1)
-              content += image_tag(url_with_domain(track_event_for_page(episode, {format: "image", category: "podcast", action: "episode - read", label: "#{page.title}: #{episode.title}"})), alt: "", width: 1, height: 1)
+              content += image_tag(track_pageview_for_page(episode, {format: "image"}), alt: "", width: 1, height: 1)
+              content += image_tag(track_event_for_page(episode, {format: "image", category: "podcast", action: "episode - read", label: "#{page.title}: #{episode.title}"}), alt: "", width: 1, height: 1)
               xml.cdata! content
             end
             xml.itunes :author, "The Wheeler Centre"
