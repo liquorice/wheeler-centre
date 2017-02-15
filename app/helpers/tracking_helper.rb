@@ -25,7 +25,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect].presence || 302,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
@@ -79,7 +79,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect].presence || 302,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
@@ -132,7 +132,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect].presence || 302,
+        redirect: options[:redirect],
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
@@ -188,7 +188,7 @@ module TrackingHelper
   end
 
   def track_event_url(params, format = nil)
-    params = URI.encode_www_form(params)
+    params = URI.encode_www_form(params.compact)
     path =
       case format
       when "image"
@@ -205,7 +205,7 @@ module TrackingHelper
   end
 
   def track_pageview_url(params, format = nil)
-    params = URI.encode_www_form(params)
+    params = URI.encode_www_form(params.compact)
     path =
       case format
       when "image"
@@ -222,7 +222,7 @@ module TrackingHelper
   end
 
   def track_social_url(params, format = nil)
-    params = URI.encode_www_form(params)
+    params = URI.encode_www_form(params.compact)
     path =
       case format
       when "image"
