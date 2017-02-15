@@ -57,17 +57,15 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
 
   params_rewrite = params_pairs.map {|pair| "#{pair[0]}=([^&]*)" }.join("|")
 
-  r301 %r{/_track/([\w\.]+)(?:[?&](?:#{params_rewrite}|[^&]*))+$}, lambda { |match, rack_env|
-    params_match_offset = 2
-    destination = [ENV["TRACKING_SERVER_BASE_URL"]]
-    destination << "/#{match[1]}?" # Format
-    params = []
-    params_pairs.each_with_index do |pair, index|
-      index_with_offset = index + params_match_offset
-      value = match[index_with_offset]
-      params << "#{pair[1]}=#{value}" if value
-    end
-    destination << params.join("&")
-    destination.join("")
+  r301 %r{/_track/([\w\.]+)(.*)}, lambda { |match, rack_env|
+    expected_params = params_pairs.map(&:first)
+    parsed_params = Rack::Utils.parse_nested_query(rack_env["QUERY_STRING"]).select {|p|
+      expected_params.include? p
+    }
+    updated_params = parsed_params.map {|key, value|
+      updated_key = params_pairs[expected_params.index key][1]
+      [updated_key, value]
+    }
+    "#{ENV["TRACKING_SERVER_BASE_URL"]}/#{match[1]}?#{URI.encode_www_form(updated_params)}"
   }
 end
