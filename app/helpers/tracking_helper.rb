@@ -25,7 +25,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect],
+        redirect: options[:redirect].presence || 302,
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
@@ -88,7 +88,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect],
+        redirect: options[:redirect].presence || 302,
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
@@ -148,7 +148,7 @@ module TrackingHelper
     if permitted_tracking_host?(url)
       tracking_params = {
         target: url,
-        redirect: options[:redirect],
+        redirect: options[:redirect].presence || 302,
         location: options[:location] || url,
         title: options[:title],
         path: options[:path] || path_for_url(url),
