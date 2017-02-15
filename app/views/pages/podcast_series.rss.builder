@@ -75,7 +75,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
                 action: "episode - accessed-file",
                 label: "#{page.title}: #{episode.title}, #{url_basename(episode.video_url)}",
                 format: "video",
-                status: 301
+                redirect: 301
               })
               xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
             else
@@ -90,7 +90,7 @@ xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc
                 action: "episode - accessed-file",
                 label: "#{page.title}: #{episode.title}, #{url_basename(episode.audio_url)}",
                 format: "audio",
-                status: 301
+                redirect: 301
               })
               xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
             end
