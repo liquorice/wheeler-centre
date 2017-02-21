@@ -43,6 +43,7 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   # Rewrite tracking URLs
   params_pairs = [
     ["_target", "target"],
+    ["target", "target"],
     ["status", "redirect"],
     ["location", "location"],
     ["title", "title"],
