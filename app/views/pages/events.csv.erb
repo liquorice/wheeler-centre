@@ -1,14 +1,15 @@
-<%
-  headers = ["ID", "Title", "Start date", "Description"]
-  output = [headers.map {|s| '"' + s + '"'}.join(", ")]
-  posts = page.events(page: params[:page], per_page: params[:per_page]).results
-  output << posts.map do |post|
-    [
-      post.id,
-      post.title,
-      post.fields[:start_date].data_present? ? post.fields[:start_date].value.rfc2822 : nil,
-      post.fields[:body].value
-    ].map {|s| '"' + s + '"'}.join(", ")
+<% require 'csv' %>
+<%==
+  CSV.generate do |csv|
+    posts = page.events(page: params[:page], per_page: params[:per_page]).results
+    csv << ["ID", "Title", "Start date", "Description"]
+    posts.each do |post|
+      csv << [
+        post.id,
+        post.title,
+        post.fields[:start_date].data_present? ? post.fields[:start_date].value.rfc2822 : nil,
+        post.fields[:body].value
+      ]
+    end
   end
 %>
-<%== output.join("\n") %>
