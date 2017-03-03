@@ -2,7 +2,7 @@
 <%==
   CSV.generate do |csv|
     posts = page.events(page: params[:page], per_page: params[:per_page]).results
-    csv << ["ID", "Title", "Start date", "Description"]
+    csv << ["Event ID", "Title", "Start date", "Description"]
     posts.each do |post|
       csv << [
         post.id,
