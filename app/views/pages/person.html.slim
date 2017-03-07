@@ -40,6 +40,19 @@
         - cache ["person-title-1", page] do
           h1.person__title itemprop="name"
             == widont_format markdown_line page.title
+            - if page.fields[:twitter_name].data_present? || page.fields[:url].data_present?
+              .person__social-links
+                - if page.fields[:twitter_name].data_present?
+                  a.person__social-links__link href="http://twitter.com/#{page.fields[:twitter_name]}"
+                    i.fa.fa-twitter
+                    |@#{page.fields[:twitter_name]}
+                    span.hide-text Follow #{page.title} on Twitter
+                - if page.fields[:twitter_name].data_present? && page.fields[:url].data_present?
+                  span.person__social-links__byline-separator ·
+                - if page.fields[:url].data_present?
+                  a.person__social-links__link href="#{page.fields[:url]}"
+                    = page.fields[:url].to_s.sub(/^https?\:\/\/(www.)?/,'')
+                    span.hide-text #{page.title}‘s website
         .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
           - cache ["person-bio-1", page] do
             .person__bio
@@ -49,11 +62,13 @@
               - if page.fields[:biography].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:biography]
+
               - elsif page.fields[:staff_bio].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:staff_bio]
-
-          / Upcoming events
+              - if page.fields[:portrait].asset.attribution.present?
+                .person__image-attribution
+                  | Image: #{page.fields[:portrait].asset.attribution}
           - if upcoming_events.results.total_pages > 0
             .person__upcoming-events
               .person__upcoming-events-grid.clearfix
