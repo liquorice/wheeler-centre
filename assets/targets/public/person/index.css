@@ -69,6 +69,13 @@
   width: 60%;
   padding-bottom: 3.5rem;
 }
+  .person__image-attribution {
+    color: #888;
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+  }
+
+
 .breakpoint-phone-wide .person__bio,
 .breakpoint-phone .person__bio {
   float: none;
@@ -203,4 +210,30 @@
   margin-top: 3rem;
   margin-bottom: 0;
 }
+
+.person__social-links {
+  color: #888;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.breakpoint-phone .person__social-links{
+  padding-top: 1rem;
+}
+
+  .person__social-links__link {
+    font-weight: normal;
+    text-decoration: underline;
+  }
+    .person__social-links__link i {
+      padding-right: .5rem;
+    }
+  .person__social-links__link:hover,
+  .person__social-links__link:focus {
+    color: #222;
+  }
+  .person__social-links__byline-separator {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
 
