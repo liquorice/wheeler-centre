@@ -66,7 +66,7 @@
               - elsif page.fields[:staff_bio].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:staff_bio]
-              - if page.fields[:portrait].asset.attribution.present?
+              - if page.fields[:portrait].data_present? && page.fields[:portrait].asset.attribution.present?
                 .person__image-attribution
                   | Image: #{page.fields[:portrait].asset.attribution}
           - if upcoming_events.results.total_pages > 0
