@@ -234,6 +234,7 @@
       display: inline-block;
       padding-bottom: 2rem;
     }
+
     .home__logos-list-item {
       padding-right: 6rem;
     }
@@ -241,7 +242,7 @@
       padding-right: 3rem;
     }
     .home__logos-list-item:last-child {
-      padding-right: 0;
+      padding-right: 0rem;
     }
     .breakpoint-phone .home__logos-list-item {
       padding-left: 1.5rem;
@@ -277,4 +278,3 @@
         width: 18rem;
         height: 9rem;
       }
-
