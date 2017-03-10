@@ -57,16 +57,16 @@
                 = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:special_projects].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Special Projects
+              h1 Special Projects
               - page.fields[:special_projects].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:venue_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Venue partners
+              h1 Venue partners
               - page.fields[:venue_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
           - if page.fields[:resident_organisations].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Resident Organisations
+              h1 Resident Organisations
               - page.fields[:resident_organisations].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
