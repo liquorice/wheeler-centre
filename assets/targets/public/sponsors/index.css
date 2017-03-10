@@ -9,6 +9,17 @@
   width: 100%;
 }
 
+.sponsors-list h1 {
+  color: #333;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
 .sponsors-list h2 {
   color: #777;
   font-family: var(--font-sans);
