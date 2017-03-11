@@ -26,7 +26,3 @@ module Heracles
     end
   end
 end
-
-
-
-
