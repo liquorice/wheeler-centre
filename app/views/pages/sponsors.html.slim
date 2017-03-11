@@ -84,7 +84,7 @@
                 h2 Reimagining the performance space
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:reimagining_the_performace_space].data_present?
+          - if page.fields[:digital_engagement].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               - page.fields[:digital_engagement].pages.each do |sponsor|
                 h2 Digital engagement (regional)
