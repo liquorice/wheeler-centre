@@ -36,7 +36,10 @@
           - if page.fields[:patrons_content].data_present?
             .sponsors-list
               h1 Patrons
-              = render_content page.fields[:patrons_content]
+              / grouper below used for spacing
+              .grouper
+                = render_content page.fields[:patrons_content]
+                br
 
           .sponsors-list
             h1 Major Partners
