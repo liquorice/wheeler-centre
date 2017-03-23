@@ -68,7 +68,7 @@
                   = render_content_in_sections page.fields[:staff_bio]
               - if page.fields[:portrait].asset.attribution
                 .person__image-attribution
-                  | Image: #{page.fields[:portrait].asset.attribution}
+                  | #{page.fields[:portrait].asset.attribution}
           - if upcoming_events.results.total_pages > 0
             .person__upcoming-events
               .person__upcoming-events-grid.clearfix
