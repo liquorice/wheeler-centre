@@ -3,3 +3,4 @@ Rails.application.config.heracles_transloadit_auth_key     = ENV["TRANSLOADIT_AU
 Rails.application.config.heracles_transloadit_auth_secret  = ENV["TRANSLOADIT_AUTH_SECRET"]
 Rails.application.config.heracles_transloadit_template_id  = ENV["TRANSLOADIT_TEMPLATE_ID"]
 Rails.application.config.heracles_embedly_api_key          = ENV["EMBEDLY_API_KEY"]
+Rails.application.config.use_ssl_for_asset_urls            = ENV["USE_SSL_FOR_ASSETS"]
