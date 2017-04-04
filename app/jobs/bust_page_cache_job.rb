@@ -6,7 +6,6 @@ require 'net/http'
 class BustPageCacheJob < Que::Job
   def run(page_cache_check_id)
     @page_check = PageCacheCheck.find(page_cache_check_id)
-
     purge_page if should_purge_page?
 
     ActiveRecord::Base.transaction do
