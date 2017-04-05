@@ -1,12 +1,13 @@
 require 'open-uri'
 require 'digest/md5'
+require 'open-uri'
+require 'net/http'
 
 class BustPageCacheJob < Que::Job
   def run(page_cache_check_id)
     @page_check = PageCacheCheck.find(page_cache_check_id)
-
     purge_page if should_purge_page?
-    
+
     ActiveRecord::Base.transaction do
       touch_or_destroy_page_cache_check
       destroy
@@ -23,8 +24,19 @@ class BustPageCacheJob < Que::Job
   end
 
   def purge_page
-    client = Varnisher::Purger.new('PURGE', @page_check.path, @page_check.edge_hostname)
-    client.send
+    Net::HTTP.post_form(
+      URI(ENV['CDN77_PURGE_ENDPOINT']),
+      [
+        ["login", ENV['CDN77_EMAIL']],
+        ["passwd", ENV['CDN77_PASSWORD']],
+        ["cdn_id", ENV['CDN77_CDN_ID']],
+        ["url[]", path]
+      ]
+    )
+  end
+
+  def path
+    URI(@page_check.path).path
   end
 
   def touch_or_destroy_page_cache_check

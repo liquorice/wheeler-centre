@@ -27,7 +27,7 @@ class EmbedAssetController < ApplicationController
   def set_cache_headers_for_page
     if Rails.env.production?
       response.headers["Surrogate-Control"] = "max-age=#{1.day.to_i}"
-      response.headers["Cache-Control"] = "max-age=300, public"
+      response.headers["Cache-Control"] = "s-maxage=86400, max-age=60, public"
       # Remove "Set-Cookie" header
       request.session_options[:skip] = true
     end
