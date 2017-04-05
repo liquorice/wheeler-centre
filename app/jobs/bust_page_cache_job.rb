@@ -30,9 +30,13 @@ class BustPageCacheJob < Que::Job
         ["login", ENV['CDN77_EMAIL']],
         ["passwd", ENV['CDN77_PASSWORD']],
         ["cdn_id", ENV['CDN77_CDN_ID']],
-        ["url[]", @page_check.path]
+        ["url[]", path]
       ]
     )
+  end
+
+  def path
+    URI(@page_check.path).path
   end
 
   def touch_or_destroy_page_cache_check
