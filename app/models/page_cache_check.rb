@@ -3,7 +3,8 @@ require "uri"
 class PageCacheCheck < ActiveRecord::Base
   memoize \
   def site
-    Heracles::Site.find_by_edge_hostname(edge_hostname)
+    Heracles::Site.find_by_edge_hostname(edge_hostname) ||
+      Heracles::Site.find_by_origin_hostname(edge_hostname)
   end
 
   def path
