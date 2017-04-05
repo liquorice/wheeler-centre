@@ -180,9 +180,12 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure only the canonical hostname is indexed
-        if ($host != "<%= ENV["CANONICAL_HOSTNAME"] %>") {
-          rewrite ^/robots.txt$ /robots.disallow.txt last;
+        # Ensure only requests through the CDN are indexed
+        if ($http_via ~* "cdn77") {
+            set $cdn_request 1;
+        }
+        if ($cdn_request != 1) {
+            rewrite ^/robots.txt$ /robots.disallow.txt last;
         }
 
         # Rails asset pipeline support.
