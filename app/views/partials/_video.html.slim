@@ -7,6 +7,9 @@
 - else
   - poster_image_url = external_video.embed["thumbnail_url"] if external_video.embed
 
+- if poster_image_url
+  - poster_image_url = poster_image_url.gsub("http://","https://")
+
 .figure.figure__video.figure__display--default
   .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
     .video-player__teaser class="video-player__poster--landscape" on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
