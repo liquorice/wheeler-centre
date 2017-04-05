@@ -1,7 +1,6 @@
 module CacheBusterHelper
   def cache_buster_script(site)
     return if !site.has_edge_delivery?
-    return if Rails.env.production? && !site.edge_hostnames.include?(request.host)
 
     host = (request.port == 80 ? request.host : request.host_with_port)
 
