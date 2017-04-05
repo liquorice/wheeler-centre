@@ -53,7 +53,7 @@ module Heracles
 
         def youtube_thumbnail_url
           if fields[:youtube_video].data_present?
-            if Rails.application.config.use_ssl_for_asset_urls
+            if Rails.application.config.use_ssl_for_asset_urls && fields[:youtube_video].embed["thumbnail_url"]
               fields[:youtube_video].embed["thumbnail_url"].gsub("http://", "https://")
             else
               fields[:youtube_video].embed["thumbnail_url"]
