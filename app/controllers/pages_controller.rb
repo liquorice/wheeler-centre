@@ -12,7 +12,7 @@ class PagesController < ApplicationController
 
     if Rails.env.production?
       response.headers["Surrogate-Control"] = "max-age=#{expires}"
-      response.headers["Cache-Control"] = "max-age=300, public"
+      response.headers["Cache-Control"] = "s-maxage=86400, max-age=60, public"
       response.headers["Surrogate-Key"] = page.cache_key
       # Remove "Set-Cookie" header
       request.session_options[:skip] = true

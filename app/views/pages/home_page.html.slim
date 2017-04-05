@@ -40,7 +40,7 @@
             a.home-banner href=banner.fields[:link].value
               .home-banner__shim
               .home-banner__image
-                img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:url]
+                img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:ssl_url]
               - if banner.fields[:label].data_present? || banner.fields[:category].data_present?
                 .home-banner__detail
                   - if banner.fields[:category].data_present?

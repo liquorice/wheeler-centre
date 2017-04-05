@@ -12,9 +12,6 @@ gem "pg"
 # Heracles
 gem "heracles", "~> 1.0.6", source: "https://gem.fury.io/icelab/"
 
-# Cache Buster
-gem 'varnisher'
-
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
 # place to require sunspot-queue (but we can't use github dependencies in its
