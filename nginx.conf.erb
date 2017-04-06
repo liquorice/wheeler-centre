@@ -188,6 +188,11 @@ http {
             rewrite ^/robots.txt$ /robots.disallow.txt last;
         }
 
+        # Temporary redirect for cdn.wheelercentre.com
+        if ($host = 'cdn.wheelercentre.com') {
+            rewrite ^/(.*) $scheme://www.wheelercentre.com/$1 permanent;
+        }
+
         # Rails asset pipeline support.
         location ~ "^/assets/.+-([0-9a-f]{32}|[0-9a-f]{64})\..+" {
             error_page 490 = @static_asset;
