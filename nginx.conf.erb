@@ -186,7 +186,7 @@ http {
             set $cdn_or_admin_request 1;
         }
 
-        if ($request_uri ~ "^/admin") {
+        if ($request_uri ~ "^/(admin|assets)") {
             set $cdn_or_admin_request 1;
         }
 
