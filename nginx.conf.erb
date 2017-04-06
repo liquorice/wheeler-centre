@@ -180,17 +180,18 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure only requests through the CDN are indexed
+        # Ensure requests that don't come through the CDN are redirected
+        # with the exception of the admin
         if ($http_via ~* "cdn77") {
-            set $cdn_request 1;
-        }
-        if ($cdn_request != 1) {
-            rewrite ^/robots.txt$ /robots.disallow.txt last;
+            set $cdn_or_admin_request 1;
         }
 
-        # Temporary redirect for cdn.wheelercentre.com
-        if ($host = 'cdn.wheelercentre.com') {
-            rewrite ^/(.*) $scheme://www.wheelercentre.com/$1 permanent;
+        if ($request_uri ~ "^/admin") {
+            set $cdn_or_admin_request 1;
+        }
+
+        if ($cdn_or_admin_request != 1) {
+            rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= ":" + ENV["CANONICAL_PORT"] if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
         }
 
         # Rails asset pipeline support.
