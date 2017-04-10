@@ -181,11 +181,11 @@ http {
         <% end %>
 
         # Ensure only requests through the CDN are indexed
-        if ($host ~* /<%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>/) {
+        if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>) {
             set $cdn_request_or_origin_request 1;
         }
         if ($cdn_request_or_origin_request != 1) {
-            rewrite ^/(.*) <%= ENV['CANONICAL_PROTOCOL'] %><%= ENV['CANONICAL_HOSTNAME'] %><%= ":#{ENV['CANONICAL_HOSTNAME']}" if ENV['CANONICAL_HOSTNAME'] != '80' %>/$1 permanent;
+            rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= ":" + ENV["CANONICAL_PORT"] if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
         }
 
         # Rails asset pipeline support.
