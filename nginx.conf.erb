@@ -180,18 +180,12 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure requests that don't come through the CDN are redirected
-        # with the exception of the admin
-        if ($http_via ~* "cdn77") {
-            set $cdn_or_admin_request 1;
+        # Ensure only requests through the CDN are indexed
+        if ($host ~* /<%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>/) {
+            set $cdn_request_or_origin_request 1;
         }
-
-        if ($request_uri ~ "^/(admin|assets)") {
-            set $cdn_or_admin_request 1;
-        }
-
-        if ($cdn_or_admin_request != 1) {
-            rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= ":" + ENV["CANONICAL_PORT"] if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
+        if ($cdn_request_or_origin_request != 1) {
+            rewrite ^/(.*) <%= ENV['CANONICAL_PROTOCOL'] %><%= ENV['CANONICAL_HOSTNAME'] %><%= ":#{ENV['CANONICAL_HOSTNAME']}" if ENV['CANONICAL_HOSTNAME'] != '80' %>/$1 permanent;
         }
 
         # Rails asset pipeline support.
