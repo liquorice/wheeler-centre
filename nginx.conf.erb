@@ -180,12 +180,19 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure only requests through the CDN are indexed
+        # Ensure only requests through the CANONICAL_HOSTNAME are indexed
+        if ($host = <%= ENV['CANONICAL_HOSTNAME'] %>) {
+            set $cdn_request 1;
+        }
+        if ($cdn_request != 1) {
+            rewrite ^/robots.txt$ /robots.disallow.txt last;
+        }
+        # Ensure everything except CANONCAL and ORIGIN requests are redirected
         if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>) {
             set $cdn_request_or_origin_request 1;
         }
         if ($cdn_request_or_origin_request != 1) {
-            rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= ":" + ENV["CANONICAL_PORT"] if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
+            rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= (":" + ENV["CANONICAL_PORT"]) if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
         }
 
         # Rails asset pipeline support.
