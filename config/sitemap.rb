@@ -111,12 +111,6 @@ SitemapGenerator::Sitemap.create do
 
   # Residents n/a
 
-  responses = Heracles::Sites::WheelerCentre::Response.visible.published
-  responses.each { |p| add "/#{p.url}"}
-
-  reviews = Heracles::Sites::WheelerCentre::Review.visible.published
-  reviews.each { |p| add "/#{p.url}"}
-
   # Settings n/a
 
   # Sponsors n/a
