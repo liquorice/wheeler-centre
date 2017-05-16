@@ -1,6 +1,6 @@
 - upcoming_events = page.upcoming_events
 - events = page.upcoming_events(page: params[:page], per_page: params[:per_page])
-- active_series = page.active_series.results
+- active_series = page.active_series
 - events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
   category: "rss", \
   action: "subscribe", \
@@ -35,7 +35,7 @@
         .column-narrow.copy
           = render_content page.fields[:intro]
 
-      - if upcoming_events.results.present?
+      - if upcoming_events.present?
         - if page.fields[:body].data_present?
           .page__body.event-index__body
             .column-wrapper
@@ -54,7 +54,7 @@
 
     / Group events by year
     - cache ["events-calendar-1", page, Time.current.beginning_of_day, upcoming_events] do
-      - upcoming_events.results.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
+      - upcoming_events.group_by {|e| e.fields[:start_date].value.beginning_of_year }.each do |year, events_by_year|
         .event-calendar__year
           .event-calendar__ical-subscribe
             i.fa.fa-calendar
@@ -122,12 +122,12 @@
                 = render_content page.fields[:event_series_intro]
           h2.screenreaders-only Current event series
           - active_series.each do |series|
-            - cache ["event-active-series-1", series, series.fields[:hero_image].asset] do
+            - cache ["event-active-series-1", series, series.fields[:hero_image].assets.first] do
               - highlight_color = series.fields[:highlight_colour].value if series.fields[:highlight_colour].data_present? && valid_hex_color(series.fields[:highlight_colour].value)
               .event-series-summary__block style=style_for_event_series_block(highlight_color)
                 a.event-series-summary__anchor href=series.absolute_url
                   - if series.fields[:hero_image].data_present?
-                    img.event-series-summary__image src=series.fields[:hero_image].asset.content_small_url
+                    img.event-series-summary__image src=series.fields[:hero_image].assets.first.content_small_url
                   .event-series-summary__text
                     h3.event-series-summary__title = series.title
                     - if series.fields[:summary].data_present?

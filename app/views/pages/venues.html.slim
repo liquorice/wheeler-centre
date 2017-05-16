@@ -25,7 +25,7 @@
           .main-venue__block
             a.main-venue__anchor href=venue.absolute_url
               - if venue.fields[:hero_image].data_present?
-                img.main-venue__image src=venue.fields[:hero_image].asset.content_small_url
+                img.main-venue__image src=venue.fields[:hero_image].assets.first.content_small_url
               .main-venue__text
                 h3.main-venue__title = venue.title
                 .main-venue__description.copy

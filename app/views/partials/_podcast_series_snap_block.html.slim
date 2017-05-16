@@ -1,7 +1,7 @@
 - show_summary = show_summary || false
 - aspect = aspect || :square
 - if post.fields[:itunes_image].data_present?
-  - image = post.fields[:itunes_image].asset
+  - image = post.fields[:itunes_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
 - cache ["podcast-series-snap-block-4", post, show_type, show_summary, image, first_topic, aspect] do

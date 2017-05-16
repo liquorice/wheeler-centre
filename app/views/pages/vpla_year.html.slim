@@ -34,7 +34,7 @@
                   a.vpla-book-snap href=book.absolute_url
                     - if book.fields[:cover_image].data_present?
                       .vpla-book-snap__image
-                        img src=book.fields[:cover_image].asset.content_small_url alt="Cover image for #{book.title}"
+                        img src=book.fields[:cover_image].assets.first.content_small_url alt="Cover image for #{book.title}"
                     h3.vpla-book-snap__title
                       span.title-text = book.title
                       - if book.fields[:author].data_present?

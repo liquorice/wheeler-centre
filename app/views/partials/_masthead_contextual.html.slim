@@ -1,20 +1,20 @@
 .masthead-contextual.masthead-contextual--events.clearfix
   / Since some of these requests are expensive through Solr, we're just caching
   / the entire upcoming block for a whole day
-  - cache ["upcoming-events-2", Time.current.beginning_of_day, upcoming_events_for_navigation.results.length] do
-    - if upcoming_events_for_navigation.results.present?
+  - cache ["upcoming-events-2", Time.current.beginning_of_day, upcoming_events_for_navigation.length] do
+    - if upcoming_events_for_navigation.present?
       .upcoming-events data-view-masthead-events={eventSelector: ".upcoming-events__item-title"}.to_json
         .upcoming-events__navigation.clearfix
           h2.upcoming-events__up-next
             | Up next
-          - if upcoming_events_for_navigation.total > 1
+          - if upcoming_events_for_navigation.total_count > 1
             a.upcoming-events__view-all href="/events"
-              | View all <span>#{upcoming_events_for_navigation.total} of our upcoming events</span>
+              | View all <span>#{upcoming_events_for_navigation.total_count} of our upcoming events</span>
               i.fa.fa-chevron-right
         ul.upcoming-events__list.clearfix
-          - upcoming_events_for_navigation.results.each do |event|
+          - upcoming_events_for_navigation.each do |event|
             - if event.fields[:thumbnail_image].data_present?
-              - image = event.fields[:thumbnail_image].asset
+              - image = event.fields[:thumbnail_image].assets.first
             - elsif event.promo_image
               - image = event.promo_image
             - cache ["upcoming-events-event-1", event, image] do
@@ -22,7 +22,7 @@
                 a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=event.absolute_url
                   - if image
                     span.upcoming-events__image-container
-                      img.upcoming-events__image alt="" src=image.content_thumbnail_url
+                      / img.upcoming-events__image alt="" src=image.content_thumbnail_url
                   span.upcoming-events__item-text-container.clearfix
                     time.upcoming-events__item-date datetime=l(event.fields[:start_date].value, format: :rfc_3339) = l event.fields[:start_date].value_in_time_zone, format: :medium_date
                     - if event.series

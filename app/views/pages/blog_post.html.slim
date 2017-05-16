@@ -2,13 +2,13 @@
 / We only show the guest author block if there’s a singular author
 - show_guest_block = page.guest_post? && page.fields[:authors].data_present? && page.fields[:authors].pages.visible.published.length == 1
 - author = page.fields[:authors].pages.visible.published.first
-- author_image = author.fields[:portrait].asset if author.present? && author.fields[:portrait].data_present?
+- author_image = author.fields[:portrait].assets.first if author.present? && author.fields[:portrait].data_present?
 
 / Custom meta data
 - if page.fields[:hero_image].data_present?
-  - open_graph_image = page.fields[:hero_image].asset
+  - open_graph_image = page.fields[:hero_image].assets.first
 - elsif page.fields[:thumbnail_image].data_present?
-  - open_graph_image = page.fields[:thumbnail_image].asset
+  - open_graph_image = page.fields[:thumbnail_image].assets.first
 
 - if page.fields[:summary].data_present?
   - open_graph_summary = strip_html(render_content(page.fields[:summary]), "")
@@ -27,9 +27,9 @@
       }, \
       image: { \
         url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
       } \
     } \
   })
@@ -81,7 +81,7 @@
       - if page.fields[:meta].data_present?
         .blog-post__meta.column-wrapper
           .blog-post__meta-inner.column-mid.copy
-            = render_content page.fields[:meta]
+            / = render_content page.fields[:meta]
 
     / Topics
     .column-wrapper.clearfix
@@ -109,7 +109,7 @@
               img src=author_image_url alt=(author_image.description.present? ? author_image.description : "Portrait of #{author.title}")
         - if author.fields[:intro].data_present?
           .column-narrow.copy.blog-post__guest-author-intro
-            = render_content author.fields[:intro]
+            / = render_content author.fields[:intro]
         - if page.authors_posts.present?
           .column-wide
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json

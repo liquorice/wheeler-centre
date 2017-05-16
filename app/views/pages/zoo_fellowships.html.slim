@@ -31,7 +31,7 @@
                   .criticism-now-event-item__image
                     - if work.fields[:promo_image].data_present?
                       a href=work.absolute_url
-                        image src=work.fields[:promo_image].asset.content_thumbnail_url alt="Hero image for #{work.title}"
+                        image src=work.fields[:promo_image].assets.first.content_thumbnail_url alt="Hero image for #{work.title}"
                   .criticism-now-event-item__details
                     h3.criticism-now-event-item__title
                       a href=work.absolute_url = work.title

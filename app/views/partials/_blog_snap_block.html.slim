@@ -3,9 +3,9 @@
 - hide_image = hide_image || false
 - aspect = aspect || :square
 - if post.fields[:thumbnail_image].data_present?
-  - image = post.fields[:thumbnail_image].asset
+  - image = post.fields[:thumbnail_image].assets.first
 - elsif post.fields[:hero_image].data_present?
-  - image = post.fields[:hero_image].asset
+  - image = post.fields[:hero_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
 - cache ["blog-snap-block-4", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do

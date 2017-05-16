@@ -1,5 +1,5 @@
 - embeded = embeded || false
-- asset = asset || audio.asset
+- asset = asset || audio.assets.first
 - tracking_label = tracking_label
 - title = title
 - if title.blank?
@@ -17,7 +17,7 @@
   - label = title
 - if asset
   .figure.figure__audio.figure__display--default
-    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.file_meta["duration"] data-audio-player-event-prefix=label
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.processed_assets.first.versions["original"].first.try(:[], "meta").try(:[], "duration") data-audio-player-event-prefix=label
       - if embeded
         h1.asset-embed__header
           a href="http://www.wheelercentre.com"
@@ -52,8 +52,8 @@
       .audio-player__handle format-handle-position="trackPosition"
         .audio-player__handle-nub
       audio preload="metadata"
-        - if asset.versions.include?(:audio_mp3) || asset.versions.include?(:audio_ogg)
-          - if asset.versions.include?(:audio_mp3)
+        - if asset.versions.include?("audio_mp3") || asset.versions.include?("audio_ogg")
+          - if asset.versions.include?("audio_mp3")
             - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
               title: title, \
               label: label + ", #{url_basename(asset.audio_mp3_url)}", \

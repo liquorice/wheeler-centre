@@ -22,7 +22,7 @@
         h1.content-page__title == widont_format markdown_line page.title
     .content-block
       .section--normal.copy
-        = render "partials/image", asset: page.fields[:cover_image].asset, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
+        = render "partials/image", asset: page.fields[:cover_image].assets.first, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
         - if page.fields[:links].data_present?
         .figure.figure__display--right-aligned.copy.vpla-book__links
           = render_content page.fields[:links]
@@ -36,7 +36,7 @@
             - if page.fields[:author_image].data_present?
               .event-presenter__image
                 .event-presenter__image-inner
-                  img src=page.fields[:author_image].asset.content_thumbnail_url alt="Portrait of #{page.fields[:author].value}"
+                  img src=page.fields[:author_image].assets.first.content_thumbnail_url alt="Portrait of #{page.fields[:author].value}"
             h3.event-presenter__title= page.fields[:author].value
             .event-presenter__intro.copy
               = render_content page.fields[:author_biography]
@@ -74,7 +74,7 @@
                   a.vpla-book-snap href=book.absolute_url
                     - if book.fields[:cover_image].data_present?
                       .vpla-book-snap__image
-                        img src=book.fields[:cover_image].asset.content_small_url alt="Cover image for #{book.title}"
+                        img src=book.fields[:cover_image].assets.first.content_small_url alt="Cover image for #{book.title}"
                     h3.vpla-book-snap__title
                       span.title-text = book.title
                       - if book.fields[:author].data_present?

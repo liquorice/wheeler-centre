@@ -1,9 +1,9 @@
 / Custom meta data
 - word = request.query_parameters[:adopted_word]
 - word_page = page.word_page(word) if word.present?
-- adopted_word_image = word_page.fields[:thankyou_image].asset if word_page.present?
+- adopted_word_image = word_page.fields[:thankyou_image].assets.first if word_page.present?
 
-- open_graph_image = adopted_word_image || page.fields[:campaign_image].asset
+- open_graph_image = adopted_word_image || page.fields[:campaign_image].assets.first
 - open_graph_summary = strip_html(render_content(page.fields[:intro]), "")
 - set_meta_tags({ \
     title: page.title, \
@@ -12,14 +12,14 @@
       description: open_graph_summary,
       image: { \
         url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
       } \
     } \
   })
 
-- image = page.fields[:campaign_image].asset
+- image = page.fields[:campaign_image].assets.first
 - archive_page = page.children.of_type("adopt_a_word_archive").first
 
 = area :masthead_title do
@@ -73,9 +73,9 @@
 
           - page.stories.each do |story|
             - if story.fields[:thumbnail_image].data_present?
-              - image = story.fields[:thumbnail_image].asset
+              - image = story.fields[:thumbnail_image].assets.first
             - elsif story.fields[:hero_image].data_present?
-              - image = story.fields[:hero_image].asset
+              - image = story.fields[:hero_image].assets.first
 
             a.adopt-a-word__story href=story.absolute_url
               - if show_image && image
@@ -92,9 +92,9 @@
     .adopt-a-word__recent-content.column-wide.clearfix
       h1.adopt-a-word__recent-header
         ' Recently adopted words
-      - if page.recent_adopted_words.results.present?
+      - if page.recent_adopted_words.present?
         ul.adopt-a-word__recent-word-list
-          - page.recent_adopted_words.results.each do |word|
+          - page.recent_adopted_words.each do |word|
             li =word.title
 
   .adopt-a-word__words-header.column-wrapper
@@ -106,7 +106,7 @@
 
   .adopt-a-word__words-wrapper.column-wrapper
     .column-wide
-      - if page.words.results.present?
+      - if page.words.present?
         = render "partials/adopt_a_word_words"
 
         .adopt-a-word__archive-button-wrapper

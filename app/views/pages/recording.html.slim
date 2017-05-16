@@ -1,7 +1,7 @@
 - primary_topic = select_primary_topics_for_page(page).first
 
 / Custom meta data
-- open_graph_image = page.fields[:hero_image].asset if page.fields[:hero_image].data_present?
+- open_graph_image = page.fields[:hero_image].assets.first if page.fields[:hero_image].data_present?
 - open_graph_summary = strip_html(render_content(page.fields[:description]), "")
 - set_meta_tags({ \
     description: open_graph_summary, \
@@ -9,9 +9,9 @@
       description: open_graph_summary,
       image: { \
         url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
       } \
     } \
   })
@@ -72,7 +72,7 @@
               = render "partials/social_sharing_icons", page: page
 
         .recording__meta
-          - cache ["recording-audio-2", page, page.fields[:audio].asset] do
+          - cache ["recording-audio-2", page, page.fields[:audio].assets.first] do
             - if page.fields[:audio].data_present?
               .recording__audio
                 = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
@@ -86,13 +86,13 @@
                     ' Part of this event
                 - page.events.each do |event|
                   = render "partials/event_snap_block", post: event, show_type: true
-          - cache ["recording-downloads-1", page.fields[:audio].asset, page.fields[:video].asset] do
+          - cache ["recording-downloads-1", page.fields[:audio].assets.first, page.fields[:video].assets.first] do
             - if page.fields[:audio].data_present? || page.fields[:video].data_present?
               .recording__downloads
                 ul
                   - if page.fields[:audio].data_present?
-                    - asset = page.fields[:audio].asset
-                    - if asset.versions.include?(:audio_mp3)
+                    - asset = page.fields[:audio].assets.first
+                    - if asset.versions.include?("audio_mp3")
                       - mp3_tracking_url = track_event(asset.audio_mp3_url, { \
                         title: asset.title || asset.file_name, \
                         category: "audio", \
@@ -104,7 +104,7 @@
                           ' Download audio file
                   - if page.fields[:video].data_present?
                     li
-                      - asset = page.fields[:video].asset
+                      - asset = page.fields[:video].assets.first
                       - version = :original
                       - version = :video_ipad_high if asset.versions.include?(:video_ipad_high)
                       - video_tracking_url = track_event(asset.send(:"#{version}_url"), { \

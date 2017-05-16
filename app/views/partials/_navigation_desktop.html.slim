@@ -4,7 +4,7 @@
       = render "partials/nav_topics_item"
 
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
-    - active_event_series = events_page.active_series.results
+    - active_event_series = events_page.active_series
     - cache ["nav-event-1", events_page, event_children, active_event_series] do
       = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series
 
