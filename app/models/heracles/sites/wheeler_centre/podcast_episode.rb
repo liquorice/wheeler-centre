@@ -12,12 +12,12 @@ module Heracles
               {name: :recording_date, type: :date_time, label: "Recording date"},
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
-              {name: :video, type: :asset, asset_file_type: :video},
-              {name: :audio, type: :asset, asset_file_type: :audio},
+              {name: :video, type: :assets, asset_file_type: :video},
+              {name: :audio, type: :assets, asset_file_type: :audio},
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_summary, type: :text},
-              {name: :itunes_image, type: :asset, asset_file_type: :image},
+              {name: :itunes_image, type: :assets, asset_file_type: :image},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark episode as explicit?"},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
@@ -74,41 +74,42 @@ module Heracles
 
         def audio_version
           if fields[:audio].data_present?
-            fields[:audio].asset.versions.include?(:audio_mp3) ? :audio_mp3 : :original
+            fields[:audio].assets.first.versions.include?("audio_mp3") ? "audio_mp3" : "original"
           end
         end
 
         def audio_result
           if fields[:audio].data_present?
-            fields[:audio].asset.results[audio_version.to_s]
+            fields[:audio].assets.first.results[audio_version.to_s]
           end
         end
 
         def audio_url
           if fields[:audio].data_present?
-            fields[:audio].asset.send(:"#{audio_version}_url")
+            fields[:audio].assets.first.send(:"#{audio_version}_url")
           end
         end
 
         def video_version
           if fields[:video].data_present?
-            fields[:video].asset.versions.include?(:ipad_high) ? :ipad_high : :original
+            fields[:video].assets.first.versions.include?(:ipad_high) ? :ipad_high : :original
           end
         end
 
         def video_result
           if fields[:video].data_present?
-            fields[:video].asset.results[video_version.to_s]
+            fields[:video].assets.first.results[video_version.to_s]
           end
         end
 
         def video_url
           if fields[:video].data_present?
-            fields[:video].asset.send(:"#{video_version}_url")
+            fields[:video].assets.first.send(:"#{video_version}_url")
           end
         end
 
         searchable do
+
           string :topic_ids, multiple: true do
             topics_with_ancestors.map(&:id)
           end
@@ -143,13 +144,13 @@ module Heracles
 
           string :audio_id do
             if fields[:audio].data_present?
-              fields[:audio].asset.id
+              fields[:audio].assets.first.id
             end
           end
 
           string :video_id do
             if fields[:video].data_present?
-              fields[:video].asset.id
+              fields[:video].assets.first.id
             end
           end
 

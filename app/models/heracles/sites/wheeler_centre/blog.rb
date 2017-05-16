@@ -22,16 +22,26 @@ module Heracles
         private
 
         def search_posts(options={})
-          Sunspot.search(BlogPost) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
+          BlogPost.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .children_of(Blog.find(id))
+          .order("fields_data->'publish_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 6)
 
-            order_by :publish_date, :desc
+          # Sunspot.search(BlogPost) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :hidden, false
 
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 6
-          end
+          #   order_by :publish_date, :desc
+
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 6
+          # end
         end
       end
     end

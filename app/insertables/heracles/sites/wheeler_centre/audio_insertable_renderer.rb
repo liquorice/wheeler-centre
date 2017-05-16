@@ -45,6 +45,29 @@ module Heracles
         end
         helper_method :display_class
 
+        helper_method \
+        def mp3_version
+          find_version_by_mime_type "audio/mpeg"
+        end
+
+        helper_method \
+        def ogg_version
+          find_version_by_mime_type "audio/x-ogg"
+        end
+
+        def find_version_by_mime_type(mime_type)
+          version = nil
+          asset.processed_assets.each do |result|
+            if result.data["mime"] == mime_type
+              version = {
+                name: result["name"],
+                version: result
+              }
+            end
+          end
+          version
+        end
+
       end
     end
   end

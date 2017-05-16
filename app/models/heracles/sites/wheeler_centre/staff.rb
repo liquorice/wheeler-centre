@@ -23,6 +23,7 @@ module Heracles
         end
 
         searchable do
+
           string :topic_ids, multiple: true do
             topics_with_ancestors.map(&:id)
           end

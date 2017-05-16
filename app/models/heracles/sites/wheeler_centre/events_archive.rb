@@ -25,17 +25,29 @@ module Heracles
         end
 
         def search_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :parent_id, events_index.id
-            with :published, true
-            with :hidden, false
-            with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
-            without :start_date_time, nil
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false,
+          )
+          .children_of(Events.find(events_index.id))
+          .where("fields_data->'start_date'->>'value' IS NOT ?", nil)
+          .where("fields_data->'start_date'->>'value' <= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 36)
 
-            order_by :start_date_time, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 36)
-          end
+          # Sunspot.search(Event) do
+          #   with :site_id, site.id
+          #   with :parent_id, events_index.id
+          #   with :published, true
+          #   with :hidden, false
+          #   with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+          #   without :start_date_time, nil
+
+          #   order_by :start_date_time, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 36)
+          # end
         end
       end
     end

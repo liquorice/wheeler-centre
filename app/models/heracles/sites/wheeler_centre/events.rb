@@ -37,28 +37,50 @@ module Heracles
         private
 
         def search_upcoming_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
-            with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+          Event.where(
+            site_id: site.id,
+            hidden: false,
+            published: true
+          )
+          .children_of(self)
+          .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' ASC")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 1000)
 
-            order_by :start_date_time, :asc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 1000)
-          end
+          # Sunspot.search(Event) do
+          #   # with :site_id, site.id
+          #   # with :parent_id, id
+          #   # with :published, true
+          #   # with :hidden, false
+          #   with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+
+          #   order_by :start_date_time, :asc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 1000)
+          # end
         end
 
         def search_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .children_of(Event.find(id))
+          .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 1000)
 
-            order_by :start_date_time, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)
-          end
+          # Sunspot.search(Event) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :start_date_time, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 50)
+          # end
         end
       end
     end
