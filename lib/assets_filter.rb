@@ -12,10 +12,10 @@ module Heracles
             asset_id = link_node["data-asset-id"]
             asset = find_asset(asset_id)
             if asset
-              asset_version = asset.has_version?(:asset_link_version) ? :asset_link_version : :original
+              asset_version = asset.versions.keys.include?("asset_link_version") ? "asset_link_version" : "original"
 
               link_node["href"] = track_event(
-                asset.results[asset_version]["url"],
+                asset.versions[asset_version].first["url"],
                 {
                   title: (asset.title.blank?) ? asset.file_name : asset.title,
                   category: "asset",
