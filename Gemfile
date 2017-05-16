@@ -4,19 +4,20 @@ source "https://rubygems.org"
 ruby "2.1.6"
 
 # Rails
-gem "rails", "~> 4.1.0"
+gem "rails", "~> 4.2.0"
 
 # Database drivers
 gem "pg"
 
 # Heracles
-gem "heracles", "~> 1.0.6", source: "https://gem.fury.io/icelab/"
+gem "icelab-heracles", "2.0.0.beta52", source: "https://gem.fury.io/icelab/", require: "heracles"
 
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
 # place to require sunspot-queue (but we can't use github dependencies in its
 # gemspec).
 gem "sunspot-queue", github: "timriley/sunspot-queue", ref: "649af734420db481fd0421dde152bbb9e7499bde"
+gem "sunspot_rails", "2.1.1"
 
 # Background worker
 gem "que"
@@ -102,7 +103,7 @@ end
 group :test, :development do
   gem "dotenv", github: "bkeepers/dotenv"
   gem "dotenv-rails"
-  gem "rspec-rails", "~> 3.0.0.beta2"
+  gem "rspec-rails", "~> 3.5.0"
 end
 
 # Development tools
@@ -115,7 +116,7 @@ group :development do
   # gem "rack-mini-profiler"
   gem "spring"
   gem "spring-commands-rspec"
-  gem "sunspot_solr"
+  gem "sunspot_solr", "2.1.1"
 
   # Guard et al
   gem "guard", "~> 2"
