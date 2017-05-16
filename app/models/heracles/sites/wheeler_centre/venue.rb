@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :assets, asset_file_type: :image},
               {name: :address, type: :text, hint: "Not displayed on site, used for address lookups on Google Maps"},
               {name: :address_formatted, type: :content, hint: "Nicely formatted for display on the site"},
               {name: :phone_number, type: :text},
@@ -43,15 +43,25 @@ module Heracles
         private
 
         def search_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :venue_id, id
-            with :published, true
-            with :hidden, false
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false,
+          )
+          .where("(fields_data#>'{venue, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: id)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 14)
 
-            order_by :start_date, :desc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 14
-          end
+          # Sunspot.search(Event) do
+          #   with :site_id, site.id
+          #   with :venue_id, id
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :start_date, :desc
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 14
+          # end
         end
 
       end

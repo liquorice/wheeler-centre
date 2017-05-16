@@ -37,15 +37,25 @@ module Heracles
         private
 
         def search_venues
-          Sunspot.search(Venues) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
+          Venues.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .children_of(Venues.find(id))
+          .order(:title)
+          .page(1)
+          .per(1000)
 
-            order_by :title, :asc
-            paginate(page: 1, per_page: 1000)
-          end
+          # Sunspot.search(Venues) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :title, :asc
+          #   paginate(page: 1, per_page: 1000)
+          # end
         end
       end
     end

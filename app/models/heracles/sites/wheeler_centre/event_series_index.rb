@@ -38,23 +38,29 @@ module Heracles
         private
 
         def search_event_series(options={})
-          Sunspot.search(EventSeries) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
+          active = options[:active]
+          EventSeries.where("fields_data->'archived'->>'value' != ?", "#{active}")
+          .order(:title)
+          .page(1)
+          .per(1000)
+          .select{ |res| res.events.present? }
+          # Sunspot.search(EventSeries) do
+          #   # with :site_id, site.id
+          #   # with :parent_id, id
+          #   # with :published, true
+          #   # with :hidden, false
 
-            if options[:active] == true
-              with :archived, false
-              without :event_ids, nil
-            elsif options[:active] == false
-              without :archived, false
-              without :event_ids, nil
-            end
+          #   if options[:active] == true
+          #     with :archived, false
+          #     without :event_ids, nil
+          #   elsif options[:active] == false
+          #     without :archived, false
+          #     without :event_ids, nil
+          #   end
 
-            order_by :title, :asc
-            paginate(page: 1, per_page: 1000)
-          end
+          #   order_by :title, :asc
+          #   paginate(page: 1, per_page: 1000)
+          # end
         end
       end
     end

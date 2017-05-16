@@ -7,7 +7,7 @@ module Heracles
             fields: [
               {name: :first_name, type: :text},
               {name: :last_name, type: :text},
-              {name: :portrait, type: :asset, asset_file_type: :image},
+              {name: :portrait, type: :assets, asset_file_type: :image},
               {name: :intro, type: :content},
               {name: :biography, type: :content},
               {name: :url, type: :text},
@@ -103,6 +103,7 @@ module Heracles
         ### Searchable
 
         searchable do
+
           string :title do
             title
           end
@@ -171,31 +172,55 @@ module Heracles
         private
 
         def search_upcoming_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :presenter_ids, id
-            with :published, true
-            with :hidden, false
-            with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
-            without :start_date_time, nil
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("(fields_data#>'{presenters, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: id)
+          .where("fields_data->'start_date'->>'value' IS NOT ?", nil)
+          .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
 
-            order_by :start_date, :asc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 18
-          end
+          # Sunspot.search(Event) do
+          #   with :site_id, site.id
+          #   with :presenter_ids, id
+          #   with :published, true
+          #   with :hidden, false
+          #   with(:start_date_time).greater_than_or_equal_to(Time.zone.now.beginning_of_day)
+          #   without :start_date_time, nil
+
+          #   order_by :start_date, :asc
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 18
+          # end
         end
 
         def search_past_events(options={})
-          Sunspot.search(Event) do
-            with :site_id, site.id
-            with :presenter_ids, id
-            with :published, true
-            with :hidden, false
-            with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
-            without :start_date_time, nil
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("(fields_data#>'{presenters, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: id)
+          .where("fields_data->'start_date'->>'value' IS NOT ?", nil)
+          .where("fields_data->'start_date'->>'value' <= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
 
-            order_by :start_date, :desc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 1000
-          end
+          # Sunspot.search(Event) do
+          #   with :site_id, site.id
+          #   with :presenter_ids, id
+          #   with :published, true
+          #   with :hidden, false
+          #   with(:start_date_time).less_than(Time.zone.now.beginning_of_day)
+          #   without :start_date_time, nil
+
+          #   order_by :start_date, :desc
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 1000
+          # end
         end
 
         # Topics with their ancestors parents for search purposes
