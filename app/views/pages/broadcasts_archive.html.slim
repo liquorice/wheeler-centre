@@ -30,21 +30,21 @@
         .column-full
           - if params[:page].present?
             .pagination-top
-              = paginate recordings.results, outer_window: 4
+              = paginate recordings, outer_window: 4
             .pagination-context.pagination-context--top
               ' Page
               = (params[:page] || 1)
               em &nbsp;of&nbsp;
-              = recordings.results.total_pages
-          - if recordings.results.present?
+              = recordings.total_pages
+          - if recordings.present?
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              - recordings.results.each do |post|
+              - recordings.each do |post|
                 = render "partials/recording_snap_block", post: post, show_type: true
-            - if recordings.results.total_pages > 1
+            - if recordings.total_pages > 1
               .pagination-context.pagination-context--bottom
                 ' Page
                 = (params[:page] || 1)
                 em &nbsp;of&nbsp;
-                = recordings.results.total_pages
+                = recordings.total_pages
               .pagination-bottom
-                = paginate recordings.results, outer_window: 4
+                = paginate recordings, outer_window: 4

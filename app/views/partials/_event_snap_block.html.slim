@@ -3,7 +3,7 @@
 - aspect = aspect || :square
 - block_classnames = []
 - if post.fields[:thumbnail_image].data_present?
-  - image = post.fields[:thumbnail_image].asset
+  - image = post.fields[:thumbnail_image].assets.first
 - elsif post.promo_image
   - image = post.promo_image
 / State classes

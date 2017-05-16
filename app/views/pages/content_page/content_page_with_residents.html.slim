@@ -32,7 +32,7 @@
                 .resident-orgs-list-item
                   - if resident.fields[:logo].data_present?
                     .resident-orgs-list-item__logo
-                      img src=resident.fields[:logo].asset.content_small_url
+                      img src=resident.fields[:logo].assets.first.content_small_url
                   h2.resident-orgs-list-item__title == markdown_line resident.title
                   - if resident.fields[:description].data_present?
                     .resident-orgs-list-item__description.copy

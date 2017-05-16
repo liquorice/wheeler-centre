@@ -16,7 +16,7 @@
       h1.content-page__title == widont_format markdown_line page.title
   .content-block
     .section--normal.copy
-      = render "partials/image", asset: page.fields[:hero_image].asset, options: {display_class: "figure__display--default figure__image--landscape"}
+      = render "partials/image", asset: page.fields[:hero_image].assets.first, options: {display_class: "figure__display--default figure__image--landscape"}
     = render_content_in_sections page.fields[:body]
     - if page.fields[:listen].data_present?
       .column-mid
@@ -71,7 +71,7 @@
                 .criticism-now-event-item__image
                   - if event.fields[:hero_image].data_present?
                     a href=event.absolute_url
-                      image src=event.fields[:hero_image].asset.content_thumbnail_url alt="Hero image for #{event.title}"
+                      image src=event.fields[:hero_image].assets.first.content_thumbnail_url alt="Hero image for #{event.title}"
                 .criticism-now-event-item__details
                   h3.criticism-now-event-item__title
                     a href=event.absolute_url = event.title

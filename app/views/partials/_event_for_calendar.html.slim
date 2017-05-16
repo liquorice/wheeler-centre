@@ -1,5 +1,5 @@
 - if event.fields[:thumbnail_image].data_present?
-  - image = event.fields[:thumbnail_image].asset
+  - image = event.fields[:thumbnail_image].assets.first
 - elsif event.promo_image
   - image = event.promo_image
 - first_topic = event.fields[:topics].pages.first if event.fields[:topics].data_present?

@@ -1,6 +1,6 @@
-- cache ["presenter-horizontal-1", presenter, presenter.fields[:portrait].asset] do
+- cache ["presenter-horizontal-1", presenter, presenter.fields[:portrait].assets.first] do
   - if presenter.fields[:portrait].data_present?
-    - image = presenter.fields[:portrait].asset
+    - image = presenter.fields[:portrait].assets.first
 
   .event-presenter.event-presenter--horizontal.clearfix itemscope=true itemtype="http://data-vocabulary.org/Person"
     - if image
