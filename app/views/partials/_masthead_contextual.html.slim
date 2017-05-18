@@ -22,7 +22,7 @@
                 a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=event.absolute_url
                   - if image
                     span.upcoming-events__image-container
-                      / img.upcoming-events__image alt="" src=image.content_thumbnail_url
+                      img.upcoming-events__image alt="" src=image.content_thumbnail_url
                   span.upcoming-events__item-text-container.clearfix
                     time.upcoming-events__item-date datetime=l(event.fields[:start_date].value, format: :rfc_3339) = l event.fields[:start_date].value_in_time_zone, format: :medium_date
                     - if event.series
