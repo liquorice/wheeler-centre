@@ -13,26 +13,6 @@ module Heracles
         end
 
         searchable do
-          # From old Heracles core
-          string :page_type
-
-          text :title, boost: 2.0
-
-          string :tags, multiple: true do
-            tag_list.to_a
-          end
-
-          boolean :published
-          boolean :hidden
-          boolean :locked
-
-          string :collection_id
-          string :parent_id
-          string :site_id
-
-          time :created_at
-          time :updated_at
-          # From old Heracles core
 
           string :topic_ids, multiple: true do
             topics_with_ancestors.map(&:id)

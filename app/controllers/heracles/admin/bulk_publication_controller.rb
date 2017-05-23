@@ -8,7 +8,7 @@ module Heracles
 
       def index
         if query_defined?
-          @search           = BulkPublicationSearch.new(tags: params[:q], site_id: current_site.id).results
+          @search           = BulkPublicationSearch.new(tags: params[:q], site_id: site.id).results
           @paginated_search = @search.page(params[:page]).per(40)
         end
       end
@@ -18,7 +18,7 @@ module Heracles
           status = params.has_key?(:publish) ? "publish" : "unpublish"
           action = BulkPublicationAction.new(
             user_id: current_user.id,
-            site_id: current_site.id,
+            site_id: site.id,
             tags: params[:q],
             action: status
           )
@@ -41,7 +41,7 @@ module Heracles
       end
 
       def assign_bulk_publication_actions_in_progress
-        @bulk_publication_actions_in_progress = BulkPublicationAction.in_progress(current_site.id, current_user.id)
+        @bulk_publication_actions_in_progress = BulkPublicationAction.in_progress(site.id, current_user.id)
       end
 
       def assign_bulk_publication_actions_completed
