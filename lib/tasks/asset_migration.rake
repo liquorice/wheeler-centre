@@ -4,7 +4,7 @@ namespace :heracles do
   namespace :assets do
     desc "Convert legacy assets to a new format"
     task :new_convert_legacy => :environment do
-      assets = Heracles::Asset.all.select{ |a| a.processed_assets.empty? }
+      assets = Heracles::Asset.all
       bar    = ProgressBar.new(assets.size)
       p "Convert #{ActionController::Base.helpers.pluralize(assets.size, "asset")}..."
       assets.each do |asset|
