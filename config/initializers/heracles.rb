@@ -43,7 +43,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "admin_thumbnail" => {
       "robot" => "/image/resize",
-      "use" => "original",
+      "use" => ":original",
       "width" => 400,
       "height" => 250,
       "resize_strategy" => "fit",
@@ -67,7 +67,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     "store_original" => {
       "robot" => "/s3/store",
       "use" => [
-        "original"
+        ":original"
       ],
       "key" => ENV["ASSETS_AWS_ACCESS_KEY_ID"],
       "secret" => ENV["ASSETS_AWS_SECRET_ACCESS_KEY"],
@@ -80,7 +80,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     "store_youtube" => {
       "robot" => "/youtube/store",
       "use" => [
-        "original"
+        ":original"
       ],
       "credentials" => "youtube_auth_1479859234",
       "title" => "${file.name}",
