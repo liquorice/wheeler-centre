@@ -10,11 +10,11 @@ cache ["podcast-series-1", page, cache_time] do
   end
 
   type = (params[:type] == "video") ? "video" : "audio"
-  episodes = page.episodes(type: type, per_page: 25).results
+  episodes = page.episodes(type: type, per_page: 25)
   series_image_url = if page.fields[:itunes_image].data_present?
     version = :original
-    version = :itunes if page.fields[:itunes_image].asset.versions.include?(:itunes)
-    page.fields[:itunes_image].asset.send(:"#{version}_url")
+    version = :itunes if page.fields[:itunes_image].assets.first.versions.include?(:itunes)
+    page.fields[:itunes_image].assets.first.send(:"#{version}_url")
   end
 
   xml.instruct! :xml, :version => "1.0"
@@ -41,13 +41,13 @@ cache ["podcast-series-1", page, cache_time] do
       xml.itunes :image, href: series_image_url if series_image_url.present?
       if episodes.present?
         episodes.each do |episode|
-          cache ["podcast-episode-9", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].asset] do
+          cache ["podcast-episode-9", page, episode, episode.fields[:people].pages, type, episode.audio_result, episode.video_result, episode.fields[:itunes_image].assets.first] do
             # Let the series explicit value override episode one
             explicit = episode.fields[:explicit].value || page.fields[:explicit].value
             episode_image_url = if episode.fields[:itunes_image].data_present?
               version = :original
-              version = :itunes_url if episode.fields[:itunes_image].asset.versions.include?(:itunes_url)
-              episode.fields[:itunes_image].asset.send(:"#{version}_url")
+              version = :itunes_url if episode.fields[:itunes_image].assets.first.versions.include?(:itunes_url)
+              episode.fields[:itunes_image].assets.first.send(:"#{version}_url")
             end
             xml.item do
               xml.title episode.title
@@ -82,8 +82,8 @@ cache ["podcast-series-1", page, cache_time] do
                 })
                 xml.enclosure url: tracking_url, length: episode.video_result["size"], type: "video/m4a"
               else
-                duration = if episode.audio_result["meta"] && episode.audio_result["meta"]["duration"].present?
-                  episode.audio_result["meta"]["duration"]
+                duration = if episode.audio_result.first["meta"] && episode.audio_result.first["meta"]["duration"].present?
+                  episode.audio_result.first["meta"]["duration"]
                 else
                   0
                 end
@@ -95,7 +95,7 @@ cache ["podcast-series-1", page, cache_time] do
                   format: "audio",
                   redirect: 301
                 })
-                xml.enclosure url: tracking_url, length: episode.audio_result["size"], type: "audio/mpeg"
+                xml.enclosure url: tracking_url, length: episode.audio_result.first["size"], type: "audio/mpeg"
               end
             end
           end
