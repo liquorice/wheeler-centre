@@ -31,7 +31,7 @@
                   .criticism-now-event-item__image
                     - if book.fields[:cover_image].data_present?
                       a href=book.absolute_url
-                        image src=book.fields[:cover_image].asset.content_thumbnail_url alt="Hero image for #{book.title}"
+                        image src=book.fields[:cover_image].assets.first.content_thumbnail_url alt="Hero image for #{book.title}"
                   .criticism-now-event-item__details
                     h3.criticism-now-event-item__title
                       a href=book.absolute_url = book.title

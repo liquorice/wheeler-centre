@@ -20,14 +20,23 @@ module Heracles
         private
 
         def search_presenters
-          Sunspot.search(Person) do
-            with :site_id, site.id
-            with :published, true
-            with :hidden, false
+          Person.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(1)
+          .per(1000)
 
-            order_by :start_date_time, :asc
-            paginate(page: 1, per_page: 1000)
-          end
+          # Sunspot.search(Person) do
+          #   with :site_id, site.id
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :start_date_time, :asc
+          #   paginate(page: 1, per_page: 1000)
+          # end
         end
       end
     end

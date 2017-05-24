@@ -36,7 +36,7 @@
       .column-wide
         .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
           - page.fields[:staff_members].pages.each do |person|
-            - image = person.fields[:portrait].asset
+            - image = person.fields[:portrait].assets.first
             - cache ["staff-staff-1", person, image] do
               .snap-block.person-summary__block
                 a.person-summary__anchor.clearfix href=person.absolute_url
@@ -61,7 +61,7 @@
       .column-wide
         .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 6, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
           - page.fields[:board_members].pages.each do |person|
-            - image = person.fields[:portrait].asset
+            - image = person.fields[:portrait].assets.first
             - cache ["staff-board-1", person, image] do
               .snap-block.person-summary__block
                 a.person-summary__anchor.clearfix href=person.absolute_url

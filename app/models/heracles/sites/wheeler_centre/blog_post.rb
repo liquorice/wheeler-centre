@@ -7,8 +7,8 @@ module Heracles
           {
             fields: [
               # Image
-              {name: :hero_image, type: :asset, asset_file_type: :image},
-              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "Set this to override the above hero image in listings"},
+              {name: :hero_image, type: :assets, asset_file_type: :image},
+              {name: :thumbnail_image, type: :assets, asset_file_type: :image, hint: "Set this to override the above hero image in listings"},
               # Content
               {name: :content_info, type: :info, text: "<hr/>"},
               {name: :summary, type: :content},
@@ -66,91 +66,60 @@ module Heracles
         end
 
         def authors_posts
-          search_posts_by_author({per_page: 4}).results
+          search_posts_by_author({per_page: 4})
         end
 
         def related_posts(options={})
           options[:per_page] = 6 || options[:per_page]
-          posts = search_posts_by_topic({per_page: options[:per_page]}).results
+          posts = search_posts_by_topic({per_page: options[:per_page]})
           # Try and find posts based on topics
           if posts.length < options[:per_page]
             additional_total = options[:per_page] - posts.length
             additional = search_posts_by_author({per_page: additional_total})
-            posts = posts + additional.results
+            posts = posts + additional
           end
           posts
-        end
-
-        searchable do
-          string :id do |page|
-            page.id
-          end
-
-          string :author_ids, multiple: true do
-            fields[:authors].pages.map(&:id)
-          end
-
-          string :author_titles, multiple: true do
-            fields[:authors].pages.map(&:title)
-          end
-
-          text :summary do
-            fields[:summary].value
-          end
-
-          text :body do
-            fields[:body].value
-          end
-
-          string :author_ids, multiple: true do
-            fields[:authors].pages.map(&:id)
-          end
-
-          string :topic_ids, multiple: true do
-            topics_with_ancestors.map(&:id)
-          end
-
-          string :topic_titles, multiple: true do
-            topics_with_ancestors.map(&:title)
-          end
-
-          string :tag_list, multiple: true do
-            tags.map(&:name)
-          end
-
-          time :publish_date do
-            fields[:publish_date].value
-          end
-
-          time :date_sort_field do
-            fields[:publish_date].value
-          end
-
         end
 
         private
 
         def search_posts_by_author(options={})
-          Sunspot.search(BlogPost) do
-            without :id, id
-            with :site_id, site.id
-            with :author_ids, fields[:authors].pages.map(&:id)
-            with :published, true
-            with :hidden, false
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          BlogPost.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("fields_data->'authors'->>'values' = ? ", fields[:authors].pages.map(&:id))
+          .page(options[:page] || 1).per(options[:per_page] || 18)
+          # Sunspot.search(BlogPost) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :author_ids, fields[:authors].pages.map(&:id)
+          #   with :published, true
+          #   with :hidden, false
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         def search_posts_by_topic(options={})
-          Sunspot.search(BlogPost) do
-            without :id, id
-            with :site_id, site.id
-            with :topic_ids, fields[:topics].pages.map(&:id)
-            with :published, true
-            with :hidden, false
 
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          BlogPost.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("(fields_data#>'{topics, page_ids}')::jsonb ?| ARRAY[:topics]", topics: fields[:topics].pages.map(&:id))
+          .page(options[:page] || 1).per(options[:per_page] || 18)
+
+          # Sunspot.search(BlogPost) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :topic_ids, fields[:topics].pages.map(&:id)
+          #   with :published, true
+          #   with :hidden, false
+
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         # Topics with their ancestors parents for search purposes

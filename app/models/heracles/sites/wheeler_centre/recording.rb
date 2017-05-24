@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :assets, asset_file_type: :image},
               {name: :description, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
@@ -15,9 +15,9 @@ module Heracles
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
               {name: :youtube_video, type: :external_video},
-              {name: :video_poster_image, type: :asset, asset_file_type: :image},
-              {name: :video, type: :asset, asset_file_type: :video, editor_columns: 6},
-              {name: :audio, type: :asset, asset_file_type: :audio, editor_columns: 6},
+              {name: :video_poster_image, type: :assets, asset_file_type: :image},
+              {name: :video, type: :assets, asset_file_type: :video, editor_columns: 6},
+              {name: :audio, type: :assets, asset_file_type: :audio, editor_columns: 6},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
               {name: :people, type: :associated_pages, page_type: :person},
@@ -53,7 +53,7 @@ module Heracles
 
         def youtube_thumbnail_url
           if fields[:youtube_video].data_present?
-            if Rails.application.config.use_ssl_for_asset_urls && fields[:youtube_video].embed["thumbnail_url"]
+            if Heracles::Sites::WheelerCentre.configuration.use_ssl_for_asset_urls && fields[:youtube_video].embed["thumbnail_url"]
               fields[:youtube_video].embed["thumbnail_url"].gsub("http://", "https://")
             else
               fields[:youtube_video].embed["thumbnail_url"]
@@ -93,16 +93,17 @@ module Heracles
 
         def related_recordings(options={})
           options[:per_page] = 6 || options[:per_page]
-          recordings = search_recordings_by_presenters({per_page: options[:per_page]}).results
+          recordings = search_recordings_by_presenters({per_page: options[:per_page]})
           # Try and find recordings based on topics
           if recordings.length < options[:per_page]
             additional_total = options[:per_page] - recordings.length
             additional = search_recordings_by_topic({per_page: additional_total})
-            recordings = recordings + additional.results
+            recordings = recordings + additional
           end
         end
 
         searchable do
+
           string :id do |page|
             page.id
           end
@@ -167,25 +168,45 @@ module Heracles
         private
 
         def search_recordings_by_presenters(options={})
-          Sunspot.search(Recording) do
-            without :id, id
-            with :site_id, site.id
-            with :person_ids, fields[:people].pages.map(&:id)
-            with :published, true
-            with :hidden, false
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          Recording.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where.not(id: id)
+          .where("(fields_data#>'{people, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: fields[:people].pages.map(&:id))
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
+
+          # Sunspot.search(Recording) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :person_ids,
+          #   with :published, true
+          #   with :hidden, false
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         def search_recordings_by_topic(options={})
-          Sunspot.search(Recording) do
-            without :id, id
-            with :site_id, site.id
-            with :topic_ids, fields[:topics].pages.map(&:id)
-            with :published, true
-            with :hidden, false
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          Recording.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where.not(id: id)
+          .where("(fields_data#>'{topics, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: fields[:people].pages.map(&:id))
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
+
+          # Sunspot.search(Recording) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :topic_ids, fields[:topics].pages.map(&:id)
+          #   with :published, true
+          #   with :hidden, false
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         # Topics with their ancestors parents for search purposes

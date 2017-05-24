@@ -18,7 +18,7 @@
         h1.content-page__title == widont_format markdown_line page.title
     .content-block
       .section--normal.copy
-        = render "partials/image", asset: page.fields[:promo_image].asset, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
+        = render "partials/image", asset: page.fields[:promo_image].assets.first, options: {display_class: "figure__display--right-aligned figure__image--landscape"}
         - if page.fields[:further_reading].data_present?
 
       / FIXME the data here has been imported into the wrong fields blurb <-> review
@@ -30,7 +30,7 @@
             - if page.author.fields[:portrait].data_present?
               .event-presenter__image
                 .event-presenter__image-inner
-                  img src=page.author.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.author.title}"
+                  img src=page.author.fields[:portrait].assets.first.content_thumbnail_url alt="Portrait of #{page.author.title}"
             h3.event-presenter__title= page.author.title
             .event-presenter__intro.copy
               = render_content page.author.fields[:biography]

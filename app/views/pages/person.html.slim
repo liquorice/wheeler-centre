@@ -4,7 +4,7 @@
 - past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
 
 / Custom meta data
-- open_graph_image = page.fields[:portrait].asset if page.fields[:portrait].data_present?
+- open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
 - open_graph_summary = strip_html(render_content(page.fields[:intro]) + render_content(page.fields[:body]), "")
 - set_meta_tags({ \
     description: open_graph_summary, \
@@ -12,9 +12,9 @@
       description: open_graph_summary,
       image: { \
         url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
       } \
     } \
   })
@@ -33,10 +33,10 @@
     .column-wrapper
       .column-wide
         - if page.fields[:portrait].data_present?
-          - cache ["person-image-1", page.fields[:portrait].asset] do
+          - cache ["person-image-1", page.fields[:portrait].assets.first] do
             .person__image
               .person__image-inner.clearfix
-                img itemprop="photo" src=page.fields[:portrait].asset.content_thumbnail_url alt="Portrait of #{page.title}"
+                img itemprop="photo" src=page.fields[:portrait].assets.first.content_thumbnail_url alt="Portrait of #{page.title}"
         - cache ["person-title-1", page] do
           h1.person__title itemprop="name"
             == widont_format markdown_line page.title
@@ -53,7 +53,7 @@
                   a.person__social-links__link href="#{page.fields[:url]}"
                     = page.fields[:url].to_s.sub(/^https?\:\/\/(www.)?/,'')
                     span.hide-text #{page.title}‘s website
-        .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.results.total_pages}"
+        .person__bio-and-events.clearfix class="person__bio-and-events--#{upcoming_events.total_pages}"
           - cache ["person-bio-1", page] do
             .person__bio
               - if page.fields[:intro].data_present?
@@ -66,34 +66,34 @@
               - elsif page.fields[:staff_bio].data_present?
                 .person__body
                   = render_content_in_sections page.fields[:staff_bio]
-              - if page.fields[:portrait].data_present? && page.fields[:portrait].asset.attribution.present?
+              - if page.fields[:portrait].data_present? && page.fields[:portrait].assets.first.attribution.present?
                 .person__image-attribution
-                  | #{page.fields[:portrait].asset.attribution}
-          - if upcoming_events.results.total_pages > 0
+                  | #{page.fields[:portrait].assets.first.attribution}
+          - if upcoming_events.total_pages > 0
             .person__upcoming-events
               .person__upcoming-events-grid.clearfix
                 .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 2, "widescreen-wide" => 2, tablet: 1, "phone-wide" => 2, phone: 2 }}.to_json
-                  - upcoming_events.results.each do |event|
+                  - upcoming_events.each do |event|
                     = render "partials/event_snap_block", post: event, show_type: true
 
     / Do a slightly odd dance based on the number of past events for each person
     / If we have between 6 and 4 events ...
-    - if past_events.total <= 6 && past_events.total >= 2
+    - if past_events.total_count <= 6 && past_events.total_count >= 2
       .column-wrapper
         .column-full
           .person__past-events.gradient-top-down
             .section-header
               h2 Past events
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              - past_events.results.each do |post|
+              - past_events.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
     / We just split them into three groups and let grouper organise them for us ¯\_(ツ)_/¯
     / Past events and other media types
-    - if (past_events.total > 6 || past_events.total < 2) || blog_posts.present?
+    - if (past_events.total_count > 6 || past_events.total_count < 2) || blog_posts.present?
       .column-wrapper
         .column-mid
           .person__related.clearfix data-view-grouper={elementsSelector: ".person__related-column", perGroup: { default: 2 }}.to_json
-            - if blog_posts.present? || past_events.results.total_pages > 0
+            - if blog_posts.present? || past_events.total_pages > 0
               / Blog posts
               - if blog_posts.present?
                 .person__related-column
@@ -111,13 +111,13 @@
                                   time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
 
               / Past events
-              - if (past_events.total > 6 || past_events.total < 2) && past_events.results.total_pages > 0
+              - if (past_events.total_count > 6 || past_events.total_count < 2) && past_events.total_pages > 0
                 .person__related-column
                   .person__past-events
                     .section-header
                       h2 Past events
                     .person__related-list
-                      - past_events.results.each do |event|
+                      - past_events.each do |event|
                         - cache ["person-past-event-item-1", event] do
                           .person__related-block
                             a.person__related-anchor href=event.absolute_url
@@ -127,7 +127,7 @@
     / Recordings
     - if recordings.present?
       .person__recordings
-        .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.results.total_pages > 0)
+        .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.total_pages > 0)
           .section-header
             h2 Recordings
           .column-full

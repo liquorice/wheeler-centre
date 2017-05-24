@@ -6,8 +6,8 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title", hint: "(optional) Set this to override the title in listings"},
-              {name: :promo_image, type: :asset, asset_file_type: :image},
-              {name: :thumbnail_image, type: :asset, asset_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
+              {name: :promo_image, type: :assets, asset_file_type: :image},
+              {name: :thumbnail_image, type: :assets, asset_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
               {name: :body, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
@@ -103,21 +103,21 @@ module Heracles
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
               additional = search_events_by_presenters({per_page: additional_total})
-              events = events + additional.results
+              events = events + additional
             end
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})
-              events = events + additional.results
+              events = events + additional
             end
           else
-            events = search_events_by_presenters({per_page: options[:per_page]}).results
+            events = search_events_by_presenters({per_page: options[:per_page]})
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
               additional = search_events_by_topic({per_page: additional_total})
-              events = events + additional.results
+              events = events + additional
             end
           end
           events
@@ -125,16 +125,17 @@ module Heracles
 
         def promo_image
           if fields[:promo_image].data_present?
-            fields[:promo_image].asset
+            fields[:promo_image].assets.first
           elsif fields[:presenters].data_present?
             primary_presenter = fields[:presenters].pages.first
-            primary_presenter.fields[:portrait].asset if primary_presenter.fields[:portrait].data_present?
+            primary_presenter.fields[:portrait].assets.first if primary_presenter.fields[:portrait].data_present?
           end
         end
 
         ### Searchable attrs
 
         searchable do
+
           string :id do |page|
             page.id
           end
@@ -200,29 +201,51 @@ module Heracles
         private
 
         def search_events_by_presenters(options={})
-          Sunspot.search(Event) do
-            without :id, id
-            with :site_id, site.id
-            with :presenter_ids, fields[:presenters].pages.map(&:id)
-            with :published, true
-            with :hidden, false
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("(fields_data#>'{presenters, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: fields[:presenters].pages.map(&:id))
+          .where.not(id: id)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
 
-            order_by :start_date_time, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          # Sunspot.search(Event) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :presenter_ids, fields[:presenters].pages.map(&:id)
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :start_date_time, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         def search_events_by_topic(options={})
-          Sunspot.search(Event) do
-            without :id, id
-            with :site_id, site.id
-            with :topic_ids, fields[:topics].pages.map(&:id)
-            with :published, true
-            with :hidden, false
+          Event.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .where("(fields_data#>'{topics, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: fields[:topics].pages.map(&:id))
+          .where.not(id: id)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 18)
 
-            order_by :start_date_time, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
-          end
+          # Sunspot.search(Event) do
+          #   without :id, id
+          #   with :site_id, site.id
+          #   with :topic_ids, fields[:topics].pages.map(&:id)
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :start_date_time, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 18)
+          # end
         end
 
         # Topics with their ancestors parents for search purposes

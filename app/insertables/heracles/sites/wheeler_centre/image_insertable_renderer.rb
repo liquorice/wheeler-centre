@@ -32,7 +32,7 @@ module Heracles
         helper_method :large_version_url
 
         def aspect_class
-          if asset.file_meta["aspect_ratio"].present? && asset.file_meta["aspect_ratio"].to_f <= 1.333333
+          if asset.processed_asset.data["versions"]["original"].first["meta"]["aspect_ratio"].present? && asset.processed_asset.data["versions"]["original"].first["meta"]["aspect_ratio"].to_f <= 1.333333
             "figure__image--portrait"
           else
             "figure__image--landscape"
