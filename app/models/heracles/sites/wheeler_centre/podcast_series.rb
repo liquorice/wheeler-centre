@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :assets, asset_file_type: :image},
               {name: :highlight_colour, type: :text, defaults: {value: '#F8F59E'}},
               {name: :intro, type: :content},
               {name: :description, type: :content},
@@ -14,7 +14,7 @@ module Heracles
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_url, type: :text},
-              {name: :itunes_image, type: :asset, asset_file_type: :image},
+              {name: :itunes_image, type: :assets, asset_file_type: :image},
               {name: :itunes_subtitle, type: :text},
               {name: :itunes_summary, type: :text},
               {name: :itunes_description, type: :text},
@@ -68,6 +68,7 @@ module Heracles
         end
 
         searchable do
+
           string :topic_ids, multiple: true do
             topics_with_ancestors.map(&:id)
           end
@@ -96,22 +97,37 @@ module Heracles
         private
 
         def search_podcast_episodes(options={})
-          Sunspot.search(PodcastEpisode) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :hidden, false
-            with :published, true
+          results = PodcastEpisode.where(
+            site_id: site.id,
+            hidden: false,
+            published: true
+          )
+          .children_of(self)
+          .order("fields_data->'publish_date'->>'value' DESC NULLS LAST")
 
-            if options[:type] == "video"
-              without :video_id, nil
-            else
-              without :audio_id, nil
-            end
-
-            order_by :publish_date_time, :desc
-
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 20
+          if options[:type] == "video"
+            results = results.where("fields_data->'video'->>'asset_ids' != '[]'") # without :video_id, nil
+          else
+            results = results.where("fields_data->'audio'->>'asset_ids' != '[]'") # without :audio_id, nil
           end
+          results.page(options[:page] || 1).per(options[:per_page] || 20)
+
+          # Sunspot.search(PodcastEpisode) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :hidden, false
+          #   with :published, true
+
+          #   if options[:type] == "video"
+          #     without :video_id, nil
+          #   else
+          #     without :audio_id, nil
+          #   end
+
+          #   order_by :publish_date_time, :desc
+
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 20
+          # end
         end
 
         def find_parent_categories(category, all_categories)

@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               {name: :intro, type: :content},
-              {name: :campaign_image, type: :asset, asset_file_type: :image},
+              {name: :campaign_image, type: :assets, asset_file_type: :image},
               {name: :description_left, type: :content, disable_insertables: true},
               {name: :description_right, type: :content, disable_insertables: true},
               {name: :list_description, type: :text },
@@ -40,38 +40,64 @@ module Heracles
         private
 
         def search_words(options={})
-          Sunspot.search(CampaignWord) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
-            with :available, true
+          CampaignWord.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .children_of(Page.find(id))
+          .where("fields_data->'is_available'->>'value' = ?", 'true')
+          .order(:title)
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 1000)
+          # Sunspot.search(CampaignWord) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :hidden, false
+          #   with :available, true
 
-            order_by :title, :asc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 1000)
-          end
+          #   order_by :title, :asc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 1000)
+          # end
         end
 
         def find_word(word)
-          Sunspot.search(CampaignWord) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :title, word
-          end
+          CampaignWord.where(
+            site_id: site.id,
+            published: true,
+            hidden: false,
+            title: word
+          )
+          # Sunspot.search(CampaignWord) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :title, word
+          # end
         end
 
         def search_recent_words(options={})
-          Sunspot.search(CampaignWord) do
-            with :site_id, site.id
-            with :parent_id, id
-            with :published, true
-            with :hidden, false
-            with :available, false
+          CampaignWord.where(
+            site_id: site.id,
+            published: true,
+            hidden: false,
+          )
+          .children_of(AdoptAWord.find(id))
+          .where("fields_data->'is_available'->>'value' = ?", 'false')
+          .order(updated_at: :desc)
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 8)
+          # Sunspot.search(CampaignWord) do
+          #   with :site_id, site.id
+          #   with :parent_id, id
+          #   with :published, true
+          #   with :hidden, false
+          #   with :available, false
 
-            order_by :updated_at, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 8)
-          end
+          #   order_by :updated_at, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 8)
+          # end
         end
       end
     end

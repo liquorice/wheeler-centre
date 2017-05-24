@@ -1,4 +1,4 @@
-- posts = page.posts(per_page: 6).results
+- posts = page.posts(per_page: 6)
 - blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
   category: "rss", \
   action: "subscribe", \
@@ -52,7 +52,7 @@
               - if author_posts.present?
                 .snap-block.guest-author
                   - if guest_author.fields[:portrait].data_present?
-                    - image = guest_author.fields[:portrait].asset
+                    - image = guest_author.fields[:portrait].assets.first
                   - cache ["blog-index-author-details-3", guest_author, image] do
                     - if image
                       .author-image

@@ -1,6 +1,6 @@
 / Custom meta data
 - series = page.series
-- open_graph_image = series.fields[:hero_image].asset if series.fields[:hero_image].present?
+- open_graph_image = series.fields[:hero_image].assets.first if series.fields[:hero_image].present?
 - open_graph_summary = strip_html(render_content(page.fields[:body]), "")
 - if open_graph_image.present?
   - set_meta_tags({ \
@@ -10,9 +10,9 @@
         description: open_graph_summary,
         image: { \
           url: (open_graph_image.content_medium_url if open_graph_image), \
-          secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-          width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-          height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+          secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+          width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+          height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
         } \
       } \
     })
@@ -59,11 +59,11 @@
         h1.podcast-episode__title= page.title
 
     .podcast-episode__body.column-wrapper
-      - cache ["podcast-audio-1", page, page.fields[:audio].asset] do
+      - cache ["podcast-audio-1", page, page.fields[:audio].assets.first] do
         - if page.fields[:audio].data_present?
           .recording__audio.recording__audio-podcast
             = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}", tracking_label: "#{page.series.title}, #{page.title}"
-          - asset = page.fields[:audio].asset
+          - asset = page.fields[:audio].assets.first
           - if asset.versions.include?(:audio_mp3)
             .recording__downloads-podcast
               ul.clearfix

@@ -25,15 +25,25 @@ module Heracles
         end
 
         def search_posts(options={})
-          Sunspot.search(BlogPost) do
-            with :site_id, site.id
-            with :parent_id, blog_index.id
-            with :published, true
-            with :hidden, false
+          BlogPost.where(
+            site_id: site.id,
+            published: true,
+            hidden: false
+          )
+          .children_of(Blog.find(blog_index.id))
+          .order(created_at: :desc)
+          .page(options[:page] || 1)
+          .per(options[:per_page] || 36)
 
-            order_by :created_at, :desc
-            paginate(page: options[:page] || 1, per_page: options[:per_page] || 36)
-          end
+          # Sunspot.search(BlogPost) do
+          #   with :site_id, site.id
+          #   with :parent_id, blog_index.id
+          #   with :published, true
+          #   with :hidden, false
+
+          #   order_by :created_at, :desc
+          #   paginate(page: options[:page] || 1, per_page: options[:per_page] || 36)
+          # end
         end
       end
     end

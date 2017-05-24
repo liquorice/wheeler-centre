@@ -1,7 +1,7 @@
 - show_summary = show_summary || false
 - aspect = aspect || :square
 - if post.fields[:hero_image].data_present?
-  - image = post.fields[:hero_image].asset
+  - image = post.fields[:hero_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
 - cache ["event-series-snap-block-1", post, show_type, show_summary, image, first_topic, aspect] do

@@ -8,9 +8,9 @@
       description: open_graph_summary,
       image: { \
         url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.results[:content_medium][:ssl_url] if open_graph_image), \
-        width: (open_graph_image.results[:content_medium][:meta][:width] if open_graph_image), \
-        height: (open_graph_image.results[:content_medium][:meta][:height] if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
       } \
     } \
   })
@@ -236,7 +236,7 @@
             .venue-map__map data-map=true
             .column-wrapper
               .column-wide
-                - venue_image = page.venue.fields[:hero_image].asset if page.venue.fields[:hero_image].data_present?
+                - venue_image = page.venue.fields[:hero_image].assets.first if page.venue.fields[:hero_image].data_present?
                 a.venue-map__panel class=("venue-map__panel--with-image" if venue_image) href=page.venue.absolute_url
                   - if venue_image
                     img.venue-map__panel-image itemprop="photo" src=venue_image.content_thumbnail_url
@@ -259,7 +259,7 @@
                 - if sponsor.fields[:url].data_present?
                   a.event__supporters-item href=sponsor.fields[:url].value
                     - if sponsor.fields[:logo].data_present?
-                      - sponsor_image = sponsor.fields[:logo].asset
+                      - sponsor_image = sponsor.fields[:logo].assets.first
                     - if sponsor_image
                       img.event__supporters-image src=sponsor_image.content_small_url
                     - else
@@ -267,7 +267,7 @@
                 - else
                   .event__supporters-item
                     - if sponsor.fields[:logo].data_present?
-                      - sponsor_image = sponsor.fields[:logo].asset
+                      - sponsor_image = sponsor.fields[:logo].assets.first
                     - if sponsor_image
                       img.event__supporters-image src=sponsor_image.content_small_url
                     - else
@@ -287,8 +287,8 @@
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
               - page.related_events.each do |post|
                 = render "partials/event_snap_block", post: post, show_type: true
-            - if page.series
-              a.block-link href=page.series.absolute_url
-                ' View all the events in
-                em = page.series.title
-                '  &rsaquo;
+            / - if page.series
+            /   a.block-link href=page.series.absolute_url
+            /     ' View all the events in
+            /     em = page.series.title
+            /     '  &rsaquo;

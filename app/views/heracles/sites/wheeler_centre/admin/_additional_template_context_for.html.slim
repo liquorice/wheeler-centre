@@ -1,5 +1,5 @@
 - append :site_navigation_items do
   li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "bulk_publication")
-    = link_to site_bulk_publication_index_path(current_site), class: "site-navigation__link"
+    = link_to site_bulk_publication_index_path(site), class: "site-navigation__link"
       i.fa.fa-copy
       ' Bulk publish

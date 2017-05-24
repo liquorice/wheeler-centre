@@ -1,5 +1,5 @@
 ul.adopt-a-word__words.clearfix
-  - page.words.results.each do |word|
+  - page.words.each do |word|
     - available_class = (word.fields['is_available'].value ? 'adopt-a-word-page__word-available' : 'adopt-a-word-page__word-unavailable')
     li class=["adopt-a-word-page__word-item", available_class] data-view-adopt-word-toggle={toggleSelector: ".adopt-a-word__word-toggle", targetSelector: ".adopt-a-word__definition-wrapper"}.to_json
 

@@ -2,8 +2,8 @@
 
 - if video_poster_image.data_present?
   - version_name = :content_large
-  - version_name = :original unless video_poster_image.asset.versions.include?(:content_large)
-  - poster_image_url = video_poster_image.asset.send(:"#{version_name.to_sym}_url")
+  - version_name = :original unless video_poster_image.assets.first.versions.include?(:content_large)
+  - poster_image_url = video_poster_image.assets.first.send(:"#{version_name.to_sym}_url")
 - else
   - poster_image_url = external_video.embed["thumbnail_url"] if external_video.embed
 

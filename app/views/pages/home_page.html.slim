@@ -36,11 +36,11 @@
     - if page.sorted_banners.present?
       .home__banners.clearfix data-view-home-banners={bannerSelector: ".home-banner"}.to_json
         - page.sorted_banners.each do |banner|
-          - cache ["home-page-banner-3", banner, banner.fields[:banner_image].asset] do
+          - cache ["home-page-banner-3", banner, banner.fields[:banner_image].assets.first] do
             a.home-banner href=banner.fields[:link].value
               .home-banner__shim
               .home-banner__image
-                img src=banner.fields[:banner_image].asset.results[:content_medium_thumbnail][:ssl_url]
+                img src=banner.fields[:banner_image].assets.first.processed_asset.data["versions"]["content_medium_thumbnail"].first["ssl_url"]
               - if banner.fields[:label].data_present? || banner.fields[:category].data_present?
                 .home-banner__detail
                   - if banner.fields[:category].data_present?
@@ -55,9 +55,9 @@
     / Highlights
     .column-wrapper
       .column-full.clearfix
-        - no_user_highlights = (user_highlights.blank? || user_highlights.total == 0)
+        - no_user_highlights = (user_highlights.blank? || user_highlights.total_count == 0)
         - cache ["home-page-highlights-1", page, highlights] do
-          - if highlights.total > 0
+          - if highlights.total_count > 0
             - if no_user_highlights
               - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
             - else
@@ -73,7 +73,7 @@
                   .intro.copy
                     = render_content page.fields[:highlights_primary_content]
               .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
-                - highlights.results.each do |post|
+                - highlights.each do |post|
                   = render "partials/snap_block", post: post, show_type: true
         - cache ["home-page-highlights-1", page, user_highlights] do
           - unless no_user_highlights
@@ -88,7 +88,7 @@
                   .intro.copy
                     = render_content page.fields[:highlights_secondary_content]
               .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }}.to_json
-                - user_highlights.results.each do |post|
+                - user_highlights.each do |post|
                   = render "partials/snap_block", post: post, show_type: true
     / Social mo'
     = render "partials/social_media_wide"
@@ -110,7 +110,7 @@
                 - page.fields[:quotes].pages.each do |quote|
                   - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
                   - if presenter
-                    - image = presenter.fields[:portrait].asset if presenter.fields[:portrait].data_present?
+                    - image = presenter.fields[:portrait].assets.first if presenter.fields[:portrait].data_present?
                   - cache ["home-page-quotes-1", quote, presenter, image] do
                     .home-quote
                       - if image
@@ -131,7 +131,7 @@
                   .intro.copy
                     = render_content page.fields[:writings_content]
             .home__writings-list
-              - user_writings.results.each_with_index do |writing, index|
+              - user_writings.each_with_index do |writing, index|
                 = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
 
     / General content area

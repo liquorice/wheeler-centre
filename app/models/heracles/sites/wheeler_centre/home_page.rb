@@ -78,25 +78,37 @@ module Heracles
         end
 
         def search_by_tag(options={})
-          Sunspot.search(searchable_types.flatten) do
-            with :site_id, site.id
-            with :published, true
-            with :hidden, false
-            with :tag_list, options[:tags] if options[:tags].present?
-            order_by :date_sort_field, :desc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 6
-          end
+          tag_list = options[:tags] if options[:tags].present?
+          result = searchable_types.map do |type|
+            results = type.where(
+              site_id: site.id,
+              published: true,
+              hidden: false
+            ).order("fields_data->'publish_date'->>'value' DESC NULLS LAST", "created_at DESC")
+            results = results.tagged_with(tag_list) if tag_list
+          end.flatten
+
+          Kaminari.paginate_array(result).page(options[:page] || 1).per(options[:per_page] || 6)
+
+          # Sunspot.search(searchable_types.flatten) do
+          #   with :site_id, site.id
+          #   with :published, true
+          #   with :hidden, false
+          #   with :tag_list, options[:tags] if options[:tags].present?
+          #   order_by :date_sort_field, :desc
+          #   paginate page: options[:page] || 1, per_page: options[:per_page] || 6
+          # end
         end
 
         def search_user_writings(options={})
-          Sunspot.search(BlogPost) do
-            with :site_id, site.id
-            with :published, true
-            with :hidden, false
-            with :tag_list, options[:tags] if options[:tags].present?
-            order_by :publish_date, :desc
-            paginate page: options[:page] || 1, per_page: options[:per_page] || 6
-          end
+          tag_list = options[:tags] if options[:tags].present?
+          results = BlogPost.where(
+            site_id: site.id,
+            published: true,
+            hidden: false,
+          ).order("fields_data->'publish_date'->>'value' DESC NULLS LAST")
+          results = results.tagged_with(tag_list) if tag_list
+          results.page(options[:page] || 1).per(options[:per_page] || 6)
         end
       end
     end

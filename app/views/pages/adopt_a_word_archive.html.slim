@@ -13,7 +13,7 @@
 
   .adopt-a-word-archive__words-wrapper.column-wrapper
     .column-wide
-      - if page.words.results.present?
+      - if page.words.present?
         = render "partials/adopt_a_word_words"
 
       .adopt-a-word__archive-button-wrapper

@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               # Image
-              {name: :hero_image, type: :asset, asset_file_type: :image},
+              {name: :hero_image, type: :assets, asset_file_type: :image},
               {name: :body, type: :content},
               # Listen
               {name: :listen, type: :content},
