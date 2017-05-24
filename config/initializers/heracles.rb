@@ -43,7 +43,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "admin_thumbnail" => {
       "robot" => "/image/resize",
-      "use" => ["original"],
+      "use" => "original",
       "width" => 400,
       "height" => 250,
       "resize_strategy" => "fit",
