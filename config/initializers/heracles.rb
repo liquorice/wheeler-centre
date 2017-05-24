@@ -30,7 +30,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
 
   config.transloadit_auth_key = ENV["TRANSLOADIT_AUTH_KEY"]
   config.transloadit_auth_secret = ENV["TRANSLOADIT_AUTH_SECRET"]
-
+  config.transloadit_assembly_steps = {}
   # config.transloadit_assembly_steps = {
   #   "admin_document_thumbnail" => {
   #     "robot" => "/document/thumbs",
