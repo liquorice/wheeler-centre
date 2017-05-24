@@ -80,7 +80,7 @@ module Heracles
 
         def audio_result
           if fields[:audio].data_present?
-            fields[:audio].assets.first.results[audio_version.to_s]
+            fields[:audio].assets.first.processed_asset.data["versions"][audio_version.to_s]
           end
         end
 
@@ -98,7 +98,7 @@ module Heracles
 
         def video_result
           if fields[:video].data_present?
-            fields[:video].assets.first.results[video_version.to_s]
+            fields[:video].assets.first.processed_asset.data["versions"][video_version.to_s]
           end
         end
 
