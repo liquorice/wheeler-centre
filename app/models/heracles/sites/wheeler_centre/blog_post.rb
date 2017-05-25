@@ -89,7 +89,7 @@ module Heracles
             published: true,
             hidden: false
           )
-          .where("fields_data->'authors'->>'values' = ? ", fields[:authors].pages.map(&:id))
+          .where("fields_data->'authors'->>'values' IN (?) ", fields[:authors].pages.map(&:id))
           .page(options[:page] || 1).per(options[:per_page] || 18)
           # Sunspot.search(BlogPost) do
           #   without :id, id
