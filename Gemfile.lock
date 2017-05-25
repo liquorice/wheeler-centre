@@ -329,7 +329,7 @@ GEM
     humanize (1.1.2)
     i18n (0.8.1)
     icalendar (2.4.1)
-    icelab-heracles (2.0.0.beta52)
+    icelab-heracles (2.0.0.beta53)
       acts-as-taggable-on (~> 3.4.3)
       ancestry (~> 2.1.0)
       api-pagination (~> 4.1.0)
@@ -696,7 +696,7 @@ DEPENDENCIES
   html_truncator
   humanize (~> 1.1.0)
   icalendar (~> 2.3)
-  icelab-heracles (= 2.0.0.beta52)!
+  icelab-heracles (= 2.0.0.beta53)!
   iso8601
   jbuilder (~> 2.0)
   launchy
