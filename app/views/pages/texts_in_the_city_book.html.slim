@@ -17,7 +17,7 @@
         h1.content-page__title == widont_format markdown_line page.title
     .content-block
       .section--normal
-        = render "partials/image", asset: page.fields[:cover_image].asset, options: {display_class: "texts-in-they-city__book-cover"}
+        = render "partials/image", asset: page.fields[:cover_image].assets.first, options: {display_class: "texts-in-they-city__book-cover"}
       = render_content_in_sections page.fields[:body]
 
       .section--normal.vpla-book__author
