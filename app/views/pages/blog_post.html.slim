@@ -99,9 +99,6 @@
           .blog-post__sharing
             = render "partials/social_sharing_icons", page: page
 
-  = author_image
-  = author
-  = page.authors_posts
   - cache ["blog-guest-author-1", author, author_image, page.authors_posts] do
     - if show_guest_block
       .blog-post__guest-author.column-wrapper.gradient-top-down
