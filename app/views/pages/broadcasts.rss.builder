@@ -1,4 +1,4 @@
-posts = page.recordings(page: params[:page], per_page: params[:per_page]).results
+posts = page.recordings(page: params[:page], per_page: params[:per_page])
 
 xml.instruct! :xml, :version => "1.0"
 xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc" => "http://purl.org/dc/elements/1.1/", "xmlns:media" => "http://www.rssboard.org/media-rss", "xmlns:wfw" => "http://wellformedweb.org/CommentAPI/", :version => "2.0" do

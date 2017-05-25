@@ -1,4 +1,4 @@
-posts = page.posts(page: params[:page], per_page: params[:per_page]).results
+posts = page.posts(page: params[:page], per_page: params[:per_page])
 
 xml.instruct! :xml, :version => "1.0"
 xml.rss "xmlns:content" => "http://purl.org/rss/1.0/modules/content/", "xmlns:dc" => "http://purl.org/dc/elements/1.1/", "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd", "xmlns:atom" => "http://www.w3.org/2005/Atom", :version => "2.0" do
