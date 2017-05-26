@@ -183,6 +183,16 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "use" => "asset",
       "ffmpeg_stack" => "v2.2.3",
       "preset" => "iphone-high"
+    },
+    "store_youtube" => {
+      "robot" => "/youtube/store",
+      "use" => ["asset"],
+      "credentials" => "youtube_auth_1479859234",
+      "title" => "${file.name}",
+      "description" => "${file.name} description",
+      "category" => "People & Blogs",
+      "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
+      "visibility" => "private"
     }
   }
 end
