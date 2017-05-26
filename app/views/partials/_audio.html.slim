@@ -17,7 +17,7 @@
   - label = title
 - if asset
   .figure.figure__audio.figure__display--default
-    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.processed_assets.first.versions["original"].first.try(:[], "meta").try(:[], "duration") data-audio-player-event-prefix=label
+    .audio-player class="{(playing) ? 'audio-player--playing' : ''} {(loaded) ? 'audio-player--loaded' : ''}" data-view-audio-player=title data-audio-player-duration=asset.versions["audio_mp3"].first.try(:[], "meta").try(:[], "duration") data-audio-player-event-prefix=label
       - if embeded
         h1.asset-embed__header
           a href="http://www.wheelercentre.com"
