@@ -34,7 +34,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
   config.transloadit_assembly_steps = {
     "content_thumbnail_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 300,
       "height" => 300,
       "quality" => 75,
@@ -51,7 +51,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_small_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 480,
       "height" => 720,
       "quality" => 75,
@@ -66,7 +66,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_medium_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 960,
       "height" => 960,
       "quality" => 75,
@@ -81,7 +81,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_large_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 1400,
       "height" => 1400,
       "quality" => 75,
@@ -96,7 +96,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_large_thumbnail_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 1400,
       "height" => 800,
       "quality" => 75,
@@ -113,7 +113,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_medium_thumbnail_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 960,
       "height" => 550,
       "quality" => 75,
@@ -130,7 +130,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "content_small_thumbnail_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 480,
       "height" => 274,
       "quality" => 75,
@@ -147,7 +147,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "itunes_resized" => {
       "robot" => "/image/resize",
-      "use" => ":original",
+      "use" => "asset",
       "width" => 1400,
       "height" => 1400,
       "quality" => 75,
@@ -164,28 +164,25 @@ Heracles::Sites::WheelerCentre.configure do |config|
     },
     "audio_mp3" => {
       "robot" => "/audio/encode",
-      "use" => ":original",
+      "use" => "asset",
       "preset" => "mp3"
     },
     "audio_ogg" => {
       "robot" => "/audio/encode",
-      "use" => ":original",
+      "use" => "asset",
       "preset" => "ogg"
     },
     "video_ipad_high" => {
       "robot" => "/video/encode",
-      "use" => ":original",
+      "use" => "asset",
       "ffmpeg_stack" => "v2.2.3",
       "preset" => "ipad-high"
     },
     "video_iphone_high" => {
       "robot" => "/video/encode",
-      "use" => ":original",
+      "use" => "asset",
       "ffmpeg_stack" => "v2.2.3",
       "preset" => "iphone-high"
-    },
-    "store" => {
-      "use" => ["content_thumbnail", "content_small", "content_medium", "content_large", "content_small_thumbnail", "content_medium_thumbnail", "content_large_thumbnail", "itunes", "audio_mp3", "audio_ogg", "video_ipad_high", "video_iphone_high"]
     }
   }
 end
