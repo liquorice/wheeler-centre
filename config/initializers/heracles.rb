@@ -30,68 +30,162 @@ Heracles::Sites::WheelerCentre.configure do |config|
 
   config.transloadit_auth_key = ENV["TRANSLOADIT_AUTH_KEY"]
   config.transloadit_auth_secret = ENV["TRANSLOADIT_AUTH_SECRET"]
-  config.transloadit_assembly_steps = {}
-  # config.transloadit_assembly_steps = {
-  #   "admin_document_thumbnail" => {
-  #     "robot" => "/document/thumbs",
-  #     "page" => 1,
-  #     "width" => 400,
-  #     "height" => 250,
-  #     "resize_strategy" => "fit",
-  #     "background" => "#dddddd",
-  #     "colorspace" => "RGB"
-  #   },
-  #   "admin_thumbnail" => {
-  #     "robot" => "/image/resize",
-  #     "use" => ":original",
-  #     "width" => 400,
-  #     "height" => 250,
-  #     "resize_strategy" => "fit",
-  #     "strip" => true,
-  #     "colorspace" => "RGB"
-  #   },
-  #   "store" => {
-  #     "robot" => "/s3/store",
-  #     "use" => [
-  #       "admin_document_thumbnail",
-  #       "admin_thumbnail"
-  #     ],
-  #     "key" => ENV["ASSETS_AWS_ACCESS_KEY_ID"],
-  #     "secret" => ENV["ASSETS_AWS_SECRET_ACCESS_KEY"],
-  #     "bucket" => ENV["ASSETS_AWS_BUCKET"],
-  #     "path" => "${fields.site_slug}/assets/${unique_original_prefix}/${file.id}_${previous_step.name}.${file.ext}",
-  #     "headers" => {
-  #       "Cache-Control" => "public, max-age=31536000"
-  #     }
-  #   },
-  #   "store_original" => {
-  #     "robot" => "/s3/store",
-  #     "use" => [
-  #       ":original"
-  #     ],
-  #     "key" => ENV["ASSETS_AWS_ACCESS_KEY_ID"],
-  #     "secret" => ENV["ASSETS_AWS_SECRET_ACCESS_KEY"],
-  #     "bucket" => ENV["ASSETS_AWS_BUCKET"],
-  #     "path" => "${fields.site_slug}/assets/${unique_original_prefix}/${file.url_name}",
-  #     "headers" => {
-  #       "Cache-Control" => "public, max-age=31536000"
-  #     }
-  #   },
-  #   "store_youtube" => {
-  #     "robot" => "/youtube/store",
-  #     "use" => [
-  #       ":original"
-  #     ],
-  #     "credentials" => "youtube_auth_1479859234",
-  #     "title" => "${file.name}",
-  #     "description" => "${file.name} description",
-  #     "category" => "People & Blogs",
-  #     "keywords" => "Ideas, Melbourne, Australia, Conversation, The Wheeler Centre, Victoria, Writing",
-  #     "visibility" => "private"
-  #   }
-  # }
 
-  # config.transloadit_auth_key = ENV["TRANSLOADIT_AUTH_KEY"]
-  # config.transloadit_auth_secret = ENV["TRANSLOADIT_AUTH_SECRET"]
-  # config.transloadit_template_id  = ENV["TRANSLOADIT_TEMPLATE_ID"]
+  config.transloadit_assembly_steps = {
+    "content_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 300,
+      "height" => 300,
+      "quality" => 75,
+      "resize_strategy" => "fillcrop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_thumbnail_resized"]
+    },
+    "content_small_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 720,
+      "quality" => 75,
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_small" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_resized"]
+    },
+    "content_medium_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 960,
+      "quality" => 75,
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_medium" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_resized"]
+    },
+    "content_large_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 1400,
+      "quality" => 75,
+      "zoom" => false,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_large" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_resized"]
+    },
+    "content_large_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 800,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_large_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_large_thumbnail_resized"]
+    },
+    "content_medium_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 960,
+      "height" => 550,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_medium_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_medium_thumbnail_resized"]
+    },
+    "content_small_thumbnail_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 480,
+      "height" => 274,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "content_small_thumbnail" => {
+      "robot" => "/image/optimize",
+      "use" => ["content_small_thumbnail_resized"]
+    },
+    "itunes_resized" => {
+      "robot" => "/image/resize",
+      "use" => ":original",
+      "width" => 1400,
+      "height" => 1400,
+      "quality" => 75,
+      "resize_strategy" => "crop",
+      "gravity" => "center",
+      "zoom" => true,
+      "strip" => true,
+      "background" => "none",
+      "colorspace" => "RGB"
+    },
+    "itunes" => {
+      "robot" => "/image/optimize",
+      "use" => ["itunes_resized"]
+    },
+    "audio_mp3" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "mp3"
+    },
+    "audio_ogg" => {
+      "robot" => "/audio/encode",
+      "use" => ":original",
+      "preset" => "ogg"
+    },
+    "video_ipad_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
+      "preset" => "ipad-high"
+    },
+    "video_iphone_high" => {
+      "robot" => "/video/encode",
+      "use" => ":original",
+      "ffmpeg_stack" => "v2.2.3",
+      "preset" => "iphone-high"
+    },
+    "store" => {
+      "use" => ["content_thumbnail", "content_small", "content_medium", "content_large", "content_small_thumbnail", "content_medium_thumbnail", "content_large_thumbnail", "itunes", "audio_mp3", "audio_ogg", "video_ipad_high", "video_iphone_high"]
+    }
+  }
 end
