@@ -1,9 +1,9 @@
 - show_summary = show_summary || false
 - aspect = aspect || :square
 - if post.fields[:itunes_image].data_present?
-  - image = post.fields[:itunes_image].assets
+  - image = post.fields[:itunes_image].assets.first
 - elsif post.series.fields[:itunes_image].data_present?
-  - image = post.series.fields[:itunes_image].assets
+  - image = post.series.fields[:itunes_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
 - cache ["podcast-episode-snap-block-1", post, show_type, show_summary, image, first_topic, post.series, aspect] do
@@ -16,8 +16,8 @@
           .podcast-episode-snap__hero-inner
             - if show_type
               span.podcast-episode-snap__hero-type Podcast episode
-            - image_url = (aspect == :square) ? image.first.legacy_results["content_thumbnail"]["url"] : image.first.legacy_results["content_small_thumbnail"]["url"]
-            img src=image_url alt=(image.first.description.present? ? image.first.description : "Cover image for of #{post.title}")
+            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+            img src=image_url alt=(image.description.present? ? image.description : "Cover image for of #{post.title}")
       h3.podcast-episode-snap__title
         span.title-text == widont_format markdown_line post.title
         - if post.fields[:topics].data_present?
