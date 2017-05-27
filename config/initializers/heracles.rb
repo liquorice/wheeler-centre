@@ -32,6 +32,10 @@ Heracles::Sites::WheelerCentre.configure do |config|
   config.transloadit_auth_secret = ENV["TRANSLOADIT_AUTH_SECRET"]
 
   config.transloadit_assembly_steps = {
+    "original" => {
+      "robot" => "/s3/store",
+      "use" => "asset"
+    },
     "content_thumbnail_resized" => {
       "robot" => "/image/resize",
       "use" => "asset",
