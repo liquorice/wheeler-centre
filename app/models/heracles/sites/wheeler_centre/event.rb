@@ -51,6 +51,14 @@ module Heracles
           }
         end
 
+        # Explicitly unescape these because TryBooking cannot handle &amp;s
+        def booking_url
+          if fields[:external_bookings].data_present?
+            str = "#{fields[:external_bookings].value}"
+            CGI.unescapeHTML(str).html_safe
+          end
+        end
+
         def summary_title
           fields[:short_title].data_present? ? fields[:short_title] : title
         end
