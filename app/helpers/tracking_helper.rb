@@ -172,7 +172,7 @@ module TrackingHelper
   private
 
   def path_for_url(url)
-    URI::parse(url).path
+    URI.parse(URI.escape(url)).path
   end
 
   def title_for_asset(asset)
