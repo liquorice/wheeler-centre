@@ -17,7 +17,7 @@ namespace :assets do
       Heracles::ProcessAssetJob.perform_now_or_later_as_required(asset)
       loop do
         sleep(1)
-        break if asset.processed_assets.first.versions.key?("original") && a.processed_assets.first.versions.key?("content_small")
+        break if asset.processed_assets.first.versions.key?("original") && asset.processed_assets.first.versions.key?("content_small")
       end
     end
   end
@@ -35,7 +35,7 @@ namespace :assets do
       Heracles::ProcessAssetJob.perform_now_or_later_as_required(asset)
       loop do
         sleep(1)
-        break if asset.processed_assets.first.versions.key?("original") && a.processed_assets.first.versions.key?("audio_mp3")
+        break if asset.processed_assets.first.versions.key?("original") && asset.processed_assets.first.versions.key?("audio_mp3")
       end
     end
   end
@@ -53,7 +53,7 @@ namespace :assets do
       Heracles::ProcessAssetJob.perform_now_or_later_as_required(asset)
       loop do
         sleep(1)
-        break if asset.processed_assets.first.versions.key?("original") && a.processed_assets.first.versions.key?("audio_mp3")
+        break if asset.processed_assets.first.versions.key?("original") && asset.processed_assets.first.versions.key?("audio_mp3")
       end
     end
   end
