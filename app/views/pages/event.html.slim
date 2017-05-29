@@ -116,7 +116,7 @@
               - if page.booked_out? && page.upcoming?
                 span.event__booked-out-flag Booked out
               - elsif page.upcoming? && page.fields[:external_bookings].data_present? && bookings_open(page)
-                - track_booking_url = track_event(page.fields[:external_bookings].value, {\
+                - track_booking_url = track_event(page.booking_url, {\
                   category: "booking", \
                   action: "external - click",
                 })
