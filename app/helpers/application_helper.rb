@@ -66,7 +66,7 @@ module ApplicationHelper
   end
 
   def url_basename(url)
-    episode = URI(url).path.split('/').last
+    episode = URI.parse(URI.escape(url)).path.split('/').last
   end
 
   def human_boolean(bool)
