@@ -34,7 +34,7 @@ module Heracles
         end
 
         def word_page(word)
-          find_word(word.downcase.strip).first
+          find_word(word.strip).first
         end
 
         private

@@ -2,7 +2,7 @@
 - word_page = page.parent.word_page(word) if word.present?
 - word_valid = word_page.present?
 
-- image = word_page.fields[:thankyou_image].asset if word_valid
+- image = word_page.fields[:thankyou_image].assets.first if word_valid
 
 - if word_valid
   - share_link = "#{url_with_domain(page.parent.absolute_url)}?adopted_word=#{word.downcase}"
