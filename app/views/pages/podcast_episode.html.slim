@@ -64,7 +64,7 @@
           .recording__audio.recording__audio-podcast
             = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}", tracking_label: "#{page.series.title}, #{page.title}"
           - asset = page.fields[:audio].assets.first
-          - if asset.versions.include?(:audio_mp3)
+          - if asset.versions.include?("audio_mp3")
             .recording__downloads-podcast
               ul.clearfix
                 li
