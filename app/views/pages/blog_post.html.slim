@@ -99,7 +99,7 @@
           .blog-post__sharing
             = render "partials/social_sharing_icons", page: page
 
-  - cache ["blog-guest-author-1", author, author_image, page.authors_posts] do
+  - cache ["blog-guest-author-2", author, author_image, page.authors_posts] do
     - if show_guest_block
       .blog-post__guest-author.column-wrapper.gradient-top-down
         - if author_image
@@ -109,7 +109,7 @@
               img src=author_image_url alt=(author_image.description.present? ? author_image.description : "Portrait of #{author.title}")
         - if author.fields[:intro].data_present?
           .column-narrow.copy.blog-post__guest-author-intro
-            / = render_content author.fields[:intro]
+            = render_content author.fields[:intro]
         - if page.authors_posts.present?
           .column-wide
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
