@@ -9,7 +9,7 @@ module Heracles
         helper_method \
         def mp3_tracking_url
           if mp3_version
-            url = asset.send(:"#{mp3_version[:name]}_url")
+            url = mp3_version["url"]
             path = File.path(url)
             file_name = File.basename(url)
             track_event_url({
@@ -26,7 +26,7 @@ module Heracles
         helper_method \
         def ogg_tracking_url
           if ogg_version
-            url = asset.send(:"#{ogg_version[:name]}_url")
+            url = ogg_version["url"]
             path = File.path(url)
             file_name = File.basename(url)
             track_event_url({
@@ -47,12 +47,12 @@ module Heracles
 
         helper_method \
         def mp3_version
-          find_version_by_mime_type "audio/mpeg"
+          asset.processed_assets.first.versions["audio_mp3"].first
         end
 
         helper_method \
         def ogg_version
-          find_version_by_mime_type "audio/x-ogg"
+          asset.processed_assets.first.versions["audio_ogg"].first
         end
 
         def find_version_by_mime_type(mime_type)
