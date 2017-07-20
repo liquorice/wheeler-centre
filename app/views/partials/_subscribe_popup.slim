@@ -2,7 +2,7 @@
   - if settings_page.fields[:subscribe_popup_enabled].value == true
     .subscribe-popup data-view-subscribe-popup={force: settings_page.fields[:subscribe_popup_force].value, cookiePrefix: settings_page.fields[:subscribe_popup_campaign].value}.to_json
       - if settings_page.fields[:subscribe_popup_image].data_present?
-        - image_url = settings_page.fields[:subscribe_popup_image].asset.content_large_url
+        - image_url = settings_page.fields[:subscribe_popup_image].assets.first.content_large_url
         .subscribe-popup__image style="background-image: url(#{image_url})"
       .subscribe-popup__inner
         .simple-subscribe.column-wrapper data-view-subscribe-form=true
