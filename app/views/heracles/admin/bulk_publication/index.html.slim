@@ -45,7 +45,7 @@
               .collection-posts__list-summary.collection-posts__list-summary--created_at Created at
             - @paginated_search.each do |result|
               li.collection-posts__list-item
-                = link_to edit_site_collection_page_path(current_site, result.collection, result) do
+                = link_to edit_site_collection_page_path(site, result.collection, result) do
                   .collection-posts__list-summary.collection-posts__list-summary--title= result.title
                   .collection-posts__list-summary.collection-posts__list-summary--url= result.url
                   .collection-posts__list-summary.collection-posts__list-summary--type= humanize_page_type result.page_type
