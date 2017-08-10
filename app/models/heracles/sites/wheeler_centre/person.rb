@@ -76,7 +76,7 @@ module Heracles
             per(options[:per_page] || 18)
         end
 
-        def podcast_episodes
+        def podcast_episodes(options={})
           Heracles::Page.
             of_type("podcast_episode").
             visible.
