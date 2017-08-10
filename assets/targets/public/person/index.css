@@ -211,11 +211,11 @@
   margin-bottom: 0;
 }
 
-.person__podcast_episodes {
+.person__podcast-episodes {
   margin-bottom: 3.5rem;
 }
-.breakpoint-phone-wide .person__podcast_episodes,
-.breakpoint-phone .person__podcast_episodes {
+.breakpoint-phone-wide .person__podcast-episodes,
+.breakpoint-phone .person__podcast-episodes {
   margin-top: 3rem;
   margin-bottom: 0;
 }
