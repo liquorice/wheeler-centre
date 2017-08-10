@@ -2,7 +2,7 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
 - upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
 - past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
-- podcast_episodes = page.podcast_episodes(page: params[:page], per_page: params[:per_page] || 100)
+- podcast_episodes = page.podcast_episodes(page: params[:page], per_page: 5 || 100)
 
 / Custom meta data
 - open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
@@ -141,7 +141,7 @@
       .person__podcast-episodes
         .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.total_pages > 0)
           .section-header
-            h2 Podcasts
+            h2 Recent podcast episodes
           .column-full
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
               - podcast_episodes.each do |episode|
