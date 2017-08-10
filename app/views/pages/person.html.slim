@@ -2,6 +2,7 @@
 - recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
 - upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
 - past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
+- podcast_episodes = page.podcast_episodes(page: params[:page], per_page: params[:per_page] || 100)
 
 / Custom meta data
 - open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
@@ -135,7 +136,7 @@
               - recordings.each do |recording|
                 = render "partials/recording_snap_block", post: recording, show_type: true
 
-    / podcast_episodes
+    / Podcast episodes
     - if podcast_episodes.present?
       .person__podcast-episodes
         .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.total_pages > 0)
