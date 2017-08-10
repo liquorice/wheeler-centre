@@ -86,6 +86,7 @@ module Heracles
               :"insertions.field" => "people",
               :"insertions.inserted_key" => insertion_key
             ).
+            order("fields_data->'publish_date'->>'value' DESC NULLS LAST").
             page(options[:page_number] || 1).
             per(options[:per_page] || 18)
         end
