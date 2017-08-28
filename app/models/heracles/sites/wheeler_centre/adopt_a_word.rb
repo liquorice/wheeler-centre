@@ -67,7 +67,7 @@ module Heracles
             site_id: site.id,
             published: true,
             hidden: false,
-            title: word
+            slug: word.downcase
           )
           # Sunspot.search(CampaignWord) do
           #   with :site_id, site.id
