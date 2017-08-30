@@ -1,0 +1,9 @@
+- if settings_page.fields[:ticker_title].data_present?
+  .ticker
+    .ticker__image
+
+    .ticker__content
+      .ticker__title
+      .ticker__scroller
+        - settings_page.ticker_texts.each do |text|
+          span.ticker__item  = text.title
