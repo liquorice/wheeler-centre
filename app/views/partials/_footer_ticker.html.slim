@@ -1,7 +1,10 @@
+- image = settings_page.fields[:ticker_image].assets.first
 - if settings_page.fields[:ticker_title].data_present?
   .ticker
-    .ticker__image
-
+    - cache ["footer-ticker-image", settings_page, image] do
+      - if image
+        .ticker__image
+          img src=image.content_thumbnail_url
     .ticker__content
       .ticker__title
       .ticker__scroller
