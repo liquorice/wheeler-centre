@@ -223,6 +223,7 @@ a, button {
 @import "./masthead-contextual/index.css";
 @import "./content-block/index.css";
 @import "./footer/index.css";
+@import "./footer-ticker/index.css";
 @import "./pagination";
 @import "./figure/index.css";
 @import "./pull-quote/index.css";
