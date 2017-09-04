@@ -25,7 +25,8 @@ module Heracles
               {name: :events_cancelled_message, type: :content, disable_insertables: true},
                # Ticker
               {name: :ticker_info, type: :info, text: "<h2>Footer Ticker</h2><hr/>"},
-              {name: :ticker_title, type: :text, label: "Ticker title", hint: "Removing this title will remove the whole ticker"},
+              {name: :ticker_enabled, label: "Enable ticker", type: :boolean, defaults: {value: true}, question_text: "Show the footer ticker to bew vistors?", editor_columns: 6},
+              {name: :ticker_title, type: :text, label: "Ticker title"},
               {name: :ticker_image, type: :assets, label: "Ticker image", asset_file_type: :image}
             ]
           }
@@ -38,7 +39,11 @@ module Heracles
         end
 
         def ticker_actions
-          children.of_type("ticker_actions").in_order.visible.published
+          children.of_type("ticker_action").in_order.visible.published
+        end
+
+        def ticker_code
+          fields[:ticker_title].value.gsub(" ", "-").downcase
         end
       end
     end

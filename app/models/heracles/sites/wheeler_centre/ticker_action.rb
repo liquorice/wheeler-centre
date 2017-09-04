@@ -5,9 +5,18 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :button_name, type: :text, label: "Action name"},
-              {name: :button_link, type: :text, label: "Action link", editor_type: "code"}
+              {name: :action_link, type: :text, label: "Ticker action link", editor_type: "code"}
             ]
+          }
+        end
+
+        ### Summary
+
+        def to_summary_hash
+          {
+            title: title,
+            link: fields[:action_link],
+            published: (published) ? "✔" : "•"
           }
         end
       end
