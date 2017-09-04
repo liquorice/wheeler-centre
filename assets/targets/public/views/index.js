@@ -97,11 +97,25 @@ views.subscribePopup = function(el, props) {
   new SubscribePopup(el, props);
 };
 
+// SubscribePopup
+var SubscribePopup = require("../subscribe-popup");
+views.subscribePopup = function(el, props) {
+  new SubscribePopup(el, props);
+};
+
 // CampaignBanner
 var CampaignBanner = require("../campaign-banner");
 views.campaignBanner = function(el, props) {
   new CampaignBanner(el, props);
 };
+
+
+// FooterTicker
+var FooterTicker = require("../footer-ticker");
+views.FooterTicker = function(el, props) {
+  new FooterTicker(el, props);
+};
+
 
 // Search
 var Search = require("../search");
