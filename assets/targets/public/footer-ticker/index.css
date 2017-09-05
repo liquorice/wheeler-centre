@@ -79,7 +79,6 @@
 
 
 .ticker__scroller-wrapper {
-  position: relative;
   display: block;
   padding-left: 100%;
   overflow: hidden;
@@ -93,7 +92,7 @@
   font-size: 2rem;
   height: 2rem;
   line-height: 2rem;
-  padding-right: 100% !important;
+  padding-right: 100%;
   white-space: nowrap;
 
   -webkit-animation-iteration-count: infinite;
