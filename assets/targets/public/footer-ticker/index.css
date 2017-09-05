@@ -79,15 +79,16 @@
 
 
 .ticker__scroller-wrapper {
+  position: relative;
   display: block;
-  padding-left: 100%;
   overflow: hidden;
   height: 2rem;
   width: 100%;
 }
 
 .ticker__scroller {
-  display: inline-block;
+  position: absolute;
+  left: 100%;
   font-weight: bold;
   font-size: 2rem;
   height: 2rem;
