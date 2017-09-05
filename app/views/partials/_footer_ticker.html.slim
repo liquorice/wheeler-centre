@@ -1,5 +1,5 @@
 - image = settings_page.fields[:ticker_image].assets.first
-- if settings_page.fields[:ticker_title].data_present?
+- if settings_page.fields[:ticker_enabled].value
   .ticker data-view-footer-ticker={cookiePrefix: settings_page.ticker_code}.to_json
     .ticker__inner
       - cache ["footer-ticker-image", settings_page, image] do
@@ -22,3 +22,4 @@
         - settings_page.ticker_actions.each do |action|
           a.ticker__action href=action.fields[:action_link]
             = action.title
+
