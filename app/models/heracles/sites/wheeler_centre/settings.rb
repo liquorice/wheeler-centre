@@ -25,7 +25,7 @@ module Heracles
               {name: :events_cancelled_message, type: :content, disable_insertables: true},
                # Ticker
               {name: :ticker_info, type: :info, text: "<h2>Footer Ticker</h2><hr/>"},
-              {name: :ticker_enabled, label: "Enable ticker", type: :boolean, defaults: {value: true}, question_text: "Show the footer ticker to bew vistors?", editor_columns: 6},
+              {name: :ticker_enabled, label: "Enable ticker", type: :boolean, defaults: {value: false}, question_text: "Show the footer ticker to new vistors?", editor_columns: 6},
               {name: :ticker_title, type: :text, label: "Ticker title"},
               {name: :ticker_image, type: :assets, label: "Ticker image", asset_file_type: :image}
             ]
