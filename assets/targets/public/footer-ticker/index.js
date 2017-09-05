@@ -19,7 +19,7 @@ function FooterTicker(el, props) {
 
   var scroller = this.el.querySelector(".ticker__scroller");
   var duration = Math.floor(scroller.offsetWidth/60) + "s";
-  scroller.style["animation-duration"] = duration;
+  scroller.setAttribute('style', 'animation-duration: ' + duration + '; -webkit-animation-duration: ' + duration + ';');
 }
 
 FooterTicker.prototype.onCloseClick = function(e) {
