@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby "2.1.6"
+ruby "2.2.2"
 
 # Rails
 gem "rails", "~> 4.2.0"
@@ -10,7 +10,7 @@ gem "rails", "~> 4.2.0"
 gem "pg"
 
 # Heracles
-gem "icelab-heracles", "2.0.0.beta53", source: "https://gem.fury.io/icelab/", require: "heracles"
+gem "icelab-heracles", "2.0.0.beta58", source: "https://gem.fury.io/icelab/", require: "heracles"
 
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right
@@ -45,7 +45,7 @@ gem "bugsnag"
 gem "color"
 gem "coffee-rails", "~> 4.0.0"
 gem "react-rails"
-gem "sass-rails", "~> 4.0.2"
+gem "sass-rails", "~> 5.0.6"
 gem "turbolinks"
 gem "uglifier", ">= 1.3.0"
 
