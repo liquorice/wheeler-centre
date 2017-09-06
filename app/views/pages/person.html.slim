@@ -1,8 +1,8 @@
-- blog_posts = page.blog_posts(page: params[:page], per_page: params[:per_page] || 100)
-- recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
-- upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
-- past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
-- podcast_episodes = page.podcast_episodes(page: params[:page], per_page: 8)
+- blog_posts = page.blog_posts(page: 1, per_page: params[:per_page] || 100)
+- recordings = page.recordings(page: 1, per_page: params[:per_page] || 100)
+- upcoming_events = page.upcoming_events(page: 1, per_page: params[:per_page] || 100)
+- past_events     = page.past_events(page: 1, per_page: params[:per_page] || 100)
+- podcast_episodes = page.podcast_episodes(page: 1, per_page: 8)
 
 / Custom meta data
 - open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
