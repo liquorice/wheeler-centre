@@ -22,9 +22,28 @@ module Heracles
               {name: :campaign_banner_code, label: "Campaign code", type: :text, editor_type: "code", hint: "Setting a new code like 'jaipur-2015' here will reset the counter and show it to everyone again."},
               # Events
               {name: :events_info, type: :info, text: "<h2>Events</h2><hr/>"},
-              {name: :events_cancelled_message, type: :content, disable_insertables: true}
+              {name: :events_cancelled_message, type: :content, disable_insertables: true},
+               # Ticker
+              {name: :ticker_info, type: :info, text: "<h2>Footer Ticker</h2><hr/>"},
+              {name: :ticker_enabled, label: "Enable ticker", type: :boolean, defaults: {value: false}, question_text: "Show the footer ticker to new vistors?", editor_columns: 6},
+              {name: :ticker_title, type: :text, label: "Ticker title"},
+              {name: :ticker_image, type: :assets, label: "Ticker image", asset_file_type: :image}
             ]
           }
+        end
+
+        ### Accessors
+
+        def ticker_texts
+          children.of_type("ticker_text").in_order.visible.published
+        end
+
+        def ticker_actions
+          children.of_type("ticker_action").in_order.visible.published
+        end
+
+        def ticker_code
+          fields[:ticker_title].value.gsub(" ", "-").downcase
         end
       end
     end
