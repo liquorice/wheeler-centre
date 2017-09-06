@@ -146,6 +146,7 @@
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
               - podcast_episodes.each do |episode|
                 = render "partials/podcast_episode_snap_block", post: episode, show_type: true
+          / If the total amount of podcasts is greater than the per_page value (defined at the top of the page)
           - if podcast_episodes.total_count > page.podcast_episodes.length
             .section-header
               h2
