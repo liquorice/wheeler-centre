@@ -150,4 +150,4 @@
           - if podcast_episodes.total_count > page.podcast_episodes.length
             .section-header
               h2
-                a href="" View all podcasts by #{page.fields[:first_name]}
+                a href="/search?page=1&page_type=podcast_episode&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all podcasts by #{page.fields[:first_name]}
