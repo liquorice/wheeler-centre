@@ -103,6 +103,12 @@ views.campaignBanner = function(el, props) {
   new CampaignBanner(el, props);
 };
 
+// FooterTicker
+var FooterTicker = require("../footer-ticker");
+views.FooterTicker = function(el, props) {
+  new FooterTicker(el, props);
+};
+
 // Search
 var Search = require("../search");
 views.search = function(el) {

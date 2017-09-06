@@ -53,7 +53,9 @@ class SearchesController < ApplicationController
                             "vpla_category",
                             "review",
                             "long_view_review",
-                            "campaign_word"]
+                            "campaign_word",
+                            "ticker_action",
+                            "ticker_text"]
 
       # Exclude hidden items
       with :hidden, false
