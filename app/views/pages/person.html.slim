@@ -110,7 +110,10 @@
                                 h3.person__related-title == markdown_line blog_post.title
                                 - if blog_post.fields[:publish_date].data_present?
                                   time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
-
+                    - if blog_posts.total_count > page.blog_posts.length
+                      .section-header
+                        h2
+                          a href="/search?page=1&page_type=blog_post&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all previous events by #{page.fields[:first_name]}
               / Past events
               - if (past_events.total_count > 6 || past_events.total_count < 2) && past_events.total_pages > 0
                 .person__related-column
@@ -125,6 +128,10 @@
                               .person__related-text
                                 h3.person__related-title == markdown_line event.title
                               time.person__related-date = l event.fields[:start_date].value, format: :medium_date
+                    - if past_events.total_count > page.past_events.length
+                      .section-header
+                        h2
+                          a href="/search?page=1&page_type=event&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all previous events by #{page.fields[:first_name]}
     / Recordings
     - if recordings.present?
       .person__recordings
@@ -135,6 +142,10 @@
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
               - recordings.each do |recording|
                 = render "partials/recording_snap_block", post: recording, show_type: true
+          - if recordings.total_count > page.recordings.length
+            .section-header
+              h2
+                a href="/search?page=1&page_type=recording&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all recordings by #{page.fields[:first_name]}
 
     / Podcast episodes
     - if podcast_episodes.present?
