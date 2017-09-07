@@ -115,7 +115,7 @@
                                 - if blog_post.fields[:publish_date].data_present?
                                   time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
                     - if blog_posts.total_count > page.blog_posts.length
-                      .section-header
+                      .section-header.section-header--upper-underline
                         h2
                           a href="/search?page=1&page_type=blog_post&q=#{name}" View all blog posts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
               / Past events
@@ -133,7 +133,7 @@
                                 h3.person__related-title == markdown_line event.title
                               time.person__related-date = l event.fields[:start_date].value, format: :medium_date
                     - if past_events.total_count > page.past_events.length
-                      .section-header
+                      .section-header.section-header--upper-underline
                         h2
                           a href="/search?page=1&page_type=event&q=#{name}" View all previous events featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
     / Recordings
