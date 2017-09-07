@@ -4,6 +4,10 @@
 - past_events     = page.past_events(page: 1, per_page: params[:per_page] || 18)
 - podcast_episodes = page.podcast_episodes(page: 1, per_page: 18)
 
+/ For escaping special character for link generation -- not to be used for paragraph/text elements
+- name = URI.escape("#{page.fields[:first_name]}+#{page.fields[:last_name]}")
+
+
 / Custom meta data
 - open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
 - open_graph_summary = strip_html(render_content(page.fields[:intro]) + render_content(page.fields[:body]), "")
@@ -113,7 +117,7 @@
                     - if blog_posts.total_count > page.blog_posts.length
                       .section-header
                         h2
-                          a href="/search?page=1&page_type=blog_post&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all blog posts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+                          a href="/search?page=1&page_type=blog_post&q=#{name}" View all blog posts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
               / Past events
               - if (past_events.total_count > 6 || past_events.total_count < 2) && past_events.total_pages > 0
                 .person__related-column
@@ -131,7 +135,7 @@
                     - if past_events.total_count > page.past_events.length
                       .section-header
                         h2
-                          a href="/search?page=1&page_type=event&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all previous events featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+                          a href="/search?page=1&page_type=event&q=#{name}" View all previous events featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
     / Recordings
     - if recordings.present?
       .person__recordings
@@ -145,7 +149,7 @@
           - if recordings.total_count > page.recordings.length
             .section-header
               h2
-                a href="/search?page=1&page_type=recording&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all recordings featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+                a href="/search?page=1&page_type=recording&q=#{name}" View all recordings featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
 
     / Podcast episodes
     - if podcast_episodes.present?
@@ -161,4 +165,4 @@
           - if podcast_episodes.total_count > page.podcast_episodes.length
             .section-header
               h2
-                a href="/search?page=1&page_type=podcast_episode&q=#{page.fields[:first_name]}+#{page.fields[:last_name]}" View all podcasts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+                a href="/search?page=1&page_type=podcast_episode&q=#{name}" View all podcasts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
