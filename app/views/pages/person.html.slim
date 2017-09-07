@@ -1,8 +1,8 @@
-- blog_posts = page.blog_posts(page: 1, per_page: params[:per_page] || 18)
-- recordings = page.recordings(page: 1, per_page: params[:per_page] || 18)
-- upcoming_events = page.upcoming_events(page: 1, per_page: params[:per_page] || 18)
-- past_events     = page.past_events(page: 1, per_page: params[:per_page] || 18)
-- podcast_episodes = page.podcast_episodes(page: 1, per_page: 18)
+- blog_posts = page.blog_posts(page: 1, per_page: params[:per_page] || 12)
+- recordings = page.recordings(page: 1, per_page: params[:per_page] || 12)
+- upcoming_events = page.upcoming_events(page: 1, per_page: params[:per_page] || 12)
+- past_events     = page.past_events(page: 1, per_page: params[:per_page] || 12)
+- podcast_episodes = page.podcast_episodes(page: 1, per_page: 12)
 
 / For escaping special character for link generation -- not to be used for paragraph/text elements
 - name = URI.escape("#{page.fields[:first_name]}+#{page.fields[:last_name]}")
