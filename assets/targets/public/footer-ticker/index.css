@@ -59,6 +59,10 @@
   padding-left: 3.2rem;
   width: calc(100% - 12rem - 54rem);
 }
+.breakpoint-phone .ticker__content,
+.breakpoint-phone-wide .ticker__content  {
+  width: calc(100% - 12rem);
+}
 
 .ticker__content-overlay {
   background: linear-gradient(to right, rgba(0,0,0,0) 90%, rgba(27, 27, 28, 1) 100%);
@@ -68,13 +72,23 @@
   width: 100%;
   z-index: 101;
 }
+.breakpoint-phone .ticker__content-overlay,
+.breakpoint-phone-wide .ticker__content-overlay {
+  display: none;
+}
 
-.ticker__title {
+a.ticker__title {
+  display: block;
   font-size: 1.4rem;
   letter-spacing: 0.18em;
   margin-bottom: 1.9rem;
   margin-top: 3.4rem;
   text-transform: uppercase;
+  z-index: 1000;
+}
+
+a.ticker__title:hover{
+  text-decoration: underline;
 }
 
 
@@ -117,6 +131,11 @@
   text-align: right;
   width: 54rem;
 }
+.breakpoint-phone .ticker__actions,
+.breakpoint-phone-wide .ticker__actions {
+  display: none;
+}
+
 .ticker__action {
   border: 1px solid #979797;
   border-radius: 2px;
