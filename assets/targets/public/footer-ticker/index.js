@@ -1,4 +1,5 @@
 var tourist = require("../tourist");
+var shuffleArray = require("../utilities/shuffle-array");
 var addClass = require("../utilities/add-class");
 
 function FooterTicker(el, props) {
@@ -20,6 +21,14 @@ function FooterTicker(el, props) {
   var scroller = this.el.querySelector(".ticker__scroller");
   var duration = Math.floor(scroller.offsetWidth/60) + "s";
   scroller.setAttribute('style', 'animation-duration: ' + duration + '; -webkit-animation-duration: ' + duration + ';');
+
+  // Randomize items in array
+  var items = Array.prototype.slice.call(this.el.querySelectorAll(".ticker__item"));
+  var shuffled = shuffleArray(items);
+  scroller.innerHTML="";
+  shuffled.forEach(function(item){
+    scroller.appendChild(item);
+  });
 }
 
 FooterTicker.prototype.onCloseClick = function(e) {
