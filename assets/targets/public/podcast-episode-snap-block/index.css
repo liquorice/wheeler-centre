@@ -23,6 +23,8 @@
     font-family: var(--font-sans);
     font-size: 1.3rem;
     padding-top: 0.6rem;
+    color: #666;
+
   }
   .podcast-episode-snap__title {
     font-family: var(--font-sans);
