@@ -76,8 +76,19 @@ module Heracles
             per(options[:per_page] || 18)
         end
 
-        def podcasts
-          # Through events
+        def podcast_episodes(options={})
+          Heracles::Page.
+            of_type("podcast_episode").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "people",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            order("fields_data->'publish_date'->>'value' DESC NULLS LAST").
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
         end
 
         def sort_first_name

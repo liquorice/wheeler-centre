@@ -1,7 +1,12 @@
-- blog_posts = page.blog_posts(page: params[:page], per_page: params[:per_page] || 100)
-- recordings = page.recordings(page: params[:page], per_page: params[:per_page] || 100)
-- upcoming_events = page.upcoming_events(page: params[:page], per_page: params[:per_page] || 100)
-- past_events     = page.past_events(page: params[:page], per_page: params[:per_page] || 100)
+- blog_posts = page.blog_posts(page: 1, per_page: params[:per_page] || 12)
+- recordings = page.recordings(page: 1, per_page: params[:per_page] || 12)
+- upcoming_events = page.upcoming_events(page: 1, per_page: params[:per_page] || 12)
+- past_events     = page.past_events(page: 1, per_page: params[:per_page] || 12)
+- podcast_episodes = page.podcast_episodes(page: 1, per_page: 12)
+
+/ For escaping special character for link generation -- not to be used for paragraph/text elements
+- full_name_escaped = URI.escape("#{page.fields[:first_name]}+#{page.fields[:last_name]}")
+
 
 / Custom meta data
 - open_graph_image = page.fields[:portrait].assets.first if page.fields[:portrait].data_present?
@@ -109,7 +114,10 @@
                                 h3.person__related-title == markdown_line blog_post.title
                                 - if blog_post.fields[:publish_date].data_present?
                                   time.person__related-date= l blog_post.fields[:publish_date].value, format: :medium_date
-
+                    - if blog_posts.total_count > page.blog_posts.length
+                      .section-header.section-header--upper-underline
+                        h2
+                          a href="/search?page=1&page_type=blog_post&q=#{full_name_escaped}" View all blog posts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
               / Past events
               - if (past_events.total_count > 6 || past_events.total_count < 2) && past_events.total_pages > 0
                 .person__related-column
@@ -122,8 +130,15 @@
                           .person__related-block
                             a.person__related-anchor href=event.absolute_url
                               .person__related-text
+                                - if event.series
+                                  p.event-snap__series
+                                    = event.series.title
                                 h3.person__related-title == markdown_line event.title
                               time.person__related-date = l event.fields[:start_date].value, format: :medium_date
+                    - if past_events.total_count > page.past_events.length
+                      .section-header.section-header--upper-underline
+                        h2
+                          a href="/search?page=1&page_type=event&q=#{full_name_escaped}" View all previous events featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
     / Recordings
     - if recordings.present?
       .person__recordings
@@ -134,3 +149,24 @@
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
               - recordings.each do |recording|
                 = render "partials/recording_snap_block", post: recording, show_type: true
+          - if recordings.total_count > page.recordings.length
+            .section-header
+              h2
+                a href="/search?page=1&page_type=recording&q=#{full_name_escaped}" View all recordings featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+
+    / Podcast episodes
+    - if podcast_episodes.present?
+      .person__podcast-episodes
+        .column-wrapper class=("gradient-top-down" if blog_posts.present? || past_events.total_pages > 0)
+          .section-header
+            h2 Podcast episodes
+          .column-full
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 5, "widescreen-wide" => 6, tablet: 4, "phone-wide" => 2, phone: 1 }}.to_json
+              - podcast_episodes.each do |episode|
+                = render "partials/podcast_episode_snap_block", post: episode, show_type: true
+          / If the total amount of podcasts is greater than the per_page value (defined at the top of the page)
+          - if podcast_episodes.total_count > page.podcast_episodes.length
+            .section-header
+              h2
+                a href="/search?page=1&page_type=podcast_episode&q=#{full_name_escaped}" View all podcasts featuring #{page.fields[:first_name]} #{page.fields[:last_name]}
+                

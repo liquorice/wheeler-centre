@@ -18,6 +18,8 @@
               span.podcast-episode-snap__hero-type Podcast episode
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
             img src=image_url alt=(image.description.present? ? image.description : "Cover image for of #{post.title}")
+      - if post.series.present?
+        p.podcast-episode-snap__series = post.series.title
       h3.podcast-episode-snap__title
         span.title-text == widont_format markdown_line post.title
         - if post.fields[:topics].data_present?
