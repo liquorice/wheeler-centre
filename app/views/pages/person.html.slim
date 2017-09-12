@@ -130,6 +130,9 @@
                           .person__related-block
                             a.person__related-anchor href=event.absolute_url
                               .person__related-text
+                                - if event.series
+                                  p.event-snap__series
+                                    = event.series.title
                                 h3.person__related-title == markdown_line event.title
                               time.person__related-date = l event.fields[:start_date].value, format: :medium_date
                     - if past_events.total_count > page.past_events.length
