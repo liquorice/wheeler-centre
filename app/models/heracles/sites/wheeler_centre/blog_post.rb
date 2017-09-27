@@ -130,6 +130,22 @@ module Heracles
           end
           topics
         end
+
+        # Re-instating search index for searching highlights tag on the home page.
+        searchable do
+          string :id do |page|
+            page.id
+          end
+
+          string :tag_list, multiple: true do
+            tags.map(&:name)
+          end
+
+          time :date_sort_field do
+            fields[:publish_date].value
+          end
+
+        end
       end
     end
   end
