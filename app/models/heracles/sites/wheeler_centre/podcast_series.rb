@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :hero_image, type: :assets, asset_file_type: :image},
+              {name: :hero_image, type: :assets, assets_file_type: :image},
               {name: :highlight_colour, type: :text, defaults: {value: '#F8F59E'}},
               {name: :intro, type: :content},
               {name: :description, type: :content},
@@ -14,7 +14,7 @@ module Heracles
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_url, type: :text},
-              {name: :itunes_image, type: :assets, asset_file_type: :image},
+              {name: :itunes_image, type: :assets, assets_file_type: :image},
               {name: :itunes_subtitle, type: :text},
               {name: :itunes_summary, type: :text},
               {name: :itunes_description, type: :text},

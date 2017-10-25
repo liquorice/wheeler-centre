@@ -5,6 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :hero_image, type: :assets, assets_file_type: :image},
               {name: :description, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
@@ -12,12 +13,12 @@ module Heracles
               {name: :recording_date, type: :date_time, label: "Recording date"},
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
-              {name: :video, type: :assets, asset_file_type: :video},
-              {name: :audio, type: :assets, asset_file_type: :audio},
+              {name: :video, type: :assets, assets_file_type: :video},
+              {name: :audio, type: :assets, assets_file_type: :audio},
               # iTunes
               {name: :itunes_info, type: :info, text: "<hr/>"},
               {name: :itunes_summary, type: :text},
-              {name: :itunes_image, type: :assets, asset_file_type: :image},
+              {name: :itunes_image, type: :assets, assets_file_type: :image},
               {name: :explicit, type: :boolean, defaults: {value: false}, question_text: "Mark episode as explicit?"},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},

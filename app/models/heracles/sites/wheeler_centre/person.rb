@@ -7,7 +7,7 @@ module Heracles
             fields: [
               {name: :first_name, type: :text},
               {name: :last_name, type: :text},
-              {name: :portrait, type: :assets, asset_file_type: :image},
+              {name: :portrait, type: :assets, assets_file_type: :image},
               {name: :intro, type: :content},
               {name: :biography, type: :content},
               {name: :url, type: :text},

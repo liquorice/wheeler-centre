@@ -7,7 +7,7 @@ module Heracles
             fields: [
               {name: :definition, type: :text},
               {name: :is_available, type: :boolean, defaults: {value: true}, question_text: "Available for purchase?"},
-              {name: :thankyou_image, type: :assets, asset_file_type: :image }
+              {name: :thankyou_image, type: :assets, assets_file_type: :image }
             ]
           }
         end

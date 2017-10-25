@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               {name: :description, type: :content},
-              {name: :logo, type: :assets, asset_file_type: :image},
+              {name: :logo, type: :assets, assets_file_type: :image},
             ]
           }
         end
