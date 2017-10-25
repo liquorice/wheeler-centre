@@ -8,14 +8,20 @@
     og: { \
       title: "Watch: #{page.title}",
       description: open_graph_summary,
-      image: { \
-        url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
-        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
-        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
-      } \
     } \
   })
+
+- if open_graph_image.present?
+  - set_meta_tags({ \
+      og: { \
+        image: { \
+          url: (open_graph_image.content_medium_url if open_graph_image), \
+          secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+          width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+          height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
+        } \
+      } \
+    })
 
 = area :masthead_title do
   - cache ["recording-broadcasts-title-1", broadcasts_page.title] do

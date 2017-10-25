@@ -7,14 +7,20 @@
     og: { \
       title: "Event: #{page.title}",
       description: open_graph_summary,
-      image: { \
-        url: (open_graph_image.content_medium_url if open_graph_image), \
-        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
-        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
-        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
-      } \
     } \
   })
+
+- if open_graph_image.present?
+  - set_meta_tags({ \
+      og: { \
+        image: { \
+          url: (open_graph_image.content_medium_url if open_graph_image), \
+          secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+          width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+          height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
+        } \
+      } \
+    })
 
 - events_rss_tracking_link = track_event("#{url_with_domain(events_page.absolute_url)}.rss", { \
   category: "rss", \
