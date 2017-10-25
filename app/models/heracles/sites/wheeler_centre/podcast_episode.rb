@@ -5,6 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :hero_image, type: :assets, asset_file_type: :image},
               {name: :description, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
