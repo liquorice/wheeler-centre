@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
-              {name: :hero_image, type: :assets, asset_file_type: :image},
+              {name: :hero_image, type: :assets, assets_file_type: :image},
               {name: :description, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
@@ -15,9 +15,9 @@ module Heracles
               # Asset
               {name: :asset_info, type: :info, text: "<hr/>"},
               {name: :youtube_video, type: :external_video},
-              {name: :video_poster_image, type: :assets, asset_file_type: :image},
-              {name: :video, type: :assets, asset_file_type: :video, editor_columns: 6},
-              {name: :audio, type: :assets, asset_file_type: :audio, editor_columns: 6},
+              {name: :video_poster_image, type: :assets, assets_file_type: :image},
+              {name: :video, type: :assets, assets_file_type: :video, editor_columns: 6},
+              {name: :audio, type: :assets, assets_file_type: :audio, editor_columns: 6},
               # Associations
               {name: :assoc_info, type: :info, text: "<hr/>"},
               {name: :people, type: :associated_pages, page_type: :person},
