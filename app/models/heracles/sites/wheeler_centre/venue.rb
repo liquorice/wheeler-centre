@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :hero_image, type: :assets, asset_file_type: :image},
+              {name: :hero_image, type: :assets, assets_file_type: :image},
               {name: :address, type: :text, hint: "Not displayed on site, used for address lookups on Google Maps"},
               {name: :address_formatted, type: :content, hint: "Nicely formatted for display on the site"},
               {name: :phone_number, type: :text},
