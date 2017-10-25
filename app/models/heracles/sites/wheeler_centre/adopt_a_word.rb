@@ -6,7 +6,7 @@ module Heracles
           {
             fields: [
               {name: :intro, type: :content},
-              {name: :campaign_image, type: :assets, asset_file_type: :image},
+              {name: :campaign_image, type: :assets, assets_file_type: :image},
               {name: :description_left, type: :content, disable_insertables: true},
               {name: :description_right, type: :content, disable_insertables: true},
               {name: :list_description, type: :text },
