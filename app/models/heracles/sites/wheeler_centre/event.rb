@@ -6,8 +6,8 @@ module Heracles
           {
             fields: [
               {name: :short_title, type: :text, label: "Short title", hint: "(optional) Set this to override the title in listings"},
-              {name: :promo_image, type: :assets, asset_file_type: :image},
-              {name: :thumbnail_image, type: :assets, asset_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
+              {name: :promo_image, type: :assets, assets_file_type: :image},
+              {name: :thumbnail_image, type: :assets, assets_file_type: :image, hint: "(optional) Set this to override the above promo image in listings"},
               {name: :body, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
