@@ -7,7 +7,7 @@ module Heracles
             fields: [
               {name: :body, type: :content},
               {name: :url, type: :text, label: "URL"},
-              {name: :logo, type: :assets, asset_file_type: :image},
+              {name: :logo, type: :assets, assets_file_type: :image},
               {name: :sponsor_id, type: :integer, label: "Sponsor Id"},
             ]
           }
