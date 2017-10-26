@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20170509011026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
-  enable_extension "pg_trgm"
   enable_extension "uuid-ossp"
+  enable_extension "pg_trgm"
 
   create_table "assets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "file_name",                 limit: 255,              null: false
