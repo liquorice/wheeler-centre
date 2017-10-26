@@ -4,7 +4,7 @@
   - open_graph_image = page.fields[:hero_image].assets.first
 - elsif series.fields[:hero_image].present?
   - open_graph_image = series.fields[:hero_image].assets.first
-- open_graph_summary = strip_html(render_content(page.fields[:body]), "")
+- open_graph_summary = strip_html(render_content(page.fields[:description]), "")
 
 - set_meta_tags({ \
     title: page_title_for_podcast(page), \
@@ -31,13 +31,14 @@
   link href=podcast_tracking_link(page.series) rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
 
 = area :masthead_title do
-  == markdown_line broadcasts_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [broadcasts_page] + broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
+  == open_graph_summary
+
 
   .podcast-episode
     - cache ["podcast-series-intro-1", page, page.series] do
