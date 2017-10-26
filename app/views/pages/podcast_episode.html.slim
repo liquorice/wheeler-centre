@@ -37,9 +37,6 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  == open_graph_summary
-
-
   .podcast-episode
     - cache ["podcast-series-intro-1", page, page.series] do
       - if page.series
