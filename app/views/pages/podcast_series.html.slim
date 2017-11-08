@@ -1,6 +1,6 @@
 / Custom meta data
 - open_graph_image = page.fields[:hero_image].assets.first if page.fields[:hero_image].data_present?
-- open_graph_summary = strip_html(render_content(page.fields[:description]), "")
+- open_graph_summary = strip_html(strip_html(render_content(page.fields[:description]), "p i em strong br span", remove_contents: true), "")
 
 - set_meta_tags({ \
     title: page.title, \
