@@ -66,7 +66,7 @@ module Heracles
             published: true,
             hidden: false
           )
-          .children_of(Event.find(id))
+          .children_of(self)
           .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
           .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
           .page(options[:page] || 1)
