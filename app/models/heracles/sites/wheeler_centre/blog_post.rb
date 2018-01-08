@@ -145,6 +145,9 @@ module Heracles
             fields[:publish_date].value
           end
 
+          text :body do
+           fields[:body].value
+          end
         end
       end
     end
