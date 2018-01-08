@@ -4,6 +4,10 @@ class SearchesController < ApplicationController
 
   def show
     @search = GlobalSearch.new do
+      adjust_solr_params do |params|
+        params[:q] = "{!q.op=OR} #{params[:q]}"
+      end
+
       fulltext params[:q]
       with :published, true
       with :site_id, site.id
