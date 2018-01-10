@@ -4,8 +4,10 @@ class SearchesController < ApplicationController
 
   def show
     @search = GlobalSearch.new do
-      adjust_solr_params do |params|
-        params[:q] = "{!q.op=OR} #{params[:q]}"
+      if params[:q].present?
+        adjust_solr_params do |params|
+          params[:q] = "{!q.op=OR} #{params[:q]}"
+        end
       end
 
       fulltext params[:q]
