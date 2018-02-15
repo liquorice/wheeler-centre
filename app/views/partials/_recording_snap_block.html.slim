@@ -2,24 +2,33 @@
 - show_type = show_type || false
 - aspect = aspect || :square
 - if post.fields[:hero_image].data_present?
-  - image = post.fields[:hero_image].assets.first
+  - hero_image = post.fields[:hero_image].assets.first
+- if post.fields[:thumbnail_image].data_present?
+  - thumbnail_image = post.fields[:thumbnail_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["recording-snap-block-3", post, show_type, show_summary, image, post.fields[:people].pages, first_topic, aspect] do
+- cache ["recording-snap-block-3", post, show_type, show_summary, hero_image, thumbnail_image, post.fields[:people].pages, first_topic, aspect] do
   .snap-block
     a.recording-snap.recording-snap-block href=post.absolute_url
       span.recording-snap__date
         ' &nbsp;
-      / If we don't have hero images for recordings (which is most of the old ones)
+      / If we don't have hero or thumbnail images for recordings (which is most of the old ones)
       / we want to use the YouTube thumbnail instead
-      - if image
+      - if thumbnail_image && aspect == :square
         .recording-snap__hero
           - if show_type
             span.recording-snap__hero-type
               i.fa.fa-play
           .recording-snap__hero-inner
-            - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
-            img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
+            img src=thumbnail_image.content_thumbnail_url alt=(thumbnail_image.description.present? ? thumbnail_image.description : "Promo image for #{post.title}")
+      - elsif hero_image
+        .recording-snap__hero
+          - if show_type
+            span.recording-snap__hero-type
+              i.fa.fa-play
+          .recording-snap__hero-inner
+            - hero_image_url = (aspect == :square) ? hero_image.content_thumbnail_url : hero_image.content_small_thumbnail_url
+            img src=hero_image_url alt=(hero_image.description.present? ? hero_image.description : "Promo image for #{post.title}")
       / We have to differentiate because YouTube images are different sizes
       - elsif post.fields[:youtube_video].data_present?
         .recording-snap__hero class="recording-snap__hero--force-#{aspect.to_s}"
