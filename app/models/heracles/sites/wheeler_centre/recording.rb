@@ -7,6 +7,7 @@ module Heracles
             fields: [
               {name: :short_title, type: :text, label: "Short title"},
               {name: :hero_image, type: :assets, assets_file_type: :image},
+              {name: :thumbnail_image, type: :assets, assets_file_type: :image},
               {name: :description, type: :content},
               # Dates
               {name: :dates_info, type: :info, text: "<hr/>"},
