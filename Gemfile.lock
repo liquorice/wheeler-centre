@@ -93,9 +93,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (3.2.4)
-      sass (~> 3.2)
-      thor
+    bourbon (4.3.4)
+      sass (~> 3.4)
+      thor (~> 0.19)
     bugsnag (5.3.2)
     builder (3.2.3)
     chronic (0.10.2)
@@ -147,7 +147,7 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
-    fattr (2.3.0)
+    fattr (2.4.0)
     ffaker (2.5.0)
     ffi (1.9.18)
     fission (0.5.0)
@@ -319,7 +319,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    highline (1.7.8)
+    highline (1.7.10)
     hike (1.2.3)
     html_truncator (0.4.1)
       nokogiri (~> 1.5)
@@ -329,13 +329,13 @@ GEM
     humanize (1.1.2)
     i18n (0.8.1)
     icalendar (2.4.1)
-    icelab-heracles (2.0.0.beta59)
+    icelab-heracles (2.0.0.beta61)
       acts-as-taggable-on (~> 3.4.3)
       ancestry (~> 2.1.0)
       api-pagination (~> 4.1.0)
       autoprefixer-rails (~> 5.1.8)
       aws-sdk (~> 2.1.13)
-      bourbon (~> 3.2.4)
+      bourbon (~> 4.0)
       cloudinary (~> 1.1.0)
       coffee-rails (~> 4.0.1)
       contracts (~> 0.8)
@@ -375,7 +375,7 @@ GEM
       refile-s3
       render_anywhere (~> 0.0.11)
       responders (~> 2.0)
-      sass-rails (~> 5.0.6)
+      sass-rails (~> 5.0)
       slim-rails (~> 3.0.1)
       transloadit-rails (~> 1.1.1)
       turbolinks (~> 2.5.3)
@@ -431,7 +431,7 @@ GEM
     oauth (0.5.1)
     options (2.3.2)
     orm_adapter (0.5.0)
-    parallel (1.12.0)
+    parallel (1.12.1)
     passenger (5.0.30)
       rack
       rake (>= 0.8.1)
@@ -461,7 +461,7 @@ GEM
     rack-canonical-host (0.2.3)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
-    rack-protection (1.5.3)
+    rack-protection (1.5.5)
       rack
     rack-rewrite (1.5.1)
     rack-test (0.6.3)
@@ -539,22 +539,21 @@ GEM
       react-source (= 0.9.0)
     react-source (0.9.0)
     redcarpet (3.4.0)
-    refile (0.6.2)
+    refile (0.5.3)
       mime-types
-      rest-client (~> 1.8)
       sinatra (~> 1.4.5)
-    refile-s3 (0.2.0)
+    refile-s3 (0.1.0)
       aws-sdk (~> 2.0)
-      refile (~> 0.6.0)
+      refile (~> 0.5.0)
     render_anywhere (0.0.12)
       rails (>= 3.0.7)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rest-client (1.8.0)
+    rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rsolr (1.0.13)
       builder (>= 2.1.2)
     rspec (3.5.0)
@@ -660,7 +659,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.4)
+    unf_ext (0.0.7.5)
     varnisher (1.1.0)
       main (~> 6.0)
       nokogiri (~> 1.6)
@@ -701,7 +700,7 @@ DEPENDENCIES
   html_truncator
   humanize (~> 1.1.0)
   icalendar (~> 2.3)
-  icelab-heracles (= 2.0.0.beta59)!
+  icelab-heracles (= 2.0.0.beta61)!
   iso8601
   jbuilder (~> 2.0)
   launchy
@@ -744,4 +743,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.15.4
+   1.16.1
