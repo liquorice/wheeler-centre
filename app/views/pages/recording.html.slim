@@ -84,7 +84,7 @@
               .recording__audio
                 = render "partials/audio", audio: page.fields[:audio], title: "Listen to #{page.title}"
           - cache ["recording-events-1", page.events] do
-            - if page.events
+            - if page.events.any?
               .recording__events
                 h2
                   - if page.events.length > 1
