@@ -9,7 +9,7 @@ module Heracles
         helper_method \
         def mp3_tracking_url
           if mp3_version
-            url = mp3_version["url"]
+            url = mp3_version["ssl_url"]
             path = File.path(url)
             file_name = File.basename(url)
             track_event_url({
@@ -26,7 +26,7 @@ module Heracles
         helper_method \
         def ogg_tracking_url
           if ogg_version
-            url = ogg_version["url"]
+            url = ogg_version["ssl_url"]
             path = File.path(url)
             file_name = File.basename(url)
             track_event_url({
