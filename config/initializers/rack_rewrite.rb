@@ -69,4 +69,7 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
     }
     "#{ENV["TRACKING_SERVER_BASE_URL"]}/#{match[1]}?#{URI.encode_www_form(updated_params)}"
   }
+
+  rewrite '/', '/next-chapter', host: "next-chapter.localhost"
+  # rewrite '/', '/notes', host: "notes.localhost"
 end
