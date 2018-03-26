@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Heracles::SiteController
+  layout :set_layout
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,5 +14,16 @@ class ApplicationController < ActionController::Base
   helper_method \
   def site
     @site ||= Heracles::Site.where(slug: HERACLES_SITE_SLUG).first!
+  end
+
+  private
+  def set_layout
+    if request.path == "/next-chapter"
+      "next_chapter"
+    elsif request.path == "/notes"
+      "notes"
+    else
+      "application"
+    end
   end
 end
