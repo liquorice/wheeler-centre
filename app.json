@@ -79,9 +79,7 @@
   "addons": [
     "memcachier",
     "papertrail",
-    {
-      "plan": "heroku-postgresql:hobby-basic"
-    }
+    "heroku-postgresql:hobby-basic",
     "scheduler",
     "websolr"
   ],
