@@ -34,7 +34,8 @@ Heracles::Sites::WheelerCentre.configure do |config|
   config.transloadit_assembly_steps = {
     "original" => {
       "robot" => "/s3/store",
-      "use" => "asset"
+      "use" => "asset",
+      "credentials" => "wheeler_centre_heracles"
     },
     "content_thumbnail_resized" => {
       "robot" => "/image/resize",
