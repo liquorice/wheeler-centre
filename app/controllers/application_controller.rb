@@ -20,8 +20,6 @@ class ApplicationController < ActionController::Base
   def set_layout
     if request.path == "/next-chapter"
       "next_chapter"
-    elsif request.path == "/new-notes"
-      "notes"
     else
       "application"
     end
