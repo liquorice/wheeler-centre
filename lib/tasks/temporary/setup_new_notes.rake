@@ -82,6 +82,8 @@ namespace :temporary do
       edition.locked = true
       edition.page_order_position = :last if edition.new_record?
       edition.fields[:highlight_colour].value = generate_color
+      a_blog_post = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20).map { |p| p if p.fields[:hero_image].data_present? }.compact.sample
+      edition.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
       edition.save!
     end
 
@@ -99,6 +101,8 @@ namespace :temporary do
       post.locked = false
       post.page_order_position = :last if post.new_record?
       post.fields[:edition].page_ids = [Heracles::Sites::WheelerCentre::LongformBlogEdition.all.sample.id]
+      a_blog_post = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20).map { |p| p if p.fields[:hero_image].data_present? }.compact.sample
+      post.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
       post.save!
     end
   end
