@@ -222,6 +222,14 @@ module ApplicationHelper
     blog_page.children.of_type("blog_archive").first
   end
 
+  ### --------------------------------------------------------------------------
+  ### Longform Blog
+  ### --------------------------------------------------------------------------
+
+  memoize \
+  def longform_blog_page
+    site.pages.of_type("longform_blog").first
+  end
 
   ### --------------------------------------------------------------------------
   ### Broadcasts
