@@ -117,6 +117,7 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr", "2.1.1"
+  gem "pry-byebug"
 
   # Guard et al
   gem "guard", "~> 2"
