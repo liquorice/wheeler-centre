@@ -20,7 +20,7 @@ namespace :temporary do
     # Notes
     longform_blog = Heracles::Sites::WheelerCentre::LongformBlog.find_or_initialize_by(url: "new-notes")
     longform_blog.site = site
-    longform_blog.title = "New notes"
+    longform_blog.title = "Notes"
     longform_blog.slug = "new-notes"
     longform_blog.published = true
     longform_blog.locked = true
@@ -87,22 +87,29 @@ namespace :temporary do
       edition.save!
     end
 
+    # migrate some random posts across
+
+
     # Create a post
-    (1..20).each do
-      title = generate_title
-      slug = slugify(title)
+    (0..19).each_with_index do |i|
+      # title = generate_title
+      # slug = slugify(title)
       post = Heracles::Sites::WheelerCentre::LongformBlogPost.find_or_initialize_by(url: "new-notes/#{slug}")
       post.collection = notes_collection
       post.parent = longform_blog
       post.site = site
-      post.title = title
-      post.slug = slug
       post.published = true
       post.locked = false
       post.page_order_position = :last if post.new_record?
+
+      old_note = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20)[i]
+      post.title = old_note.title
+      post.slug = old_note.slug
+
+      post.fields.data = old_note.fields.data
       post.fields[:edition].page_ids = [Heracles::Sites::WheelerCentre::LongformBlogEdition.all.sample.id]
-      a_blog_post = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20).map { |p| p if p.fields[:hero_image].data_present? }.compact.sample
-      post.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
+      # a_blog_post = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20).map { |p| p if p.fields[:hero_image].data_present? }.compact.sample
+      # post.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
       post.save!
     end
   end
