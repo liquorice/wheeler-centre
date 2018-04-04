@@ -8,7 +8,7 @@
   link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
-  = blog_page.title
+  = longform_blog_page.title
 
 = area :masthead_contextual_navigation do
   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
