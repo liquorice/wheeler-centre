@@ -6,11 +6,7 @@ module Heracles
           {
             fields: [
               {name: :intro, label: "Introduction", type: :content},
-              {name: :highlighted_authors_title, type: :text},
-              {name: :highlighted_authors_intro, type: :content, with_buttons: %i(bold italic link), disable_insertables: true},
-              {name: :highlighted_authors, type: :associated_pages, page_type: :person},
-              {name: :middle, type: :content, hint: "Sits between 'Latest' and 'Guest posts'"},
-              {name: :end, type: :content, hint: "Sits after 'Guest posts'"},
+              {name: :end, type: :content, hint: "Sits after the edition list"},
             ]
           }
         end
