@@ -16,7 +16,12 @@
     - cache ["nav-blog-1", blog_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=blog_page.absolute_url
-          = blog_page.title
+          ' News
+
+    / - cache ["nav-longform-blog-1", blog_page] do
+    li.masthead-nav-main__item
+      a.masthead-nav-main__anchor href="/new-notes"
+        ' Notes
 
     - cache ["nav-people-1", people_page] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
