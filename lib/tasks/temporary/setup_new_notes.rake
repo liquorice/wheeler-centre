@@ -87,10 +87,7 @@ namespace :temporary do
       edition.save!
     end
 
-    # migrate some random posts across
-
-
-    # Create a post
+    # migrate some posts across
     (0..19).each_with_index do |i|
       # title = generate_title
       # slug = slugify(title)
@@ -112,5 +109,14 @@ namespace :temporary do
       # post.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
       post.save!
     end
+
+    # Change notes page to "news"
+    blog_page = Heracles::Sites::WheelerCentre::Blog.first
+    blog_page.title = "News"
+    blog_page.save!
+
+    blog_archive = Heracles::Sites::WheelerCentre::BlogArchive.first
+    blog_archive.fields[:nav_title].value = "News archive"
+    blog_archive.save!
   end
 end
