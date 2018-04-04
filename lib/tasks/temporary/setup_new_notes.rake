@@ -88,9 +88,9 @@ namespace :temporary do
     end
 
     # migrate some posts across
-    (0..19).each_with_index do |i|
-      # title = generate_title
-      # slug = slugify(title)
+    # grab the ones tagged with 'notes'
+    notes = Heracles::Site.first.pages.of_type("blog_post").tagged_with("notes")
+    notes.each_with_index do |note, i|
       post = Heracles::Sites::WheelerCentre::LongformBlogPost.find_or_initialize_by(url: "new-notes/#{slug}")
       post.collection = notes_collection
       post.parent = longform_blog
@@ -98,15 +98,10 @@ namespace :temporary do
       post.published = true
       post.locked = false
       post.page_order_position = :last if post.new_record?
-
-      old_note = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20)[i]
-      post.title = old_note.title
-      post.slug = old_note.slug
-
-      post.fields.data = old_note.fields.data
+      post.title = note.title
+      post.slug = note.slug
+      post.fields.data = note.fields.data
       post.fields[:edition].page_ids = [Heracles::Sites::WheelerCentre::LongformBlogEdition.all.sample.id]
-      # a_blog_post = Heracles::Site.first.pages.of_type("blog_post").reorder(created_at: :desc).limit(20).map { |p| p if p.fields[:hero_image].data_present? }.compact.sample
-      # post.fields[:hero_image].asset_ids = a_blog_post.fields[:hero_image].assets.map(&:id)
       post.save!
     end
 
