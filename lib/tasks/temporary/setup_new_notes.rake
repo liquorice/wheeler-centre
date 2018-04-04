@@ -1,5 +1,5 @@
 def generate_title
-  title = FFaker::Lorem.words(5).join(" ")
+  title = FFaker::Lorem.words(3).join(" ")
   title[0].upcase + title[1..-1]
 end
 
