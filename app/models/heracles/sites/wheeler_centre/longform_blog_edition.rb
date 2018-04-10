@@ -7,7 +7,7 @@ module Heracles
             fields: [
               {name: :hero_content, type: :content, hint: "Shown on the edition list page — can include image(s)"},
               {name: :hero_image, type: :assets, assets_file_type: :image, hint: "Displayed at the top"},
-              {name: :intro, type: :content, hint: "Shown above the notes list"},
+              {name: :intro, label: "Introduction", type: :content, hint: "Shown above the notes list"},
               {name: :end, type: :content, hint: "Shown after the notes list"},
             ]
           }
