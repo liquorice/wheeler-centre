@@ -207,3 +207,14 @@ heroku config:set BUNDLE_GEM__FURY__IO="your-token-here"
 ```
 
 You can find the token on your [Gemfury repos page](https://manage.fury.io/dashboard/icelab#/repos).
+
+## Dealing with Heroku review apps
+```sh
+heroku login
+heroku addons:create heroku-postgresql:hobby-basic --app wheeler-centre-pr-46
+heroku pg:copy HEROKU_POSTGRESQL_BLUE_URL HEROKU_POSTGRESQL_OLIVE_URL --app wheeler-centre-pr-46
+heroku pg:promote HEROKU_POSTGRESQL_OLIVE_URL --app wheeler-centre-pr-46
+heroku config:set ADMIN_HOST=wheeler-centre-pr-46.herokuapp.com CANONICAL_DOMAIN=https://wheeler-centre-pr-46.herokuapp.com CANONICAL_HOSTNAME=wheeler-centre-pr-46.herokuapp.com --app wheeler-centre-pr-46
+heroku run rake temporary:setup_new_notes --app wheeler-centre-pr-46
+heroku login
+```
