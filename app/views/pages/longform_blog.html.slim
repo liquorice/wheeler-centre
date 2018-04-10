@@ -15,7 +15,7 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  .blog-index
+  .longform-blog-index
     - cache ["blog-index-intro-1", page] do
       - if page.fields[:intro].data_present?
         .intro.blog-index__intro.column-wrapper
@@ -24,28 +24,13 @@
 
     / List out the long form posts
     / TODO: use distinct edition classes (if this HTML is, in fact, acceptable (?))
-    - page.editions.each do |edition|
-      - highlight_color = edition.fields[:highlight_colour].value if edition.fields[:highlight_colour].data_present? && valid_hex_color(edition.fields[:highlight_colour].value)
-      .event-series-summary__block style=style_for_event_series_block(highlight_color)
-        a.event-series-summary__anchor href=edition.absolute_url
-          - if edition.fields[:hero_image].data_present?
-            img.event-series-summary__image src=edition.fields[:hero_image].assets.first.content_small_url
-          .event-series-summary__text
-            h3.event-series-summary__title = edition.title
-            - if edition.fields[:summary].data_present?
-              .event-series-summary__description.copy
-                = render_content edition.fields[:summary]
-            - else
-              .event-series-summary__description.copy
-                = force_excerptify_html render_content(edition.fields[:body]), 40, "i em strong br"
-            span.event-series-summary__action View this edition
-
-
-    / Content area
-    - cache ["blog-index-middle-1", page] do
-      - if page.fields[:middle].data_present?
-        .content-block
-          = render_content_in_sections page.fields[:middle]
+    .column-wide
+      - page.editions.each do |edition|
+        a.longform-blog-edition.clearfix href=edition.absolute_url
+          h2.longform-blog-edition__title = edition.title
+          - if edition.fields[:hero_content].data_present?
+            .longform-blog-edition__hero_content.copy
+               = render_content edition.fields[:hero_content]
 
     / Content area
     - cache ["blog-index-end-1", page] do

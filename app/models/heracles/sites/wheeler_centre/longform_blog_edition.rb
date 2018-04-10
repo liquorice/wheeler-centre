@@ -5,13 +5,10 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :hero_image, type: :assets, assets_file_type: :image},
-              {name: :summary, type: :content},
-              {name: :body, type: :content},
-              {name: :highlight_colour, type: :text, editor_type: 'code'},
-              {name: :interview, type: :content},
-              {name: :editorial, type: :content, hint: ""},
-              {name: :quotes, type: :content, hint: ""},
+              {name: :hero_content, type: :content, hint: "Shown on the edition list page — can include image(s)"},
+              {name: :hero_image, type: :assets, assets_file_type: :image, hint: "Displayed at the top"},
+              {name: :intro, type: :content, hint: "Shown above the notes list"},
+              {name: :end, type: :content, hint: "Shown after the notes list"},
             ]
           }
         end

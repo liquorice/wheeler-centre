@@ -5,8 +5,10 @@ module Heracles
         def self.config
           {
             fields: [
+              {name: :nav_title, type: :text},
               {name: :intro, label: "Introduction", type: :content},
-              {name: :end, type: :content, hint: "Sits after the edition list"},
+              {name: :featured_editions, type: :associated_pages, page_type: :longform_blog_edition},
+              {name: :end, type: :content, hint: "Shown after the edition list"},
             ]
           }
         end
@@ -18,15 +20,11 @@ module Heracles
         private
 
         def search_editions(options={})
-          # active = options[:active]
-          # EventSeries.where("fields_data->'archived'->>'value' != ?", "#{active}")
-          LongformBlogEdition
+          fields[:featured_editions]
+            .pages
             .published
             .visible
-            .order(:title)
-            # .page(1)
-            # .per(1000)
-            # .select{ |res| res.events.present? }
+            .rank(:page_order)
         end
       end
     end
