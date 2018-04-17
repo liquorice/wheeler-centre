@@ -1,3 +1,13 @@
-html {
-  background: #fff;
+/* Variables */
+
+:root {
+  --primary-color: #00ADF2;
 }
+
+/* Imports */
+
+html {
+  background-color: var(--primary-color);
+}
+
+@import "./masthead/index.css";
