@@ -1,13 +1,22 @@
 /* Variables */
 
 :root {
-  --primary-color: #00ADF2;
+  --color-blue: #00ADF2;
+  --color-light-blue: #E9F9FF;
+  --color-dark-blue: #254957;
+
+  --column-wide: 120rem;
+
+  --font-mono: "monaco", monospace;
+  --font-sans: "Colfax", Helvetica, sans-serif;
+  --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
 }
 
 /* Imports */
 
 html {
-  background-color: var(--primary-color);
+  background-color: var(--color-light-blue);
 }
 
-@import "./masthead/index.css";
+@import "./masthead";
+@import "./masthead/nav.css";
