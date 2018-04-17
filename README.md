@@ -210,11 +210,11 @@ You can find the token on your [Gemfury repos page](https://manage.fury.io/dashb
 
 ## Dealing with Heroku review apps
 ```sh
-heroku login
+heroku login # login with the wheelercentre account
 heroku addons:create heroku-postgresql:hobby-basic --app wheeler-centre-pr-46
-heroku pg:copy HEROKU_POSTGRESQL_BLUE_URL HEROKU_POSTGRESQL_OLIVE_URL --app wheeler-centre-pr-46
-heroku pg:promote HEROKU_POSTGRESQL_OLIVE_URL --app wheeler-centre-pr-46
+heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_AMBER_URL --app wheeler-centre-pr-46 # replace the 2nd url env var with the one created in the previous step
+heroku pg:promote HEROKU_POSTGRESQL_AMBER_URL --app wheeler-centre-pr-46
 heroku config:set ADMIN_HOST=wheeler-centre-pr-46.herokuapp.com CANONICAL_DOMAIN=https://wheeler-centre-pr-46.herokuapp.com CANONICAL_HOSTNAME=wheeler-centre-pr-46.herokuapp.com --app wheeler-centre-pr-46
 heroku run rake temporary:setup_new_notes --app wheeler-centre-pr-46
-heroku login
+heroku login # log back in with your own account
 ```

@@ -12,32 +12,67 @@
   = longform_blog_page.title
 
 = area :masthead_contextual_navigation do
-  - pages = [longform_blog_page] + longform_blog_page.children.in_order.visible.published.where(collection_id: nil)
-  = render "partials/masthead_contextual_navigation", pages: pages, current: page
-
-/ = area :masthead_contextual_navigation do
-/   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
-/   = render "partials/masthead_contextual_navigation", pages: pages, current: page
+  ul.masthead-contextual__navigation-list
+    - if longform_blog_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_page.absolute_url
+          ' Editions
+    - if longform_blog_archive_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_archive_page.absolute_url
+          ' Browse all notes
 
 = area :main do
-  .blog-index
-    - if page.fields[:hero_image].data_present?
-      .column-wide
-        img.edition-hero src=page.fields[:hero_image].assets.first.content_medium_thumbnail_url
-
+  .longform-blog-index
     - cache ["longform-blog-edition-intro", page] do
       - if page.fields[:intro].data_present?
-        .intro.blog-index__intro.column-wrapper
-          .column-narrow.copy
+        .intro.longform-blog-index__intro.column-wrapper
+          .column-mid.copy
             = render_content page.fields[:intro]
 
-    .blog-index__latest.column-wrapper
-      h2.blog-index__latest-header Notes from the '#{page.title}' edition
+    .longform-blog-index__latest.column-wrapper
+      - if page.fields[:subheading].data_present?
+        h2.longform-blog-index__latest-header = page.fields[:subheading].value
       - if posts.present?
         .column-wide
-          .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
-            - posts.each do |post|
-              = render "partials/blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
+          - posts.each do |post|
+            - if post.fields[:hero_image].data_present?
+              - image = post.fields[:hero_image].assets.first
+            .snap-block
+              a.longform-blog-snap.longform-blog-snap-block href=post.absolute_url
+                - unless image.blank?
+                  .longform-blog-snap__hero
+                    .longform-blog-snap__hero-inner
+                      img src=image.content_medium_thumbnail_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
+                .longform-blog-snap__right
+                  time.longform-blog-snap__date
+                    = l post.publish_date, format: :medium_date
+                  h3.longform-blog-snap__title
+                    span.title-text == widont_format markdown_line post.title
+                    - if post.fields[:topics].data_present?
+                      span.title-tags
+                        '  &nbsp;/&nbsp;
+                        = post.fields[:topics].pages.first.title
+                  - if post.fields[:authors].data_present?
+                    p.longform-blog-snap__authors
+                      - if post.guest_post?
+                        ' Guest post by
+                      - else
+                        ' By
+                      = post.fields[:authors].pages.map(&:title).to_sentence
+                      - summary = ""
+                      - if post.fields[:summary].data_present?
+                        - summary = post.fields[:summary]
+                      - elsif post.fields[:body].data_present?
+                        - summary = post.fields[:body]
+                      - if summary.present?
+                        .longform-blog-snap-block__summary class=("longform-blog-snap-block__summary--no-image" if image.blank?)
+                          .longform-blog-snap-block__summary-inner.copy
+                            = force_excerptify_html render_content(summary), (image.blank? ? 70 : 50), "p i em strong br"
+                            p.longform-blog-snap-block__read-more
+                              ' Read
+                              | ›
+
 
     / Content area
     - cache ["longform-blog-edition-end", page] do

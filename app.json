@@ -58,10 +58,10 @@
     "HEROKU_APP_NAME": {
       "required": true
     },
-    "PRODUCTION_DATABASE_URL": {
+    "FLARUM_HOST": {
       "required": true
     },
-    "FLARUM_HOST": {
+    "ASSETS_AWS_BUCKET": {
       "required": true
     },
     "BASIC_AUTH_PASSWORD": "lab",
