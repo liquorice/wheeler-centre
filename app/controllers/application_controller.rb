@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   private
   def set_layout
-    if request.path == "/the-next-chapter"
+    if request.path.match /^\/the-next-chapter/
       "next_chapter"
     else
       "application"

@@ -13,7 +13,7 @@ def slugify(name)
 end
 
 namespace :temporary do
-  desc "Set up /notes and /news split"
+  desc "Set up next chapter, yo"
   task setup_next_chapter: :environment do
     site = Heracles::Site.first
 
@@ -25,5 +25,16 @@ namespace :temporary do
     home_page.locked = true
     home_page.page_order_position = :last if home_page.new_record?
     home_page.save!
+
+    # About us page
+    about_page = Heracles::Sites::WheelerCentre::NextChapterContentPage.find_or_initialize_by(url: "the-next-chapter/about-us")
+    about_page.parent = home_page
+    about_page.site = site
+    about_page.title = "About us"
+    about_page.slug = "about-us"
+    about_page.published = true
+    about_page.locked = true
+    about_page.page_order_position = :last if about_page.new_record?
+    about_page.save!
   end
 end

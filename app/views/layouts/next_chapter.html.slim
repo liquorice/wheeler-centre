@@ -32,12 +32,14 @@ html
   = area :body_outer do
     body data-view-fast-click=true
       = area :body do
-        = render 'partials/skip_links'
-        = render 'partials/campaign_banner'
+        = area :masthead do
+          = render 'partials/next_chapter_masthead'
 
         = area :main_outer do
           div role="main" id="main-content"
             = area :main
-            = area :main_footer
+
+        = area :footer do
+          = render 'partials/next_chapter_footer'
 
       = cache_buster_script site
