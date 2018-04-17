@@ -1,3 +1,37 @@
-.masthead-next-chapter {
+.nc-header {
+  background-color: var(--color-light-blue);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
 
+.nc-header__wrapper {
+  max-width: var(--column-wide);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+
+  display: flex;
+}
+
+.nc-logo {
+  width: 50%;
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+}
+
+.nc-logo h1 {
+  color: transparent;
+  font: 0/0 a;
+}
+
+.nc-logo__image {
+  width: 100%;
+  max-width: 40.7rem;
+}
+
+.nc-clip {
+  width: 17rem;
+  clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 0%);
+  background-color: var(--color-blue);
 }
