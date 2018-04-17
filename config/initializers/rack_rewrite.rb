@@ -71,5 +71,6 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   }
 
   rewrite '/', '/next-chapter', host: "next-chapter.localhost"
+  rewrite '/', '/next-chapter', host: "next-chapter.wheeler-centre-pr-46.herokuapp.com"
   # rewrite '/', '/notes', host: "notes.localhost"
 end
