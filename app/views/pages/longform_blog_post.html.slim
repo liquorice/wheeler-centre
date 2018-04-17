@@ -47,8 +47,15 @@
   = longform_blog_page.title
 
 = area :masthead_contextual_navigation do
-  - pages = [longform_blog_page] + longform_blog_page.children.in_order.visible.published.where(collection_id: nil)
-  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+  ul.masthead-contextual__navigation-list
+    - if longform_blog_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_page.absolute_url
+          ' Editions
+    - if longform_blog_archive_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_archive_page.absolute_url
+          ' Browse all notes
 
 = area :main do
   .blog-post.clearfix

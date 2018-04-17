@@ -231,6 +231,11 @@ module ApplicationHelper
     site.pages.of_type("longform_blog").first
   end
 
+  memoize \
+  def longform_blog_archive_page
+    site.pages.of_type("longform_blog_archive").first
+  end
+
   ### --------------------------------------------------------------------------
   ### Broadcasts
   ### --------------------------------------------------------------------------
