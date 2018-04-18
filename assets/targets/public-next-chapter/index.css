@@ -38,3 +38,4 @@ html {
 @import "./masthead";
 @import "./masthead/nav.css";
 @import "./footer";
+@import "./content-page";

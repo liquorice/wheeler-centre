@@ -11,12 +11,16 @@
           ' Navigate this section
           i.fa.fa-angle-down
         .content-page__nav-inner
-          h3.content-page__nav-title
-            - unless page.root.id == page.id
-              a href=page.root.absolute_url = page.root.title
-            - else
-              = page.root.title
-          = render "partials/page_nav_children", parent: page.root, current: page
+          - if page.children.any? || page.parent != next_chapter_home_page
+            h3.content-page__nav-title
+              - if page.parent == page.root
+                = page.title
+              - else
+                a href=page.parent.next_chapter_absolute_url = page.parent.title
+          - if page.parent == page.root
+            = render "partials/next_chapter_page_nav_children", parent: page, current: page
+          - else
+            = render "partials/next_chapter_page_nav_children", parent: page.parent, current: page
     .content-page__content.clearfix
       - if page.fields[:intro].data_present?
         .content-page__intro
