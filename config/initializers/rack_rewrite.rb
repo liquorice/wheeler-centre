@@ -70,7 +70,7 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
     "#{ENV["TRACKING_SERVER_BASE_URL"]}/#{match[1]}?#{URI.encode_www_form(updated_params)}"
   }
 
-  rewrite '/', '/next-chapter', host: "next-chapter.localhost"
-  rewrite '/', '/next-chapter', host: "next-chapter.wheeler-centre-pr-46.herokuapp.com"
+  rewrite /\/(.*)/, '/the-next-chapter/$1', host: "the-next-chapter.localhost"
+  # rewrite '/', '/the-next-chapter', host: "next-chapter.wheeler-centre-pr-46.herokuapp.com"
   # rewrite '/', '/notes', host: "notes.localhost"
 end

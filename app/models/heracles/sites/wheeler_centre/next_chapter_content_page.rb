@@ -27,6 +27,10 @@ module Heracles
           end
         end
 
+        def next_chapter_absolute_url
+          absolute_url.gsub("/the-next-chapter", "")
+        end
+
         private
 
         # Topics with their ancestors parents for search purposes
