@@ -21,7 +21,10 @@
 
 .nc-logo {
   width: 50%;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   display: flex;
+
   align-items: center;
 }
 

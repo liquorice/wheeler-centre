@@ -88,14 +88,16 @@
 
 .nc-primary-nav__list-item {
   margin-bottom: 2.5rem;
+}
 
+.breakpoint-tablet .nc-primary-nav__list-item {
+  margin-bottom: 1.5rem;
 }
 
 .breakpoint-phone-wide .nc-primary-nav__list-item,
 .breakpoint-phone .nc-primary-nav__list-item {
   padding-right: 1rem;
   margin-bottom: 0.5rem;
-/*  text-align: center;*/
 }
 
 .nc-primary-nav__list-anchor {
@@ -106,6 +108,10 @@
 
 .nc-primary-nav__list-anchor:hover {
   text-decoration: underline;
+}
+
+.breakpoint-tablet .nc-primary-nav__list-anchor {
+  font-size: 1.8rem;
 }
 
 .breakpoint-phone-wide .nc-primary-nav__list-anchor,
