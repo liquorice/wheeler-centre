@@ -22,12 +22,16 @@
 /* Next Chapter logo */
 
 .nc-logo {
-  width: 50%;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-  display: flex;
-
   align-items: center;
+  display: flex;
+  padding-bottom: 7rem;
+  padding-left: 7rem;
+  padding-top: 7rem;
+  width: 50%;
+}
+
+.breakpoint-tablet .nc-logo {
+  padding-left: 1.5rem;
 }
 
 .breakpoint-phone-wide .nc-logo,
@@ -55,7 +59,7 @@
 }
 
 .nc-clip {
-  width: 17rem;
+  width: 19.5rem;
   clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 0%);
   background-color: var(--color-blue);
 }
