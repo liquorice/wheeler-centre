@@ -1,3 +1,18 @@
+/* These styles override the styles we're inheriting from the main site */
+
 .content-page__title {
+  color: var(--color-blue);
+}
+
+.sub-page-nav__anchor:hover {
+  background-color: var(--color-light-blue);
+  color: var(--color-blue);
+}
+
+.sub-page-nav__anchor--active {
+  color: var(--color-blue);
+}
+
+.copy p a, .copy blockquote a, .copy li a {
   color: var(--color-blue);
 }
