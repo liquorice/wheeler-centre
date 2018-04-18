@@ -23,6 +23,12 @@ html {
   padding-right: 3.5rem;
 }
 
+.breakpoint-phone-wide .nc-inner,
+.breakpoint-phone .nc-inner {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .nc-wrapper {
   margin-left: auto;
   margin-right: auto;
