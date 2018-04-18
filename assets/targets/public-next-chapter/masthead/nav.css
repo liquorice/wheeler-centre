@@ -1,10 +1,10 @@
 .nc-nav {
-  width: 50%;
   background-color: var(--color-blue);
-  padding-top: 3rem;
-  padding-left: 9rem;
   padding-bottom: 4rem;
+  padding-left: 9rem;
+  padding-top: 3rem;
   position: relative;
+  width: 50%;
 }
 
 .breakpoint-tablet .nc-nav {
@@ -13,23 +13,23 @@
 
 .breakpoint-phone-wide .nc-nav,
 .breakpoint-phone .nc-nav {
-  width: 100%;
-  padding-top: 1rem;
-  padding-right: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  width: 100%;
 }
 
 .nc-nav::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -200%;
+  background-color: var(--color-blue);
   bottom: 0;
+  content: "";
   display: block;
   height: 100%;
+  position: absolute;
+  right: -200%;
+  top: 0;
   width: 200%;
-  background-color: var(--color-blue);
   z-index: 0;
 }
 
@@ -96,8 +96,8 @@
 
 .breakpoint-phone-wide .nc-primary-nav__list-item,
 .breakpoint-phone .nc-primary-nav__list-item {
-  padding-right: 1rem;
   margin-bottom: 0.5rem;
+  padding-right: 1rem;
 }
 
 .nc-primary-nav__list-anchor {
