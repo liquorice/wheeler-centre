@@ -1,17 +1,19 @@
 .nc-footer-container {
   background-color: var(--color-light-blue);
-  font-family: var(--font-sans);
-  padding-top: 5rem;
-  padding-bottom: 5rem;
 }
 
 .nc-footer {
   display: flex;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  font-family: var(--font-sans);
 }
 
 .breakpoint-phone-wide .nc-footer,
 .breakpoint-phone .nc-footer {
   flex-direction: column;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .nc-footer-logo {
@@ -83,6 +85,10 @@
 .nc-footer-nav__list-anchor {
   font-size: 1.4rem;
   color: var(--color-dark-blue);
+}
+
+.nc-footer-nav__list-anchor:hover {
+  text-decoration: underline;
 }
 
 .nc-footer-nav__list-anchor--parent {
