@@ -12,8 +12,8 @@
 .breakpoint-phone-wide .nc-footer,
 .breakpoint-phone .nc-footer {
   flex-direction: column;
-  padding-bottom: 1.5rem;
-  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
 }
 
 .nc-footer-logo {
