@@ -49,6 +49,7 @@
 .breakpoint-phone-wide .nc-secondary-nav,
 .breakpoint-phone .nc-secondary-nav {
   margin-bottom: 1rem;
+  justify-content: flex-start;
 }
 
 .nc-secondary-nav__list-item {
@@ -90,13 +91,9 @@
   margin-bottom: 2rem;
 }
 
-.breakpoint-tablet .nc-primary-nav__list-item {
-  margin-bottom: 1.5rem;
-}
-
 .breakpoint-phone-wide .nc-primary-nav__list-item,
 .breakpoint-phone .nc-primary-nav__list-item {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   padding-right: 1rem;
 }
 
@@ -116,5 +113,5 @@
 
 .breakpoint-phone-wide .nc-primary-nav__list-anchor,
 .breakpoint-phone .nc-primary-nav__list-anchor {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
