@@ -76,7 +76,7 @@
 }
 
 .nc-footer-nav__list-item {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .nc-footer-nav__list-item:last-child {
@@ -96,7 +96,9 @@
 .nc-footer-nav__list-anchor--parent {
   font-weight: bold;
   font-size: 1.7rem;
-  line-height: 2.2rem
+  line-height: 2.2rem;
+  margin-bottom: 0.4rem;
+  display: inline-block;
 }
 
 .nc-wheeler-centre-logo {
