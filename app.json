@@ -64,6 +64,9 @@
     "ASSETS_AWS_BUCKET": {
       "required": true
     },
+    "PRODUCTION_DATABASE_URL": {
+      "required": true
+    },
     "BASIC_AUTH_PASSWORD": "lab",
     "BASIC_AUTH_USER": "ice",
     "CANONICAL_PORT": "80"
