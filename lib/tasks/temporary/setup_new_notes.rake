@@ -119,15 +119,6 @@ namespace :temporary do
     longform_blog.fields[:featured_editions].page_ids = editions.map(&:id)
     longform_blog.save!
 
-    # Change notes page to "news"
-    blog_page = Heracles::Sites::WheelerCentre::Blog.first
-    blog_page.title = "News"
-    blog_page.save!
-
-    blog_archive = Heracles::Sites::WheelerCentre::BlogArchive.first
-    blog_archive.fields[:nav_title].value = "News archive"
-    blog_archive.save!
-
     # Heracles::Site.first.pages.of_type(:longform_blog_edition).each do |edition|
     #   edition.fields[:summary].value = edition.fields[:hero_content].value
     #   edition.save!
