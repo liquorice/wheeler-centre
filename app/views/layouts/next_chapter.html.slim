@@ -1,0 +1,46 @@
+doctype 5
+html
+  head
+    meta charset="utf-8"
+    = render "partials/metaquery_breakpoints"
+    = render "partials/inline_boot_javascript"
+
+    / TODO add DNS prefetch URLs
+    link rel="dns-prefetch" href="//cdn.embedly.com"
+    link rel="dns-prefetch" href="//www.youtube.com"
+
+    link rel="canonical" href="#{canonical_domain}#{request.fullpath}"
+
+    = display_meta_tags site: I18n.t("metadata.site_name"),
+                        separator: "—",
+                        reverse: true
+    = stylesheet_link_tag "public", media: "screen"
+    = stylesheet_link_tag "public-next-chapter", media: "screen"
+    = stylesheet_link_tag "print", media: "print"
+    - if Rails.env.development?
+      = development_javascript
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv", defer: true
+    = javascript_include_tag "public", async: true
+
+    / TODO shift to xhr if we use a CDN -> origin structure
+    / = csrf_meta_tags
+    = render 'partials/analytics'
+    link rel="icon" href=image_path("public-next-chapter/fav.png")
+
+    = area :head
+
+  = area :body_outer do
+    body data-view-fast-click=true
+      = area :body do
+        = area :masthead do
+          = render 'partials/next_chapter_masthead'
+
+        = area :main_outer do
+          div role="main" id="main-content"
+            = area :main
+
+        = area :footer do
+          = render 'partials/next_chapter_footer'
+
+      = cache_buster_script site

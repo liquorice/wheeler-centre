@@ -1,28 +1,12 @@
 {
   "name": "wheeler-centre",
   "scripts": {
+    "postdeploy": "pg_dump $PRODUCTION_DATABASE_URL | psql $DATABASE_URL"
   },
   "env": {
     "ADMIN_HOST": {
       "required": true
     },
-    "ASSET_HOST_PRODUCTION": {
-      "required": true
-    },
-    "ASSETS_AWS_ACCESS_KEY_ID": {
-      "required": true
-    },
-    "ASSETS_AWS_BUCKET": {
-      "required": true
-    },
-    "ASSETS_AWS_REGION": {
-      "required": true
-    },
-    "ASSETS_AWS_SECRET_ACCESS_KEY": {
-      "required": true
-    },
-    "BASIC_AUTH_USER": "ice",
-    "BUGSNAG_API_KEY": "",
     "BUNDLE_GEM__FURY__IO": {
       "required": true
     },
@@ -32,70 +16,21 @@
     "CANONICAL_HOSTNAME": {
       "required": true
     },
-    "CANONICAL_PORT": {
-      "required": true
-    },
     "CANONICAL_PROTOCOL": {
-      "required": true
-    },
-    "CDN_ORIGIN_DOMAIN": {
-      "required": true
-    },
-    "CDN_ORIGIN_PORT": {
-      "required": true
-    },
-    "CDN77_CDN_ID": {
-      "required": true
-    },
-    "CDN77_EMAIL": {
-      "required": true
-    },
-    "CDN77_PASSWORD": {
-      "required": true
-    },
-    "CDN77_PURGE_ENDPOINT": {
-      "required": true
-    },
-    "EMBEDLY_API_KEY": {
-      "required": true
-    },
-    "FASTLY_API_KEY": {
       "required": true
     },
     "FASTLY_SERVICE_ID": {
       "required": true
     },
-    "FLARUM_AUTH_TOKEN": {
-      "required": true
-    },
-    "FLARUM_HOST": {
-      "required": true
-    },
     "FOG_PROVIDER": {
-      "required": true
-    },
-    "GA_TRACKING_ID": {
-      "required": true
-    },
-    "HEROKU_POSTGRESQL_RED_URL": {
       "required": true
     },
     "LANG": {
       "required": true
     },
-    "MEMCACHIER_PASSWORD": {
-      "required": true
-    },
-    "MEMCACHIER_SERVERS": {
-      "required": true
-    },
-    "MEMCACHIER_USERNAME": {
-      "required": true
-    },
     "NPM_CONFIG_PRODUCTION": {
       "required": true
     },
-    "PAPERTRAIL_API_TOKEN": "",
     "PERMITTED_TRACKING_HOSTS": {
       "required": true
     },
@@ -104,9 +39,6 @@
     },
     "RAILS_ENV": {
       "required": true
-    },
-    "SECRET_KEY_BASE": {
-      "generator": "secret"
     },
     "SENSIBLE_DEFAULTS": {
       "required": true
@@ -117,22 +49,27 @@
     "TRACKING_SERVER_BASE_URL": {
       "required": true
     },
-    "TRANSLOADIT_AUTH_KEY": {
-      "required": true
-    },
-    "TRANSLOADIT_AUTH_SECRET": {
-      "required": true
-    },
-    "TRANSLOADIT_TEMPLATE_ID": {
-      "required": true
-    },
     "USE_SSL_FOR_ASSETS": {
       "required": true
     },
-    "WEBSOLR_URL": {
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    },
+    "HEROKU_APP_NAME": {
       "required": true
     },
-    "BASIC_AUTH_PASSWORD": "lab"
+    "FLARUM_HOST": {
+      "required": true
+    },
+    "ASSETS_AWS_BUCKET": {
+      "required": true
+    },
+    "PRODUCTION_DATABASE_URL": {
+      "required": true
+    },
+    "BASIC_AUTH_PASSWORD": "lab",
+    "BASIC_AUTH_USER": "ice",
+    "CANONICAL_PORT": "80"
   },
   "formation": {
     "worker": {
@@ -145,7 +82,7 @@
   "addons": [
     "memcachier",
     "papertrail",
-    "heroku-postgresql",
+    "heroku-postgresql:hobby-basic",
     "scheduler",
     "websolr"
   ],

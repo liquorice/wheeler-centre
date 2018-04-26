@@ -1,0 +1,117 @@
+.nc-nav {
+  background-color: var(--color-blue);
+  padding-bottom: 4rem;
+  padding-left: 9rem;
+  padding-top: 3rem;
+  position: relative;
+  width: 50%;
+}
+
+.breakpoint-tablet .nc-nav {
+  padding-left: 3rem;
+}
+
+.breakpoint-phone-wide .nc-nav,
+.breakpoint-phone .nc-nav {
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  width: 100%;
+}
+
+.nc-nav::after {
+  background-color: var(--color-blue);
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  right: -200%;
+  top: 0;
+  width: 200%;
+  z-index: 0;
+}
+
+.breakpoint-phone-wide .nc-nav::after,
+.breakpoint-phone .nc-nav::after {
+  display: none;
+}
+
+/* Secondary nav */
+
+.nc-secondary-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4rem;
+}
+
+.breakpoint-phone-wide .nc-secondary-nav,
+.breakpoint-phone .nc-secondary-nav {
+  margin-bottom: 1rem;
+  justify-content: flex-start;
+}
+
+.nc-secondary-nav__list-item {
+  margin-right: 3rem;
+}
+
+.breakpoint-phone-wide .nc-secondary-nav__list-item,
+.breakpoint-phone .nc-secondary-nav__list-item {
+  margin-right: 1.5rem;
+}
+
+.nc-secondary-nav__list-item:last-child {
+  margin-right: 0;
+}
+
+.nc-secondary-nav__list-anchor {
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.nc-secondary-nav__list-anchor:hover {
+  opacity: 0.8
+}
+
+/* Primary nav */
+
+.nc-primary-nav {
+}
+
+.breakpoint-phone-wide .nc-primary-nav,
+.breakpoint-phone .nc-primary-nav {
+  columns: 2;
+}
+
+.nc-primary-nav__list-item {
+  margin-bottom: 2rem;
+}
+
+.breakpoint-phone-wide .nc-primary-nav__list-item,
+.breakpoint-phone .nc-primary-nav__list-item {
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+.nc-primary-nav__list-anchor {
+  color: #FFFFFF;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nc-primary-nav__list-anchor:hover {
+  text-decoration: underline;
+}
+
+.breakpoint-tablet .nc-primary-nav__list-anchor {
+  font-size: 1.8rem;
+}
+
+.breakpoint-phone-wide .nc-primary-nav__list-anchor,
+.breakpoint-phone .nc-primary-nav__list-anchor {
+  font-size: 1.6rem;
+}

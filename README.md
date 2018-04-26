@@ -207,3 +207,10 @@ heroku config:set BUNDLE_GEM__FURY__IO="your-token-here"
 ```
 
 You can find the token on your [Gemfury repos page](https://manage.fury.io/dashboard/icelab#/repos).
+
+## Dealing with Heroku review apps
+```sh
+heroku config:set ADMIN_HOST=wheeler-centre-pr-46.herokuapp.com CANONICAL_DOMAIN=https://wheeler-centre-pr-46.herokuapp.com CANONICAL_HOSTNAME=wheeler-centre-pr-46.herokuapp.com --app wheeler-centre-pr-46
+heroku run rake temporary:setup_next_chapter --app wheeler-centre-pr-46
+heroku run rake temporary:setup_new_notes --app wheeler-centre-pr-46
+```

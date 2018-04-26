@@ -1,0 +1,70 @@
+.nc-header-container {
+  background-color: var(--color-light-blue);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.breakpoint-phone-wide .nc-header-container .nc-inner,
+.breakpoint-phone .nc-header-container .nc-inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.nc-header {
+  display: flex;
+}
+
+.breakpoint-phone-wide .nc-header,
+.breakpoint-phone .nc-header {
+  flex-direction: column-reverse;
+}
+
+/* Next Chapter logo */
+
+.nc-logo {
+  align-items: center;
+  display: flex;
+  padding-bottom: 7rem;
+  padding-left: 7rem;
+  padding-top: 7rem;
+  width: 50%;
+}
+
+.breakpoint-tablet .nc-logo {
+  padding-left: 1.5rem;
+}
+
+.breakpoint-phone-wide .nc-logo,
+.breakpoint-phone .nc-logo {
+  padding-bottom: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 3rem;
+  width: 100%;
+}
+
+.nc-logo h1 {
+  color: transparent;
+  font: 0/0 a;
+}
+
+.nc-logo__image {
+  max-width: 40.7rem;
+  width: 100%;
+}
+
+.breakpoint-phone-wide .nc-logo__image,
+.breakpoint-phone .nc-logo__image {
+  max-width: 35rem;
+}
+
+.nc-clip {
+  width: 19.5rem;
+  clip-path: polygon(0% 0, 101% 0%, 101% 101%, 0 0%);
+  background-color: var(--color-blue);
+}
+
+.breakpoint-phone-wide .nc-clip,
+.breakpoint-phone .nc-clip {
+  display: none;
+}

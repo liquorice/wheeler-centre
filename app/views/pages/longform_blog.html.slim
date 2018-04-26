@@ -1,0 +1,39 @@
+- blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
+  category: "rss", \
+  action: "subscribe", \
+  title: "RSS: #{blog_archive_page.title}" \
+})
+
+= area :head do
+  link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+
+= area :masthead_title do
+  = longform_blog_page.title
+
+= area :masthead_contextual_navigation do
+  - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  .longform-blog-index
+    - cache ["blog-index-intro-1", page] do
+      - if page.fields[:intro].data_present?
+        .intro.longform-blog-index__intro.column-wrapper
+          .column-narrow.copy
+            = render_content page.fields[:intro]
+
+    / List out the long form posts
+    / TODO: use distinct edition classes (if this HTML is, in fact, acceptable (?))
+    .column-wide
+      - page.editions.each do |edition|
+        h2.longform-blog-edition__title = edition.title
+        - if edition.fields[:summary].data_present?
+          .longform-blog-edition__hero_content.copy
+             == render_content(edition.fields[:summary])
+
+    / Content area
+    - cache ["blog-index-end-1", page] do
+      - if page.fields[:end].data_present?
+        .content-block
+          = render_content_in_sections page.fields[:end]
+

@@ -200,6 +200,15 @@ module ApplicationHelper
   end
 
   ### --------------------------------------------------------------------------
+  ### Notes
+  ### --------------------------------------------------------------------------
+
+  memoize \
+  def notes_page
+    site.pages.of_type("longform_blog").first
+  end
+
+  ### --------------------------------------------------------------------------
   ### People
   ### --------------------------------------------------------------------------
 
@@ -222,6 +231,28 @@ module ApplicationHelper
     blog_page.children.of_type("blog_archive").first
   end
 
+  ### --------------------------------------------------------------------------
+  ### Longform Blog
+  ### --------------------------------------------------------------------------
+
+  memoize \
+  def longform_blog_page
+    site.pages.of_type("longform_blog").first
+  end
+
+  memoize \
+  def longform_blog_archive_page
+    site.pages.of_type("longform_blog_archive").first
+  end
+
+  ### --------------------------------------------------------------------------
+  ### The Next Chapter
+  ### --------------------------------------------------------------------------
+
+  memoize \
+  def next_chapter_home_page
+    site.pages.of_type("next_chapter_home_page").first
+  end
 
   ### --------------------------------------------------------------------------
   ### Broadcasts

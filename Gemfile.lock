@@ -98,6 +98,7 @@ GEM
       thor (~> 0.19)
     bugsnag (5.3.2)
     builder (3.2.3)
+    byebug (10.0.0)
     chronic (0.10.2)
     cliver (0.3.2)
     cloudinary (1.1.7)
@@ -452,6 +453,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
     public_suffix (2.0.5)
     que (0.12.1)
     querystring (0.1.0)
@@ -711,6 +715,7 @@ DEPENDENCIES
   passenger (~> 5.0.7)
   pg
   poltergeist
+  pry-byebug
   que
   quiet_assets
   rack-canonical-host

@@ -1,0 +1,51 @@
+/* These styles override the styles we're inheriting from the main site */
+
+.content-page__title {
+  color: var(--color-blue);
+}
+
+.sub-page-nav__anchor:hover {
+  background-color: var(--color-light-blue);
+  color: var(--color-blue);
+}
+
+.sub-page-nav__anchor--active {
+  color: var(--color-blue);
+}
+
+.copy p a, .copy blockquote a, .copy li a {
+  color: var(--color-blue);
+}
+
+.blog-snap:hover .title-text {
+  color: var(--color-blue);
+}
+
+.blog-post__title {
+  color: var(--color-blue);
+}
+
+ul.social-links a:hover {
+  color: var(--color-blue);
+}
+
+.blog-post__tags-list a:hover {
+  color: var(--color-blue);
+}
+
+a:hover .blog-snap__hero-type {
+  background-color: var(--color-blue);
+}
+
+.simple-subscribe__controls input {
+  background-color: var(--color-light-blue);
+}
+
+.simple-subscribe__controls button {
+  background-color: var(--color-blue);
+}
+
+.blog-post__sharing {
+  width: auto;
+  float: none;
+}
