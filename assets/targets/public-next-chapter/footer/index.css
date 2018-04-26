@@ -1,0 +1,142 @@
+.nc-footer-container {
+  background-color: var(--color-light-blue);
+}
+
+.nc-footer {
+  display: flex;
+  font-family: var(--font-sans);
+  padding-bottom: 5rem;
+  padding-top: 5rem;
+}
+
+.breakpoint-phone-wide .nc-footer,
+.breakpoint-phone .nc-footer {
+  flex-direction: column;
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+}
+
+.nc-footer-logos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nc-social-media {
+  display: flex;
+  flex-direction: column;
+}
+
+.nc-social-media__account {
+  color: var(--color-dark-blue);
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.nc-social-media__account i {
+  margin-right: 0.5rem;
+}
+
+.nc-social-media__account:last-child {
+  margin-bottom: 0;
+}
+
+.nc-footer-logo {
+  display: block;
+  height: 7.6rem;
+  margin-right: 9rem;
+  width: 21.5rem;
+}
+
+.breakpoint-tablet .nc-footer-logo {
+  height: 5.8rem;
+  margin-right: 4rem;
+  width: 16.5rem;
+}
+
+.breakpoint-phone-wide .nc-footer-logo,
+.breakpoint-phone .nc-footer-logo {
+  height: 4.2rem;
+  margin-bottom: 3rem;
+  margin-right: 0;
+  width: 12rem;
+}
+
+.nc-footer-logo img {
+  width: 100%;
+}
+
+.nc-footer-nav {
+  display: flex;
+  flex: 1;
+  padding-top: 1rem;
+}
+
+.breakpoint-phone-wide .nc-footer-nav,
+.breakpoint-phone .nc-footer-nav {
+  flex-direction: column;
+}
+
+.nc-footer-nav__box {
+  flex: 1;
+  display: flex;
+}
+
+.nc-footer-nav__col {
+  flex: 1;
+}
+
+.breakpoint-phone-wide .nc-footer-nav__col,
+.breakpoint-phone .nc-footer-nav__col {
+  margin-bottom: 3rem;
+}
+
+.nc-footer-nav__list {
+  margin-bottom: 4rem;
+  padding-right: 3rem;
+}
+
+.nc-footer-nav__list:last-child {
+  margin-bottom: 0;
+}
+
+.nc-footer-nav__list-item {
+  margin-bottom: 0.2rem;
+}
+
+.nc-footer-nav__list-item:last-child {
+  margin-bottom: 0;
+}
+
+.nc-footer-nav__list-anchor {
+  color: var(--color-dark-blue);
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+}
+
+.nc-footer-nav__list-anchor:hover {
+  text-decoration: underline;
+}
+
+.nc-footer-nav__list-anchor--parent {
+  font-weight: bold;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.nc-wheeler-centre-logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.nc-wheeler-centre-anchor {
+  width: 3.9rem;
+  height: 3.5rem;
+}
+
+.nc-wheeler-centre-anchor img {
+  width: 100%;
+}

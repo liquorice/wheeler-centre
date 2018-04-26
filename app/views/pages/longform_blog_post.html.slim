@@ -1,0 +1,130 @@
+- first_topic = page.fields[:topics].pages.first if page.fields[:topics].data_present?
+/ We only show the guest author block if there’s a singular author
+- show_guest_block = page.guest_post? && page.fields[:authors].data_present? && page.fields[:authors].pages.visible.published.length == 1
+- author = page.fields[:authors].pages.visible.published.first
+- author_image = author.fields[:portrait].assets.first if author.present? && author.fields[:portrait].data_present?
+
+/ Custom meta data
+- if page.fields[:hero_image].data_present?
+  - open_graph_image = page.fields[:hero_image].assets.first
+- elsif page.fields[:thumbnail_image].data_present?
+  - open_graph_image = page.fields[:thumbnail_image].assets.first
+
+- if page.fields[:summary].data_present?
+  - open_graph_summary = strip_html(render_content(page.fields[:summary]), "")
+- else
+  - open_graph_summary = strip_html(render_content(page.fields[:intro]) + render_content(page.fields[:body]), "")
+- set_meta_tags({ \
+    description: open_graph_summary, \
+    og: { \
+      type: "article", \
+      title: "Notes – #{page.title}",
+      description: open_graph_summary, \
+      article: { \
+        published_time: page.publish_date.iso8601,  \
+        modified_time: page.updated_at.iso8601, \
+        author: (page.fields[:authors].pages.map(&:title) if page.fields[:authors].data_present?), \
+        tags: (page.fields[:topics].pages.map(&:title) if page.fields[:topics].data_present?), \
+      }, \
+      image: { \
+        url: (open_graph_image.content_medium_url if open_graph_image), \
+        secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+        width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+        height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
+      } \
+    } \
+  })
+- blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
+  category: "rss", \
+  action: "subscribe", \
+  title: "RSS: #{blog_archive_page.title}" \
+})
+
+= area :head do
+  link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+
+= area :masthead_title do
+  = longform_blog_page.title
+
+= area :masthead_contextual_navigation do
+  ul.masthead-contextual__navigation-list
+    - if longform_blog_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_page.absolute_url
+          ' Editions
+    - if longform_blog_archive_page
+      li.masthead-contextual__navigation-item
+        a.masthead-contextual__navigation-anchor href=longform_blog_archive_page.absolute_url
+          ' Browse all notes
+
+= area :main do
+  .blog-post.clearfix
+    - cache ["longform-blog-header-2", page, page.fields[:authors].pages, first_topic]
+      .blog-post__header.column-wrapper
+        .column-wide
+          p.blog-post__byline
+            - if page.fields[:authors].data_present?
+              - if page.guest_post?
+                ' Guest post by
+              - else
+                ' By
+              - page.authors.each_with_index do |author, index|
+                a href=author.absolute_url
+                  = author.title
+                - if index < page.authors.length - 1
+                  ',
+              span.blog-post__byline-separator ·
+            - if first_topic.present?
+              ' In
+              a href=first_topic.absolute_url = first_topic.title
+              span.blog-post__byline-separator ·
+            time datetime=l(page.publish_date, format: :rfc_3339)
+              = l page.publish_date, format: :day_dmy_with_full_words
+          h1.blog-post__title == widont_format markdown_line page.title
+      - if page.fields[:intro].data_present?
+        .blog-post__intro.column-wrapper
+          = render_content_in_sections page.fields[:intro]
+      .blog-post__body.column-wrapper
+        = render_content_in_sections page.fields[:body]
+      - if page.fields[:meta].data_present?
+        .blog-post__meta.column-wrapper
+          .blog-post__meta-inner.column-mid.copy
+            = render_content page.fields[:meta]
+
+    / Topics
+    .column-wrapper.clearfix
+      .column-mid
+        / Social icons
+        - cache ["longform-blog-topics-1", page, page.fields[:topics].pages] do
+          - if page.fields[:topics].data_present?
+            .blog-post__tags
+              h2.blog-post__tag-header Topics
+              ul.blog-post__tags-list
+                - page.fields[:topics].pages.sort_by(&:title).each do |topic|
+                  li
+                    a href=topic.absolute_url = topic.title
+        - cache ["longform-blog-socal-icons-1", page, page.title] do
+          .blog-post__sharing
+            = render "partials/social_sharing_icons", page: page
+
+  - cache ["longform-blog-guest-author-2", author, author_image, page.authors_posts] do
+    - if show_guest_block
+      .blog-post__guest-author.column-wrapper.gradient-top-down
+        - if author_image
+          a.blog-post__guest-author-image href=author.absolute_url
+            .blog-post__guest-author-image-inner
+              - author_image_url = author_image.content_thumbnail_url
+              img src=author_image_url alt=(author_image.description.present? ? author_image.description : "Portrait of #{author.title}")
+        - if author.fields[:intro].data_present?
+          .column-narrow.copy.blog-post__guest-author-intro
+            = render_content author.fields[:intro]
+        - if page.authors_posts.present?
+          .column-wide
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 2, phone: 2 }}.to_json
+              - page.authors_posts.each do |post|
+                = render "partials/blog_snap_block", post: post, show_type: true, aspect: :landscape
+  - cache ["longform-blog-comments-1", page.fields[:flarum_discussion_id]] do
+    - if page.fields[:flarum_discussion_id].data_present?
+      .blog-post__comments.column-wrapper class=("blog-post__comments--with-guest" if show_guest_block)
+        .column-mid.clearfix
+          = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }

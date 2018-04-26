@@ -1,0 +1,50 @@
+- posts = page.posts(page: params[:page], per_page: params[:per_page])
+- blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
+  category: "rss", \
+  action: "subscribe", \
+  title: "RSS: #{blog_archive_page.title}" \
+})
+
+= area :head do
+  link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+
+= area :masthead_title do
+  = longform_blog_page.title
+
+= area :masthead_contextual_navigation do
+  - pages = [longform_blog_page] + longform_blog_page.children.in_order.visible.published.where(collection_id: nil)
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+
+= area :main do
+  - cache ["recordings-archive-1", page, posts] do
+    .blog-archive
+      .blog-archive__top class=("gradient-bottom-up" unless params[:page].present?)
+        .blog-archive__header
+          h1.blog-archive__title
+            = page.title
+        - if page.fields[:intro].data_present? && !params[:page].present?
+          .recordings-archive__intro.intro.column-wrapper
+            .column-narrow.copy
+              = render_content page.fields[:intro]
+      .column-wrapper
+        .column-full
+          - if params[:page].present?
+            .pagination-top
+              = paginate posts, outer_window: 4
+            .pagination-context.pagination-context--top
+              ' Page
+              = (params[:page] || 1)
+              em &nbsp;of&nbsp;
+              = posts.total_pages
+          - if posts.present?
+            .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              - posts.each do |post|
+                = render "partials/blog_snap_block", post: post, show_type: true
+            - if posts.total_pages > 1
+              .pagination-context.pagination-context--bottom
+                ' Page
+                = (params[:page] || 1)
+                em &nbsp;of&nbsp;
+                = posts.total_pages
+              .pagination-bottom
+                = paginate posts, outer_window: 4
