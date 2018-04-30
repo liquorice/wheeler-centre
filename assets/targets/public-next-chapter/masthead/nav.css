@@ -54,6 +54,8 @@
 
 .nc-secondary-nav__list-item {
   margin-right: 3rem;
+  display: flex;
+  align-items: center;
 }
 
 .breakpoint-phone-wide .nc-secondary-nav__list-item,
@@ -101,6 +103,7 @@
   color: #FFFFFF;
   font-size: 2rem;
   font-weight: bold;
+  text-align: center;
 }
 
 .nc-primary-nav__list-anchor:hover {
