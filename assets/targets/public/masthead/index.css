@@ -46,11 +46,9 @@
       cursor: pointer;
       display: block;
       position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      padding: .5rem 1.5rem;
-      font-size: 2rem;
+      top: .6rem;
+      left: .5rem;
+      padding: .5rem;
     }
 
     .masthead__mobile-toggle i {
@@ -112,21 +110,21 @@
       }
 
         .masthead-nav-main__item--break {
-          padding-right: 1rem;
-          margin-right: 1rem;
+          padding-right: 1.6rem;
+          margin-right: 1.6rem;
           position: relative;
         }
 
         .breakpoint-tablet-wide .masthead-nav-main__item--break,
         .breakpoint-tablet .masthead-nav-main__item--break,
         .breakpoint-phone-wide .masthead-nav-main__item--break  {
-          padding-right: 0.5rem;
-          margin-right: 0.5rem;
+          padding-right: 1.2rem;
+          margin-right: 1.2rem;
         }
 
         .breakpoint-w-669 .masthead-nav-main__item--break {
-          padding-right: 0.5rem;
-          margin-right: 0.5rem;
+          padding-right: 1rem;
+          margin-right: 1rem;
         }
 
         .breakpoint-phone .masthead-nav-main__item--break {
@@ -186,8 +184,8 @@
           border: none;
           color: var(--primary-color-lighter);
           display: inline-block;
-          font-size: 1.5rem;
-          font-size: 1.5rem;
+          font-size: 1.6rem;
+          font-size: 1.6rem;
           padding: 1.8rem;
         }
 
@@ -214,8 +212,8 @@
         }
 
         .breakpoint-w-669 .masthead-nav-main__anchor {
-          font-size: 1.6rem;
-          font-size: 1.6rem;
+          font-size: 1.4rem;
+          font-size: 1.4rem;
           padding: 1.2rem;
         }
 
@@ -281,8 +279,8 @@
         }
 
         .breakpoint-w-669 .masthead-nav-main__dropdown-item {
-          font-size: 1.6rem;
-          font-size: 1.6rem;
+          font-size: 1.4rem;
+          font-size: 1.4rem;
         }
 
         .masthead-nav-main__dropdown-item:last-child {
