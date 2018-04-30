@@ -71,5 +71,5 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   }
 
   rewrite /\/(.*)/, '/the-next-chapter/$1', host: "the-next-chapter.localhost"
-  rewrite /\/(.*)/, '/the-next-chapter/$1', host: "next-chapter.wheeler-centre-pr-46.herokuapp.com"
+  rewrite /\/(.*)/, '/the-next-chapter/$1', host: "the-next-chapter.wheelercentre.com"
 end
