@@ -13,16 +13,6 @@
         a.masthead-nav-main__anchor href=broadcasts_page.absolute_url
           = broadcasts_page.title
 
-    - cache ["nav-podcasts-1", broadcasts_page] do
-      li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/broadcasts/podcasts"
-          'Podcasts
-
-    - cache ["nav-podcasts-1", broadcasts_page] do
-      li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="#"
-          'News
-
     - cache ["nav-blog-1", blog_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=blog_page.absolute_url
