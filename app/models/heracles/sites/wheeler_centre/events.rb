@@ -26,6 +26,10 @@ module Heracles
           search_upcoming_events(options)
         end
 
+        def upcoming_events_except_cancelled(options={})
+          search_upcoming_events(options).where("fields_data->'ticketing_stage'->>'value' <> ? ", "Cancelled")
+        end
+
         def events(options={})
           search_events(options)
         end
