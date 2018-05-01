@@ -22,6 +22,7 @@ module Heracles
             where(
               :"insertions.field" => "topics",
               :"insertions.inserted_key" => insertion_keys_for_self_and_descendents).
+            where.not(type: "Heracles::Sites::WheelerCentre::LongformBlogPost").
             group("pages.id"). # we can't use `distinct` here since it fails for queries returning JSON column
             order("created_at DESC").
             page(options[:page_number] || 1).
@@ -38,6 +39,7 @@ module Heracles
             where(
               :"insertions.field" => "topics",
               :"insertions.inserted_key" => insertion_keys_for_self_and_descendents).
+            where.not(type: "Heracles::Sites::WheelerCentre::LongformBlogPost").
             group("pages.id"). # we can't use `distinct` here since it fails for queries returning JSON column
             order("random()").
             page(options[:page_number] || 1).
