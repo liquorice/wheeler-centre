@@ -58,6 +58,25 @@
   max-width: 35rem;
 }
 
+/* Switching logo versions based on screen size */
+.nc-logo__image--large {
+  display: block;
+}
+
+.nc-logo__image--small {
+  display: none;
+}
+
+.breakpoint-phone-wide .nc-logo__image--small,
+.breakpoint-phone .nc-logo__image--small {
+  display: block;
+}
+
+.breakpoint-phone-wide .nc-logo__image--large,
+.breakpoint-phone .nc-logo__image--large {
+  display: none;
+}
+
 .nc-clip {
   width: 19.5rem;
   clip-path: polygon(0% 0, 101% 0%, 101% 101%, 0 0%);
