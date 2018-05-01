@@ -304,7 +304,7 @@ module ApplicationHelper
 
   memoize \
   def upcoming_events_for_navigation
-    events_page.upcoming_events(per_page: 5)
+    events_page.upcoming_events_except_cancelled(per_page: 5)
   end
 
   def days_for_week(week)
