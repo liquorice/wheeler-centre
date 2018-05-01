@@ -11,6 +11,10 @@
   padding-left: 3rem;
 }
 
+.breakpoint-w-799 .nc-nav {
+  padding-left: 1.5rem;
+}
+
 .breakpoint-phone-wide .nc-nav,
 .breakpoint-phone .nc-nav {
   padding-bottom: 1.5rem;
@@ -43,13 +47,20 @@
 .nc-secondary-nav {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
+}
+
+.breakpoint-w-799 .nc-secondary-nav {
+  margin-left: -4rem;
 }
 
 .breakpoint-phone-wide .nc-secondary-nav,
 .breakpoint-phone .nc-secondary-nav {
-  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,.2);
   justify-content: flex-start;
+  margin-bottom: 2rem;
+  margin-left: 0;
+  padding-bottom: 1rem;
 }
 
 .nc-secondary-nav__list-item {
@@ -90,6 +101,10 @@
 }
 
 .nc-primary-nav__list-item {
+  margin-bottom: 3rem;
+}
+
+.breakpoint-w-799 .nc-primary-nav__list-item {
   margin-bottom: 2rem;
 }
 
@@ -101,7 +116,7 @@
 
 .nc-primary-nav__list-anchor {
   color: #FFFFFF;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
   text-align: center;
 }
@@ -111,6 +126,10 @@
 }
 
 .breakpoint-tablet .nc-primary-nav__list-anchor {
+  font-size: 2rem;
+}
+
+.breakpoint-w-799 .nc-primary-nav__list-anchor {
   font-size: 1.8rem;
 }
 
