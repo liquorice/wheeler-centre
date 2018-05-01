@@ -1,14 +1,11 @@
 function FontResizer(el, props) {
-  var fontSizedEl = document.querySelector(props.fontSizedElSelector);
-  var smallButton = el.querySelector(props.smallButtonSelector);
-  var normalButton = el.querySelector(props.normalButtonSelector);
-  var largeButton = el.querySelector(props.largeButtonSelector);
-  var buttons = [{el: smallButton, fontsize: "57.5%"}, {el: normalButton, fontsize: "62.5%"}, {el: largeButton, fontsize: "67.5%"}];
+  var fontResizingEl = document.querySelector(props.fontResizingSelector);
+  var buttons = props.buttons.map(function(button) { return {el: el.querySelector(button.selector), fontSize: button.fontSize}; });
   buttons.map(function(button) {
     button.el.addEventListener("click", function(e) {
-      fontSizedEl.style.fontSize = button.fontsize;
-      buttons.map(function(b) { b.el.classList.remove("nc-font-size--active"); });
-      button.el.classList.add("nc-font-size--active");
+      fontResizingEl.style.fontSize = button.fontSize;
+      buttons.map(function(b) { b.el.classList.remove(props.activeClass); });
+      button.el.classList.add(props.activeClass);
     });
   });
 }
