@@ -19,10 +19,10 @@
 
             li.nc-secondary-nav__list-item
 
-              .nc-font-sizes
-                button.nc-font-size.nc-font-size--small onclick="document.getElementById('nc').style.fontSize = '57.5%'" A
-                button.nc-font-size.nc-font-size--normal.nc-font-size--active onclick="document.getElementById('nc').style.fontSize = '62.5%'" A
-                button.nc-font-size.nc-font-size--large onclick="document.getElementById('nc').style.fontSize = '67.5%'" A
+              .nc-font-sizes data-view-font-resizer={fontSizedElSelector: "#nc", smallButtonSelector: ".nc-font-size--small", normalButtonSelector: ".nc-font-size--normal", largeButtonSelector: ".nc-font-size--large"}.to_json
+                button.nc-font-size.nc-font-size--small A
+                button.nc-font-size.nc-font-size--normal.nc-font-size--active A
+                button.nc-font-size.nc-font-size--large A
 
           ul.nc-primary-nav
             li.nc-primary-nav__list-item
