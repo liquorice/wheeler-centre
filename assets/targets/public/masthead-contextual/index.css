@@ -225,8 +225,32 @@
       transform: translateY(-1.5rem);
       opacity: 1;
       visibility: visible;
+    }
 
+    .upcoming-event__ticketing-stage {
+      background-color: #C73C30;
+      color: #fff;
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: bold;
+      left: 0;
+      letter-spacing: 0.1em;
+      padding: .4rem .6rem .3rem;
+      position: absolute;
+      text-transform: uppercase;
+      top: 0.7rem;
+    }
 
+    .upcoming-event__ticketing-stage--booked-out,
+    .upcoming-event__ticketing-stage--cancelled {
+      background-color: #C73C30;
+      color: #fff;
+    }
+
+    .upcoming-event__ticketing-stage--booking-fast {
+      background-color: #FFFFFF;
+      color: var(--primary-color);
     }
 
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
