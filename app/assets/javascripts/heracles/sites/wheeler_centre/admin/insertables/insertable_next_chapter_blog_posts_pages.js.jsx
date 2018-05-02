@@ -50,7 +50,7 @@
             <div className="insertable-display-pages__controls">
               <div className="button-group">
                 <button className="button insertable-display__edit button button--soft" onClick={this.editValue}>
-                  Edit blog posts
+                  Edit Next Chapter blog posts
                 </button>
                 <button className="button insertable-display__remove button button--soft" onClick={this.remove}>
                   <i className="fa fa-times"/>
@@ -78,7 +78,7 @@
           <div className="insertable-display-pages__content">
             <div className="insertable-display-pages__pages">
               <dl className="field-details-list">
-                <dt>Selected blog posts</dt>
+                <dt>Selected Next Chapter blog posts</dt>
                 <dd>
                   <ul className="insertable-display-pages__list">
                     {pages}
@@ -98,7 +98,7 @@
         );
       } else {
         return (
-          <p className="insertable-display-pages__empty">No blog posts selected</p>
+          <p className="insertable-display-pages__empty">No Next Chapter blog posts selected</p>
         );
       }
     }
@@ -134,13 +134,13 @@
       return (
         <div className="insertable-edit fields--reversed">
           <form onSubmit={this.onSubmit}>
-            <h2 className="insertable-edit__title">Edit insertable blog posts</h2>
+            <h2 className="insertable-edit__title">Edit insertable Next Chapter blog posts</h2>
             <div className="field">
               <div className="field-header">
-                <label className="field-label" htmlFor="edit__caption">Blog posts</label>
+                <label className="field-label" htmlFor="edit__caption">Next Chapter blog posts</label>
               </div>
               <div className="field-main">
-                <PagesSelector pageTypeLabel="blog post" pageType="next_chapter_blog_post" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
+                <PagesSelector pageTypeLabel="Next Chapter blog posts" pageType="next_chapter_blog_post" page_ids={this.state.value.page_ids} callback={this.onPagesSelectorUpdate}/>
               </div>
             </div>
             <div className="field">
@@ -168,7 +168,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" className="button button--highlight">Save changes to blog posts insertable</button>
+            <button type="submit" className="button button--highlight">Save changes to Next Chapter blog posts insertable</button>
           </form>
         </div>
       );
