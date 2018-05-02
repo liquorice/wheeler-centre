@@ -53,7 +53,7 @@
 
 = area :main do
   .blog-post.clearfix
-    - cache ["blog-header-2", page, page.fields[:authors].pages, first_topic]
+    - cache ["nc-blog-header-2", page, page.fields[:authors].pages, first_topic]
       .blog-post__header.column-wrapper
         .column-wide
           p.blog-post__byline
@@ -88,7 +88,7 @@
     .column-wrapper.clearfix
       .column-mid
         / Hide topics on NC blog posts
-        / - cache ["blog-topics-1", page, page.fields[:topics].pages] do
+        / - cache ["nc-blog-topics-1", page, page.fields[:topics].pages] do
         /   - if page.fields[:topics].data_present?
         /     .blog-post__tags
         /       h2.blog-post__tag-header Topics
@@ -98,12 +98,12 @@
         /             a href=topic.absolute_url = topic.title
 
         / Social icons
-        - cache ["blog-socal-icons-1", page, page.title] do
+        - cache ["nc-blog-socal-icons-1", page, page.title] do
           .blog-post__sharing
             = render "partials/social_sharing_icons", page: page
 
   / Hide bottom author section on NC blog posts
-  / - cache ["blog-guest-author-2", author, author_image, page.authors_posts] do
+  / - cache ["nc-blog-guest-author-2", author, author_image, page.authors_posts] do
   /   - if show_guest_block
   /     .blog-post__guest-author.column-wrapper.gradient-top-down
   /       - if author_image
@@ -121,14 +121,14 @@
   /               = render "partials/blog_snap_block", post: post, show_type: true, aspect: :landscape
 
   / Hiding Flarum for NC blog posts
-  / - cache ["blog-comments-1", page.fields[:flarum_discussion_id]] do
+  / - cache ["nc-blog-comments-1", page.fields[:flarum_discussion_id]] do
   /   - if page.fields[:flarum_discussion_id].data_present?
   /     .blog-post__comments.column-wrapper class=("blog-post__comments--with-guest" if show_guest_block)
   /       .column-mid.clearfix
   /         = render partial: "partials/flarum_discussion", locals: {flarum_discussion_id: page.fields[:flarum_discussion_id].value }
 
   / Show related events
-  - cache ["blog-related-1", page, page.related_posts] do
+  - cache ["nc-blog-related-1", page, page.related_posts] do
     - if page.related_posts.present?
       .blog-post__related.column-wrapper class=("gradient-top-down" unless show_guest_block)
         .section-header

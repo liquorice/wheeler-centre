@@ -33,7 +33,7 @@
 
 = area :main do
   .blog-index.content-page__main
-    - cache ["blog-index-intro-1", page] do
+    - cache ["nc-blog-index-intro-1", page] do
       - if page.fields[:intro].data_present?
         .intro.blog-index__intro.column-wrapper
           .column-narrow.copy
@@ -49,13 +49,13 @@
             'There's more news over here on page two &#8230; &rsaquo;
 
     / Content area
-    - cache ["blog-index-middle-1", page] do
+    - cache ["nc-blog-index-middle-1", page] do
       - if page.fields[:middle].data_present?
         .content-block
           = render_content_in_sections page.fields[:middle]
 
     / Content area
-    - cache ["blog-index-end-1", page] do
+    - cache ["nc-blog-index-end-1", page] do
       - if page.fields[:end].data_present?
         .content-block
           = render_content_in_sections page.fields[:end]

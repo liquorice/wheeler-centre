@@ -24,7 +24,7 @@
 
 = area :main do
   .longform-blog-index
-    - cache ["longform-blog-edition-intro", page] do
+    - cache ["lfb-edition-intro", page] do
       - if page.fields[:intro].data_present?
         .intro.longform-blog-index__intro.column-wrapper
           .column-mid.copy
@@ -75,7 +75,7 @@
 
 
     / Content area
-    - cache ["longform-blog-edition-end", page] do
+    - cache ["lfb-edition-end", page] do
       - if page.fields[:end].data_present?
         .content-block
           = render_content_in_sections page.fields[:end]

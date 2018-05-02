@@ -16,7 +16,7 @@
   = render "partials/masthead_contextual_navigation", pages: pages, current: page
 
 = area :main do
-  - cache ["recordings-archive-1", page, posts] do
+  - cache ["lfb-recordings-archive-1", page, posts] do
     .blog-archive
       .blog-archive__top class=("gradient-bottom-up" unless params[:page].present?)
         .blog-archive__header
