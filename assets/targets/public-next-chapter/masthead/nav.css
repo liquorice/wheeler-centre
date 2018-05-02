@@ -48,10 +48,11 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 3.5rem;
+  margin-left: -18rem;
 }
 
 .breakpoint-w-799 .nc-secondary-nav {
-  margin-left: -4rem;
+  margin-left: -8rem;
 }
 
 .breakpoint-phone-wide .nc-secondary-nav,
@@ -64,7 +65,7 @@
 }
 
 .nc-secondary-nav__list-item {
-  margin-right: 3rem;
+  margin-right: 2.5rem;
   display: flex;
   align-items: center;
 }
