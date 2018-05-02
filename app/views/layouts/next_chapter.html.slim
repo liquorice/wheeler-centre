@@ -1,5 +1,5 @@
 doctype 5
-html
+html#nc
   head
     meta charset="utf-8"
     = render "partials/metaquery_breakpoints"
@@ -11,7 +11,7 @@ html
 
     link rel="canonical" href="#{canonical_domain}#{request.fullpath}"
 
-    = display_meta_tags site: I18n.t("metadata.site_name"),
+    = display_meta_tags site: "The Next Chapter",
                         separator: "—",
                         reverse: true
     = stylesheet_link_tag "public", media: "screen"
@@ -22,6 +22,7 @@ html
     /[if lt IE 9]
       = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true
+    = javascript_include_tag "public-next-chapter", async: true
 
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags

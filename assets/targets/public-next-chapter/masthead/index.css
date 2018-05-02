@@ -58,6 +58,25 @@
   max-width: 35rem;
 }
 
+/* Switching logo versions based on screen size */
+.nc-logo__image--large {
+  display: block;
+}
+
+.nc-logo__image--small {
+  display: none;
+}
+
+.breakpoint-phone-wide .nc-logo__image--small,
+.breakpoint-phone .nc-logo__image--small {
+  display: block;
+}
+
+.breakpoint-phone-wide .nc-logo__image--large,
+.breakpoint-phone .nc-logo__image--large {
+  display: none;
+}
+
 .nc-clip {
   width: 19.5rem;
   clip-path: polygon(0% 0, 101% 0%, 101% 101%, 0 0%);
@@ -67,4 +86,49 @@
 .breakpoint-phone-wide .nc-clip,
 .breakpoint-phone .nc-clip {
   display: none;
+}
+
+.nc-font-sizes {
+  align-items: center;
+  display: flex;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.nc-font-sizes::before {
+  background-color: rgba(255,255,255,0.3);
+  bottom: 0.2rem;
+  content: "";
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0.2rem;
+  width: 1px;
+}
+
+.nc-font-size {
+  align-items: center;
+  color: #FFFFFF;
+  display: flex;
+  font-weight: bold;
+  height: 3rem;
+  justify-content: center;
+  width: 3rem;
+}
+
+.nc-font-size--small {
+  font-size: 1.1rem;
+}
+
+.nc-font-size--normal {
+  font-size: 1.5rem;
+}
+
+.nc-font-size--large {
+  font-size: 2rem;
+}
+
+.nc-font-size:hover {
+  background-color: rgba(255,255,255,0.1);
+  cursor: pointer;
 }

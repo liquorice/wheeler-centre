@@ -6,7 +6,8 @@
           h1
             ' The Next Chapter
             a href="/the-next-chapter/"
-              img.nc-logo__image src=image_path("public-next-chapter/masthead/next-chapter-logo.png")
+              img.nc-logo__image.nc-logo__image--large src=image_path("public-next-chapter/masthead/next-chapter-logo.png")
+              img.nc-logo__image.nc-logo__image--small src=image_path("public-next-chapter/masthead/next-chapter-logo--mobile.png")
 
         .nc-clip
 
@@ -16,6 +17,13 @@
               a.nc-secondary-nav__list-anchor href="/the-next-chapter/about-us" About us
             li.nc-secondary-nav__list-item
               a.nc-secondary-nav__list-anchor href="/the-next-chapter/faqs" FAQs
+
+            li.nc-secondary-nav__list-item
+
+              .nc-font-sizes data-view-font-resizer={fontResizingSelector: "#nc", activeClass: "nc-font-size--active", buttons: [{selector: ".nc-font-size--small", fontSize: "57.5%"}, {selector: ".nc-font-size--normal", fontSize: "62.5%"}, {selector: ".nc-font-size--large", fontSize: "67.5%"}]}.to_json
+                button.nc-font-size.nc-font-size--small A
+                button.nc-font-size.nc-font-size--normal.nc-font-size--active A
+                button.nc-font-size.nc-font-size--large A
 
           ul.nc-primary-nav
             li.nc-primary-nav__list-item

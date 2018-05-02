@@ -27,11 +27,20 @@
   flex-direction: column;
 }
 
+.breakpoint-phone-wide .nc-social-media,
+.breakpoint-phone .nc-social-media {
+  margin-bottom: 3rem;
+}
+
 .nc-social-media__account {
   color: var(--color-dark-blue);
   font-size: 1.4rem;
   line-height: 1.8rem;
   margin-bottom: 0.7rem;
+}
+
+.nc-social-media__account:hover {
+  text-decoration: underline;
 }
 
 .nc-social-media__account i {
@@ -44,9 +53,9 @@
 
 .nc-footer-logo {
   display: block;
-  height: 7.6rem;
-  margin-right: 9rem;
-  width: 21.5rem;
+  height: 7rem;
+  margin-right: 6rem;
+  width: 18rem;
 }
 
 .breakpoint-tablet .nc-footer-logo {

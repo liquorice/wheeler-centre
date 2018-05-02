@@ -35,6 +35,11 @@ html {
   max-width: var(--column-wide);
 }
 
+/* More news link */
+.block-link {
+  color: var(--color-blue);
+}
+
 @import "./masthead";
 @import "./masthead/nav.css";
 @import "./footer";
