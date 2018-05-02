@@ -8,7 +8,7 @@
   - image = post.fields[:hero_image].assets.first
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
 
-- cache ["blog-snap-block-4", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do
+- cache ["nc-blog-snap-block-4", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do
   .snap-block
     a.blog-snap.blog-snap-block href=post.next_chapter_absolute_url
       time.blog-snap__date
