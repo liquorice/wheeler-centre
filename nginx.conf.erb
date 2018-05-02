@@ -188,7 +188,7 @@ http {
             rewrite ^/robots.txt$ /robots.disallow.txt last;
         }
         # Ensure everything except CANONCAL and ORIGIN requests are redirected
-        if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>) {
+        if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>|<%= ENV['NEXT_CHAPTER_HOSTNAME'] %>) {
             set $cdn_request_or_origin_request 1;
         }
         if ($cdn_request_or_origin_request != 1) {
