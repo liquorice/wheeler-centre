@@ -81,6 +81,10 @@ module Heracles
           posts
         end
 
+        def next_chapter_absolute_url
+          absolute_url.gsub(/^\/the-next-chapter/, "")
+        end
+
         private
 
         def search_posts_by_author(options={})
