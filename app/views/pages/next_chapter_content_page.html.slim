@@ -1,3 +1,19 @@
+- set_meta_tags({ \
+    description: "The Next Chapter", \
+    og: { \
+      type: "website", \
+      site_name: "The Next Chapter", \
+      title: "#{page.title} – The Next Chapter", \
+      description: "The Next Chapter", \
+      image: { \
+        url: (image_path("public-next-chapter/masthead/next-chapter-logo-social.png")), \
+        secure_url: (image_path("public-next-chapter/masthead/next-chapter-logo-social.png")), \
+        width: "700", \
+        height: "434", \
+      } \
+    } \
+  })
+
 = area :masthead_title do
   = page.root.title
 
