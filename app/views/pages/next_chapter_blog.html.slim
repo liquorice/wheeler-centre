@@ -14,7 +14,7 @@
     } \
   })
 
-- posts = page.posts(per_page: 6)
+- posts = page.posts(per_page: 12)
 - blog_archive_rss_tracking_link = track_event("#{url_with_domain(blog_archive_page.absolute_url)}.rss", { \
   category: "rss", \
   action: "subscribe", \
@@ -42,11 +42,11 @@
       h2.blog-index__latest-header Latest news
       - if posts.present?
         .column-wide
-          .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: true, perGroup: { default: 3, phone: 2 }}.to_json
+          .snap-uneven.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", fillGroups: false, perGroup: { default: 3, phone: 2 }}.to_json
             - posts.each do |post|
               = render "partials/next_chapter_blog_snap_block", post: post, show_type: false, aspect: :landscape, show_summary: true
-          a.block-link.blog-index__latest-more href=blog_archive_page.absolute_url
-            'There's more news over here on page two &#8230; &rsaquo;
+          / a.block-link.blog-index__latest-more href=blog_archive_page.absolute_url
+          /  'There's more news over here on page two &#8230; &rsaquo;
 
     / Content area
     - cache ["nc-blog-index-middle-1", page] do
