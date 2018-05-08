@@ -26,10 +26,13 @@
     / TODO: use distinct edition classes (if this HTML is, in fact, acceptable (?))
     .column-wide
       - page.editions.each do |edition|
-        h2.longform-blog-edition__title = edition.title
-        - if edition.fields[:summary].data_present?
-          .longform-blog-edition__hero_content.copy
-             == render_content(edition.fields[:summary])
+        a.longform-blog-edition href=edition.absolute_url
+          h2.longform-blog-edition__title = edition.title
+          - if edition.fields[:summary].data_present?
+            .longform-blog-edition__hero_content.copy
+               == render_content(edition.fields[:summary])
+            .longform-blog-edition__link_text
+              ' Open this edition ›
 
     / Content area
     - cache ["lfb-blog-index-end-1", page] do
