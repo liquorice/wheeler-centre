@@ -74,6 +74,11 @@
                 - if index < page.authors.length - 1
                   ',
               span.blog-post__byline-separator ·
+            - if page.editions.any?
+              ' Part of our
+              == page.editions.map {|e| "<a href='#{e.absolute_url}'>#{e.title}</a>"}.to_sentence + " "
+              ' editions
+              span.blog-post__byline-separator ·
             - if first_topic.present?
               ' In
               a href=first_topic.absolute_url = first_topic.title
