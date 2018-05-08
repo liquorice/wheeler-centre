@@ -31,11 +31,22 @@
   text-align: center;
 }
 
+.longform-blog-edition__link_text {
+  color: #888;
+  font-family: "Colfax", Helvetica, sans-serif;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+  .longform-blog-edition:hover .longform-blog-edition__link_text {
+    color: #009e8c;
+    text-decoration: underline;
+  }
+
 .edition-hero {
   width: 100%;
   margin-bottom: 2em;
 }
-
 
 /*Index*/
 
