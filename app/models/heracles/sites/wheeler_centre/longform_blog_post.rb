@@ -81,6 +81,18 @@ module Heracles
           posts
         end
 
+        def editions
+          Heracles::Page.
+            of_type("longform_blog_edition").
+            joins(:insertions).
+            visible.
+            published.
+            where(
+              :"insertions.field" => "notes",
+              :"insertions.inserted_key" => insertion_key
+            )
+        end
+
         private
 
         def search_posts_by_author(options={})
