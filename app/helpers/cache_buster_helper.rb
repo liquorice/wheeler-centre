@@ -5,7 +5,9 @@ module CacheBusterHelper
 
     host = (request.port == 80 ? request.host : request.host_with_port)
 
-    src = "//#{site.primary_origin_hostname}/_check/#{host}#{request.path}/_check.js#{('?' + request.query_string) if request.query_string.present?}"
+    request_path = request.path.gsub(/^\/thenextchapter/, "")
+
+    src = "//#{site.primary_origin_hostname}/_check/#{host}#{request_path}/_check.js#{('?' + request.query_string) if request.query_string.present?}"
     content_tag :script, nil, async: true, src: src
   end
 end
