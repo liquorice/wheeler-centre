@@ -24,9 +24,10 @@ class BustPageCacheJob < Que::Job
   end
 
   def purge_page
-    if path =~ /^\/thenextchapter/
+    purge_path = path
+    if purge_path =~ /^\/thenextchapter/
       cdn_id = ENV['NEXT_CHAPTER_CDN77_CDN_ID']
-      path = path.gsub(/^\/thenextchapter/, "")
+      purge_path.gsub!(/^\/thenextchapter/, "")
     else
       cdn_id = ENV['CDN77_CDN_ID']
     end
@@ -37,7 +38,7 @@ class BustPageCacheJob < Que::Job
         ["login", ENV['CDN77_EMAIL']],
         ["passwd", ENV['CDN77_PASSWORD']],
         ["cdn_id", cdn_id],
-        ["url[]", path]
+        ["url[]", purge_path]
       ]
     )
   end
