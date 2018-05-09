@@ -8,11 +8,7 @@ class PageCacheCheck < ActiveRecord::Base
   end
 
   def path
-    if edge_uri.host =~ /^thenextchapter\./
-      "/thenextchapter" + edge_uri.request_uri
-    else
-      edge_uri.request_uri
-    end
+    edge_uri.request_uri
   end
 
   def edge_url
