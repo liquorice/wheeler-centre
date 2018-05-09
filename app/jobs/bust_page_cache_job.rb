@@ -24,12 +24,19 @@ class BustPageCacheJob < Que::Job
   end
 
   def purge_page
+    if path =~ /^\/thenextchapter/
+      cdn_id = ENV['NEXT_CHAPTER_CDN77_CDN_ID']
+      path = path.gsub(/^\/thenextchapter/, "")
+    else
+      cdn_id = ENV['CDN77_CDN_ID']
+    end
+
     Net::HTTP.post_form(
       URI(ENV['CDN77_PURGE_ENDPOINT']),
       [
         ["login", ENV['CDN77_EMAIL']],
         ["passwd", ENV['CDN77_PASSWORD']],
-        ["cdn_id", ENV['CDN77_CDN_ID']],
+        ["cdn_id", cdn_id],
         ["url[]", path]
       ]
     )
