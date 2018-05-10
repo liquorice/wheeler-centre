@@ -77,7 +77,7 @@
             - if page.editions.any?
               ' Part of our
               == page.editions.map {|e| "<a href='#{e.absolute_url}'>#{e.title}</a>"}.to_sentence + " "
-              ' editions
+              ' edition
               span.blog-post__byline-separator ·
             - if first_topic.present?
               ' In

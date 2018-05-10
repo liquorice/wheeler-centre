@@ -39,7 +39,7 @@
           - if posts.present?
             .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, "widescreen-wide" => 6, widescreen: 5, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               - posts.each do |post|
-                = render "partials/blog_snap_block", post: post, show_type: true
+                = render "partials/longform_blog_snap_block", post: post, show_type: true
             - if posts.total_pages > 1
               .pagination-context.pagination-context--bottom
                 ' Page
