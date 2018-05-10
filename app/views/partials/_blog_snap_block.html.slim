@@ -16,7 +16,7 @@
       - unless image.blank?
         .blog-snap__hero
           - if show_type
-            span.blog-snap__hero-type Note
+            span.blog-snap__hero-type News
           - unless hide_image
             .blog-snap__hero-inner
               - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
