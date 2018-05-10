@@ -13,7 +13,17 @@
         a.masthead-nav-main__anchor href=broadcasts_page.absolute_url
           = broadcasts_page.title
 
-    - cache ["nav-blog-1", blog_page] do
+    - cache ["nav-podcasts-1", podcasts_page] do
+      li.masthead-nav-main__item
+        a.masthead-nav-main__anchor href=podcasts_page.absolute_url
+          = podcasts_page.title
+
+    - cache ["nav-blog-1", notes_page] do
+      li.masthead-nav-main__item
+        a.masthead-nav-main__anchor href=notes_page.absolute_url
+          = notes_page.title
+
+    - cache ["nav-news-1", blog_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=blog_page.absolute_url
           = blog_page.title

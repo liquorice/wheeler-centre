@@ -218,7 +218,7 @@ module ApplicationHelper
   end
 
   ### --------------------------------------------------------------------------
-  ### Blog
+  ### Blog (news)
   ### --------------------------------------------------------------------------
 
   memoize \
@@ -261,6 +261,11 @@ module ApplicationHelper
   memoize \
   def broadcasts_page
     site.pages.of_type("broadcasts").first
+  end
+
+  memoize \
+  def podcasts_page
+    site.pages.of_type("podcasts").first
   end
 
   memoize \

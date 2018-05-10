@@ -7,26 +7,43 @@
       li.masthead-nav-main__item.masthead-nav-main__item--break
         a.masthead-nav-main__anchor href=people_page.absolute_url
           = people_page.title
+
     - cache ["nav-projects-3", projects_page, projects_for_navigation] do
       = render "partials/nav_projects_item"
+
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href="/about-us"
         ' About Us
+
+    - cache ["nav-podcasts-1", broadcasts_page] do
+      li.masthead-nav-main__item
+        a.masthead-nav-main__anchor href="/broadcasts/podcasts"
+          'Podcasts
+
+    - cache ["nav-news-1", broadcasts_page] do
+      li.masthead-nav-main__item
+        a.masthead-nav-main__anchor href="/news"
+          'News
+
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href="/support-us/donate"
         ' Donate
+
   ul.masthead-nav-secondary.masthead-nav-secondary--mobile.clearfix
     - cache ["nav-events-2", broadcasts_page] do
       li.masthead-nav-secondary__item
         a.masthead-nav-secondary__anchor href=href=events_page.absolute_url
           = events_page.title
+
     - cache ["nav-broadcasts-2", broadcasts_page] do
       li.masthead-nav-secondary__item
         a.masthead-nav-secondary__anchor href=broadcasts_page.absolute_url
           = broadcasts_page.title
+
     - cache ["nav-blog-2", blog_page] do
       li.masthead-nav-secondary__item
         a.masthead-nav-secondary__anchor href=blog_page.absolute_url
           = blog_page.title
 
     = render "partials/nav_search_box"
+
