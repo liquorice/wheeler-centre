@@ -1,0 +1,46 @@
+- show_summary = show_summary || false
+- show_type = show_type || false
+- hide_image = hide_image || false
+- aspect = aspect || :square
+- if post.fields[:thumbnail_image].data_present?
+  - image = post.fields[:thumbnail_image].assets.first
+- elsif post.fields[:hero_image].data_present?
+  - image = post.fields[:hero_image].assets.first
+- first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
+
+- cache ["blog-snap-block-4", post, show_type, show_summary, hide_image, image, post.fields[:authors].pages, first_topic, aspect] do
+  .snap-block
+    a.blog-snap.blog-snap-block href=post.absolute_url
+      time.blog-snap__date
+        = l post.publish_date, format: :medium_date
+      - unless image.blank?
+        .blog-snap__hero
+          - if show_type
+            span.blog-snap__hero-type Note
+          - unless hide_image
+            .blog-snap__hero-inner
+              - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
+              img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
+      h3.blog-snap__title
+        span.title-text == widont_format markdown_line post.title
+        - if post.fields[:topics].data_present?
+          span.title-tags
+            '  &nbsp;/&nbsp;
+            = post.fields[:topics].pages.first.title
+      - if post.fields[:authors].data_present?
+        p.blog-snap__authors
+          - if post.guest_post?
+            ' Guest post by
+          - else
+            ' By
+          = post.fields[:authors].pages.map(&:title).to_sentence
+      / Show text if no image
+      - if image.blank? || show_summary
+        - summary = ""
+        - if post.fields[:summary].data_present?
+          - summary = post.fields[:summary]
+        - else
+          - summary = post.fields[:body]
+        .blog-snap-block__summary.snap-block__summary class=("blog-snap-block__summary--no-image" if image.blank?)
+          .blog-snap-block__summary-inner.snap-block__summary-inner.copy
+            = force_excerptify_html render_content(summary), (image.blank? ? 64 : 50), "p i em strong br"
