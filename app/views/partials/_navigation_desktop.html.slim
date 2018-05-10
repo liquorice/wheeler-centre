@@ -1,34 +1,34 @@
 .masthead__navigation--desktop
   ul.masthead-nav-main.masthead-nav-main--desktop.clearfix
-    - cache ["nav-topics-1", primary_topics] do
+    - cache ["nav-topics-2", primary_topics] do
       = render "partials/nav_topics_item"
 
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
     - active_event_series = events_page.active_series
-    - cache ["nav-event-1", events_page, event_children, active_event_series] do
+    - cache ["nav-event-2", events_page, event_children, active_event_series] do
       = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series
 
-    - cache ["nav-broadcasts-1", broadcasts_page] do
+    - cache ["nav-broadcasts-2", broadcasts_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=broadcasts_page.absolute_url
           = broadcasts_page.title
 
-    - cache ["nav-podcasts-1", podcasts_page] do
+    - cache ["nav-podcasts-2", podcasts_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=podcasts_page.absolute_url
           = podcasts_page.title
 
-    - cache ["nav-blog-1", notes_page] do
+    - cache ["nav-blog-2", notes_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=notes_page.absolute_url
           = notes_page.title
 
-    - cache ["nav-news-1", blog_page] do
+    - cache ["nav-news-2", blog_page] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=blog_page.absolute_url
           = blog_page.title
 
-    - cache ["nav-people-1", people_page] do
+    - cache ["nav-people-2", people_page] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
         a.masthead-nav-main__anchor href=people_page.absolute_url
           = people_page.title
