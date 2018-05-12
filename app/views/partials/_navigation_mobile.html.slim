@@ -20,10 +20,10 @@
         a.masthead-nav-main__anchor href="/broadcasts/podcasts"
           'Podcasts
 
-    - cache ["nav-news-1", broadcasts_page] do
+    - cache ["nav-notes-1", notes_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/news"
-          'News
+        a.masthead-nav-main__anchor href=notes_page.absolute_url
+          = notes_page.title
 
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href="/support-us/donate"
