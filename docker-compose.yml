@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+  db:
+    image: postgres:9.6.3
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_USER: db
+      POSTGRES_PASSWORD: db
+      POSTGRES_DB: wheeler_centre_development
