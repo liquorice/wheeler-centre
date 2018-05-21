@@ -18,7 +18,7 @@
     description: open_graph_summary, \
     og: { \
       type: "article", \
-      title: "Notes – #{page.title}",
+      title: "News – #{page.title}",
       description: open_graph_summary, \
       article: { \
         published_time: page.publish_date.iso8601,  \
@@ -41,7 +41,7 @@
 })
 
 = area :head do
-  link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
+  link href=blog_archive_rss_tracking_link rel="alternate" title="News from The Wheeler Centre" type="application/rss+xml"
 
 = area :masthead_title do
   = blog_page.title

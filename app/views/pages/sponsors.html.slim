@@ -27,78 +27,50 @@
       .content-page__body
         section.section--normal
 
-          - if page.fields[:government_partners].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h1 Government Partners
-              - page.fields[:government_partners].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
+          // 1. Patrons
           - if page.fields[:patrons_content].data_present?
             .sponsors-list
               h1 Patrons
               / grouper below used for spacing
               .grouper
                 = render_content page.fields[:patrons_content]
-                br
 
-          .sponsors-list
-            h1 Major Partners
-          - if page.fields[:media].data_present?
+          // 2. Government partners
+          - if page.fields[:government_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Media
-              - page.fields[:media].pages.each do |sponsor|
+              h1 Government Partners
+              - page.fields[:government_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:corporate_partners].data_present?
+          // 3. Major partners
+          - if page.fields[:major_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Corporate partners
-              - page.fields[:corporate_partners].pages.each do |sponsor|
+              h1 Major Partners
+              - page.fields[:major_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:accomodation].data_present?
+          // 4. Program partners
+          - if page.fields[:program_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Accommodation
-              - page.fields[:accommodation].pages.each do |sponsor|
+              h1 Program Partners
+              - page.fields[:program_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:audio_visual].data_present?
+          // 5. Supporting partners
+          - if page.fields[:supporting_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Audio Visual
-              - page.fields[:audio_visual].pages.each do |sponsor|
+              h1 Supporting Partners
+              - page.fields[:supporting_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:wine].data_present?
+          // 6. Trusts and foundations partners
+          - if page.fields[:trusts_and_foundations].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Wine
-              - page.fields[:wine].pages.each do |sponsor|
+              h1 Trusts and Foundations
+              - page.fields[:trusts_and_foundations].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          - if page.fields[:fellowships_and_residencies].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Fellowships & Residencies
-              - page.fields[:fellowships_and_residencies].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
-          .sponsors-list
-            h1 Special Projects
-          - if page.fields[:reimagining_the_performace_space].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h2 Reimagining the performance space
-              - page.fields[:reimagining_the_performace_space].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
-          - if page.fields[:digital_engagement].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              - page.fields[:digital_engagement].pages.each do |sponsor|
-                h2 Digital engagement (regional)
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
-          - if page.fields[:venue_partners].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h1 Venue partners
-              - page.fields[:venue_partners].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
+          // 7. Resident organisations
           - if page.fields[:resident_organisations].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h1 Resident Organisations
