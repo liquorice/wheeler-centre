@@ -1,4 +1,5 @@
 web: bin/passenger_dev
+docker: docker-compose up
 solr: bundle exec rake sunspot:solr:run
 watch_assets: nodenv exec npm run start
 worker: bundle exec rake que:work
