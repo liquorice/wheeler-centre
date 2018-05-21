@@ -42,9 +42,12 @@ You can pull production data down using the following commands:
 ```
 heroku pg:backups capture --app=wheeler-centre
 curl -o latest.dump `heroku pg:backups --app=wheeler-centre public-url`
-pg_restore --verbose --clean --no-acl --no-owner -d wheeler_centre_development < latest.dump
+docker-compose up --detach && docker-compose exec -T db pg_restore --verbose --clean --no-acl --no-owner -U db -h localhost -p 5432 -d wheeler_centre_development < ./latest.dump
 rm latest.dump
+docker-compose stop
 ```
+
+The database username/password in development are both `db`.
 
 ### Running the Application Locally
 
