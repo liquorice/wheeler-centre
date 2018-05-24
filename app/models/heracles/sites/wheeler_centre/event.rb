@@ -110,21 +110,25 @@ module Heracles
             # Try and find events based on presenters
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_presenters({per_page: additional_total, excluded_ids: events.map(&:id)})
+              excluded_ids = events.present? ? events.map(&:id) : []
+              additional = search_events_by_presenters({per_page: additional_total, excluded_ids: excluded_ids})
               events = events + additional
             end
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_topic({per_page: additional_total, excluded_ids: events.map(&:id)})
+              excluded_ids = events.present? ? events.map(&:id) : []
+              additional = search_events_by_topic({per_page: additional_total, excluded_ids: excluded_ids})
               events = events + additional
             end
           else
-            events = search_events_by_presenters({per_page: options[:per_page], excluded_ids: events.map(&:id)})
+            excluded_ids = events.present? ? events.map(&:id) : []
+            events = search_events_by_presenters({per_page: options[:per_page], excluded_ids: excluded_ids})
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_topic({per_page: additional_total, excluded_ids: events.map(&:id)})
+              excluded_ids = events.present? ? events.map(&:id) : []
+              additional = search_events_by_topic({per_page: additional_total, excluded_ids: excluded_ids})
               events = events + additional
             end
           end
