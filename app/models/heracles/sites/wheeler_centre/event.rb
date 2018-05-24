@@ -110,21 +110,21 @@ module Heracles
             # Try and find events based on presenters
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_presenters({per_page: additional_total})
+              additional = search_events_by_presenters({per_page: additional_total, excluded_ids: events.map(&:id)})
               events = events + additional
             end
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_topic({per_page: additional_total})
+              additional = search_events_by_topic({per_page: additional_total, excluded_ids: events.map(&:id)})
               events = events + additional
             end
           else
-            events = search_events_by_presenters({per_page: options[:per_page]})
+            events = search_events_by_presenters({per_page: options[:per_page], excluded_ids: events.map(&:id)})
             # Try and find events based on topics
             if events.length < options[:per_page]
               additional_total = options[:per_page] - events.length
-              additional = search_events_by_topic({per_page: additional_total})
+              additional = search_events_by_topic({per_page: additional_total, excluded_ids: events.map(&:id)})
               events = events + additional
             end
           end
@@ -213,6 +213,10 @@ module Heracles
         private
 
         def search_events_by_presenters(options={})
+          excluded_ids = [id]
+          if (options[:excluded_ids])
+            excluded_ids << options[:excluded_ids]
+          end
           Event.where(
             site_id: site.id,
             published: true,
@@ -237,13 +241,17 @@ module Heracles
         end
 
         def search_events_by_topic(options={})
+          excluded_ids = [id]
+          if (options[:excluded_ids])
+            excluded_ids << options[:excluded_ids]
+          end
           Event.where(
             site_id: site.id,
             published: true,
             hidden: false
           )
           .where("(fields_data#>'{topics, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: fields[:topics].pages.map(&:id))
-          .where.not(id: id)
+          .where.not(id: excluded_ids)
           .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
           .page(options[:page] || 1)
           .per(options[:per_page] || 18)
