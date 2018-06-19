@@ -98,7 +98,7 @@
     - if (past_events.total_count > 6 || past_events.total_count < 2) || blog_posts.present?
       .column-wrapper
         .column-mid
-          .person__related.clearfix data-view-grouper={elementsSelector: ".person__related-column", perGroup: { default: 2 }}.to_json
+          .person__related.clearfix data-view-grouper={elementsSelector: ".person__related-column", perGroup: { default: 3 }}.to_json
             - if blog_posts.present? || longform_blog_posts.present? || past_events.total_pages > 0
               / Blog posts
               - if blog_posts.present?
