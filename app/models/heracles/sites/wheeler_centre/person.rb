@@ -76,6 +76,20 @@ module Heracles
             per(options[:per_page] || 18)
         end
 
+        def longform_blog_posts(options={})
+          Heracles::Page.
+            of_type("longform_blog_post").
+            visible.
+            published.
+            joins(:insertions).
+            where(
+              :"insertions.field" => "authors",
+              :"insertions.inserted_key" => insertion_key
+            ).
+            page(options[:page_number] || 1).
+            per(options[:per_page] || 18)
+        end
+
         def podcast_episodes(options={})
           Heracles::Page.
             of_type("podcast_episode").
