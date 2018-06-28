@@ -28,7 +28,7 @@ module Heracles
         end
 
         def next_chapter_absolute_url
-          absolute_url.gsub("/thenextchapter", "")
+          absolute_url.gsub(/^\/thenextchapter/, "")
         end
 
         private
