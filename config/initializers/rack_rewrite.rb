@@ -72,4 +72,7 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
 
   rewrite /\/(.*)/, '/thenextchapter/$1', host: "thenextchapter.localhost"
   rewrite /\/(.*)/, '/thenextchapter/$1', host: "thenextchapter.wheelercentre.com"
+  r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "www.wheelercentre.com"
+  r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "wheelercentre.com"
+  r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "localhost"
 end
