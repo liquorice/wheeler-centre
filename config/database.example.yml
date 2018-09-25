@@ -1,9 +1,7 @@
 development: &default
   adapter: postgresql
   encoding: unicode
-  username: db
-  password: db
-  port: 15432
+  port: 5432
   host: localhost
   database: wheeler_centre_development
 

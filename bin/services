@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if hash overmind 2>/dev/null; then
+  overmind start -f Procfile.services -s .overmind.services.sock
+else
+  bundle exec foreman start -f Procfile.services
+fi
