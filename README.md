@@ -19,7 +19,21 @@ git clone git@github.com:icelab/wheeler-centre.git
 cd ~/src/wheeler-centre
 ```
 
-To install the required gems & prepare the database:
+To set up all the required services:
+
+```
+bin/boostrap
+```
+
+Once that’s done you can start the services by running:
+
+```
+bin/services
+```
+
+You’ll need to have them running for any of the following commands.
+
+Install the required gems & prepare the database:
 
 ```
 bin/setup
@@ -42,9 +56,8 @@ You can pull production data down using the following commands:
 ```
 heroku pg:backups capture --app=wheeler-centre
 curl -o latest.dump `heroku pg:backups --app=wheeler-centre public-url`
-docker-compose up --detach && docker-compose exec -T db pg_restore --verbose --clean --no-acl --no-owner -U db -h localhost -p 5432 -d wheeler_centre_development < ./latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -p 5432 -d wheeler_centre_development < ./latest.dump
 rm latest.dump
-docker-compose stop
 ```
 
 The database username/password in development are both `db`.
