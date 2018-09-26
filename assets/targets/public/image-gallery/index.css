@@ -1,0 +1,28 @@
+/* Image gallery embed */
+
+.gallery-container {
+}
+
+/* Reset copy list styles */
+.copy .gallery {
+  margin-left: 0;
+}
+
+.copy .gallery > li {
+  list-style-type: none;
+}
+
+/* ul */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(20rem, 1fr));
+  grid-gap: 3rem;
+}
+
+/* li */
+.gallery__image {
+}
+
+.gallery__image img {
+  width: 100%;
+}

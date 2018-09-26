@@ -272,5 +272,4 @@ a, button {
 @import "./flarum-discussion/index.css";
 @import "./adopt-a-word/index.css";
 @import "./copy-to-clipboard/index.css";
-
-
+@import "./image-gallery/index.css";
