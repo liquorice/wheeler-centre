@@ -11,6 +11,18 @@
   clear: both;
 }
 
+.caption,
+.figure__caption {
+  color: #888;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+}
+
+.caption p:last-child,
+.figure__caption p:last-child {
+  margin-bottom: -.5rem;
+}
+
   .figure img {
     width: 100%;
   }
