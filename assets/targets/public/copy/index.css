@@ -90,6 +90,16 @@
     width: 100%;
   }
 
+/* Extra top padding on center aligned images */
+.copy .figure__display--center-aligned.figure__image {
+  padding-top: 3.5rem;
+}
+
+/* Remove top padding if first instance of center aligned image in copy */
+.copy .figure__display--center-aligned.figure__image:first-child {
+  padding-top: 0rem;
+}
+
 
 /* Block Elements
 ---------------------------------------- */
