@@ -141,4 +141,7 @@ views.flarumCommentCount = flarumCommentCount;
 // Copy to clipboard
 views.copyToClipboard = require("../copy-to-clipboard");
 
+// Gallery
+views.gallery = require("../gallery");
+
 module.exports = views;

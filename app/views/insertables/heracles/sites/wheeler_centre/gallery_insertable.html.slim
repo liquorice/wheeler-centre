@@ -1,0 +1,22 @@
+div class=wrapper_div_class style=wrapper_div_style
+  ul.gallery data-view-gallery={slides: gallery_slide_data}.to_json
+    /! loop each asset in `assets`
+    - assets.each_with_index do |asset, idx|
+      li.gallery__image
+        - if (asset_processor_name = options[:asset_processor])
+          - asset_url = send(:"#{asset_processor_name}_asset_url", asset, options[:asset_processor_options] || {})
+        - else
+          - asset_url = asset.original_url
+
+        /! abstract properties from `data`
+        - props = data[:assets_data][idx]
+        - caption =props[:caption]
+        - alt_text = props[:alt_text]
+        - link = props[:link]
+
+        a href=asset_url
+          img.figure__content src=asset_url alt=(alt_text if alt_text.present?)
+
+        - if caption.present?
+          .figure__caption.caption.copy
+            p = caption
