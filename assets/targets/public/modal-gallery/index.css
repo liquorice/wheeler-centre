@@ -26,3 +26,127 @@
 .gallery__image img {
   width: 100%;
 }
+
+/*
+ * Modal gallery
+ */
+
+@import "flickity/dist/flickity.css";
+
+.gallery-slider {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  transition: opacity 250ms;
+  z-index: 10000;
+}
+.gallery-slider--closed {
+  opacity: 0;
+}
+.gallery-slider__close {
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  height: 4.4rem;
+  width: 4.4rem;
+  z-index: 1;
+}
+.gallery-slider__close svg {
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 30%;
+  top: 30%;
+  height: 40%;
+  width: 40%;
+}
+.gallery-slider__close path {
+  fill: #333;
+}
+.gallery-slide {
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 100vh;
+  width: 100vw;
+}
+.gallery-slide:after {
+  background-color: var(--primary-color);
+  content: "";
+  height: 3rem;
+  width: 3rem;
+  left: 50%;
+  top: 50%;
+  margin-left: -1.5rem;
+  margin-top: -1.5rem;
+  position: absolute;
+  z-index: 1;
+  border-radius: 100%;
+  animation: sk-scaleout 1s infinite ease-in-out;
+}
+@keyframes sk-scaleout {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.gallery-slide__inner {
+  align-items: center;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+  left: 10%;
+  position: absolute;
+  flex-direction: column;
+  right: 10%;
+  top: 10%;
+  z-index: 2;
+}
+.gallery-slide__content {
+  max-width: 100%;
+}
+.gallery-slide__content--image,
+.gallery-slide__content--image + .gallery-slide__caption {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.gallery-slide__content--image.flickity-lazyloaded,
+.gallery-slide__content--image.flickity-lazyloaded + .gallery-slide__caption {
+  opacity: 1;
+}
+
+.gallery-slide__content--image {
+  max-height: 90vh;
+}
+
+.gallery-slide__caption {
+  font-family: var(--font-sans);
+  color: #888;
+  font-size: 1.4rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.gallery-slider .flickity-button,
+.gallery-slider__close {
+  background: none;
+}
+
+.gallery-slider .flickity-button svg path,
+.gallery-slider__close svg path {
+  fill: var(--primary-color);
+  transition: fill 150ms ease;
+}
+
+.gallery-slider .flickity-button:hover svg path,
+.gallery-slider .flickity-button:focus svg path,
+.gallery-slider__close:hover svg path,
+.gallery-slider__close:focus svg path {
+  fill: var(--primary-color-darker);
+}
