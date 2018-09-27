@@ -43,9 +43,7 @@ module Heracles
           assets.each_with_index.map {|asset, i|
             asset_data = data[:assets_data][i]
             thumbnail_version_name = :content_thumbnail
-            thumbnail_version_name = :content_thumbnail unless asset.versions.include?(:content_thumbnail)
             large_version_name = :content_large
-            large_version_name = :original unless asset.versions.include?(:content_large)
             {
               thumbnail_url: asset.send(:"#{thumbnail_version_name.to_sym}_url"),
               alt_text: asset_data[:alt_text],
