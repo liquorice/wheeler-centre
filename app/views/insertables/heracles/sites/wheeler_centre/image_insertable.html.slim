@@ -1,4 +1,4 @@
-.figure class="#{display_class} #{aspect_class} #{option_class}" style=("width:#{data[:width]}" if data[:width])
+.figure class="#{display_class} #{aspect_class} #{option_class} figure__image" style=("width:#{data[:width]}" if data[:width])
   - if link_url
     a href=link_url title=(link_title if link_title) target=(link_target if link_target)
       - if options[:version].present?
