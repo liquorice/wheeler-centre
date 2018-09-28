@@ -29,9 +29,9 @@
             li.nc-primary-nav__list-item
               a.nc-primary-nav__list-anchor href="/what-is-the-next-chapter" What is the Next Chapter?
 
-            / Hiding for launch
-            / li.nc-primary-nav__list-item
-            /   a.nc-primary-nav__list-anchor href="/meet-the-writers" Meet the writers
+            - if site.pages.find_by_url("thenextchapter/meet-the-writers").visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/meet-the-writers" Meet the writers
 
             li.nc-primary-nav__list-item
               a.nc-primary-nav__list-anchor href="/meet-the-judges" Meet the judges

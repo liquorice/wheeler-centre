@@ -59,12 +59,12 @@
 
             .nc-footer-nav__col
 
-              / Hiding for launch
-              / ul.nc-footer-nav__list
-              /   li.nc-footer-nav__list-item
-              /     a.nc-footer-nav__list-anchor.nc-footer-nav__list-anchor--parent href="/meet-the-writers" Meet the writers
-              /   li.nc-footer-nav__list-item
-              /     a.nc-footer-nav__list-anchor href="/meet-the-writers/2017" 2017
+              - if site.pages.find_by_url("thenextchapter/meet-the-writers").visible?
+                ul.nc-footer-nav__list
+                  li.nc-footer-nav__list-item
+                    a.nc-footer-nav__list-anchor.nc-footer-nav__list-anchor--parent href="/meet-the-writers" Meet the writers
+                  li.nc-footer-nav__list-item
+                    a.nc-footer-nav__list-anchor href="/meet-the-writers/2018" 2018
 
               ul.nc-footer-nav__list
                 li.nc-footer-nav__list-item
