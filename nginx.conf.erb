@@ -180,8 +180,11 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure only requests through the CANONICAL_HOSTNAME are indexed
+        # Ensure only requests through the CANONICAL_HOSTNAME or NEXT_CHAPTER_HOSTNAME are indexed
         if ($host = <%= ENV['CANONICAL_HOSTNAME'] %>) {
+            set $cdn_request 1;
+        }
+        if ($host = <%= ENV['NEXT_CHAPTER_HOSTNAME'] %>) {
             set $cdn_request 1;
         }
         if ($cdn_request != 1) {
