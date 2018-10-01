@@ -181,7 +181,7 @@ http {
         <% end %>
 
         # Ensure only requests through the CANONICAL_HOSTNAME are indexed
-        if ($host = <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['NEXT_CHAPTER_HOSTNAME'] %>) {
+        if ($host = <%= ENV['CANONICAL_HOSTNAME'] %>) {
             set $cdn_request 1;
         }
         if ($cdn_request != 1) {
