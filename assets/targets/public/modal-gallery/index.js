@@ -16,11 +16,7 @@ function modalGallery(slides) {
     wrapper = domify(
       '<div tabindex="0" class="gallery-slider gallery-slider--closed"></div>'
     );
-    closeButton = domify('<button class="gallery-slider__close">'
-      + '<svg viewBox="0 0 100 100">'
-      + '<path d="M50 60l-40 40-10-10 40-40-40-40 10-10 40 40 40-40 10 10-40 40 40 40-10 10-40-40z" fill="none"/>'
-      + '</svg>'
-    + '</button>');
+    closeButton = domify('<button class="gallery-slider__close"><svg viewBox="0 0 100 100"><path d="M50 60l-40 40-10-10 40-40-40-40 10-10 40 40 40-40 10 10-40 40 40 40-10 10-40-40z" fill="none"/></svg></button>');
     wrapper.appendChild(closeButton);
 
     // Create each individual slide
@@ -65,7 +61,7 @@ function modalGallery(slides) {
     }
     // Remove the hidden class
     window.requestAnimationFrame(function() {
-      removeClass(wrapper, "gallery-slider--closed")
+      removeClass(wrapper, "gallery-slider--closed");
     });
 
     // Bind listeners
@@ -82,7 +78,7 @@ function modalGallery(slides) {
    * Close the gallery and then destroy it
    */
   function close(destroyOnClose) {
-    destroyOnClose = destroyOnClose != null ? destroyOnClose : false
+    destroyOnClose = destroyOnClose != null ? destroyOnClose : false;
     wrapper.removeEventListener("keydown", onKeyDown);
     closeButton.removeEventListener("click", onCloseClick);
     addClass(wrapper, "gallery-slider--closed");
@@ -150,9 +146,7 @@ function wrapped(slide, content) {
   inner.appendChild(content);
   if (slide.caption) {
     var caption = domify(
-      '<p class="gallery-slide__caption">'
-      + slide.caption
-      + '</p>'
+      '<p class="gallery-slide__caption">' + slide.caption + '</p>'
     );
     inner.appendChild(caption);
   }
