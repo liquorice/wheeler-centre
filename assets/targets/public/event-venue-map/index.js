@@ -4,6 +4,7 @@ function EventVenueMap(el, props) {
   this.el = el;
   this.props = props;
   this.mapElement = el.querySelector("[data-map]");
+  GoogleMapsLoader.KEY = "AIzaSyDp1GgfV8-Ks8bwLHyga74LeB9Ny__Pc-o";
   GoogleMapsLoader.load(this.onGmapsReady.bind(this));
 }
 
