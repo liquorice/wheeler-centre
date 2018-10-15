@@ -30,10 +30,10 @@ module Heracles
         def gallery_slide_data
           assets.each_with_index.map {|asset, i|
             version_name = :content_large
-            version_name = :original unless asset.versions.include?(:content_large)
             {
               image: asset.send(:"#{version_name.to_sym}_url"),
-              caption: data[:assets_data][i][:caption]
+              caption: (data[:assets_data][i][:caption] if data[:assets_data][i][:caption].present?),
+              attribution: (asset.attribution if asset.attribution.present? && data[:assets_data][i][:show_attribution] == true)
             }
           }
         end

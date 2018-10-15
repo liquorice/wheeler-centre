@@ -144,12 +144,21 @@ function wrapped(slide, content) {
   var wrapper = domify('<div class="gallery-slide"></div>');
   var inner = domify('<div class="gallery-slide__inner"></div>');
   inner.appendChild(content);
-  if (slide.caption) {
+
+  if (slide.caption || slide.attribution) {
+    var output = slide.caption || "";
+    if (slide.attribution) {
+      if (slide.caption) {
+        output = output + " — ";
+      }
+      output = output + slide.attribution;
+    }
     var caption = domify(
-      '<p class="gallery-slide__caption">' + slide.caption + '</p>'
+      '<p class="gallery-slide__caption">' + output + '</p>'
     );
     inner.appendChild(caption);
   }
+
   wrapper.appendChild(inner);
   return wrapper;
 }
