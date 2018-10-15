@@ -1,6 +1,11 @@
 div class=wrapper_div_class style=wrapper_div_style
+  p.gallery__instruction
+    i.fa.fa-search
+    ' Select an image to view in detail
   ul.gallery data-view-gallery={slides: gallery_slide_data}.to_json
     - images.each do |image|
       li.gallery__image
-        a href=image[:link_url]
+        a.figure__content href=image[:link_url]
           img.figure__content src=image[:thumbnail_url] alt=(image[:alt_text] if image[:alt_text].present?)
+        span.gallery-thumb__hero-type
+          span.i.fa.fa-search
