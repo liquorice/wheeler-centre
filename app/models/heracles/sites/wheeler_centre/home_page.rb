@@ -70,6 +70,7 @@ module Heracles
         def searchable_types
           [
             BlogPost,
+            LongformBlogPost,
             Event,
             Recording,
             PodcastEpisode,
