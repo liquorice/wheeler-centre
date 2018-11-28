@@ -23,7 +23,7 @@ var DEST  = path.join(__dirname, "..", "public", "assets")
 gulp.task("manifest:digest", function(cb) {
   console.log("Starting manifest:digest task");
   var stream = gulp.src(BUILD+"/**/*")
-    .pipe(gulpRevAll({
+    .pipe(gulpRevAll.revision({
       transformFilename: function (file, hash) {
         var ext = path.extname(file.path);
         return path.basename(file.path, ext) + "-" + hash + ext;
@@ -58,12 +58,15 @@ gulp.task("manifest:combine", ["manifest:digest"], function(cb) {
         files: {},
         assets: {}
       };
+      var assetFullBasePath = path.join(process.cwd(), "assets/build");
       for(var manifest in data) {
         for(var file in data[manifest].files) {
           merged.files[file] = data[manifest].files[file];
         }
         for(var asset in data[manifest].assets) {
-          merged.assets[asset] = data[manifest].assets[asset];
+          // Fix up broken asset names
+          var assetKey = asset.replace(new RegExp(assetFullBasePath + "\/"), "")
+          merged.assets[assetKey] = data[manifest].assets[asset];
         }
       }
       return new Buffer(JSON.stringify(merged));
