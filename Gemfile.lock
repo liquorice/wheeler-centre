@@ -519,6 +519,8 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_autoscale_agent (0.4.0)
+      activesupport (>= 3.2)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.8)
@@ -725,6 +727,7 @@ DEPENDENCIES
   rails-assets-jquery-ujs-standalone!
   rails-assets-viewloader!
   rails_12factor
+  rails_autoscale_agent
   rb-fsevent
   react-rails
   redcarpet
@@ -748,4 +751,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.16.1
+   1.17.1

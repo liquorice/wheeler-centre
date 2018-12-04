@@ -86,6 +86,7 @@ group :production do
   gem "rails_12factor"
   gem "dalli"      # memcache on production
   gem "memcachier" # memcache on production
+  gem "rails_autoscale_agent"
 end
 
 group :test do
