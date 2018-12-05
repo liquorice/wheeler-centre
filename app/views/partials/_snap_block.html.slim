@@ -7,6 +7,8 @@
   = render "partials/blog_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
 - elsif post.page_type == "longform_blog_post"
   = render "partials/longform_blog_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
+- elsif post.page_type == "next_chapter_blog_post"
+  = render "partials/next_chapter_blog_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
 - elsif post.page_type == "event"
   = render "partials/event_snap_block", post: post, show_type: show_type, show_summary: show_summary, aspect: aspect, hide_image: hide_image
 - elsif post.page_type == "recording"
