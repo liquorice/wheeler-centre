@@ -214,6 +214,20 @@ module Heracles
 
         end
 
+        def csv_headers
+          [
+            "ID",
+            "Title",
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+          ]
+        end
+
         private
 
         def search_events_by_presenters(options={})
