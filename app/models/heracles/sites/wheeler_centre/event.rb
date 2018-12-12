@@ -240,6 +240,8 @@ module Heracles
             "Sponsors",
             "Topics",
             "Flarum discussion ID",
+            "Updated at",
+            "Created at",
           ]
         end
 
@@ -269,6 +271,8 @@ module Heracles
             (fields[:sponsors].pages.map(&:id).join(",") if fields[:sponsors].data_present?),
             (fields[:topics].pages.map(&:id).join(",") if fields[:topics].data_present?),
             fields[:flarum_discussion_id],
+            updated_at,
+            created_at,
           ]
         end
 
