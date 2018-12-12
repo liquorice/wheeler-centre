@@ -51,6 +51,8 @@ module Heracles
             "Description",
             "Directions",
             "Parking",
+            "Updated at",
+            "Created at",
           ]
         end
 
@@ -65,6 +67,8 @@ module Heracles
             fields[:description],
             fields[:directions],
             fields[:parking],
+            updated_at,
+            created_at,
           ]
         end
 

@@ -208,6 +208,8 @@ module Heracles
             "Staff member",
             "Staff bio",
             "Position title",
+            "Updated at",
+            "Created at",
           ]
         end
 
@@ -225,6 +227,8 @@ module Heracles
             fields[:is_staff_member],
             fields[:staff_bio],
             fields[:position_title],
+            updated_at,
+            created_at,
           ]
         end
 
