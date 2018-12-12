@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       end
       resources :sites do
         resources :bulk_publication, only: [:index, :create]
+        resources :events_export, only: [:index, :create]
       end
     end
   end
