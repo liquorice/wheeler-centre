@@ -40,6 +40,20 @@ module Heracles
           end
         end
 
+        def csv_headers
+          [
+            "ID",
+            "Title",
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+          ]
+        end
+
         private
 
         def search_events(options={})
@@ -63,7 +77,6 @@ module Heracles
           #   paginate page: options[:page] || 1, per_page: options[:per_page] || 14
           # end
         end
-
       end
     end
   end

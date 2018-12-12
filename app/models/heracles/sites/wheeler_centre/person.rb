@@ -194,6 +194,24 @@ module Heracles
           end
         end
 
+        def csv_headers
+          [
+            "ID",
+            "Title",
+            "First name",
+            "Last name",
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+            fields[:first_name],
+            fields[:last_name],
+          ]
+        end
+
         private
 
         def search_upcoming_events(options={})
