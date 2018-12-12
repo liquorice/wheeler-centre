@@ -110,6 +110,10 @@ module Heracles
           [
             "ID",
             "Title",
+            "Hero image",
+            "Summary",
+            "Body",
+            "Sponsor IDs"
           ]
         end
 
@@ -117,6 +121,10 @@ module Heracles
           [
             id,
             title,
+            (fields[:hero_image].assets.first.original_url if fields[:hero_image].data_present?),
+            fields[:summary],
+            fields[:body],
+            (fields[:sponsors].pages.map(&:id).join(",") if fields[:sponsors].data_present?),
           ]
         end
 

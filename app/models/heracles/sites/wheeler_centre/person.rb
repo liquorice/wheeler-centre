@@ -200,6 +200,14 @@ module Heracles
             "Title",
             "First name",
             "Last name",
+            "Portrait",
+            "Intro",
+            "Biography",
+            "URL",
+            "Twitter name",
+            "Staff member",
+            "Staff bio",
+            "Position title",
           ]
         end
 
@@ -209,6 +217,14 @@ module Heracles
             title,
             fields[:first_name],
             fields[:last_name],
+            (fields[:portrait].assets.first.original_url if fields[:portrait].data_present?),
+            fields[:intro],
+            fields[:biography],
+            fields[:url],
+            fields[:twitter_name],
+            fields[:is_staff_member],
+            fields[:staff_bio],
+            fields[:position_title],
           ]
         end
 
