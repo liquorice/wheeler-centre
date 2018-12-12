@@ -113,7 +113,9 @@ module Heracles
             "Hero image",
             "Summary",
             "Body",
-            "Sponsor IDs"
+            "Sponsor IDs",
+            "Updated at",
+            "Created at",
           ]
         end
 
@@ -125,6 +127,8 @@ module Heracles
             fields[:summary],
             fields[:body],
             (fields[:sponsors].pages.map(&:id).join(",") if fields[:sponsors].data_present?),
+            updated_at,
+            created_at,
           ]
         end
 
