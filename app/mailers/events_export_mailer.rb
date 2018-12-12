@@ -1,15 +1,15 @@
 class EventsExportMailer < ActionMailer::Base
   layout "mailer"
 
-  def export(files)
+  def export(to_email, files)
     files.each do |file|
       name, path = file
       attachments[name] = File.read(path)
     end
 
     mail_options = {
-      to: "max@icelab.com.au",
-      from: "max@icelab.com.au",
+      to: to_email,
+      from: "webmaster@wheelercentre.com",
       subject: "Events export"
     }
 
