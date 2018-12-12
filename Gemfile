@@ -113,6 +113,7 @@ group :development do
   gem "binding_of_caller"
   gem "foreman"
   gem "launchy"
+  gem "letter_opener"
   gem "quiet_assets"
   # gem "rack-mini-profiler"
   gem "spring"
