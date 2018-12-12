@@ -106,6 +106,20 @@ module Heracles
           end
         end
 
+        def csv_headers
+          [
+            "ID",
+            "Title",
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+          ]
+        end
+
         private
 
         def search_upcoming_events(options={})
