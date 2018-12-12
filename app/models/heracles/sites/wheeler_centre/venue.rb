@@ -44,6 +44,13 @@ module Heracles
           [
             "ID",
             "Title",
+            "Hero image",
+            "Address",
+            "Address formatted",
+            "Phone number",
+            "Description",
+            "Directions",
+            "Parking",
           ]
         end
 
@@ -51,6 +58,13 @@ module Heracles
           [
             id,
             title,
+            (fields[:hero_image].assets.first.original_url if fields[:hero_image].data_present?),
+            fields[:address],
+            fields[:address_formatted],
+            fields[:phone_number],
+            fields[:description],
+            fields[:directions],
+            fields[:parking],
           ]
         end
 
