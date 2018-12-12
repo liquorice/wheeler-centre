@@ -1,9 +1,10 @@
 require "csv"
 
 class EventsExportJob < Que::Job
-  def run(site_id)
+  def run(site_id, to_email)
     timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%s")
     attachments = []
+
     # Events
     events = find_events(site_id)
     attachments << build_csv_file({
@@ -40,7 +41,7 @@ class EventsExportJob < Que::Job
       rows: event_series.map(&:to_csv)
     })
 
-    EventsExportMailer.export(attachments).deliver_now
+    EventsExportMailer.export(to_email, attachments).deliver_now
   end
 
   private
@@ -93,5 +94,4 @@ class EventsExportJob < Que::Job
     file.rewind
     file
   end
-
 end
