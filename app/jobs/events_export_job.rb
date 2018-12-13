@@ -2,7 +2,7 @@ require "csv"
 
 class EventsExportJob < Que::Job
 
-  def run(site_id, to_email = "webmaster@wheelercentre.com")
+  def run(site_id, to_email)
     timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%s")
     attachments = []
 
