@@ -50,6 +50,30 @@ module Heracles
         def with_ancestors
           [self] + self.ancestors.of_type("topic").visible.published
         end
+
+        def csv_headers
+          [
+            "ID",
+            "Title",
+            "URL",
+            "Body",
+            "Intro",
+            "Updated at",
+            "Created at",
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+            absolute_url,
+            fields[:intro],
+            fields[:body],
+            updated_at,
+            created_at,
+          ]
+        end
       end
     end
   end

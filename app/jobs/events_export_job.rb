@@ -42,6 +42,24 @@ class EventsExportJob < Que::Job
       rows: event_series.map(&:to_csv)
     })
 
+    # Sponsors
+    sponsors = find_sponsors(site_id)
+    attachments << build_csv_file({
+      filename: "#{timestamp}-sponsors.csv",
+      title: "Sponsors",
+      headers: sponsors.first.csv_headers,
+      rows: sponsors.map(&:to_csv)
+    })
+
+    # Topics
+    topics = find_topics(site_id)
+    attachments << build_csv_file({
+      filename: "#{timestamp}-topics.csv",
+      title: "Topics",
+      headers: topics.first.csv_headers,
+      rows: topics.map(&:to_csv)
+    })
+
     EventsExportMailer.export(to_email, attachments).deliver_now
   end
 
@@ -70,6 +88,20 @@ class EventsExportJob < Que::Job
 
   def find_event_series(site_id)
     Heracles::Sites::WheelerCentre::EventSeries
+      .where(site_id: site_id)
+      .order(:created_at)
+      .to_a
+  end
+
+  def find_sponsors(site_id)
+    Heracles::Sites::WheelerCentre::Sponsor
+      .where(site_id: site_id)
+      .order(:created_at)
+      .to_a
+  end
+
+  def find_topics(site_id)
+    Heracles::Sites::WheelerCentre::Topic
       .where(site_id: site_id)
       .order(:created_at)
       .to_a
