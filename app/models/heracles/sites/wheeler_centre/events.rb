@@ -12,9 +12,11 @@ module Heracles
               # Content for off season when there are no events published
               {name: :off_season_info, type: :info, text: "<hr/>"},
               {name: :body_off_season, type: :content, hint: "This content will display when there are no upcoming events."},
-              # Even series intro
+              # Event series intro
               {name: :event_series_info, type: :info, text: "<hr/>"},
               {name: :event_series_intro, type: :content, hint: "A line or two to introduce the current event series"},
+              # Open graph image
+              {name: :og_image, type: :assets, assets_file_type: :image, hint: "(optional) Add an open graph image for the Events page"},
             ]
           }
         end
@@ -36,6 +38,12 @@ module Heracles
 
         def active_series
           children.of_type("event_series_index").first.active_series
+        end
+
+        def og_image
+          if fields[:og_image].data_present?
+            fields[:og_image].assets.first
+          end
         end
 
         private
