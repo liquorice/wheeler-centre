@@ -1,3 +1,17 @@
+Custom meta data
+- open_graph_image = page.og_image
+- if open_graph_image.present?
+  - set_meta_tags({ \
+      og: { \
+        image: { \
+          url: (open_graph_image.content_medium_url if open_graph_image), \
+          secure_url: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["ssl_url"] if open_graph_image), \
+          width: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["width"] if open_graph_image), \
+          height: (open_graph_image.processed_asset.data["versions"]["content_medium"].first["meta"]["height"] if open_graph_image), \
+        } \
+      } \
+    })
+
 - upcoming_events = page.upcoming_events
 - events = page.upcoming_events(page: params[:page], per_page: params[:per_page])
 - active_series = page.active_series
