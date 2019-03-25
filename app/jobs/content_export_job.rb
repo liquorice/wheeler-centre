@@ -1,6 +1,6 @@
 require "csv"
 
-class EventsExportJob < Que::Job
+class ContentExportJob < Que::Job
 
   def run(site_id, to_email)
     timestamp = Time.zone.now.strftime("%Y%m%d-%H%M%s")
@@ -60,7 +60,25 @@ class EventsExportJob < Que::Job
       rows: topics.map(&:to_csv)
     })
 
-    EventsExportMailer.export(to_email, attachments).deliver_now
+    # Blog posts (news)
+    blog_posts = find_blog_posts(site_id)
+    attachments << build_csv_file({
+      filename: "#{timestamp}-news.csv",
+      title: "News",
+      headers: blog_posts.first.csv_headers,
+      rows: blog_posts.map(&:to_csv)
+    })
+
+    # Longform blog posts (notes)
+    longform_blog_posts = find_longform_blog_posts(site_id)
+    attachments << build_csv_file({
+      filename: "#{timestamp}-notes.csv",
+      title: "Notes",
+      headers: longform_blog_posts.first.csv_headers,
+      rows: longform_blog_posts.map(&:to_csv)
+    })
+
+    ContentExportMailer.export(to_email, attachments).deliver_now
   end
 
   private
@@ -102,6 +120,20 @@ class EventsExportJob < Que::Job
 
   def find_topics(site_id)
     Heracles::Sites::WheelerCentre::Topic
+      .where(site_id: site_id)
+      .order(:created_at)
+      .to_a
+  end
+
+  def find_blog_posts(site_id)
+    Heracles::Sites::WheelerCentre::BlogPost
+      .where(site_id: site_id)
+      .order(:created_at)
+      .to_a
+  end
+
+  def find_longform_blog_posts(site_id)
+    Heracles::Sites::WheelerCentre::LongformBlogPost
       .where(site_id: site_id)
       .order(:created_at)
       .to_a

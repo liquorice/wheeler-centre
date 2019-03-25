@@ -1,0 +1,16 @@
+.admin-page.events-export
+
+  h1.admin-page__title Content export
+  .copy
+    p Enter an email address below to trigger a CSV export of all:
+    ul
+      li Events
+      li Event series
+      li People
+      li Venues
+      li News
+      li Notes
+
+  form.events-export__form method="post"
+    input.field-text-input name="email" placeholder="email@example.com" type="email"
+    button.button.button--bright type="submit" Start export

@@ -3,7 +3,7 @@
     = link_to site_bulk_publication_index_path(site), class: "site-navigation__link"
       i.fa.fa-copy
       ' Bulk publish
-  li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "events_export")
-    = link_to site_events_export_index_path(site), class: "site-navigation__link"
+  li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "content_export")
+    = link_to site_content_export_index_path(site), class: "site-navigation__link"
       i.fa.fa-table
-      ' Events export
+      ' Content export

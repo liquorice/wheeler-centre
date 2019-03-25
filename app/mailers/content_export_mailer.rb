@@ -1,4 +1,4 @@
-class EventsExportMailer < ActionMailer::Base
+class ContentExportMailer < ActionMailer::Base
   layout "mailer"
 
   def export(to_email, files)
@@ -10,7 +10,7 @@ class EventsExportMailer < ActionMailer::Base
     mail_options = {
       to: to_email,
       from: "webmaster@wheelercentre.com",
-      subject: "Events export"
+      subject: "Content export"
     }
 
     mail(mail_options)
