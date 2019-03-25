@@ -41,6 +41,50 @@ module Heracles
           }
         end
 
+        ### Exports
+
+        def csv_headers
+          [
+            "ID",
+            "Title",
+            "URL",
+            "Hero image",
+            "Thumbnail image",
+            "Summary",
+            "Intro",
+            "Body",
+            "Meta",
+            "Guest post",
+            "Authors",
+            "Publish date",
+            "Topics",
+            "Flarum discussion ID",
+            "Updated at",
+            "Created at"
+          ]
+        end
+
+        def to_csv
+          [
+            id,
+            title,
+            absolute_url,
+            (fields[:hero].assets.first.original_url if fields[:hero] && fields[:hero].data_present?),
+            (fields[:thumbnail_image].assets.first.original_url if fields[:thumbnail_image].data_present?),
+            fields[:summary],
+            fields[:intro],
+            fields[:body],
+            fields[:meta],
+            fields[:guest_post],
+            (fields[:authors].pages.map(&:id).join(",") if fields[:authors].data_present?),
+            publish_date,
+            (fields[:topics].pages.map(&:id).join(",") if fields[:topics].data_present?),
+            fields[:flarum_discussion_id],
+            updated_at,
+            created_at
+          ]
+        end
+
         ### Accessors
 
         def publish_date
