@@ -1,2 +1,10 @@
-<p>Events export complete.</p>
-<p>The attached CSVs contain all events, series, people, and venues from the beginning of time until <%= Time.zone.now.strftime("%A, %d %b %Y %l:%M %p") %>.</p>
+<p>Content export complete.</p>
+<p>The below CSVs contain all events, series, people, venues, news and notes from the beginning of time until <%= Time.zone.now.strftime("%A, %d %b %Y %l:%M %p") %>.</p>
+<ul>
+  <%- @files.each do |file|%>
+    <%- name, url = file %>
+    <li>
+      <a href="<%= url %>"><%= name %></a>
+    </li>
+  <%- end %>
+</ul>
