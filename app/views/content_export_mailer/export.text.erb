@@ -1,3 +1,8 @@
-Events export complete.
+Content export complete.
 
-The attached CSVs contain all events, series, people, and venues from the beginning of time until <%= Time.zone.now.strftime("%A, %d %b %Y %l:%M %p") %>.
+The below CSVs contain all events, series, people, venues, news and notes from the beginning of time until <%= Time.zone.now.strftime("%A, %d %b %Y %l:%M %p") %>.
+
+<%- @files.each do |file|%>
+<%- name, url = file %>
+- <%= name %> — <<%= url %>>
+<%- end %>

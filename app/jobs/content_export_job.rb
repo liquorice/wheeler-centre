@@ -78,7 +78,31 @@ class ContentExportJob < Que::Job
       rows: longform_blog_posts.map(&:to_csv)
     })
 
-    ContentExportMailer.export(to_email, attachments).deliver_now
+    client = Aws::S3::Client.new(
+      region: ENV["ASSETS_AWS_REGION"],
+      access_key_id: ENV["ASSETS_AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["ASSETS_AWS_SECRET_ACCESS_KEY"]
+    )
+
+    export_id = SecureRandom.uuid
+    bucket_name = ENV["ASSETS_AWS_BUCKET"]
+    bucket = Aws::S3::Bucket.new(
+      bucket_name,
+      client: client
+    )
+    uploaded_attachments = attachments.map {|attachment|
+      file, path = attachment
+      key = "content-exports/#{export_id}/#{file}"
+      bucket.put_object(
+        acl: "public-read",
+        body: path,
+        key: key
+      )
+      public_url = bucket.object(key).public_url
+      [file, public_url]
+    }
+
+    ContentExportMailer.export(to_email, uploaded_attachments).deliver_now
   end
 
   private
