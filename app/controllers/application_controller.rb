@@ -20,6 +20,8 @@ class ApplicationController < ActionController::Base
   def set_layout
     if request.path.match /^\/thenextchapter/
       "next_chapter"
+    elsif request.path.match /^\/tnew/
+      "tnew"
     else
       "application"
     end
