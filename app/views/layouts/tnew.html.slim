@@ -21,8 +21,8 @@ html
     - if Rails.env.development?
       = development_javascript
     /[if lt IE 9]
-      = javascript_include_tag "html5shiv", defer: true
-    = javascript_include_tag "public", async: true
+      script src=asset_url_with_domain(javascript_path("html5shiv")) defer="true"
+    script src=asset_url_with_domain(javascript_path("public")) async="true"
 
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
