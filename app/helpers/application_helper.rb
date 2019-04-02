@@ -53,6 +53,14 @@ module ApplicationHelper
     canonical_domain + "/" + url.gsub(/^\//, '')
   end
 
+  def asset_url_with_domain(url)
+    if Rails.env.production?
+      url_with_domain(url)
+    else
+      url
+    end
+  end
+
   def pcast_url_with_domain(url)
     url_with_domain(url).gsub(/^https?/, "pcast")
   end
