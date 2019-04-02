@@ -14,8 +14,10 @@ html
     = display_meta_tags site: I18n.t("metadata.site_name"),
                         separator: "—",
                         reverse: true
-    = stylesheet_link_tag "public", media: "screen"
-    = stylesheet_link_tag "print", media: "print"
+
+    link rel="stylesheet" media="screen" href=asset_url_with_domain(stylesheet_path("public"))
+    link rel="stylesheet" media="print" href=asset_url_with_domain(stylesheet_path("print"))
+
     - if Rails.env.development?
       = development_javascript
     /[if lt IE 9]
@@ -25,7 +27,15 @@ html
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
     = render 'partials/analytics'
-    = render "partials/favicons"
+
+    link href=asset_url_with_domain(asset_path("public/favicons/favicon.ico")) rel="shortcut icon"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-57x57.png")) rel="apple-touch-icon" sizes="57x57"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-72x72.png")) rel="apple-touch-icon" sizes="72x72"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-114x114.png")) rel="apple-touch-icon" sizes="114x114"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-144x144.png")) rel="apple-touch-icon" sizes="144x144"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-120x120.png")) rel="apple-touch-icon" sizes="120x120"
+    link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-152x152.png")) rel="apple-touch-icon" sizes="152x152"
+
     = area :head
 
   = area :body_outer do
