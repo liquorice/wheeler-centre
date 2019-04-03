@@ -30,9 +30,9 @@
   text-transform: uppercase;
 }
 
-/* Promo form */
+/* Promo box */
 
-.tn-apply-promo {
+.tn-subnav-component .tn-promo-box {
   margin-left: 1rem;
 }
 
@@ -45,14 +45,14 @@
   font-family: var(--font-sans);
   line-height: 1;
   font-size: 1.5rem;
-  width: 10rem;
+  width: 18rem;
   padding: 0.6rem 1.2rem;
   margin-right: 1rem;
 }
 
 /* Promo button */
 
-.tn-subnav-promo-button {
+.tn-subnav-component .tn-promo-box button.tn-subnav-promo-button {
   border: 1px solid #918F8F;
   border-radius: .3rem;
   display: inline-block;
@@ -68,7 +68,7 @@
   text-transform: capitalize;
 }
 
-.tn-subnav-promo-button:hover {
+.tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
   background-color: var( --primary-color);
   color: #FFFFFF;
   text-decoration: none;
