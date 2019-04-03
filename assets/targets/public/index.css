@@ -277,4 +277,6 @@ a, button {
 /* TNEW */
 @import "./tnew/index.css";
 @import "./tnew/subnav.css";
+@import "./tnew/form.css";
 @import "./tnew/login.css";
+@import "./tnew/register.css";

@@ -1,0 +1,40 @@
+/* Tnew forms */
+
+/* Field group */
+
+.form-group {
+  margin-bottom: 3rem;
+}
+
+/* Input label */
+
+.control-label {
+  color: #918F8F;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Input label hint */
+
+.tn-required-field {
+  color: #918F8F;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Form Input */
+
+.form-control {
+  height: 4.3rem;
+  font-size: 1.7rem !important;
+  font-family: var(--font-sans);
+  border: 1px solid #918F8F;
+}
+
+.form-control:focus {
+  outline: none !important;
+}
