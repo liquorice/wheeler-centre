@@ -9,13 +9,7 @@ form.tn-login-component {
   padding: 3rem 3.5rem 3.5rem 3.5rem;
 }
 
-/* Field group */
-
-.tn-login-component .form-group {
-  margin-bottom: 3rem;
-}
-
-/* Form heading */
+/* Login form heading */
 
 .tn-login-component h2 {
   color: var(--text-color);
@@ -23,26 +17,6 @@ form.tn-login-component {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
-}
-
-/* Input label */
-
-form.tn-login-component label {
-  color: #918F8F;
-  font-family: var(--font-sans);
-  font-size: 1.2rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* Input label hint */
-
-form.tn-login-component small {
-  color: #918F8F;
-  font-family: var(--font-sans);
-  font-size: 1.2rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 /* Retrieve password link */
@@ -56,22 +30,9 @@ form.tn-login-component small {
   margin-bottom: 3rem;
 }
 
-/* Form Input */
-
-.tn-login-component .form-control {
-  height: 4.3rem;
-  font-size: 1.7rem !important;
-  font-family: var(--font-sans);
-  border: 1px solid #918F8F;
-}
-
-.tn-login-component .form-control:focus {
-  outline: none !important;
-}
-
 /* Form Login button */
 
-.tn-login-component #tn-login-button {
+#tn-login-button {
   background-color: #FFFFFF !important;
   border-radius: .3rem;
   border: 1px solid var(--primary-color);
@@ -89,7 +50,7 @@ form.tn-login-component small {
   transition-property: transform,background-color,color;
 }
 
-.tn-login-component #tn-login-button:hover {
+#tn-login-button:hover {
   background-color: var(--primary-color) !important;
   border: 1px solid var(--primary-color) !important;
   color: #FFFFFF !important;

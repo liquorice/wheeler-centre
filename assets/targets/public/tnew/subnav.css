@@ -2,6 +2,8 @@
 
 .tn-subnav-component {
   font-family: var(--font-sans);
+  margin-bottom: 3rem;
+  padding: 0;
 }
 
 /* Login link */
