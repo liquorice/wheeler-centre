@@ -273,3 +273,6 @@ a, button {
 @import "./adopt-a-word/index.css";
 @import "./copy-to-clipboard/index.css";
 @import "./modal-gallery/index.css";
+
+/* TNEW */
+@import "./tnew/index.css";
