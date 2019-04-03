@@ -1,0 +1,25 @@
+/* TNEW */
+
+.tnew-bg {
+  background-color: #F6FBFB;
+}
+
+.tn-subnav-component {
+  font-family: var(--font-sans);
+}
+
+.tn-subnav-component .tn-login-link {
+  color: var( --primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tn-subnav-component .tn-cart-link .tn-link {
+  color: var( --primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
