@@ -1,12 +1,12 @@
 /* TNEW */
 
-.tnew-bg {
-  background-color: #F6FBFB;
-}
+/* Header */
 
 .tn-subnav-component {
   font-family: var(--font-sans);
 }
+
+/* Login link */
 
 .tn-subnav-component .tn-login-link {
   color: var( --primary-color);
@@ -16,10 +16,57 @@
   text-transform: uppercase;
 }
 
+/* View cart link */
+
 .tn-subnav-component .tn-cart-link .tn-link {
   color: var( --primary-color);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+/* Promo form */
+
+.tn-apply-promo {
+  margin-left: 1rem;
+}
+
+/* Promo code input */
+
+.tn-subnav-promo-code {
+  border: 1px solid #C9C9C9;
+  border-radius: .3rem;
+  display: inline-block;
+  font-family: var(--font-sans);
+  line-height: 1;
+  font-size: 1.5rem;
+  width: 10rem;
+  padding: 0.6rem 1.2rem;
+  margin-right: 1rem;
+}
+
+/* Promo button */
+
+tn-subnav-promo-button {
+  border: 1px solid #918F8F;
+  border-radius: .3rem;
+  display: inline-block;
+  color: #918F8F;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1;
+  padding: .8rem 1.2rem;
+  text-decoration: none;
+  transform: scale(1,1);
+  transition-property: transform,background-color,color;
+  transition-duration: 250ms;
+  text-transform: capitalize;
+}
+
+tn-subnav-promo-button:hover {
+  background-color: var( --primary-color);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: scale(1.1,1.1);
 }
