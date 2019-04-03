@@ -38,7 +38,7 @@
 
 /* Promo code input */
 
-.tn-subnav-promo-code {
+.tn-subnav-component .tn-promo-box input {
   border: 1px solid #C9C9C9;
   border-radius: .3rem;
   display: inline-block;
@@ -52,7 +52,7 @@
 
 /* Promo button */
 
-tn-subnav-promo-button {
+.tn-subnav-promo-button {
   border: 1px solid #918F8F;
   border-radius: .3rem;
   display: inline-block;
@@ -68,7 +68,7 @@ tn-subnav-promo-button {
   text-transform: capitalize;
 }
 
-tn-subnav-promo-button:hover {
+.tn-subnav-promo-button:hover {
   background-color: var( --primary-color);
   color: #FFFFFF;
   text-decoration: none;
