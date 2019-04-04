@@ -37,4 +37,22 @@
 
 .form-control:focus {
   outline: none !important;
+  box-shadow: none;
+  border: 1px solid #918F8F;
+}
+
+.has-error .form-control:focus {
+  box-shadow: none;
+}
+
+/* Validiation label */
+
+.help-block {
+  font-family: var(--font-sans);
+}
+
+/* Hide label validation icon */
+
+.has-error .control-label::before {
+  display: none;
 }
