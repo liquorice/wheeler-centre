@@ -1,0 +1,90 @@
+/* Subnav */
+
+.tn-subnav-component {
+  font-family: var(--font-sans);
+  margin-bottom: 3rem;
+  padding: 0;
+}
+
+/* Login link */
+
+.tn-subnav-component .tn-login-link {
+  color: var( --primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tn-subnav-component .tn-login-link .tn-link:hover {
+  color: #4a4a4a;
+}
+
+/* View cart link */
+
+.tn-subnav-component .tn-cart-link .tn-link {
+  color: var( --primary-color);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.tn-subnav-component .tn-cart-link .tn-link:hover {
+  color: #4a4a4a;
+}
+
+/* Promo box */
+
+.tn-subnav-component .tn-promo-box {
+  margin-left: 3rem;
+}
+
+/* Promo code input */
+
+.tn-subnav-component .tn-promo-box input {
+  border-radius: .3rem;
+  border: 1px solid #C9C9C9;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-right: 1rem;
+  padding: 0.8rem 1.2rem;
+  width: 18rem;
+}
+
+/* Promo button */
+
+.tn-subnav-component .tn-promo-box button.tn-subnav-promo-button {
+  border-radius: .3rem;
+  border: 1px solid #918F8F;
+  color: #918F8F;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: .8rem 1.2rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  transform: scale(1,1);
+  transition-duration: 250ms;
+  transition-property: transform,background-color,color;
+}
+
+.tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
+  background-color: var( --primary-color);
+  border: 1px solid var( --primary-color);
+  color: #FFFFFF;
+  text-decoration: none;
+  transform: scale(1.1,1.1);
+}
+
+/* Timer */
+
+.tn-subnav-component .tn-cart-link .tn-timer {
+  color: #918F8F;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-left: 3rem;
+}
