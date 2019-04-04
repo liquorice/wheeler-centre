@@ -6,9 +6,13 @@
   padding: 0;
 }
 
+.breakpoint-w-768 .tn-subnav-component {
+  margin-left: 0;
+}
+
 /* Login link */
 
-.tn-subnav-component .tn-login-link {
+.tn-login-link {
   color: var( --primary-color);
   font-size: 1.4rem;
   font-weight: 700;
@@ -16,13 +20,13 @@
   text-transform: uppercase;
 }
 
-.tn-subnav-component .tn-login-link .tn-link:hover {
+.tn-login-link .tn-link:hover {
   color: #4a4a4a;
 }
 
 /* View cart link */
 
-.tn-subnav-component .tn-cart-link .tn-link {
+.tn-cart-link .tn-link {
   color: var( --primary-color);
   font-size: 1.4rem;
   font-weight: 700;
@@ -37,6 +41,17 @@
 
 .tn-subnav-component .tn-promo-box {
   margin-left: 3rem;
+  margin-right: 0;
+}
+
+.breakpoint-w-768 .tn-subnav-component .tn-promo-box {
+  margin-right: 0;
+}
+
+@media (max-width: 992px) {
+  .tn-subnav-component .tn-promo-box {
+    margin-right: 0;
+  }
 }
 
 /* Promo code input */
@@ -67,9 +82,8 @@
   padding: .8rem 1.2rem;
   text-decoration: none;
   text-transform: capitalize;
-  transform: scale(1,1);
   transition-duration: 250ms;
-  transition-property: transform,background-color,color;
+  transition-property: background-color,color;
 }
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
@@ -77,7 +91,6 @@
   border: 1px solid var( --primary-color);
   color: #FFFFFF;
   text-decoration: none;
-  transform: scale(1.1,1.1);
 }
 
 /* Timer */
