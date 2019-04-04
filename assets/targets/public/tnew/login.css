@@ -9,6 +9,11 @@ form.tn-login-component {
   padding: 3rem 3.5rem 3.5rem 3.5rem;
 }
 
+.breakpoint-phone-wide form.tn-login-component,
+.breakpoint-phone form.tn-login-component {
+  margin-bottom: 3rem;
+}
+
 /* Login form heading */
 
 .tn-login-component h2 {
@@ -65,6 +70,8 @@ form.tn-login-component {
   font-family: var(--font-sans);
   font-size: 2rem;
   font-weight: 700;
+  margin-top: 3.2rem;
+  margin-bottom: 2rem;
   margin-left: 2rem;
 }
 
@@ -72,7 +79,7 @@ form.tn-login-component {
 
 .tn-create-sub-heading {
   font-size: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   margin-left: 2rem;
 }
 
