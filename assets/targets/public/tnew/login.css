@@ -9,8 +9,7 @@ form.tn-login-component {
   padding: 3rem 3.5rem 3.5rem 3.5rem;
 }
 
-.breakpoint-phone-wide form.tn-login-component,
-.breakpoint-phone form.tn-login-component {
+.breakpoint-w-768 form.tn-login-component {
   margin-bottom: 3rem;
 }
 
@@ -43,6 +42,7 @@ form.tn-login-component {
   border: 1px solid var(--primary-color);
   color: var(--primary-color) !important;
   display: inline-block;
+  width: auto;
   font-family: var(--font-sans);
   font-size: 1.7rem;
   font-weight: 700;
@@ -63,16 +63,20 @@ form.tn-login-component {
   transform: scale(1.1,1.1);
 }
 
-/* Not registered yet heading */
+/* Not registered / Guests heading */
 
-.tn-create-heading {
+.tn-create-heading,
+.tn-account-login__guest-login-section-heading {
   color: var(--text-color);
   font-family: var(--font-sans);
   font-size: 2rem;
   font-weight: 700;
   margin-top: 3.2rem;
   margin-bottom: 2rem;
-  margin-left: 2rem;
+}
+
+.breakpoint-w-768 .tn-create-heading {
+  margin-top: 0;
 }
 
 /* Not registered yet subheading */
@@ -80,34 +84,39 @@ form.tn-login-component {
 .tn-create-sub-heading {
   font-size: 2rem;
   margin-bottom: 3rem;
-  margin-left: 2rem;
 }
 
-/* Register button */
+/* Register / Guests button */
 
-.tn-register-button {
+.tn-register-button,
+.tn-account-login__guest-login-section-button {
   background-color: #FFFFFF !important;
   border-radius: .3rem;
   border: 1px solid var(--primary-color);
   color: var(--primary-color) !important;
-  display: inline;
+  display: inline-block;
+  width: auto;
   font-family: var(--font-sans);
   font-size: 1.7rem;
   font-weight: 700;
   line-height: 1;
-  margin-left: 2rem;
   padding: .8rem 1.2rem;
   text-decoration: none;
   text-transform: capitalize;
-  transform: scale(1,1);
-  transition-duration: 250ms;
-  transition-property: transform,background-color,color;
+  transform: scale(1,1) !important;
+  transition-duration: 250ms !important;
+  transition-property: transform,background-color,color !important;
 }
 
-.tn-register-button:hover {
+.tn-register-button:hover,
+.tn-account-login__guest-login-section-button:hover {
   background-color: var(--primary-color) !important;
   border: 1px solid var(--primary-color) !important;
   color: #FFFFFF !important;
   text-decoration: none;
-  transform: scale(1.1,1.1);
+  transform: scale(1.1,1.1) !important;
+}
+
+.tn-account-login-page .tn-register-button {
+  margin-bottom: 0;
 }
