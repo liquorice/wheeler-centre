@@ -1,0 +1,113 @@
+/* Login page */
+
+/* Login form */
+
+form.tn-login-component {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  border: 2px solid #EEEEEE;
+  padding: 3rem 3.5rem 3.5rem 3.5rem;
+}
+
+.breakpoint-phone-wide form.tn-login-component,
+.breakpoint-phone form.tn-login-component {
+  margin-bottom: 3rem;
+}
+
+/* Login form heading */
+
+.tn-login-component h2 {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+/* Retrieve password link */
+
+.tn-account-login-page .tn-account-login-forgot-login-link {
+  color: #918F8F;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-bottom: 3rem;
+}
+
+/* Form Login button */
+
+#tn-login-button {
+  background-color: #FFFFFF !important;
+  border-radius: .3rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color) !important;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: .8rem 1.2rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  transform: scale(1,1);
+  transition-duration: 250ms;
+  transition-property: transform,background-color,color;
+}
+
+#tn-login-button:hover {
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  transform: scale(1.1,1.1);
+}
+
+/* Not registered yet heading */
+
+.tn-create-heading {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 3.2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+}
+
+/* Not registered yet subheading */
+
+.tn-create-sub-heading {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  margin-left: 2rem;
+}
+
+/* Register button */
+
+.tn-register-button {
+  background-color: #FFFFFF !important;
+  border-radius: .3rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color) !important;
+  display: inline;
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: 2rem;
+  padding: .8rem 1.2rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  transform: scale(1,1);
+  transition-duration: 250ms;
+  transition-property: transform,background-color,color;
+}
+
+.tn-register-button:hover {
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  transform: scale(1.1,1.1);
+}
