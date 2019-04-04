@@ -21,6 +21,12 @@
   margin-bottom: 0 !important;
 }
 
+.breakpoint-phone-wide .tn-heading,
+.breakpoint-phone .tn-heading {
+  font-size: 3rem;
+  line-height: 3.8rem;
+}
+
 .tn-heading-sub-text {
   color: var(--primary-color);
   font-size: 2rem;
