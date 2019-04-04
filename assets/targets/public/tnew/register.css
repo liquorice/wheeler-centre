@@ -24,6 +24,7 @@
   border: 1px solid var(--primary-color);
   color: var(--primary-color) !important;
   display: inline-block;
+  width: auto;
   font-family: var(--font-sans);
   font-size: 1.7rem;
   font-weight: 700;
