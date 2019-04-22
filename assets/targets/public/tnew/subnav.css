@@ -68,6 +68,10 @@
   width: 18rem;
 }
 
+.breakpoint-w-768 .tn-subnav-component .tn-promo-box input {
+  width: 14rem;
+}
+
 /* Promo button */
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button {
