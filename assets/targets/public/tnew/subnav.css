@@ -14,19 +14,21 @@
 
 .tn-login-link .tn-link,
 .tn-logout-link {
-  color: var( --primary-color);
+  color: var(--primary-color);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
-.tn-login-link .tn-link:hover {
-  color: #4a4a4a;
+.tn-account-info-link:hover,
+.tn-login-link .tn-link:hover,
+.tn-logout-link:hover {
+  color: #4a4a4a !important;
 }
 
-.tn-login-link .tn-text {
-  margin-left: 0 !important;
+.tn-login-link .tn-icon {
+  font-size: 1.4rem !important;
 }
 
 .tn-logout-link:before {
@@ -34,9 +36,15 @@
   margin-left: none !important;
 }
 
+.tn-logged-in-text,
 .tn-logged-in-email {
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
 }
+
+.tn-logged-in-email {
+  text-decoration: underline !important;
+}
+
 
 /* View cart link */
 
