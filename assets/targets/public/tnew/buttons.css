@@ -1,0 +1,42 @@
+/* Primary button */
+
+.btn {
+  background-color: #FFFFFF;
+  border-radius: .3rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color) !important;
+  display: inline-block;
+  width: auto;
+  font-family: var(--font-sans);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: .8rem 1.2rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  transform: scale(1,1);
+  transition-duration: 250ms;
+  transition-property: transform,background-color,color;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color) !important;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  transform: scale(1.1,1.1);
+}
+
+/* Default button */
+
+.btn-default {
+  border: 1px solid #918F8F;
+  color: #918F8F !important;
+}
+
+.btn-default:hover {
+  background-color: #FFFFFF !important;
+  border: 1px solid #666 !important;
+  color: #666 !important;
+  transform: scale(1,1) !important;
+}
