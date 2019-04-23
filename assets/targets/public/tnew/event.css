@@ -1,0 +1,28 @@
+/* Event page */
+
+.tn-event-detail__display-time {
+  font-size: 1.7rem !important;
+  font-family: var(--font-sans);
+  color: #666;
+}
+
+.tn-event-detail__title {
+  color: var(--primary-color);
+  font-family: var(--font-sans);
+  font-size: 4.2rem !important;
+  font-weight: 700;
+  line-height: 5.7rem;
+}
+
+/* Continue shopping link */
+
+.tn-additional-events__continue-shopping-link {
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+  text-decoration: underline;
+  color: #222;
+}
+
+.tn-additional-events__continue-shopping-link:hover {
+  color: var(--primary-color);
+}
