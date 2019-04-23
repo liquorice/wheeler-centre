@@ -1,5 +1,17 @@
 /* Register page */
 
+.tn-login-component,
+.tn-patron-component,
+.tn-address-component {
+  margin-bottom: 3rem;
+}
+
+.breakpoint-w-768 .tn-login-component,
+.breakpoint-w-768 .tn-patron-component,
+.breakpoint-w-768 .tn-address-component {
+  margin-bottom: 3rem;
+}
+
 .tn-patron-component h2 {
   color: var(--text-color);
   font-family: var(--font-sans);
