@@ -6,6 +6,10 @@
   margin-bottom: 3rem;
 }
 
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
 /* Input label */
 
 .control-label {
