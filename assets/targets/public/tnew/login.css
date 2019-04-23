@@ -38,12 +38,14 @@ form.tn-login-component {
 
 .tn-create-heading,
 .tn-account-login__guest-login-section-heading {
-  color: var(--text-color);
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
   font-family: var(--font-sans);
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 3.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1.5rem;
+  letter-spacing: .15em;
+  margin-top: 3.5rem;
 }
 
 .breakpoint-w-768 .tn-create-heading {
@@ -53,7 +55,7 @@ form.tn-login-component {
 /* Not registered yet subheading */
 
 .tn-create-sub-heading {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 2rem;
 }
 
