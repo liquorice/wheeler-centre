@@ -56,3 +56,14 @@
 .has-error .control-label::before {
   display: none;
 }
+
+/* Error labels */
+
+.alert {
+  font-size: 1.4rem !important;
+  font-family: var(--font-sans);
+}
+
+.breakpoint-w-768 .alert {
+  padding: 1rem;
+}
