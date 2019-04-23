@@ -21,6 +21,19 @@
   text-transform: uppercase;
 }
 
+@media (max-width: 992px) {
+  .subnav-icon,
+  .subnav-text,
+  .tn-subnav-component .tn-cart-link .tn-timer,
+  .tn-subnav-component .tn-icon,
+  .tn-subnav-component .tn-login-link.tn-logged-in .tn-logged-in-email,
+  .tn-subnav-component .tn-login-link.tn-logged-in .tn-logged-in-text,
+  .tn-subnav-component .tn-text {
+    line-height: 1.3em;
+    font-size: 12px;
+  }
+}
+
 .tn-account-info-link:hover,
 .tn-login-link .tn-link:hover,
 .tn-logout-link:hover {
@@ -29,12 +42,13 @@
 
 .tn-login-link .tn-icon {
   font-size: 1.4rem !important;
+  color: var(--primary-color) !important;
 }
 
-.tn-logout-link:before {
+/*.tn-logout-link:before {
   content: "" !important;
   margin-left: none !important;
-}
+}*/
 
 .tn-logged-in-text,
 .tn-logged-in-email {
