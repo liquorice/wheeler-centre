@@ -1,5 +1,9 @@
 /* Event page */
 
+.breakpoint-w-768 .tn-event-detail__main-container {
+  margin-bottom: 4.5rem !important;
+}
+
 .tn-event-detail__display-time {
   font-size: 1.7rem !important;
   font-family: var(--font-sans);
