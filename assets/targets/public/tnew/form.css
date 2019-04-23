@@ -12,7 +12,8 @@
 
 /* Input label */
 
-.control-label {
+.control-label,
+.tn-guest-login-form__section--guest-contact label {
   color: #918F8F;
   font-family: var(--font-sans);
   font-size: 1.2rem;
@@ -47,6 +48,24 @@
 
 .has-error .form-control:focus {
   box-shadow: none;
+}
+
+/* Radio */
+
+.checkbox, .radio {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkbox label, .radio label {
+  padding-left: 3rem;
+}
+
+.checkbox-inline input[type=checkbox],
+.checkbox input[type=checkbox],
+.radio-inline input[type=radio],
+.radio input[type=radio] {
+  margin-left: -3rem;
 }
 
 /* Validiation label */
