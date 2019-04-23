@@ -276,6 +276,7 @@ a, button {
 
 /* TNEW */
 @import "./tnew/index.css";
+@import "./tnew/tabs.css";
 @import "./tnew/cart.css";
 @import "./tnew/buttons.css";
 @import "./tnew/subnav.css";

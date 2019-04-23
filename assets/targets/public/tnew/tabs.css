@@ -1,0 +1,35 @@
+/* Tabs */
+
+.tn-account-tab-navigation {
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 4rem;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+  background-color: #F6FBFB;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs li a {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+}
+
+.nav-tabs li a:hover {
+  color: var(--text-color);
+}
+
+.breakpoint-w-768 .nav-tabs {
+  border-bottom: none;
+}
+
+.breakpoint-w-768 .nav-tabs>li {
+  margin-bottom: 0;
+}
+
+.breakpoint-w-768 .nav-tabs>li>a {
+  border: 1px solid #ddd;
+}
