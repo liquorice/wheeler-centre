@@ -26,3 +26,62 @@
 .tn-additional-events__continue-shopping-link:hover {
   color: var(--primary-color);
 }
+
+/* Ticket selector */
+
+.tn-ticket-selector__pricetype-selector,
+.tn-ticket-selector__zone-selector {
+  margin-bottom: 0 !important;
+}
+
+.tn-ticket-selector__pricetype-selector {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  border: 2px solid #EEEEEE;
+  padding: 3rem 3.5rem 3.5rem 3.5rem;
+}
+
+.tn-ticket-selector__pricetype-name {
+  font-family: var(--font-sans);
+  font-size: 2rem !important;
+}
+
+/* Additional controls */
+
+.tn-ticket-selector__additional-controls {
+}
+
+.tn-ticket-selector__additional-controls p {
+  margin-bottom: 2rem;
+}
+
+/* Purchase button */
+
+#tn-add-to-cart-button[disabled]:hover {
+  background-color: var(--primary-color);
+  transform: scale(1,1) !important;
+}
+
+/* Events container */
+
+.tn-event-detail__additional-events-container {
+  padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .tn-event-detail__additional-events-container {
+    margin-right: 3.5rem !important;
+  }
+}
+
+.tn-additional-events__instructions {
+  border-bottom: none !important;
+  background-color: transparent !important;
+  margin: 0 0 2rem 0 !important;
+  padding: 0 !important;
+}
+
+.tn-additional-events__btn-submit {
+  margin-left: 1.5rem !important;
+  border-radius: 0.3rem !important;
+}
