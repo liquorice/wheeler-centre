@@ -40,6 +40,12 @@
   text-decoration: none;
 }
 
+/* Fixing masthead search input color */
+
+.masthead-nav-secondary__search-input {
+  color: #000;
+}
+
 /* Error labels */
 
 .alert {
