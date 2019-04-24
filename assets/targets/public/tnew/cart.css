@@ -45,9 +45,13 @@
 }
 
 .tn-cart-item-details__list {
+  padding: 0rem !important;
+  margin-top: 2rem !important;
+}
+
+.tn-cart-item-detail__list {
   font-family: var(--font-sans);
   padding: 1rem !important;
-  margin-top: 1rem !important;
   border-radius: 0.4rem;
   font-size: 1.5rem;
 }
@@ -67,4 +71,39 @@
 
 .tn-cart-totals__line-item--primary {
   font-weight: 700 !important;
+}
+
+/* Cart billing information */
+
+.tn-patron-billing-information h2,
+.tn-patron-shipping-information h2 {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  letter-spacing: .15em;
+  font-weight: 400 !important;
+}
+
+.breakpoint-w-768 .tn-patron-shipping-information h2 {
+  margin-top: 3rem;
+}
+
+.tn-edit-billing-link,
+.tn-edit-delivery-link {
+  font-size: 1.5rem;
+  font-family: var(--font-sans);
+  text-decoration: underline;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.tn-hosted-payment-iframe {
+  outline: 1px solid;
+}
+
+.tn-hosted-payment-iframe h3 {
+  outline: 1px solid blue !important;
 }

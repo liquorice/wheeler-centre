@@ -35,13 +35,13 @@
 }
 
 .tn-guest-login-form__section-header h2 {
-  color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
   font-family: var(--font-sans);
   font-size: 1.4rem;
-  text-transform: uppercase;
-  padding-bottom: 1.5rem;
   letter-spacing: .15em;
+  padding-bottom: 1.5rem;
+  text-transform: uppercase;
 }
 
 .tn-guest-login-form__section-header p {
@@ -65,18 +65,35 @@
 }
 
 .tn-interests .control-label {
-  color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
   font-family: var(--font-sans);
   font-size: 1.4rem;
-  text-transform: uppercase;
-  padding-bottom: 1rem;
-  letter-spacing: .15em;
   font-weight: 400 !important;
+  letter-spacing: .15em;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .tn-interests .checkbox label {
   font-size: 1.8rem;
   line-height: 2.7rem;
   font-family: var(--font-sans);
+}
+
+/* Update login */
+
+.tn-update-password-component h2 {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  letter-spacing: .15em;
+  padding-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+#tn-password-update-button {
+  margin-bottom: 6rem;
+  margin-top: 2rem;
 }

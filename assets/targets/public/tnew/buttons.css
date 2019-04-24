@@ -19,12 +19,24 @@
   transition-property: transform,background-color,color;
 }
 
-.btn:hover {
+.btn:hover,
+.btn-primary:active,
+.btn-primary:focus {
   background-color: var(--primary-color) !important;
   border: 1px solid var(--primary-color) !important;
   color: #FFFFFF !important;
   text-decoration: none;
   transform: scale(1.1,1.1);
+}
+
+/* Remove button box shadow/outlines */
+
+.btn.active, .btn:active {
+  box-shadow: none;
+}
+
+.btn:focus {
+  outline: none !important;
 }
 
 /* Default button */
@@ -43,4 +55,8 @@
 
 .btn.tn-btn-grouped~.btn.tn-btn-grouped {
   margin-top: 0;
+}
+
+.tn-btn-grouped {
+  margin-right: 1rem;
 }
