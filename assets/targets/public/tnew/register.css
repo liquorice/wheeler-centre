@@ -53,3 +53,30 @@
   line-height: 2.7rem;
   font-family: var(--font-sans);
 }
+
+/* Interests */
+
+.tn-interests h2 {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.tn-interests .control-label {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  letter-spacing: .15em;
+  font-weight: 400 !important;
+}
+
+.tn-interests .checkbox label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
+}
