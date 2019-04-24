@@ -38,14 +38,14 @@ form.tn-login-component {
 
 .tn-create-heading,
 .tn-account-login__guest-login-section-heading {
-  color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
   font-family: var(--font-sans);
   font-size: 1.4rem;
-  text-transform: uppercase;
-  padding-bottom: 1.5rem;
   letter-spacing: .15em;
   margin-top: 3.5rem;
+  padding-bottom: 1.5rem;
+  text-transform: uppercase;
 }
 
 .breakpoint-w-768 .tn-create-heading {
