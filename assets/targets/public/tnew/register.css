@@ -1,5 +1,17 @@
 /* Register page */
 
+.tn-login-component,
+.tn-patron-component,
+.tn-address-component {
+  margin-bottom: 3rem;
+}
+
+.breakpoint-w-768 .tn-login-component,
+.breakpoint-w-768 .tn-patron-component,
+.breakpoint-w-768 .tn-address-component {
+  margin-bottom: 3rem;
+}
+
 .tn-patron-component h2 {
   color: var(--text-color);
   font-family: var(--font-sans);
@@ -16,31 +28,55 @@
   margin-bottom: 2rem;
 }
 
-/* Form Login button */
+/* Checkout as guest */
 
-#tn-account-register-button-register {
-  background-color: #FFFFFF !important;
-  border-radius: .3rem;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color) !important;
-  display: inline-block;
-  width: auto;
-  font-family: var(--font-sans);
-  font-size: 1.7rem;
-  font-weight: 700;
-  line-height: 1;
-  padding: .8rem 1.2rem;
-  text-decoration: none;
-  text-transform: capitalize;
-  transform: scale(1,1);
-  transition-duration: 250ms;
-  transition-property: transform,background-color,color;
+.tn-guest-login-form__section-header {
+  margin-bottom: 3rem !important;
 }
 
-#tn-account-register-button-register:hover {
-  background-color: var(--primary-color) !important;
-  border: 1px solid var(--primary-color) !important;
-  color: #FFFFFF !important;
-  text-decoration: none;
-  transform: scale(1.1,1.1);
+.tn-guest-login-form__section-header h2 {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1.5rem;
+  letter-spacing: .15em;
+}
+
+.tn-guest-login-form__section-header p {
+  font-size: 1.8rem;
+}
+
+.tn-guest-login-form__section--delivery-method label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
+}
+
+/* Interests */
+
+.tn-interests h2 {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.tn-interests .control-label {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  letter-spacing: .15em;
+  font-weight: 400 !important;
+}
+
+.tn-interests .checkbox label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
 }

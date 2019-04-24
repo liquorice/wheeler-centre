@@ -198,6 +198,11 @@ http {
             rewrite ^/(.*) <%= ENV["CANONICAL_PROTOCOL"] %><%= ENV["CANONICAL_HOSTNAME"] %><%= (":" + ENV["CANONICAL_PORT"]) if ENV["CANONICAL_PORT"] != "80"  %>/$1 permanent;
         }
 
+        # Enable CORS for fonts
+        location ~* \.(eot|otf|ttf|woff|woff2)$ {
+            add_header Access-Control-Allow-Origin *;
+        }
+
         # Rails asset pipeline support.
         location ~ "^/assets/.+-([0-9a-f]{32}|[0-9a-f]{64})\..+" {
             error_page 490 = @static_asset;
