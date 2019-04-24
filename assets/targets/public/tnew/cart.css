@@ -46,7 +46,7 @@
 
 .tn-cart-item-details__list {
   padding: 0rem !important;
-  margin-top: 1rem !important;
+  margin-top: 2rem !important;
 }
 
 .tn-cart-item-detail__list {
@@ -98,4 +98,12 @@
   text-decoration: underline;
   margin-top: 1rem;
   display: inline-block;
+}
+
+.tn-hosted-payment-iframe {
+  outline: 1px solid;
+}
+
+.tn-hosted-payment-iframe h3 {
+  outline: 1px solid blue !important;
 }
