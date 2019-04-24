@@ -27,6 +27,16 @@
   transform: scale(1.1,1.1);
 }
 
+/* Remove button box shadow/outlines */
+
+.btn.active, .btn:active {
+  box-shadow: none;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
 /* Default button */
 
 .btn-default {
