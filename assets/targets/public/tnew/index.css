@@ -33,19 +33,26 @@
   margin-top: 0rem !important;
 }
 
-/* Remove button box shadow/outlines */
-
-.btn.active, .btn:active {
-  box-shadow: none;
-}
-
-.btn:focus {
-  outline: none !important;
-}
-
 /* Fixing footer nav sec link hover colours */
 
 .footer-nav-secondary li a:hover {
   color: #FFFFFF;
   text-decoration: none;
+}
+
+/* Fixing masthead search input color */
+
+.masthead-nav-secondary__search-input {
+  color: #000;
+}
+
+/* Error labels */
+
+.alert {
+  font-size: 1.4rem !important;
+  font-family: var(--font-sans);
+}
+
+.breakpoint-w-768 .alert {
+  padding: 1rem;
 }
