@@ -12,22 +12,58 @@
 
 /* Login link */
 
-.tn-login-link {
-  color: var( --primary-color);
+.tn-login-link .tn-link,
+.tn-logout-link {
+  color: var(--primary-color);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
-.tn-login-link .tn-link:hover {
-  color: #4a4a4a;
+@media (max-width: 992px) {
+  .subnav-icon,
+  .subnav-text,
+  .tn-subnav-component .tn-cart-link .tn-timer,
+  .tn-subnav-component .tn-icon,
+  .tn-subnav-component .tn-login-link.tn-logged-in .tn-logged-in-email,
+  .tn-subnav-component .tn-login-link.tn-logged-in .tn-logged-in-text,
+  .tn-subnav-component .tn-text {
+    line-height: 1.3em;
+    font-size: 12px;
+  }
 }
+
+.tn-account-info-link:hover,
+.tn-login-link .tn-link:hover,
+.tn-logout-link:hover {
+  color: #4a4a4a !important;
+}
+
+.tn-login-link .tn-icon {
+  font-size: 1.4rem !important;
+  color: var(--primary-color) !important;
+}
+
+/*.tn-logout-link:before {
+  content: "" !important;
+  margin-left: none !important;
+}*/
+
+.tn-logged-in-text,
+.tn-logged-in-email {
+  font-size: 1.5rem !important;
+}
+
+.tn-logged-in-email {
+  text-decoration: underline !important;
+}
+
 
 /* View cart link */
 
 .tn-cart-link .tn-link {
-  color: var( --primary-color);
+  color: var(--primary-color);
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: .1em;
@@ -68,7 +104,11 @@
   width: 18rem;
 }
 
-/* Promo button */
+.breakpoint-w-768 .tn-subnav-component .tn-promo-box input {
+  width: 14rem;
+}
+
+/* Promo button (default style) */
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button {
   border-radius: .3rem;
@@ -87,10 +127,8 @@
 }
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
-  background-color: var( --primary-color);
-  border: 1px solid var( --primary-color);
-  color: #FFFFFF;
-  text-decoration: none;
+  border: 1px solid #666 !important;
+  color: #666 !important;
 }
 
 /* Timer */
