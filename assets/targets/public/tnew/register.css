@@ -80,3 +80,20 @@
   line-height: 2.7rem;
   font-family: var(--font-sans);
 }
+
+/* Update login */
+
+.tn-update-password-component h2 {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1.5rem;
+  letter-spacing: .15em;
+}
+
+#tn-password-update-button {
+  margin-bottom: 6rem;
+  margin-top: 2rem;
+}
