@@ -26,10 +26,12 @@
   border-bottom: none;
 }
 
-.breakpoint-w-768 .nav-tabs>li {
-  margin-bottom: 0;
-}
-
 .breakpoint-w-768 .nav-tabs>li>a {
   border: 1px solid #ddd;
+}
+
+.breakpoint-w-768 .nav-tabs>li.active>a,
+.breakpoint-w-768 .nav-tabs>li.active>a:focus,
+.breakpoint-w-768 .nav-tabs>li.active>a:hover {
+  border-bottom-color: #DDD;
 }
