@@ -53,6 +53,18 @@
   font-family: var(--font-sans);
 }
 
+.alert a,
+.tn-unknown-error-component a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.alert a:hover,
+.tn-unknown-error-component a:hover {
+  color: #222;
+}
+
 .breakpoint-w-768 .alert {
   padding: 1rem;
 }
+
