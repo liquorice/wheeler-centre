@@ -69,8 +69,13 @@
   font-family: var(--font-sans);
 }
 
+.tn-cart-totals__line-item--subtotal {
+  font-size: 2rem !important;
+}
+
 .tn-cart-totals__line-item--primary {
   font-weight: 700 !important;
+  font-size: 2.5rem !important;
 }
 
 /* Cart billing information */
