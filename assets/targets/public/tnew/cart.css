@@ -128,3 +128,24 @@
 .tn-selected-shipping-method {
   font-weight: normal !important;
 }
+
+/* Receipt component */
+
+.tn-receipt-component {
+  margin-bottom: 4rem;
+}
+
+.tn-receipt-component h2 {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  letter-spacing: .15em;
+  font-weight: 400 !important;
+}
+
+.breakpoint-w-768 .tn-receipt-print {
+  margin-bottom: 3rem;
+}
