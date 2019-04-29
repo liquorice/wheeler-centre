@@ -117,14 +117,6 @@
   color: #000 !important;
 }
 
-.tn-hosted-payment-iframe {
-  outline: 1px solid;
-}
-
-.tn-hosted-payment-iframe h3 {
-  outline: 1px solid blue !important;
-}
-
 .tn-selected-shipping-method {
   font-weight: normal !important;
 }
@@ -149,3 +141,4 @@
 .breakpoint-w-768 .tn-receipt-print {
   margin-bottom: 3rem;
 }
+
