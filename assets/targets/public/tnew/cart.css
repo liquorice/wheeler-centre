@@ -87,7 +87,8 @@
 /* Cart billing information */
 
 .tn-patron-billing-information h2,
-.tn-patron-shipping-information h2 {
+.tn-patron-shipping-information h2,
+.tn-donation-ask-component h2 {
   color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
   font-family: var(--font-sans);
@@ -107,8 +108,13 @@
   font-size: 1.5rem;
   font-family: var(--font-sans);
   text-decoration: underline;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-block;
+}
+
+.tn-edit-billing-link:hover,
+.tn-edit-delivery-link:hover {
+  color: #000 !important;
 }
 
 .tn-hosted-payment-iframe {
@@ -117,4 +123,8 @@
 
 .tn-hosted-payment-iframe h3 {
   outline: 1px solid blue !important;
+}
+
+.tn-selected-shipping-method {
+  font-weight: normal !important;
 }
