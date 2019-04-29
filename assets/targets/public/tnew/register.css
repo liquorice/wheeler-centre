@@ -56,6 +56,10 @@
 
 /* Interests */
 
+.tn-interests {
+  margin-bottom: 4rem;
+}
+
 .tn-interests h2 {
   color: var(--text-color);
   font-family: var(--font-sans);

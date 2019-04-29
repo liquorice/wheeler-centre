@@ -13,7 +13,8 @@
 /* Input label */
 
 .control-label,
-.tn-guest-login-form__section--guest-contact label {
+.tn-guest-login-form__section--guest-contact label,
+.tn-guest-login-billing-address__address-inputs label {
   color: #918F8F;
   font-family: var(--font-sans);
   font-size: 1.2rem;
@@ -43,7 +44,7 @@
 .form-control:focus {
   outline: none !important;
   box-shadow: none;
-  border: 1px solid #918F8F;
+  border: 1px solid #333;
 }
 
 .has-error .form-control:focus {

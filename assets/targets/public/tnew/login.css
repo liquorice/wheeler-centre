@@ -34,6 +34,10 @@ form.tn-login-component {
   margin-bottom: 3rem;
 }
 
+.tn-account-login__guest-login-section {
+  margin: 0 !important;
+}
+
 /* Not registered / Guests heading */
 
 .tn-create-heading,
@@ -43,22 +47,29 @@ form.tn-login-component {
   font-family: var(--font-sans);
   font-size: 1.4rem;
   letter-spacing: .15em;
-  margin-top: 3.5rem;
   padding-bottom: 1.5rem;
   text-transform: uppercase;
 }
 
-.breakpoint-w-768 .tn-create-heading {
-  margin-top: 0;
-}
+/* Not registered yet subheading / Subscribe */
 
-/* Not registered yet subheading */
-
-.tn-create-sub-heading {
+.tn-create-sub-heading,
+.tn-create-brief-heading {
   font-size: 1.8rem;
   margin-bottom: 2rem;
 }
 
-.tn-account-login-page .tn-register-button {
-  margin-bottom: 0;
+.tn-create-brief-heading a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.tn-create-brief-heading a:hover {
+  color: #222;
+}
+
+.tn-account-login-page .tn-register-button,
+.tn-account-login__guest-login-section-button,
+.tn-register-brief-button {
+  margin-bottom: 3.5rem;
 }
