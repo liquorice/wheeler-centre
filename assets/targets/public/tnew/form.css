@@ -44,7 +44,7 @@
 .form-control:focus {
   outline: none !important;
   box-shadow: none;
-  border: 1px solid #918F8F;
+  border: 1px solid #333;
 }
 
 .has-error .form-control:focus {
