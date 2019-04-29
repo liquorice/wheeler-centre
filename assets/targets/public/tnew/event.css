@@ -3,17 +3,17 @@
 /* Series header */
 
 .tn-prod-season-header {
-  padding-bottom: 3.5rem !important;
-  margin-bottom: 4rem !important;
   border-bottom: 1px solid var(--primary-color-light) !important;
+  margin-bottom: 4rem !important;
+  padding-bottom: 3.5rem !important;
 }
 
 .tn-prod-season-header__first-date,
 .tn-prod-season-header__last-date,
 .tn-prod-season-header__date-separator {
-  font-size: 1.5rem !important;
-  font-family: var(--font-sans);
   color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
 }
 
 .tn-prod-season-header__title-and-image-container {
@@ -32,9 +32,9 @@
 }
 
 .tn-event-detail__display-time {
-  font-size: 1.7rem !important;
-  font-family: var(--font-sans);
   color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 1.7rem !important;
   font-weight: 700;
 }
 
@@ -50,10 +50,10 @@
 /* Continue shopping link */
 
 .tn-additional-events__continue-shopping-link {
+  color: #222;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
   text-decoration: underline;
-  color: #222;
 }
 
 .tn-additional-events__continue-shopping-link:hover {

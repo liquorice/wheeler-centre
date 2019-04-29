@@ -35,16 +35,16 @@
 /* Form Input */
 
 .form-control {
-  height: 4.3rem;
-  font-size: 1.7rem !important;
-  font-family: var(--font-sans);
   border: 1px solid #918F8F;
+  font-family: var(--font-sans);
+  font-size: 1.7rem !important;
+  height: 4.3rem;
 }
 
 .form-control:focus {
-  outline: none !important;
-  box-shadow: none;
   border: 1px solid #333;
+  box-shadow: none;
+  outline: none !important;
 }
 
 .has-error .form-control:focus {
