@@ -17,9 +17,9 @@
 
 .tn-event-listing-mode-tab-nav__list-item.active {
   background-color: transparent !important;
-  border-bottom: 1px solid #F6FBFB !important;
   border-radius: 3px 3px 0 0;
   border: 1px solid #DDD !important;
+  border-bottom: 1px solid #F6FBFB !important;
   margin-bottom: -1px !important;
 }
 
