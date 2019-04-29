@@ -1,5 +1,32 @@
 /* Event page */
 
+/* Series header */
+
+.tn-prod-season-header {
+  padding-bottom: 3.5rem !important;
+  margin-bottom: 4rem !important;
+  border-bottom: 1px solid var(--primary-color-light) !important;
+}
+
+.tn-prod-season-header__first-date,
+.tn-prod-season-header__last-date,
+.tn-prod-season-header__date-separator {
+  font-size: 1.5rem !important;
+  font-family: var(--font-sans);
+  color: #666;
+}
+
+.tn-prod-season-header__title-and-image-container {
+  margin-top: 0 !important;
+}
+
+.tn-prod-season-header__title {
+  font-family: var(--font-sans);
+  font-size: 2.2rem !important;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
 .breakpoint-w-768 .tn-event-detail__main-container {
   margin-bottom: 4.5rem !important;
 }
@@ -7,7 +34,8 @@
 .tn-event-detail__display-time {
   font-size: 1.7rem !important;
   font-family: var(--font-sans);
-  color: #666;
+  color: var(--text-color);
+  font-weight: 700;
 }
 
 .tn-event-detail__title {
@@ -16,6 +44,7 @@
   font-size: 4.2rem !important;
   font-weight: 700;
   line-height: 5.7rem;
+  margin: 1rem 0 1.5rem 0 !important;
 }
 
 /* Continue shopping link */
@@ -73,6 +102,17 @@
 }
 
 /* Events container */
+
+.tn-additional-events {
+  margin-top: 3px;
+  margin-bottom: 3rem !important;
+}
+
+.tn-additional-events__instructions {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: auto !important;
+}
 
 .tn-event-detail__additional-events-container {
   padding: 0 !important;
