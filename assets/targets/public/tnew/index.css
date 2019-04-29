@@ -54,7 +54,8 @@
 }
 
 .alert a,
-.tn-unknown-error-component a {
+.tn-unknown-error-component a,
+.tn-not-found-component a {
   color: #222;
   text-decoration: underline;
 }
