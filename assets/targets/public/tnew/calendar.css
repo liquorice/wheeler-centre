@@ -1,0 +1,119 @@
+/* Calendar tabs */
+
+.tn-event-listing-mode-tab-nav__list {
+  border-bottom: 1px solid #DDD !important;
+}
+
+.tn-event-listing-mode-tab-nav__list-item {
+  border: none !important;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  color: var(--text-color) !important;
+}
+
+.tn-event-listing-mode-tab-nav__list-item:hover {
+  background-color: #EEE;
+}
+
+.tn-event-listing-mode-tab-nav__list-item.active {
+  margin-bottom: -1px !important;
+  background-color: transparent !important;
+  border: 1px solid #DDD !important;
+  border-bottom: 1px solid #F6FBFB !important;
+  border-radius: 3px 3px 0 0;
+}
+
+.tn-event-listing-mode-tab-nav__list-item.active:hover {
+  background-color: transparent !important;
+}
+
+.tn-event-listing__primary-view {
+  padding: 2rem !important;
+  border-radius: 4px;
+  border: 2px solid #eee;
+}
+
+.tn-btn-datepicker__icon-container {
+  color: var(--primary-color) !important;
+}
+
+.tn-events-calendar__table {
+  border-spacing: 1px !important;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+}
+
+.tn-btn-datepicker__btn {
+  margin-left: -1px;
+  margin-right: -1px;
+  font-weight: 400 !important;
+  font-size: 1.7rem !important;
+}
+
+@media (min-width: 768px) {
+  .tn-event-listing-mode-tab-nav__list--secondary {
+    top: 32px !important;
+    right: 25px !important;
+  }
+}
+
+.tn-btn-datepicker__icon-container .glyphicon {
+  font-size: 2rem;
+}
+
+.tn-page-bottom a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.tn-events-calendar__event.btn {
+  border: none !important;
+  font-size: 1.5rem;
+}
+
+.tn-events-calendar__event.btn:hover,
+.tn-events-calendar__event.btn:active,
+.tn-events-calendar__event.btn:focus {
+  transform: none !important;
+  border: none !important;
+}
+
+.tn-events-calendar__day-cell {
+  padding: 5px !important;
+}
+
+.tn-events-calendar__day-cell--today {
+  background-color: var(--primary-color-lighter) !important;
+}
+
+.tn-event-listing__controls-heading {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.tn-event-listing-view__results-heading {
+  font-size: 1.5rem !important;
+  font-family: var(--font-sans);
+  color: #666;
+}
+
+.tn-prod-list-item__property--heading {
+  font-size: 2rem !important;
+  font-family: var(--font-sans);
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.tn-prod-list-item__property--heading a:hover {
+  text-decoration: none !important;
+  color: var(--text-color) !important;
+}
+
+.tn-prod-list-item__perf-property {
+  font-size: 1.5rem !important;
+  font-family: var(--font-sans);
+  color: #666;
+}
