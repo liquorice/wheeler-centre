@@ -43,13 +43,13 @@ html
       = area :body do
         = render 'partials/skip_links'
         = area :masthead do
-          = render 'partials/masthead'
+          = render 'partials/masthead', :fully_resolved_links => true
 
         = area :main_outer do
           div role="main" id="main-content"
             = area :main
 
         = area :footer do
-          = render 'partials/footer'
+          = render 'partials/footer', :fully_resolved_links => true
 
       = cache_buster_script site
