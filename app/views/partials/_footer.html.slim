@@ -17,29 +17,34 @@ footer.footer.clearfix role="contentinfo"
       .footer-nav-main__group
         - cache ["footer-broadcasts-header-1", broadcasts_page] do
           h3
-            a href=broadcasts_page.absolute_url = broadcasts_page.title
+            a href=url_with_domain(broadcasts_page.absolute_url, with_domain: with_domain)
+              = broadcasts_page.title
         - broadcasts_pages = broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
         - cache ["footer-broadcasts-nav-1", broadcasts_pages] do
           ul
             - broadcasts_pages.each do |child|
                 - cache ["footer-nav-item-1", child] do
                   li
-                    a href=child.absolute_url == markdown_line child.title
+                    a href=url_with_domain(child.absolute_url, with_domain: with_domain)
+                      == markdown_line child.title
       .footer-nav-main__group
         - cache ["footer-blog-header-1", blog_page] do
           h3
-            a href=blog_page.absolute_url  == markdown_line blog_page.title
+            a href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
+              == markdown_line blog_page.title
         - blog_pages = blog_page.children.in_order.visible.published.where(collection_id: nil)
         - cache ["footer-blog-nav-1", blog_pages] do
           ul
             - blog_pages.each do |child|
               - cache ["footer-nav-item-1", child] do
                 li
-                  a href=child.absolute_url == markdown_line child.title
+                  a href=url_with_domain(child.absolute_url, with_domain: with_domain)
+                    == markdown_line child.title
       .footer-nav-main__group
         - cache ["footer-people-header-1", people_page] do
           h3
-            a href=people_page.absolute_url == markdown_line people_page.title
+            a href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
+              == markdown_line people_page.title
       .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
         h3= projects_page.title
         - cache ["footer-projects-nav-2", projects_for_navigation] do
@@ -49,7 +54,8 @@ footer.footer.clearfix role="contentinfo"
                 - group.each do |child|
                   - cache ["footer-nav-item-1", child] do
                     li
-                      a href=child.absolute_url == markdown_line child.title
+                      a href=url_with_domain(child.absolute_url, with_domain: with_domain)
+                        == markdown_line child.title
       .footer-nav-main__group.footer-nav-main__group--double
         h3 Topics
         - cache ["footer-projects-nav-1", primary_topics] do
@@ -59,7 +65,8 @@ footer.footer.clearfix role="contentinfo"
                 - group.each do |child|
                   - cache ["footer-nav-item-1", child] do
                     li
-                      a href=child.absolute_url == markdown_line child.title
+                      a href=url_with_domain(child.absolute_url, with_domain: with_domain)
+                        == markdown_line child.title
   - cache  ["footer-search-1", params[:q]] do
     nav.footer-nav-secondary.clearfix
       ul
@@ -70,12 +77,12 @@ footer.footer.clearfix role="contentinfo"
             button.footer__search-button
               i.fa.fa-search
         li
-          a href="/about-us" About Us
+          a href="#{canonical_domain}/about-us" About Us
         li
-          a href="/support-us/donate" Donate
+          a href="#{canonical_domain}/support-us/donate" Donate
         li
-          a href="/subscribe" Subscribe
+          a href="#{canonical_domain}/subscribe" Subscribe
 
   .footer__logo
-    a.footer__logo-anchor  data-view-touch-preview={previewClassName: "footer__logo-anchor--hover"}.to_json href="/"
+    a.footer__logo-anchor data-view-touch-preview={previewClassName: "footer__logo-anchor--hover"}.to_json href=url_with_domain("/", with_domain: with_domain)
       ' The Wheeler Centre
