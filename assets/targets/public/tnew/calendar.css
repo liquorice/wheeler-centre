@@ -94,10 +94,14 @@
   margin-bottom: 2rem;
 }
 
+.tn-events-calendar__day-number {
+  color: #666 !important;
+}
+
 .tn-event-listing-view__results-heading {
-  color: #666;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
+  color: #666 !important;
 }
 
 .tn-prod-list-item__property--heading {
@@ -116,4 +120,21 @@
   color: #666;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
+}
+
+.tn-btn-datepicker__date-display {
+  text-transform: capitalize !important;
+}
+
+.tn-datepicker td.day[aria-current=date] span {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.tn-datepicker tr:nth-child(0n+2) {
+  background-color: var(--primary-color-lighter) !important;
+}
+
+.tn-btn-datepicker__btn-container .btn-default {
+  border: 1px solid var(--primary-color) !important;
 }
