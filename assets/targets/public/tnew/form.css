@@ -51,6 +51,11 @@
   box-shadow: none;
 }
 
+.input-group-addon {
+  border: 1px solid #918F8F !important;
+  border: 0px solid !important;
+}
+
 /* Radio */
 
 .checkbox, .radio {
@@ -80,3 +85,4 @@
 .has-error .control-label::before {
   display: none;
 }
+
