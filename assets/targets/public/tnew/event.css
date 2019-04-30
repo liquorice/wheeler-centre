@@ -104,14 +104,18 @@
 /* Events container */
 
 .tn-additional-events {
-  margin-top: 3px;
-  margin-bottom: 3rem !important;
+  margin-bottom: 0rem !important;
 }
 
 .tn-additional-events__instructions {
   font-family: var(--font-sans);
   font-size: 1.5rem;
   line-height: auto !important;
+  margin: 0 0 2rem 0 !important;
+  color: #666;
+  border-bottom: none !important;
+  background-color: transparent !important;
+  padding: 3px 0 0 0 !important;
 }
 
 .tn-event-detail__additional-events-container {
@@ -122,13 +126,6 @@
   .tn-event-detail__additional-events-container {
     margin-right: 3.5rem !important;
   }
-}
-
-.tn-additional-events__instructions {
-  border-bottom: none !important;
-  background-color: transparent !important;
-  margin: 0 0 2rem 0 !important;
-  padding: 0 !important;
 }
 
 .tn-additional-events__btn-submit {
