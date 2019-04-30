@@ -49,8 +49,12 @@ module ApplicationHelper
     end
   end
 
-  def url_with_domain(url)
-    canonical_domain + "/" + url.gsub(/^\//, '')
+  def url_with_domain(url, with_domain: true)
+    if with_domain
+      canonical_domain + "/" + url.gsub(/^\//, '')
+    else
+      url
+    end
   end
 
   def asset_url_with_domain(url)
