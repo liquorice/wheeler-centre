@@ -4,14 +4,16 @@ footer.footer.clearfix role="contentinfo"
       .footer-nav-main__group
         - cache ["footer-events-header-1", events_page] do
           h3
-            a href=events_page.absolute_url == markdown_line events_page.title
+            a href=url_with_domain(events_page.absolute_url, with_domain: with_domain)
+              == markdown_line events_page.title
         - events_pages = events_page.children.in_order.visible.published.where(collection_id: nil)
         - cache ["footer-events-nav-1", events_pages] do
           ul
             - events_pages.each do |child|
               - cache ["footer-nav-item-1", child] do
                 li
-                  a href=child.absolute_url == markdown_line child.title
+                  a href=url_with_domain(child.absolute_url, with_domain: with_domain)
+                    == markdown_line child.title
       .footer-nav-main__group
         - cache ["footer-broadcasts-header-1", broadcasts_page] do
           h3
