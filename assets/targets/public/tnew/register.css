@@ -101,3 +101,15 @@
   margin-bottom: 6rem;
   margin-top: 2rem;
 }
+
+/* Shipping form */
+
+.tn-radio-group {
+  margin-bottom: 3rem;
+}
+
+.tn-shipping-method label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
+}
