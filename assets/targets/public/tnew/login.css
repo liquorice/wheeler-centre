@@ -53,10 +53,9 @@ form.tn-login-component {
 
 /* Not registered yet subheading / Subscribe */
 
-.tn-create-sub-heading,
-.tn-create-brief-heading {
+.tn-create-sub-heading {
   font-size: 1.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .tn-create-brief-heading a {
@@ -71,5 +70,5 @@ form.tn-login-component {
 .tn-account-login-page .tn-register-button,
 .tn-account-login__guest-login-section-button,
 .tn-register-brief-button {
-  margin-bottom: 3.5rem;
+  margin-bottom: 4.5rem;
 }
