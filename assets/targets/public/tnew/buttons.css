@@ -25,7 +25,9 @@
 
 .btn:hover,
 .btn-primary:active,
-.btn-primary:focus {
+.btn-primary:focus,
+.btn-info:active,
+.btn-info:focus {
   background-color: var(--primary-color) !important;
   border: 1px solid var(--primary-color) !important;
   color: #FFFFFF !important;
