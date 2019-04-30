@@ -32,6 +32,11 @@ form.tn-login-component {
   font-weight: 700;
   text-decoration: underline;
   margin-bottom: 3rem;
+  text-transform: lowercase;
+}
+
+.tn-account-login-page .tn-account-login-forgot-login-link::first-letter {
+  text-transform: uppercase;
 }
 
 .tn-account-login__guest-login-section {
