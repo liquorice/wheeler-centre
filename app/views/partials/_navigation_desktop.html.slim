@@ -1,12 +1,12 @@
 .masthead__navigation--desktop
   ul.masthead-nav-main.masthead-nav-main--desktop.clearfix
     - cache ["nav-topics-3", primary_topics] do
-      = render "partials/nav_topics_item"
+      = render "partials/nav_topics_item", with_domain: with_domain
 
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
     - active_event_series = events_page.active_series
     - cache ["nav-event-3", events_page, event_children, active_event_series] do
-      = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series
+      = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series, with_domain: with_domain
 
     - cache ["nav-broadcasts-3", broadcasts_page] do
       li.masthead-nav-main__item
@@ -34,7 +34,7 @@
           = people_page.title
 
     - cache ["nav-projects-4", projects_page, projects_for_navigation] do
-      = render "partials/nav_projects_item"
+      = render "partials/nav_projects_item", with_domain: with_domain
   ul.masthead-nav-secondary.masthead-nav-secondary--desktop.clearfix
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href=url_with_domain("/about-us", with_domain: with_domain)
@@ -42,4 +42,4 @@
     li.masthead-nav-secondary__item
       a.masthead-nav-secondary__anchor href=url_with_domain("/support-us/donate", with_domain: with_domain)
         ' Donate
-    = render "partials/nav_search_box"
+    = render "partials/nav_search_box", with_domain: with_domain
