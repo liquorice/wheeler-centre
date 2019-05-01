@@ -11,5 +11,5 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
         ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
           - group.each do |project|
             li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href=project.absolute_url
+              a.masthead-nav-main__dropdown-anchor href=url_with_domain(project.absolute_url, with_domain: with_domain)
                 == markdown_line project.title

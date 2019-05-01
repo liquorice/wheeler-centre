@@ -1,45 +1,45 @@
 .masthead__navigation--desktop
   ul.masthead-nav-main.masthead-nav-main--desktop.clearfix
-    - cache ["nav-topics-2", primary_topics] do
+    - cache ["nav-topics-3", primary_topics] do
       = render "partials/nav_topics_item"
 
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
     - active_event_series = events_page.active_series
-    - cache ["nav-event-2", events_page, event_children, active_event_series] do
+    - cache ["nav-event-3", events_page, event_children, active_event_series] do
       = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series
 
-    - cache ["nav-broadcasts-2", broadcasts_page] do
+    - cache ["nav-broadcasts-3", broadcasts_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href=broadcasts_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(broadcasts_page.absolute_url, with_domain: with_domain)
           = broadcasts_page.title
 
-    - cache ["nav-podcasts-2", podcasts_page] do
+    - cache ["nav-podcasts-3", podcasts_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href=podcasts_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(podcasts_page.absolute_url, with_domain: with_domain)
           = podcasts_page.title
 
-    - cache ["nav-blog-2", notes_page] do
+    - cache ["nav-blog-3", notes_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href=notes_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(notes_page.absolute_url, with_domain: with_domain)
           = notes_page.title
 
-    - cache ["nav-news-2", blog_page] do
+    - cache ["nav-news-3", blog_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href=blog_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
           = blog_page.title
 
-    - cache ["nav-people-2", people_page] do
+    - cache ["nav-people-3", people_page] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
-        a.masthead-nav-main__anchor href=people_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
           = people_page.title
 
-    - cache ["nav-projects-3", projects_page, projects_for_navigation] do
+    - cache ["nav-projects-4", projects_page, projects_for_navigation] do
       = render "partials/nav_projects_item"
   ul.masthead-nav-secondary.masthead-nav-secondary--desktop.clearfix
     li.masthead-nav-secondary__item
-      a.masthead-nav-secondary__anchor href="/about-us"
+      a.masthead-nav-secondary__anchor href=url_with_domain("/about-us", with_domain: with_domain)
         ' About Us
     li.masthead-nav-secondary__item
-      a.masthead-nav-secondary__anchor href="/support-us/donate"
+      a.masthead-nav-secondary__anchor href=url_with_domain("/support-us/donate", with_domain: with_domain)
         ' Donate
     = render "partials/nav_search_box"
