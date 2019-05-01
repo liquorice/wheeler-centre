@@ -13,7 +13,7 @@
 
 = area :masthead_contextual_navigation do
   - pages = [page] + page.children.in_order.visible.published.where(collection_id: nil)
-  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page, with_domain: false
 
 = area :main do
   .broadcasts
