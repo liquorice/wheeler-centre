@@ -3,7 +3,7 @@
     .masthead__container
       = render 'partials/navigation'
       h1.masthead__logo
-        a.masthead__logo-anchor href="/"
+        a.masthead__logo-anchor href=url_with_domain("/", with_domain: with_domain)
           | The Wheeler Centre
   = area :masthead_contextual
     = render 'partials/masthead_contextual'
