@@ -72,7 +72,7 @@ footer.footer.clearfix role="contentinfo"
       ul
         li.footer-nav-secondary__search
           span.screenreaders-only Search
-          form.footer__search-form.clearfix action=main_app.search_path method="GET"
+          form.footer__search-form.clearfix action=url_with_domain(main_app.search_path, with_domain: with_domain) method="GET"
             input.footer__search-input placeholder="Search the Wheeler Centre…" name="q"
             button.footer__search-button
               i.fa.fa-search
