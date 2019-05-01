@@ -4,7 +4,7 @@
 = area :masthead_contextual_navigation do
   - year = page.ancestors.of_type("vpla_year").first
   - pages = [year] + year.children.in_order.visible.published.where(collection_id: nil)
-  = render "partials/masthead_contextual_navigation", pages: pages, current: page
+  = render "partials/masthead_contextual_navigation", pages: pages, current: page, with_domain: false
 
 = area :main do
   .content-page__main.column-wrapper
