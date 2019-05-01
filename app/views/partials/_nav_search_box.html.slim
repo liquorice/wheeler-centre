@@ -2,7 +2,7 @@ li.masthead-nav-secondary__item.masthead-nav-secondary__item--search data-view-m
   .masthead-nav-secondary__search-box
     button.masthead-nav-secondary__search-close
       i.fa.fa-times
-    form.masthead-nav-secondary__search-form.clearfix action=main_app.search_path method="GET"
+    form.masthead-nav-secondary__search-form.clearfix action=url_with_domain(main_app.search_path, with_domain: with_domain) method="GET"
       input.masthead-nav-secondary__search-input placeholder="Search the Wheeler Centre…" name="q"
       button.masthead-nav-secondary__search-button
         i.fa.fa-search

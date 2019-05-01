@@ -11,5 +11,5 @@ li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__ite
         ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
           - group.each do |topic|
             li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href=topic.absolute_url
+              a.masthead-nav-main__dropdown-anchor href=url_with_domain(topic.absolute_url, with_domain: with_domain)
                 == markdown_line topic.title

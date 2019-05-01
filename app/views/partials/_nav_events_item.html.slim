@@ -2,7 +2,7 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
   data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
   data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
   ]
-  a.masthead-nav-main__anchor href=events_page.absolute_url
+  a.masthead-nav-main__anchor href=url_with_domain(events_page.absolute_url, with_domain: with_domain)
     = events_page.title
     i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
   .masthead-nav-main__dropdown.clearfix
@@ -10,14 +10,17 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
       li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
         span Our calendar
       li.masthead-nav-main__dropdown-item
-        a.masthead-nav-main__dropdown-anchor href=events_page.absolute_url == markdown_line events_page.title
+        a.masthead-nav-main__dropdown-anchor href=url_with_domain(events_page.absolute_url, with_domain: with_domain)
+          == markdown_line events_page.title
       - event_children.each do |child|
         li.masthead-nav-main__dropdown-item
-          a.masthead-nav-main__dropdown-anchor href=child.absolute_url == markdown_line child.title
+          a.masthead-nav-main__dropdown-anchor href=url_with_domain(child.absolute_url, with_domain: with_domain)
+            == markdown_line child.title
     - if active_event_series.present?
       ul.masthead-nav-main__dropdown-list
         li.masthead-nav-main__dropdown-item.masthead-nav-main__dropdown-item--title
           span Current event series
         - active_event_series.each do |series|
           li.masthead-nav-main__dropdown-item
-            a.masthead-nav-main__dropdown-anchor href=series.absolute_url == markdown_line series.title
+            a.masthead-nav-main__dropdown-anchor href=url_with_domain(series.absolute_url, with_domain: with_domain)
+              == markdown_line series.title
