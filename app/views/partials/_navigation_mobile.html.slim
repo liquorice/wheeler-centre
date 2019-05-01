@@ -1,7 +1,7 @@
 .masthead__navigation--mobile
   ul.masthead-nav-main.masthead-nav-main--mobile.clearfix
     - cache ["nav-topics-1", primary_topics] do
-      = render "partials/nav_topics_item"
+      = render "partials/nav_topics_item", with_domain: with_domain
 
     - cache ["nav-people-1", people_page] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
@@ -9,7 +9,7 @@
           = people_page.title
 
     - cache ["nav-projects-3", projects_page, projects_for_navigation] do
-      = render "partials/nav_projects_item"
+      = render "partials/nav_projects_item", with_domain: with_domain
 
     li.masthead-nav-main__item
       a.masthead-nav-main__anchor href=url_with_domain("/about-us", with_domain: with_domain)
@@ -45,5 +45,5 @@
         a.masthead-nav-secondary__anchor href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
           = blog_page.title
 
-    = render "partials/nav_search_box"
+    = render "partials/nav_search_box", with_domain: with_domain
 
