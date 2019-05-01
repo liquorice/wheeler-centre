@@ -40,9 +40,10 @@
   text-decoration: none;
 }
 
-/* Fixing masthead search input color */
+/* Fixing search input color */
 
-.masthead-nav-secondary__search-input {
+.masthead-nav-secondary__search-input,
+.footer__search-input {
   color: #000;
 }
 
