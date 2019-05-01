@@ -1,49 +1,49 @@
 .masthead__navigation--mobile
   ul.masthead-nav-main.masthead-nav-main--mobile.clearfix
     - cache ["nav-topics-1", primary_topics] do
-      = render "partials/nav_topics_item"
+      = render "partials/nav_topics_item", with_domain: with_domain
 
     - cache ["nav-people-1", people_page] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
-        a.masthead-nav-main__anchor href=people_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
           = people_page.title
 
     - cache ["nav-projects-3", projects_page, projects_for_navigation] do
-      = render "partials/nav_projects_item"
+      = render "partials/nav_projects_item", with_domain: with_domain
 
     li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/about-us"
+      a.masthead-nav-main__anchor href=url_with_domain("/about-us", with_domain: with_domain)
         ' About Us
 
     - cache ["nav-podcasts-1", broadcasts_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href="/broadcasts/podcasts"
+      a.masthead-nav-main__anchor href=url_with_domain("/broadcasts/podcasts", with_domain: with_domain)
           'Podcasts
 
     - cache ["nav-notes-1", notes_page] do
       li.masthead-nav-main__item
-        a.masthead-nav-main__anchor href=notes_page.absolute_url
+        a.masthead-nav-main__anchor href=url_with_domain(notes_page.absolute_url, with_domain: with_domain)
           = notes_page.title
 
     li.masthead-nav-main__item
-      a.masthead-nav-main__anchor href="/support-us/donate"
+      a.masthead-nav-main__anchor href=url_with_domain("/support-us/donate", with_domain: with_domain)
         ' Donate
 
   ul.masthead-nav-secondary.masthead-nav-secondary--mobile.clearfix
     - cache ["nav-events-2", broadcasts_page] do
       li.masthead-nav-secondary__item
-        a.masthead-nav-secondary__anchor href=href=events_page.absolute_url
+        a.masthead-nav-secondary__anchor href=href=url_with_domain(events_page.absolute_url, with_domain: with_domain)
           = events_page.title
 
     - cache ["nav-broadcasts-2", broadcasts_page] do
       li.masthead-nav-secondary__item
-        a.masthead-nav-secondary__anchor href=broadcasts_page.absolute_url
+        a.masthead-nav-secondary__anchor href=url_with_domain(broadcasts_page.absolute_url, with_domain: with_domain)
           = broadcasts_page.title
 
     - cache ["nav-blog-2", blog_page] do
       li.masthead-nav-secondary__item
-        a.masthead-nav-secondary__anchor href=blog_page.absolute_url
+        a.masthead-nav-secondary__anchor href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
           = blog_page.title
 
-    = render "partials/nav_search_box"
+    = render "partials/nav_search_box", with_domain: with_domain
 

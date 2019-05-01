@@ -4,6 +4,6 @@
   nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggleSelector: ".masthead__mobile-toggle", targetSelector: ".masthead-nav-main--mobile", targetActiveClassName: "masthead-nav-main--active"}.to_json
     button.masthead__mobile-toggle
       i.fa.fa-angle-down
-    = render "partials/navigation_desktop"
-    = render "partials/navigation_mobile"
+    = render "partials/navigation_desktop", with_domain: with_domain
+    = render "partials/navigation_mobile", with_domain: with_domain
 
