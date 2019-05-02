@@ -3,9 +3,9 @@
     .column-wrapper
       div class=column_class
         - unless data[:title].blank?
-          .section-header.next-chapter-header
+          .section-header
             h2 = markdown_line data[:title]
-        .snap-wrapper.next-chapter-header.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: grouper_config}.to_json
+        .snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: grouper_config}.to_json
           - blog_posts.each do |blog_post|
             = render "partials/next_chapter_blog_snap_block", post: blog_post, show_type: true, aspect: :landscape
   - else
