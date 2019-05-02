@@ -40,6 +40,15 @@ html {
   color: var(--color-blue);
 }
 
+.next-chapter-header h2 {
+  color: #757575;
+}
+.next-chapter-header time {
+  color: #757575;
+}
+
+
+
 @import "./masthead";
 @import "./masthead/nav.css";
 @import "./footer";

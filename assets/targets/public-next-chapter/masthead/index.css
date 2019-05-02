@@ -80,7 +80,7 @@
 .nc-clip {
   width: 19.5rem;
   clip-path: polygon(0% 0, 101% 0%, 101% 101%, 0 0%);
-  background-color: var(--color-blue);
+  background-color: var(--color-dark-blue);
 }
 
 .breakpoint-phone-wide .nc-clip,
