@@ -1,5 +1,5 @@
 .nc-nav {
-  background-color: var(--color-blue);
+  background-color: var(--color-dark-blue);
   padding-bottom: 4rem;
   padding-left: 9rem;
   padding-top: 3rem;
@@ -25,7 +25,7 @@
 }
 
 .nc-nav::after {
-  background-color: var(--color-blue);
+  background-color: var(--color-dark-blue);
   bottom: 0;
   content: "";
   display: block;
