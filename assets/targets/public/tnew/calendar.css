@@ -117,7 +117,7 @@
 }
 
 .tn-prod-list-item__perf-property {
-  color: #666;
+  color: #333 !important;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
 }

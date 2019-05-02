@@ -1,0 +1,129 @@
+/* Packages */
+
+/* Package list item */
+
+@media (min-width: 768px) {
+  .tn-prod-list-item {
+    grid-column-gap: 30px !important;
+    border-radius: 4px;
+    border: 2px solid #eee !important;
+    padding: 2rem !important;
+  }
+}
+
+.tn-package-list-item__date-range {
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+.tn-package-list-item__location {
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+.tn-package-list-item__description {
+  max-width: 65rem;
+}
+
+.tn-package-list-item__description p {
+  margin-bottom: 1.5rem !important;
+}
+
+.tn-prod-list-item__property--img-container {
+  margin-top: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .tn-prod-list-item__property--img-container {
+    grid-row: 1/span 3 !important;
+  }
+}
+
+.breakpoint-w-768 .tn-prod-list-item--package {
+  border-top: 1px solid var(--primary-color-light) !important;
+}
+
+.breakpoint-w-768 .tn-prod-list-item--package:first-child {
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+
+/* Package info */
+
+.tn-package-detail__title {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem !important;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.tn-package-detail__venue {
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+.tn-ticket-selector__pricetype-selector,
+.tn-ticket-selector__zone-selector {
+  margin-bottom: 2rem !important;
+}
+
+/* Performance list */
+
+.tn-package-detail__perf-list {
+  background-color: #F6FBFB !important;
+  margin-bottom: 4rem !important;
+}
+
+.tn-package-perf {
+  margin-bottom: 1rem !important;
+  background-color: #FFF;
+}
+
+.tn-package-perf__property {
+  color: #333 !important;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+  padding: 1rem !important;
+}
+
+.tn-package-perf__property--datetime {
+  color: #333 !important;
+}
+
+.breakpoint-w-768 .tn-package-perf__property--datetime {
+  color: #333 !important;
+}
+
+/* Available sections header */
+
+.tn-ticket-selector__heading-available-zones {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
+  font-family: var(--font-sans);
+  font-size: 1.4rem !important;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.tn-package-detail__heading-container,
+.tn-package-detail__description-container {
+  margin-bottom: 3rem !important;
+}
+
+.breakpoint-w-768 .tn-package-detail__heading-container,
+.breakpoint-w-768 .tn-package-detail__description-container {
+  margin-bottom: 2rem !important;
+}
+
+/* Ticket selector label */
+
+.tn-ticket-selector__zone-selector label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
+}
