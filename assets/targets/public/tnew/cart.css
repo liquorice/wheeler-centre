@@ -88,7 +88,8 @@
 
 .tn-patron-billing-information h2,
 .tn-patron-shipping-information h2,
-.tn-donation-ask-component h2 {
+.tn-donation-ask-component h2,
+.tn-gift-certificates-redemption-component h2 {
   color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
   font-family: var(--font-sans);
@@ -142,3 +143,9 @@
   margin-bottom: 3rem;
 }
 
+/* Gift certificate component */
+
+#tn-payment-apply-gift-certificate-form {
+  margin-top: 2rem;
+  margin-bottom: 6rem;
+}
