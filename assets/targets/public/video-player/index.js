@@ -32,6 +32,10 @@ function VideoPlayer(el, props) {
 
   window.addEventListener("hashchange", this.moveToTimeHash.bind(this), false);
 
+  // Set attributes for accessibility
+  document.getElementsByTagName('iframe')[0].setAttribute('lang', 'en');
+
+
   // Set up the player
   this.iframe = this.el.querySelector("iframe");
   this.player = new playerjs.Player(this.iframe);
