@@ -16,7 +16,7 @@
       .video-player__cover
       .video-player__header
         .video-player__play
-          i.fa.fa-play.video-player__play-icon
+          i.fa.fa-play.video-player__play-icon aria-label="play"
         h3.video-player__title
           - if external_video.embed["title"].present?
             = widont_format(external_video.embed["title"]).html_safe
