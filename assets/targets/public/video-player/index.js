@@ -35,6 +35,9 @@ function VideoPlayer(el, props) {
   // Set attributes for accessibility
   document.getElementsByTagName('iframe')[0].setAttribute('lang', 'en');
 
+  var video_title_el = document.getElementsByClassName('video-player__title');
+  var video_title = video_title_el[0].innerText;
+  document.getElementsByTagName('iframe')[0].setAttribute('title', video_title);
 
   // Set up the player
   this.iframe = this.el.querySelector("iframe");
