@@ -13,7 +13,7 @@ function iOS() {
   return ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
 }
 
-function VideoPlayer(el, props) {
+function VideoPlayer(el, title) {
   this.el = el;
   this.model = {
     duration: [],
@@ -32,16 +32,13 @@ function VideoPlayer(el, props) {
 
   window.addEventListener("hashchange", this.moveToTimeHash.bind(this), false);
 
-  // Set attributes for accessibility
-  document.getElementsByTagName('iframe')[0].setAttribute('lang', 'en');
-
-  var video_title_el = document.getElementsByClassName('video-player__title');
-  var video_title = video_title_el[0].innerText;
-  document.getElementsByTagName('iframe')[0].setAttribute('title', video_title);
-
   // Set up the player
   this.iframe = this.el.querySelector("iframe");
   this.player = new playerjs.Player(this.iframe);
+
+  // Set attributes for accessibility
+  this.iframe.setAttribute('lang', document.documentElement.getAttribute('lang') || "en");
+  this.iframe.setAttribute('title', title);
 
   // Bind player events
   this.player.on("ready", this.onPlayerReady.bind(this));
