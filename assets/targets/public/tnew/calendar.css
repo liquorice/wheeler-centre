@@ -94,6 +94,10 @@
   margin-bottom: 2rem;
 }
 
+.tn-events-calendar__event-time {
+  font-weight: 400 !important;
+}
+
 .tn-events-calendar__day-number {
   color: #666 !important;
 }
@@ -137,4 +141,17 @@
 
 .tn-btn-datepicker__btn-container .btn-default {
   border: 1px solid var(--primary-color) !important;
+}
+
+.tn-events-list-view__datepicker-divider-label {
+  color: #666 !important;
+  font-family: var(--font-sans);
+  font-style: normal !important;
+  font-size: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .tn-events-list-view__date-range {
+    align-items: center;
+  }
 }
