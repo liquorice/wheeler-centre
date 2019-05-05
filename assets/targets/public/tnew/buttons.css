@@ -66,3 +66,12 @@
 .tn-btn-grouped {
   margin-right: 1rem;
 }
+
+/* Disabled buttons */
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  opacity: .5 !important;
+  filter: alpha(opacity=50) !important;
+}
