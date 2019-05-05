@@ -73,7 +73,9 @@
 }
 
 .tn-cart-totals__line-item--subtotal,
-.tn-cart-totals__line-item--subtotal .tn-cart-totals__label  {
+.tn-cart-totals__line-item--subtotal .tn-cart-totals__label,
+.tn-cart-totals__label,
+.tn-cart-totals__value  {
   font-size: 2rem !important;
   color: #666 !important;
 }
@@ -81,6 +83,7 @@
 .tn-cart-totals__line-item--primary,
 .tn-cart-totals__label--total,
 .tn-cart-totals__value--total {
+  color: #333 !important;
   font-weight: 700 !important;
   font-size: 2.5rem !important;
 }
