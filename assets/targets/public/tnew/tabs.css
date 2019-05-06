@@ -18,7 +18,8 @@
   font-size: 1.5rem;
 }
 
-.nav-tabs li a:hover {
+.nav-tabs li a:hover,
+.nav-tabs li a:focus {
   color: var(--text-color);
 }
 
