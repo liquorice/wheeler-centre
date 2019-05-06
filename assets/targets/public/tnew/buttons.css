@@ -37,7 +37,8 @@
 
 /* Remove button box shadow/outlines */
 
-.btn.active, .btn:active {
+.btn.active,
+.btn:active {
   box-shadow: none;
 }
 
