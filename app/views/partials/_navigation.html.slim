@@ -1,6 +1,6 @@
 / Since some of these requests are expensive through Solr, we're just caching
 / the entire navigation block for each day
-- cache ["navigation-all-2", Time.current.beginning_of_day] do
+- cache ["navigation-all-3", Time.current.beginning_of_day] do
   nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggleSelector: ".masthead__mobile-toggle", targetSelector: ".masthead-nav-main--mobile", targetActiveClassName: "masthead-nav-main--active"}.to_json
     button.masthead__mobile-toggle
       i.fa.fa-angle-down
