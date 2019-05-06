@@ -34,7 +34,7 @@
       .video-player__teaser class=(poster_image_aspect_class if poster_image_aspect_class) on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
         .video-player__cover
         .video-player__header
-          .video-player__play
+          .video-player__play on-keypress="onTeaserClick" tabindex="0"
             i.fa.fa-play.video-player__play-icon aria-label="play"
           h3.video-player__title = title
         .video-player__metadata
