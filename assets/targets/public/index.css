@@ -158,7 +158,7 @@ a, button {
   }
 
   .section-header h2 {
-    color: #777;
+    color: #757575;
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;

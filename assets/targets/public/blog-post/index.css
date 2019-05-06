@@ -24,7 +24,7 @@
 }
 
   .blog-post__byline {
-    color: #888;
+    color: #757575;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
@@ -125,7 +125,7 @@
   padding-top: 3rem;
 }
   .blog-post__meta-inner {
-    color: #888;
+    color: #757575;
     font-family: var(--font-sans);
     font-size: 1.7rem;
   }
@@ -331,7 +331,7 @@
 .blog-index__latest {}
 
   .blog-index__latest-header {
-    color: #777;
+    color: #757575;
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;

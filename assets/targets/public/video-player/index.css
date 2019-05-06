@@ -1,4 +1,3 @@
-
 .video-player {
   font-family: var(--font-sans);
   position: relative;
@@ -93,6 +92,10 @@
     left: 0;
     top: 0;
   }
+      .video-player__play:focus {
+        outline: 1px currentColor dotted;
+      }
+
       .breakpoint-phone-wide .video-player__play,
       .breakpoint-phone .video-player__play {
         height: 3rem;

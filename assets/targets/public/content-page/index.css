@@ -27,7 +27,7 @@
 }
   .content-page__nav-title {
     border-bottom: 1px solid #ededed;
-    color: #777;
+    color: #757575;
     font-family: var(--font-sans);
     -webkit-font-smoothing: subpixel-antialiased;
     font-smoothing: subpixel-antialiased;
@@ -50,7 +50,7 @@
 .breakpoint-phone-wide .content-page__nav-toggle,
 .breakpoint-phone .content-page__nav-toggle {
   border-bottom: 1px solid #ededed;
-  color: #888;
+  color: #757575;
   cursor: pointer;
   display: block;
   font-family: var(--font-sans);
