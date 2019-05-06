@@ -85,6 +85,15 @@ VideoPlayer.prototype.onTeaserClick = function(e) {
   }
 };
 
+VideoPlayer.prototype.onPlayerEnter = function(e) {
+  console.log("here");
+  e.preventDefault();
+  this.view.set("playing", true);
+  if (!iOS()) {
+    this.player.play();
+  }
+};
+
 // Watch the `property` and change the `el`
 VideoPlayer.prototype.formatDuration = function(el, property) {
   var binding = this;
