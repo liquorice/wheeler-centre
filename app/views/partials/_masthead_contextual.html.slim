@@ -1,7 +1,7 @@
 .masthead-contextual.masthead-contextual--events.clearfix
   / Since some of these requests are expensive through Solr, we're just caching
   / the entire upcoming block for a whole day
-  - cache ["upcoming-events-4", Time.current.beginning_of_day, upcoming_events_for_navigation.length] do
+  - cache ["upcoming-events-5", Time.current.beginning_of_day, upcoming_events_for_navigation.length] do
     - if upcoming_events_for_navigation.present?
       .upcoming-events data-view-masthead-events={eventSelector: ".upcoming-events__item-title"}.to_json
         .upcoming-events__navigation.clearfix
@@ -21,7 +21,7 @@
               - image = event.fields[:thumbnail_image].assets.first
             - elsif event.promo_image
               - image = event.promo_image
-            - cache ["upcoming-events-event-1", event, image] do
+            - cache ["upcoming-events-event-2", event, image] do
               li.upcoming-events__item
                 a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=url_with_domain(event.absolute_url, with_domain: with_domain)
                   - if image
