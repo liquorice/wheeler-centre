@@ -99,6 +99,7 @@
 
 .tn-events-calendar__event-time {
   font-weight: 400 !important;
+  left: 5px !important;
 }
 
 .tn-events-calendar__day-number {
@@ -173,4 +174,10 @@
 .tn-event-listing-busy-indicator__content:after {
   width: 3rem !important;
   height: 3rem !important;
+}
+
+.tn-events-calendar__list-day-heading {
+  font-family: var(--font-sans);
+  background-color: #a6a6a6 !important;
+  color: #FFF !important;
 }
