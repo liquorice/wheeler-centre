@@ -28,14 +28,15 @@
       .caption.figure__caption.copy
         p == data[:caption]
 - else
+  - title = widont_format(data[:embedData][:title]).html_safe
   .figure.figure__video class=display_class
-    .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=true
+    .video-player class="{(playing) ? 'video-player--playing' : ''} {(loaded) ? 'video-player--loaded' : ''}" data-view-video-player=title
       .video-player__teaser class=(poster_image_aspect_class if poster_image_aspect_class) on-click="onTeaserClick" style=("background-image: url(#{poster_image_url})" if poster_image_url)
         .video-player__cover
         .video-player__header
-          .video-player__play
-            i.fa.fa-play.video-player__play-icon
-          h3.video-player__title = widont_format(data[:embedData][:title]).html_safe
+          .video-player__play on-keypress="onTeaserClick" tabindex="0"
+            i.fa.fa-play.video-player__play-icon aria-label="play"
+          h3.video-player__title = title
         .video-player__metadata
           span.video-player__watch Watch
           span.video-player__duration format-duration="duration"
