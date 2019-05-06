@@ -37,7 +37,8 @@
 
 /* Remove button box shadow/outlines */
 
-.btn.active, .btn:active {
+.btn.active,
+.btn:active {
   box-shadow: none;
 }
 
@@ -65,4 +66,19 @@
 
 .tn-btn-grouped {
   margin-right: 1rem;
+}
+
+/* Disabled buttons */
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  opacity: .5 !important;
+  filter: alpha(opacity=50) !important;
+}
+
+.btn.disabled:hover,
+.btn[disabled]:hover,
+fieldset[disabled] .btn:hover {
+  transform: scale(1,1) !important;
 }
