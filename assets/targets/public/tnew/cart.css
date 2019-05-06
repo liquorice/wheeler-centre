@@ -23,9 +23,6 @@
 
 /* Cart items */
 
-.tn-cart__section-items {
-}
-
 .tn-cart__section-items .tn-cart-item:first-child {
   border: none;
 }

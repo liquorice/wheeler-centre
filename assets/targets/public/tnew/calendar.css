@@ -27,20 +27,22 @@
   background-color: transparent !important;
 }
 
+/* Calendar view (white box) */
+
 .tn-event-listing__primary-view {
   border-radius: 4px;
   border: 2px solid #eee;
   padding: 2rem !important;
 }
 
+/* Datepickers */
+
 .tn-btn-datepicker__icon-container {
   color: var(--primary-color) !important;
 }
 
-.tn-events-calendar__table {
-  border-spacing: 1px !important;
-  font-family: var(--font-sans);
-  font-size: 1.5rem;
+.tn-btn-datepicker__icon-container .glyphicon {
+  font-size: 2rem;
 }
 
 .tn-btn-datepicker__btn {
@@ -50,6 +52,44 @@
   margin-right: -1px;
 }
 
+.tn-btn-datepicker__date-display {
+  text-transform: capitalize !important;
+}
+
+.tn-datepicker td.day[aria-current=date] span {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.tn-datepicker tr:nth-child(0n+2) {
+  background-color: var(--primary-color-lighter) !important;
+}
+
+.tn-btn-datepicker__btn-container .btn-default {
+  border: 1px solid var(--primary-color) !important;
+}
+
+.tn-events-list-view__datepicker-divider-label {
+  color: #666 !important;
+  font-family: var(--font-sans);
+  font-style: normal !important;
+  font-size: 1.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .tn-events-list-view__date-range {
+    align-items: center;
+  }
+}
+
+/* Calendar table */
+
+.tn-events-calendar__table {
+  border-spacing: 1px !important;
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+}
+
 @media (min-width: 768px) {
   .tn-event-listing-mode-tab-nav__list--secondary {
     top: 32px !important;
@@ -57,14 +97,13 @@
   }
 }
 
-.tn-btn-datepicker__icon-container .glyphicon {
-  font-size: 2rem;
-}
-
 .tn-page-bottom a {
   color: var(--primary-color);
   text-decoration: underline;
 }
+
+/* Calendar events */
+
 .tn-events-calendar__event {
   padding: 2.5rem .5rem .7rem .5rem !important;
 }
@@ -128,36 +167,6 @@
   color: #333 !important;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
-}
-
-.tn-btn-datepicker__date-display {
-  text-transform: capitalize !important;
-}
-
-.tn-datepicker td.day[aria-current=date] span {
-  background-color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
-}
-
-.tn-datepicker tr:nth-child(0n+2) {
-  background-color: var(--primary-color-lighter) !important;
-}
-
-.tn-btn-datepicker__btn-container .btn-default {
-  border: 1px solid var(--primary-color) !important;
-}
-
-.tn-events-list-view__datepicker-divider-label {
-  color: #666 !important;
-  font-family: var(--font-sans);
-  font-style: normal !important;
-  font-size: 1.5rem !important;
-}
-
-@media (min-width: 768px) {
-  .tn-events-list-view__date-range {
-    align-items: center;
-  }
 }
 
 /* Busy indicator */
