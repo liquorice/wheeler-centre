@@ -54,9 +54,10 @@
 
 /* Error labels */
 
-.alert {
+.alert,
+.tn-heading-info {
   font-size: 1.4rem !important;
-  font-family: var(--font-sans);
+  font-family: var(--font-sans) !important;
 }
 
 .alert a,
@@ -72,6 +73,11 @@
 
 #tn-gift-certificate-submit {
   margin-top: 2rem;
+}
+
+.tn-heading-info,
+.tn-modal-heading-info {
+  background-color: var(--primary-color-lighter);
 }
 
 /* Adopt a word */
