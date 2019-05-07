@@ -11,7 +11,8 @@
   margin-bottom: 4rem;
 }
 
-.tn-heading {
+.tn-heading,
+.tn-header-component h1 {
   color: var(--primary-color);
   font-family: var(--font-sans);
   font-size: 4.8rem;
@@ -33,6 +34,10 @@
   margin-top: 0rem !important;
 }
 
+.tn-heading-sub-text strong {
+  font-weight: bold;
+}
+
 /* Fixing footer nav sec link hover colours */
 
 .footer-nav-secondary li a:hover {
@@ -49,9 +54,10 @@
 
 /* Error labels */
 
-.alert {
+.alert,
+.tn-heading-info {
   font-size: 1.4rem !important;
-  font-family: var(--font-sans);
+  font-family: var(--font-sans) !important;
 }
 
 .alert a,
@@ -66,5 +72,20 @@
 }
 
 #tn-gift-certificate-submit {
+  margin-top: 2rem;
+}
+
+.tn-heading-info,
+.tn-modal-heading-info {
+  background-color: var(--primary-color-lighter);
+}
+
+/* Adopt a word */
+
+.tn-contribution-type-text {
+  margin-bottom: 3rem;
+}
+
+#tn-contribution-submit {
   margin-top: 2rem;
 }

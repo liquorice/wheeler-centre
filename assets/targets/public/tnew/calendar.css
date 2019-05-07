@@ -158,7 +158,8 @@
   font-weight: 700;
 }
 
-.tn-prod-list-item__property--heading a:hover {
+.tn-prod-list-item__property--heading a:hover,
+.tn-prod-list-item__property--heading a:focus {
   color: var(--text-color) !important;
   text-decoration: none !important;
 }
