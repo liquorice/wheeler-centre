@@ -53,23 +53,74 @@
 
 /* Package info */
 
-.tn-package-detail__title {
+.tn-package-detail__title,
+.tn-flex-package-details__title {
   color: var(--text-color);
   font-family: var(--font-sans);
   font-size: 2rem !important;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem !important;
 }
 
+.tn-flex-package-details__date-range,
+.tn-flex-package-details__locations-list-item,
 .tn-package-detail__venue {
   color: #666;
   font-family: var(--font-sans);
   font-size: 1.5rem !important;
 }
 
-.tn-ticket-selector__pricetype-selector,
+.tn-flex-package-details__date-range {
+  margin-bottom: 0.5rem;
+}
+
+.tn-flex-package-details__locations-list,
+.tn-package-detail__venue {
+  margin-top: 0 !important;
+}
+
+.tn-flex-package-details__locations-list  {
+  margin-bottom: 2rem !important;
+}
+
 .tn-ticket-selector__zone-selector {
   margin-bottom: 2rem !important;
+}
+
+.tn-ticket-selector__pricetype-selector {
+  margin-bottom: 4rem !important;
+}
+
+.tn-ticket-selector__pricetype-selector p {
+  padding: 1rem 0;
+}
+
+.tn-flex-details__ticket-selector-container {
+  margin-top: 4rem !important;
+  padding-top: 4rem !important;
+  border-top: 1px solid var(--primary-color-light) !important;
+}
+
+.tn-ticket-selector__pricetype-selector legend {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
+  display: inline !important;
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  letter-spacing: .15em;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-transform: uppercase;
+  width: auto !important;
+}
+
+.tn-ticket-selector__legend-heading {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777;
+  font-family: var(--font-sans);
+  font-size: 1.4rem !important;
+  letter-spacing: .15em;
+  text-transform: uppercase;
 }
 
 /* Performance list */
@@ -120,8 +171,9 @@
   margin-bottom: 2rem !important;
 }
 
-/* Ticket selector label */
+/* Ticket selector/Seating options labels */
 
+#tn-fieldset-seating-options label,
 .tn-ticket-selector__zone-selector label {
   font-size: 1.8rem;
   line-height: 2.7rem;
