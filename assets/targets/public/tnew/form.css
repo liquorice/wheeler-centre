@@ -67,6 +67,7 @@
   padding-left: 3rem;
 }
 
+#tn-fieldset-seating-options input[type=checkbox],
 .checkbox-inline input[type=checkbox],
 .checkbox input[type=checkbox],
 .radio-inline input[type=radio],

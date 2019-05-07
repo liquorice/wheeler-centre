@@ -11,7 +11,8 @@
   margin-bottom: 4rem;
 }
 
-.tn-heading {
+.tn-heading,
+.tn-header-component h1 {
   color: var(--primary-color);
   font-family: var(--font-sans);
   font-size: 4.8rem;
@@ -31,6 +32,10 @@
   font-size: 1.7rem;
   margin-bottom: 3rem;
   margin-top: 0rem !important;
+}
+
+.tn-heading-sub-text strong {
+  font-weight: bold;
 }
 
 /* Fixing footer nav sec link hover colours */
@@ -66,5 +71,15 @@
 }
 
 #tn-gift-certificate-submit {
+  margin-top: 2rem;
+}
+
+/* Adopt a word */
+
+.tn-contribution-type-text {
+  margin-bottom: 3rem;
+}
+
+#tn-contribution-submit {
   margin-top: 2rem;
 }
