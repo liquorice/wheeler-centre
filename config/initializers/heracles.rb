@@ -170,23 +170,25 @@ Heracles::Sites::WheelerCentre.configure do |config|
     "audio_mp3" => {
       "robot" => "/audio/encode",
       "use" => "asset",
+      "ffmpeg_stack" => "v3.3.3",
       "preset" => "mp3"
     },
     "audio_ogg" => {
       "robot" => "/audio/encode",
       "use" => "asset",
+      "ffmpeg_stack" => "v3.3.3",
       "preset" => "ogg"
     },
     "video_ipad_high" => {
       "robot" => "/video/encode",
       "use" => "asset",
-      "ffmpeg_stack" => "v2.2.3",
+      "ffmpeg_stack" => "v3.3.3",
       "preset" => "ipad-high"
     },
     "video_iphone_high" => {
       "robot" => "/video/encode",
       "use" => "asset",
-      "ffmpeg_stack" => "v2.2.3",
+      "ffmpeg_stack" => "v3.3.3",
       "preset" => "iphone-high"
     },
     "store_youtube" => {
