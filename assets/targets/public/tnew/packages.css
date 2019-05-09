@@ -102,15 +102,6 @@
 }
 
 .tn-ticket-selector__pricetype-selector legend {
-  -webkit-font-smoothing: subpixel-antialiased;
-  color: #777777;
-  display: inline !important;
-  font-family: var(--font-sans);
-  font-size: 1.4rem;
-  letter-spacing: .15em;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  text-transform: uppercase;
   width: auto !important;
 }
 
@@ -121,6 +112,8 @@
   font-size: 1.4rem !important;
   letter-spacing: .15em;
   text-transform: uppercase;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Performance list */
@@ -174,7 +167,8 @@
 /* Ticket selector/Seating options labels */
 
 #tn-fieldset-seating-options label,
-.tn-ticket-selector__zone-selector label {
+.tn-ticket-selector__zone-selector label,
+.tn-contribution-type-form label {
   font-size: 1.8rem;
   line-height: 2.7rem;
   font-family: var(--font-sans);
@@ -266,6 +260,11 @@
   font-size: 2rem !important;
   font-weight: 700;
   color: var(--primary-color) !important;
+  text-transform: lowercase;
+}
+
+.tn-flex-performance-group__selection-status::first-letter {
+  text-transform: uppercase;
 }
 
 .tn-flex-production__date-range {
@@ -440,4 +439,81 @@
   font-family: var(--font-sans);
   color: #666 !important;
   font-weight: 400;
+}
+
+/* Edit package link */
+
+.tn-cart-item-summary__action-item--edit-package a {
+  text-decoration: underline;
+  color: #222;
+  font-size: 1.5rem;
+}
+
+.tn-cart-item-summary__action-item--edit-package a:hover,
+.tn-cart-item-summary__action-item--edit-package a:focus {
+  color: var(--primary-color) !important;
+}
+
+/* Review in progress */
+
+.tn-flex-in-progress__header {
+  border-bottom: none !important;
+  margin: 2rem 0 !important;
+}
+
+.tn-flex-in-progress__package-list-heading {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777 !important;
+  font-family: var(--font-sans);
+  font-size: 1.4rem !important;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.tn-flex-in-progress-package__heading {
+  font-size: 2rem !important;
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.tn-flex-in-progress-package__message-package-incomplete {
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+.tn-flex-in-progress-package__section-heading {
+  color: #666;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+.tn-flex-in-progress-package__section-subhead {
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #777777 !important;
+  font-family: var(--font-sans);
+  font-size: 1.4rem !important;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin: 3rem 0 1.5rem !important;
+}
+
+.tn-flex-in-progress-package__section-contents {
+  color: #333;
+  font-family: var(--font-sans);
+  font-size: 1.5rem !important;
+}
+
+tn-flex-in-progress-package__special-requests-list {
+  margin-left: 1rem !important;
+}
+
+.tn-flex-in-progress-package__special-requests-list li::before {
+  content: "\2022";
+  color: var(--primary-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 2rem;
+  margin-left: -2rem;
 }
