@@ -356,6 +356,12 @@
   border: 1px solid #EEE;
 }
 
+.tn-ticket-selector__zone-subtotal-amount {
+  color: #000;
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
 /* Package sidebar */
 
 .tn-flex-cart__main-container {
@@ -413,6 +419,10 @@
 
 .tn-flex-selection {
   min-height: auto !important;
+}
+
+.tn-flex-cart__additional-selections-text {
+  margin-bottom: 2rem;
 }
 
 /* Mobile cart */

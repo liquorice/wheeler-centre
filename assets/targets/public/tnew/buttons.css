@@ -82,3 +82,10 @@ fieldset[disabled] .btn {
 fieldset[disabled] .btn:hover {
   transform: scale(1,1) !important;
 }
+
+.btn-default.active,
+.btn-default:active,
+.btn-default:hover,
+.open>.btn-default.dropdown-toggle {
+  background-color: #FFF !important;
+}
