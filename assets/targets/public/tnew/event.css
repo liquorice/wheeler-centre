@@ -62,7 +62,6 @@
 
 /* Ticket selector */
 
-.tn-ticket-selector__pricetype-selector,
 .tn-ticket-selector__zone-selector {
   margin-bottom: 0 !important;
 }
@@ -85,14 +84,48 @@
   padding-right: 2rem;
 }
 
-/* Additional controls */
+.tn-ticket-selector__controls-container {
+  margin-bottom: 0 !important;
+}
 
-.tn-ticket-selector__additional-controls {
+/* Access requirements component */
+
+.tn-ticket-selector__additional-controls .form-group {
+  margin-bottom: 0 !important;
+}
+
+.tn-ticket-selector__additional-controls .form-group:last-child {
+  margin-top: 3rem !important;
 }
 
 .tn-ticket-selector__additional-controls p {
   margin-bottom: 2rem;
 }
+
+.tn-order-notes-component h2,
+.tn-ticket-selector__additional-controls h4 {
+  color: #777777;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: var(--font-sans);
+  font-size: 1.4rem !important;
+  text-transform: uppercase;
+  padding-bottom: 1rem;
+  letter-spacing: .15em;
+  font-weight: 400 !important;
+}
+
+.tn-ticket-selector__additional-controls p,
+.tn-order-notes-component p {
+  margin-bottom: 1rem;
+  max-width: 90rem;
+}
+
+.tn-ticket-selector__additional-controls p a,
+.tn-order-notes-component p a {
+  text-decoration: underline;
+  color: var(--primary-color);
+}
+
 
 /* Purchase button */
 
