@@ -150,33 +150,3 @@
   margin-top: 2rem;
   margin-bottom: 6rem;
 }
-
-/* Access requirements component */
-
-.tn-ticket-selector__additional-controls,
-.tn-order-notes-component {
-}
-
-.tn-order-notes-component h2,
-.tn-ticket-selector__additional-controls h4 {
-  color: #777777;
-  -webkit-font-smoothing: subpixel-antialiased;
-  font-family: var(--font-sans);
-  font-size: 1.4rem !important;
-  text-transform: uppercase;
-  padding-bottom: 1rem;
-  letter-spacing: .15em;
-  font-weight: 400 !important;
-}
-
-.tn-ticket-selector__additional-controls p,
-.tn-order-notes-component p {
-  margin-bottom: 1rem;
-  max-width: 90rem;
-}
-
-.tn-ticket-selector__additional-controls p a,
-.tn-order-notes-component p a {
-  text-decoration: underline;
-  color: var(--primary-color);
-}
