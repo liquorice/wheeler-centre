@@ -15,7 +15,8 @@
 .control-label,
 .tn-guest-login-form__section--guest-contact label,
 .tn-guest-login-billing-address__address-inputs label,
-.tn-flex-seating-notes-form label {
+.tn-flex-seating-notes-form label,
+.tn-contribution-type-form .control-label {
   color: #918F8F;
   font-family: var(--font-sans);
   font-size: 1.2rem;
