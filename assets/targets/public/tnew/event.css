@@ -173,3 +173,9 @@
   margin-left: 0 !important;
   margin-top: 1.5rem !important;
 }
+
+/* HIDING ADDITIONAL EVENTS FORM */
+
+.tn-additional-events {
+  display: none;
+}
