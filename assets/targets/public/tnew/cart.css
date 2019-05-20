@@ -156,3 +156,8 @@
 .tn-payment-submit-component {
   text-align: right;
 }
+
+.tn-order-information-line a {
+  text-decoration: underline;
+  color: #222;
+}
