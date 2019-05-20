@@ -150,3 +150,14 @@
   margin-top: 2rem;
   margin-bottom: 6rem;
 }
+
+/* Align process payment button to the right */
+
+.tn-payment-submit-component {
+  text-align: right;
+}
+
+.tn-order-information-line a {
+  text-decoration: underline;
+  color: #222;
+}
