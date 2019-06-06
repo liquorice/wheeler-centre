@@ -161,3 +161,41 @@
   text-decoration: underline;
   color: #222;
 }
+
+/* Round up component */
+
+.tn-donationAskCheckout-component {
+  background-color: var(--primary-color-lighter);
+  padding: 2rem !important;
+  margin-bottom: 4rem;
+}
+
+.tn-donationAskCheckout-component legend {
+  border: none;
+}
+
+.tn-donationAskCheckout-component .tn-heading {
+  color: var(--text-color);
+  font-size: 2rem;
+  line-height: initial;
+}
+
+.tn-donationAskCheckout-component .tn-heading-sub-text {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.tn-donationAskCheckout-component ol {
+  margin-bottom: 2rem;
+}
+
+.tn-donationAskCheckout-component .radio label {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-family: var(--font-sans);
+}
+
+.tn-donationAskCheckout-component .component-actions {
+  margin: 0;
+}
+
