@@ -78,6 +78,40 @@
 .tn-heading-info,
 .tn-modal-heading-info {
   background-color: var(--primary-color-lighter);
+  padding: 2rem 2rem 0.5rem 2rem !important;
+}
+
+.tn-heading-info h3 {
+  font-weight: bold;
+}
+
+.tn-heading-info a {
+  text-decoration: underline;
+}
+
+.tn-alert-message div {
+  display: inline-block;
+}
+
+/* Promo code */
+
+.tn-promo-applied .tn-text {
+  font-size: 1.5rem !important;
+}
+
+.tn-subnav-component .tn-promo-box.tn-promo-applied:before {
+  font-size: 1.4rem !important;
+  color: #C9C9C9 !important;
+}
+
+.tn-promo-applied .tn-link.btn {
+  padding: 0px 5px !important;
+  margin-left: 0.5rem;
+  border: 1px solid var(--primary-color);
+}
+
+.tn-subnav-component .tn-promo-box.tn-promo-applied .tn-icon:after {
+  color: var(--primary-color);
 }
 
 /* Adopt a word */
