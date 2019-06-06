@@ -191,3 +191,20 @@
   background-color: #a6a6a6 !important;
   color: #FFF !important;
 }
+
+/* Status */
+.tn-events-calendar__day-event-list .tn-events-calendar__event-status,
+.tn-events-calendar__table .tn-events-calendar__event-status {
+  margin: 5px 0 0 0 !important;
+  padding: 5px !important;
+  font-size: 12px !important;
+  line-height: 14px;
+  font-weight: normal;
+  text-transform: lowercase !important;
+  font-style: normal !important;
+  background-color: rgba(0,0,0,.05) !important;
+}
+
+.tn-events-calendar__table .tn-events-calendar__event-status:first-letter {
+  text-transform: uppercase !important;
+}
