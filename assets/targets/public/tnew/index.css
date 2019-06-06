@@ -89,3 +89,9 @@
 #tn-contribution-submit {
   margin-top: 2rem;
 }
+
+/* Contribute */
+
+.tn-contribution-component .tn-loader {
+  display: none !important;
+}
