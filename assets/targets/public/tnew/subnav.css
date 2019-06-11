@@ -113,8 +113,8 @@
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button {
   border-radius: .3rem;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 1px solid #918F8F;
+  color: #918F8F;
   display: inline-block;
   font-family: var(--font-sans);
   font-size: 1.7rem;
@@ -123,15 +123,13 @@
   padding: .8rem 1.2rem;
   text-decoration: none;
   text-transform: capitalize;
-  transform: scale(1,1);
   transition-duration: 250ms;
-  transition-property: transform,background-color,color;
+  transition-property: background-color,color;
 }
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
-  background-color: var(--primary-color) !important;
-  color: #FFF !important;
-  transform: scale(1.1,1.1);
+  border: 1px solid #666 !important;
+  color: #666 !important;
 }
 
 /* Timer */
