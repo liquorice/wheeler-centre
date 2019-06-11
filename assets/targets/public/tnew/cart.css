@@ -144,6 +144,14 @@
   margin-bottom: 3rem;
 }
 
+.tn-receipt-component .tn-receipt-print {
+  text-transform: lowercase;
+}
+
+.tn-receipt-component .tn-receipt-print:first-letter {
+  text-transform: uppercase;
+}
+
 /* Gift certificate component */
 
 #tn-payment-apply-gift-certificate-form {
