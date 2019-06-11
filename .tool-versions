@@ -1,2 +1,4 @@
-postgres 9.6.10
 java oracle-8.191
+nodejs 6.9.4
+postgres 9.6.10
+ruby 2.2.2
