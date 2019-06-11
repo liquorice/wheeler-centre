@@ -5,6 +5,9 @@ html lang="en"
     = render "partials/metaquery_breakpoints"
     = render "partials/inline_boot_javascript"
 
+    / Exclude any TNEW-derived layouts from search
+    meta name="robots" content="noindex"
+
     / TODO add DNS prefetch URLs
     link rel="dns-prefetch" href="//cdn.embedly.com"
     link rel="dns-prefetch" href="//www.youtube.com"
