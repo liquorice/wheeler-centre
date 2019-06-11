@@ -47,6 +47,10 @@
   margin: 1rem 0 1.5rem 0 !important;
 }
 
+.tn-event-detail__unavailable-text {
+  margin-top: 3rem;
+}
+
 /* Continue shopping link */
 
 .tn-additional-events__continue-shopping-link {
