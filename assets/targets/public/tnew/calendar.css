@@ -105,7 +105,7 @@
 /* Calendar events */
 
 .tn-events-calendar__event {
-  padding: 2.5rem .5rem .7rem .5rem !important;
+  padding: 2.5rem 1rem 1rem 1rem !important;
 }
 
 .tn-events-calendar__event.btn {
@@ -120,8 +120,14 @@
   transform: none !important;
 }
 
+.tn-events-calendar__event.btn:hover .tn-events-calendar__event-status,
+.tn-events-calendar__event.btn:active .tn-events-calendar__event-status,
+.tn-events-calendar__event.btn:focus .tn-events-calendar__event-status {
+  color: #FFFFFF !important;
+}
+
 .tn-events-calendar__day-cell {
-  padding: 5px !important;
+  padding: 8px !important;
 }
 
 .tn-events-calendar__day-cell--today {
@@ -138,7 +144,12 @@
 
 .tn-events-calendar__event-time {
   font-weight: 400 !important;
-  left: 5px !important;
+  left: 1rem !important;
+  top: 1rem !important;
+}
+
+.tn-events-calendar__event-name {
+  text-transform: capitalize;
 }
 
 .tn-events-calendar__day-number {
@@ -203,6 +214,7 @@
   text-transform: lowercase !important;
   font-style: normal !important;
   background-color: rgba(0,0,0,.05) !important;
+  color: var(--primary-color-darker) !important;
 }
 
 .tn-events-calendar__table .tn-events-calendar__event-status:first-letter {

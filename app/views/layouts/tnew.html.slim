@@ -19,7 +19,7 @@ html lang="en"
                         reverse: true
 
     link rel="stylesheet" media="screen" href=asset_url_with_domain(stylesheet_path("public"))
-    link rel="stylesheet" media="print" href=asset_url_with_domain(stylesheet_path("print"))
+    = stylesheet_link_tag "print", media: "print"
 
     - if Rails.env.development?
       = development_javascript
