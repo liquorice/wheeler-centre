@@ -138,7 +138,11 @@
 
 .tn-events-calendar__event-time {
   font-weight: 400 !important;
-  left: 5px !important;
+  left: 8px !important;
+}
+
+.tn-events-calendar__event-name {
+  text-transform: capitalize;
 }
 
 .tn-events-calendar__day-number {
@@ -203,6 +207,7 @@
   text-transform: lowercase !important;
   font-style: normal !important;
   background-color: rgba(0,0,0,.05) !important;
+  color: var(--primary-color-darker) !important;
 }
 
 .tn-events-calendar__table .tn-events-calendar__event-status:first-letter {
