@@ -145,11 +145,7 @@
 }
 
 .tn-receipt-component .tn-receipt-print {
-  text-transform: lowercase;
-}
-
-.tn-receipt-component .tn-receipt-print:first-letter {
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 /* Gift certificate component */
