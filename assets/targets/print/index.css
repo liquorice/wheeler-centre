@@ -92,3 +92,113 @@ img {
 .figure__video {
   display: none
 }
+
+/* TNEW */
+
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+  float: none;
+}
+
+.tn-subnav-component {
+  display: none;
+}
+
+.tn-receipt-page .tn-header-component .tn-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: var(--font-sans);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.tn-receipt-page .tn-header-component .tn-heading-sub-text {
+  font-size: 1.5rem;
+  font-family: var(--font-sans);
+}
+
+.tn-receipt-component,
+.tn-patron-billing-information {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.tn-patron-shipping-information {
+  font-size: 1.5rem;
+}
+
+.tn-receipt-component h2,
+.tn-patron-billing-information h2,
+.tn-patron-shipping-information h2 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  font-family: var(--font-sans);
+  margin-bottom: 0.5rem;
+}
+
+.tn-order-address-information-component {
+  margin-bottom: 2rem;
+}
+
+.tn-selected-shipping-method {
+  font-weight: normal;
+}
+
+.tn-cart__section-items .tn-cart-item {
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.tn-cart-item-summary {
+  margin-bottom: 2rem;
+}
+
+.tn-cart-item-summary__property--name {
+  font-size: 2.5rem !important;
+  font-weight: bold !important;
+  font-family: var(--font-sans);
+  margin-top: 2rem;
+}
+
+.tn-cart-item-summary__property--price-total {
+  font-size: 2rem !important;
+  font-weight: bold !important;
+  font-family: var(--font-sans);
+  margin-bottom: 1rem;
+}
+
+.tn-cart-item-summary__property--date-time,
+.tn-cart-item-summary__property--location {
+  font-size: 1.5rem !important;
+}
+
+.tn-cart-item {
+  border-top: 1px solid #eee !important;
+  padding-top: 0.5rem !important;
+}
+
+.tn-cart-item-details__list,
+.tn-cart-item-detail__list {
+  padding: 0 !important;
+  font-size: 1.5rem !important;
+  font-family: var(--font-sans);
+  font-weight: bold;
+}
+
+.tn-cart-totals__line-item--subtotal {
+  font-weight: bold !important;
+  font-family: var(--font-sans);
+}
+
+.tn-cart-totals__label {
+  margin-bottom: 1rem !important;
+}
+
+.tn-cart-totals__line-item--subtotal {
+  margin-bottom: 3rem !important;
+}
+
+.tn-cart-totals__line-item--subtotal,
+.tn-cart-totals__line-item--total {
+  font-weight: bold !important;
+  font-family: var(--font-sans);
+}
