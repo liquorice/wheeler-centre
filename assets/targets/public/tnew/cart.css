@@ -58,6 +58,7 @@
 
 .tn-cart__btn-remove {
   border-radius: 0.4rem;
+  top: 27px !important;
 }
 
 /* Totals */
