@@ -212,3 +212,7 @@ img {
 .tn-cart-totals__value--total {
   font-size: 1.5rem !important;
 }
+
+.tnew-bg a[href]:after {
+  content: none !important;
+}
