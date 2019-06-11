@@ -60,6 +60,10 @@
   font-family: var(--font-sans) !important;
 }
 
+.tn-heading-info {
+  margin-bottom: 3rem !important;
+}
+
 .alert a,
 .tn-unknown-error-component a,
 .tn-not-found-component a {
@@ -78,7 +82,7 @@
 .tn-heading-info,
 .tn-modal-heading-info {
   background-color: var(--primary-color-lighter);
-  padding: 2rem 2rem 0.5rem 2rem !important;
+  padding: 2rem !important;
 }
 
 .tn-heading-info h3 {
@@ -87,10 +91,6 @@
 
 .tn-heading-info a {
   text-decoration: underline;
-}
-
-.tn-alert-message div {
-  display: inline-block;
 }
 
 /* Promo code */
@@ -172,12 +172,7 @@
 
 .tn-component-contact-permissions .tn-component__fieldset-additional-text {
   font-size: 1.7rem !important;
-  text-transform: lowercase;
   margin-bottom: 2rem;
-}
-
-.tn-component-contact-permissions .tn-component__fieldset-additional-text:first-letter {
-  text-transform: uppercase;
 }
 
 .tn-component__radio-group label {
