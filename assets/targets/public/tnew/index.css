@@ -158,6 +158,10 @@
   float: none !important;
 }
 
+.tn-component-contact-permissions__settings .tn-component__fieldset-radio {
+  margin-bottom: 3rem;
+}
+
 .tn-component-contact-permissions .tn-component__fieldset-label {
   color: var(--text-color);
   font-family: var(--font-sans);
