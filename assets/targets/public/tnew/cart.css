@@ -195,8 +195,7 @@
 }
 
 .tn-donationAskCheckout-component .radio label {
-  font-size: 1.8rem;
-  line-height: 2.7rem;
+  font-size: 1.5rem !important;
   font-family: var(--font-sans);
 }
 
@@ -204,3 +203,6 @@
   margin: 0;
 }
 
+.tn-donationAskCheckout-component li.radio {
+  margin: 5px 0 !important;
+}
