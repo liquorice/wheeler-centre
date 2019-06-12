@@ -213,7 +213,7 @@
   line-height: 1;
   padding: .8rem 1.2rem;
   text-decoration: none;
-  text-transform: capitalize;
+  text-transform: lowercase;
   transform: scale(1,1);
   transition-duration: 250ms;
   transition-property: transform,background-color,color;
@@ -226,6 +226,15 @@
   color: #FFFFFF !important;
   text-decoration: none;
   transform: scale(1.1,1.1);
+}
+
+.tn-component-contact-permissions__footer-actions .btn-save {
+  text-transform: lowercase !important;
+}
+
+.tn-component-contact-permissions__footer-actions .btn-dismiss::first-letter,
+.tn-component-contact-permissions__footer-actions .btn-save::first-letter {
+  text-transform: uppercase !important;
 }
 
 .tn-component-contact-permissions__footer-actions .btn-dismiss {
