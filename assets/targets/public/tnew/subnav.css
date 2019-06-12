@@ -124,15 +124,11 @@
   padding: .8rem 1.2rem;
   text-decoration: none;
   text-transform: capitalize;
-  transform: scale(1,1);
-  transition-duration: 250ms;
-  transition-property: transform,background-color,color;
 }
 
 .tn-subnav-component .tn-promo-box button.tn-subnav-promo-button:hover {
   background-color: #444 !important;
   color: #FFF !important;
-  transform: scale(1.1,1.1);
 }
 
 /* Timer */
