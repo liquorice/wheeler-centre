@@ -176,8 +176,7 @@
 }
 
 .tn-component__radio-group label {
-  font-size: 1.8rem;
-  line-height: 2.7rem;
+  font-size: 1.5rem;
   font-family: var(--font-sans);
   margin: 0;
   margin-left: 1rem;
@@ -186,7 +185,7 @@
 .tn-component__radio-group .ng-scope {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .tn-component__radio-group .ng-scope input {
@@ -213,7 +212,7 @@
   line-height: 1;
   padding: .8rem 1.2rem;
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: none;
   transform: scale(1,1);
   transition-duration: 250ms;
   transition-property: transform,background-color,color;
@@ -229,10 +228,9 @@
 }
 
 .tn-component-contact-permissions__footer-actions .btn-save {
-  text-transform: lowercase !important;
+  text-transform: lowercase;
 }
 
-.tn-component-contact-permissions__footer-actions .btn-dismiss::first-letter,
 .tn-component-contact-permissions__footer-actions .btn-save::first-letter {
   text-transform: uppercase !important;
 }
