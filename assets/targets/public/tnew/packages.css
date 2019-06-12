@@ -169,8 +169,7 @@
 #tn-fieldset-seating-options label,
 .tn-ticket-selector__zone-selector label,
 .tn-contribution-type-form label {
-  font-size: 1.8rem;
-  line-height: 2.7rem;
+  font-size: 1.5rem;
   font-family: var(--font-sans);
 }
 
