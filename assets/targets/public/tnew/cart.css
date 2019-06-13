@@ -195,12 +195,31 @@
 }
 
 .tn-donationAskCheckout-component .radio label {
-  font-size: 1.5rem !important;
-  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+}
+
+.breakpoint-tablet .tn-donationAskCheckout-component .radio label {
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+}
+
+.breakpoint-phone-wide .tn-donationAskCheckout-component .radio label,
+.breakpoint-phone .tn-donationAskCheckout-component .radio label {
+  line-height: 3rem;
+}
+
+.tn-donationAskCheckout-component .radio label input {
+  top: 0;
 }
 
 .tn-donationAskCheckout-component .component-actions {
   margin: 0;
+}
+
+.breakpoint-phone-wide .tn-donationAskCheckout-component li.radio,
+.breakpoint-phone .tn-donationAskCheckout-component li.radio {
+  margin: 10px 0;
 }
 
 .tn-donationAskCheckout-component li.radio {
