@@ -1,6 +1,6 @@
 :root {
-  --font-sans: "Colfax", Helvetica, sans-serif;
-  --font-serif: "FreightTextPro", "Hoefler Text", Palatino, serif;
+  --font-sans: Helvetica, sans-serif;
+  --font-serif: "Hoefler Text", Palatino, serif;
   --primary-color: #009e8c;
   --primary-color-lighter: #ccefeb;
   --primary-color-light: #b4dbd7;
@@ -11,8 +11,6 @@
 @import "../public/utilities/reset.css";
 @import "../public/utilities/accessibility.css";
 @import "../public/utilities/clearfix.css";
-@import "../public/fonts/colfax.css";
-@import "../public/fonts/freight-text-pro.css";
 @import "../public/fonts/font-awesome.css";
 
 @page {
@@ -74,11 +72,10 @@ img {
   margin-bottom: 1rem;
 }
 
-@import "./masthead";
 @import "./blog";
 @import "./events";
 
-
+.masthead,
 .subscribe-popup,
 .masthead__navigation,
 .masthead-contextual,
