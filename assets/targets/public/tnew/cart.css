@@ -58,6 +58,7 @@
 
 .tn-cart__btn-remove {
   border-radius: 0.4rem;
+  top: 27px !important;
 }
 
 /* Totals */
@@ -196,7 +197,6 @@
 .tn-donationAskCheckout-component .radio label {
   font-size: 1.5rem;
   line-height: 2.3rem;
-  font-family: var(--font-sans);
 }
 
 .breakpoint-tablet .tn-donationAskCheckout-component .radio label {
@@ -220,4 +220,8 @@
 .breakpoint-phone-wide .tn-donationAskCheckout-component li.radio,
 .breakpoint-phone .tn-donationAskCheckout-component li.radio {
   margin: 10px 0;
+}
+
+.tn-donationAskCheckout-component li.radio {
+  margin: 5px 0 !important;
 }
