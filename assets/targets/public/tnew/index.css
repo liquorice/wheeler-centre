@@ -227,14 +227,6 @@
   transform: scale(1.1,1.1);
 }
 
-.tn-component-contact-permissions__footer-actions .btn-save {
-  text-transform: lowercase;
-}
-
-.tn-component-contact-permissions__footer-actions .btn-save::first-letter {
-  text-transform: uppercase !important;
-}
-
 .tn-component-contact-permissions__footer-actions .btn-dismiss {
   border: 1px solid #918F8F;
   color: #918F8F !important;
