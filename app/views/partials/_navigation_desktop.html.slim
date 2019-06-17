@@ -1,39 +1,39 @@
 .masthead__navigation--desktop
   ul.masthead-nav-main.masthead-nav-main--desktop.clearfix
-    - cache ["nav-topics-4", primary_topics] do
+    - cache ["nav-topics-4", primary_topics, with_domain] do
       = render "partials/nav_topics_item", with_domain: with_domain
 
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
     - active_event_series = events_page.active_series
-    - cache ["nav-event-4", events_page, event_children, active_event_series] do
+    - cache ["nav-event-4", events_page, event_children, active_event_series, with_domain] do
       = render  "partials/nav_events_item", event_children: event_children, active_event_series: active_event_series, with_domain: with_domain
 
-    - cache ["nav-broadcasts-4", broadcasts_page] do
+    - cache ["nav-broadcasts-4", broadcasts_page, with_domain] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=url_with_domain(broadcasts_page.absolute_url, with_domain: with_domain)
           = broadcasts_page.title
 
-    - cache ["nav-podcasts-4", podcasts_page] do
+    - cache ["nav-podcasts-4", podcasts_page, with_domain] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=url_with_domain(podcasts_page.absolute_url, with_domain: with_domain)
           = podcasts_page.title
 
-    - cache ["nav-blog-4", notes_page] do
+    - cache ["nav-blog-4", notes_page, with_domain] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=url_with_domain(notes_page.absolute_url, with_domain: with_domain)
           = notes_page.title
 
-    - cache ["nav-news-4", blog_page] do
+    - cache ["nav-news-4", blog_page, with_domain] do
       li.masthead-nav-main__item
         a.masthead-nav-main__anchor href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
           = blog_page.title
 
-    - cache ["nav-people-4", people_page] do
+    - cache ["nav-people-4", people_page, with_domain] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
         a.masthead-nav-main__anchor href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
           = people_page.title
 
-    - cache ["nav-projects-5", projects_page, projects_for_navigation] do
+    - cache ["nav-projects-5", projects_page, projects_for_navigation, with_domain] do
       = render "partials/nav_projects_item", with_domain: with_domain
   ul.masthead-nav-secondary.masthead-nav-secondary--desktop.clearfix
     li.masthead-nav-secondary__item
