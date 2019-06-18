@@ -147,6 +147,7 @@
 
 .tn-receipt-component .tn-receipt-print {
   text-transform: lowercase;
+  padding-left: 3.5rem;
 }
 
 .tn-receipt-component .tn-receipt-print:first-letter {
@@ -154,8 +155,11 @@
 }
 
 .tn-receipt-component .tn-receipt-print::before {
-  display: none;
+  position: absolute;
+  left: 1.2rem;
+  top: 0.7rem;
 }
+
 
 /* Gift certificate component */
 
