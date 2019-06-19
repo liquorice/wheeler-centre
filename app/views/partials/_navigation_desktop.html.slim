@@ -1,5 +1,26 @@
 .masthead__navigation--desktop
   ul.masthead-nav-main.masthead-nav-main--desktop.clearfix
+
+    li.masthead-nav-main__item.masthead-nav-main__item--break.masthead-nav-main__item--has-dropdown[
+      data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
+      data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
+      ]
+      button.masthead-nav-main__anchor
+        i.fa.fa-user.masthead-nav-main__tnew-icon
+        ' Account
+        i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
+      .masthead-nav-main__dropdown.clearfix
+        ul.masthead-nav-main__dropdown-list
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="https://my.wheelercentre.com/account/login?returnurl=%2faccount%2fupdate"
+              ' Update account information
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="https://my.wheelercentre.com/account/login?returnurl=%2faccount%2finterests"
+              ' Update email preferences
+          li.masthead-nav-main__dropdown-item
+            a.masthead-nav-main__dropdown-anchor href="https://my.wheelercentre.com/cart/details"
+              ' View cart
+
     - cache ["nav-topics-4", primary_topics] do
       = render "partials/nav_topics_item", with_domain: with_domain
 
