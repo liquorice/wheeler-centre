@@ -80,10 +80,12 @@
 .subscribe-content__group {
   float: left;
   padding-bottom: 1rem;
-  width: 50%;
+  width: 30%;
+  padding-right: 1.5rem;
 }
-  .subscribe-content__group:nth-child(1n) {
-    padding-right: 1.5rem;
+  .subscribe-content__group--email {
+    width: 40%;
+    padding-right: 0;
   }
   .subscribe-content__label {
     color: #888;
