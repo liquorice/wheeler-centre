@@ -1,73 +1,73 @@
 footer.footer.clearfix role="contentinfo"
-  - cache ["footer-nav-all-3", Time.current.beginning_of_day] do
+  - cache ["footer-nav-all-3", Time.current.beginning_of_day, with_domain] do
     nav.footer-nav-main.clearfix
       .footer-nav-main__group
-        - cache ["footer-events-header-3", events_page] do
+        - cache ["footer-events-header-3", events_page, with_domain] do
           h3
             a href=url_with_domain(events_page.absolute_url, with_domain: with_domain)
               == markdown_line events_page.title
         - events_pages = events_page.children.in_order.visible.published.where(collection_id: nil)
-        - cache ["footer-events-nav-3", events_pages] do
+        - cache ["footer-events-nav-3", events_pages, with_domain] do
           ul
             - events_pages.each do |child|
-              - cache ["footer-nav-item-3", child] do
+              - cache ["footer-nav-item-3", child, with_domain] do
                 li
                   a href=url_with_domain(child.absolute_url, with_domain: with_domain)
                     == markdown_line child.title
       .footer-nav-main__group
-        - cache ["footer-broadcasts-header-3", broadcasts_page] do
+        - cache ["footer-broadcasts-header-3", broadcasts_page, with_domain] do
           h3
             a href=url_with_domain(broadcasts_page.absolute_url, with_domain: with_domain)
               = broadcasts_page.title
         - broadcasts_pages = broadcasts_page.children.in_order.visible.published.where(collection_id: nil)
-        - cache ["footer-broadcasts-nav-3", broadcasts_pages] do
+        - cache ["footer-broadcasts-nav-3", broadcasts_pages, with_domain] do
           ul
             - broadcasts_pages.each do |child|
-                - cache ["footer-nav-item-3", child] do
+                - cache ["footer-nav-item-3", child, with_domain] do
                   li
                     a href=url_with_domain(child.absolute_url, with_domain: with_domain)
                       == markdown_line child.title
       .footer-nav-main__group
-        - cache ["footer-blog-header-3", blog_page] do
+        - cache ["footer-blog-header-3", blog_page, with_domain] do
           h3
             a href=url_with_domain(blog_page.absolute_url, with_domain: with_domain)
               == markdown_line blog_page.title
         - blog_pages = blog_page.children.in_order.visible.published.where(collection_id: nil)
-        - cache ["footer-blog-nav-3", blog_pages] do
+        - cache ["footer-blog-nav-3", blog_pages, with_domain] do
           ul
             - blog_pages.each do |child|
-              - cache ["footer-nav-item-3", child] do
+              - cache ["footer-nav-item-3", child, with_domain] do
                 li
                   a href=url_with_domain(child.absolute_url, with_domain: with_domain)
                     == markdown_line child.title
       .footer-nav-main__group
-        - cache ["footer-people-header-3", people_page] do
+        - cache ["footer-people-header-3", people_page, with_domain] do
           h3
             a href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
               == markdown_line people_page.title
       .footer-nav-main__group.footer-nav-main__group--double.footer-nav-main__group--projects
         h3= projects_page.title
-        - cache ["footer-projects-nav-3", projects_for_navigation] do
+        - cache ["footer-projects-nav-3", projects_for_navigation, with_domain] do
           - projects_for_navigation.in_groups(2, false).each do |group|
             - if group.present?
               ul
                 - group.each do |child|
-                  - cache ["footer-nav-item-3", child] do
+                  - cache ["footer-nav-item-3", child, with_domain] do
                     li
                       a href=url_with_domain(child.absolute_url, with_domain: with_domain)
                         == markdown_line child.title
       .footer-nav-main__group.footer-nav-main__group--double
         h3 Topics
-        - cache ["footer-projects-nav-3", primary_topics] do
+        - cache ["footer-projects-nav-3", primary_topics, with_domain] do
           - primary_topics.in_groups(2, false).each do |group|
             - if group.present?
               ul
                 - group.each do |child|
-                  - cache ["footer-nav-item-3", child] do
+                  - cache ["footer-nav-item-3", child, with_domain] do
                     li
                       a href=url_with_domain(child.absolute_url, with_domain: with_domain)
                         == markdown_line child.title
-  - cache  ["footer-search-3", params[:q]] do
+  - cache  ["footer-search-3", params[:q], with_domain] do
     nav.footer-nav-secondary.clearfix
       ul
         li.footer-nav-secondary__search
