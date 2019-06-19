@@ -154,7 +154,8 @@
   margin: 0 !important;
   border: none !important;
   width: auto !important;
-  display: inline-block !important;
+  display: flex !important;
+  flex-direction: column-reverse;
   float: none !important;
 }
 
