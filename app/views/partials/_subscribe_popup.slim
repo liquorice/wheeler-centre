@@ -7,13 +7,7 @@
       .subscribe-popup__inner
         .simple-subscribe.column-wrapper data-view-subscribe-form=true
           .simple-subscribe__inner.column-wide
-            form.clearfix action="https://icelab-mailer.createsend.com/t/r/s/jktkhl/" method="post"
-              / Campaign Monitor fields
-              input type="hidden" name="cm-f-trlyhi" id="Source" value=""
-              input type="hidden" name="cm-f-nebk" id="Referrer" value="http://wheelercentre.com/"
-              javascript:
-                document.getElementById('Referrer').value = document.referrer;
-
+            form.clearfix action="http://tracking.wordfly.com/join/wheelercentre" method="post"
               label.simple-subscribe__label.copy
                 - if settings_page.fields[:subscribe_popup_intro].data_present?
                   = render_content settings_page.fields[:subscribe_popup_intro], image: {version: :content_small}
@@ -23,8 +17,20 @@
                     em Wheeler Weekly
                     '  for the latest on our upcoming events, broadcasts and notes from our website, and previews of events and presenters from our programme.
               .simple-subscribe__controls
-                input.simple-subscribe__input placeholder="Enter your email address" type="email" name="cm-jktkhl-jktkhl"
+                input.simple-subscribe__input placeholder="Enter your email address" name="Email" required="" type="email"
+
+                /* WordFly requires the HTML to submit the form */
+                input name="FirstName" type="hidden"
+                input name="LastName" type="hidden"
+
                 button type="submit" Subscribe
+
+
         button.subscribe-popup__close
           span ×
           ' Not right now. I’m trying to read.
+
+
+
+
+
