@@ -11,7 +11,7 @@ ul.adopt-a-word__words.clearfix
       .adopt-a-word__definition-wrapper
         .adopt-a-word__definition-word= word.title
         .adopt-a-word__word-definition= word.fields[:definition]
-        a.adopt-a-word__word-button href="https://heroix.everydayhero.com.au/event/adopt-a-word/donate?answer_1=#{word.title}"
+        a.adopt-a-word__word-button href="https://my.wheelercentre.com/donate/i/#{word.title.downcase}"
           ' Adopt this word
         .adopt-a-word__word-button--adopted
           ' Word adopted
