@@ -105,6 +105,10 @@
         float: left;
       }
 
+      .masthead-nav-main__tnew-icon {
+        margin-right: 0.5rem;
+      }
+
       .breakpoint-phone .masthead-nav-main__item {
         float: none;
       }
