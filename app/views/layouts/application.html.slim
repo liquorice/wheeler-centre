@@ -34,18 +34,12 @@ html lang="en"
         = render 'partials/skip_links'
         = render 'partials/campaign_banner'
         = render 'partials/subscribe_popup'
-
-        // WC logo for print only
-        .print-logo
-
         = area :masthead do
           = render 'partials/masthead', with_domain: false
-
         = area :main_outer do
           div role="main" id="main-content"
             = area :main
             = area :main_footer
-
         = area :footer_before do
           = render 'partials/subscribe_simple_wide'
           - if current_page?(root_path)
