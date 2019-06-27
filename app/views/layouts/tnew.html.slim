@@ -45,6 +45,10 @@ html lang="en"
     body data-view-fast-click=true
       = area :body do
         = render 'partials/skip_links'
+
+        // WC logo for print only
+        .print-logo
+
         = area :masthead do
           = render 'partials/masthead', with_domain: true
 
