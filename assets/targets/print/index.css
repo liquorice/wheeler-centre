@@ -50,7 +50,6 @@ body, button, input, textarea {
 
 a, a:visited {
   color: #444 !important;
-  /*text-decoration: underline;*/
   border: 0 !important
 }
 img {
@@ -97,6 +96,10 @@ img {
 }
 
 .tn-subnav-component {
+  display: none;
+}
+
+.tn-heading-sub-text {
   display: none;
 }
 
@@ -212,4 +215,15 @@ img {
 
 .tnew-bg a[href]:after {
   content: none !important;
+}
+
+/* Show print masthead */
+
+.print-logo {
+  display: block;
+  background-image: url(wheeler-centre-logo--print.svg) !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+  height: 3.45rem;
+  width: 17rem;
 }
