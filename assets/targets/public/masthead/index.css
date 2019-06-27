@@ -531,6 +531,11 @@
       width: 100%;
     }
 
+    /* Hide Print logo masthead */
+    .print-logo {
+      display: none;
+    }
+
   .breakpoint-tablet .masthead__logo,
   .breakpoint-phone-wide .masthead__logo,
   .breakpoint-phone .masthead__logo {
