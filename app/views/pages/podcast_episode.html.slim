@@ -28,6 +28,13 @@
     } \
   })
 
+/ Set twitter:image
+- set_meta_tags({ \
+    twitter: { \
+      image: (open_graph_image.content_medium_url if open_graph_image), \
+    } \
+  })
+
 = area :head do
   link href=podcast_tracking_link(page.series) rel="alternate" title="#{page.parent.title} podcast" type="application/rss+xml"
 
