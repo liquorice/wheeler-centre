@@ -147,6 +147,8 @@
 
 .tn-component-contact-permissions__settings {
   margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column !important;
 }
 
 .tn-component-contact-permissions__settings__item {
