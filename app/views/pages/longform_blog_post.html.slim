@@ -40,6 +40,13 @@
   title: "RSS: #{blog_archive_page.title}" \
 })
 
+/ Set twitter:image
+- set_meta_tags({ \
+    twitter: { \
+      image: (open_graph_image.content_medium_url if open_graph_image), \
+    } \
+  })
+
 = area :head do
   link href=blog_archive_rss_tracking_link rel="alternate" title="Notes from The Wheeler Centre" type="application/rss+xml"
 

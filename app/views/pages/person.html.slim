@@ -25,6 +25,13 @@
     } \
   })
 
+/ Set twitter:image
+- set_meta_tags({ \
+    twitter: { \
+      image: (open_graph_image.content_medium_url if open_graph_image), \
+    } \
+  })
+
 = area :masthead_title do
   ' People
 
