@@ -238,3 +238,52 @@
 .tn-donationAskCheckout-component li.radio {
   margin: 5px 0 !important;
 }
+
+/* Returning free tickets */
+
+#ReturnTix .well-sm {
+  border-radius: none;
+}
+
+#ReturnTix .well {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: none;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ReturnTix .table {
+  font-size: 1.5rem;
+  line-height: 2.3rem;
+  font-family: var(--font-sans);
+}
+
+#ReturnTix .table th {
+  background-color: #ccefeb;
+  font-weight: bold;
+  border: none;
+  padding: 1.5rem !important;
+  text-transform: lowercase !important;
+}
+
+#ReturnTix .table th:first-letter {
+  text-transform: uppercase !important;
+}
+
+#ReturnTix .table td {
+  padding: 1.5rem !important;
+  border: none;
+}
+
+#ReturnTix .table a {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+#ReturnTix .table tr:nth-child(even) td {
+  background-color: #EEEEEE;
+}
