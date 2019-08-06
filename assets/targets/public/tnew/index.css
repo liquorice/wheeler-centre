@@ -12,7 +12,8 @@
 }
 
 .tn-heading,
-.tn-header-component h1 {
+.tn-header-component h1,
+#ReturnTix #headr h2 {
   color: var(--primary-color);
   font-family: var(--font-sans);
   font-size: 4.8rem;
@@ -21,7 +22,8 @@
   margin-bottom: 1rem !important;
 }
 
-.breakpoint-w-768 .tn-heading {
+.breakpoint-w-768 .tn-heading,
+.breakpoint-w-768 #ReturnTix #headr h2 {
   font-size: 3rem;
   line-height: 3.8rem;
 }
