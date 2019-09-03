@@ -76,6 +76,12 @@
 
 /* Promo box */
 
+/* TEMP HIDING PROMO BOX */
+
+.tn-subnav-component .tn-promo-box {
+  display: none !important;
+}
+
 .tn-subnav-component .tn-promo-box {
   margin-left: 3rem;
   margin-right: 0;
