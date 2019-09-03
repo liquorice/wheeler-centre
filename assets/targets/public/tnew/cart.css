@@ -67,11 +67,9 @@
 }
 
 .tn-cart-totals__line-item {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans) !important;
 }
 
-.tn-cart-totals__line-item--subtotal,
-.tn-cart-totals__line-item--subtotal .tn-cart-totals__label,
 .tn-cart-totals__label,
 .tn-cart-totals__value  {
   font-size: 2rem !important;
@@ -286,4 +284,48 @@
 
 #ReturnTix .table tr:nth-child(even) td {
   background-color: #EEEEEE;
+}
+
+@media screen and (max-width: 639px) {
+  #ReturnTix .table {
+    display: block;
+  }
+  #ReturnTix .table > *, #ReturnTix .table tr, #ReturnTix .table td, #ReturnTix .table th {
+    display: block;
+  }
+  #ReturnTix .table thead {
+    display: none;
+  }
+  #ReturnTix .table tbody tr td {
+    position: relative;
+    text-align: right;
+    border-bottom: 1px solid #ddd;
+  }
+  #ReturnTix .table tbody tr td:last-child {
+    border-bottom: none;
+  }
+  #ReturnTix .table tbody tr td:before {
+    position: absolute;
+    font-weight: 700;
+    width: 30%;
+    left: 1.5rem;
+    top: 1.5rem;
+    bottom: 0;
+    text-align: left !important;
+  }
+  #ReturnTix .table tbody tr td:nth-child(1):before {
+    content: "Order no";
+  }
+  #ReturnTix .table tbody tr td:nth-child(2):before {
+    content: "Event name";
+  }
+  #ReturnTix .table tbody tr td:nth-child(3):before {
+    content: "Event date & time";
+  }
+  #ReturnTix .table tbody tr td:nth-child(4):before {
+    content: "Ticket no";
+  }
+  #ReturnTix .table tbody tr td:nth-child(5):before {
+    content: "Seat";
+  }
 }
