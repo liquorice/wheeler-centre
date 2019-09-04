@@ -46,66 +46,77 @@ namespace :temporary do
         start_date: "Sun, 10 Nov 2019 11:30:00",
         end_date: "Sun, 10 Nov 2019 12:30:00",
         type: "Spotlight",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Who Gave You Permission",
         start_date: "Sun, 10 Nov 2019 13:30:00" ,
         end_date: "Sun, 10 Nov 2019 14:30:00",
         type: "Panel",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Decolonising Feminism",
         start_date: "Sun, 10 Nov 2019 15:30:00",
         end_date: "Sun, 10 Nov 2019 16:30:00",
         type: "Panel",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Zadie Smith",
         start_date: "Sun, 10 Nov 2019 17:30:00",
         end_date: "Sun, 10 Nov 2019 18:30:00",
         type: "Spotlight",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Gala: Things My Mother Never Told Me",
         start_date: "Sun, 10 Nov 2019 19:30:00",
         end_date: "Sun, 10 Nov 2019 21:00:00",
         type: "Gala",
+        price: "$50 adult<br>$40 concession",
       },
       {
         title: "Feminism Never Sleeps with Jan Fran",
         start_date: "Sun, 10 Nov 2019 22:00:00",
         end_date: "Sun, 10 Nov 2019 23:00:00",
         type: "Queerstories",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Taking Up Space: The City We Deserve",
         start_date: "Sun, 10 Nov 2019 10:00:00",
         end_date: "Sun, 10 Nov 2019 11:00:00",
         type: "Panel",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Tressie Mcmillan Cottom: Thick",
         start_date: "Sun, 10 Nov 2019 12:00:00",
         end_date: "Sun, 10 Nov 2019 13:00:00",
         type: "Spotlight",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Mona Eltahawy & Fatima Bhutto",
         start_date: "Sun, 10 Nov 2019 14:00:00",
         end_date: "Sun, 10 Nov 2019 15:00:00",
         type: "Panel",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Rage Against the Machine: Feminism & Capitalism",
         start_date: "Sun, 10 Nov 2019 16:00:00",
         end_date: "Sun, 10 Nov 2019 17:00:00",
         type: "Panel",
+        price: "$30 adult<br>$25 concession",
       },
       {
         title: "Monica Lewinsky",
         start_date: "Sun, 10 Nov 2019 18:00:00",
         end_date: "Sun, 10 Nov 2019 19:00:00",
         type: "Spotlight",
+        price: "$30 adult<br>$25 concession",
       }
     ]
 
@@ -126,6 +137,7 @@ namespace :temporary do
       event.fields[:end_date].time_zone = "Melbourne"
       event.fields[:series].page_ids = [broadsite_event_series.id]
       event.fields[:broadside_type].value = event_hash[:type]
+      event.fields[:ticket_prices].value = event_hash[:price]
       event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
       event.save!
     end
