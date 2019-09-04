@@ -70,9 +70,17 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
     "#{ENV["TRACKING_SERVER_BASE_URL"]}/#{match[1]}?#{URI.encode_www_form(updated_params)}"
   }
 
+  # The Next Chapter microsite
   rewrite /\/(.*)/, '/thenextchapter/$1', host: "thenextchapter.localhost"
   rewrite /\/(.*)/, '/thenextchapter/$1', host: "thenextchapter.wheelercentre.com"
   r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "www.wheelercentre.com"
   r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "wheelercentre.com"
   r301 "/thenextchapter", "https://thenextchapter.wheelercentre.com", :host => "localhost"
+
+  # Broadside microsite
+  rewrite /\/(.*)/, '/broadside/$1', host: "broadside.localhost"
+  rewrite /\/(.*)/, '/broadside/$1', host: "broadside.wheelercentre.com"
+  r301 "/broadside", "https://broadside.wheelercentre.com", :host => "www.wheelercentre.com"
+  r301 "/broadside", "https://broadside.wheelercentre.com", :host => "wheelercentre.com"
+  r301 "/broadside", "https://broadside.wheelercentre.com", :host => "localhost"
 end
