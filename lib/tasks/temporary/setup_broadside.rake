@@ -155,5 +155,15 @@ namespace :temporary do
       event_page.fields[:event].page_ids = [site.pages.find_by_url("events/#{slugify(event_hash[:title])}").id]
       event_page.save!
     end
+
+    # Redirects from the WC event pages to the broadside event pages
+    events.each do |event_hash|
+      redirect = Heracles::Redirect.find_or_initialize_by(source_url: "/events/#{slugify(event_hash[:title])}")
+      redirect.source_url = "/events/#{slugify(event_hash[:title])}"
+      redirect.target_url = "/broadside/#{slugify(event_hash[:title])}"
+      redirect.site = site
+      redirect.save!
+    end
+
   end
 end
