@@ -1,0 +1,147 @@
+def slugify(name)
+  name.downcase.gsub(/\&/, "and").gsub(/[^a-zA-Z0-9]/, ' ').gsub(/\s+/, '-')
+end
+
+namespace :temporary do
+  desc "Set up broadside microsite pages"
+  task setup_broadside: :environment do
+    site = Heracles::Site.first
+
+    home_page = Heracles::Sites::WheelerCentre::BroadsideHomePage.find_or_initialize_by(url: "broadside")
+    home_page.site = site
+    home_page.title = "Broadside"
+    home_page.slug = "broadside"
+    home_page.published = true
+    home_page.locked = true
+    home_page.page_order_position = :last if home_page.new_record?
+    home_page.save!
+
+    # When page
+    when_page = Heracles::Sites::WheelerCentre::BroadsideWhenPage.find_or_initialize_by(url: "broadside/when")
+    when_page.parent = home_page
+    when_page.site = site
+    when_page.title = "When"
+    when_page.slug = "when"
+    when_page.published = true
+    when_page.locked = false
+    when_page.page_order_position = :last if when_page.new_record?
+    when_page.save!
+
+    # Broadside `event_series`
+    broadsite_event_series = Heracles::Sites::WheelerCentre::EventSeries.find_or_initialize_by(url: "events/series/broadside")
+    broadsite_event_series.parent = site.pages.find_by(url: "events/series")
+    broadsite_event_series.collection = Heracles::Sites::WheelerCentre::Collection.find_by(url: "events/series/all-event-series")
+    broadsite_event_series.site = site
+    broadsite_event_series.title = "Broadside"
+    broadsite_event_series.slug = "broadside"
+    broadsite_event_series.published = true
+    broadsite_event_series.locked = false
+    broadsite_event_series.page_order_position = :last if broadsite_event_series.new_record?
+    broadsite_event_series.save!
+
+    # Events
+    events = [
+      {
+        title: "Helen Garner",
+        start_date: "Sun, 10 Nov 2019 11:30:00",
+        end_date: "Sun, 10 Nov 2019 12:30:00",
+        type: "Spotlight",
+      },
+      {
+        title: "Who Gave You Permission",
+        start_date: "Sun, 10 Nov 2019 13:30:00" ,
+        end_date: "Sun, 10 Nov 2019 14:30:00",
+        type: "Panel",
+      },
+      {
+        title: "Decolonising Feminism",
+        start_date: "Sun, 10 Nov 2019 15:30:00",
+        end_date: "Sun, 10 Nov 2019 16:30:00",
+        type: "Panel",
+      },
+      {
+        title: "Zadie Smith",
+        start_date: "Sun, 10 Nov 2019 17:30:00",
+        end_date: "Sun, 10 Nov 2019 18:30:00",
+        type: "Spotlight",
+      },
+      {
+        title: "Gala: Things My Mother Never Told Me",
+        start_date: "Sun, 10 Nov 2019 19:30:00",
+        end_date: "Sun, 10 Nov 2019 21:00:00",
+        type: "Gala",
+      },
+      {
+        title: "Feminism Never Sleeps with Jan Fran",
+        start_date: "Sun, 10 Nov 2019 22:00:00",
+        end_date: "Sun, 10 Nov 2019 23:00:00",
+        type: "Queerstories",
+      },
+      {
+        title: "Taking Up Space: The City We Deserve",
+        start_date: "Sun, 10 Nov 2019 10:00:00",
+        end_date: "Sun, 10 Nov 2019 11:00:00",
+        type: "Panel",
+      },
+      {
+        title: "Tressie Mcmillan Cottom: Thick",
+        start_date: "Sun, 10 Nov 2019 12:00:00",
+        end_date: "Sun, 10 Nov 2019 13:00:00",
+        type: "Spotlight",
+      },
+      {
+        title: "Mona Eltahawy & Fatima Bhutto",
+        start_date: "Sun, 10 Nov 2019 14:00:00",
+        end_date: "Sun, 10 Nov 2019 15:00:00",
+        type: "Panel",
+      },
+      {
+        title: "Rage Against the Machine: Feminism & Capitalism",
+        start_date: "Sun, 10 Nov 2019 16:00:00",
+        end_date: "Sun, 10 Nov 2019 17:00:00",
+        type: "Panel",
+      },
+      {
+        title: "Monica Lewinsky",
+        start_date: "Sun, 10 Nov 2019 18:00:00",
+        end_date: "Sun, 10 Nov 2019 19:00:00",
+        type: "Spotlight",
+      }
+    ]
+
+    events_collection = Heracles::Sites::WheelerCentre::Collection.find_by(url: "events/all-events")
+    events.each do |event_hash|
+      event = Heracles::Sites::WheelerCentre::Event.find_or_initialize_by(url: "events/#{slugify(event_hash[:title])}")
+      event.parent = Heracles::Sites::WheelerCentre::Events.all.first
+      event.collection = events_collection
+      event.site = site
+      event.title = event_hash[:title]
+      event.slug = slugify(event_hash[:title])
+      event.published = true
+      event.locked = false
+      event.page_order_position = :last if event.new_record?
+      event.fields[:start_date].value = event_hash[:start_date]
+      event.fields[:start_date].time_zone = "Melbourne"
+      event.fields[:end_date].value = event_hash[:end_date]
+      event.fields[:end_date].time_zone = "Melbourne"
+      event.fields[:series].page_ids = [broadsite_event_series.id]
+      event.fields[:broadside_type].value = event_hash[:type]
+      event.fields[:venue].page_ids = [site.pages.find_by_url("/events/venues/melbourne-town-hall").id]
+      event.save!
+    end
+
+    # `broadside_event_pages`
+    events.each do |event_hash|
+      event_page = Heracles::Sites::WheelerCentre::BroadsideEventPage.find_or_initialize_by(url: "broadside/#{slugify(event_hash[:title])}")
+      event_page.parent = Heracles::Sites::WheelerCentre::BroadsideHomePage.all.first
+      event_page.site = site
+      event_page.title = event_hash[:title]
+      event_page.slug = slugify(event_hash[:title])
+      event_page.published = true
+      event_page.locked = false
+      event_page.page_order_position = :last if event_page.new_record?
+      event_page.fields[:event].page_ids = [site.pages.find_by_url("events/#{slugify(event_hash[:title])}").id]
+      event_page.save!
+    end
+  end
+end
