@@ -1,6 +1,6 @@
 = area :main do
   h1 = page.event.title
-  - page.event.fields[:ticket_prices].data_present?
+  - if page.event.fields[:ticket_prices].data_present?
     p = page.event.fields[:ticket_prices].value
   - if page.event.fields[:broadside_type].data_present?
     p = page.event.fields[:broadside_type].value
