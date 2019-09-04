@@ -126,7 +126,7 @@ namespace :temporary do
       event.fields[:end_date].time_zone = "Melbourne"
       event.fields[:series].page_ids = [broadsite_event_series.id]
       event.fields[:broadside_type].value = event_hash[:type]
-      event.fields[:venue].page_ids = [site.pages.find_by_url("/events/venues/melbourne-town-hall").id]
+      event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
       event.save!
     end
 
