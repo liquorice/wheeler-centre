@@ -32,6 +32,8 @@ module Heracles
               {name: :sponsors, type: :associated_pages, page_type: :sponsor},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :flarum_discussion_id, type: :text, editor_type: :code},
+              # Temporary
+              {name: :broadside_type, type: :text, editor_type: "select", option_values: [ "Spotlight", "Panel", "Queer stories", "Gala" ], editor_columns: 4},
             ]
           }
         end

@@ -1,14 +1,16 @@
 module Heracles
   module Sites
     module WheelerCentre
-      class BroadsideHomePage < ::Heracles::Page
+      class BroadsideWhenPage < ::Heracles::Page
         def self.config
           {
             fields: [
-              {name: :intro, label: "Introduction", type: :content},
-              {name: :body, type: :content},
             ]
           }
+        end
+
+        def event_pages
+          site.pages.of_type(:broadside_event_page)
         end
 
         def absolute_url

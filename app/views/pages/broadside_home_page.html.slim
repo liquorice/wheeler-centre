@@ -15,12 +15,6 @@
   })
 
 = area :main do
-  ' yo
   .content-page__main.column-wrapper
     .content-page__content.clearfix
-      - if page.fields[:intro].data_present?
-        .content-page__intro
-          = render_content_in_sections page.fields[:intro]
-      - if page.fields[:body].data_present?
-        .content-page__body
-          = render_content_in_sections page.fields["body"]
+
