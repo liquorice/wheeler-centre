@@ -1,0 +1,26 @@
+- set_meta_tags({ \
+    description: "", \
+    og: { \
+      type: "website", \
+      site_name: "Broadside", \
+      title: "Broadside", \
+      description: "", \
+      image: { \
+        url: image_url("public-broadside/masthead/broadside-logo-social.png"), \
+        secure_url: image_url("public-broadside/masthead/broadside-logo-social.png"), \
+        width: "583", \
+        height: "360", \
+      } \
+    } \
+  })
+
+= area :main do
+  ' yo
+  .content-page__main.column-wrapper
+    .content-page__content.clearfix
+      - if page.fields[:intro].data_present?
+        .content-page__intro
+          = render_content_in_sections page.fields[:intro]
+      - if page.fields[:body].data_present?
+        .content-page__body
+          = render_content_in_sections page.fields["body"]
