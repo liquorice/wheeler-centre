@@ -184,6 +184,11 @@ img {
   font-weight: bold;
 }
 
+.tn-cart-totals,
+.tn-cart-totals__line-item {
+  font-family: var(--font-sans) !important;
+}
+
 .tn-cart-totals__line-item--subtotal {
   font-weight: bold !important;
   font-family: var(--font-sans);
