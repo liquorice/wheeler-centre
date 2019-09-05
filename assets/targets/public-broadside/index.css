@@ -1,0 +1,45 @@
+/* Variables */
+
+:root {
+  --column-full: 100%;
+  --column-wide: 98rem;
+  --column-narrow: 64.5rem;
+
+  --font-normal: titling-gothic-fb, sans-serif;
+  --font-narrow: titling-gothic-fb-condensed, sans-serif;
+  --font-wide: titling-gothic-fb-wide, sans-serif;
+
+  --primary-color: #ff6c2f;
+  --pink-color: #ED6998;
+  --blue-color: #8998CC;
+  --grey-color: #222222;
+  --white-color: #ffffff;
+}
+
+/* Imports */
+
+@import "./reset/index.css";
+@import "./layout/index.css";
+@import "./type/index.css";
+
+/* Base */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  font-family: var(--font-normal);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}

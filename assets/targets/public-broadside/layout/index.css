@@ -1,0 +1,27 @@
+/*
+  Layout
+*/
+
+.column-wrapper {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.column-full,
+.column-wide,
+.column-narrow {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.column-full {
+  max-width: var(--column-full);
+}
+
+.column-wide {
+  max-width: var(--column-wide);
+}
+
+.column-narrow {
+  max-width: var(--column-narrow);
+}

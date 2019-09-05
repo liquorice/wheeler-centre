@@ -1,0 +1,45 @@
+/*
+  Type
+*/
+
+/* Alignment */
+
+.t-center {
+  text-align: center;
+}
+
+/* Weights */
+
+.t-normal {
+  font-weight: 300;
+}
+
+.t-bold {
+  font-weight: 500;
+}
+
+/* Case */
+
+.t-upper {
+  text-transform: uppercase;
+}
+
+/* Widths */
+
+.t-narrow {
+  font-family: var(--font-narrow);
+}
+
+.t-wide {
+  font-family: var(--font-wide);
+}
+
+/* H1 Page title */
+
+.page-title {
+  font-size: 10rem;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--font-wide);
+}
