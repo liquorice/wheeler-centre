@@ -1,6 +1,9 @@
 = area :main do
-  h1 When
-  - if page.event_pages
-    - page.event_pages.each do |event_page|
-      a href=event_page.absolute_url
-        = event_page.title
+
+  .column-wrapper
+    .column-wide
+      h1.page-title When
+      - if page.event_pages
+        - page.event_pages.each do |event_page|
+          a href=event_page.absolute_url
+            = event_page.title
