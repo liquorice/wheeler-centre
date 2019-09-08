@@ -67,21 +67,15 @@
 }
 
 .tn-cart-totals__line-item {
+  font-weight: bold !important;
   font-family: var(--font-sans) !important;
-}
-
-.tn-cart-totals__label,
-.tn-cart-totals__value  {
   font-size: 2rem !important;
-  color: #666 !important;
+  margin-bottom: 3rem !important;
 }
 
-.tn-cart-totals__line-item--primary,
-.tn-cart-totals__label--total,
-.tn-cart-totals__value--total {
-  color: #333 !important;
-  font-weight: 700 !important;
-  font-size: 2.5rem !important;
+.tn-cart-totals__label {
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
 /* Cart billing information */
