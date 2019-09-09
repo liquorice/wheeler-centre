@@ -10,22 +10,22 @@
 }
 
 .bs-calendar__time {
-  width: 34%;
   font-size: 2rem;
   font-weight: 500;
+  width: 34%;
 }
 
 .bs-calendar__event {
-  padding-right: 2.4rem;
-  margin-bottom: 5rem;
   flex: 1;
+  margin-bottom: 5rem;
+  padding-right: 2.4rem;
 }
 
 .bs-calendar__event-title {
   font-size: 5rem;
+  font-weight: 500;
   line-height: 5rem;
   text-transform: uppercase;
-  font-weight: 500;
 }
 
 .bs-calendar__event-speakers {
