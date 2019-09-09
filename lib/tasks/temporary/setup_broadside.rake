@@ -5,6 +5,11 @@ end
 namespace :temporary do
   desc "Set up broadside microsite pages"
   task setup_broadside: :environment do
+
+    if Rails.env != "development"
+      raise "Currently set to run in development only. Double check everything before running in production."
+    end
+
     site = Heracles::Site.first
 
     home_page = Heracles::Sites::WheelerCentre::BroadsideHomePage.find_or_initialize_by(url: "broadside")
@@ -163,6 +168,51 @@ namespace :temporary do
       redirect.target_url = "/broadside/#{slugify(event_hash[:title])}"
       redirect.site = site
       redirect.save!
+    end
+
+    # Who page
+    who_page = Heracles::Sites::WheelerCentre::BroadsideWhoPage.find_or_initialize_by(url: "broadside/who")
+    who_page.parent = home_page
+    who_page.site = site
+    who_page.title = "Who"
+    who_page.slug = "who"
+    who_page.published = true
+    who_page.locked = false
+    who_page.page_order_position = :last if who_page.new_record?
+    who_page.save!
+
+    people_collection = Heracles::Sites::WheelerCentre::Collection.find_by(url: "people/all-people")
+    people = ["Aileen Moreton-Robinson", "Aminatou Sow", "Ariel Levy", "Caroline Martin", "Curtis Sittenfeld", "Fatima Bhutto", "Gala Vanting", "Helen Garner", "Intan Paramaditha", "Jan Fran", "Jax Jacki Brown", "Jia Tolentino", "Maria Tumarkin", "Michelle Law", "Mona Eltahawy", "Monica Lewinsky", "Nayuka Gorrie", "Nicole Kalms", "Nicole Lee", "Paola Balla", "Patricia Cornelius", "Raquel Willis", "Ruby Hamad", "Santilla Chingaipe", "Sarah Krasnostein", "Sophie Black", "Tressie McMillan Cottom", "Zadie Smith"]
+    people.each do |person_name|
+      first_name = person_name[0..(person_name =~ /\s/)-1]
+      last_name = person_name[(person_name =~ /\s/)+1..-1]
+      person = Heracles::Sites::WheelerCentre::Person.find_or_initialize_by(url: "people/#{slugify(person_name)}")
+      person.parent = Heracles::Sites::WheelerCentre::People.all.first
+      person.collection = people_collection
+      person.site = site
+      person.title = person_name
+      person.slug = slugify(person_name)
+      person.published = true
+      person.locked = false
+      person.page_order_position = :last if person.new_record?
+      person.fields[:first_name].value = first_name
+      person.fields[:last_name].value = last_name
+      person.fields[:biography].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
+      person.fields[:portrait].asset_ids = [Heracles::Asset.find("93782353-5c4b-4e80-b002-c6f0a3dc3f94").id]
+      person.save!
+    end
+
+    people.each do |person_name|
+      speaker_page = Heracles::Sites::WheelerCentre::BroadsideSpeakerPage.find_or_initialize_by(url: "broadside/who/#{slugify(person_name)}")
+      speaker_page.parent = who_page
+      speaker_page.site = site
+      speaker_page.title = person_name
+      speaker_page.slug = slugify(person_name)
+      speaker_page.published = true
+      speaker_page.locked = false
+      speaker_page.page_order_position = :last if speaker_page.new_record?
+      speaker_page.fields[:person].page_ids = [site.pages.find_by_url("people/#{slugify(person_name)}").id]
+      speaker_page.save!
     end
 
   end

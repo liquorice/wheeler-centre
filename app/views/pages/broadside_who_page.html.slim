@@ -1,0 +1,11 @@
+= area :main do
+
+  .column-wrapper
+    .column-wide
+      h1.page-title Who
+      - if page.speaker_pages
+        - page.speaker_pages.each do |speaker_page|
+          a href=speaker_page.absolute_url
+            = speaker_page.title
+          - if speaker_page.portrait_url
+            img src=speaker_page.portrait_url
