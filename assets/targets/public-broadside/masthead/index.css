@@ -1,0 +1,44 @@
+/*
+  Masthead
+*/
+
+.bs-masthead {
+  align-items: center;
+  display: flex;
+  padding-bottom: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 3rem;
+}
+
+.bs-menu,
+.bs-support {
+  font-size: 2.2rem;
+}
+
+.bs-menu {
+  margin-right: auto;
+}
+
+.bs-support {
+  margin-left: auto;
+}
+
+/* Broadside logo */
+
+.bs-masthead__logo {
+  width: 14rem;
+  height: 7.4rem;
+  margin-left: 6rem;
+}
+
+.bs-masthead__logo-anchor {
+  background-image: url(masthead-logo.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: transparent;
+  display: block;
+  font: 0/0 a;
+  height: 100%;
+  width: 100%;
+}

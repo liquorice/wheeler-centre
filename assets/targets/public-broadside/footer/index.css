@@ -1,0 +1,114 @@
+/*
+  Footer
+*/
+
+.bs-footer {
+  margin-bottom: 10rem;
+  margin-top: 10rem;
+}
+
+.breakpoint-w-768 .bs-footer {
+  margin-bottom: 0;
+  margin-top: 5rem;
+}
+
+.bs-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 2.4rem);
+  font-size: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.breakpoint-w-768 .bs-footer-nav {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+}
+
+.bs-footer-nav__group {
+  width: 33.3%;
+  padding-right: 2.4rem;
+  margin-bottom: 5rem;
+}
+
+.breakpoint-w-768 .bs-footer-nav__group {
+  width: 50%;
+}
+
+.bs-footer-nav__group li:first-child {
+  margin-bottom: 1.5rem;
+}
+
+.breakpoint-w-768 .bs-footer-nav__group li:first-child {
+  margin-bottom: 1rem;
+}
+
+.bs-footer-nav__group li {
+  margin-bottom: 0.5rem;
+}
+
+.bs-footer-nav__group li a {
+}
+
+/* Logos */
+
+.bs-footer-logos {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.bs-footer-logos__item {
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: transparent;
+  display: block;
+  font: 0/0 a;
+}
+
+.breakpoint-w-768 .bs-footer-logos__item {
+  background-position: center left;
+  margin-bottom: 5rem;
+  width: 50%;
+}
+
+.bs-footer-logos__item--wheeler-centre {
+  background-image: url(logos/red/wheeler-centre.png);
+  background-size: 14.6rem 3rem;
+  height: 3rem;
+  width: 14.6rem;
+}
+
+.bs-footer-logos__item--creative-victoria {
+  background-image: url(logos/red/creative-victoria.png);
+  background-size: 10rem 3.2rem;
+  height: 3.2rem;
+  width: 10rem;
+}
+
+.bs-footer-logos__item--city-of-melbourne {
+  background-image: url(logos/red/city-of-melbourne.png);
+  background-size: 13.8rem 4.6rem;
+  height: 4.6rem;
+  width: 13.8rem;
+}
+
+.bs-footer-logos__item--melbourne-city-of-literature {
+  background-image: url(logos/red/melbourne-city-of-literature.png);
+  background-size: 10rem 4.6rem;
+  height: 4.6rem;
+  width: 10rem;
+}
+
+.bs-footer-logos__item--australia-council-for-the-arts {
+  background-image: url(logos/red/australia-council-for-the-arts.png);
+  background-size: 14.6rem 3.8rem;
+  height: 3.8rem;
+  width: 14.6rem;
+}
+
+
+
+

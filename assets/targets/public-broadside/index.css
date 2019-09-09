@@ -21,6 +21,8 @@
 @import "./reset/index.css";
 @import "./layout/index.css";
 @import "./type/index.css";
+@import "./masthead/index.css";
+@import "./footer/index.css";
 
 /* Base */
 
