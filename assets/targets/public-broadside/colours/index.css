@@ -6,18 +6,38 @@
   color: var(--primary-color);
 }
 
+.bg-orange {
+  background-color: var(--primary-color);
+}
+
 .c-grey {
   color: var(--grey-color);
+}
+
+.bg-grey {
+  background-color: var(--grey-color);
 }
 
 .c-white {
   color: var(--white-color);
 }
 
+.bg-white {
+  background-color: var(--white-color);
+}
+
 .c-pink {
   color: var(--pink-color);
 }
 
+.bg-pink {
+  background-color: var(--pink-color);
+}
+
 .c-blue {
   color: var(--blue-color);
+}
+
+.bg-blue {
+  background-color: var(--blue-color);
 }

@@ -37,12 +37,31 @@
 /* H1 Page title */
 
 .page-title {
+  font-family: var(--font-wide);
   font-size: 10rem;
-  line-height: 10rem;
   font-weight: 500;
+  line-height: 10rem;
+  padding-bottom: 3rem;
+  padding-top: 1rem;
   text-align: center;
   text-transform: uppercase;
-  font-family: var(--font-wide);
-  padding-top: 1rem;
-  padding-bottom: 5rem;
+}
+
+.breakpoint-w-768 .page-title {
+  font-size: 6rem;
+  line-height: 6rem;
+  padding-bottom: 2rem;
+}
+
+/* BS headings */
+
+.bs-heading {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .bs-heading {
+  font-size: 1.5rem;
 }

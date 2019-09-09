@@ -23,6 +23,10 @@
 @import "./type/index.css";
 @import "./masthead/index.css";
 @import "./footer/index.css";
+@import "./subnav/index.css";
+@import "./calendar/index.css";
+
+@import "./colours/index.css";
 
 /* Base */
 
