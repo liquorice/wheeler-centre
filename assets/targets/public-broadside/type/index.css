@@ -41,7 +41,6 @@
   font-size: 10rem;
   font-weight: 500;
   line-height: 10rem;
-  padding-bottom: 3rem;
   padding-top: 1rem;
   text-align: center;
   text-transform: uppercase;
@@ -50,7 +49,6 @@
 .breakpoint-w-768 .page-title {
   font-size: 6rem;
   line-height: 6rem;
-  padding-bottom: 2rem;
 }
 
 /* BS headings */
