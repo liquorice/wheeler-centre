@@ -1,12 +1,81 @@
 = area :main do
-  h1 = page.event.title
-  - if page.event.fields[:ticket_prices].data_present?
-    p = page.event.fields[:ticket_prices].value
-  - if page.event.fields[:broadside_type].data_present?
-    p = page.event.fields[:broadside_type].value
-  - if page.start_time
-    p = page.start_time
-  - if page.end_time
-    p = page.end_time
-  - if page.event.venue
-    p = page.event.venue.title
+
+  .column-wrapper
+    .column-wide
+
+      ul.bs-subnav
+        li.bs-subnav__item
+          a href="/when" ← Festival schedule
+
+      .heading-block
+        .heading-block__info
+          h1.heading-block__heading= page.event.title
+        .heading-block__pattern
+
+      ' Add event description here plus sharing/calendar buttons
+      br
+      br
+      /= render_content_in_sections page.fields[:body]
+
+      .event-meta
+        .event-meta-info
+
+          .event-meta__label When
+          .event-meta-info__value
+            - if page.start_time
+              = page.start_time
+            span.t-normal
+              '  to
+              br
+            - if page.end_time
+              = page.end_time
+
+          .event-meta__label When
+          .event-meta-info__value.t-upper
+            - if page.event.fields[:ticket_prices].data_present?
+              p = page.event.fields[:ticket_prices].value
+
+          .event-meta__label Where
+          .event-meta-info__value.t-upper
+            - if page.event.venue
+              p = page.event.venue.title
+
+          .event-meta__label Type
+          .event-meta-info__value.t-upper
+            - if page.event.fields[:broadside_type].data_present?
+              p = page.event.fields[:broadside_type].value
+
+        .event-meta-speakers
+
+          .bs-speaker
+            .bs-speaker__image
+            .bs-speaker__info
+              .bs-speaker__title Nicole Kalms
+              .bs-speaker__meta
+                span @nicolekalms
+              .bs-speaker__intro
+                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+
+          .bs-speaker
+            .bs-speaker__image
+            .bs-speaker__info
+              .bs-speaker__title Nicole Kalms
+              .bs-speaker__meta
+                span @nicolekalms
+              .bs-speaker__intro
+                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+
+          .bs-speaker
+            .bs-speaker__image
+            .bs-speaker__info
+              .bs-speaker__title Nicole Kalms
+              .bs-speaker__meta
+                span @nicolekalms
+              .bs-speaker__intro
+                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+
+      .heading-block.heading-block--reverse
+        .heading-block__info
+          h1.heading-block__heading.t-wide
+            a href="/" Book now
+        .heading-block__pattern

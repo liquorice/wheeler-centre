@@ -3,6 +3,7 @@
 */
 
 .bs-calendar {
+  margin-bottom: 5rem;
 }
 
 .bs-calendar__item {
@@ -15,10 +16,22 @@
   width: 34%;
 }
 
+.breakpoint-w-768 .bs-calendar__time {
+  font-size: 1.5rem;
+}
+
 .bs-calendar__event {
   flex: 1;
   margin-bottom: 5rem;
   padding-right: 2.4rem;
+}
+
+.bs-calendar__item:last-child .bs-calendar__event {
+  margin-bottom: 0;
+}
+
+.breakpoint-w-768 .bs-calendar__event {
+  margin-bottom: 2rem;
 }
 
 .bs-calendar__event-title {
@@ -26,6 +39,12 @@
   font-weight: 500;
   line-height: 5rem;
   text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.breakpoint-w-768 .bs-calendar__event-title {
+  font-size: 3rem;
+  line-height: 3rem;
 }
 
 .bs-calendar__event-speakers {
