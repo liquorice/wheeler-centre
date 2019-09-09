@@ -15,7 +15,9 @@ html#nc lang="en"
                         separator: "—",
                         reverse: true
     = stylesheet_link_tag "public-broadside", media: "screen"
-    = stylesheet_link_tag "print", media: "print"
+
+    / = stylesheet_link_tag "print", media: "print"
+
     - if Rails.env.development?
       = development_javascript
     /[if lt IE 9]
@@ -25,7 +27,7 @@ html#nc lang="en"
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
     = render 'partials/broadside_analytics'
-    link rel="icon" href=image_path("public-broadside/fav.png")
+    link rel="icon" href=image_path("public-broadside/favicon.png")
 
     / Adobe fonts
     link rel="stylesheet" href="https://use.typekit.net/ilb4eyx.css"

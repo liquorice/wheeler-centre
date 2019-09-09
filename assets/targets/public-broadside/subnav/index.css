@@ -1,0 +1,32 @@
+/*
+  Subnav
+*/
+
+.bs-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10rem;
+}
+
+.breakpoint-w-768 .bs-subnav {
+  margin-bottom: 5rem;
+}
+
+.bs-subnav__item {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .bs-subnav__item {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.bs-subnav__item--active {
+  font-family: var(--font-wide);
+}

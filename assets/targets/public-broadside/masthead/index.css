@@ -11,9 +11,21 @@
   padding-top: 3rem;
 }
 
+.breakpoint-w-768 .bs-masthead {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .bs-menu,
 .bs-support {
   font-size: 2.2rem;
+}
+
+.breakpoint-w-768 .bs-menu,
+.breakpoint-w-768 .bs-support {
+  font-size: 1.5rem;
 }
 
 .bs-menu {
@@ -30,6 +42,12 @@
   width: 14rem;
   height: 7.4rem;
   margin-left: 6rem;
+}
+
+.breakpoint-w-768 .bs-masthead__logo {
+  width: 9.5rem;
+  height: 5rem;
+  margin-left: 4rem;
 }
 
 .bs-masthead__logo-anchor {

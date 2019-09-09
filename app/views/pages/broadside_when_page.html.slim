@@ -3,7 +3,44 @@
   .column-wrapper
     .column-wide
       h1.page-title When
+
+      ul.bs-subnav
+        li.bs-subnav__item.bs-subnav__item--active
+          a href="/" Festival schedule
+        li.bs-subnav__item
+          a href="/" School programs
+
+
+      .heading-block
+        .heading-block__info
+          h2.heading-block__heading Sat Nov 9
+        .heading-block__pattern
+
       - if page.event_pages
-        - page.event_pages.each do |event_page|
-          a href=event_page.absolute_url
-            = event_page.title
+        .bs-calendar
+          - page.event_pages.first(5).each do |event_page|
+            a.bs-calendar__item href=event_page.absolute_url
+              .bs-calendar__time
+                ' 11:30am to 12:30pm
+              .bs-calendar__event
+                h3.bs-calendar__event-title.t-narrow
+                  = event_page.title
+                span.bs-calendar__event-speakers Add speakers here
+
+      .heading-block.heading-block--reverse
+        .heading-block__info
+          h2.heading-block__heading Sun Nov 10
+        .heading-block__pattern
+
+      - if page.event_pages
+        .bs-calendar
+          - page.event_pages.last(5).each do |event_page|
+            a.bs-calendar__item href=event_page.absolute_url
+              .bs-calendar__time
+                ' 11:30am to 12:30pm
+              .bs-calendar__event
+                h3.bs-calendar__event-title.t-narrow
+                  = event_page.title
+                span.bs-calendar__event-speakers Add speakers here
+
+
