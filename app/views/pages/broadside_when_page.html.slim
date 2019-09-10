@@ -17,20 +17,20 @@
           h2.heading-block__heading Sat Nov 9
         .heading-block__pattern
 
-      - if page.event_pages
+      - if page.saturday_event_pages
         .bs-calendar
-          - page.event_pages.first(5).each do |event_page|
+          - page.saturday_event_pages.each do |event_page|
             a.bs-calendar__item href=event_page.absolute_url
               .bs-calendar__time
                 - if event_page.start_time
                   = event_page.start_time
-                span.t-normal  to 
+                span.t-normal<> to
                 - if event_page.end_time
                   = event_page.end_time
               .bs-calendar__event
                 h3.bs-calendar__event-title.t-narrow
                   = event_page.title
-                span.bs-calendar__event-speakers Add speakers here
+                span.bs-calendar__event-speakers = event_page.speaker_names
 
       // SUN NOV 10
 
@@ -39,19 +39,19 @@
           h2.heading-block__heading Sun Nov 10
         .heading-block__pattern
 
-      - if page.event_pages
+      - if page.sunday_event_pages
         .bs-calendar
-          - page.event_pages.last(5).each do |event_page|
+          - page.sunday_event_pages.each do |event_page|
             a.bs-calendar__item href=event_page.absolute_url
               .bs-calendar__time
                 - if event_page.start_time
                   = event_page.start_time
-                span.t-normal  to 
+                span.t-normal<> to
                 - if event_page.end_time
                   = event_page.end_time
               .bs-calendar__event
                 h3.bs-calendar__event-title.t-narrow
                   = event_page.title
-                span.bs-calendar__event-speakers Add speakers here
+                span.bs-calendar__event-speakers = event_page.speaker_names
 
 

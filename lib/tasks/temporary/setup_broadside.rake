@@ -71,6 +71,7 @@ namespace :temporary do
       person.page_order_position = :last if person.new_record?
       person.fields[:first_name].value = first_name
       person.fields[:last_name].value = last_name
+      person.fields[:twitter_name].value = "twitter"
       person.fields[:biography].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
       person.fields[:portrait].asset_ids = [Heracles::Sites::WheelerCentre::Person.all.sample.fields[:portrait].try(:assets).try(:first).try(:id)]
       person.save!
@@ -94,43 +95,43 @@ namespace :temporary do
     events = [
       {
         title: "Helen Garner",
-        start_date: "Sun, 10 Nov 2019 11:30:00",
-        end_date: "Sun, 10 Nov 2019 12:30:00",
+        start_date: "Sat, 9 Nov 2019 11:30:00",
+        end_date: "Sat, 9 Nov 2019 12:30:00",
         type: "Spotlight",
         price: "$30 adult<br>$25 concession",
       },
       {
         title: "Who Gave You Permission",
-        start_date: "Sun, 10 Nov 2019 13:30:00" ,
-        end_date: "Sun, 10 Nov 2019 14:30:00",
+        start_date: "Sat, 9 Nov 2019 13:30:00" ,
+        end_date: "Sat, 9 Nov 2019 14:30:00",
         type: "Panel",
         price: "$30 adult<br>$25 concession",
       },
       {
         title: "Decolonising Feminism",
-        start_date: "Sun, 10 Nov 2019 15:30:00",
-        end_date: "Sun, 10 Nov 2019 16:30:00",
+        start_date: "Sat, 9 Nov 2019 15:30:00",
+        end_date: "Sat, 9 Nov 2019 16:30:00",
         type: "Panel",
         price: "$30 adult<br>$25 concession",
       },
       {
         title: "Zadie Smith",
-        start_date: "Sun, 10 Nov 2019 17:30:00",
-        end_date: "Sun, 10 Nov 2019 18:30:00",
+        start_date: "Sat, 9 Nov 2019 17:30:00",
+        end_date: "Sat, 9 Nov 2019 18:30:00",
         type: "Spotlight",
         price: "$30 adult<br>$25 concession",
       },
       {
         title: "Gala: Things My Mother Never Told Me",
-        start_date: "Sun, 10 Nov 2019 19:30:00",
-        end_date: "Sun, 10 Nov 2019 21:00:00",
+        start_date: "Sat, 9 Nov 2019 19:30:00",
+        end_date: "Sat, 9 Nov 2019 21:00:00",
         type: "Gala",
         price: "$50 adult<br>$40 concession",
       },
       {
         title: "Feminism Never Sleeps with Jan Fran",
-        start_date: "Sun, 10 Nov 2019 22:00:00",
-        end_date: "Sun, 10 Nov 2019 23:00:00",
+        start_date: "Sat, 9 Nov 2019 22:00:00",
+        end_date: "Sat, 9 Nov 2019 23:00:00",
         type: "Queerstories",
         price: "$30 adult<br>$25 concession",
       },
@@ -189,6 +190,7 @@ namespace :temporary do
       event.fields[:series].page_ids = [broadsite_event_series.id]
       event.fields[:broadside_type].value = event_hash[:type]
       event.fields[:ticket_prices].value = event_hash[:price]
+      event.fields[:body].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
       event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
       event.fields[:presenters].page_ids = heracles_people.sample((1..4).to_a.sample).map(&:id)
       event.save!
