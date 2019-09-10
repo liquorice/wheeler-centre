@@ -32,10 +32,12 @@ module Heracles
           end
         end
 
-        def related_event_pages_grouped
-          related_event_pages.group_by do |event_page|
-            event_page.event.fields[:start_date].value.strftime("%a")
-          end
+        def saturday_event_pages
+          related_event_pages_grouped["Sat"]
+        end
+
+        def sunday_event_pages
+          related_event_pages_grouped["Sun"]
         end
 
         def absolute_url
@@ -43,6 +45,12 @@ module Heracles
         end
 
         private
+
+        def related_event_pages_grouped
+          related_event_pages.group_by do |event_page|
+            event_page.event.fields[:start_date].value.strftime("%a")
+          end
+        end
 
         def related_event_pages
           if person && person.upcoming_events
