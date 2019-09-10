@@ -32,32 +32,13 @@
           = page.biography
 
     .column-wide
-      - if page.saturday_event_pages
-        h2 Saturday
-        - page.saturday_event_pages.each do |broadside_event_page|
-          a.bs-calendar__item href=broadside_event_page.absolute_url
-            .bs-calendar__time
-              - if broadside_event_page.start_time
-                = broadside_event_page.start_time
-              span.t-normal<> to
-              - if broadside_event_page.end_time
-                = broadside_event_page.end_time
-            .bs-calendar__event
-              h3.bs-calendar__event-title.t-narrow
-                = broadside_event_page.title
-              span.bs-calendar__event-speakers = broadside_event_page.speaker_names
-      - if page.sunday_event_pages
-        h2 Sunday
-        - page.sunday_event_pages.each do |broadside_event_page|
-          a.bs-calendar__item href=broadside_event_page.absolute_url
-            .bs-calendar__time
-              - if broadside_event_page.start_time
-                = broadside_event_page.start_time
-              span.t-normal<> to
-              - if broadside_event_page.end_time
-                = broadside_event_page.end_time
-            .bs-calendar__event
-              h3.bs-calendar__event-title.t-narrow
-                = broadside_event_page.title
-              span.bs-calendar__event-speakers = broadside_event_page.speaker_names
+      .bs-calendar
+        - if page.saturday_event_pages
+          h3.bs-calendar__day-heading.bs-heading.t-center Saturday
+          - page.saturday_event_pages.each do |broadside_event_page|
+            = render "partials/broadside_event", event_page: broadside_event_page
 
+        - if page.sunday_event_pages
+          h3.bs-calendar__day-heading.bs-heading.t-center Sunday
+          - page.sunday_event_pages.each do |broadside_event_page|
+            = render "partials/broadside_event", event_page: broadside_event_page
