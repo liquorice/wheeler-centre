@@ -32,9 +32,9 @@ module Heracles
           end
         end
 
-        def speakers
+        def speaker_names
           if event.fields[:presenters].data_present?
-            event.fields[:presenters].pages
+            event.fields[:presenters].pages.map(&:title).join(", ")
           end
         end
 
