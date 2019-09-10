@@ -73,7 +73,7 @@ namespace :temporary do
       person.fields[:last_name].value = last_name
       person.fields[:twitter_name].value = "twitter"
       person.fields[:biography].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
-      person.fields[:portrait].asset_ids = [Heracles::Sites::WheelerCentre::Person.all.sample.fields[:portrait].try(:assets).try(:first).try(:id)]
+      # person.fields[:portrait].asset_ids = [Heracles::Sites::WheelerCentre::Person.all.sample.fields[:portrait].try(:assets).try(:first).try(:id)]
       person.save!
       person
     end
