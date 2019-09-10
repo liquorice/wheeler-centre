@@ -7,25 +7,26 @@
         li.bs-subnav__item
           a href="/who" ← Speakers
 
-      .heading-block
-        .heading-block__info
+  .heading-block
+    .heading-block__info
 
-          - heading_class = "t-wide"
-          - if page.title.length > 20
-            - heading_class = "t-narrow"
-          h1.heading-block__heading class=heading_class = page.title
+      - heading_class = "t-wide"
+      - if page.title.length > 20
+        - heading_class = "t-narrow"
+      h1.heading-block__heading class=heading_class = page.title
 
-          - if page.twitter_name
-            .bs-speaker__twitter
-              span.ss-icon &#xF611;
-              a target="_blank" href="https://twitter.com/#{page.twitter_name}"
-                = "@" + page.twitter_name
+      - if page.twitter_name
+        .bs-speaker__twitter
+          span.ss-icon &#xF611;
+          a target="_blank" href="https://twitter.com/#{page.twitter_name}"
+            = "@" + page.twitter_name
 
-        .heading-block__pattern
+    .heading-block__pattern
 
           - if page.portrait_url
             img src=page.portrait_url
 
+  .column-wrapper
     .column-narrow
       - if page.biography
         .bs-speaker__bio.copy
