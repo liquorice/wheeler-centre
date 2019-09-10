@@ -6,18 +6,21 @@
         li.bs-subnav__item
           a href="/when" ← Festival schedule
 
-      .heading-block
-        .heading-block__info
+  .heading-block
+    .heading-block__info
 
-          / Event status
-          span.bs-event__ticketing-stage Selling fast
-          / span.bs-event__booked-out-flag Booked out
+      / Event status
+      span.bs-event__ticketing-stage Selling fast
+      / span.bs-event__booked-out-flag Booked out
 
-          - heading_class = "t-wide"
-          - if page.event.title.length > 20
-            - heading_class = "t-narrow"
-          h1.heading-block__heading class=heading_class = page.event.title
-        .heading-block__pattern
+      - heading_class = "t-wide"
+      - if page.event.title.length > 20
+        - heading_class = "t-narrow"
+      h1.heading-block__heading class=heading_class = page.event.title
+    .heading-block__pattern
+
+  .column-wrapper
+    .column-wide
 
       .bs-event
         .bs-event__share
@@ -70,22 +73,23 @@
 
           - if page.broadside_speaker_pages
             - page.broadside_speaker_pages.each do |speaker_page|
-              a href=speaker_page.absolute_url
-                .bs-speaker
+              a.bs-speaker href=speaker_page.absolute_url
+                - if speaker_page.portrait_url
+                  img.bs-speaker__image src=speaker_page.portrait_url
 
-                  - if speaker_page.portrait_url
-                    img.bs-speaker__image src=speaker_page.portrait_url
+                .bs-speaker__info
+                  .bs-speaker__title = speaker_page.title
+                  .bs-speaker__meta
+                    - if speaker_page.twitter_name
+                      span = "@" + speaker_page.twitter_name
+                  .bs-speaker__intro.copy
+                    = speaker_page.biography
 
-                  .bs-speaker__info
-                    .bs-speaker__title = speaker_page.title
-                    .bs-speaker__meta
-                      - if speaker_page.twitter_name
-                        span = "@" + speaker_page.twitter_name
-                    .bs-speaker__intro.copy
-                      = speaker_page.biography
-
-      .heading-block.heading-block--reverse
-        .heading-block__info
-          h1.heading-block__heading.t-wide
-            a href="/" Book now
-        .heading-block__pattern
+  .heading-block.heading-block--reverse
+    .heading-block__info
+      h1.heading-block__heading.t-wide
+        a href="/"
+          ' Book
+          br
+          ' now
+    .heading-block__pattern

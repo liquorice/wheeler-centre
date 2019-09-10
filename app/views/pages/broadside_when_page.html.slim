@@ -6,27 +6,37 @@
 
       ul.bs-subnav
         li.bs-subnav__item.bs-subnav__item--active
-          a href="/" Festival schedule
+          a href="/when" Festival schedule
         li.bs-subnav__item
-          a href="/" School programs
+          a href="/" Teen Day
 
-      // SAT NOV 9
-      .heading-block
-        .heading-block__info
-          h2.heading-block__heading Sat Nov 9
-        .heading-block__pattern
+  // SAT NOV 9
+  .heading-block
+    .heading-block__info
+      h2.heading-block__heading
+        'Sat
+        br
+        ' Nov 9
+    .heading-block__pattern
 
+  .column-wrapper
+    .column-wide
       .bs-calendar
         - if page.saturday_event_pages
           - page.saturday_event_pages.each do |event_page|
             = render "partials/broadside_event", event_page: event_page
 
-      // SUN NOV 10
-      .heading-block.heading-block--reverse
-        .heading-block__info
-          h2.heading-block__heading Sun Nov 10
-        .heading-block__pattern
+  // SUN NOV 10
+  .heading-block.heading-block--reverse
+    .heading-block__info
+      h2.heading-block__heading
+        ' Sun
+        br
+        ' Nov 10
+    .heading-block__pattern
 
+  .column-wrapper
+    .column-wide
       .bs-calendar
         - if page.sunday_event_pages
           - page.sunday_event_pages.each do |event_page|
