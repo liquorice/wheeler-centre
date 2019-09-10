@@ -5,9 +5,9 @@
   --column-wide: 98rem;
   --column-narrow: 64.5rem;
 
-  --font-normal: titling-gothic-fb, sans-serif;
-  --font-narrow: titling-gothic-fb-condensed, sans-serif;
-  --font-wide: titling-gothic-fb-wide, sans-serif;
+  --font-normal: titling-gothic-fb, Helvetica, sans-serif;
+  --font-narrow: titling-gothic-fb-condensed, Helvetica, sans-serif;
+  --font-wide: titling-gothic-fb-wide, Helvetica, sans-serif;
 
   --primary-color: #ff6c2f;
   --pink-color: #ED6998;
@@ -18,6 +18,7 @@
 
 /* Imports */
 
+@import "./copy/index.css";
 @import "./reset/index.css";
 @import "./layout/index.css";
 @import "./type/index.css";
