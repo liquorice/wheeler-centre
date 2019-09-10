@@ -63,3 +63,12 @@
 .breakpoint-w-768 .bs-heading {
   font-size: 1.5rem;
 }
+
+/* Labels */
+
+.bs-label {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: .15em;
+}
