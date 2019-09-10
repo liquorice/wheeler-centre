@@ -32,7 +32,19 @@ module Heracles
           end
         end
 
-        def related_broadside_events
+        def related_event_pages_grouped
+          related_event_pages.group_by do |event_page|
+            event_page.event.fields[:start_date].value.strftime("%a")
+          end
+        end
+
+        def absolute_url
+          super.gsub(/^\/broadside/, "")
+        end
+
+        private
+
+        def related_event_pages
           if person && person.upcoming_events
             person.upcoming_events.map do |event|
               BroadsideEventPage.where(
@@ -43,10 +55,6 @@ module Heracles
               .where("(fields_data#>'{event, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: event.id).all
             end.flatten
           end
-        end
-
-        def absolute_url
-          super.gsub(/^\/broadside/, "")
         end
       end
     end
