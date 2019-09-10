@@ -2,17 +2,34 @@
 
   .column-wrapper
     .column-wide
-      - heading_class = "t-wide"
-      - if page.title.length > 14
-        - heading_class = "t-narrow"
-      h1.page-title class=heading_class = page.title
-      - if page.portrait_url
-        img src=page.portrait_url
+
+      ul.bs-subnav
+        li.bs-subnav__item
+          a href="/who" ← Speakers
+
+      .heading-block
+        .heading-block__info
+
+          .speaker-twitter aminatousow
+          - if page.twitter_name
+            = "@" + page.twitter_name
+
+          - heading_class = "t-wide"
+          - if page.title.length > 20
+            - heading_class = "t-narrow"
+          h1.heading-block__heading class=heading_class = page.title
+
+        .heading-block__pattern
+
+          - if page.portrait_url
+            img src=page.portrait_url
+
+    .column-narrow
       - if page.biography
-        p = page.biography
-      br
-      br
-      br
+        .copy
+          = page.biography
+
+    .column-wide
       h2 Events
       - if page.related_broadside_events
         - page.related_broadside_events.each do |broadside_event_page|
