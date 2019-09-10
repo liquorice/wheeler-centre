@@ -72,14 +72,17 @@
             - page.broadside_speaker_pages.each do |speaker_page|
               a href=speaker_page.absolute_url
                 .bs-speaker
-                  .bs-speaker__image
+
+                  - if speaker_page.portrait_url
+                    img.bs-speaker__image src=speaker_page.portrait_url
+
                   .bs-speaker__info
                     .bs-speaker__title = speaker_page.title
                     .bs-speaker__meta
                       - if speaker_page.twitter_name
                         span = "@" + speaker_page.twitter_name
-                    .bs-speaker__intro
-                      p = speaker_page.biography
+                    .bs-speaker__intro.copy
+                      = speaker_page.biography
 
       .heading-block.heading-block--reverse
         .heading-block__info

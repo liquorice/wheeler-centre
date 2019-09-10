@@ -112,3 +112,7 @@
 .bs-speaker__bio {
   margin-bottom: 10rem;
 }
+
+.breakpoint-w-768 .bs-speaker__bio {
+  margin-bottom: 5rem;
+}
