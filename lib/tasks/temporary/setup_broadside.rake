@@ -224,7 +224,8 @@ namespace :temporary do
     content_pages = [
       {
         slug: "what",
-        title: "About Broadside",
+        title: "What",
+        alternative_title: "About broadside",
         url: "broadside/what"
       },
       {
@@ -244,7 +245,8 @@ namespace :temporary do
       },
       {
         slug: "how",
-        title: "Tickets, packages and deals",
+        title: "How",
+        alternative_title: "Tickets, packages and deals",
         url: "broadside/how"
       },
       {
@@ -269,7 +271,8 @@ namespace :temporary do
       },
       {
         slug: "support",
-        title: "Donate",
+        title: "Support",
+        alternative_title: "Donate",
         url: "broadside/support"
       },
       {
@@ -303,6 +306,7 @@ namespace :temporary do
       page.published = true
       page.locked = false
       page.page_order_position = :last if page.new_record?
+      page.fields[:alternative_title].value = content_page[:alternative_title] if content_page[:alternative_title]
       page.save!
     end
   end
