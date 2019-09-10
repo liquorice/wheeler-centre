@@ -1,0 +1,7 @@
+= area :main do
+
+  .column-wrapper
+    .column-wide
+      h1.page-title = page.title
+      - if page.fields[:body].data_present?
+        p = render_content(page.fields[:body].value)

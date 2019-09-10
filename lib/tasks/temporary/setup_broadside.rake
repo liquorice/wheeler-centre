@@ -61,20 +61,22 @@ namespace :temporary do
       first_name = person_name[0..(person_name =~ /\s/)-1]
       last_name = person_name[(person_name =~ /\s/)+1..-1]
       person = Heracles::Sites::WheelerCentre::Person.find_or_initialize_by(url: "people/#{slugify(person_name)}")
-      person.parent = Heracles::Sites::WheelerCentre::People.all.first
-      person.collection = people_collection
-      person.site = site
-      person.title = person_name
-      person.slug = slugify(person_name)
-      person.published = true
-      person.locked = false
-      person.page_order_position = :last if person.new_record?
-      person.fields[:first_name].value = first_name
-      person.fields[:last_name].value = last_name
-      person.fields[:twitter_name].value = "twitter"
-      person.fields[:biography].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
-      # person.fields[:portrait].asset_ids = [Heracles::Sites::WheelerCentre::Person.all.sample.fields[:portrait].try(:assets).try(:first).try(:id)]
-      person.save!
+      if person.new_record?
+        person.parent = Heracles::Sites::WheelerCentre::People.all.first
+        person.collection = people_collection
+        person.site = site
+        person.title = person_name
+        person.slug = slugify(person_name)
+        person.published = true
+        person.locked = false
+        person.page_order_position = :last if person.new_record?
+        person.fields[:first_name].value = first_name
+        person.fields[:last_name].value = last_name
+        person.fields[:twitter_name].value = "twitter"
+        person.fields[:biography].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
+        # person.fields[:portrait].asset_ids = [Heracles::Sites::WheelerCentre::Person.all.sample.fields[:portrait].try(:assets).try(:first).try(:id)]
+        person.save!
+      end
       person
     end
 
@@ -219,7 +221,89 @@ namespace :temporary do
       redirect.save!
     end
 
+    content_pages = [
+      {
+        slug: "what",
+        title: "About Broadside",
+        url: "broadside/what"
+      },
+      {
+        slug: "about-the-wheeler-centre",
+        title: "About the Wheeler Centre",
+        url: "broadside/what/about-the-wheeler-centre"
+      },
+      {
+        slug: "faq",
+        title: "FAQ",
+        url: "broadside/what/faq"
+      },
+      {
+        slug: "privacy-policy",
+        title: "Privacy policy",
+        url: "broadside/what/privacy-policy"
+      },
+      {
+        slug: "how",
+        title: "Tickets, packages and deals",
+        url: "broadside/how"
+      },
+      {
+        slug: "getting-there",
+        title: "Getting there",
+        url: "broadside/how/getting-there"
+      },
+      {
+        slug: "what-s-nearby",
+        title: "What's nearby",
+        url: "broadside/how/what-s-nearby"
+      },
+      {
+        slug: "accessibility",
+        title: "Accessibility",
+        url: "broadside/how/accessibility"
+      },
+      {
+        slug: "terms-and-conditions",
+        title: "Terms and conditions",
+        url: "broadside/how/terms-and-conditions"
+      },
+      {
+        slug: "support",
+        title: "Donate",
+        url: "broadside/support"
+      },
+      {
+        slug: "supporters-partners",
+        title: "Supporters / partners",
+        url: "broadside/support/supporters-partners"
+      },
+      {
+        slug: "stay-in-touch",
+        title: "Stay in touch",
+        url: "broadside/support/stay-in-touch"
+      },
+    ]
 
-
+    # content pages
+    def count_em(str, target)
+      target.chars.uniq.map { |c| str.count(c)/target.count(c) }.min
+    end
+    content_pages.each do |content_page|
+      page = Heracles::Sites::WheelerCentre::BroadsideContentPage.find_or_initialize_by(url: content_page[:url])
+      if count_em(content_page[:url], "/") > 1
+        path = content_page[:url][0..content_page[:url].rindex("/")-1]
+        parent = Heracles::Page.find_by(url: path)
+      else
+        parent = Heracles::Sites::WheelerCentre::BroadsideHomePage.all.first
+      end
+      page.parent = parent
+      page.site = site
+      page.title = content_page[:title]
+      page.slug = content_page[:slug]
+      page.published = true
+      page.locked = false
+      page.page_order_position = :last if page.new_record?
+      page.save!
+    end
   end
 end

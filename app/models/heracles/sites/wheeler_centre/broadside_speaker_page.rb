@@ -15,8 +15,9 @@ module Heracles
         end
 
         def biography
-          if person && person.fields[:biography].data_present?
-            person.fields[:biography].value
+          # seems like intro is what's used mostly
+          if person && person.fields[:intro].data_present?
+            person.fields[:intro].value
           end
         end
 
