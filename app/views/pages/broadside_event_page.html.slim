@@ -12,16 +12,31 @@
           h1.heading-block__heading= page.event.title
         .heading-block__pattern
 
-      ' Add event description here plus sharing/calendar buttons
-      br
-      br
-      /= render_content_in_sections page.fields[:body]
+      .bs-event
+        .bs-event__share
+          .bs-label Share
+          ul
+            li
+              / twitter
+              a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+            li
+              / facebook
+              a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
+            li
+              / email
+              a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
 
-      .event-meta
-        .event-meta-info
+        .bs-event__content.copy
+          /= render_content_in_sections page.fields[:body]
+          p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
 
-          .event-meta__label When
-          .event-meta-info__value
+          p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+
+      .bs-event-meta
+        .bs-event-meta-info
+
+          .bs-label When
+          .bs-event-meta-info__value
             - if page.start_time
               = page.start_time
             span.t-normal
@@ -30,22 +45,23 @@
             - if page.end_time
               = page.end_time
 
-          .event-meta__label When
-          .event-meta-info__value.t-upper
+          .bs-label When
+          .bs-event-meta-info__value.t-upper
             - if page.event.fields[:ticket_prices].data_present?
               p = page.event.fields[:ticket_prices].value
 
-          .event-meta__label Where
-          .event-meta-info__value.t-upper
+          .bs-label Where
+          .bs-event-meta-info__value.t-upper
             - if page.event.venue
               p = page.event.venue.title
 
-          .event-meta__label Type
-          .event-meta-info__value.t-upper
+          .bs-label Type
+          .bs-event-meta-info__value.t-upper
             - if page.event.fields[:broadside_type].data_present?
               p = page.event.fields[:broadside_type].value
 
-        .event-meta-speakers
+        .bs-event-meta-speakers
+          .bs-label Who
 
           .bs-speaker
             .bs-speaker__image
