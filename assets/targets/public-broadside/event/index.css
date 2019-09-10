@@ -12,6 +12,31 @@
   margin-bottom: 5rem;
 }
 
+/* Status */
+
+.bs-event__ticketing-stage,
+.bs-event__booked-out-flag {
+  background-color: var(--primary-color);
+  border-radius: .3rem;
+  color: #fff;
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  padding: .5rem .7rem .4rem;
+  text-transform: uppercase;
+}
+
+.bs-event__ticketing-stage {
+  background-color: transparent;
+  border-bottom: 2px solid color(var(--primary-color) tint(30%));
+  border-radius: 0;
+  color: var(--primary-color);
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* Share */
 
 .bs-event__share {
