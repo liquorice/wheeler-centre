@@ -26,6 +26,19 @@ module Heracles
           end
         end
 
+        def related_broadside_events
+          if person && person.upcoming_events
+            person.upcoming_events.map do |event|
+              BroadsideEventPage.where(
+                site_id: site.id,
+                published: true,
+                hidden: false
+              )
+              .where("(fields_data#>'{event, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: event.id).all
+            end.flatten
+          end
+        end
+
         def absolute_url
           super.gsub(/^\/broadside/, "")
         end

@@ -1,5 +1,4 @@
 = area :main do
-
   .column-wrapper
     .column-wide
 
@@ -57,7 +56,7 @@
 
           .bs-label Where
           .bs-event-meta-info__value.t-upper
-            - if page.event.venue
+            - if page.event && page.event.venue
               p = page.event.venue.title
 
           .bs-label Type
@@ -68,32 +67,16 @@
         .bs-event-meta-speakers
           .bs-label Who
 
-          .bs-speaker
-            .bs-speaker__image
-            .bs-speaker__info
-              .bs-speaker__title Nicole Kalms
-              .bs-speaker__meta
-                span @nicolekalms
-              .bs-speaker__intro
-                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
-
-          .bs-speaker
-            .bs-speaker__image
-            .bs-speaker__info
-              .bs-speaker__title Nicole Kalms
-              .bs-speaker__meta
-                span @nicolekalms
-              .bs-speaker__intro
-                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
-
-          .bs-speaker
-            .bs-speaker__image
-            .bs-speaker__info
-              .bs-speaker__title Nicole Kalms
-              .bs-speaker__meta
-                span @nicolekalms
-              .bs-speaker__intro
-                p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+          - if page.speakers
+            - page.speakers.each do |speaker|
+              .bs-speaker
+                .bs-speaker__image
+                .bs-speaker__info
+                  .bs-speaker__title = speaker.title
+                  .bs-speaker__meta
+                    span @nicolekalms
+                  .bs-speaker__intro
+                    p = speaker.fields[:biography].value
 
       .heading-block.heading-block--reverse
         .heading-block__info

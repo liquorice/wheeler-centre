@@ -3,5 +3,25 @@
   .column-wrapper
     .column-wide
       h1.page-title = page.title
+      - if page.portrait_url
+        img src=page.portrait_url
       - if page.biography
         p = page.biography
+      br
+      br
+      br
+      h2 Events
+      - if page.related_broadside_events
+        - page.related_broadside_events.each do |broadside_event_page|
+          a href=broadside_event_page.absolute_url
+            = broadside_event_page.title
+          - if broadside_event_page.day
+            p = broadside_event_page.day
+          - if broadside_event_page.start_time
+            p = broadside_event_page.start_time
+          - if broadside_event_page.end_time
+            p = broadside_event_page.end_time
+          - if broadside_event_page.event && broadside_event_page.event.venue
+            p = broadside_event_page.event.venue.title
+          - if broadside_event_page.speakers
+            p = broadside_event_page.speakers.map(&:title).join(", ")
