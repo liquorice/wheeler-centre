@@ -24,13 +24,13 @@
               .bs-calendar__time
                 - if event_page.start_time
                   = event_page.start_time
-                span.t-normal  to 
+                span.t-normal<> to
                 - if event_page.end_time
                   = event_page.end_time
               .bs-calendar__event
                 h3.bs-calendar__event-title.t-narrow
                   = event_page.title
-                span.bs-calendar__event-speakers Add speakers here
+                span.bs-calendar__event-speakers = event_page.speaker_names
 
       // SUN NOV 10
 
@@ -46,12 +46,12 @@
               .bs-calendar__time
                 - if event_page.start_time
                   = event_page.start_time
-                span.t-normal  to 
+                span.t-normal<> to
                 - if event_page.end_time
                   = event_page.end_time
               .bs-calendar__event
                 h3.bs-calendar__event-title.t-narrow
                   = event_page.title
-                span.bs-calendar__event-speakers Add speakers here
+                span.bs-calendar__event-speakers = event_page.speaker_names
 
 
