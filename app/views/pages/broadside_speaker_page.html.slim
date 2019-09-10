@@ -10,14 +10,16 @@
       .heading-block
         .heading-block__info
 
-          .speaker-twitter aminatousow
-          - if page.twitter_name
-            = "@" + page.twitter_name
-
           - heading_class = "t-wide"
           - if page.title.length > 20
             - heading_class = "t-narrow"
           h1.heading-block__heading class=heading_class = page.title
+
+          - if page.twitter_name
+            .bs-speaker__twitter
+              span.ss-icon &#xF611;
+              a target="_blank" href="https://twitter.com/#{page.twitter_name}"
+                = "@" + page.twitter_name
 
         .heading-block__pattern
 
@@ -26,22 +28,21 @@
 
     .column-narrow
       - if page.biography
-        .copy
+        .bs-speaker__bio.copy
           = page.biography
 
     .column-wide
-      h2 Events
       - if page.related_broadside_events
         - page.related_broadside_events.each do |broadside_event_page|
-          a href=broadside_event_page.absolute_url
-            = broadside_event_page.title
-          - if broadside_event_page.day
-            p = broadside_event_page.day
-          - if broadside_event_page.start_time
-            p = broadside_event_page.start_time
-          - if broadside_event_page.end_time
-            p = broadside_event_page.end_time
-          - if broadside_event_page.event && broadside_event_page.event.venue
-            p = broadside_event_page.event.venue.title
-          - if broadside_event_page.speaker_names
-            p = broadside_event_page.speaker_names
+          a.bs-calendar__item href=broadside_event_page.absolute_url
+            .bs-calendar__time
+              - if broadside_event_page.start_time
+                = broadside_event_page.start_time
+              span.t-normal<> to
+              - if broadside_event_page.end_time
+                = broadside_event_page.end_time
+            .bs-calendar__event
+              h3.bs-calendar__event-title.t-narrow
+                = broadside_event_page.title
+              span.bs-calendar__event-speakers = broadside_event_page.speaker_names
+
