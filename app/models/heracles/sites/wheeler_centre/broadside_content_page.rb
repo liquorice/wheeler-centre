@@ -13,9 +13,9 @@ module Heracles
 
         def nav_pages
           if parent.url == "broadside"
-            [self] + children
+            [self] + children.published.visible.rank(:page_order)
           else
-            siblings
+            siblings.published.visible.rank(:page_order)
           end
         end
       end
