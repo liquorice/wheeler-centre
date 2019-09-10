@@ -1,0 +1,96 @@
+/*
+  Speakers
+*/
+
+.bs-speaker-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6rem;
+}
+
+.breakpoint-w-768 .bs-speaker-list {
+  flex-direction: column;
+}
+
+.bs-speaker-list__item {
+  margin-bottom: 5rem;
+  position: relative;
+  text-align: center;
+  width: 50%;
+}
+
+.bs-speaker-list__item:nth-child(odd) {
+  padding-left: 1.5rem;
+}
+
+.bs-speaker-list__item:nth-child(even) {
+  padding-right: 1.5rem;
+}
+
+/* Sneaky way to alternate colours in groups of two offset by 1 */
+
+.bs-speaker-list__item:nth-child(4n), .bs-speaker-list__item:nth-child(4n-1) .bs-speaker-list__title {
+  color: var(--pink-color);
+}
+
+.bs-speaker-list__item:nth-child(4n-2), .bs-speaker-list__item:nth-child(4n-3) .bs-speaker-list__title {
+  color: var(--blue-color);
+}
+
+.bs-speaker-list__item:nth-child(1) {
+  display: none;
+}
+
+/* Small screens revert to simple alternates */
+
+.breakpoint-w-768 .bs-speaker-list__item:nth-child(odd) .bs-speaker-list__title {
+  color: var(--pink-color);
+}
+
+.breakpoint-w-768 .bs-speaker-list__item:nth-child(even) .bs-speaker-list__title {
+  color: var(--blue-color);
+}
+
+.breakpoint-w-768 .bs-speaker-list__item {
+  margin-bottom: 3rem;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.bs-speaker-list__item a {
+  display: inline-block;
+}
+
+.bs-speaker-list__title {
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 5rem;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .bs-speaker-list__title {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+.bs-speaker-list__image {
+  display: none;
+  height: 16rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16rem;
+  z-index: 999;
+}
+
+.bs-speaker-list__item a:hover .bs-speaker-list__image {
+  display: block;
+}
+
+.breakpoint-w-768 .bs-speaker-list__image {
+  height: 8rem;
+  width: 8rem;
+}
