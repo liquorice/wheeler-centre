@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :event, type: :associated_pages, page_type: :event, label: "Event", editor_type: 'singular'},
+              {name: :event, type: :associated_pages, page_type: :event, label: "Event", editor_type: 'singular', required: true},
             ]
           }
         end

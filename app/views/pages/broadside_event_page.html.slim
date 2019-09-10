@@ -31,10 +31,8 @@
               a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
 
         .bs-event__content.copy
-          /= render_content_in_sections page.fields[:body]
-          p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
-
-          p Egestas erat imperdiet sed euismod. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ac turpis egestas sed tempus urna et pharetra.
+          - if page.event.fields[:body].data_present?
+            = render_content_in_sections page.event.fields[:body]
 
       .bs-event-meta
         .bs-event-meta-info
