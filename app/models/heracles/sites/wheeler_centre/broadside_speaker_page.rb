@@ -20,6 +20,12 @@ module Heracles
           end
         end
 
+        def twitter_name
+          if person && person.fields[:twitter_name].data_present?
+            person.fields[:twitter_name].value
+          end
+        end
+
         def portrait_url
           if person && person.fields[:portrait].data_present?
             person.fields[:portrait].assets.first.content_thumbnail_url

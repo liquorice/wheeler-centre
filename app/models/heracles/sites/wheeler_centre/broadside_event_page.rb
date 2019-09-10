@@ -5,7 +5,7 @@ module Heracles
         def self.config
           {
             fields: [
-              {name: :event, type: :associated_pages, page_type: :event, label: "Event", editor_type: 'singular'},
+              {name: :event, type: :associated_pages, page_type: :event, label: "Event", editor_type: 'singular', required: true},
             ]
           }
         end
@@ -32,9 +32,20 @@ module Heracles
           end
         end
 
-        def speakers
+        def speaker_names
           if event.fields[:presenters].data_present?
-            event.fields[:presenters].pages
+            event.fields[:presenters].pages.map(&:title).join(", ")
+          end
+        end
+
+        def broadside_speaker_pages
+          if event.fields[:presenters].data_present?
+            BroadsideSpeakerPage.where(
+              site_id: site.id,
+              published: true,
+              hidden: false
+            )
+            .where("(fields_data#>'{person, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: event.fields[:presenters].pages.map(&:id))
           end
         end
 
