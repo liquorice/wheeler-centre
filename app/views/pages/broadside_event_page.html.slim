@@ -76,7 +76,8 @@
                   .bs-speaker__info
                     .bs-speaker__title = speaker_page.title
                     .bs-speaker__meta
-                      span @nicolekalms
+                      - if speaker_page.twitter_name
+                        span = "@" + speaker_page.twitter_name
                     .bs-speaker__intro
                       p = speaker_page.biography
 
