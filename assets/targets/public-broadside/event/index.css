@@ -113,6 +113,11 @@
   margin-bottom: 0;
 }
 
+.breakpoint-w-768 .bs-event-meta-info__value {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
 /* Speakers */
 
 .bs-speaker {

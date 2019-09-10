@@ -3,9 +3,18 @@
   .column-wrapper
     .column-wide
       h1.page-title Who
+
       - if page.speaker_pages
-        - page.speaker_pages.each do |speaker_page|
-          a href=speaker_page.absolute_url
-            = speaker_page.title
-            - if speaker_page.portrait_url
-              img src=speaker_page.portrait_url
+        .bs-speaker-list
+          .bs-speaker-list__item
+          - page.speaker_pages.each do |speaker_page|
+            .bs-speaker-list__item
+              a href=speaker_page.absolute_url
+
+                - heading_class = "t-wide"
+                - if speaker_page.title.length > 14
+                  - heading_class = "t-narrow"
+
+                h2.bs-speaker-list__title class=heading_class = speaker_page.title
+                - if speaker_page.portrait_url
+                  img.bs-speaker-list__image src=speaker_page.portrait_url
