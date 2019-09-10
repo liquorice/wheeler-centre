@@ -189,6 +189,7 @@ namespace :temporary do
       event.fields[:series].page_ids = [broadsite_event_series.id]
       event.fields[:broadside_type].value = event_hash[:type]
       event.fields[:ticket_prices].value = event_hash[:price]
+      event.fields[:body].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
       event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
       event.fields[:presenters].page_ids = heracles_people.sample((1..4).to_a.sample).map(&:id)
       event.save!
