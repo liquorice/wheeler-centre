@@ -14,12 +14,28 @@ module Heracles
           fields[:event].pages.first
         end
 
+        def day
+          if event.fields[:start_date].data_present?
+            event.fields[:start_date].value.strftime("%a %b %-d")
+          end
+        end
+
         def start_time
-          event.fields[:start_date].value.strftime("%-l:%M%p")
+          if event.fields[:start_date].data_present?
+            event.fields[:start_date].value.strftime("%-l:%M%p")
+          end
         end
 
         def end_time
-          event.fields[:end_date].value.strftime("%-l:%M%p")
+          if event.fields[:end_date].data_present?
+            event.fields[:end_date].value.strftime("%-l:%M%p")
+          end
+        end
+
+        def speakers
+          if event.fields[:presenters].data_present?
+            event.fields[:presenters].pages
+          end
         end
 
         def absolute_url

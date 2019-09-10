@@ -7,5 +7,5 @@
         - page.speaker_pages.each do |speaker_page|
           a href=speaker_page.absolute_url
             = speaker_page.title
-          - if speaker_page.portrait_url
-            img src=speaker_page.portrait_url
+            - if speaker_page.portrait_url
+              img src=speaker_page.portrait_url
