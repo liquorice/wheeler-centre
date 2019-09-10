@@ -2,7 +2,10 @@
 
   .column-wrapper
     .column-wide
-      h1.page-title = page.title
+      - heading_class = "t-wide"
+      - if page.title.length > 20
+        - heading_class = "t-narrow"
+      h1.page-title class=heading_class = page.title
       - if page.portrait_url
         img src=page.portrait_url
       - if page.biography

@@ -13,7 +13,10 @@
           span.bs-event__ticketing-stage Selling fast
           / span.bs-event__booked-out-flag Booked out
 
-          h1.heading-block__heading= page.event.title
+          - heading_class = "t-wide"
+          - if page.event.title.length > 20
+            - heading_class = "t-narrow"
+          h1.heading-block__heading class=heading_class = page.event.title
         .heading-block__pattern
 
       .bs-event
@@ -65,16 +68,17 @@
         .bs-event-meta-speakers
           .bs-label Who
 
-          - if page.speakers
-            - page.speakers.each do |speaker|
-              .bs-speaker
-                .bs-speaker__image
-                .bs-speaker__info
-                  .bs-speaker__title = speaker.title
-                  .bs-speaker__meta
-                    span @nicolekalms
-                  .bs-speaker__intro
-                    p = speaker.fields[:biography].value
+          - if page.broadside_speaker_pages
+            - page.broadside_speaker_pages.each do |speaker_page|
+              a href=speaker_page.absolute_url
+                .bs-speaker
+                  .bs-speaker__image
+                  .bs-speaker__info
+                    .bs-speaker__title = speaker_page.title
+                    .bs-speaker__meta
+                      span @nicolekalms
+                    .bs-speaker__intro
+                      p = speaker_page.biography
 
       .heading-block.heading-block--reverse
         .heading-block__info

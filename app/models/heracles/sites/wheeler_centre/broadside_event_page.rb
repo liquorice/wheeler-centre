@@ -38,6 +38,17 @@ module Heracles
           end
         end
 
+        def broadside_speaker_pages
+          if event.fields[:presenters].data_present?
+            BroadsideSpeakerPage.where(
+              site_id: site.id,
+              published: true,
+              hidden: false
+            )
+            .where("(fields_data#>'{person, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: event.fields[:presenters].pages.map(&:id))
+          end
+        end
+
         def absolute_url
           super.gsub(/^\/broadside/, "")
         end
