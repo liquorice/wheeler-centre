@@ -9,9 +9,12 @@
   .heading-block
     .heading-block__info
 
-      / Event status
-      span.bs-event__ticketing-stage Selling fast
-      / span.bs-event__booked-out-flag Booked out
+      - if page.ticketing_stage
+        / Event status
+        - if page.ticketing_stage == "Booked out"
+          span.bs-event__booked-out-flag = page.ticketing_stage
+        - else
+          span.bs-event__ticketing-stage = page.ticketing_stage
 
       h1.heading-block__heading.t-narrow = page.event.title
 
