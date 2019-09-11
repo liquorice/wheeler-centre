@@ -1,9 +1,20 @@
 .bs-masthead
 
-  .bs-menu-container data-view-nav-toggle={toggleSelector: ".bs-menu", targetSelector: ".yeah", targetActiveClassName: "yeah--active"}.to_json
-    button.bs-menu.t-bold.t-upper.t-wide
-      ' Menu
-    .yeah
+  .bs-menu data-view-nav-toggle={toggleSelector: ".bs-menu-toggle", targetSelector: ".bs-main-nav", targetActiveClassName: "bs-main-nav--active"}.to_json
+    button.bs-menu-toggle.t-bold.t-upper.t-wide Menu
+    .bs-main-nav
+      ul
+        li
+          a.t-wide class="bs-main-nav--what" href="/what" What
+        li
+          a.t-narrow class="bs-main-nav--when" href="/when" When
+        li
+          a.t-wide class="bs-main-nav--who" href="/who" Who
+        li
+          a.t-narrow class="bs-main-nav--how" href="/how" How
+        li
+          a.t-wide class="bs-main-nav--teen" href="/teen-day" Teen&nbsp;Day
+
 
   h1.bs-masthead__logo
     a.bs-masthead__logo-anchor href="/" Broadside 2019
