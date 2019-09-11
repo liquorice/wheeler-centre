@@ -5,10 +5,10 @@
 .bs-masthead {
   align-items: center;
   display: flex;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   padding-left: 5rem;
   padding-right: 5rem;
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 
 .breakpoint-w-768 .bs-masthead {
@@ -59,4 +59,10 @@
   font: 0/0 a;
   height: 100%;
   width: 100%;
+}
+
+/* Home version */
+
+.bs-home .bs-masthead__logo-anchor {
+  display: none;
 }

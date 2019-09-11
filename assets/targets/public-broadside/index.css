@@ -31,6 +31,7 @@
 @import "./fonts/font-awesome.css";
 @import "./fonts/ss-social-regular.css";
 @import "./speakers/index.css";
+@import "./home/index.css";
 
 /* Base */
 
@@ -52,4 +53,11 @@ body {
   line-height: 1.5;
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Home version */
+
+body.bs-home {
+  background-color: var(--primary-color);
+  color: var(--white-color);
 }
