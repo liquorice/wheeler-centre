@@ -247,6 +247,7 @@ namespace :temporary do
         slug: "how",
         title: "How",
         alternative_title: "Tickets, packages and deals",
+        template: "tickets_page.html.slim",
         url: "broadside/how"
       },
       {
@@ -307,6 +308,7 @@ namespace :temporary do
       page.locked = false
       page.page_order_position = :last if page.new_record?
       page.fields[:alternative_title].value = content_page[:alternative_title] if content_page[:alternative_title]
+      page.template = content_page[:template] if content_page[:template]
       page.save!
     end
   end
