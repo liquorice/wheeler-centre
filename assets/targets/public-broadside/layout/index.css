@@ -81,6 +81,11 @@
   line-height: 6rem;
 }
 
+.heading-block__detail {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
 .heading-block__pattern {
   flex: 1;
   height: 40rem;

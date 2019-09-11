@@ -37,7 +37,7 @@
 
   .column-wrapper
     .column-wide
-      .bs-calendar
+      .bs-calendar.bs-calendar--sunday
         - if page.sunday_event_pages
           - page.sunday_event_pages.each do |event_page|
             = render "partials/broadside_event", event_page: event_page

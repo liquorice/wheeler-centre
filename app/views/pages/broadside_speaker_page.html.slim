@@ -19,9 +19,8 @@
             = "@" + page.twitter_name
 
     .heading-block__pattern
-
-      - if page.portrait_url
-        img.heading-block__image src=page.portrait_url
+      - if page.large_url
+        img.heading-block__image src=page.large_url
 
   .column-wrapper
     .column-narrow

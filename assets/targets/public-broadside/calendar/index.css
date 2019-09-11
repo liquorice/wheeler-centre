@@ -3,7 +3,17 @@
 */
 
 .bs-calendar {
-  margin-bottom: 5rem;
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+}
+
+.bs-calendar--sunday {
+  padding-bottom: 5rem;
+}
+
+.breakpoint-w-768 .bs-calendar {
+  padding-top: 0rem;
+  padding-bottom: 5rem;
 }
 
 .bs-calendar__item {
@@ -14,6 +24,7 @@
   font-size: 2rem;
   font-weight: 500;
   width: 34%;
+  padding-right: 2.4rem;
 }
 
 .breakpoint-w-768 .bs-calendar__time {
@@ -39,7 +50,7 @@
   font-weight: 500;
   line-height: 5rem;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .breakpoint-w-768 .bs-calendar__event-title {
