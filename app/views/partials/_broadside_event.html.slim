@@ -1,11 +1,19 @@
 a.bs-calendar__item href=event_page.absolute_url
-  .bs-calendar__time
+  .bs-calendar__time.t-wide
     - if event_page.start_time
       = event_page.start_time
-    span.t-normal<> to
+    span.t-narrow<> -
     - if event_page.end_time
       = event_page.end_time
   .bs-calendar__event
-    h3.bs-calendar__event-title.t-narrow
+
+    - heading_class = "t-wide"
+    - if event_page.title.length > 14
+      - heading_class = "t-narrow"
+    h3.bs-calendar__event-title.t-narrow class=heading_class
       = event_page.title
     span.bs-calendar__event-speakers = event_page.speaker_names
+
+
+
+

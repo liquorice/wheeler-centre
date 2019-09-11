@@ -16,8 +16,8 @@
       h1.heading-block__heading.t-narrow = page.event.title
 
     .heading-block__pattern
-      - if page.event.promo_image.content_medium_url
-        img.heading-block__image src=page.event.promo_image.content_medium_url
+      - if page.event.promo_image
+        img.heading-block__image src=page.event.promo_image.content_large_url
 
   .column-wrapper
     .column-wide
@@ -87,9 +87,12 @@
 
   .heading-block.heading-block--reverse
     .heading-block__info
-      h1.heading-block__heading.t-wide
-        a href="/"
-          ' Book
-          br
-          ' now
+      h1.heading-block__heading.t-narrow
+        ' Bookings
+        br
+        ' Open soon
+      p.heading-block__detail
+        ' Packages available now.
+        a href="how" Find out more
+        ' .
     .heading-block__pattern

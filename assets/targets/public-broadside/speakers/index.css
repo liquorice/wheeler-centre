@@ -102,7 +102,7 @@
   display: flex;
   font-size: 1.4rem;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .bs-speaker__twitter span {
@@ -110,9 +110,5 @@
 }
 
 .bs-speaker__bio {
-  margin-bottom: 10rem;
-}
-
-.breakpoint-w-768 .bs-speaker__bio {
   margin-bottom: 5rem;
 }
