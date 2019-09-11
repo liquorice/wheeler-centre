@@ -11,12 +11,24 @@ module Heracles
           }
         end
 
+        def page_title
+          if parent != site.pages.of_type(:broadside_home_page).all.first
+            parent.title
+          else
+            title
+          end
+        end
+
         def nav_pages
           if parent.url == "broadside"
             [self] + children.published.visible.rank(:page_order)
           else
-            siblings.published.visible.rank(:page_order)
+            [parent] + siblings.published.visible.rank(:page_order)
           end
+        end
+
+        def absolute_url
+          super.gsub(/^\/broadside/, "")
         end
       end
     end
