@@ -1,7 +1,9 @@
 .bs-masthead
 
-  a.bs-menu.t-bold.t-upper.t-wide href="/"
-    ' Menu
+  .bs-menu-container data-view-nav-toggle={toggleSelector: ".bs-menu", targetSelector: ".yeah", targetActiveClassName: "yeah--active"}.to_json
+    button.bs-menu.t-bold.t-upper.t-wide
+      ' Menu
+    .yeah
 
   h1.bs-masthead__logo
     a.bs-masthead__logo-anchor href="/" Broadside 2019
