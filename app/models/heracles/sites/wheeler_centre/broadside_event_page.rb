@@ -49,6 +49,11 @@ module Heracles
           end
         end
 
+        def ticketing_stage
+          if event && event.fields[:ticketing_stage].data_present?
+            event.fields[:ticketing_stage].value
+          end
+        end
         def absolute_url
           super.gsub(/^\/broadside/, "")
         end
