@@ -180,18 +180,21 @@ http {
             passenger_env_var '<%= name %>' '<%= value %>';
         <% end %>
 
-        # Ensure only requests through the CANONICAL_HOSTNAME or NEXT_CHAPTER_HOSTNAME are indexed
+        # Ensure only requests through the CANONICAL_HOSTNAME or NEXT_CHAPTER_HOSTNAME or BROADSIDE_HOSTNAME are indexed
         if ($host = <%= ENV['CANONICAL_HOSTNAME'] %>) {
             set $cdn_request 1;
         }
         if ($host = <%= ENV['NEXT_CHAPTER_HOSTNAME'] %>) {
             set $cdn_request 1;
         }
+        if ($host = <%= ENV['BROADSIDE_HOSTNAME'] %>) {
+            set $cdn_request 1;
+        }
         if ($cdn_request != 1) {
             rewrite ^/robots.txt$ /robots.disallow.txt last;
         }
         # Ensure everything except CANONCAL and ORIGIN requests are redirected
-        if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>|<%= ENV['NEXT_CHAPTER_HOSTNAME'] %>) {
+        if ($host ~* <%= ENV['CANONICAL_HOSTNAME'] %>|<%= ENV['CDN_ORIGIN_DOMAIN'] %>|<%= ENV['NEXT_CHAPTER_HOSTNAME'] %>|<%= ENV['BROADSIDE_HOSTNAME'] %>) {
             set $cdn_request_or_origin_request 1;
         }
         if ($cdn_request_or_origin_request != 1) {
