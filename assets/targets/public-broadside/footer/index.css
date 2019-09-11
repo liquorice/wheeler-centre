@@ -81,11 +81,19 @@
   width: 14.6rem;
 }
 
+.bs-home .bs-footer-logos__item--wheeler-centre {
+  background-image: url(logos/white/wheeler-centre.png);
+}
+
 .bs-footer-logos__item--creative-victoria {
   background-image: url(logos/red/creative-victoria.png);
   background-size: 10rem 3.2rem;
   height: 3.2rem;
   width: 10rem;
+}
+
+.bs-home .bs-footer-logos__item--creative-victoria {
+  background-image: url(logos/white/creative-victoria.png);
 }
 
 .bs-footer-logos__item--city-of-melbourne {
@@ -95,11 +103,19 @@
   width: 13.8rem;
 }
 
+.bs-home .bs-footer-logos__item--city-of-melbourne {
+  background-image: url(logos/white/city-of-melbourne.png);
+}
+
 .bs-footer-logos__item--melbourne-city-of-literature {
   background-image: url(logos/red/melbourne-city-of-literature.png);
   background-size: 10rem 4.6rem;
   height: 4.6rem;
   width: 10rem;
+}
+
+.bs-home .bs-footer-logos__item--melbourne-city-of-literature {
+  background-image: url(logos/white/melbourne-city-of-literature.png);
 }
 
 .bs-footer-logos__item--australia-council-for-the-arts {
@@ -109,6 +125,6 @@
   width: 14.6rem;
 }
 
-
-
-
+.bs-home .bs-footer-logos__item--australia-council-for-the-arts {
+  background-image: url(logos/white/australia-council-for-the-arts.png);
+}
