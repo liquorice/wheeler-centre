@@ -177,24 +177,27 @@ namespace :temporary do
     events_collection = Heracles::Sites::WheelerCentre::Collection.find_by(url: "events/all-events")
     events.each do |event_hash|
       event = Heracles::Sites::WheelerCentre::Event.find_or_initialize_by(url: "events/#{slugify(event_hash[:title])}")
-      event.parent = Heracles::Sites::WheelerCentre::Events.all.first
-      event.collection = events_collection
-      event.site = site
-      event.title = event_hash[:title]
-      event.slug = slugify(event_hash[:title])
-      event.published = true
-      event.locked = false
-      event.page_order_position = :last if event.new_record?
-      event.fields[:start_date].value = event_hash[:start_date]
-      event.fields[:start_date].time_zone = "Melbourne"
-      event.fields[:end_date].value = event_hash[:end_date]
-      event.fields[:end_date].time_zone = "Melbourne"
-      event.fields[:series].page_ids = [broadsite_event_series.id]
-      event.fields[:broadside_type].value = event_hash[:type]
-      event.fields[:ticket_prices].value = event_hash[:price]
-      event.fields[:body].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
-      event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
-      event.fields[:presenters].page_ids = heracles_people.sample((1..4).to_a.sample).map(&:id)
+      if event.new_record?
+        event.parent = Heracles::Sites::WheelerCentre::Events.all.first
+        event.collection = events_collection
+        event.site = site
+        event.title = event_hash[:title]
+        event.slug = slugify(event_hash[:title])
+        event.published = true
+        event.locked = false
+        event.page_order_position = :last if event.new_record?
+        event.fields[:start_date].value = event_hash[:start_date]
+        event.fields[:start_date].time_zone = "Melbourne"
+        event.fields[:end_date].value = event_hash[:end_date]
+        event.fields[:end_date].time_zone = "Melbourne"
+        event.fields[:series].page_ids = [broadsite_event_series.id]
+        event.fields[:broadside_type].value = event_hash[:type]
+        event.fields[:ticket_prices].value = event_hash[:price]
+        event.fields[:body].value = "<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>"
+        event.fields[:venue].page_ids = [site.pages.find_by(url: "events/venues/melbourne-town-hall").id]
+        event.fields[:presenters].page_ids = heracles_people.sample((1..4).to_a.sample).map(&:id)
+      end
+      event.fields[:ticketing_stage].value = ["Booking fast", "Booked out", "Cancelled"].sample
       event.save!
     end
 
