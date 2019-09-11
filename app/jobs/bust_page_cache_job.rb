@@ -30,7 +30,7 @@ class BustPageCacheJob < Que::Job
       purge_path.gsub!(/^\/thenextchapter/, "")
     elsif purge_path =~ /^\/broadside/
       cdn_id = ENV['BROADSIDE_CDN77_CDN_ID']
-      purge_path.gsub!(/^\/thenextchapter/, "")
+      purge_path.gsub!(/^\/broadside/, "")
     else
       cdn_id = ENV['CDN77_CDN_ID']
     end
