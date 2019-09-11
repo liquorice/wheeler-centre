@@ -13,11 +13,11 @@
       span.bs-event__ticketing-stage Selling fast
       / span.bs-event__booked-out-flag Booked out
 
-      - heading_class = "t-wide"
-      - if page.event.title.length > 20
-        - heading_class = "t-narrow"
-      h1.heading-block__heading class=heading_class = page.event.title
+      h1.heading-block__heading.t-narrow = page.event.title
+
     .heading-block__pattern
+      - if page.event.promo_image.content_medium_url
+        img.heading-block__image src=page.event.promo_image.content_medium_url
 
   .column-wrapper
     .column-wide

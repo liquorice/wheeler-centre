@@ -10,10 +10,7 @@
   .heading-block
     .heading-block__info
 
-      - heading_class = "t-wide"
-      - if page.title.length > 20
-        - heading_class = "t-narrow"
-      h1.heading-block__heading class=heading_class = page.title
+      h1.heading-block__heading.t-narrow = page.title
 
       - if page.twitter_name
         .bs-speaker__twitter
@@ -23,8 +20,8 @@
 
     .heading-block__pattern
 
-          - if page.portrait_url
-            img src=page.portrait_url
+      - if page.portrait_url
+        img.heading-block__image src=page.portrait_url
 
   .column-wrapper
     .column-narrow

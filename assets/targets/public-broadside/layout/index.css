@@ -111,3 +111,8 @@
 .heading-block--reverse .heading-block__pattern {
   background-position: center;
 }
+
+.heading-block__image {
+  height: 100%;
+  width: auto;
+}
