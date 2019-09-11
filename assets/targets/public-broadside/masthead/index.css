@@ -18,6 +18,11 @@
   padding-bottom: 2rem;
 }
 
+.bs-menu {
+  margin-right: auto;
+  position: relative;
+}
+
 .bs-menu,
 .bs-support {
   font-size: 2.2rem;
@@ -28,8 +33,16 @@
   font-size: 1.5rem;
 }
 
-.bs-menu {
-  margin-right: auto;
+.bs-menu-toggle {
+  color: var(--primary-color);
+}
+
+.bs-menu-toggle:hover {
+  cursor: pointer;
+}
+
+.bs-home .bs-menu-toggle {
+  color: var(--white-color);
 }
 
 .bs-support {
@@ -65,4 +78,87 @@
 
 .bs-home .bs-masthead__logo-anchor {
   display: none;
+}
+
+/* Main nav */
+
+.bs-main-nav {
+  display: none;
+  position: absolute;
+  top: -0.3rem;
+  left: 14rem;
+}
+
+.bs-main-nav--active {
+  display: block;
+}
+
+.breakpoint-w-768 .bs-main-nav {
+  top: -0.5rem;
+  left: 8rem;
+}
+
+
+.bs-main-nav ul {
+}
+
+.bs-main-nav ul li {
+  text-align: center;
+}
+
+.bs-main-nav li a {
+  color: var(--grey-color);
+  font-weight: 500;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.bs-main-nav--what {
+  font-size: 8.5rem;
+  line-height: 8.5rem;
+}
+
+.breakpoint-w-768 .bs-main-nav--what {
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.bs-main-nav--when {
+  font-size: 14rem;
+  line-height: 14rem;
+}
+
+.breakpoint-w-768 .bs-main-nav--when {
+  font-size: 8rem;
+  line-height: 8rem;
+}
+
+.bs-main-nav--who {
+  font-size: 10rem;
+  line-height: 10rem;
+}
+
+.breakpoint-w-768 .bs-main-nav--who {
+  font-size: 6rem;
+  line-height: 6rem;
+}
+
+.bs-main-nav--how {
+  font-size: 17rem;
+  line-height: 17rem;
+}
+
+.breakpoint-w-768 .bs-main-nav--how {
+  font-size: 10rem;
+  line-height: 10rem;
+}
+
+.bs-main-nav--teen {
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.breakpoint-w-768 .bs-main-nav--teen {
+  font-size: 3rem;
+  line-height: 3rem;
 }
