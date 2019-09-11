@@ -1,0 +1,19 @@
+= area :main do
+
+  .column-wrapper
+    .column-wide
+      h1.page-title = page.page_title
+
+      p custom page!
+
+      ul.bs-subnav
+        - page.nav_pages.each do |nav_page|
+          li.bs-subnav__item.bs-subnav__item--active
+            a href=nav_page.absolute_url
+              - if nav_page.fields[:alternative_title].data_present?
+                = nav_page.fields[:alternative_title].value
+              - else
+                = nav_page.title
+
+      - if page.fields[:body].data_present?
+        p = render_content(page.fields[:body].value)
