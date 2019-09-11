@@ -24,7 +24,7 @@ module Heracles
         private
 
         def event_pages
-          site.pages.of_type(:broadside_event_page)
+          site.pages.of_type(:broadside_event_page).where.not(title: "Teen Day")
         end
 
         def event_pages_grouped_by_day
