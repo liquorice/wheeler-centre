@@ -63,8 +63,14 @@
           - if page.event.fields[:body].data_present?
             = render_content_in_sections page.event.fields[:body]
 
+  .column-wrapper
+    .column-wide
       .bs-event-meta
         .bs-event-meta-info
+
+          - if page.slug == "teen-day"
+            h2.bs-label.c-green Events
+            = render "partials/broadside_teen_day_events"
 
           - unless page.slug == "teen-day"
             .bs-label class=highlight_color_dark When
@@ -96,6 +102,9 @@
 
         .bs-event-meta-speakers
           .bs-label class=highlight_color_dark Who
+
+          - if page.slug == "teen-day"
+            = render "partials/broadside_teen_day_speakers"
 
           - if page.broadside_speaker_pages
             - page.broadside_speaker_pages.each do |speaker_page|

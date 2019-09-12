@@ -4,12 +4,11 @@
 
 .bs-event {
   display: flex;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
 }
 
 .breakpoint-w-768 .bs-event {
   flex-direction: column;
-  margin-bottom: 5rem;
 }
 
 /* Status */
@@ -76,6 +75,7 @@
 
 .bs-event-meta {
   display: flex;
+  margin-top: 8rem;
   margin-bottom: 8rem;
   width: calc(100% + 2.4rem);
 }
@@ -155,4 +155,31 @@
 .bs-speaker__intro {
   font-size: 1.4rem;
   line-height: 2rem;
+}
+
+/* Accordion */
+
+.bs-accordion {
+  margin-bottom: 5rem;
+}
+
+.bs-accordion__item {
+}
+
+.bs-accordion__summary {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--green-color);
+}
+
+.bs-accordion__summary:hover {
+  cursor: pointer;
+}
+
+.bs-accordion__content {
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  color: var(--green-color-dark);
 }
