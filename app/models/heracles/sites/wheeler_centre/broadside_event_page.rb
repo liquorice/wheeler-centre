@@ -54,6 +54,19 @@ module Heracles
             event.fields[:ticketing_stage].value
           end
         end
+
+        def on_saturday?
+          if event && event.fields[:start_date].data_present?
+            event.fields[:start_date].value.strftime("%a") == "Sat"
+          end
+        end
+
+        def on_sunday?
+          if event && event.fields[:start_date].data_present?
+            event.fields[:start_date].value.strftime("%a") == "Sun"
+          end
+        end
+
         def absolute_url
           super.gsub(/^\/broadside/, "")
         end
