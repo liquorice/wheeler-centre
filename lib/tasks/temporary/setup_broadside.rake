@@ -5,11 +5,6 @@ end
 namespace :temporary do
   desc "Set up broadside microsite pages"
   task setup_broadside: :environment do
-
-    if Rails.env != "development"
-      raise "Currently set to run in development only. Double check everything before running in production."
-    end
-
     site = Heracles::Site.first
 
     home_page = Heracles::Sites::WheelerCentre::BroadsideHomePage.find_or_initialize_by(url: "broadside")
