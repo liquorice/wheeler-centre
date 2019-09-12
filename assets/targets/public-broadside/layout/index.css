@@ -83,7 +83,11 @@
 
 .heading-block__detail {
   font-size: 1.4rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+.heading-block__detail strong {
+  font-weight: 500;
 }
 
 .heading-block__pattern {
