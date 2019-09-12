@@ -59,7 +59,7 @@
                 / email
                 a.ss-icon class=highlight_color href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
 
-        .bs-event__content.copy class=highlight_color
+        .bs-event__content.copy class=highlight_color_dark
           - if page.event.fields[:body].data_present?
             = render_content_in_sections page.event.fields[:body]
 
@@ -78,9 +78,9 @@
                 = page.end_time
 
           - unless page.slug == "teen-day"
-            .bs-label class=highlight_color_dark Price
-            .bs-event-meta-info__value.t-upper class=highlight_color
-              - if page.event.fields[:ticket_prices].data_present?
+            - if page.event.fields[:ticket_prices].data_present?
+              .bs-label class=highlight_color_dark Price
+              .bs-event-meta-info__value.t-upper class=highlight_color
                 p = page.event.fields[:ticket_prices].value
 
           .bs-label class=highlight_color_dark Where
@@ -131,6 +131,6 @@
           ' Packages
           strong available now
           ' .
-          a href="/how" Find out more
+          a href="/how" Find out more →
 
     .heading-block__pattern class=highlight_pattern

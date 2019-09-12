@@ -1,5 +1,20 @@
+- if event_page.on_saturday?
+  - highlight_color = "c-pink"
+  - highlight_color_dark = "c-pink-dark"
+  - highlight_bg_color = "bg-pink"
+  - highlight_bg_color_dark = "bg-pink-dark"
+  - highlight_pattern = "heading-block__pattern--pink"
+
+- if event_page.on_sunday?
+  - highlight_color = "c-blue"
+  - highlight_color_dark = "c-blue-dark"
+  - highlight_bg_color = "bg-blue"
+  - highlight_bg_color_dark = "bg-blue-dark"
+  - highlight_pattern = "heading-block__pattern--blue"
+
+
 a.bs-calendar__item href=event_page.absolute_url
-  .bs-calendar__time.t-wide
+  .bs-calendar__time.t-wide class=highlight_color_dark
     - if event_page.start_time
       = event_page.start_time
     span.t-narrow<> -
@@ -10,6 +25,6 @@ a.bs-calendar__item href=event_page.absolute_url
     - heading_class = "t-wide"
     - if event_page.title.length > 14
       - heading_class = "t-narrow"
-    h3.bs-calendar__event-title.t-narrow class=heading_class
+    h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
       = event_page.title
-    p.bs-calendar__event-speakers = event_page.speaker_names
+    p.bs-calendar__event-speakers class=highlight_color_dark = event_page.speaker_names

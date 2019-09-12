@@ -4,7 +4,7 @@
 
 .bs-event {
   display: flex;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 }
 
 .breakpoint-w-768 .bs-event {
@@ -76,7 +76,7 @@
 
 .bs-event-meta {
   display: flex;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
   width: calc(100% + 2.4rem);
 }
 

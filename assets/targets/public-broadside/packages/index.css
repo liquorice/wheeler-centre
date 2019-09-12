@@ -55,7 +55,6 @@
 }
 
 .bs-package__button a {
-  background-color: var(--primary-color);
   color: var(--white-color);
   display: inline-block;
   font-size: 3rem;
