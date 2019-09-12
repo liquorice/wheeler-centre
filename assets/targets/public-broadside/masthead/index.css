@@ -34,8 +34,13 @@
 
 .bs-menu-toggle {
   position: absolute;
+  top: 4.3rem;
   z-index: 1000;
   color: var(--primary-color);
+}
+
+.breakpoint-w-768 .bs-menu-toggle {
+  top: 3.1rem;
 }
 
 .bs-menu--active .bs-menu-toggle span {
