@@ -36,9 +36,12 @@ html#nc lang="en"
 
   = area :body_outer do
 
-    - if page.title == 'Broadside'
+    - if page.slug == 'broadside'
       - home_class = "bs-home"
+    - elsif page.slug == "teen-day"
+      - home_class = "bs-teen"
     body data-view-fast-click=true class=home_class
+
       = area :body do
         = area :masthead do
           = render 'partials/broadside_masthead'
