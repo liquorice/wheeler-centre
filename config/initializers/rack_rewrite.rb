@@ -81,6 +81,9 @@ WheelerCentre::Application.config.middleware.insert_before(Rack::Runtime, Rack::
   rewrite /\/(.*)/, '/broadside/$1', host: "broadside.localhost"
   rewrite /\/(.*)/, '/broadside/$1', host: "broadside.wheelercentre.com"
   r301 /^\/broadside\/(.*)/, "http://broadside.localhost:5000/$1", :host => "localhost"
+  r301 /^\/broadside/, "http://broadside.localhost:5000", :host => "localhost"
+  r301 /^\/broadside/, "https://broadside.wheelercentre.com", :host => "www.wheelercentre.com"
+  r301 /^\/broadside/, "https://broadside.wheelercentre.com", :host => "wheelercentre.com"
   r301 /^\/broadside\/(.*)/, "https://broadside.wheelercentre.com/$1", :host => "www.wheelercentre.com"
   r301 /^\/broadside\/(.*)/, "https://broadside.wheelercentre.com/$1", :host => "wheelercentre.com"
 end
