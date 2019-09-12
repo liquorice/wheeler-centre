@@ -20,7 +20,6 @@
 
 .bs-menu {
   margin-right: auto;
-  position: relative;
 }
 
 .bs-menu,
@@ -48,6 +47,27 @@
 .bs-support {
   margin-left: auto;
 }
+
+/* Close toggle */
+
+.bs-menu-toggle--close {
+  color: var(--white-color);
+  position: absolute;
+  left: 5rem;
+  top: 4.3rem;
+  font-size: 2.2rem;
+}
+
+.bs-menu-toggle--close:hover {
+  cursor: pointer;
+}
+
+.breakpoint-w-768 .bs-menu-toggle--close {
+  font-size: 1.5rem;
+  left: 2rem;
+  top: 3.5rem;
+}
+
 
 /* Broadside logo */
 
@@ -85,21 +105,29 @@
 .bs-main-nav {
   display: none;
   position: absolute;
-  top: -0.3rem;
-  left: 14rem;
+  background-color: var(--white-color);
+}
+
+.bs-home .bs-main-nav {
+  background-color: var(--primary-color);
 }
 
 .bs-main-nav--active {
-  display: block;
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  overflow-y: scroll;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999999;
 }
-
-.breakpoint-w-768 .bs-main-nav {
-  top: -0.5rem;
-  left: 8rem;
-}
-
 
 .bs-main-nav ul {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .bs-main-nav ul li {
@@ -107,7 +135,7 @@
 }
 
 .bs-main-nav li a {
-  color: var(--grey-color);
+  color: var(--white-color);
   font-weight: 500;
   text-transform: uppercase;
   display: inline-block;
