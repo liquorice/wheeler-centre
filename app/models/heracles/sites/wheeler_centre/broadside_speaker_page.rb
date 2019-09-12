@@ -60,8 +60,8 @@ module Heracles
         end
 
         def related_event_pages
-          if person && person.upcoming_events
-            person.upcoming_events.map do |event|
+          if upcoming_events
+            upcoming_events.map do |event|
               BroadsideEventPage.where(
                 site_id: site.id,
                 published: true,
@@ -70,6 +70,20 @@ module Heracles
               .where("(fields_data#>'{event, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: event.id).all
             end.flatten
           end
+        end
+
+        # Upcoming events, include unpublished and hidden for now..
+        def upcoming_events
+          return unless person
+          Event.where(
+            site_id: site.id,
+            # published: true,
+            # hidden: false
+          )
+          .where("(fields_data#>'{presenters, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: person.id)
+          .where("fields_data->'start_date'->>'value' IS NOT ?", nil)
+          .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
+          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
         end
       end
     end
