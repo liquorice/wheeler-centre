@@ -6,7 +6,9 @@
 
       ul.bs-subnav
         - page.nav_pages.each do |nav_page|
-          li.bs-subnav__item.bs-subnav__item--active
+          - if page.slug == nav_page.slug
+            - active_class = "bs-subnav__item--active"
+          li.bs-subnav__item class=active_class
             a href=nav_page.absolute_url
               - if nav_page.fields[:alternative_title].data_present?
                 = nav_page.fields[:alternative_title].value
