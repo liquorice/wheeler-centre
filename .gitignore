@@ -45,3 +45,6 @@ lib/video_migration/credentials_file.json
 
 # Ignore temporary Passenger files
 passenger.*
+
+# database dump file
+latest.dump
