@@ -33,6 +33,7 @@
 
 .breakpoint-w-768 .bs-footer-nav__group {
   width: 50%;
+  margin-bottom: 3rem;
 }
 
 .bs-footer-nav__group li:first-child {

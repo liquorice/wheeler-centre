@@ -166,8 +166,8 @@
 }
 
 .bs-main-nav--what {
-  font-size: 8.5rem;
-  line-height: 8.5rem;
+  font-size: 7rem;
+  line-height: 7rem;
 }
 
 .breakpoint-w-768 .bs-main-nav--what {
@@ -176,18 +176,18 @@
 }
 
 .bs-main-nav--when {
-  font-size: 14rem;
-  line-height: 14rem;
+  font-size: 20rem;
+  line-height: 20rem;
 }
 
 .breakpoint-w-768 .bs-main-nav--when {
-  font-size: 8rem;
-  line-height: 8rem;
+  font-size: 12rem;
+  line-height: 12rem;
 }
 
 .bs-main-nav--who {
-  font-size: 10rem;
-  line-height: 10rem;
+  font-size: 5rem;
+  line-height: 5rem;
 }
 
 .breakpoint-w-768 .bs-main-nav--who {
@@ -196,13 +196,13 @@
 }
 
 .bs-main-nav--how {
-  font-size: 17rem;
-  line-height: 17rem;
+  font-size: 20rem;
+  line-height: 20rem;
 }
 
 .breakpoint-w-768 .bs-main-nav--how {
-  font-size: 10rem;
-  line-height: 10rem;
+  font-size: 12rem;
+  line-height: 12rem;
 }
 
 .bs-main-nav--teen {
