@@ -113,6 +113,7 @@
 
   .heading-block.heading-block--reverse
     .heading-block__info
+
       - if page.slug == "teen-day"
         h1.heading-block__heading.t-narrow class=highlight_color
           ' More Info
@@ -122,6 +123,14 @@
           ' contact
           a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
           ' .
+      - elsif page.slug == "up-late"
+        h1.heading-block__heading.t-narrow class=highlight_color
+          ' ON SALE
+          br
+          ' MON 23 SEPT
+        p.heading-block__detail class=highlight_color_dark
+          ' Single event tickets available from
+          strong Monday 23 September
       - else
         h1.heading-block__heading.t-narrow class=highlight_color
           a href="/how"
@@ -129,7 +138,7 @@
             br
             ' your pass
         p.heading-block__detail class=highlight_color_dark
-          ' Single event tickets will be available from
+          ' Single event tickets available from
           strong Monday 23 September
 
     .heading-block__pattern class=highlight_pattern
