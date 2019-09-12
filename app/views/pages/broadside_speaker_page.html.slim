@@ -1,0 +1,41 @@
+= area :main do
+
+  .column-wrapper
+    .column-wide
+
+      ul.bs-subnav
+        li.bs-subnav__item
+          a href="/who" ← Speakers
+
+  .heading-block
+    .heading-block__info
+
+      h1.heading-block__heading.t-narrow = page.title
+
+      - if page.twitter_name
+        .bs-speaker__twitter
+          span.ss-icon &#xF611;
+          a target="_blank" href="https://twitter.com/#{page.twitter_name}"
+            = "@" + page.twitter_name
+
+    .heading-block__pattern
+      - if page.large_url
+        img.heading-block__image src=page.large_url
+
+  .column-wrapper
+    .column-narrow
+      - if page.biography
+        .bs-speaker__bio.copy
+          = page.biography
+
+    .column-wide
+      .bs-calendar
+        - if page.saturday_event_pages
+          h3.bs-calendar__day-heading.bs-heading.t-center Saturday
+          - page.saturday_event_pages.each do |broadside_event_page|
+            = render "partials/broadside_event", event_page: broadside_event_page
+
+        - if page.sunday_event_pages
+          h3.bs-calendar__day-heading.bs-heading.t-center Sunday
+          - page.sunday_event_pages.each do |broadside_event_page|
+            = render "partials/broadside_event", event_page: broadside_event_page

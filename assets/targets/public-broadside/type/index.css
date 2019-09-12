@@ -1,0 +1,75 @@
+/*
+  Type
+*/
+
+/* Alignment */
+
+.t-center {
+  text-align: center;
+}
+
+/* Weights */
+
+.t-normal {
+  font-weight: 300;
+}
+
+.t-bold {
+  font-weight: 500;
+}
+
+/* Case */
+
+.t-upper {
+  text-transform: uppercase;
+}
+
+/* Widths */
+
+.t-narrow {
+  font-family: var(--font-narrow);
+}
+
+.t-wide {
+  font-family: var(--font-wide);
+}
+
+/* H1 Page title */
+
+.page-title {
+  font-family: var(--font-wide);
+  font-size: 10rem;
+  font-weight: 500;
+  line-height: 10rem;
+  padding-top: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .page-title {
+  font-size: 6rem;
+  line-height: 6rem;
+}
+
+/* BS headings */
+
+.bs-heading {
+  color: var(--primary-color);
+  font-size: 2rem;
+  line-height: 2.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .bs-heading {
+  font-size: 1.5rem;
+}
+
+/* Labels */
+
+.bs-label {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: .15em;
+}

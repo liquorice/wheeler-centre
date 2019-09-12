@@ -1,0 +1,66 @@
+/*
+  Packages
+*/
+
+.bs-package {
+  margin-bottom: 10rem;
+}
+
+.breakpoint-w-768 .bs-package {
+  margin-bottom: 5rem;
+}
+
+.bs-package__copy {
+  margin-bottom: 5rem;
+}
+
+.bs-package__small-print {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.bs-package__info {
+  display: flex;
+}
+
+.breakpoint-w-768 .bs-package__info {
+  flex-direction: column;
+}
+
+.bs-package__price {
+  width: 50%;
+}
+
+.breakpoint-w-768 .bs-package__price {
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.bs-package__price-value {
+  font-family: var(--font-narrow);
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 5rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.bs-package__button {
+  width: 50%;
+}
+
+.breakpoint-w-768 .bs-package__button {
+  width: 100%;
+  text-align: center;
+}
+
+.bs-package__button a {
+  color: var(--white-color);
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 3rem;
+  padding: 2rem 4rem;
+  text-align: center;
+  text-transform: uppercase;
+}

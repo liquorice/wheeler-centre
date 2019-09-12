@@ -1,0 +1,158 @@
+/*
+  Event
+*/
+
+.bs-event {
+  display: flex;
+  margin-bottom: 8rem;
+}
+
+.breakpoint-w-768 .bs-event {
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+
+/* Status */
+
+.bs-event__ticketing-stage,
+.bs-event__booked-out-flag {
+  background-color: var(--primary-color);
+  border-radius: .3rem;
+  color: #fff;
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+  padding: .5rem .7rem .4rem;
+  text-transform: uppercase;
+}
+
+.bs-event__ticketing-stage {
+  background-color: transparent;
+  border-bottom: 2px solid color(var(--primary-color) tint(30%));
+  border-radius: 0;
+  color: var(--primary-color);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Share */
+
+.bs-event__share {
+  width: 17%;
+  padding-right: 2.4rem;
+}
+
+.breakpoint-w-768 .bs-event__share {
+  width: 100%;
+  padding-right: 0;
+  margin-bottom: 2rem;
+}
+
+.bs-event__share ul {
+  font-size: 2rem;
+}
+
+.bs-event__share li {
+  display: inline;
+  padding-right: 1.5rem;
+}
+
+.bs-event__share a:hover {
+}
+
+/* Content */
+
+.bs-event__content {
+  width: 65.8%;
+}
+
+.breakpoint-w-768 .bs-event__content {
+  width: 100%;
+}
+
+/* Meta */
+
+.bs-event-meta {
+  display: flex;
+  margin-bottom: 8rem;
+  width: calc(100% + 2.4rem);
+}
+
+.breakpoint-w-768 .bs-event-meta {
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 5rem;
+}
+
+.bs-event-meta-info,
+.bs-event-meta-speakers {
+  width: 50%;
+  padding-right: 2.4rem;
+}
+
+.breakpoint-w-768 .bs-event-meta-info,
+.breakpoint-w-768 .bs-event-meta-speakers {
+  width: 100%;
+  padding-right: 0;
+}
+
+.breakpoint-w-768 .bs-event-meta-info {
+  margin-bottom: 5rem;
+}
+
+.bs-event-meta-info__value {
+  font-family: var(--font-narrow);
+  font-size: 5rem;
+  line-height: 5rem;
+  margin-bottom: 5rem;
+}
+
+.bs-event-meta-info__value:last-child {
+  margin-bottom: 0;
+}
+
+.breakpoint-w-768 .bs-event-meta-info__value {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+/* Speakers */
+
+.bs-speaker {
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.bs-speaker:last-child {
+  margin-bottom: 0;
+}
+
+.bs-speaker__image {
+  background-color: #CCC;
+  height: 10rem;
+  width: 10rem;
+  margin-right: 2.4rem;
+}
+
+.bs-speaker__info {
+  flex: 1;
+}
+
+.bs-speaker__title {
+  font-weight: 500;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.bs-speaker__meta {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.bs-speaker__intro {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}

@@ -1,0 +1,68 @@
+/* Variables */
+
+:root {
+  --column-full: 100%;
+  --column-wide: 98rem;
+  --column-narrow: 64.5rem;
+
+  --font-normal: titling-gothic-fb, Helvetica, sans-serif;
+  --font-narrow: titling-gothic-fb-condensed, Helvetica, sans-serif;
+  --font-wide: titling-gothic-fb-wide, Helvetica, sans-serif;
+
+  --primary-color: #ff6c2f;
+  --pink-color: #ED6998;
+  --pink-color-dark: #6F2E45;
+  --blue-color: #8998CC;
+  --blue-color-dark: #444B67;
+  --green-color: #00A651;
+  --green-color-dark: #26563D;
+  --grey-color: #222222;
+  --white-color: #ffffff;
+}
+
+/* Imports */
+
+@import "./copy/index.css";
+@import "./reset/index.css";
+@import "./layout/index.css";
+@import "./type/index.css";
+@import "./masthead/index.css";
+@import "./footer/index.css";
+@import "./subnav/index.css";
+@import "./calendar/index.css";
+@import "./event/index.css";
+@import "./colours/index.css";
+@import "./fonts/font-awesome.css";
+@import "./fonts/ss-social-regular.css";
+@import "./speakers/index.css";
+@import "./home/index.css";
+@import "./packages/index.css";
+
+/* Base */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  font-family: var(--font-normal);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Home version */
+
+body.bs-home {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}

@@ -1,0 +1,135 @@
+= area :main do
+
+  - if page.on_saturday?
+    - highlight_color = "c-pink"
+    - highlight_color_dark = "c-pink-dark"
+    - highlight_bg_color = "bg-pink"
+    - highlight_bg_color_dark = "bg-pink-dark"
+    - highlight_pattern = "heading-block__pattern--pink"
+
+  - if page.on_sunday?
+    - highlight_color = "c-blue"
+    - highlight_color_dark = "c-blue-dark"
+    - highlight_bg_color = "bg-blue"
+    - highlight_bg_color_dark = "bg-blue-dark"
+    - highlight_pattern = "heading-block__pattern--blue"
+
+  - if page.slug == "teen-day"
+    - highlight_color = "c-green"
+    - highlight_color_dark = "c-green-dark"
+    - highlight_bg_color = "bg-green"
+    - highlight_bg_color_dark = "bg-green-dark"
+    - highlight_pattern = "heading-block__pattern--green"
+
+  .column-wrapper
+    .column-wide
+
+      ul.bs-subnav
+        li.bs-subnav__item
+          a href="/when" ← Festival schedule
+
+  .heading-block
+    .heading-block__info
+
+      - if page.ticketing_stage
+        / Event status
+        span.bs-event__booked-out-flag class=highlight_bg_color_dark = page.ticketing_stage
+
+      h1.heading-block__heading.t-narrow class=highlight_color = page.event.title
+
+    .heading-block__pattern class=highlight_pattern
+      - if page.event.promo_image
+        img.heading-block__image src=page.event.promo_image.content_large_url
+
+  .column-wrapper
+    .column-wide
+
+      .bs-event
+        .bs-event__share
+          - unless page.slug == "teen-day"
+            .bs-label class=highlight_color_dark Share
+            ul
+              li
+                / twitter
+                a.ss-icon class=highlight_color target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+              li
+                / facebook
+                a.ss-icon class=highlight_color target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
+              li
+                / email
+                a.ss-icon class=highlight_color href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
+
+        .bs-event__content.copy class=highlight_color_dark
+          - if page.event.fields[:body].data_present?
+            = render_content_in_sections page.event.fields[:body]
+
+      .bs-event-meta
+        .bs-event-meta-info
+
+          - unless page.slug == "teen-day"
+            .bs-label class=highlight_color_dark When
+            .bs-event-meta-info__value class=highlight_color
+              - if page.start_time
+                = page.start_time
+              span.t-normal
+                '  to
+                br
+              - if page.end_time
+                = page.end_time
+
+          - unless page.slug == "teen-day"
+            - if page.event.fields[:ticket_prices].data_present?
+              .bs-label class=highlight_color_dark Price
+              .bs-event-meta-info__value.t-upper class=highlight_color
+                p = page.event.fields[:ticket_prices].value
+
+          .bs-label class=highlight_color_dark Where
+          .bs-event-meta-info__value.t-upper class=highlight_color
+            - if page.event && page.event.venue
+              p = page.event.venue.title
+
+          - unless page.slug == "teen-day"
+            .bs-label class=highlight_color_dark Type
+            .bs-event-meta-info__value.t-upper class=highlight_color
+              - if page.event.fields[:broadside_type].data_present?
+                p = page.event.fields[:broadside_type].value
+
+        .bs-event-meta-speakers
+          .bs-label class=highlight_color_dark Who
+
+          - if page.broadside_speaker_pages
+            - page.broadside_speaker_pages.each do |speaker_page|
+              a.bs-speaker href=speaker_page.absolute_url
+                - if speaker_page.portrait_url
+                  img.bs-speaker__image src=speaker_page.portrait_url
+
+                .bs-speaker__info
+                  .bs-speaker__title class=highlight_color = speaker_page.title
+                  .bs-speaker__meta
+                    - if speaker_page.twitter_name
+                      span = "@" + speaker_page.twitter_name
+                  .bs-speaker__intro.copy class=highlight_color_dark
+                    = speaker_page.biography
+
+  .heading-block.heading-block--reverse
+    .heading-block__info
+      - if page.slug == "teen-day"
+        h1.heading-block__heading.t-narrow class=highlight_color
+          ' More Info
+        p.heading-block__detail class=highlight_color_dark
+          ' To find out more about Teen Day
+          br
+          ' contact
+          a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
+          ' .
+      - else
+        h1.heading-block__heading.t-narrow class=highlight_color
+          a href="/how"
+            ' Book
+            br
+            ' your pass
+        p.heading-block__detail class=highlight_color_dark
+          ' Single event tickets will be available from
+          strong Monday 23 September
+
+    .heading-block__pattern class=highlight_pattern

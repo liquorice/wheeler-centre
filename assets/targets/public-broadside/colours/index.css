@@ -1,0 +1,93 @@
+/*
+  Colours
+*/
+
+/* Orange */
+
+.c-orange {
+  color: var(--primary-color);
+}
+
+.bg-orange {
+  background-color: var(--primary-color);
+}
+
+/* Grey */
+
+.c-grey {
+  color: var(--grey-color);
+}
+
+.bg-grey {
+  background-color: var(--grey-color);
+}
+
+/* White */
+
+.c-white {
+  color: var(--white-color);
+}
+
+.bg-white {
+  background-color: var(--white-color);
+}
+
+/* Pink */
+
+.c-pink {
+  color: var(--pink-color);
+}
+
+.bg-pink {
+  background-color: var(--pink-color);
+}
+
+/* Pink dark */
+
+.c-pink-dark {
+  color: var(--pink-color-dark);
+}
+
+.bg-pink-dark {
+  background-color: var(--pink-color-dark);
+}
+
+/* Blue */
+
+.c-blue {
+  color: var(--blue-color);
+}
+
+.bg-blue {
+  background-color: var(--blue-color);
+}
+
+/* Blue dark */
+
+.c-blue-dark {
+  color: var(--blue-color-dark);
+}
+
+.bg-blue-dark {
+  background-color: var(--blue-color-dark);
+}
+
+/* Green */
+
+.c-green {
+  color: var(--green-color);
+}
+
+.bg-green {
+  background-color: var(--green-color);
+}
+
+/* Green dark */
+
+.c-green-dark {
+  color: var(--green-color-dark);
+}
+
+.bg-green-dark {
+  background-color: var(--green-color-dark);
+}

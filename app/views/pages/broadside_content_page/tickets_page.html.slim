@@ -1,0 +1,189 @@
+= area :main do
+
+  .column-wrapper
+    .column-wide
+      h1.page-title = page.page_title
+
+      ul.bs-subnav
+        - page.nav_pages.each do |nav_page|
+          li.bs-subnav__item.bs-subnav__item--active
+            a href=nav_page.absolute_url
+              - if nav_page.fields[:alternative_title].data_present?
+                = nav_page.fields[:alternative_title].value
+              - else
+                = nav_page.title
+
+      / - if page.fields[:body].data_present?
+      /   p = render_content(page.fields[:body].value)
+
+  / WEEKEND PASS
+  .bs-package
+    .heading-block
+      .heading-block__info
+        h1.heading-block__heading.t-narrow
+          ' Weekend
+          br
+          ' pass
+      .heading-block__pattern
+
+    .column-wrapper
+      .column-narrow
+
+        .bs-package__copy.copy
+          p
+            ' Weekend Pass – 
+            span.t-bold Save 25% 
+            ' on single tickets across two days, all sessions in the Melbourne Town Hall.*
+
+          p Includes:
+
+          ul
+            li A limited edition Broadside tote bag available for collection at Melbourne Town Hall during event time only.
+
+          p.bs-package__small-print
+            ' * Does not include access to Club Skunk Up Late: With Aminatou Sow and Jia Tolentino hosted by Jan Fran.
+
+      .column-wide
+        .bs-label Price
+        .bs-package__info
+          .bs-package__price
+            .bs-package__price-value
+              ' $217.50 Adult
+              br
+              ' $180 Concession
+            p.bs-package__small-print Plus a one-off transaction fee of $4.00 per order
+
+          .bs-package__button.t-narrow
+            a.bg-orange href="/"
+              ' Book
+              br
+              ' Weekend pass
+
+  / SATURDAY PASS
+  .bs-package
+    .heading-block.heading-block--reverse
+      .heading-block__info
+        h1.heading-block__heading.t-narrow.c-pink
+          ' Saturday
+          br
+          ' pass
+      .heading-block__pattern.heading-block__pattern--pink
+
+    .column-wrapper
+      .column-narrow
+
+        .bs-package__copy.copy.c-pink
+          p
+            ' Saturday Pass – 
+            span.t-bold Save 15% 
+            ' on all single ticketed events on Saturday*.
+
+          p Includes:
+
+          ul
+            li All sessions in Melbourne Town Hall on Saturday.
+
+          p.bs-package__small-print
+            ' * Does not include access to Up Late with Jan Fran: Aminatou Sow with Jia Tolentino.
+
+      .column-wide
+        .bs-label.c-pink-dark Price
+        .bs-package__info
+          .bs-package__price
+            .bs-package__price-value.c-pink
+              ' $131.75 Adult
+              br
+              ' $110.50 Concession
+            p.bs-package__small-print.c-pink Plus a one-off transaction fee of $4.00 per order
+
+          .bs-package__button.t-narrow
+            a.bg-pink href="/"
+              ' Book
+              br
+              ' Saturday pass
+
+  / SUNDAY PASS
+  .bs-package
+    .heading-block
+      .heading-block__info
+        h1.heading-block__heading.t-narrow.c-blue
+          ' Sunday
+          br
+          ' pass
+      .heading-block__pattern.heading-block__pattern--blue
+
+    .column-wrapper
+      .column-narrow
+
+        .bs-package__copy.copy.c-blue
+          p
+            ' Sunday Pass – 
+            span.t-bold Save 15% 
+            ' on all single ticketed events on Sunday*.
+
+          p Includes:
+
+          ul
+            li All sessions in Melbourne Town Hall on Sunday.
+
+          p.bs-package__small-print
+            ' * Does not include access to Up Late with Jan Fran: Aminatou Sow with Jia Tolentino.
+
+      .column-wide
+        .bs-label.c-blue-dark Price
+        .bs-package__info
+          .bs-package__price
+            .bs-package__price-value.c-blue
+              ' $114.75 Adult
+              br
+              ' $93.50 Concession
+            p.bs-package__small-print.c-blue-dark Plus a one-off transaction fee of $4.00 per order
+
+          .bs-package__button.t-narrow
+            a.bg-blue href="/"
+              ' Book
+              br
+              ' Sunday pass
+
+  / 3-PLUS PASS
+  .bs-package
+    .heading-block.heading-block--reverse
+      .heading-block__info
+        h1.heading-block__heading.t-narrow
+          ' 3-plus
+          br
+          ' pass
+      .heading-block__pattern
+
+    .column-wrapper
+      .column-narrow
+
+        .bs-package__copy.copy
+          p
+            ' 3 Pluss Pass – Can’t make it to everything?
+            span.t-bold Save 10% 
+            ' on select single tickets if you purchase tickets to three or more events*.
+
+          p Includes:
+
+          ul
+            li All sessions in Melbourne Town Hall on Saturday.
+
+          p.bs-package__small-print
+            ' * Please note tickets to Monica Lewinsky and Up Late with Jan Fran: Aminatou Sow and Jia Tolentino are not included in this pass.
+
+      .column-wide
+        .bs-label Price
+        .bs-package__info
+          .bs-package__price
+            .bs-package__price-value
+              ' $67.50 Adult
+              br
+              ' $54 Concession
+            p.bs-package__small-print Plus a one-off transaction fee of $4.00 per order
+
+          .bs-package__button.t-narrow
+            a.bg-orange href="/"
+              ' Book
+              br
+              ' 3-plus pass

@@ -1,0 +1,146 @@
+/*
+  Home
+*/
+
+.bs-home__intro {
+  margin-bottom: 3rem;
+}
+
+.breakpoint-w-768 .bs-home__intro {
+  margin-bottom: 1rem;
+}
+
+.bs-home__logo {
+  height: 16.1rem;
+  margin-bottom: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30.6rem;
+}
+
+.breakpoint-w-768 .bs-home__logo {
+  width: 14rem;
+  height: 7.4rem;
+  margin-bottom: 2rem;
+}
+
+.bs-home__logo-anchor {
+  background-image: url(masthead-logo--white.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: transparent;
+  display: block;
+  font: 0/0 a;
+  height: 100%;
+  width: 100%;
+}
+
+/* Poster */
+
+.bs-home__poster {
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.breakpoint-w-768 .bs-home__poster {
+  margin-bottom: 3rem;
+}
+
+.bs-home__poster img {
+  width: 100%;
+  display: block;
+}
+
+/* Details */
+
+.bs-home__details {
+  display: flex;
+  margin-bottom: 10rem;
+}
+
+.breakpoint-w-768 .bs-home__details {
+  margin-bottom: 5rem;
+}
+
+.bs-home__where {
+  width: 50%;
+}
+
+.bs-home__social {
+  width: 50%;
+}
+
+.bs-home__social ul {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.bs-home__social li {
+  display: inline;
+  padding-right: 1.5rem;
+}
+
+.bs-home__social li:last-child {
+  padding-right: 0;
+}
+
+/* Speaker list */
+
+.bs-home-speakers {
+  display: flex;
+  margin-top: 10rem;
+}
+
+.breakpoint-w-768 .bs-home-speakers {
+  margin-top: 5rem;
+  flex-direction: column;
+}
+
+.bs-home-speakers__column {
+  width: 50%;
+}
+
+.breakpoint-w-768 .bs-home-speakers__column {
+  width: 100%;
+}
+
+.bs-home-speakers__item {
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+.breakpoint-w-768 .bs-home-speakers__item {
+  margin-bottom: 3rem;
+}
+
+.bs-home-speakers__item a {
+  display: inline-block;
+}
+
+.bs-home-speakers__title {
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 5rem;
+  text-transform: uppercase;
+}
+
+.breakpoint-w-768 .bs-home-speakers__title {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+.bs-home-speakers__item--image {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.breakpoint-w-768 .bs-home-speakers__item--image {
+  display: none;
+}
+
+.bs-home-speakers__item--image img {
+  width: 25rem;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}

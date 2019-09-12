@@ -1,0 +1,131 @@
+- set_meta_tags({ \
+    description: "", \
+    og: { \
+      type: "website", \
+      site_name: "Broadside", \
+      title: "Broadside", \
+      description: "", \
+      image: { \
+        url: image_url("public-broadside/masthead/broadside-logo-social.png"), \
+        secure_url: image_url("public-broadside/masthead/broadside-logo-social.png"), \
+        width: "583", \
+        height: "360", \
+      } \
+    } \
+  })
+
+= area :main do
+  .column-wrapper
+    .column-wide
+
+      .bs-home__intro
+        h2.bs-heading.t-center.c-white
+          ' The Wheeler Centre presents
+
+      h1.bs-home__logo
+        a.bs-home__logo-anchor href="/" Broadside 2019
+
+      .bs-home__poster
+        img src=image_path("public-broadside/home/bs-poster.png")
+
+      .bs-home__details.t-center
+        h2.bs-home__where.bs-heading.c-white
+          ' At the
+          br Melbourne town hall
+
+        .bs-home__social
+          h2.bs-heading.c-white
+            ' #Broadside2019
+
+          ul
+            li
+              / twitter
+              a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+            li
+              / facebook
+              a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
+            li
+              / email
+              a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
+
+  .heading-block.heading-block--home
+    .heading-block__info
+      h1.heading-block__heading.t-narrow
+        a href="/when"
+          ' View
+          br
+          ' Schedule
+    .heading-block__pattern.heading-block__pattern--white
+
+  .heading-block.heading-block--home.heading-block--reverse
+    .heading-block__info
+      h1.heading-block__heading.t-narrow
+        a href="/how"
+          ' Buy a pass
+          br
+          ' and save
+    .heading-block__pattern.heading-block__pattern--white
+
+  .column-wrapper
+    .column-wide
+
+      .bs-home-speakers
+
+        .bs-home-speakers__column
+
+          .bs-home-speakers__item.bs-home-speakers__item--image
+            img src=image_path("public-broadside/home/zadie-smith.png")
+
+          .bs-home-speakers__item
+            a href="/who/nayuka-gorrie"
+              h2.bs-home-speakers__title.c-white.t-wide Nayuka Gorrie
+          .bs-home-speakers__item
+            a href="/who/patricia-cornelius"
+              h2.bs-home-speakers__title.c-white.t-narrow Patricia Cornelius
+          .bs-home-speakers__item
+            a href="/who/ariel-levy"
+              h2.bs-home-speakers__title.c-white.t-wide Ariel Levy
+
+          .bs-home-speakers__item.bs-home-speakers__item--image
+            img src=image_path("public-broadside/home/jia-tolentino.png")
+
+          .bs-home-speakers__item
+            a href="/who/curtis-sittenfeld"
+              h2.bs-home-speakers__title.c-white.t-narrow Curtis Sittenfeld
+          .bs-home-speakers__item
+            a href="/who/courtney-barnett"
+              h2.bs-home-speakers__title.c-white.t-wide Courtney Barnett
+          .bs-home-speakers__item
+            a href="/who/aileen-moreton-robinson"
+              h2.bs-home-speakers__title.c-white.t-narrow Aileen Moreton-Robinson
+
+        .bs-home-speakers__column
+
+          .bs-home-speakers__item
+            a href="/who/zadie-smith"
+              h2.bs-home-speakers__title.c-white.t-wide Zadie Smith
+          .bs-home-speakers__item
+            a href="/who/monica-lewinsky"
+              h2.bs-home-speakers__title.c-white.t-narrow Monica Lewinsky
+          .bs-home-speakers__item
+            a href="/who/helen-garner"
+              h2.bs-home-speakers__title.c-white.t-wide Helen Garner
+
+          .bs-home-speakers__item.bs-home-speakers__item--image
+            img src=image_path("public-broadside/home/monica-lewinski.png")
+
+          .bs-home-speakers__item
+            a href="/who/jia-tolentino"
+              h2.bs-home-speakers__title.c-white.t-narrow Jia Tolentino
+          .bs-home-speakers__item
+            a href="/who/mona-eltahawy"
+              h2.bs-home-speakers__title.c-white.t-wide Mona Eltahawy
+          .bs-home-speakers__item
+            a href="/who/fatima-bhutto"
+              h2.bs-home-speakers__title.c-white.t-narrow Fatima Bhutto
+
+          .bs-home-speakers__item.bs-home-speakers__item--image
+            img src=image_path("public-broadside/home/helen-garner.jpg")
+
+      h2.bs-heading.t-center.c-white
+        a href="/who" And many more →

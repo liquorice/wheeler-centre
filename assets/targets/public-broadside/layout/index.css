@@ -1,0 +1,131 @@
+/*
+  Layout
+*/
+
+.column-wrapper {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+
+.breakpoint-w-768 .column-wrapper {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.column-full,
+.column-wide,
+.column-narrow {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.column-full {
+  max-width: var(--column-full);
+}
+
+.column-wide {
+  max-width: var(--column-wide);
+}
+
+.column-narrow {
+  max-width: var(--column-narrow);
+}
+
+/* Heading block */
+
+.heading-block {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+
+.heading-block--home {
+  margin-bottom: 0;
+}
+
+.breakpoint-w-768 .heading-block {
+  flex-direction: column-reverse;
+}
+
+.breakpoint-w-768 .heading-block--home {
+  margin-bottom: 5rem;
+}
+
+.heading-block--reverse {
+  flex-direction: row-reverse;
+}
+
+.heading-block__info {
+  text-align: center;
+  width: 50%;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.breakpoint-w-768 .heading-block__info {
+  width: 100%;
+}
+
+.heading-block__heading {
+  font-family: var(--font-wide);
+  font-size: 8rem;
+  font-weight: 500;
+  line-height: 8rem;
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+.breakpoint-w-768 .heading-block__heading {
+  font-size: 6rem;
+  line-height: 6rem;
+}
+
+.heading-block__detail {
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+.heading-block__detail strong {
+  font-weight: 500;
+}
+
+.heading-block__pattern {
+  flex: 1;
+  height: 40rem;
+  background-image: url('pattern-orange.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.heading-block__pattern--white {
+  background-image: url('pattern-white.png');
+}
+
+.heading-block__pattern--blue {
+  background-image: url('pattern-blue.png');
+}
+
+.heading-block__pattern--pink {
+  background-image: url('pattern-pink.png');
+}
+
+.heading-block__pattern--green {
+  background-image: url('pattern-green.png');
+}
+
+.breakpoint-w-768 .heading-block__pattern {
+  height: 10rem;
+  width: 100%;
+  flex: none;
+  margin-bottom: 3rem;
+}
+
+.heading-block--reverse .heading-block__pattern {
+  background-position: center;
+}
+
+.heading-block__image {
+  height: 100%;
+  width: auto;
+}

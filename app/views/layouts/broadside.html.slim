@@ -1,0 +1,56 @@
+doctype 5
+html#nc lang="en"
+  head
+    meta charset="utf-8"
+    = render "partials/metaquery_breakpoints"
+    = render "partials/inline_boot_javascript"
+
+    / TODO add DNS prefetch URLs
+    link rel="dns-prefetch" href="//cdn.embedly.com"
+    link rel="dns-prefetch" href="//www.youtube.com"
+
+    link rel="canonical" href="#{canonical_domain}#{request.fullpath}"
+
+    = display_meta_tags site: "",
+                        separator: "—",
+                        reverse: true
+    = stylesheet_link_tag "public-broadside", media: "screen"
+
+    / = stylesheet_link_tag "print", media: "print"
+
+    - if Rails.env.development?
+      = development_javascript
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv", defer: true
+    = javascript_include_tag "public-broadside", async: true
+
+    / TODO shift to xhr if we use a CDN -> origin structure
+    / = csrf_meta_tags
+    = render 'partials/broadside_analytics'
+    link rel="icon" href=image_path("public-broadside/favicon.png")
+
+    / Adobe fonts
+    link rel="stylesheet" href="https://use.typekit.net/ilb4eyx.css"
+
+    = area :head
+
+  = area :body_outer do
+
+    - if page.slug == 'broadside'
+      - home_class = "bs-home"
+    - elsif page.slug == "teen-day"
+      - home_class = "bs-teen"
+    body data-view-fast-click=true class=home_class
+
+      = area :body do
+        = area :masthead do
+          = render 'partials/broadside_masthead'
+
+        = area :main_outer do
+          div role="main" id="main-content"
+            = area :main
+
+        = area :footer do
+          = render 'partials/broadside_footer'
+
+      = cache_buster_script site
