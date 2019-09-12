@@ -1,5 +1,19 @@
 = area :main do
 
+  - if page.on_saturday?
+    - highlight_color = "c-pink"
+    - highlight_color_dark = "c-pink-dark"
+    - highlight_bg_color = "bg-pink"
+    - highlight_bg_color_dark = "bg-pink-dark"
+    - highlight_pattern = "heading-block__pattern--pink"
+
+  - if page.on_sunday?
+    - highlight_color = "c-blue"
+    - highlight_color_dark = "c-blue-dark"
+    - highlight_bg_color = "bg-blue"
+    - highlight_bg_color_dark = "bg-blue-dark"
+    - highlight_pattern = "heading-block__pattern--blue"
+
   - if page.slug == "teen-day"
     - highlight_color = "c-green"
     - highlight_color_dark = "c-green-dark"
@@ -19,10 +33,7 @@
 
       - if page.ticketing_stage
         / Event status
-        - if page.ticketing_stage == "Booked out"
-          span.bs-event__booked-out-flag class=highlight_bg_color_dark = page.ticketing_stage
-        - else
-          span.bs-event__ticketing-stage class=highlight_color = page.ticketing_stage
+        span.bs-event__booked-out-flag class=highlight_bg_color_dark = page.ticketing_stage
 
       h1.heading-block__heading.t-narrow class=highlight_color = page.event.title
 
@@ -36,19 +47,19 @@
       .bs-event
         .bs-event__share
           - unless page.slug == "teen-day"
-            .bs-label Share
+            .bs-label class=highlight_color_dark Share
             ul
               li
                 / twitter
-                a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+                a.ss-icon class=highlight_color target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
               li
                 / facebook
-                a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
+                a.ss-icon class=highlight_color target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
               li
                 / email
-                a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
+                a.ss-icon class=highlight_color href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
 
-        .bs-event__content.copy
+        .bs-event__content.copy class=highlight_color
           - if page.event.fields[:body].data_present?
             = render_content_in_sections page.event.fields[:body]
 
@@ -93,11 +104,11 @@
                   img.bs-speaker__image src=speaker_page.portrait_url
 
                 .bs-speaker__info
-                  .bs-speaker__title = speaker_page.title
+                  .bs-speaker__title class=highlight_color = speaker_page.title
                   .bs-speaker__meta
                     - if speaker_page.twitter_name
                       span = "@" + speaker_page.twitter_name
-                  .bs-speaker__intro.copy
+                  .bs-speaker__intro.copy class=highlight_color_dark
                     = speaker_page.biography
 
   .heading-block.heading-block--reverse
@@ -112,12 +123,14 @@
           a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
           ' .
       - else
-        h1.heading-block__heading.t-narrow
+        h1.heading-block__heading.t-narrow class=highlight_color
           ' Bookings
           br
           ' Open soon
-        p.heading-block__detail
-          ' Packages available now.
+        p.heading-block__detail class=highlight_color_dark
+          ' Packages
+          strong available now
+          ' .
           a href="/how" Find out more
 
     .heading-block__pattern class=highlight_pattern

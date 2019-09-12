@@ -88,13 +88,13 @@
 .bs-masthead__logo {
   width: 14rem;
   height: 7.4rem;
-  margin-left: 6rem;
+  margin-left: 16rem;
 }
 
 .breakpoint-w-768 .bs-masthead__logo {
   width: 9.5rem;
   height: 5rem;
-  margin-left: 4rem;
+  margin-left: 10.5rem;
 }
 
 .bs-masthead__logo-anchor {
