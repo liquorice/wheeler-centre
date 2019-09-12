@@ -83,7 +83,7 @@ module Heracles
           .where("(fields_data#>'{presenters, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: person.id)
           .where("fields_data->'start_date'->>'value' IS NOT ?", nil)
           .where("fields_data->'start_date'->>'value' >= ? ", Time.zone.now.beginning_of_day)
-          .order("fields_data->'start_date'->>'value' DESC NULLS LAST")
+          .order("fields_data->'start_date'->>'value' ASC NULLS LAST")
         end
       end
     end
