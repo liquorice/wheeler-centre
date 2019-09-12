@@ -68,10 +68,10 @@ namespace :temporary do
     end
 
     # Redirects from the WC event pages to the broadside event pages
-    events.each do |event_hash|
-      redirect = Heracles::Redirect.find_or_initialize_by(source_url: "/events/#{slugify(event_hash[:title])}")
-      redirect.source_url = "/events/#{slugify(event_hash[:title])}"
-      redirect.target_url = "/broadside/#{slugify(event_hash[:title])}"
+    events.each do |event|
+      redirect = Heracles::Redirect.find_or_initialize_by(source_url: "/events/#{slugify(event.title)}")
+      redirect.source_url = "/events/#{slugify(event.title)}"
+      redirect.target_url = "/broadside/#{slugify(event.title)}"
       redirect.site = site
       redirect.save!
     end
