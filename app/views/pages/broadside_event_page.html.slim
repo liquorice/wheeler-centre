@@ -1,4 +1,12 @@
 = area :main do
+
+  - if page.slug == "teen-day"
+    - highlight_color = "c-green"
+    - highlight_color_dark = "c-green-dark"
+    - highlight_bg_color = "bg-green"
+    - highlight_bg_color_dark = "bg-green-dark"
+    - highlight_pattern = "heading-block__pattern--green"
+
   .column-wrapper
     .column-wide
 
@@ -12,15 +20,13 @@
       - if page.ticketing_stage
         / Event status
         - if page.ticketing_stage == "Booked out"
-          span.bs-event__booked-out-flag = page.ticketing_stage
+          span.bs-event__booked-out-flag class=highlight_bg_color_dark = page.ticketing_stage
         - else
-          span.bs-event__ticketing-stage = page.ticketing_stage
+          span.bs-event__ticketing-stage class=highlight_color = page.ticketing_stage
 
-      h1.heading-block__heading.t-narrow = page.event.title
+      h1.heading-block__heading.t-narrow class=highlight_color = page.event.title
 
-    - if page.slug == "teen-day"
-      - pattern_class = "heading-block__pattern--green"
-    .heading-block__pattern class=pattern_class
+    .heading-block__pattern class=highlight_pattern
       - if page.event.promo_image
         img.heading-block__image src=page.event.promo_image.content_large_url
 
@@ -49,34 +55,36 @@
       .bs-event-meta
         .bs-event-meta-info
 
-          .bs-label When
-          .bs-event-meta-info__value
-            - if page.start_time
-              = page.start_time
-            span.t-normal
-              '  to
-              br
-            - if page.end_time
-              = page.end_time
+          - unless page.slug == "teen-day"
+            .bs-label class=highlight_color_dark When
+            .bs-event-meta-info__value class=highlight_color
+              - if page.start_time
+                = page.start_time
+              span.t-normal
+                '  to
+                br
+              - if page.end_time
+                = page.end_time
 
-          .bs-label Price
-          .bs-event-meta-info__value.t-upper
-            - if page.event.fields[:ticket_prices].data_present?
-              p = page.event.fields[:ticket_prices].value
+          - unless page.slug == "teen-day"
+            .bs-label class=highlight_color_dark Price
+            .bs-event-meta-info__value.t-upper class=highlight_color
+              - if page.event.fields[:ticket_prices].data_present?
+                p = page.event.fields[:ticket_prices].value
 
-          .bs-label Where
-          .bs-event-meta-info__value.t-upper
+          .bs-label class=highlight_color_dark Where
+          .bs-event-meta-info__value.t-upper class=highlight_color
             - if page.event && page.event.venue
               p = page.event.venue.title
 
           - unless page.slug == "teen-day"
-            .bs-label Type
-            .bs-event-meta-info__value.t-upper
+            .bs-label class=highlight_color_dark Type
+            .bs-event-meta-info__value.t-upper class=highlight_color
               - if page.event.fields[:broadside_type].data_present?
                 p = page.event.fields[:broadside_type].value
 
         .bs-event-meta-speakers
-          .bs-label Who
+          .bs-label class=highlight_color_dark Who
 
           - if page.broadside_speaker_pages
             - page.broadside_speaker_pages.each do |speaker_page|
@@ -95,13 +103,13 @@
   .heading-block.heading-block--reverse
     .heading-block__info
       - if page.slug == "teen-day"
-        h1.heading-block__heading.t-narrow
-          ' For more
+        h1.heading-block__heading.t-narrow class=highlight_color
+          ' More Info
+        p.heading-block__detail class=highlight_color_dark
+          ' To find out more about Teen Day
           br
-          ' Info
-        p.heading-block__detail
-          ' Contact us
-          a href="#" (add)
+          ' contact
+          a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
           ' .
       - else
         h1.heading-block__heading.t-narrow
@@ -111,5 +119,5 @@
         p.heading-block__detail
           ' Packages available now.
           a href="/how" Find out more
-          ' .
-    .heading-block__pattern
+
+    .heading-block__pattern class=highlight_pattern

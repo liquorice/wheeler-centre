@@ -11,8 +11,11 @@
 
   --primary-color: #ff6c2f;
   --pink-color: #ED6998;
+  --pink-color-dark: #6F2E45;
   --blue-color: #8998CC;
+  --blue-color-dark: #444B67;
   --green-color: #00A651;
+  --green-color-dark: #26563D;
   --grey-color: #222222;
   --white-color: #ffffff;
 }

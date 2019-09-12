@@ -49,3 +49,11 @@
 .bg-green {
   background-color: var(--green-color);
 }
+
+.c-green-dark {
+  color: var(--green-color-dark);
+}
+
+.bg-green-dark {
+  background-color: var(--green-color-dark);
+}
