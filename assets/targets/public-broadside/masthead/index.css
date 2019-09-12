@@ -33,7 +33,17 @@
 }
 
 .bs-menu-toggle {
+  position: absolute;
+  z-index: 1000;
   color: var(--primary-color);
+}
+
+.bs-menu--active .bs-menu-toggle span {
+  display: none;
+}
+
+.bs-menu--active .bs-menu-toggle:after {
+  content: "Hide";
 }
 
 .bs-menu-toggle:hover {
@@ -116,7 +126,7 @@
   background-color: var(--primary-color);
 }
 
-.bs-main-nav--active {
+.bs-menu--active .bs-main-nav {
   align-items: center;
   bottom: 0;
   display: flex;
@@ -126,7 +136,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bs-main-nav ul {
