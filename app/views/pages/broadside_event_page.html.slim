@@ -18,7 +18,9 @@
 
       h1.heading-block__heading.t-narrow = page.event.title
 
-    .heading-block__pattern
+    - if page.slug == "teen-day"
+      - pattern_class = "heading-block__pattern--green"
+    .heading-block__pattern class=pattern_class
       - if page.event.promo_image
         img.heading-block__image src=page.event.promo_image.content_large_url
 
@@ -27,17 +29,18 @@
 
       .bs-event
         .bs-event__share
-          .bs-label Share
-          ul
-            li
-              / twitter
-              a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
-            li
-              / facebook
-              a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
-            li
-              / email
-              a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
+          - unless page.slug == "teen-day"
+            .bs-label Share
+            ul
+              li
+                / twitter
+                a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+              li
+                / facebook
+                a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
+              li
+                / email
+                a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
 
         .bs-event__content.copy
           - if page.event.fields[:body].data_present?
@@ -56,7 +59,7 @@
             - if page.end_time
               = page.end_time
 
-          .bs-label When
+          .bs-label Price
           .bs-event-meta-info__value.t-upper
             - if page.event.fields[:ticket_prices].data_present?
               p = page.event.fields[:ticket_prices].value
@@ -66,10 +69,11 @@
             - if page.event && page.event.venue
               p = page.event.venue.title
 
-          .bs-label Type
-          .bs-event-meta-info__value.t-upper
-            - if page.event.fields[:broadside_type].data_present?
-              p = page.event.fields[:broadside_type].value
+          - unless page.slug == "teen-day"
+            .bs-label Type
+            .bs-event-meta-info__value.t-upper
+              - if page.event.fields[:broadside_type].data_present?
+                p = page.event.fields[:broadside_type].value
 
         .bs-event-meta-speakers
           .bs-label Who
@@ -90,12 +94,22 @@
 
   .heading-block.heading-block--reverse
     .heading-block__info
-      h1.heading-block__heading.t-narrow
-        ' Bookings
-        br
-        ' Open soon
-      p.heading-block__detail
-        ' Packages available now.
-        a href="how" Find out more
-        ' .
+      - if page.slug == "teen-day"
+        h1.heading-block__heading.t-narrow
+          ' For more
+          br
+          ' Info
+        p.heading-block__detail
+          ' Contact us
+          a href="#" (add)
+          ' .
+      - else
+        h1.heading-block__heading.t-narrow
+          ' Bookings
+          br
+          ' Open soon
+        p.heading-block__detail
+          ' Packages available now.
+          a href="/how" Find out more
+          ' .
     .heading-block__pattern

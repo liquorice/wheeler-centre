@@ -104,6 +104,12 @@
   display: none;
 }
 
+/* Teen version */
+
+.bs-teen .bs-masthead__logo-anchor {
+  background-image: url(masthead-logo--teen.svg);
+}
+
 /* Main nav */
 
 .bs-main-nav {
@@ -147,9 +153,6 @@
 
 .bs-home .bs-main-nav li a {
   color: var(--white-color);
-  font-weight: 500;
-  text-transform: uppercase;
-  display: inline-block;
 }
 
 .bs-main-nav--what {

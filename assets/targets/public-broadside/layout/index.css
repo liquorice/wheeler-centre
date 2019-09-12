@@ -106,6 +106,10 @@
   background-image: url('pattern-pink.png');
 }
 
+.heading-block__pattern--green {
+  background-image: url('pattern-green.png');
+}
+
 .breakpoint-w-768 .heading-block__pattern {
   height: 10rem;
   width: 100%;

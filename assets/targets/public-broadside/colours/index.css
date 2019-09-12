@@ -41,3 +41,11 @@
 .bg-blue {
   background-color: var(--blue-color);
 }
+
+.c-green {
+  color: var(--green-color);
+}
+
+.bg-green {
+  background-color: var(--green-color);
+}
