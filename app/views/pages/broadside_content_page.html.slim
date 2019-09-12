@@ -16,4 +16,4 @@
                 = nav_page.title
 
       - if page.fields[:body].data_present?
-        p = render_content page.fields[:body]
+        p = render_content_in_sections page.fields[:body]
