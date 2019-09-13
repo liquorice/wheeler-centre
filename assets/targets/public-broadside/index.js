@@ -1,5 +1,6 @@
 require("es5-shim");
 var viewloader = require("viewloader");
+var promoParamsLinkChecker = require("../public/promo-parameters");
 
 var views = {};
 
@@ -9,4 +10,7 @@ views.navToggle = function(el, props) {
 };
 
 // Kick things off
-domready(viewloader.execute.bind(this, views));
+domready(function onDomReady() {
+  viewloader.execute(views);
+  promoParamsLinkChecker();
+});
