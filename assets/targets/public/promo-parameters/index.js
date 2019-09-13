@@ -8,6 +8,7 @@ var parsedURL = new Url(window.location, true);
 if (parsedURL.query.promo != null) {
   cookie(COOKIE_NAME, parsedURL.query.promo, {
     path: "/",
+    domain: ".wheelercentre.com", // This ensures we share across domains but will stop things working locally
     maxage: COOKIE_MAX_AGE_IN_MS
   });
 }
