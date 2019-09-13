@@ -157,65 +157,23 @@
 
 .bs-main-nav ul li {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .bs-main-nav li a {
   color: var(--primary-color);
   font-weight: 500;
   text-transform: uppercase;
-  display: inline-block;
+  display: block;
+  font-size: 10rem;
+  line-height: 10rem;
 }
 
-.bs-home .bs-main-nav li a {
-  color: var(--white-color);
-}
-
-.bs-main-nav--what {
+.breakpoint-w-768 .bs-main-nav li a {
   font-size: 7rem;
   line-height: 7rem;
 }
 
-.breakpoint-w-768 .bs-main-nav--what {
-  font-size: 5rem;
-  line-height: 5rem;
-}
-
-.bs-main-nav--when {
-  font-size: 20rem;
-  line-height: 20rem;
-}
-
-.breakpoint-w-768 .bs-main-nav--when {
-  font-size: 12rem;
-  line-height: 12rem;
-}
-
-.bs-main-nav--who {
-  font-size: 5rem;
-  line-height: 5rem;
-}
-
-.breakpoint-w-768 .bs-main-nav--who {
-  font-size: 6rem;
-  line-height: 6rem;
-}
-
-.bs-main-nav--how {
-  font-size: 20rem;
-  line-height: 20rem;
-}
-
-.breakpoint-w-768 .bs-main-nav--how {
-  font-size: 12rem;
-  line-height: 12rem;
-}
-
-.bs-main-nav--teen {
-  font-size: 5rem;
-  line-height: 5rem;
-}
-
-.breakpoint-w-768 .bs-main-nav--teen {
-  font-size: 3rem;
-  line-height: 3rem;
+.bs-home .bs-main-nav li a {
+  color: var(--white-color);
 }
