@@ -26,6 +26,9 @@
             - page.saturday_event_pages.each do |event_page|
               = render "partials/broadside_event", event_page: event_page
 
+          h4.bs-heading.t-center
+            a href="/how" Ticket packages available →
+
     // SUN NOV 10
     .heading-block.heading-block--reverse
       .heading-block__info
@@ -41,3 +44,6 @@
           - if page.sunday_event_pages
             - page.sunday_event_pages.each do |event_page|
               = render "partials/broadside_event", event_page: event_page
+
+          h4.bs-heading.t-center
+            a href="/how" Ticket packages available →
