@@ -64,3 +64,13 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+.bs-first-nations {
+  border-top: 1px solid;
+  padding-top: 3rem;
+}
+
+
+.bs-first-nations .bs-heading {
+  margin-bottom: 1rem;
+}
