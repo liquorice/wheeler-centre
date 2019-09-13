@@ -10,7 +10,10 @@ module Heracles
         end
 
         def speaker_pages
-          site.pages.of_type(:broadside_speaker_page)
+          # n+1
+          site.pages.of_type(:broadside_speaker_page).sort_by do |bsp|
+            bsp.person.fields[:last_name].value
+          end
         end
 
         def absolute_url
