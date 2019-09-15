@@ -74,14 +74,14 @@
 
           - unless page.slug == "teen-day"
             .bs-label class=highlight_color_dark When
-            .bs-event-meta-info__value class=highlight_color
-              - if page.start_time
-                = page.start_time
-              span.t-normal
-                '  to
-                br
-              - if page.end_time
-                = page.end_time
+            .bs-event-meta-info__value.t-upper class=highlight_color
+
+              - if page.event.fields[:display_date].value.present?
+                time.event__date-time itemprop="startDate" datetime=(l(page.event.fields[:start_date].value_in_time_zone, format: :rfc_3339) if page.event.fields[:start_date].data_present?)
+                  = page.event.fields[:display_date].value
+              - else
+                time.event__date-time itemprop="startDate" datetime=(l(page.event.fields[:start_date].value_in_time_zone, format: :rfc_3339) if page.event.fields[:start_date].data_present?)
+                  = format_date(page.event.fields[:start_date].value_in_time_zone, page.event.fields[:end_date].value_in_time_zone, format: "day_short_name_and_date")
 
           - unless page.slug == "teen-day"
             - if page.event.fields[:ticket_prices].data_present?
