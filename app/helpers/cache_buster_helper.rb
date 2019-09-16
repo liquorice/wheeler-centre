@@ -8,6 +8,8 @@ module CacheBusterHelper
     request_path = request.path
     if request.host =~ /^thenextchapter/
       request_path.gsub!(/^\/thenextchapter/, "")
+    elsif request.host =~ /^broadside/
+      request_path.gsub!(/^\/broadside/, "")
     end
 
     src = "//#{site.primary_origin_hostname}/_check/#{host}#{request_path}/_check.js#{('?' + request.query_string) if request.query_string.present?}"
