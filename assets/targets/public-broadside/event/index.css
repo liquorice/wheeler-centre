@@ -183,3 +183,17 @@
   margin-bottom: 3rem;
   color: var(--green-color-dark);
 }
+
+/* Teen day pdf button */
+
+.bs-teen-day-pdf {
+  color: var(--white-color);
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 3rem;
+  padding: 2rem 4rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
