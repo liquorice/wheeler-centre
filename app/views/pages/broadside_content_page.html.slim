@@ -7,7 +7,7 @@
       description: "Two days of an unapologetically feminist agenda", \
       image: { \
         url: image_url("public-broadside/bs-open-graph.png"), \
-        secure_url: image_url("public-broadside/bs-open-graph.png"), \
+        secure_url: image_url("public-broadside/bs-open-graph.png").gsub(/^http/, "https"), \
         width: "666", \
         height: "404", \
       } \

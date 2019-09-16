@@ -1,3 +1,15 @@
+- if request.fullpath == "/broadside"
+  - canonical_url = "https://broadside.wheelercentre.com"
+- else
+  - canonical_url = "https://broadside.wheelercentre.com#{request.fullpath.gsub(/^\/broadside/, "")}"
+
+- set_meta_tags({ \
+    canonical: canonical_url, \
+    og: { \
+      url: canonical_url \
+    } \
+  })
+
 doctype 5
 html#nc lang="en"
   head
@@ -9,7 +21,6 @@ html#nc lang="en"
     link rel="dns-prefetch" href="//cdn.embedly.com"
     link rel="dns-prefetch" href="//www.youtube.com"
 
-    link rel="canonical" href="#{canonical_domain}#{request.fullpath}"
 
     = display_meta_tags site: "",
                         separator: "—",
