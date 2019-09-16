@@ -23,6 +23,7 @@
 .breakpoint-w-768 .bs-footer-nav {
   margin-bottom: 0;
   font-size: 1.2rem;
+  width: 100%;
 }
 
 .bs-footer-nav__group {
