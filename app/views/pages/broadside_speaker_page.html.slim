@@ -1,6 +1,6 @@
 / Custom meta data
 - open_graph_image = page.image
-- open_graph_summary = strip_html(page.biography, "")
+- open_graph_summary = strip_html(page.biography, "").strip
 
 - set_meta_tags({ \
     title: page.title, \
