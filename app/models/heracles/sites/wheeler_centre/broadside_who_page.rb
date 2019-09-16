@@ -10,9 +10,12 @@ module Heracles
         end
 
         def speaker_pages
-          # n+1
+          # n+1 (had to code this quick :grimace:)
           site.pages.of_type(:broadside_speaker_page).sort_by do |bsp|
-            bsp.person.fields[:last_name].value
+            bsp.person.fields[:first_name].value
+          end.reject do |bsp|
+            ["Evelyn Araluen", "An Dang", "Denise Chapman", "Amrita Hepi", "Karen Pickering", "Reni Louise-Permadi", "Eloise Grills", "Claire G. Coleman"].
+              include? bsp.title
           end
         end
 
