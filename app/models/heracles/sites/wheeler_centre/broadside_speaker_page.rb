@@ -27,6 +27,12 @@ module Heracles
           end
         end
 
+        def image
+          if person && person.fields[:portrait].data_present?
+            person.fields[:portrait].assets.first
+          end
+        end
+
         def large_url
           if person && person.fields[:portrait].data_present?
             person.fields[:portrait].assets.first.content_large_url
