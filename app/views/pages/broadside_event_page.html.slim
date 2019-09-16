@@ -95,11 +95,11 @@
           - if page.event.fields[:body].data_present?
             = render_content_in_sections page.event.fields[:body]
 
-            - if page.slug == "teen-day"
-              a.bs-teen-day-pdf.bg-green download="" target="_blank" href=image_url('https://wheeler-centre-heracles.s3.amazonaws.com/03c/525/7a4/03c5257a4cfb3f3f2cc7ef637f3305e94b3094cb7becdde4321e97ded74c/2019_Broadside_Teen%20Day%20Programme.pdf')
-                  ' Download
-                  br
-                  ' Program
+          - if page.slug == "teen-day"
+            a.bs-teen-day-pdf.bg-green download="" target="_blank" href=image_url('https://wheeler-centre-heracles.s3.amazonaws.com/03c/525/7a4/03c5257a4cfb3f3f2cc7ef637f3305e94b3094cb7becdde4321e97ded74c/2019_Broadside_Teen%20Day%20Programme.pdf')
+                ' Download
+                br
+                ' Program
 
   .column-wrapper
     .column-wide
