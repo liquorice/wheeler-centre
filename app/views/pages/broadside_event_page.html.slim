@@ -170,22 +170,19 @@
           ' contact
           a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
           ' .
-      - elsif page.slug == "up-late"
-        h1.heading-block__heading.t-narrow class=highlight_color
-          ' ON SALE
-          br
-          ' MON 23 SEPT
-        p.heading-block__detail class=highlight_color_dark
-          ' Single event tickets available from
-          strong Monday 23 September
       - else
         h1.heading-block__heading.t-narrow class=highlight_color
           a href="/how"
             ' Book
             br
-            ' your pass
-        p.heading-block__detail class=highlight_color_dark
-          ' Single event tickets available from
-          strong Monday 23 September
+            ' now
+        - unless page.slug == "up-late"
+          p.heading-block__detail class=highlight_color_dark
+            strong
+              a href="/how" Buy a pass and save!
+            '  Limited quantities now available.
 
     .heading-block__pattern class=highlight_pattern
+
+
+
