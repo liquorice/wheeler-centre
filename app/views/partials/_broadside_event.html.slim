@@ -27,4 +27,9 @@ a.bs-calendar__item href=event_page.absolute_url
       - heading_class = "t-narrow"
     h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
       = event_page.title
+    - if event_page.ticketing_stage
+      - ticketing_stage_class = "bs-event__ticketing-stage--#{event_page.ticketing_stage.downcase.gsub(" ", "-")}"
+      / Event status
+      span.bs-event__ticketing-stage class=[highlight_bg_color_dark, ticketing_stage_class]
+        = event_page.ticketing_stage
     p.bs-calendar__event-speakers class=highlight_color_dark = event_page.speaker_names
