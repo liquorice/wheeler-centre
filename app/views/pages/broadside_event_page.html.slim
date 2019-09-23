@@ -64,8 +64,10 @@
     .heading-block__info
 
       - if page.ticketing_stage
+        - ticketing_stage_class = "bs-event__ticketing-stage--#{page.ticketing_stage.downcase.gsub(" ", "-")}"
         / Event status
-        span.bs-event__booked-out-flag class=highlight_bg_color_dark = page.ticketing_stage
+        span.bs-event__ticketing-stage class=[highlight_bg_color_dark, ticketing_stage_class]
+          = page.ticketing_stage
 
       h1.heading-block__heading.t-narrow class=highlight_color = page.event.title
 
@@ -171,12 +173,18 @@
           a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
           ' .
       - else
-        h1.heading-block__heading.t-narrow class=highlight_color
-          a itemprop="offerurl" href=page.external_bookings
-            ' Book
+        - if page.event.booked_out?
+          h1.heading-block__heading.t-narrow class=highlight_color
+            ' Booked
             br
-            ' now
-        - unless page.slug == "up-late"
+            ' out
+        - else
+          h1.heading-block__heading.t-narrow class=highlight_color
+            a itemprop="offerurl" href=page.external_bookings
+              ' Book
+              br
+              ' now
+        - unless page.slug == "up-late" || page.event.booked_out?
           p.heading-block__detail class=highlight_color_dark
             strong
               a href="/how" Buy a pass and save!
