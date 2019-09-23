@@ -67,6 +67,12 @@ module Heracles
           end
         end
 
+        def external_bookings
+          if event && event.fields[:external_bookings].data_present?
+            event.fields[:external_bookings].value
+          end
+        end
+
         def absolute_url
           super.gsub(/^\/broadside/, "")
         end
