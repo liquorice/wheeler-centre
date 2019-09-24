@@ -34,7 +34,7 @@
 
 .bs-event__ticketing-stage--booking-fast {
   background-color: color(var(--primary-color) tint(85%));
-  color: var(--primary-color);
+  color: #FFFFFF;
 }
 
 .bs-event__ticketing-stage--booked-out {
