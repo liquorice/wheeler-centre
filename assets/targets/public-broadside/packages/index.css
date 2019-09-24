@@ -66,11 +66,38 @@
 }
 
 .bs-first-nations {
-  border-top: 1px solid;
-  padding-top: 3rem;
 }
 
 
 .bs-first-nations .bs-heading {
   margin-bottom: 1rem;
+}
+
+/* Booked out package */
+
+.bs-package--booked-out {
+  position: relative;
+}
+
+.bs-package--booked-out .heading-block,
+.bs-package--booked-out .column-wrapper {
+  opacity: 0.25;
+}
+
+.bs-package__booked-out {
+  font-family: var(--font-narrow);
+  font-size: 8rem;
+  font-weight: 500;
+  height: 18rem;
+  left: 50%;
+  line-height: 8rem;
+  margin-left: -16rem;
+  margin-top: -9rem;
+  position: absolute;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 50%;
+  width: 32rem;
+  z-index: 99;
 }

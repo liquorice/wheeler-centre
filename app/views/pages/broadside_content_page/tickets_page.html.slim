@@ -61,21 +61,18 @@
             .bs-package__price-value
               ' From $10
 
-            p.bs-package__small-print
-              ' (If 'Up Late' books out, From $20)
-
           .bs-package__button.t-narrow
             a.bg-orange href="/when"
               ' Book
               br
               ' Tickets
 
-  / WEEKEND PASS
+  / 3-PLUS PASS
   .bs-package
     .heading-block.heading-block--reverse
       .heading-block__info
         h1.heading-block__heading.t-narrow
-          ' Weekend
+          ' 3-plus
           br
           ' pass
       .heading-block__pattern
@@ -85,31 +82,30 @@
 
         .bs-package__copy.copy
           p
-            ' Weekend Pass – 
-            span.t-bold Save 25% 
-            ' on single tickets across two days, including all sessions in the Melbourne Town Hall.*
-
-          ul
-            li A limited edition Broadside tote bag available for collection at Melbourne Town Hall during event time only.
+            ' 3-Plus Pass – Can’t make it to everything?
+            span.t-bold Save 10% 
+            ' on select single tickets if you purchase tickets to three or more events across the weekend.
 
           p.bs-package__small-print
-            ' * Excludes access to Up Late.
+            ' * Please note, tickets to Monica Lewinsky and Up Late are not included in this pass.
 
       .column-wide
         .bs-label Price
         .bs-package__info
           .bs-package__price
             .bs-package__price-value
-              ' $217.50 Adult
+              ' From
               br
-              ' $180 Concession
+              ' $67.50 Adult
+              br
+              ' $54 Concession
             p.bs-package__small-print Plus a one-off transaction fee of $4.00 per order
 
           .bs-package__button.t-narrow
-            a.bg-orange href="https://my.wheelercentre.com/packages/fixed/16"
+            a.bg-orange href="https://my.wheelercentre.com/packages/flex/19"
               ' Book
               br
-              ' Weekend pass
+              ' 3-plus pass
 
   / SATURDAY PASS
   .bs-package
@@ -153,7 +149,11 @@
               ' Saturday pass
 
   / SUNDAY PASS
-  .bs-package
+  .bs-package.bs-package--booked-out
+    .bs-package__booked-out
+      ' Booked
+      br
+      ' out
     .heading-block.heading-block--reverse
       .heading-block__info
         h1.heading-block__heading.t-narrow.c-blue
@@ -185,17 +185,22 @@
             p.bs-package__small-print.c-blue-dark Plus a one-off transaction fee of $4.00 per order
 
           .bs-package__button.t-narrow
-            a.bg-blue href="https://my.wheelercentre.com/packages/fixed/18"
-              ' Book
+            a.bg-blue
+              ' Booked
               br
-              ' Sunday pass
+              ' out
 
-  / 3-PLUS PASS
-  .bs-package
+
+  / WEEKEND PASS
+  .bs-package.bs-package--booked-out
+    .bs-package__booked-out
+      ' Booked
+      br
+      ' out
     .heading-block
       .heading-block__info
         h1.heading-block__heading.t-narrow
-          ' 3-plus
+          ' Weekend
           br
           ' pass
       .heading-block__pattern
@@ -205,30 +210,32 @@
 
         .bs-package__copy.copy
           p
-            ' 3-Plus Pass – Can’t make it to everything?
-            span.t-bold Save 10% 
-            ' on select single tickets if you purchase tickets to three or more events across the weekend.
+            ' Weekend Pass – 
+            span.t-bold Save 25% 
+            ' on single tickets across two days, including all sessions in the Melbourne Town Hall.*
+
+          ul
+            li A limited edition Broadside tote bag available for collection at Melbourne Town Hall during event time only.
 
           p.bs-package__small-print
-            ' * Please note, tickets to Monica Lewinsky and Up Late are not included in this pass.
+            ' * Excludes access to Up Late.
 
       .column-wide
         .bs-label Price
         .bs-package__info
           .bs-package__price
             .bs-package__price-value
-              ' From
+              ' $217.50 Adult
               br
-              ' $67.50 Adult
-              br
-              ' $54 Concession
+              ' $180 Concession
             p.bs-package__small-print Plus a one-off transaction fee of $4.00 per order
 
           .bs-package__button.t-narrow
-            a.bg-orange href="https://my.wheelercentre.com/packages/flex/19"
-              ' Book
+            a.bg-orange
+              ' Booked
               br
-              ' 3-plus pass
+              ' out
+
 
   .column-wrapper
     .column-narrow
