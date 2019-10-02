@@ -31,7 +31,7 @@ function onLinkClick(e) {
     e.preventDefault();
     parsedLinkURL.set(
       "query",
-      Object.assign({}, parsedLinkURL.query, { promo: promoCode })
+      Object.assign({}, parsedLinkURL.query, { promo: promoCode, premove: "Y" })
     );
     visitLink(parsedLinkURL.toString(), openInNewWindow);
   } else if (
@@ -45,7 +45,7 @@ function onLinkClick(e) {
     var parsedTrackingTargetURL = new Url(parsedLinkURL.query.target);
     parsedTrackingTargetURL.set(
       "query",
-      Object.assign({}, parsedTrackingTargetURL.query, { promo: promoCode })
+      Object.assign({}, parsedTrackingTargetURL.query, { promo: promoCode, premove: "Y" })
     );
     // Then set that value in the tracking URL
     parsedLinkURL.set(
