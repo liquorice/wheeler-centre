@@ -1,6 +1,6 @@
 / Custom meta data
 - open_graph_image = page.image
-- open_graph_summary = strip_html(page.biography, "").strip
+- open_graph_summary = strip_html(page.intro, "").strip
 
 - set_meta_tags({ \
     title: page.title, \
@@ -56,8 +56,10 @@
 
   .column-wrapper
     .column-narrow
-      - if page.biography
-        .bs-speaker__bio.copy
+      .bs-speaker__bio.copy
+        - if page.intro
+          = page.intro
+        - if page.biography
           = page.biography
 
     .column-wide

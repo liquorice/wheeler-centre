@@ -14,10 +14,15 @@ module Heracles
           fields[:person].pages.first
         end
 
-        def biography
-          # seems like intro is what's used mostly
+        def intro
           if person && person.fields[:intro].data_present?
             person.fields[:intro].value
+          end
+        end
+
+        def biography
+          if person && person.fields[:biography].data_present?
+            person.fields[:biography].value
           end
         end
 
