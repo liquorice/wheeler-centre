@@ -2,7 +2,7 @@ var cookie = require("component-cookie");
 var delegate = require("delegate");
 var Url = require("url-parse");
 
-COOKIE_DOMAIN = "localhost";
+COOKIE_DOMAIN = ".wheelercentre.com";
 var PROMO_COOKIE_NAME = "promo-parameter";
 var PROMO_COOKIE_MAX_AGE_IN_MS = 3 * 24 * 60 * 60 * 1000;
 var CLICKED_COOKIE_NAME = "promo-last-clicked";
