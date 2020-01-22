@@ -7,7 +7,7 @@
       .subscribe-popup__inner
         .simple-subscribe.column-wrapper data-view-subscribe-form=true
           .simple-subscribe__inner.column-wide
-            form.clearfix action="http://tracking.wordfly.com/join/wheelercentre" method="post"
+            form.clearfix action="https://tracking.wordfly.com/join/wheelercentre" method="post"
               label.simple-subscribe__label.copy
                 - if settings_page.fields[:subscribe_popup_intro].data_present?
                   = render_content settings_page.fields[:subscribe_popup_intro], image: {version: :content_small}
