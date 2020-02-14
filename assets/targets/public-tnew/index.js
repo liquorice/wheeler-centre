@@ -41,7 +41,7 @@ domready(function onDomReady() {
   viewloader.execute(views);
 
   // Redirect my.wheelercentre.com/events to www.wheelercentre.com/events
-  if (window.location.pathname === "/events") {
+  if (window.location.pathname === "/events" && window.location.hostname === "my.wheelercentre.com") {
     window.location = "https://www.wheelercentre.com/events";
   }
 });
