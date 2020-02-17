@@ -1,0 +1,84 @@
+// Admin: Pages ----------------------------------------------------------------
+
+.page-path {
+  @include font-size(18);
+  @include pad(vert, normal);
+  display: flex;
+  flex: 1;
+  float: left;
+  font-family: $font-alternate;
+  .fa {
+    @include font-size(16);
+    margin-top: 0.3rem;
+  }
+}
+.page-path__parent {
+  padding-left: 0.5rem;
+  color: $grey-mid;
+  a:hover {
+    color: $primary;
+    text-decoration: underline;
+  }
+}
+
+.page-path__slug {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  line-height: 1;
+  display: inline;
+  height: auto;
+  margin-top: -1px;
+  padding: 0;
+  flex: 1;
+}
+
+.page-public-link {
+  color: $green-highlight-dark;
+  position: relative;
+  &:hover {
+    color: $highlight;
+    span {
+      opacity: 1;
+      transform: translate3d(0,0,0);
+    }
+  }
+  span {
+    @include pad(horz, small);
+    @include pad(vert, tiny);
+    @include inset(top, small);
+    @include font-size(12);
+    color: $white;
+    background-color: $highlight;
+    border-radius: 2px;
+    font-family: $font-main;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transform: translate3d(0,20px,0);
+    transition-property: opacity, transform;
+    transition-duration: 80ms;
+    transition-delay: 10ms;
+    transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1);
+    position: absolute;
+    pointer-events: none;
+    text-align: center;
+    top: 100%;
+    width: 120px;
+    z-index: 1;
+    &:after {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: $highlight;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+  }
+}

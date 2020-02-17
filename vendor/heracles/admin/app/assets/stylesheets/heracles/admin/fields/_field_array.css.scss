@@ -1,0 +1,66 @@
+// Admin: Field Array ----------------------------------------------------------
+
+.field-array {
+  .field-fallback {
+    @include inset(top, small);
+  }
+}
+
+.field-array__items {
+  @include inset(top, smaller);
+}
+
+.field-array__item {
+  @include inset(bottom, tiny);
+  @include pad(vert, small);
+  @include pad(horz, small);
+  // border: 1px solid $grey-soft;
+  background-color: $grey-bg;
+  border-radius: 2px;
+  font-family: $font-alternate;
+  line-height: 1.2;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  &:hover {
+    background-color: $green-light;
+    cursor: move;
+  }
+}
+  .field-array__item--editing {
+    background-color: $green-light;
+  }
+
+  .field-array__item-label {}
+
+  .field-array__item-buttons {
+    float: right;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(15px, 0, 0);
+    transition-property: opacity, transform;
+    transition-duration: 120ms;
+    transition-timing-function: linear, cubic-bezier(0.175, 0.665, 0.320, 1);
+    .field-array__item:hover & {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+.field-array__add-items {
+  @include pad(top, small);
+}
+
+.field-array__cancel {
+  @include pad(top, small);
+  @include pad(left, tiny);
+}
+.field-array__cancel-button {
+  @include pad(left, tiny);
+  color: $primary;
+  text-decoration: underline;
+  &:hover {
+    color: $highlight;
+  }
+}

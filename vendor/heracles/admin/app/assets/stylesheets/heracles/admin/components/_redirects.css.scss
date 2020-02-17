@@ -1,0 +1,167 @@
+// Redirects -------------------------------------------------------------------
+
+.redirects {}
+
+.redirects-list {
+  @include pad(top, small);
+  @include outset(horz, normal);
+  // @include pad(horz, small);
+  // border: 1px solid $green-mid;
+}
+  .redirects-list__empty {
+    @include inset(horz, normal);
+    @include pad(top, normal);
+    @include font-size(18);
+    @include standard-links;
+    border-top: 1px solid $grey-light;
+  }
+
+.redirects-list__li {
+}
+  .redirects-list__add {
+    display: block;
+    height: 20px;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      margin-top: -1px;
+      border-bottom: 1px solid transparent;
+    }
+    &:hover {
+      &:before {
+        border-color: $green-mid;
+      }
+      span {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+      }
+    }
+    span {
+      margin-right: 10px;
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      opacity: 0;
+      transform: translate3d(-20px,0,0);
+      transition: all 150ms cubic-bezier(0.175, 0.665, 0.320, 1);
+      &:after {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(255, 0, 153, 0);
+        border-left-color: #97bcc4;
+        border-width: 5px;
+        margin-top: -5px;
+      }
+    }
+  }
+
+.redirects-list-item {
+  @include pad(vert, smaller);
+  @include pad(horz, normal);
+  background-color: $grey-soft;
+  outline: 0 solid $green-mid;
+  position: relative;
+  transition: outline 60ms linear;
+}
+  .redirects-list-item--editing {
+    outline: 2px solid $green-mid;
+  }
+  .redirects-list-item__saving {
+    @include font-size(18);
+    background-color: rgba($white, 0.9);
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    padding-top: 60px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    transition: opacity 80ms linear 100ms;
+    top: 0;
+    z-index: 1;
+    i {
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      position: absolute;
+    }
+    span {
+      @include pad(left, medium);
+      display: inline-block;
+    }
+    .redirects-list-item--saving & {
+      opacity: 1;
+      pointer-events: inherit;
+    }
+  }
+
+  .redirects-list-item__inputs {
+    @include clearfix-micro;
+    position: relative;
+    label {
+      @include pad(bottom, tiny);
+      display: block;
+    }
+    input {
+      transition: all 60ms linear;
+      .redirects-list-item--closed & {
+        @include pad(vert, tiny);
+        @include pad(horz, small);
+        background-color: lighten($grey-soft, 2%);
+        border-color: darken($grey-soft, 4%);
+        box-shadow: none;
+        height: 3.5rem;
+      }
+    }
+  }
+    .redirects-list-item__sort-handle {
+      position: absolute;
+      right: -5px;
+      top: 0;
+    }
+
+    .redirects-list-item__source-url {
+      float: left;
+      margin-right: -1px;
+      width: 50%;
+    }
+    .redirects-list-item__target-url {
+      float: left;
+      width: 50%;
+    }
+  .redirects-list-item__controls {
+    @include pad(top, small);
+    @include clearfix-micro;
+    @include standard-links;
+    opacity: 0;
+    max-height: 0;
+    transition-property: opacity, max-height;
+    transition-duration: 200ms;
+    transition-timing-function: linear, cubic-bezier(0.175, 0.665, 0.320, 1);
+    overflow: hidden;
+    .redirects-list-item--editing & {
+      opacity: 1;
+      max-height: 50px;
+    }
+  }
+    .redirects-list-item__save {
+      @include inset(right, small);
+    }
+    .redirects-list-item__cancel {
+      @include inset(left, tiny);
+    }
+    .redirects-list-item__delete {
+      float: right;
+      margin-top: 8px;
+    }

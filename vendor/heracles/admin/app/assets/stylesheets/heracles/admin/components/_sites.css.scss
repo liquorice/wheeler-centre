@@ -1,0 +1,53 @@
+.sites-index {
+  @include pad(vert, large);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  width: 60%;
+}
+
+  .sites-index__title {
+    @extend .large-title;
+    @include inset(bottom, mid);
+    @include font-size(24);
+    @include standard-links;
+    text-align: center;
+  }
+
+.sites-index-item {
+  @include clearfix;
+  @include pad(vert, tiny);
+  border-top: 1px solid $green-light;
+  text-align: center;
+  position: relative;
+}
+  .sites-index-item__anchor {
+    @include pad(vert, mid);
+    display: block;
+    transition-property: background-color;
+    transition-duration: 200ms;
+    &:hover {
+      background-color: rgba($green-mid , 0.15);
+    }
+  }
+  .sites-index-item__title {
+    @include font-size(28);
+    color: $primary;
+    font-family: $font-alternate;
+    a:hover & {
+      color: $highlight;
+      // text-decoration: underline;
+    }
+  }
+  .sites-index-item__edit {
+    margin-top: -20px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+  }
+
+
+.site__delete {
+  @include inset(top, tiny);
+  float: right;
+}

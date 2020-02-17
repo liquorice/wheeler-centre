@@ -1,0 +1,18 @@
+source "https://rubygems.org"
+source "https://rails-assets.org"
+
+# Load dependencies from the gemspec
+gemspec
+
+# Database
+gem "pg"
+
+gem "varnisher", "~> 1.1.0"
+
+gem "capybara"
+gem "database_cleaner"
+gem "factory_girl_rails"
+gem "rspec-rails", "~> 3.3.0"
+gem "rspec-activemodel-mocks", github: "rspec/rspec-activemodel-mocks" # remove this when 1.0.2 actually hits rubygems
+gem "shoulda-matchers"
+gem "simplecov"

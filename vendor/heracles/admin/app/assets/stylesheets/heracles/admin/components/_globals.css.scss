@@ -1,0 +1,60 @@
+// Global variables -------------------
+
+
+// Colours ----------------------------
+
+$body-background: #fff;
+$body-text:       #444;
+$white:           #fff;
+
+$primary:   #003840;
+$highlight: #ff383f;
+$highlight-light: lighten(#ff383f, 5%);
+$warning:   $highlight;
+$notice:    #23EEC3;
+$success:   #eae152;
+$yellow:    #f9d633;
+
+$grey-bg:    #f7f7f7;
+$grey-soft:  #eff2f2;
+$grey-light: #ddd;
+$grey-mid:   #aaa;
+$grey-dark:  #777;
+
+$green-mid: #b3d3da;
+$green-light-bg: lighten($green-mid, 17.5%);
+$green-light: lighten($green-mid, 10%);
+$green-mid-dark: darken($green-mid, 40%);
+$green-dark: darken($green-mid, 50%);
+$green-highlight: #23eec3;
+$green-highlight-dark: darken($green-highlight, 12%);
+
+$blue-highlight: rgb(2, 85, 177);
+
+// Type -------------------------------
+
+$font-main: 'larsseit', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;;
+$font-main-bold: 'larsseit medium', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;;
+$font-alternate: 'lyon', 'minion-pro', Georgia, serif;
+$font-icon: 'FontAwesome';
+$font-mono: inconsolata, consolas, monospace;
+
+@mixin font-weight($weight) {
+  @if $weight == "bold" {
+    font-weight: 700;
+  } @else if $weight == "medium" {
+    font-weight: 500;
+  } @else if $weight == "normal" {
+    font-weight: 400;
+  }
+}
+
+// Grid settings ----------------------
+
+$grid-columns: 24;
+$column: 30px;
+$gutter: 20px;
+$max-width: 1400px;
+
+// $visual-grid: true;
+// $visual-grid-index: front;

@@ -1,0 +1,28 @@
+#!/bin/bash
+set -x
+
+env
+
+echo '--- bundling'
+bundle install
+
+echo '--- copying sample.env'
+cp sample.env .env
+
+echo '--- generating database.yml'
+cat <<EOF > config/database.yml
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: heracles_test
+  pool: 5
+  username: postgres
+  password:
+EOF
+
+echo '--- preparing database'
+./bin/rake db:create RAILS_ENV=test
+./bin/rake db:test:prepare RAILS_ENV=test
+
+echo '--- running specs'
+./bin/rspec

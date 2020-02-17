@@ -1,0 +1,30 @@
+.users-list {
+  @include clearfix;
+  @include pad(vert, tiny);
+  border-top: 1px solid $green-light;
+  text-align: center;
+  position: relative;
+}
+  .users-list__anchor {
+    @include pad(vert, mid);
+    display: block;
+    transition-property: background-color;
+    transition-duration: 200ms;
+    &:hover {
+      background-color: rgba($green-mid , 0.15);
+    }
+  }
+  .users-list__name {
+    @include font-size(28);
+    color: $primary;
+    font-family: $font-alternate;
+    a:hover & {
+      color: $highlight;
+    }
+  }
+  .sites-index-item__edit {
+    margin-top: -20px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+  }

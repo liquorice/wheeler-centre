@@ -1,0 +1,54 @@
+.form-content
+  = form_errors_panel form
+
+  .fields-row
+    .field.field-columns--6
+      .field-header
+        = form.label :name, class: "field-label"
+      .field-main
+        = form.text_field :name, class: "field-text-input"
+        = form_field_errors form, :name
+    .field.field-columns--6
+      .field-header
+        = form.label :email, class: "field-label"
+      .field-main
+        = form.email_field :email, class: "field-text-input field-mono"
+        = form_field_errors form, :email
+
+  .fields-row
+    .field.field-columns--6
+      .field-header
+        = form.label :password, class: "field-label"
+      .field-main
+        = form.password_field :password, class: "field-text-input"
+        = form_field_errors form, :password
+      - if form.object.persisted?
+        .field-block-hint.copy
+          p This will change the user’s password.
+    .field.field-columns--6
+      .field-header
+        = form.label :password_confirmation, class: "field-label"
+      .field-main
+        = form.password_field :password_confirmation, class: "field-text-input"
+        = form_field_errors form, :password_confirmation
+
+  .fields-row
+    .field
+      .field-checkbox
+        = form.check_box :superadmin, class: "field-checkbox-input"
+        = form.label :superadmin, "Make this user a super admin?", class: "field-checkbox-label"
+
+  .fields-row
+    = hidden_field_tag :"heracles_user[site_ids][]"
+    .field
+      .field-header
+        h3.field-label This user should have access to these sites:
+      - sites.each do |site|
+        .field-main
+          label.field-checkbox
+            = check_box_tag :"heracles_user[site_ids][]", site.id, form.object.site_ids.include?(site.id), class: "field-checkbox-input"
+            .field-checkbox-label= site.title
+
+  .fields-row
+    .field
+      button.button.button--highlight Update user

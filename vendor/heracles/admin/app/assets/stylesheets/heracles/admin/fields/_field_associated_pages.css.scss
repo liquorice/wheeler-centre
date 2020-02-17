@@ -1,0 +1,37 @@
+// Admin: Field Associated Pages -----------------------------------------------
+
+.field-associated-pages__form {
+  @include inset(bottom, normal);
+}
+
+.selected-pages {
+  @include pad(all, small);
+  border: 1px solid $green-mid;
+  color: $body-text;
+  .fields--reversed & {
+    background-color: $white;
+  }
+}
+  .selected-pages--hide {
+    display: none;
+  }
+
+  .selected-page {
+    @include pad(horz, normal);
+    @include inset(top, tiny);
+    @include pad(vert, smaller);
+    background-color: $grey-soft;
+    position: relative;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .selected-page__controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .selected-page__title {
+    @include font-size(16);
+  }

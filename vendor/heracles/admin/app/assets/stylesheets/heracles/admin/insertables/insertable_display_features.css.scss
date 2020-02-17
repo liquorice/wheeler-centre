@@ -1,0 +1,95 @@
+// Gets pull into the TinyMCE iframe
+// Features --------------------------------------------------------------------
+
+.insertable-display-features__pages {
+  @include pad(all, small);
+  border: 1px solid $green-mid;
+  position: relative;
+  overflow: hidden;
+  max-height: 150px;
+  &:before {
+    @include linear-gradient(to bottom, rgba(#fff,0) 1%, rgba(#fff, 1) 80%);
+    bottom: 0;
+    content: "";
+    height: 40px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
+}
+  .insertable-display-features__target {
+    @include font-size(16);
+    border-radius: 3px;
+    background-color: $white;
+    color: $grey-mid;
+    font-family: $font-main;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+    .fa {
+      @include inset(right, small);
+    }
+  }
+  .insertable-display-features__controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+  }
+
+.selected-features__list {
+  display: flex;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  width: 200%;
+}
+  // Columns layouts for the selected features
+  .selected-feature {
+    flex: 1;
+    margin-right: 1em;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .selected-feature--2-of-4 {
+    flex: 2;
+  }
+  .selected-feature--3-of-4 {
+    flex: 3;
+  }
+
+  .selected-feature-page {
+    @include pad(all, normal);
+    position: relative;
+  }
+    .selected-feature-page__controls {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+  .selected-feature-page__title {
+    @include inset(bottom, smaller);
+    @include font-size(16);
+    color: $grey-mid;
+    font-weight: bold;
+  }
+
+  .selected-feature-page__image {
+    @include inset(bottom, normal);
+    background-color: $white;
+    border: 1px solid darken($grey-light, 2%);
+    &:before {
+      content: "";
+      display: block;
+      padding-top: 20%;
+    }
+  }
+
+  .selected-feature-page__body {
+    font-family: $font-alternate;
+    color: $grey-mid;
+  }
+

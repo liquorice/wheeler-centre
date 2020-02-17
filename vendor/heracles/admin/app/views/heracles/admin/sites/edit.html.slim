@@ -1,0 +1,5 @@
+.admin-page
+  h1.admin-page__title Edit site
+
+  = form_for all_site, url: site_path(all_site) do |form|
+    = render "form", form: form

@@ -1,0 +1,110 @@
+/**
+ * Flexbox
+ */
+
+.flex {
+  display: flex;
+}
+
+.flex--inline {
+  display: inline-flex;
+}
+
+// Direction
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--column-reverse {
+  flex-direction: column-reverse;
+}
+
+// Wrap
+
+.flex--wrap {
+  flex-wrap: wrap
+}
+
+.flex--nowrap {
+  flex-wrap: nowrap
+}
+
+.flex--wrap-reverse {
+  flex-wrap: wrap-reverse
+}
+
+// Align
+//  | flex-end | center | space-between | space-around | stretch;
+.flex--align,
+.flex--align-start {
+  align-content: flex-start;
+}
+
+.flex--align-end {
+  align-content: flex-end;
+}
+
+.flex--align-center {
+  align-content: center;
+}
+
+.flex--align-space-between {
+  align-content: space-between;
+}
+
+.flex--align-space-around {
+  align-content: space-around;
+}
+
+.flex--align-stretch {
+  align-content: stretch;
+}
+
+.flex__item-1 {
+  flex: 1;
+}
+
+.flex__item-2 {
+  flex: 2;
+}
+
+.flex__item-3 {
+  flex: 3;
+}
+
+.flex__item-4 {
+  flex: 4;
+}
+
+.flex__item-5 {
+  flex: 5;
+}
+
+.flex__item-6 {
+  flex: 6;
+}
+
+.flex__item-7 {
+  flex: 7;
+}
+
+.flex__item-8 {
+  flex: 8;
+}
+
+.flex__item-9 {
+  flex: 9;
+}
+
+.flex__item-10 {
+  flex: 10;
+}

@@ -1,0 +1,84 @@
+.lightbox-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: 100;
+}
+.lightbox-cover {
+  background: rgba(white, 0.95);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 101;
+}
+.lightbox-contents {
+  @include pad(horz, huge);
+  height: 300%;
+  padding-top: 10rem;
+  position: relative;
+  z-index: 102;
+}
+.lightbox__close {
+  @include font-size(24);
+  padding: 1rem 2rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 103;
+}
+.lightbox-title {
+  @include font-size(30);
+  margin-bottom: 1rem;
+}
+
+
+.page-type-lightbox {
+  text-align: center;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+  .tree-nav__new-page {
+    @include font-size(15);
+    background-color: $green-highlight;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    font-family: $font-alternate;
+    height: 15rem;
+    justify-content: center;
+    line-height: 1.3;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    position: relative;
+    top: 0.5rem;
+    transition: background-color 200ms, color 200ms;
+    vertical-align: bottom;
+    width: 15rem;
+    &:before {
+      content: "\f15c";
+      display: block;
+      font-family: $font-icon;
+      margin-bottom: 0.2rem;
+    }
+    &:hover {
+      background-color: $highlight;
+      color: #fff;
+    }
+  }
+    .tree-nav__new-page--collection {
+      background-color: darken($green-highlight, 20%);
+      color: $white;
+      &:before {
+        content: "\f07c";
+      }
+    }
+  .tree-nav__new-page--hidden {
+      background-color: $grey-mid;
+      &:before {
+        content: "\f070";
+      }
+    }

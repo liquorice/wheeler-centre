@@ -1,0 +1,355 @@
+// TinyMCE styles
+
+.mce-container,
+.mce-container *,
+.mce-widget,
+.mce-widget * {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: top;
+  background: transparent;
+  text-decoration: none;
+  text-shadow: none;
+  float: none;
+  position: static;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+  cursor: inherit;
+  -webkit-tap-highlight-color: transparent;
+  line-height: normal;
+  font-weight: normal;
+  text-align: left;
+}
+
+.mce-container *[unselectable] {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+// The TinyMCE container that sits inside our .field
+.mce-tinymce {
+  box-shadow: inset 2px 2px 0 rgba($green-mid , 0.15);
+  display: block;
+  visibility: visible !important;
+  position: relative;
+}
+
+.mce-edit-area {
+  filter: none;
+}
+
+.mce-container,
+.mce-container-body { display: block }
+.mce-autoscroll { overflow: hidden }
+
+.mce-tinymce iframe {
+}
+
+
+
+// Content editor field --------------------------------------------------------
+
+.field-content-editor {
+  @include font-size(20);
+  border: 1px solid $green-mid;
+  display: block;
+  position: relative;
+  width: 100%;
+  .has-error &,
+  .field--has-errors & {
+    border-color: $highlight;
+  }
+}
+
+.field-content-editor__inline-controls {
+  @include pad(horz, tiny);
+  background-color: $white;
+  border: 1px solid $green-mid;
+  box-shadow: 0 3px 0 0 rgba($green-mid, 0.2);
+  position: absolute;
+  z-index: 2;
+
+  $arrow-width: 5px;
+
+  &:after,
+  &:before {
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    width: 0;
+  }
+
+  &:after {
+    border-color: rgba(#000, 0);
+    border-top-color: $white;
+    border-width: $arrow-width;
+    margin-left: $arrow-width * -1;
+  }
+  &:before {
+    border-color: rgba(#000, 0);
+    border-top-color: $green-mid;
+    border-width: $arrow-width + 1px;
+    margin-left: ($arrow-width + 1px) * -1;
+  }
+}
+  .field-content-editor__inline-controls--hidden {
+    display: none;
+  }
+  .field-content-editor__inline-editor {
+    @include outset(horz, tiny);
+    @include pad(horz, small);
+    @include pad(vert, small);
+    display: block;
+    border-top: 1px solid $green-mid;
+    width: 400px;
+    .field-content-editor__insertable & {
+      @include pad(horz, tiny);
+      border-top: none;
+      clear: both;
+      width: 100%;
+    }
+  }
+  .inline-editor-group__divider {
+    height: 5px;
+    position: relative;
+    span {
+      @include font-size(1);
+      @include pad(horz, tiny);
+      background-color: $green-mid;
+      border-radius: 1px;
+      color: $white;
+      left: -24px;
+      margin-top: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding-top: 3px;
+      padding-bottom: 2px;
+      position: absolute;
+      z-index: 1;
+    }
+  }
+  .inline-editor-group {
+    @include pad(bottom, tiny);
+    display: flex;
+  }
+    .inline-editor-group--asset {
+      @include pad(bottom, small);
+      @include inset(bottom, small);
+      border-bottom: 1px solid $green-mid;
+      .field-content-editor__insertable & {
+        border: none;
+      }
+    }
+    .inline-editor-group__item {
+      flex: 1;
+      &:first-child {
+        @include pad(right, tiny);
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  .inline-editor-actions {
+    @include pad(bottom, smaller);
+    @include pad(horz, small);
+  }
+
+.field-content-editor__controls {
+  @include clearfix;
+  border-bottom: 1px solid $green-mid;
+  .has-error &,
+  .field--has-errors & {
+    border-color: $highlight;
+  }
+}
+  .field-content-editor__control-group {
+    @include pad(horz, tiny);
+    margin-left: -1px;
+    border-right: 1px solid $green-mid;
+    border-left: 1px solid $green-mid;
+    display: inline-block;
+    + .field-content-editor__control-btn {
+      @include inset(left, tiny);
+    }
+    .has-error &,
+    .field--has-errors & {
+      border-color: $highlight;
+    }
+  }
+  .field-content-editor__control-btn {
+    @include inset(vert, tiny);
+    @include pad(horz, small);
+    @include pad(vert, tiny);
+    @include font-size(15);
+    border-radius: 2px;
+    color: darken(#97bcc4, 20%);
+    display: inline-block;
+    transition-duration: 80ms;
+    transition-property: background-color, color;
+    &.active {
+      background-color: lighten(#97bcc4, 20%);
+      color: $primary;
+    }
+    &:hover {
+      background-color: lighten($highlight, 32%);
+      color: $highlight;
+    }
+    + .field-content-editor__control-group {
+      @include inset(left, tiny);
+    }
+    .field-content-editor-dropdown & {
+      color: $white;
+      display: block;
+      margin-left: 3px;
+      margin-right: 3px;
+      &.active {
+        background-color: darken(#90aeb5, 20%);
+      }
+      &:hover {
+        color: $highlight;
+      }
+    }
+    &.field-content-editor-dropdown:hover {
+      background-color: #90aeb5;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      color: $white;
+    }
+  }
+
+.field-content-editor-dropdown {
+  cursor: pointer;
+  position: relative;
+  i {
+    @include inset(right, tiny);
+  }
+  .fa-chevron-down {
+    @include font-size(10);
+    @include inset(left, tiny);
+    margin-right: 0;
+  }
+}
+  .field-content-editor-dropdown__list {
+    display: none;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-color: #90aeb5;
+    left: 0;
+    min-width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 5;
+    .field-content-editor-dropdown:hover & {
+      display: block;
+    }
+  }
+  .field-content-editor__dropdown-icon {
+    position: absolute;
+  }
+  .field-content-editor__dropdown-label {
+    display: block;
+    margin-left: 27px;
+    white-space: nowrap;
+  }
+
+
+// Insertable editor -----------------------------------------------------------
+
+.field-content-editor__insertable {
+  backface-visibility: hidden;
+  border-left: 5px solid darken(#1f2f31, 3%);
+  background-color: #1f2f31;
+  float: right;
+  margin-right: -30%;
+  overflow: hidden;
+  width: 30%; // Default width, will be overriden per insertable
+  z-index: 100;
+}
+
+
+.insertable-edit {
+  @include pad(all, mid);
+  color: #e1edf0;
+  a {
+    color: #bbedf7;
+    text-decoration: underline;
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+}
+
+  .insertable-edit__title {
+    @include font-size(24);
+    @include inset(bottom, normal);
+  }
+
+  .insertable-edit__actions {
+    button {
+      @include inset(right, small);
+    }
+  }
+
+  .field-group {
+    @include clearfix;
+    @include inset(bottom, mid);
+    @include outset(horz, mid);
+    @include pad(horz, mid);
+    border-bottom: 1px solid lighten(#1f2f31, 8%);
+  }
+
+.field-options {
+  clear: both;
+  position: relative;
+}
+
+  .field-options__option {
+    // transition-delay: 10ms, 10ms; // Need this else the show animation fails! (╯°□°)╯︵ ┻━┻
+    transition-duration: 350ms;
+    transition-property: all;
+    &.ng-animate {
+      display: block !important;
+    }
+    &.ng-enter {
+      opacity: 0;
+      transform: translate3d(0,-100px,0);
+      transition-delay: 100ms
+    }
+    &.ng-enter.ng-enter-active,
+    &.ng-leave {
+      opacity: 1;
+      transform: translate3d(0,0,0);
+    }
+    &.ng-leave.ng-leave-active {
+      opacity: 0;
+      position: absolute;
+      transform: translate3d(0,100px,0);
+    }
+  }
+
+
+.insertable-edit__caption {
+  height: 15rem;
+}
+
+
+// Inline link editor
+
+.insertable-inline-editor {
+  background: #fff;
+  height: 0;
+  width: 0;
+}
+  .insertable-inline-editor__wrapper {
+    
+  }

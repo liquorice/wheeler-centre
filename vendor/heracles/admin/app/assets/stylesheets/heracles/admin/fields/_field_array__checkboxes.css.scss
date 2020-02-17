@@ -1,0 +1,6 @@
+// Admin: Field Array Checkboxes -----------------------------------------------
+
+.field-array__checkboxes__items {
+  @include inset(top, smaller);
+  @include pad(bottom, normal);
+}

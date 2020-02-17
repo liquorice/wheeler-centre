@@ -1,0 +1,32 @@
+// Gets pull into the TinyMCE iframe
+// Code ------------------------------------------------------------------------
+
+.insertable-display-code__details {
+  @include pad(all, smaller);
+  border: 1px solid $green-mid;
+  overflow: hidden;
+  max-height: 150px;
+  min-height: 30px;
+  &:before {
+    @include linear-gradient(to bottom, rgba(#fff,0) 1%, rgba(#fff, 1) 80%);
+    bottom: 1px;
+    content: "";
+    height: 40px;
+    left: 1px;
+    position: absolute;
+    right: 1px;
+    z-index: 1;
+  }
+  pre {
+    @include font-size(13);
+    color: $grey-mid;
+    font-family: $font-mono;
+  }
+}
+  .insertable-display-code__controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+  }
+

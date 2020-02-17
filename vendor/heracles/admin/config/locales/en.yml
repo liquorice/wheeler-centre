@@ -1,0 +1,29 @@
+en:
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} was successfully created.'
+        alert: '%{resource_name} could not be created.'
+      update:
+        notice: '%{resource_name} was successfully updated.'
+        alert: '%{resource_name} could not be updated.'
+      destroy:
+        notice: '%{resource_name} was successfully destroyed.'
+        alert: '%{resource_name} could not be destroyed.'
+    heracles:
+      admin:
+        pages:
+          create:
+            notice: 'Page was successfully created.'
+            alert: 'Error creating page.'
+          update:
+            notice: 'Page was successfully updated.'
+            alert: 'Error updating page.'
+          destroy:
+            notice: 'Page was successfully deleted.'
+            alert: 'Error deleting page.'
+  forms:
+    actions:
+      update:
+        errors_intro: 'We had some problems updating this %{downcase_resource_name}:'
+        errors_outro: 'Please check the fields and try again.'

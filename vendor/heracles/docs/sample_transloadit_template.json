@@ -1,0 +1,46 @@
+{
+  "steps": {
+    "admin_document_thumbnail": {
+      "robot": "/document/thumbs",
+      "page": 1,
+      "width": 400,
+      "height": 250,
+      "resize_strategy": "fit",
+      "background": "#dddddd"
+    },
+    "admin_thumbnail": {
+      "robot": "/image/resize",
+      "use": ":original",
+      "width": 400,
+      "height": 250,
+      "resize_strategy": "fit",
+      "strip": true
+    },
+    "store": {
+      "robot": "/s3/store",
+      "use": [
+        "admin_document_thumbnail", "admin_thumbnail"
+      ],
+      "key": "XXX",
+      "secret": "XXX",
+      "bucket": "XXX",
+      "path": "${fields.site_slug}/assets/${unique_original_prefix}/${file.id}_${previous_step.name}.${file.ext}",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000"
+      }
+    },
+    "store_original": {
+      "robot": "/s3/store",
+      "use": [
+        ":original"
+      ],
+      "key": "XXX",
+      "secret": "XXX",
+      "bucket": "XXX",
+      "path": "${fields.site_slug}/assets/${unique_original_prefix}/${file.url_name}",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000"
+      }
+    }
+  }
+}

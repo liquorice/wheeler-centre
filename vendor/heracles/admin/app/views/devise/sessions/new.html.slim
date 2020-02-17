@@ -1,0 +1,20 @@
+.sign-in
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "sign-in__form"} ) do |form|
+    h1.sign-in__header Sign in to your account
+    .field
+      .field-header
+        = form.label :email, class: "field-label"
+      .field-main
+        = form.email_field :email, autofocus: true, class: "field-text-input", placeholder: "your@email.com"
+    .field
+      .field-header
+        = form.label :password, class: "field-label"
+      .field-main
+        = form.password_field :password, class: "field-text-input", placeholder: "•••••"
+    - if devise_mapping.rememberable?
+      .field
+        .field-checkbox
+          = form.label :remember_me, "Remember me?", class: "field-checkbox-label"
+          = form.check_box :remember_me, class: "field-checkbox-input"
+    = form.submit "Sign in", class: "button button--highlight"
+    = render "links"

@@ -1,0 +1,46 @@
+// Gets pull into the TinyMCE iframe
+// Saved search ----------------------------------------------------------------
+
+.insertable-display-savedsearch__details {
+  @include pad(all, smaller);
+  border: 1px solid $green-mid;
+  overflow: hidden;
+  font-family: $font-mono;
+  max-height: 200px;
+  min-height: 50px;
+  @include font-size(13);
+  &:before {
+    @include linear-gradient(to bottom, rgba(#fff,0) 1%, rgba(#fff, 1) 80%);
+    bottom: 1px;
+    content: "";
+    height: 40px;
+    left: 1px;
+    position: absolute;
+    right: 1px;
+    z-index: 1;
+  }
+  b {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  ul {
+    margin-top: 7px;
+    li {
+      margin-bottom: 3px;
+    }
+  }
+}
+.insertable-display-savedsearch__controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+}
+
+
+.insertable-display-savedsearch__title {
+  @include inset(bottom, small);
+  @include font-size(16);
+  font-family: $font-main;
+  font-weight: bold;
+}

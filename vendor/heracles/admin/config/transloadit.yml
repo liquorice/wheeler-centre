@@ -1,0 +1,15 @@
+development: &CONFIG
+  jquery_sdk_version: "latest"
+  auth:
+    key: "<%= Rails.application.config.heracles_transloadit_auth_key %>"
+    secret: "<%= Rails.application.config.heracles_transloadit_auth_secret %>"
+    duration: 1800 # 30 minute validity period for signed upload forms
+
+  templates:
+    site_asset_upload: "<%= Rails.application.config.heracles_transloadit_template_id %>"
+
+staging:
+  <<: *CONFIG
+
+production:
+  <<: *CONFIG

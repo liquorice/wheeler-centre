@@ -1,0 +1,5 @@
+.admin-page
+  h1.admin-page__title Create a new site
+
+  = form_for all_site, as: :site, url: sites_path do |form|
+    = render "form", form: form

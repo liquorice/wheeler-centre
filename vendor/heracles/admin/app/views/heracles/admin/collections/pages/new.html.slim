@@ -1,0 +1,6 @@
+= replace :form do
+  div data-view-page-form-controller=""
+    = render partial: "heracles/admin/pages/tree_nav", locals: {page: @collection}
+    .admin-content
+      = form_for @page, as: :page, url: site_collection_pages_path(site, @collection), html: {class: "edit-page-form", data: {"view-save-state-tracker" => true}} do |form|
+        = render "form", form: form, insertions: nil

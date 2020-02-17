@@ -1,0 +1,1 @@
+<%= File.read(File.expand_path("../../.rspec", __FILE__)).to_s %>

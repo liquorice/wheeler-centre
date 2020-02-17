@@ -1,0 +1,13 @@
+div class=wrapper_div_class style=wrapper_div_style
+  - if link_url
+    a href=link_url title=(link_title if link_title) target=(link_target if link_target)
+      img.figure__content src=asset_url alt=alt_text
+  - else
+    img.figure__content src=asset_url alt=alt_text
+
+  - if data[:caption].present?
+    .figure__caption.copy
+      p = data[:caption]
+
+  - if asset.attribution.present? && data[:show_attribution] == true
+    cite.figure__attribution = asset.attribution
