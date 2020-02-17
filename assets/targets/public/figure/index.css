@@ -11,6 +11,11 @@
   clear: both;
 }
 
+/* Allow figures to sit alongside sidenav and not be pushed down */
+.content-page__content .figure {
+  clear: none;
+}
+
   .figure img {
     width: 100%;
   }
