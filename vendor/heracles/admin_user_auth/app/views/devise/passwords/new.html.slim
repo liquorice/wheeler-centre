@@ -1,0 +1,9 @@
+.sign-in
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, class: "sign-in__form" }) do |form|
+    h1.sign-in__header Forgot your password?
+    = devise_error_messages!
+    .field
+      .field-main
+        = form.email_field :email, autofocus: true, class: "field-text-input", placeholder: "your@email.com"
+    = form.submit "Send me reset password instructions", class: "button button--highlight"
+    = render "links"

@@ -1,0 +1,80 @@
+.insertable-display-button {}
+
+/**
+ * insertable-display-button button styles
+ */
+
+.btn {
+  -webkit-font-smoothing: antialiased;
+  background-color: #23eec3;
+  border-radius: 2px;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-family: "larsseit", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  text-shadow: none;
+  transition: background-color 200ms linear;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #0da887;
+}
+
+/**
+ * Remove margin
+ */
+
+.insertable-display-button .field-details-list dd,
+.insertable-display-button .field-details-list div {
+  margin-bottom: 0;
+}
+
+/**
+ * Create 2 columns
+ * left: contains the button
+ * right: contains the insertable details
+ */
+
+.column-left {
+  float: left;
+  width: 200px;
+}
+
+.column-right  {
+  overflow: hidden;
+  width: 100%;
+}
+
+/**
+ * insertable-details
+ * Includes overrides
+ */
+
+.insertable-details {}
+
+.insertable-details__item {
+  float: left;
+  width: 18%;
+}
+
+.insertable-details__item dd {
+  max-height: 25px;
+  overflow: hidden;
+}
+
+.insertable-details__item span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.1;
+  max-height: 25px;
+  overflow: hidden;
+}

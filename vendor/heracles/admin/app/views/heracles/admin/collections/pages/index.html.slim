@@ -1,0 +1,76 @@
+= replace :form do
+  .collection-index
+    = render partial: "heracles/admin/pages/tree_nav", locals: {page: @collection}
+    .admin-content
+      .form-header
+        .page-path
+          i.fa.fa-file-text
+          span.page-path__parent
+            == build_breadcrumbs @collection
+          span.page-path__slug.collection-index__title
+            i.fa.fa-folder-open
+            = @collection.title
+        .form-controls
+          .form-controls__search
+            - if params[:q]
+              a href=url_for(q: nil)
+                i.fa.fa-times
+                ' Clear
+            form
+              label.field-addon
+                input.field-text-input.field-small.field-addon-input name="q" type="text" placeholder="Search #{@collection.contained_page_type.humanize.downcase.pluralize}" value=params[:q]
+                button.field-addon-button.field-addon-button--last.button.button--small.button--soft
+                  i.fa.fa-search
+          a.collection-index__edit-button.button.button--soft href=edit_site_page_path(id: @collection)
+            ' Edit collection
+          a.collection-index__new-button.button.button--highlight href=new_site_collection_page_path(collection_id: @collection)
+            'Add new #{@collection.contained_page_type.humanize.downcase.singularize}
+      .collection-posts
+        - has_page_actions = site_page_actions_template_exists?(site)
+        - if @pages.present?
+          ul.collection-posts__list
+            li.collection-posts__list-header
+              - first_page = @pages.first
+              - first_page.to_summary_hash.each do |key, value|
+                - type = (first_page.fields[key].present?) ?  first_page.fields[key].field_type : key.to_s
+                - label = (first_page.fields[key].present?) ?  first_page.fields[key].field_label : key.to_s.gsub(/_/, " ").capitalize
+                .collection-posts__list-summary class="collection-posts__list-summary--#{type}"
+                  = label
+              - if has_page_actions
+                .collection-posts__list-summary--collapse
+                  i.fa.fa-angle-down
+            - @pages.each do |page|
+              - summary_hash = page.to_summary_hash
+              li.collection-posts__list-item
+                a href=edit_site_collection_page_path(id: page)
+                  - summary_hash.each do |key, summary|
+                    / Special case `title`
+                    - if key == :title
+                      .collection-posts__list-summary.collection-posts__list-summary--title
+                        = summary
+                    - elsif key == :created_at
+                      .collection-posts__list-summary.collection-posts__list-summary--created_at
+                        = summary
+                    - else
+                      - type = (page.fields[key].present?) ?  page.fields[key].field_type : key.to_s
+                      .collection-posts__list-summary class="collection-posts__list-summary--#{type}"
+                        = summary
+                / Additional page actions
+                - if site_page_actions_template_exists?(site)
+                  .collection-posts__item-actions data-view-show-page-actions={buttonSelector: ".collection-posts__item-actions-button", pullOutSelector: ".collection-posts__item-actions-pull-out"}.to_json
+                    button.collection-posts__item-actions-button.button.button--soft.button--small
+                      i.fa.fa-angle-down
+                    .collection-posts__item-actions-pull-out
+                      = render partial: "#{site.engine_path}/admin/page_actions", locals: {page: page}
+          = paginate @pages, params: {open_tree_nav: nil}
+        - else
+          p.collection-posts__empty
+            - if params[:q].present?
+              | No results for ‘
+              span= params[:q]
+              '’ —
+              a href=url_for(q: nil) view all #{@collection.contained_page_type.humanize.downcase.pluralize}
+            - else
+              ' No #{@collection.contained_page_type.humanize.downcase} yet —
+              a href=new_site_collection_page_path
+                ' create the first one?

@@ -1,0 +1,14 @@
+.admin-page
+  h1.admin-page__title
+    ' Select a user
+    - if policy(Heracles::User).new?
+      ' or
+      = link_to "create a new one", new_user_path
+
+  ul.users-list
+    - users.each do |user|
+      li.users-list__item
+        - if policy(user).edit?
+          = link_to edit_user_path(user), class: "users-list__anchor" do
+            p.users-list__name= user.name
+            p.users-list__email= user.email

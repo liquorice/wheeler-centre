@@ -1,0 +1,19 @@
+.sites-index
+  - if all_sites.any?
+    h1.admin-page__title
+      ' Select a site
+      - if policy(Heracles::Site).new?
+        ' or
+        = link_to "create a new one", new_site_path, class: "sites-index__new"
+    ul.sites-index__list data-no-turbolink="true"
+      - all_sites.each do |site|
+        li.sites-index-item
+          = link_to site_pages_path(site), class: "sites-index-item__anchor" do
+            h2.sites-index-item__title= site.title
+            p.sites-index-item__hostname= site.all_hostnames.join(", ")
+          - if policy(site).edit?
+            = link_to "Edit", edit_site_path(site), class: "button button--soft sites-index-item__edit"
+  - else
+    p.sites-index__empty
+      ' No sites just yet.
+

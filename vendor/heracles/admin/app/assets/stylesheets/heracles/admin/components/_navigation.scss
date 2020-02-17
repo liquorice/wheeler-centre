@@ -1,0 +1,121 @@
+// Admin: Navigation -----------------------------------------------------------
+
+.navigation {
+  @include clearfix;
+  @include pad(horz, normal);
+  background-color: $primary;
+  color: $white;
+  position: relative;
+  z-index: 2;
+}
+
+  .global-navigation__link,
+  .admin-navigation__link,
+  .site-navigation__link {
+    @include pad(horz, smaller);
+    @include pad(top, small);
+    background-color: $primary;
+    color: #bbedf7;
+    display: block;
+    padding-bottom: 12px;
+    padding-bottom: 1.2rem;
+    transition-property: background-color;
+    transition-duration: 100ms;
+    &:hover {
+      background-color: lighten($primary, 15%);
+      color: $white;
+    }
+    .fa-chevron-down {
+      @include inset(left, small);
+      @include font-size(12);
+    }
+  }
+  .global-navigation__list-item--active .global-navigation__link,
+  .admin-navigation__list-item--active .admin-navigation__link,
+  .site-navigation__list-item--active .site-navigation__link {
+    background-color: $white;
+    color: $highlight;
+  }
+  .global-navigation__link {
+    .global-navigation__list-item--dropdown:hover & {
+      background-color: lighten($primary, 15%);
+      color: $white;
+    }
+  }
+
+// Admin: Global navigation ----------------------------------------------------
+
+.global-navigation__list {
+  float: left;
+}
+  .global-navigation__list-item--dropdown {
+    position: relative;
+  }
+  .global-navigation__dropdown-list {
+    @include pad(horz, tiny);
+    @include pad(vert, tiny);
+    background-color: lighten($primary, 15%);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    min-width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition-duration: 100ms;
+    transition-property: opacity;
+    .global-navigation__list-item--dropdown:hover &,
+    .global-navigation__list-item--dropdown--hover & {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+  .global-navigation__dropdown-link {
+    @include pad(horz, small);
+    border-radius: 2px;
+    display: block;
+    padding-bottom: 3px;
+    padding-bottom: 0.3rem;
+    padding-top: 3px;
+    padding-top: 0.3rem;
+    &:hover {
+      background-color: lighten($highlight, 32%);
+      color: $highlight;
+    }
+  }
+
+
+// Admin: Admin navigation -----------------------------------------------------
+
+.admin-navigation__list {
+  float: right;
+}
+  .admin-navigation__list-item {
+    float: left;
+    i {
+      @include pad(left, small);
+    }
+  }
+  .admin-navigation__list-item--divider {
+    border-left: 1px solid lighten($primary, 5%);
+  }
+  .admin-navigation__text {
+    @include pad(horz, smaller);
+    @include pad(top, small);
+    display: block;
+    padding-bottom: 12px;
+    padding-bottom: 1.2rem;
+  }
+
+
+
+// Admin: Site navigation ------------------------------------------------------
+
+.site-navigation__list {
+  float: left;
+}
+  .site-navigation__list-item {
+    float: left;
+    i {
+      @include pad(right, small);
+    }
+  }

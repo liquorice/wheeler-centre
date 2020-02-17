@@ -1,0 +1,78 @@
+doctype html
+html
+  - additional_template_context_for(site)
+  head
+    = area :head do
+      title
+        = area :title, "#{site.try(:title).presence || 'Site'} — Admin"
+      = area :stylesheets do
+        = stylesheet_link_tag "heracles/admin/admin", media: "all", "data-turbolinks-track" => true
+      - if site
+          = stylesheet_link_tag "#{site.engine_path}/admin", media: "all", "data-turbolinks-track" => true
+      = area :javascripts do
+        = render partial: "heracles/admin/shared/admin_loader"
+      = csrf_meta_tags
+  body class=admin_body_classes
+    = flashes
+    = area :application do
+      = area :navigation do
+        nav.navigation role="navigation"
+          - if heracles_admin_current_user
+            = area :global_navigation do
+              ul.global-navigation__list data-no-turbolink="true"
+                / All sites
+                - if site && available_sites.size > 1
+                  li.global-navigation__list-item.global-navigation__list-item--dropdown data-view-activate-preview="global-navigation__list-item--dropdown--hover"
+                    = link_to site_pages_path(site), class: "global-navigation__link" do
+                      = site.title
+                      i.fa.fa-chevron-down
+                    ul.global-navigation__dropdown-list
+                      - available_sites.each do |other_site|
+                        li.global-navigation__dropdown-list-item
+                          = link_to site_pages_path(other_site), class: "global-navigation__dropdown-link" do
+                            - if other_site == site
+                              ' &bull;&nbsp;
+                            = other_site.title
+                - elsif site
+                  li.global-navigation__list-item
+                    = link_to site.title, site_pages_path(site), class: "global-navigation__link"
+                - else
+                  li.global-navigation__list-item
+                    = link_to sites_path, class: "global-navigation__link" do
+                      '  Select a site &nbsp;
+                      i.fa.fa-flash
+
+            / Users/sites admin
+            = area :admin_navigation do
+              ul.admin-navigation__list data-no-turbolink="true"
+                - if heracles_admin_current_user.heracles_superadmin? && respond_to?(:users_path)
+                  li.admin-navigation__list-item class=("admin-navigation__list-item--active" if controller_name == "users")
+                    = link_to "Users", users_path, class: "admin-navigation__link"
+                - if available_sites.size > 1
+                  li.admin-navigation__list-item class=("admin-navigation__list-item--active" if controller_name == "sites" && action_name != "show")
+                    = link_to "Sites", sites_path, class: "admin-navigation__link"
+                li.admin-navigation__list-item.admin-navigation__list-item--divider
+                  span.admin-navigation__text = heracles_admin_current_user.heracles_admin_name
+                li.admin-navigation__list-item.admin-navigation__list-item--divider
+                  = link_to heracles_admin_logout_path, method: heracles_admin_logout_path_method, class: "admin-navigation__link" do
+                    ' Sign out
+                    i.fa.fa-sign-out
+            = area :site_navigation do
+              - if site
+                ul.site-navigation__list
+                  = area :site_navigation_items do
+                    li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "pages")
+                      = link_to site_pages_path(site), class: "site-navigation__link" do
+                        i.fa.fa-sitemap
+                        ' Pages
+                    li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "assets")
+                      = link_to site_assets_path(site), class: "site-navigation__link"
+                        i.fa.fa-file
+                        ' Assets
+                    li.site-navigation__list-item class=("site-navigation__list-item--active" if controller_name == "redirects")
+                      = link_to site_redirects_path(site), class: "site-navigation__link"
+                        i.fa.fa-random
+                        ' Redirects
+    .admin-wrapper data-view-admin-controller=true class=[open_tree_nav(params[:open_tree_nav])]
+      .admin-wrapper__cover
+      = yield

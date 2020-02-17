@@ -1,0 +1,192 @@
+.collection-index {
+  @include clearfix;
+  display: flex;
+  min-height: 100vh;
+}
+
+.collection-index__header {
+  @include clearfix;
+  @include pad(horz, normal);
+  background: $grey-bg;
+  display: flex;
+  min-height: 6.5rem;
+}
+
+  .collection-index__title {
+    @include font-size(12);
+    @include pad(bottom, tiny);
+    @include pad(horz, small);
+    @include inset(left, tiny);
+    background: $grey-light;
+    border-radius: 3px;
+    font-family: $font-main;
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+    padding-top: 0.2rem;
+    text-transform: uppercase;
+    flex: none;
+    i {
+      @include pad(right, small);
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .collection-index__new-button {
+    @include inset(left, small);
+  }
+
+.collection-posts {
+  @include pad(top, large);
+  @include pad(bottom, huge);
+  @include pad(horz, large);
+  // margin-left: auto;
+  // margin-right: auto;
+  // max-width: 1200px;
+  // width: 60%;
+}
+
+  .collection-posts__list {
+    @include pad(bottom, normal);
+  }
+    .collection-posts__list-item {
+      @include font-size(16);
+      @include pad(vert, tiny);
+      border-bottom: 1px solid $grey-bg;
+      font-family: $font-alternate;
+      display: flex;
+      a {
+        color: $primary;
+        display: flex;
+        flex: 1;
+        &:hover {
+          div {
+            color: $highlight;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .collection-posts__list-header {
+      @include pad(bottom, small);
+      @include inset(bottom, small);
+      border-bottom: 1px solid $grey-light;
+      display: flex;
+    }
+    .collection-posts__list-summary {
+      @include pad(horz, small);
+      color: $grey-dark;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+      // Adjustments to each field_type
+      .collection-posts__list-summary--title {
+        color: $primary;
+        padding-left: 0;
+        .collection-posts__list-header & {
+          color: $grey-dark;
+        }
+      }
+      .collection-posts__list-summary--created_at,
+      .collection-posts__list-summary--boolean,
+      .collection-posts__list-summary--published,
+      .collection-posts__list-summary--hidden,
+      .collection-posts__list-summary--date_time {
+        flex: 0.5;
+        text-align: center;
+      }
+      .collection-posts__list-summary--created_at {
+        padding-right: 0;
+      }
+      .collection-posts__list-summary--collapse {
+        @include pad(horz, tiny);
+        flex: none;
+        width: auto;
+      }
+
+// Empty
+
+.collection-posts__empty {
+  @include font-size(18);
+  @include standard-links;
+  @include pad(vert, large);
+  text-align: center;
+}
+
+
+// Additional actions
+.collection-posts__item-actions {
+  display: block;
+  position: relative;
+}
+  .collection-posts__item-actions-button {
+    padding: 0.3rem 0.8rem 0.2rem;
+  }
+
+.collection-posts__item-actions-pull-out {
+  display: none;
+  position: absolute;
+  right: 100%;
+  top: -0.8rem;
+  max-width: 30rem;
+  margin-right: 1rem;
+}
+  .collection-posts__item-actions-pull-out--active {
+    display: block;
+  }
+
+  .collection-posts__item-actions-pull-out li {
+    &:first-child {
+      a, button, span {
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        position: relative;
+        &:after {
+          left: 100%;
+          top: 50%;
+          border: solid transparent;
+          content: " ";
+          height: 0;
+          width: 0;
+          position: absolute;
+          pointer-events: none;
+          border-left-color: #97bcc4;
+          border-width: 3px;
+          margin-top: -4px;
+        }
+        &:hover:after {
+          border-left-color: darken(#97bcc4, 20%);
+        }
+      }
+    }
+    &:last-child {
+      a, button, span {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+    }
+  }
+
+  .collection-posts__item-actions-pull-out a,
+  .collection-posts__item-actions-pull-out span,
+  .collection-posts__item-actions-pull-out button {
+    @include font-size(14);
+    @include pad(horz, small);
+    @include pad(vert, small);
+    background-color: #97bcc4;
+    border: none;
+    border-bottom: 1px solid $white;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    font-family: $font-main;
+    text-align: left;
+    width: 100%;
+    white-space: nowrap;
+    &:hover {
+      background-color: darken(#97bcc4, 20%);
+    }
+  }

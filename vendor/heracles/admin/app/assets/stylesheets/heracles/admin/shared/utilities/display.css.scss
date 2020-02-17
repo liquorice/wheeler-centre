@@ -1,0 +1,41 @@
+/**
+ * Display utilities
+ */
+
+.hidden,
+.is-hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.ib,
+.inline-block {
+  display: inline-block;
+}
+
+.is-visible {
+  visibility: visible;
+}
+
+.is-invisible {
+  visibility: hidden;
+}
+
+// Completely remove from the flow but leave available to screen readers.
+.is-vishidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+}

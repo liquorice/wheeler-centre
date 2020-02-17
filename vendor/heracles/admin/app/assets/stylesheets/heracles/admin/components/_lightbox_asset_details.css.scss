@@ -1,0 +1,130 @@
+.asset-details-lightbox {
+  text-align: center;
+}
+.lightbox-asset {
+  display: inline-block;
+  max-width: 90%;
+  min-width: 450px;
+}
+.lightbox-asset__file-name {
+  @extend .asset-selector-result__file-name;
+}
+.lightbox-asset__date {
+  @extend .asset-selector-result__date;
+}
+.lightbox-asset__preview {
+  @include pad(all, smaller);
+  background-color: $white;
+  border: 1px solid $green-mid;
+}
+.lightbox-asset__preview--pdf,
+.lightbox-asset__preview--xls,
+.lightbox-asset__preview--doc {
+  background-color: $green-light;
+}
+.lightbox-asset__preview-image {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+  .lightbox-asset__preview-proxy {
+    @include pad(all, medium);
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: $white;
+    border-radius: 3px;
+    display: block;
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    &:before {
+      @include font-size(24);
+      content: "\f15b";
+      color: $green-highlight;
+    }
+  }
+
+.lightbox-asset__details {
+  text-align: left;
+  background-color: $green-light-bg;
+  border: 1px solid $green-mid;
+  border-top: 0;
+  margin-bottom: 8rem;
+  & dd {
+    position: relative;
+    line-height: 1.5rem;
+  }
+  & dd a {
+    position: absolute;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.lightbox-asset__details__wrapper {
+  @include pad(all, mid);
+}
+.lightbox-asset__details-list {
+  @extend .field-details-list;
+  a,
+  a:link {
+    text-decoration: underline;
+    color: $primary;
+  }
+  a:hover {
+    color: $body-text;
+    text-decoration: none;
+  }
+}
+.lightbox-asset__details__title {
+  font-family: $font-main-bold;
+  margin-bottom: 1rem;
+}
+a.lightbox-asset__details__title-edit {
+  float: right;
+  text-decoration: underline;
+  @include font-size(14);
+  &:hover {
+    text-decoration: none;
+  }
+}
+.lightbox-asset__details__outer-title {
+  @include pad(horz, mid);
+  @include pad(vert, small);
+  color: $green-mid-dark;
+  margin-bottom: 0rem;
+}
+.lightbox-asset__details__border-title {
+  border-bottom: 1px solid $green-mid;
+}
+
+.lightbox-asset__details__data {
+  @include pad(top, mid);
+  border-bottom: 1px solid $green-mid;
+}
+.lightbox-asset__details__data-field {
+  @include pad(horz, mid);
+  @include pad(bottom, mid);
+}
+.lightbox-asset__details__data-title {
+  display: block;
+  font-family: $font-main-bold;
+  margin-bottom: 1rem;
+}
+.lightbox-asset__details__data-input,
+.lightbox-asset__details__data-area {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid $green-mid;
+}
+  .lightbox-asset__details__data-input.field-select2 {
+    border: none;
+    background-color: #fff;
+    padding: 0;
+  }
+.lightbox-asset__details__data-area {
+  height: 70px;
+}

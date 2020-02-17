@@ -1,0 +1,19 @@
+div class=wrapper_div_class
+  audio controls=true
+    source src=asset.original_url type=asset.content_type
+
+    / TODO: re-enable these once we update the insertable renderer to work with the new processed assets
+    / - if mp3_url.present?
+    /   source src=mp3_url type="audio/mpeg"
+    / - if ogg_url.present?
+    /   source src=ogg_url type="audio/ogg"
+
+  - if data[:caption].present? || (asset.attribution.present? && data[:show_attribution] == true)
+    .figure__caption.caption.copy
+      p
+        - if data[:caption].present?
+          = data[:caption]
+          - if (data[:caption].present? && asset.attribution.present? && data[:show_attribution] == true)
+            '  —
+        - if asset.attribution.present? && data[:show_attribution] == true
+          = asset.attribution

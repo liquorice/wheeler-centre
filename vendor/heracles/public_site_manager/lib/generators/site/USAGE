@@ -1,0 +1,6 @@
+Description:
+    Generates a new Heracles site
+
+Example:
+    rails generate site melbourne_school_of_government
+

@@ -1,0 +1,6 @@
+// Admin: Field Text Radio -----------------------------------------------
+
+.field-text__radio__items {
+  @include inset(top, smaller);
+  @include pad(bottom, normal);
+}

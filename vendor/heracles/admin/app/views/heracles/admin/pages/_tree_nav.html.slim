@@ -1,0 +1,30 @@
+- cache ['heracles-admin-tree-nav', page.try(:hierarchy_cache_key)] do
+  .tree-nav data-view-tree-nav=""
+    .tree-nav__nav
+      a.tree-nav__open-nav[href="#"]
+        i.fa.fa-bars
+      .tree-nav__nav-right
+        /*a[href="#"]*/
+        /*  i.fa.fa-search*/
+        a.tree-nav__close-nav[href="#"]
+          i.fa.fa-times-circle
+
+    .tree-nav__list data-view-tree-nav-sortable="true"
+      h2.tree-nav__title Navigation
+      - if page.present?
+        = build_page_tree pages_in_path(page), ->(page) { policy(page) }, ->(scope) { page_type_policy_scope(scope) },  _current_page=(page.new_record? ? page.try(:parent) || page : page)
+      - else
+        span No pages yet.
+
+      span[class="tree-nav__list-add tree-nav__list-item" data-view-page-type-selector=""]
+        i[class="fa fa-plus-circle"]
+        | Add page here
+        - page_type_policy_scope(site.page_classes).each do |page_class|
+          - class_name = "tree-nav__new-page tree-nav__new-page--"
+          - if page_class.collection?
+            - class_name += "collection"
+          - elsif page_class.hidden?
+            - class_name += "hidden"
+          - else
+            - class_name += "page"
+          = link_to page_class.page_type.humanize, new_site_page_path(page_type: page_class.page_type), class: class_name

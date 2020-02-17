@@ -1,0 +1,27 @@
+ENV["BUNDLE_GEMFILE"] = File.expand_path("../../Gemfile", __FILE__)
+
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
+
+APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
+load 'rails/tasks/engine.rake'
+
+require "rspec/core"
+require "rspec/core/rake_task"
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
+
+namespace :spec do
+  task :enable_coverage do
+    ENV["COVERAGE"] = "1"
+  end
+
+  desc "Executes specs with code coverage reports"
+  task coverage: :enable_coverage do
+    Rake::Task[:spec].invoke
+  end
+end

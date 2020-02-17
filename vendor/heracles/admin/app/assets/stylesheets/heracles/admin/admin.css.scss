@@ -1,0 +1,170 @@
+// Variables --------------------------
+@import "heracles/admin/components/globals";
+
+// Libraries --------------------------
+@import "bourbon";
+// @import "neat";
+@import "font-awesome";
+
+// Patterns ---------------------------
+
+// Load patterns
+@import "heracles/admin/shared/patterns/all";
+
+// Call patterns
+@include reset();
+
+// Base -------------------------------
+
+@import "heracles/admin/shared/fonts";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // Set font-size down to 10px (16px * 0.625)
+  overflow-x: hidden;
+}
+
+body {
+  @include font-size(15);
+  background-color: $body-background;
+  background-repeat: repeat;
+  color: $body-text;
+  font-family: $font-main;
+  height: 100%;
+  line-height: (23 / 16);
+  overflow-x: hidden;
+}
+
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+.large-title {
+  @include inset(bottom, mid);
+  @include font-size(34);
+  color: $green-dark;
+  letter-spacing: 1px;
+  font-family: $font-main-bold;
+  font-weight: normal;
+  text-align: center;
+}
+
+.admin-wrapper {
+  transition-property: transform;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(.33, 0, .2, 1);
+  &.tree-nav--open {
+    transform: translate(30%, 0);
+    .admin-wrapper__cover {
+      cursor: pointer;
+      transform: translate(0, 0);
+      transition-delay: 30ms, 0ms;
+    }
+  }
+}
+div[data-view-page-form-controller] {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-wrapper__cover {
+  background-color: rgba(#fff,.6);
+  bottom: 0;
+  left: 4rem;
+  right: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transform: translate(100%, 0);
+  transition-delay: 30ms, 230ms;
+  transition-duration: 200ms, 1ms;
+  transition-property: opacity, transform;
+  z-index: 99;
+}
+  .admin-wrapper__cover--show {
+    cursor: pointer;
+    transform: translate(0, 0);
+    transition-delay: 30ms, 0ms;
+    opacity: 1;
+  }
+  @for $i from 1 through 10 {
+    .admin-wrapper__cover--move-#{$i}0 {
+      transform: translate(#{$i}0%, 0);
+    }
+    .admin-wrapper__cover--move-#{$i}5 {
+      transform: translate(#{$i}5%, 0);
+    }
+    .admin-wrapper__cover--move-neg-#{$i}0 {
+      transform: translate(-#{$i}0%, 0);
+    }
+    .admin-wrapper__cover--move-neg-#{$i}5 {
+      transform: translate(-#{$i}5%, 0);
+    }
+  }
+
+.admin-content {
+  margin-top: -4.5rem;
+  padding-left: 4rem;
+  padding-top: 4.5rem;
+  position: relative;
+  width: 100%;
+}
+  .admin-page {
+    @include pad(top, large);
+    @include pad(bottom, huge);
+    @include pad(horz, large);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    width: 60%;
+  }
+  .admin-page__title {
+    @include inset(bottom, mid);
+    @include font-size(24);
+    @include standard-links;
+    text-align: center;
+  }
+
+// Fields -----------------------------
+
+@import "heracles/admin/components/buttons";
+@import "heracles/admin/components/form";
+@import "heracles/admin/fields/field_array";
+@import "heracles/admin/fields/field_array__checkboxes";
+@import "heracles/admin/fields/field_assets";
+@import "heracles/admin/fields/field_associated_pages";
+@import "heracles/admin/fields/field_boolean";
+@import "heracles/admin/fields/field_date_time";
+@import "heracles/admin/fields/field_text__radio";
+@import "heracles/admin/fields/field_associated_pages";
+@import "heracles/admin/fields/field_info";
+@import "heracles/admin/fields/field_stale";
+
+// Components -------------------------
+
+@import "heracles/admin/components/progress";
+@import "heracles/admin/components/select2";
+@import "heracles/admin/components/copy";
+@import "heracles/admin/components/sign_in_up";
+@import "heracles/admin/components/collections";
+@import "heracles/admin/components/sites";
+@import "heracles/admin/components/pagination";
+@import "heracles/admin/components/flashes";
+@import "heracles/admin/components/navigation";
+@import "heracles/admin/components/autoexpand";
+@import "heracles/admin/components/content_editor";
+@import "heracles/admin/components/pages";
+@import "heracles/admin/components/sites";
+@import "filament-sticky";
+@import "heracles/admin/components/tree_nav";
+@import "heracles/admin/components/asset_uploader";
+@import "heracles/admin/components/collections";
+@import "heracles/admin/components/lightbox";
+@import "heracles/admin/components/lightbox_asset_selector";
+@import "heracles/admin/components/lightbox_asset_details";
+@import "heracles/admin/components/lightbox_savedsearch_selector";
+@import "heracles/admin/components/redirects";
+@import "heracles/admin/components/users";

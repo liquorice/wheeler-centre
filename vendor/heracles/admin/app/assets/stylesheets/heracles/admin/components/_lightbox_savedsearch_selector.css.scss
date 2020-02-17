@@ -1,0 +1,84 @@
+.savedsearch-selector {
+  .lightbox-title {
+    text-align: center;
+  }
+  .field-select2 {
+    display: inline-block;
+  }
+}
+
+.savedsearch-selector__list {
+  border: 1px solid $green-mid;
+  margin: 0 auto 34px auto;
+}
+
+.savedsearch-selector__options {
+  @include pad(all, normal);
+}
+
+.savedsearch-selector__row {
+  @include pad(horz, normal);
+  @include pad(vert, smaller);
+  border-top: 1px solid $green-mid;
+  background-color: $green-light-bg;
+}
+.savedsearch-selector__row--theme {
+  @include pad(all, normal);
+  border-top: 1px solid $green-mid;
+}
+.savedsearch-selector__row--tag {
+  .select2-container {
+    background: #FFF;
+    padding: 0;
+    border: none;
+    line-height: 4rem;
+    height: 4rem;
+    .select2-choices {
+      line-height: 3.8rem;
+    }
+    .select2-search-choice {
+      line-height: 2rem;
+    }
+  }
+}
+
+.savedsearch-selector__label {
+  display: inline-block;
+  padding-right: 0;
+  padding-right: 15px;
+}
+.savedsearch-selector__label--match {
+  width: 198px;
+}
+.savedsearch-selector__label--condition {
+  width: 102px;
+}
+
+.savedsearch-selector__button {
+  cursor: pointer;
+}
+
+.savedsearch__add {
+  float: right;
+}
+
+.savedsearch-selector__right {
+  float: right;
+  position: relative;
+  top: 7px;
+}
+
+.savedsearch-selector__field {
+  display: inline-block;
+  width: auto;
+  min-width: 200px;
+}
+
+.savedsearch-selector__drop {
+  margin-right: 15px;
+  min-width: 150px;
+}
+
+.savedsearch-selector__save {
+  text-align: center;
+}

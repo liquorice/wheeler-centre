@@ -1,0 +1,41 @@
+// Pagination ------------------------------------------------------------------
+
+.pagination {
+  @include clearfix;
+  .page,
+  .next,
+  .last,
+  .first,
+  .prev {
+    @include pad(right, small);
+    float: left;
+    a {
+      @include pad(horz, small);
+      @include pad(bottom, tiny);
+      background-color: $white;
+      border-radius: 2px;
+      display: block;
+      padding-top: 0.7rem;
+      transition-property: background-color, color;
+      transition-duration: 200ms;
+      &:hover {
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+  .gap {
+    @include pad(right, smaller);
+    @include pad(bottom, tiny);
+    @include pad(top, tiny);
+  }
+  .current {
+    @include pad(horz, smaller);
+    @include pad(bottom, tiny);
+    @include inset(right, small);
+    background-color: $highlight;
+    border-radius: 2px;
+    color: $white;
+    padding-top: 0.7rem;
+  }
+}

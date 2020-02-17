@@ -1,0 +1,79 @@
+= hidden_field_tag :parent_id, params[:parent_id]
+= hidden_field_tag :page_type, params[:page_type]
+- collection_type = @collection.contained_page_type.humanize.singularize
+
+.form-header
+  .page-path
+    - if @page.persisted?
+      = link_to public_url(site, @page), class: "page-public-link" do
+        i.fa.fa-file-text
+        span View page on site
+    - else
+      i.fa.fa-file-text
+    span.page-path__parent
+      - if @page.persisted?
+        == build_breadcrumbs @page
+      - else
+        == build_breadcrumbs @collection
+    span.page-path__slug.collection-index__title
+      i.fa.fa-folder-open
+      = link_to @collection.title, site_collection_pages_path(site, @collection)
+    span.page-path__parent
+      |/
+    = form.text_field :slug, class: "field-text-input page-path__slug", placeholder: "slug"
+  .form-controls.fixedsticky data-view-sticky=""
+    - if @page.page? && @page.persisted?
+      button.form-controls__preview.button.button--soft data-page-preview=%({"url": "#{site_page_preview_url(site, @page)}", "token": "#{site.preview_token}"})
+        ' Preview
+    .form-controls__hidden.field-checkbox
+      = form.check_box :hidden, class: "field-checkbox-input"
+      = form.label :hidden, "Hidden?", class: "field-checkbox-label"
+    .form-controls__published.field-checkbox
+      = form.check_box :published, class: "field-checkbox-input"
+      = form.label :published, "Published?", :class => 'field-checkbox-label'
+    a.form-controls__cancel.button[href=cancel_page_editing_path(@page)]
+      i.fa.fa-times &nbsp;
+      | Cancel
+    button.form-controls__save.button.button--highlight type="submit" Save #{collection_type.downcase}
+
+.form-content
+  .form-content__right.fixedsticky data-view-sticky=""
+    .form-nav
+  - if insertions.present?
+    .form-content__left
+      .form-insertions.copy data-view-insertions-panel=""
+        p
+          ' This #{collection_type.downcase} is referenced on #{insertions.length}&nbsp;#{"page".pluralize(insertions.length)} —
+          a.form-insertions-toggle href="#toggle"
+            span.form-insertions-toggle__off
+              ' Show list
+              i.fa.fa-angle-down
+            span.form-insertions-toggle__on
+              ' Hide list
+              i.fa.fa-angle-down
+        ul.form-insertions__list
+          - insertions.each do |insertion|
+            li.form-insertions__list-item
+              a.form-insertions__link href=edit_site_page_path(id: insertion.page)
+                span.form-insertions__title= insertion.page.title
+                span.form-insertions__slug
+                  |/
+                  = insertion.page.url
+  .form-body#form-body
+    .field
+      .field-header
+        = form.label :title, "#{collection_type} title", class: "field-label"
+      .field-main
+        = form.text_field :title, class: "field-text-input page-form__title", placeholder: "Title"
+
+    div data-view-fields-editor=""
+      = form.hidden_field :form_fields_json
+
+    .field-divider
+    .form-body__tags data-content="#{demlimited_tag_list @page.tags}"
+
+= append :edit_page_footer do
+  - if @page.persisted?
+    a.edit-page-form__delete.button.button--small.button--highlight href=site_collection_page_path(site, @collection, @page) data-method="delete" data-confirm="Are you sure want to delete this #{collection_type.downcase}? THERE IS NO UNDO."
+      ' Delete this
+      = collection_type.downcase

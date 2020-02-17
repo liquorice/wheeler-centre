@@ -1,0 +1,20 @@
+#=require jquery
+#=require lodash
+
+"use strict"
+
+class Embedly
+  constructor: ->
+    @domain = 'api.embed.ly/'
+    @path   = '1/oembed'
+    @key    = "<%= Heracles.configuration.embedly_api_key %>"
+  endpoint: -> "//#{@domain}#{@path}"
+  params: (params) ->
+    embedlyParams = $.param window.HeraclesAdmin.options.embedlyParams
+    "?key=#{@key}&callback=?&#{params}&#{embedlyParams}"
+  getUrls: (urls) ->
+    urlsParams = "urls=#{_.map(urls, encodeURIComponent).join(',')}"
+    return $.getJSON "#{@endpoint()}#{@params(urlsParams)}"
+  getUrl: (url) -> @getUrls [url]
+
+HeraclesAdmin.helpers.embedly = new Embedly()

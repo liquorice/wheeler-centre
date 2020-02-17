@@ -1,0 +1,8 @@
+div class=wrapper_div_class
+  div
+    .responsive-embed style=responsive_embed_div_style
+      == data[:embedData][:html]
+
+  - if data[:caption].present?
+    .figure__caption.copy
+      p = data[:caption]

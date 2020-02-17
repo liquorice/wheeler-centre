@@ -1,0 +1,58 @@
+.form-content
+  = form_errors_panel form
+  .fields-row
+    .field.field-columns--6
+      .field-header
+        = form.label :title, "Title", class: "field-label"
+      .field-main
+        = form.text_field :title, placeholder: "Title", class: "field-text-input"
+        = form_field_errors form, :title
+    .field.field-columns--6
+      .field-header
+        = form.label :slug, "Slug", class: "field-label"
+        span.field-hint Must match the name of your site engine
+      .field-main
+        = form.text_field :slug, placeholder: "Slug", class: "field-text-input field-mono"
+        = form_field_errors form, :slug
+
+  .fields-row
+    .field
+      .field-header
+        = form.label :space_delimited_origin_hostnames, "Origin hostnames", class: "field-label"
+        span.field-hint Separate by spaces
+      .field-main
+        = form.text_area :space_delimited_origin_hostnames, class: "field-mono field-text-input field-size--small"
+        = form_field_errors form, :origin_hostnames
+      .field-block-hint.copy
+        p Origin hosts serve the site directly. If there is no CDN for the site (i.e. if there are no edge hosts below), the first hostname will be used to render canonical URLs.
+
+  .fields-row
+    .field
+      .field-header
+        = form.label :space_delimited_edge_hostnames, "Edge hostnames", class: "field-label"
+        span.field-hint Separate by spaces
+      .field-main
+        = form.text_area :space_delimited_edge_hostnames, class: "field-mono field-text-input field-size--small"
+        = form_field_errors form, :edge_hostnames
+      .field-block-hint.copy
+        p Edge hosts are for sites delivered via a CDN. When this is present, the first hostname will be used to render canonical URLs, taking precedence over any origin hostnames.
+
+  .fields-row
+    .field
+      .field-header
+        = form.label :transloadit_params, "Transloadit params", class: "field-label"
+      .field-main
+        = form.text_area :transloadit_params, class: "field-mono field-text-input field-size--large"
+        = form_field_errors form, :transloadit_params
+
+  .fields-row
+    .field
+      .field-checkbox
+        = form.check_box :published, class: "field-checkbox-input"
+        = form.label :published, "Published?", class: "field-checkbox-label"
+
+  .fields-row
+    .field
+      button.button.button--highlight Save changes to site
+      - if form.object.persisted? && policy(form.object).destroy?
+        = link_to "Delete this site?", site_path(form.object), method: :delete, class: "site__delete button button--small button--highlight", data: {confirm: "Are you sure you want to delete this site? All the site's pages will be deleted too. THERE IS NO UNDO."}

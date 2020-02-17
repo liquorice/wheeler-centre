@@ -10,7 +10,7 @@ gem "rails", "~> 4.2.0"
 gem "pg"
 
 # Heracles
-gem "icelab-heracles", "2.0.0.beta67", source: "https://gem.fury.io/icelab/", require: "heracles"
+gem "icelab-heracles", "2.0.0.beta67", path: "vendor/heracles", require: "heracles"
 
 # Temporary dependency on forked sunspot queue (with Active Job support). Once
 # this patch goes upstream, we can remove this, since Heracles is the right

@@ -1,0 +1,21 @@
+= replace :form do
+  div data-view-page-form-controller=""
+    = render partial: "heracles/admin/pages/tree_nav", locals: {page: @page}
+    .admin-content
+      = form_for @page, as: :page, url: site_page_path(site, @page), html: { class: "edit-page-form", data: {"view-save-state-tracker" => true} } do |form|
+        = render "form", form: form, insertions: @insertions
+      .edit-page__footer
+        = area :edit_page_footer do
+          - if @page.page? && policy(@page).change_page_type?
+            .change-page-type
+              .change-page-type__closed
+                button.change-page-type__toggle.button.button--small.button--soft Change page type?
+                span.change-page-type__current= @page.page_type
+              .change-page-type__open
+                = form_for :page_type, url: site_page_page_type_path(site, @page), method: :patch do |form|
+                  = form.label :type, "Page type", class: "field-label"
+                  = form.select :type, allowed_alternative_page_types(@page), {selected: @page.page_type}, {class: "field-select field-small"}
+                  .change-page-type__controls
+                    button.button.button--highlight type="submit" Save new page type
+                    ' or
+                    a.change-page-type__toggle href="#cancel" cancel

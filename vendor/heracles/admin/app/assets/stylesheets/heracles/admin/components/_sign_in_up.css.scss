@@ -1,0 +1,28 @@
+// Sign in ---------------------------------------------------------------------
+
+.sign-in {
+  @include pad(vert, large);
+  // background: #f09;
+  display: flex;
+}
+  .sign-in__form {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 400px;
+    .field {
+      // Override spacing for .field to bring them closer together
+      @include pad(bottom, normal);
+    }
+  }
+  .sign-in__header {
+    @include inset(bottom, normal);
+    @include font-size(20);
+    font-family: $font-alternate;
+  }
+
+  .sign-in__links {
+    @include inset(top, medium);
+    @include standard-links;
+    @include font-size(18);
+    font-family: $font-alternate
+  }

@@ -1,0 +1,16 @@
+// Admin: Flashes --------------------------------------------------------------
+
+.flash {
+  @include pad(vert, small);
+  @include pad(horz, large);
+}
+  .flash--notice {
+    background-color: $notice;
+  }
+  .flash--success {
+    background-color: $success;
+  }
+  .flash--alert {
+    background-color: $warning;
+    color: $white;
+  }

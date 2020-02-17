@@ -1,0 +1,110 @@
+.asset-uploader {
+  &:before {
+    @extend .large-title;
+    background: rgba(255, 255, 255, 0.95);
+    content: "⇣\00A0\00A0\00A0\00A0 Drop file to upload \00A0\00A0\00A0⇣";
+    height: 100%;
+    left: 0;
+    line-height: 60rem;
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+  }
+  .asset-dropover &:before {
+    opacity: 1;
+  }
+}
+
+.asset-uploader {
+  @include font-size(17);
+  background: $green-light;
+  color: $green-mid-dark;
+  margin: 3rem auto 5rem;
+  max-width: 80rem;
+  overflow: hidden;
+  padding: 5rem 3rem;
+  position: relative;
+  text-align: center;
+  transition: height 500ms;
+}
+
+.asset-uploader-upload-button {
+  left: 0;
+  padding: 4rem 1rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.asset-uploader-file-input {
+  bottom: 0;
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.asset-uploader-progress {
+  appearance: none;
+  border: 0;
+  width: 60%;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  background-color: lighten($green-light, 10%);
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 0.3rem rgba(0,0,0,.1) inset;
+  color: $green-highlight;
+}
+
+.asset-uploader-progress::-webkit-progress-bar {
+  animation: animate-stripes 3s linear infinite reverse;
+  background-size: 5.5rem 3rem, 100% 100%, 100% 100%;
+  background-image: -webkit-linear-gradient(135deg, transparent,
+                          transparent 33%,
+                          rgba(0,0,0,.1) 33%,
+                          rgba(0,0,0,.1) 66%,
+                          transparent 66%),
+  -webkit-linear-gradient(top,
+                          rgba(255, 255, 255, .25),
+                          rgba(0,0,0,.2)),
+  -webkit-linear-gradient(left, $green-mid-dark, $green-highlight);
+  border-radius: 0.2rem;
+}
+
+.asset-uploader-progress[value]::-webkit-progress-bar {
+  background-color: rgba($green-mid-dark, 0.4);
+  background-image: none;
+  border-radius: 0.2rem;
+  box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.01) inset;
+  color: $green-highlight;
+}
+.asset-uploader-progress[value]::-webkit-progress-value {
+  animation: animate-stripes 3s linear infinite;
+  background-size: 5.5rem 3rem, 100% 100%, 100% 100%;
+  border-radius: 0.3rem;
+  opacity: 0.9;
+  position: relative;
+  transition: width 500ms;
+}
+
+@keyframes animate-stripes { 100% { background-position: -100px 0; } }
+
+// TODO: Firefox
+.asset-uploader-progress[value]::-webkit-progress-value {
+  /* Gradient background with Stripes */
+  background-image: -webkit-linear-gradient(135deg, transparent,
+                          transparent 33%,
+                          rgba(0,0,0,.1) 33%,
+                          rgba(0,0,0,.1) 66%,
+                          transparent 66%),
+  -webkit-linear-gradient(top,
+                          rgba(255, 255, 255, .25),
+                          rgba(0,0,0,.2)),
+  -webkit-linear-gradient(left, $green-mid-dark, $green-highlight);
+}

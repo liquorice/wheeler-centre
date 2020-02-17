@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= camel_case_site_name %></title>
+  <%%= stylesheet_link_tag    "heracles/sites/<%= snake_case_site_name %>/public", media: "all" %>
+  <%%= javascript_include_tag "heracles/sites/<%= snake_case_site_name %>/public" %>
+  <%%= csrf_meta_tags %>
+</head>
+<body>
+
+<%%= yield %>
+
+</body>
+</html>

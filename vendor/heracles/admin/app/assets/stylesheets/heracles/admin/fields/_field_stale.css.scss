@@ -1,0 +1,35 @@
+.fields-stale__header {
+  @include font-size(18);
+  @include pad(bottom, small);
+}
+
+.fields-stale__actions {
+  display: block;
+  float: right;
+  height: 0;
+  overflow: visible;
+  position: relative;
+  top: -7px;
+  z-index: 1;
+}
+
+.fields-stale__delete {
+	@include pad(vert, tiny);
+  @include pad(horz, small);
+	color: #59909c;
+  display: inline-block;
+  &:active {
+    color: lighten(#59909c, 20%);
+  }
+  &:hover {
+  	background-color: #ffdbdc;
+		border-radius: 3px;
+    color: $highlight;
+  }
+}
+
+.fields-stale {
+	p.copy {
+		@include pad(bottom, normal);
+	}
+}
