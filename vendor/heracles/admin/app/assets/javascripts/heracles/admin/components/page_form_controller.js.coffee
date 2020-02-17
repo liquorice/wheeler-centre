@@ -18,7 +18,6 @@ class PageFormController
     @watchSlug()
     @setupInsertables()
     @setupChangePageType()
-    @focusTitleInput()
 
   setupInsertables: ->
     insertableEditor = new InsertableEditor()
@@ -56,8 +55,5 @@ class PageFormController
   toggleChangePageType: (e) =>
     e.preventDefault()
     @$el.find(".change-page-type").toggleClass("change-page-type--open")
-
-  focusTitleInput: ->
-    @$el.find(".page-form__title").focus()
 
 HeraclesAdmin.views.pageFormController = ($el) -> new PageFormController $el
