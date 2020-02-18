@@ -103,6 +103,13 @@
 
       = render_content_in_sections page.fields[:description]
 
+      - if page.people.present?
+        section.section--normal
+          .recording__presenters
+            h2.recording__presenters-header Who?
+            - page.people.each do |presenter|
+              = render "partials/presenter_horizontal", presenter: presenter
+
     - cache ["podcast-episode-comments-1", page.fields[:flarum_discussion_id]] do
       - if page.fields[:flarum_discussion_id].data_present?
         .podcast-episode__comments.column-wrapper
