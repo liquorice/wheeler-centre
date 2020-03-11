@@ -1,6 +1,7 @@
 //=require lodash
 //=require jquery
 //=require react
+//=require heracles/admin/object-hash.js
 //=require heracles/admin/sortable.js
 //=require heracles/admin/react-sortable-mixin.js
 //=require heracles/admin/insertables/insertable_image
@@ -85,18 +86,23 @@ var InsertableGalleryDisplay = React.createClass({
    */
 
   sortAssetsArray: function (id, oldIndex, newIndex) {
-    var clone = _.assign({}, this.state.assets);
+    // I don't understand why but this is somehow already sorted when it arrives here?
 
-    var target = clone.filter(function(asset, idx){
-      if (asset.id === id) return asset
-    });
+    // var clone = this.state.assets.slice().map(function(obj) {
+    //   return _.assign({}, obj);
+    // });
 
-    if (!target.length) return;
+    // var target = clone.filter(function(asset, idx){
+    //   if (asset.id === id) return asset
+    // });
 
-    // remove > insert > return
-    clone.splice(oldIndex, 1)
-    clone.splice(newIndex, 0, target[0]);
-    return clone;
+    // if (!target.length) return;
+
+    // // remove > insert > return
+    // clone.splice(oldIndex, 1)
+    // clone.splice(newIndex, 0, target[0]);
+    // return clone;
+    return this.state.assets
   },
 
   /**
@@ -471,7 +477,7 @@ var InsertableGalleryDisplay = React.createClass({
       <InsertableImageDisplay
         isGalleryAsset={ true }
         isSortable={ isSortable }
-        key={ idx }
+        key={ objectHash(_.assign({idx: idx}, data)) }
         onRemove={ this.removeAsset }
         onValueUpdate={ this.mergeUpdatedAssetData }
         type="image"
