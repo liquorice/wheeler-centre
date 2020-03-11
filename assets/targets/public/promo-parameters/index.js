@@ -36,8 +36,11 @@ function onLinkClick(e) {
     e.metaKey ||
     e.ctrlKey ||
     e.delegateTarget.getAttribute("target") === "_blank";
-  // Intercept any links to my.wheelercentre.com
-  if (parsedLinkURL.hostname === "my.wheelercentre.com") {
+  // Intercept any links to my.wheelercentre.com or test-ap-play.tn.services (the test domain)
+  if (
+    parsedLinkURL.hostname === "my.wheelercentre.com" ||
+    parsedLinkURL.hostname === "test-ap-play.tn.services"
+  ) {
     e.preventDefault();
     parsedLinkURL.set(
       "query",
@@ -45,17 +48,21 @@ function onLinkClick(e) {
     );
     visitLink(parsedLinkURL.toString(), promoCode, openInNewWindow);
   } else if (
-    // Intercept any links to my.wheelercentre.com _through_ track.wheelercentre.com
+    // Intercept any links to my.wheelercentre.com or test-ap-play.tn.services _through_ track.wheelercentre.com
     parsedLinkURL.hostname === "track.wheelercentre.com" &&
     parsedLinkURL.query &&
-    /http?s\:\/\/my\.wheelercentre\.com/.test(parsedLinkURL.query.target)
+    (/http?s\:\/\/my\.wheelercentre\.com/.test(parsedLinkURL.query.target) ||
+      /http?s\:\/\/test-ap-play\.tn\.services/.test(parsedLinkURL.query.target))
   ) {
     e.preventDefault();
     // Extract then set the params in the `target` URL
     var parsedTrackingTargetURL = new Url(parsedLinkURL.query.target);
     parsedTrackingTargetURL.set(
       "query",
-      Object.assign({}, parsedTrackingTargetURL.query, { promo: promoCode, premove: "Y" })
+      Object.assign({}, parsedTrackingTargetURL.query, {
+        promo: promoCode,
+        premove: "Y"
+      })
     );
     // Then set that value in the tracking URL
     parsedLinkURL.set(
