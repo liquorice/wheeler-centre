@@ -56,7 +56,7 @@
 = area :main do
 
   .event data-view-event=true itemscope=true itemtype="http://data-vocabulary.org/Event"
-    - cache ["event-intro-1", page, page.recordings] do
+    - cache ["event-intro-1", page, page.recordings, page.podcast_episodes] do
       - unless page.upcoming?
         .intro.event__intro.column-wrapper.gradient-bottom-up
           .column-narrow.copy
@@ -65,26 +65,62 @@
                 ' This is an event from
                 em = time_ago_in_words page.fields[:start_date].value_in_time_zone
                 '  ago.
-              / Show a link to the single recording
-              - if page.recordings && page.recordings.length == 1
-                ' If you missed it, you can catch up on
-                a href=page.fields[:recordings].pages.first.absolute_url
-                  | this recording of the event
-                ' .
-              / Concat a list of recordings
-              - elsif page.recordings && page.recordings.present?
-                ' If you missed it, you can catch up on these recordings:
-                - page.recordings.each_with_index do |recording, index|
-                  - if page.series
-                    / Try and strip the series title from the recordings
-                    a href=recording.absolute_url = recording.title.gsub(/#{page.series.title}\:/, '')
+              - if page.recordings.any?
+                / Show a link to the single recording
+                - if page.recordings.length == 1
+                  ' If you missed it, you can catch up on
+                  a href=page.recordings.first.absolute_url
+                    | this recording
+                    - unless page.podcast_episodes.any?
+                      ' of the event
+                  - unless page.podcast_episodes.any?
+                    ' .
                   - else
-                    a href=recording.absolute_url
-                      = recording.title.gsub(/#{page.title}\:/, '')
-                  - if index == page.recordings.length - 1
-                    '.
+                    ' 
+                / Concat a list of recordings
+                - else
+                  ' If you missed it, you can catch up on these recordings:
+                  - page.recordings.each_with_index do |recording, index|
+                    - if page.series
+                      / Try and strip the series title from the recordings
+                      a href=recording.absolute_url = recording.title.gsub(/#{page.series.title}\:/, '')
+                    - else
+                      a href=recording.absolute_url
+                        = recording.title.gsub(/#{page.title}\:/, '')
+                    - if index == page.recordings.length - 1
+                      - unless page.podcast_episodes.any?
+                        ' .
+                      - else
+                        ' 
+                    - else
+                      ',
+              - if page.podcast_episodes.any?
+                / Show a link to the single recording
+                - if page.podcast_episodes.length == 1
+                  - if page.recordings.any?
+                    ' or you can listen to
                   - else
-                    ',
+                    ' If you missed it, you can catch up on
+                  a href=page.podcast_episodes.first.absolute_url
+                    | this podcast of the event
+                  ' .
+                / Concat a list of recordings
+                - else
+                  - if page.recordings.any?
+                    ' or you can listen to these recordings:
+                  - else
+                    ' If you missed it, you can catch up on these recordings:
+                  - page.podcast_episodes.each_with_index do |podcast, index|
+                    - if page.series
+                      / Try and strip the series title from the podcasts
+                      a href=podcast.absolute_url = podcast.title.gsub(/#{page.series.title}\:/, '')
+                    - else
+                      a href=podcast.absolute_url
+                        = podcast.title.gsub(/#{page.title}\:/, '')
+                    - if index == page.podcast_episodes.length - 1
+                      ' .
+                    - else
+                      ',
     - cache ["event-series-intro-1", page, page.series] do
       - if page.series
         - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
