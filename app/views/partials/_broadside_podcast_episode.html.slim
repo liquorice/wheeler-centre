@@ -18,7 +18,7 @@ a.bs-calendar__item href=url_with_domain(podcast_episode.absolute_url)
       - heading_class = "t-narrow"
     h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
       / TODO CHANGE THIS
-      = podcast_episode.title.gsub(/^The Fifth Estate: /, "")
+      = podcast_episode.title.gsub(/^Broadside: /, "")
 
     p.bs-calendar__event-speakers class=highlight_color_dark
       - if with_type

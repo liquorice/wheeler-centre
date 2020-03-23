@@ -20,8 +20,7 @@ a.bs-calendar__item href=url_with_domain(recording.absolute_url)
     - if recording.title.length > 14
       - heading_class = "t-narrow"
     h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
-      / TODO CHANGE THIS
-      = recording.title.gsub(/^The Fifth Estate: /, "")
+      = recording.title.gsub(/^Broadside: /, "")
 
     p.bs-calendar__event-speakers class=highlight_color_dark
       - if with_type

@@ -4,8 +4,7 @@ module Heracles
       class BroadsideWatchPage < ::Heracles::Page
         def self.config
           {
-            fields: [
-            ]
+            fields: []
           }
         end
 
@@ -29,7 +28,7 @@ module Heracles
 
         memoize \
         def broadside_events
-          broadside_series = Heracles::Page.of_type(:event_series).find_by(title: "The Fifth Estate")
+          broadside_series = Heracles::Page.of_type(:event_series).find_by(title: "Broadside")
           Heracles::Page.of_type(:event).where("(fields_data#>'{series, page_ids}')::jsonb ?| ARRAY[:page_ids]", page_ids: broadside_series.id).order("fields_data->'start_date'->>'value' ASC NULLS LAST")
         end
       end
