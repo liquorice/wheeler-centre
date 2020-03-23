@@ -78,6 +78,16 @@ module Heracles
         def recordings
           if fields[:recordings].data_present?
             fields[:recordings].pages.visible.published
+          else
+            []
+          end
+        end
+
+        def podcast_episodes
+          if fields[:podcast_episodes].data_present?
+            fields[:podcast_episodes].pages.visible.published
+          else
+            []
           end
         end
 
