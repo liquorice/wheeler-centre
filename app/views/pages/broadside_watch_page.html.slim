@@ -28,10 +28,11 @@
       h1.page-title Watch
 
       ul.bs-subnav
-        li.bs-subnav__item.bs-subnav__item--active
-          a href="#videos" Videos
-        li.bs-subnav__item
-          a href="#podcasts" Podcasts
+        - if page.recordings.any? && page.podcast_episodes.any?
+          li.bs-subnav__item.bs-subnav__item--active
+            a href="#videos" Videos
+          li.bs-subnav__item
+            a href="#podcasts" Podcasts
 
   - cache ['bs-watch-page-recordings-1', page.recordings] do
     - if page.recordings.any?
