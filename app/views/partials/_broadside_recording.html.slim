@@ -1,0 +1,29 @@
+- highlight_color = "c-pink"
+- highlight_color_dark = "c-pink-dark"
+- highlight_bg_color = "bg-pink"
+- highlight_bg_color_dark = "bg-pink-dark"
+- highlight_pattern = "heading-block__pattern--pink"
+- if recording.fields[:hero_image].data_present?
+  - hero_image = recording.fields[:hero_image].assets.first
+- if recording.fields[:thumbnail_image].data_present?
+  - thumbnail_image = recording.fields[:thumbnail_image].assets.first
+
+a.bs-calendar__item href=url_with_domain(recording.absolute_url)
+  .bs-calendar__image
+    - if thumbnail_image
+      img src=thumbnail_image.content_small_thumbnail_url alt=(thumbnail_image.description.present? ? thumbnail_image.description : "Promo image for #{recording.title}")
+    - elsif hero_image
+      img src=hero_image.content_small_thumbnail_url alt=(hero_image.description.present? ? hero_image.description : "Promo image for #{recording.title}")
+
+  .bs-calendar__event
+    - heading_class = "t-wide"
+    - if recording.title.length > 14
+      - heading_class = "t-narrow"
+    h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
+      / TODO CHANGE THIS
+      = recording.title.gsub(/^The Fifth Estate: /, "")
+
+    p.bs-calendar__event-speakers class=highlight_color_dark
+      - if with_type
+        ' Podcast &nbsp;/&nbsp;
+      = recording.people.map(&:title).join(", ")

@@ -1,0 +1,59 @@
+- set_meta_tags({ \
+    description: "", \
+    og: { \
+      type: "website", \
+      site_name: "Broadside", \
+      title: "Broadside - WATCH", \
+      description: "Two days of an unapologetically feminist agenda", \
+      image: { \
+        url: image_url("public-broadside/bs-open-graph.png"), \
+        secure_url: image_url("public-broadside/bs-open-graph.png").gsub(/^http/, "https"), \
+        width: "666", \
+        height: "404", \
+      } \
+    } \
+  })
+
+/ Set twitter:image
+- set_meta_tags({ \
+    twitter: { \
+      image: image_url("public-broadside/bs-open-graph.png"), \
+    } \
+  })
+
+= area :main do
+
+  .column-wrapper
+    .column-wide
+      h1.page-title Watch
+
+      ul.bs-subnav
+        li.bs-subnav__item.bs-subnav__item--active
+          a href="#videos" Videos
+        li.bs-subnav__item
+          a href="#podcasts" Podcasts
+
+  - cache ['bs-watch-page-recordings-1', page.recordings] do
+    - if page.recordings.any?
+      .heading-block
+        .heading-block__info
+          h2#videos.heading-block__heading.t-narrow.c-pink
+            ' Videos
+        .heading-block__pattern.heading-block__pattern--pink
+      .column-wrapper
+        .column-wide
+          .bs-calendar
+            - page.recordings.each do |recording|
+              = render "partials/broadside_recording", recording: recording, with_type: false
+
+  - cache ['bs-watch-page-podcast_episodes-1', page.podcast_episodes] do
+    - if page.podcast_episodes.any?
+      .heading-block.heading-block--reverse
+        .heading-block__info
+          h2#podcasts.heading-block__heading.t-narrow.c-blue
+            ' Podcasts
+        .heading-block__pattern.heading-block__pattern--blue
+      .column-wrapper
+        .column-wide
+          - page.podcast_episodes.each do |podcast_episode|
+            = render "partials/broadside_podcast_episode", podcast_episode: podcast_episode, with_type: false

@@ -70,6 +70,8 @@ module Heracles
         def people
           if fields[:people].data_present?
             fields[:people].pages.visible.published
+          else
+            []
           end
         end
 

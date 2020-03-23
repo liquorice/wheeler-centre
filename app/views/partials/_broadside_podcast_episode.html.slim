@@ -1,0 +1,32 @@
+- highlight_color = "c-blue"
+- highlight_color_dark = "c-blue-dark"
+- highlight_bg_color = "bg-blue"
+- highlight_bg_color_dark = "bg-blue-dark"
+- highlight_pattern = "heading-block__pattern--blue"
+- if podcast_episode.fields[:itunes_image].data_present?
+  - image = podcast_episode.fields[:itunes_image].assets.first
+- elsif podcast_episode.series.fields[:itunes_image].data_present?
+  - image = podcast_episode.series.fields[:itunes_image].assets.first
+
+a.bs-calendar__item href=url_with_domain(podcast_episode.absolute_url)
+  .bs-calendar__image
+    - if image
+      img src=image.content_small_thumbnail_url alt=(image.description.present? ? image.description : "Promo image for #{podcast_episode.title}")
+  .bs-calendar__event
+    - heading_class = "t-wide"
+    - if podcast_episode.title.length > 14
+      - heading_class = "t-narrow"
+    h3.bs-calendar__event-title.t-narrow class=heading_class class=highlight_color
+      / TODO CHANGE THIS
+      = podcast_episode.title.gsub(/^The Fifth Estate: /, "")
+
+    p.bs-calendar__event-speakers class=highlight_color_dark
+      - if with_type
+        ' Podcast
+      - if podcast_episode.fields[:audio].data_present? && podcast_episode.fields[:audio].assets.first.versions["original"].first.try(:[], "meta").try(:[], "duration").present?
+        - if with_type
+          ' &nbsp;/&nbsp;
+        => Time.at(podcast_episode.fields[:audio].assets.first.versions["original"].first.try(:[], "meta").try(:[], "duration")).utc.strftime("%H:%M:%S")
+        - if podcast_episode.people.any?
+          ' &nbsp;/&nbsp;
+      = podcast_episode.people.map(&:title).join(", ")

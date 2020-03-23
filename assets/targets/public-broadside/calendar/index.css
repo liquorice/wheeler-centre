@@ -18,13 +18,35 @@
 
 .bs-calendar__item {
   display: flex;
+  align-items: center;
+  margin-bottom: 5rem;
 }
 
-.bs-calendar__time {
+.bs-calendar__item:last-child .bs-calendar__item {
+  margin-bottom: 0;
+}
+
+.breakpoint-w-768 .bs-calendar__item {
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.bs-calendar__time,
+.bs-calendar__image {
   font-size: 2rem;
   font-weight: 500;
   width: 34%;
-  padding-right: 2.4rem;
+  padding-right: 3.2rem;
+}
+
+.breakpoint-w-768 .bs-calendar__time,
+.breakpoint-w-768 .bs-calendar__image {
+  padding-right: 2rem;
+  width: 30%;
+}
+
+.bs-calendar__image img {
+  max-width: 100%;
 }
 
 .breakpoint-w-768 .bs-calendar__time {
@@ -33,16 +55,11 @@
 
 .bs-calendar__event {
   flex: 1;
-  margin-bottom: 5rem;
   padding-right: 2.4rem;
 }
 
-.bs-calendar__item:last-child .bs-calendar__event {
-  margin-bottom: 0;
-}
-
 .breakpoint-w-768 .bs-calendar__event {
-  margin-bottom: 3rem;
+  width: 70%;
 }
 
 .bs-calendar__event-title {
@@ -54,8 +71,8 @@
 }
 
 .breakpoint-w-768 .bs-calendar__event-title {
-  font-size: 3rem;
-  line-height: 3rem;
+  font-size: 2.6rem;
+  line-height: 2.6rem;
 }
 
 .bs-calendar__event-speakers {

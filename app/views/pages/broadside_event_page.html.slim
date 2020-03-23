@@ -159,38 +159,23 @@
                       span = "@" + speaker_page.twitter_name
                   .bs-speaker__intro.copy class=highlight_color_dark
                     = speaker_page.intro
-
-  .heading-block.heading-block--reverse
-    .heading-block__info
-
-      - if page.slug == "teen-day"
+  - if page.event.recordings.any? || page.event.podcast_episodes.any?
+    .heading-block.heading-block--reverse
+      .heading-block__info
         h1.heading-block__heading.t-narrow class=highlight_color
-          ' More Info
-        p.heading-block__detail class=highlight_color_dark
-          ' To find out more about Teen Day
-          br
-          ' contact
-          a href="mailto:bec.kavanagh@wheelercentre.com" bec.kavanagh@wheelercentre.com
-          ' .
-      - else
-        - if page.event.booked_out?
-          h1.heading-block__heading.t-narrow class=highlight_color
-            ' Booked
-            br
-            ' out
-        - else
-          h1.heading-block__heading.t-narrow class=highlight_color
-            a itemprop="offerurl" href=page.external_bookings
-              ' Book
-              br
-              ' now
-        - unless page.slug == "up-late" || page.event.booked_out?
-          p.heading-block__detail class=highlight_color_dark
-            strong
-              a href="/how" Buy a pass and save!
-            '  Limited quantities now available.
-
-    .heading-block__pattern class=highlight_pattern
-
+          - if page.event.recordings.any?
+            ' Watch
+            - if page.event.podcast_episodes.any?
+              ' /
+          - if page.event.podcast_episodes.any?
+            ' Listen
+      .heading-block__pattern class=highlight_pattern
+    .column-wrapper
+        .column-wide
+          .bs-calendar
+            - page.event.recordings.each do |recording|
+              = render "partials/broadside_recording", recording: recording, with_type: true
+            - page.event.podcast_episodes.each do |podcast_episode|
+              = render "partials/broadside_podcast_episode", podcast_episode: podcast_episode, with_type: true
 
 
