@@ -71,8 +71,6 @@
                   ' If you missed it, you can catch up on
                   a href=page.recordings.first.absolute_url
                     | this recording
-                    - unless page.podcast_episodes.any?
-                      ' of the event
                   - unless page.podcast_episodes.any?
                     ' .
                   - else
@@ -102,7 +100,7 @@
                   - else
                     ' If you missed it, you can catch up on
                   a href=page.podcast_episodes.first.absolute_url
-                    | this podcast of the event
+                    | this podcast
                   ' .
                 / Concat a list of recordings
                 - else
