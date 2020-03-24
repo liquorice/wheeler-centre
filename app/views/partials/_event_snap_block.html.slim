@@ -7,7 +7,7 @@
 - elsif post.promo_image
   - image = post.promo_image
 / State classes
-- if post.upcoming? && post.fields[:ticketing_stage].data_present?
+- if (post.upcoming? && post.fields[:ticketing_stage].data_present?) || (post.fields[:ticketing_stage].value == "Cancelled")
   - dasherised_stage = post.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
   - block_classnames << "event-calendar-event--#{dasherised_stage}"
 - first_topic = post.fields[:topics].pages.first if post.fields[:topics].data_present?
@@ -29,7 +29,7 @@
                   i.fa.fa-play.event-snap__past-event-icon
                 ' Past event
           .event-snap__hero-inner
-            - if post.fields[:ticketing_stage].data_present? && post.upcoming?
+            - if post.fields[:ticketing_stage].data_present? && post.upcoming? || (post.fields[:ticketing_stage].value == "Cancelled")
               .event-calendar-event__flag
                 .event-calendar-event__flag-text = post.fields[:ticketing_stage].value
             - image_url = (aspect == :square) ? image.content_thumbnail_url : image.content_small_thumbnail_url
