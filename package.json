@@ -55,7 +55,7 @@
     "webpack-notifier": "1.2.1"
   },
   "engines": {
-    "node": "6.9.4"
+    "node": "7.10.1"
   },
   "scripts": {
     "clean": "rm -rf ./node_modules && npm run clean-build",
