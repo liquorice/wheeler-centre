@@ -6,13 +6,7 @@ Rails + Heracles app for the Wheeler Centre
 
 ### First-time setup
 
-Ensure you have access Icelab's [Gemfury](http://fury.io) organization. Log in and visit the [repos page](https://manage.fury.io/dashboard/icelab#/repos) to find your private repo token (it's listed at the top of the page as `https://your-token-here@repo.fury.io/icelab/`). Let bundler know about your token:
-
-```
-bundle config https://gem.fury.io/icelab/ put-your-token-here
-```
-
-Then check out the app:
+Check out the app:
 
 ```
 git clone git@github.com:icelab/wheeler-centre.git
@@ -22,7 +16,7 @@ cd ~/src/wheeler-centre
 To set up all the required services:
 
 ```
-bin/boostrap
+bin/bootstrap
 ```
 
 Once that’s done you can start the services by running:
@@ -60,37 +54,20 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -p 5432 -d wheeler
 rm latest.dump
 ```
 
-The database username/password in development are both `db`.
-
 ### Running the Application Locally
 
 ```
-foreman start -f Procfile.dev
+bin/server
 open http://localhost:5000
 ```
 
-### Running the Specs
+### Content management system
 
-To run all ruby and javascript specs:
+The app is built on top of a Rails engine called Heracles that provides the CMS features, including all the
+infrastructure for the admin area. The [Heracles README](./vendor/heracles/README.md) has some specific details about
+its implementation.
 
-```
-rake
-```
-
-Again, with coverage for the ruby specs:
-
-```
-rake spec:coverage
-```
-
-### Using Guard
-
-Guard is configured to run ruby and jasmine specs, and also listen for
-livereload connections. Growl is used for notifications.
-
-```
-guard
-```
+The admin area should mount locally at <http://localhost:5000/admin>.
 
 ### Environment Variables
 
@@ -207,7 +184,7 @@ if (DEVELOPMENT) {
 
 # Deployment
 
-The site runs on Heroku, behind a [Fastly](https://www.fastly.com) CDN.
+The site runs on Heroku, behind [CDN77](https://www.cdn77.com) using an origin-pull architecture.
 
 Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the main app). When setting up a new Heroku app, add them as follows:
 
@@ -216,15 +193,8 @@ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 ```
 
-Add a Gemfury repo token config var so bundler on Heroku can install the private heracles gem:
-
-```
-heroku config:set BUNDLE_GEM__FURY__IO="your-token-here"
-```
-
-You can find the token on your [Gemfury repos page](https://manage.fury.io/dashboard/icelab#/repos).
-
 ## Dealing with Heroku review apps
+
 ```sh
 heroku config:set ADMIN_HOST=wheeler-centre-pr-46.herokuapp.com CANONICAL_DOMAIN=https://wheeler-centre-pr-46.herokuapp.com CANONICAL_HOSTNAME=wheeler-centre-pr-46.herokuapp.com --app wheeler-centre-pr-46
 heroku run rake temporary:setup_next_chapter --app wheeler-centre-pr-46

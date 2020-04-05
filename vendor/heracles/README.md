@@ -206,14 +206,6 @@ rails generate site site_name
 
 # Deployment
 
-Add a `BUNDLE_GEM__FURY__IO` Gemfury repo token environment variable so bundler can install the private gem in production.
-
-On Heroku, this looks lke:
-
-```
-heroku config:set BUNDLE_GEM__FURY__IO="your-token-here"
-```
-
 You can find the token on your [Gemfury repos page](https://manage.fury.io/dashboard/icelab#/repos).
 
 # Architecture
@@ -615,4 +607,3 @@ git push
 git push origin v2.0.0.beta67
 git push fury
 ```
-
