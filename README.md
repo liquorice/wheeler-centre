@@ -184,7 +184,19 @@ if (DEVELOPMENT) {
 
 # Deployment
 
-The site runs on Heroku, behind [CDN77](https://www.cdn77.com) using an origin-pull architecture.
+The site runs on Heroku, behind [CDN77](https://www.cdn77.com) using an origin-pull architecture and is deployed using
+Heroku’s standard git deployment. Once you’ve added the production app as a git remote you can deploy the site by
+pushing master to that remote:
+
+```sh
+git push heroku master
+```
+
+If you need to deploy a branch to production temporarily you can do so using the following syntax:
+
+```
+git push heroku branch-name:master
+```
 
 Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the main app). When setting up a new Heroku app, add them as follows:
 
