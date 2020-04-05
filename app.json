@@ -7,9 +7,6 @@
     "ADMIN_HOST": {
       "required": true
     },
-    "BUNDLE_GEM__FURY__IO": {
-      "required": true
-    },
     "CANONICAL_DOMAIN": {
       "required": true
     },
@@ -17,9 +14,6 @@
       "required": true
     },
     "CANONICAL_PROTOCOL": {
-      "required": true
-    },
-    "FASTLY_SERVICE_ID": {
       "required": true
     },
     "FOG_PROVIDER": {
