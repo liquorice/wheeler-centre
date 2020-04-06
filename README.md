@@ -4,7 +4,13 @@ Rails + Heracles app for the Wheeler Centre
 
 # Development
 
-### First-time setup
+## Requirements
+
+The app uses:
+
+- [asdf](https://github.com/asdf-vm/asdf) to install and manage system services
+
+## First-time setup
 
 Check out the app:
 
@@ -54,14 +60,14 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -p 5432 -d wheeler
 rm latest.dump
 ```
 
-### Running the Application Locally
+## Running the Application Locally
 
 ```
 bin/server
 open http://localhost:5000
 ```
 
-### Content management system
+## Content management system
 
 The app is built on top of a Rails engine called Heracles that provides the CMS features, including all the
 infrastructure for the admin area. The [Heracles README](./vendor/heracles/README.md) has some specific details about
@@ -69,7 +75,7 @@ its implementation.
 
 The admin area should mount locally at <http://localhost:5000/admin>.
 
-### Environment Variables
+## Environment Variables
 
 Several common features and operational parameters can be set using
 environment variables. These are all optional.
@@ -91,7 +97,7 @@ environment variables. These are all optional.
 * `CDN_ORIGIN_DOMAIN`, `CDN_ORIGIN_PORT` - i.e. the non-CDN-ed URL (and port)
 * `FOG_PROVIDER` - Required for the fog gem, in our case this will generally be AWS and is used to generate the search engine sitemaps.
 
-### Assets
+## Assets
 
 Assets live outside the standard sprockets-based asset pipeline. We’re using webpack to (almost) entirely replace the asset pipeline, though it works in a similar way to the asset pipeline in practice: we’re not creating fancy bundles, just normal static JavaScript and CSS.
 
@@ -131,7 +137,7 @@ npm run build
 
 This will build a development version of the webpack assets into `./assets/build` so you can inspect them.
 
-#### JavaScript
+### JavaScript
 
 Dependencies are managed through [npm](http://npmjs.com). To add a dependency you’ll want to:
 
@@ -170,7 +176,7 @@ var Foo = require("./foo"); // Will look for index.js automatically
 var fooInstance = new Foo();
 ```
 
-#### Debugging
+### Debugging
 
 We inject a special constant into the JavaScript environment at build time: `DEVELOPMENT`. This is a boolean that allows you to add *persistent* code you’d only like to run in development:
 
