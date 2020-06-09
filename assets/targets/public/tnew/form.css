@@ -16,7 +16,8 @@
 .tn-guest-login-form__section--guest-contact label,
 .tn-guest-login-billing-address__address-inputs label,
 .tn-flex-seating-notes-form label,
-.tn-contribution-type-form .control-label {
+.tn-contribution-type-form .control-label,
+.tn-opg-form .tn-fieldset label {
   color: #918F8F;
   font-family: var(--font-sans);
   font-size: 1.2rem;
@@ -66,6 +67,7 @@
 }
 
 .checkbox label, .radio label {
+  font-family: var(--font-sans);
   padding-left: 3rem;
 }
 
@@ -77,7 +79,7 @@
   margin-left: -3rem;
 }
 
-/* Validiation label */
+/* Validation label */
 
 .help-block {
   font-family: var(--font-sans);
@@ -88,4 +90,3 @@
 .has-error .control-label::before {
   display: none;
 }
-
