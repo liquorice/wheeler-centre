@@ -1,0 +1,20 @@
+/* Donate page */
+
+/* Panel title */
+.tn-opg-form__amount-input-panel h3 {
+  font-family: var(--font-sans);
+}
+
+/* Form headings */
+.tn-opg-form h2 {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+/* Donation total */
+.tn-opg-form__totals {
+  font-family: var(--font-sans);
+}
