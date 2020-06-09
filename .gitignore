@@ -48,3 +48,4 @@ passenger.*
 
 # database dump file
 latest.dump
+*.sql
