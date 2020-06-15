@@ -11,6 +11,14 @@
   margin-bottom: 4rem;
 }
 
+.tn-header-component p {
+  margin-bottom: 1rem;
+}
+
+.tn-header-component p:last-child {
+  margin-bottom: none;
+}
+
 .tn-heading,
 .tn-header-component h1,
 #ReturnTix #headr h2 {

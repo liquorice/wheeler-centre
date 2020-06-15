@@ -83,7 +83,8 @@
 .tn-patron-billing-information h2,
 .tn-patron-shipping-information h2,
 .tn-donation-ask-component h2,
-.tn-gift-certificates-redemption-component h2 {
+.tn-gift-certificates-redemption-component h2,
+.tn-one-page-giving-receipt h2 {
   color: #777777;
   -webkit-font-smoothing: subpixel-antialiased;
   font-family: var(--font-sans);

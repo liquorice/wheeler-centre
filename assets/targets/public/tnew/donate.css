@@ -1,4 +1,4 @@
-/* Donate page */
+/** Donate page **/
 
 /* Panel title */
 .tn-opg-form__amount-input-panel h3 {
@@ -17,4 +17,23 @@
 /* Donation total */
 .tn-opg-form__totals {
   font-family: var(--font-sans);
+}
+
+/** Confirmation page **/
+
+/* Order confirmation */
+.tn-one-page-giving-receipt {
+  margin-bottom: 4rem;
+}
+
+.tn-one-page-giving-receipt button.tn-one-page-receipt-print {
+  float: right;
+}
+
+span.tn-order-information-line.tn-additional-information {
+  margin-top: 1rem;
+}
+
+.tn-cart-totals__line-item {
+  align-items: baseline;
 }
