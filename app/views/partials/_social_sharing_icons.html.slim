@@ -2,11 +2,10 @@ h2.social-links__header Share
 ul.social-links
   li.social-links__twitter
     / twitter
-    a.ss-icon target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+    a.ss-icon target="_blank" href="https://twitter.com/intent/tweet?url=#{request.original_url}" &#xF611;
   li.social-links__facebook
     / facebook
     a.ss-icon target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
   li.social-links__email
     / email
     a.ss-icon href="mailto:?subject=From the Wheeler Centre: #{u(page.title)} &body=#{u(request.original_url)}  " &#x2709;
-

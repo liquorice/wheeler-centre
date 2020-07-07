@@ -85,7 +85,7 @@
             ul
               li
                 / twitter
-                a.ss-icon class=highlight_color target="_blank" href="https://twitter.com/home?status=#{request.original_url}" &#xF611;
+                a.ss-icon class=highlight_color target="_blank" href="https://twitter.com/intent/tweet?url=#{request.original_url}" &#xF611;
               li
                 / facebook
                 a.ss-icon class=highlight_color target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" &#xF610;
@@ -177,5 +177,3 @@
               = render "partials/broadside_recording", recording: recording, with_type: true
             - page.event.podcast_episodes.each do |podcast_episode|
               = render "partials/broadside_podcast_episode", podcast_episode: podcast_episode, with_type: true
-
-
