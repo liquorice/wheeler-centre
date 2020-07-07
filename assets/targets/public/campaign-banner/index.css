@@ -22,7 +22,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
-  padding-top: 3rem;
+  padding-top: 2rem;
   padding-bottom: 2rem;
   position: relative;
   transform: translate3d(0,0,0);
@@ -37,6 +37,16 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
+
+/* Text */
+
+.campaign-banner .copy {
+  font-size: 1.7rem;
+}
+
+.campaign-banner .copy p:last-child {
+  margin-bottom: 0;
+}
 
 /* Images */
 
