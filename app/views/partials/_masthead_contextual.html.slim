@@ -13,22 +13,9 @@
               i.fa.fa-chevron-right
         ul.upcoming-events__list.clearfix
           - upcoming_events_for_navigation.each do |event|
-            - event_classnames = []
-            - if event.fields[:ticketing_stage].data_present?
-              - dasherised_stage = event.fields[:ticketing_stage].value.downcase.gsub(/\s+/, '-')
-              - event_classnames << "upcoming-event__ticketing-stage--#{dasherised_stage}"
-            - if event.fields[:thumbnail_image].data_present?
-              - image = event.fields[:thumbnail_image].assets.first
-            - elsif event.promo_image
-              - image = event.promo_image
-            - cache ["upcoming-events-event-2", event, image, with_domain] do
+            - cache ["upcoming-events-event-2", event, with_domain] do
               li.upcoming-events__item
-                a.upcoming-events__item-anchor data-view-touch-preview={previewClassName: "upcoming-events__item-anchor--hover"}.to_json href=url_with_domain(event.absolute_url, with_domain: with_domain)
-                  - if image
-                    span.upcoming-events__image-container
-                      - if event.fields[:ticketing_stage].data_present?
-                        .upcoming-event__ticketing-stage class="#{event_classnames.join(' ')}" = event.fields[:ticketing_stage].value
-                      img.upcoming-events__image alt="" src=image.content_thumbnail_url
+                a.upcoming-events__item-anchor href=url_with_domain(event.absolute_url, with_domain: with_domain)
                   span.upcoming-events__item-text-container.clearfix
                     time.upcoming-events__item-date datetime=l(event.fields[:start_date].value, format: :rfc_3339) = l event.fields[:start_date].value_in_time_zone, format: :medium_date
                     - if event.series
