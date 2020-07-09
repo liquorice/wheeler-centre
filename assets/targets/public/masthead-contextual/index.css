@@ -202,66 +202,10 @@
     position: relative;
   }
 
-    .upcoming-events__image-container {
-      position: absolute;
-      top: -28%;
-      opacity: 0;
-      overflow: hidden;
-      pointer-events: none;
-      transition-property: transform, opacity;
-      transition-duration: 150ms;
-      transition-timing-function: cubic-bezier(.10, .10, .25, .90);
-      width: 100%;
-      z-index: 6;
-      visibility: hidden;
-    }
-
-    .breakpoint-w-599 .upcoming-events__image-container {
-      display: none;
-    }
-
-    .upcoming-events__item-anchor:hover .upcoming-events__image-container,
-    .upcoming-events__item-anchor:focus .upcoming-events__image-container {
-      transform: translateY(-1.5rem);
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .upcoming-event__ticketing-stage {
-      background-color: #C73C30;
-      color: #fff;
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: 1.1rem;
-      font-weight: bold;
-      left: 0;
-      letter-spacing: 0.1em;
-      padding: .4rem .6rem .3rem;
-      position: absolute;
-      text-transform: uppercase;
-      top: 0.7rem;
-    }
-
-    .upcoming-event__ticketing-stage--booked-out,
-    .upcoming-event__ticketing-stage--cancelled {
-      background-color: #C73C30;
-      color: #fff;
-    }
-
-    .upcoming-event__ticketing-stage--booking-fast {
-      background-color: #FFFFFF;
-      color: var(--primary-color);
-    }
-
     .upcoming-events__item-anchor:hover .upcoming-events__item-title,
     .upcoming-events__item-anchor:focus .upcoming-events__item-title {
       text-decoration: underline;
     }
-
-      .upcoming-events__image-container img {
-        max-width: 100%;
-      }
-
 
     .upcoming-events__item-text-container {
       font-size: 1.6rem;

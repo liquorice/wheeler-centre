@@ -123,7 +123,7 @@ module TrackingHelper
   #   - network (REQUIRED) - social network (eg twitter, facebook)
   #
   # Example:
-  # track_social(https://twitter.com/home?status=http://localhost:5000/broadcasts/podcasts/the-fifth-estate,
+  # track_social(https://twitter.com/intent/tweet?url=http://localhost:5000/broadcasts/podcasts/the-fifth-estate,
   #   location: http://localhost:5000/broadcasts/podcasts/the-fifth-estate", title: "The Fifth Estate",
   #   path: "/broadcasts/podcasts/the-fifth-estate", action: "share", network: "twitter"
   #
