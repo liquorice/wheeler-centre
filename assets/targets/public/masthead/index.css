@@ -231,7 +231,7 @@
           color: #fff;
         }
 
-      // Apply a bottom border to the active nav item, at all but phone breakpoints
+      /* Apply a bottom border to the active nav item, at all but phone breakpoints */
       .masthead-nav-main__anchor--active {
         border-bottom: 3px solid #fff;
       }
