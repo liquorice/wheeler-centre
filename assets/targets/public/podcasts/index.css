@@ -51,7 +51,7 @@
     border-right: 1px solid #fff;
     color: #fff;
     float: left;
-    min-height: 36rem;
+    height: 36rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -70,7 +70,7 @@
     height: 6rem;
   }
   .breakpoint-tablet .podcasts-index__feature-block {
-    min-height: 40rem;
+    height: 40rem;
   }
   .breakpoint-phone-wide .podcasts-index__feature-block,
   .breakpoint-phone .podcasts-index__feature-block {
