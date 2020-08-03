@@ -234,7 +234,7 @@
       /* Apply a bottom border to the active nav item, at all but phone breakpoints */
       /* TODO: Don't display for dropdowns in hover state */
       .masthead-nav-main__anchor--active {
-        border-bottom: 3px solid #fff;
+        border-bottom: 3px solid #ccefeb;
       }
 
     .masthead-nav-main__dropdown {
