@@ -108,6 +108,12 @@
         margin-right: 0.5rem;
       }
 
+      /* A slight hack to fix the display of the last nav item at the tablet breakpoint, which accounts for the bottom
+         border added to the currently-active nav item */
+      .breakpoint-tablet .masthead-nav-main li:last-of-type {
+        clear: left;
+      }
+
       .breakpoint-phone .masthead-nav-main__item {
         float: none;
       }
