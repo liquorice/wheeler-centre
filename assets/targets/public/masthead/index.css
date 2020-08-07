@@ -76,6 +76,7 @@
     .masthead-nav-secondary{
       list-style: none;
     }
+
     .masthead-nav-main {
       float: left;
       margin-left: -1.5rem;
@@ -106,12 +107,6 @@
 
       .masthead-nav-main__tnew-icon {
         margin-right: 0.5rem;
-      }
-
-      /* A slight hack to fix the display of the last nav item at the tablet breakpoint, which accounts for the bottom
-         border added to the currently-active nav item */
-      .breakpoint-tablet .masthead-nav-main li:last-of-type {
-        clear: left;
       }
 
       .breakpoint-phone .masthead-nav-main__item {
@@ -236,16 +231,6 @@
           background-color: var(--primary-color);
           color: #fff;
         }
-
-      /* Apply a bottom border to the active nav item, at all but phone breakpoints */
-      .masthead-nav-main__anchor--active {
-        border-bottom: 3px solid #ccefeb;
-      }
-
-      /* Don't display for dropdowns in hover state */
-      .masthead-nav-main__item--has-dropdown:hover > .masthead-nav-main__anchor--active  {
-        border-bottom: 3px solid transparent;
-      }
 
     .masthead-nav-main__dropdown {
       background-color: var(--primary-color-darker);
