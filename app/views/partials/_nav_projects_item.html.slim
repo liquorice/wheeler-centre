@@ -2,7 +2,7 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
   data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
   data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
   ]
-  button.masthead-nav-main__anchor
+  button.masthead-nav-main__anchor class=("masthead-nav-main__anchor--active" if request.path.match(/^\/projects/))
     = projects_page.title
     i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
   .masthead-nav-main__dropdown.clearfix
