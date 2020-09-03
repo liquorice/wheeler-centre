@@ -45,10 +45,11 @@ May also need to run the database migration in the process:
 rake db:migrate
 ```
 
-Add the heroku git remote:
+Add the heroku git remotes for staging and production:
 
 ```
-git remote add heroku git@heroku.com:wheeler-centre.git
+git remote add staging git@heroku.com:wheeler-centre-staging.git
+git remote add production git@heroku.com:wheeler-centre.git
 ```
 
 You can pull production data down using the following commands:
@@ -195,13 +196,13 @@ Heroku’s standard git deployment. Once you’ve added the production app as a 
 pushing master to that remote:
 
 ```sh
-git push heroku master
+git push production master
 ```
 
 If you need to deploy a branch to production temporarily you can do so using the following syntax:
 
 ```
-git push heroku branch-name:master
+git push production branch-name:master
 ```
 
 Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the main app). When setting up a new Heroku app, add them as follows:
