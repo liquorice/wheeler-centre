@@ -205,12 +205,28 @@ If you need to deploy a branch to production temporarily you can do so using the
 git push production branch-name:master
 ```
 
-Two buildpacks are used on Heroku: nodejs (for the assets) and ruby (for the main app). When setting up a new Heroku app, add them as follows:
+Three buildpacks are used on Heroku: jemalloc (to improve Ruby memory performance), nodeJS (for assets) and ruby (for the Rails app). When setting up a new Heroku app, add them as follows:
 
 ```
+heroku buildpacks:add https://github.com/producthunt/heroku-buildpack-jemalloc
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 ```
+
+## Staging environment, and deployment to the production environment
+
+A staging environment is available at [https://wheeler-centre-staging.herokuapp.com](https://wheeler-centre-staging.herokuapp.com/). When deploying changes, these should first be deployed the staging environment for testing and review. If you're happy that everything is working as expected, the deployment of these changes to production should be performed by 'promoting' them to production via the pipeline configured for the app on Heroku.
+
+## An important caveat regarding the staging environment
+
+The staging environment mostly functions as per the production environment, with an important caveat: asset uploads and deletions via Heracles don't function as expected.
+
+The application relies on AWS S3 (for asset storage) and [Transloadit](https://transloadit.com/) (for the processing of uploaded assets) and due to the time, effort, and cost required to replicate the configuration of these services for use in the staging environment we've opted not to do this at this stage. Therefore:
+
+**When using the staging environment, new assets must not be uploaded via Heracles, and existing assets must not be deleted**
+
+Performing either of these actions will affect production data, and therefore must be avoided.
+
 
 ## Dealing with Heroku review apps
 
