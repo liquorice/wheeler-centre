@@ -1,0 +1,65 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 14px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+</style>
+
+<script src="http://documentcloud.github.io/underscore/underscore-min.js"></script>
+<script src="http://backbonejs.org/backbone-min.js"></script>
+
+<div class="view">
+  <h1>Hi {name || 'Unknown'}</h1>
+  <p>You are {age || 0} years old</p>
+</div>
+
+<script src="./reactive.js"></script>
+<script>
+var User = Backbone.Model.extend();
+var user = new User({
+    name: 'Matt',
+    age: 24
+});
+
+// simplified backbone adapter
+
+var Adapter = function(model) {
+    if (!(this instanceof Adapter)) {
+        return new Adapter(model);
+    }
+
+    var self = this;
+    self.model = model;
+};
+
+Adapter.prototype.subscribe = function(prop, fn) {
+    this.model.on('change:' + prop, fn);
+};
+
+Adapter.prototype.set = function(prop, val) {
+    this.model.set(prop, val);
+};
+
+Adapter.prototype.get = function(prop) {
+    return this.model.get(prop);
+};
+
+// bind
+
+var el = document.querySelector('.view');
+reactive(el, user, {
+    adapter: Adapter
+})
+
+setTimeout(function() {
+    user.set({
+        name: 'Ted',
+        age: 36
+    });
+}, 2000);
+</script>

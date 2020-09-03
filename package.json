@@ -19,7 +19,7 @@
     "html5shiv": "^3.7.2",
     "picturefill": "2.2.1",
     "query-string": "1.0.0",
-    "reactive": "1.2.0",
+    "reactive": "^1.2.0",
     "superagent": "1.4.0",
     "timecodeutils": "0.0.1",
     "url-parse": "^1.4.7",

@@ -1,0 +1,40 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 14px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+</style>
+
+<form>
+  <label>
+    title:
+    <input type="text" data-value="title" placeholder="Title" />
+  </label>
+  <label>
+    complete:
+    <input type="checkbox" data-checked="complete" />
+  </label>
+</form>
+
+<script src="./reactive.js"></script>
+<script>
+var reactive = require('reactive');
+
+function Item(title) {
+  this.title = title;
+  this.complete = true;
+}
+
+var item = new Item('Get groceries');
+var el = document.querySelector('form');
+var view = reactive(el, item);
+
+setTimeout(function(){
+  view.set('complete', false);
+}, 1000);
+</script>

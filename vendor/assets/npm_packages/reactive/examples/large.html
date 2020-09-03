@@ -1,0 +1,69 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 9px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+  article {
+    float: left;
+    margin: 15px;
+    width: 150px;
+  }
+</style>
+
+<input type="text" value="Reactive">
+<input type="range" min="0" max="100" value="0">
+
+<br>
+
+<article>
+  <h1>{ title || 'Untitled' }</h1>
+  <p>{ description } <strong>{views} views</strong></p>
+</article>
+
+<script src="./reactive.js"></script>
+<script>
+  //var Emitter = require('emitter');
+  //var reactive = require('reactive');
+  //var Emitter = reactive.Emitter;
+
+  var title = document.querySelector('[type=text]');
+
+  var views = [];
+
+  title.oninput = function(){
+    views.forEach(function(view) {
+        view.set('title', title.value);
+    });
+  };
+
+  var input = document.querySelector('[type=range]');
+
+  input.onchange = function(){
+    views.forEach(function(view) {
+        view.set('views', ~~input.value);
+    });
+  };
+
+  var init = {
+    title: 'Reactive',
+    description: 'Some description here.',
+    views: 0
+  };
+
+  var el = document.querySelector('article');
+  var n = 400;
+
+  while (n--) {
+    var clone = el.cloneNode(true);
+    var view = reactive(clone, init);
+    views.push(view);
+    document.body.appendChild(clone);
+  }
+
+  el.parentNode.removeChild(el);
+</script>

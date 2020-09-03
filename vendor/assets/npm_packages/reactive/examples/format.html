@@ -1,0 +1,64 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 14px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+</style>
+
+<div id="user">
+  <h2>{first}</h2>
+  <p><span>{fullname}</span> was born on <span data-date="birthdate" format="%Y %d"></span>. Check out his webpage at <a href="{url}" data-url-text="url"></a></p>
+</div>
+
+<script src="./reactive.js"></script>
+<script>
+  var tmpl = document.querySelector('#user');
+
+  var user = {
+    first: 'Loki',
+    last: 'Ferret',
+    birthdate: new Date,
+    slug: 'loki'
+  };
+
+  function UserView(user) {
+    this.user = user;
+    var view = reactive(tmpl, user, {
+        delegate: this
+    });
+    view.bind('data-date', function(el, prop) {
+        var binding = this;
+
+        var format = el.getAttribute('format');
+        binding.change(function() {
+          var date = binding.value(prop);
+          el.textContent = format
+            .replace('%Y', date.getFullYear())
+            .replace('%d', date.getDate())
+        });
+    })
+    view.bind('data-url-text', function(el, prop) {
+        var binding = this;
+
+        binding.change(function() {
+          var value = binding.value(prop);
+          el.textContent = value.replace(/^https?:\/\/(www\.)?/, '');
+        });
+    })
+  }
+
+  UserView.prototype.url = function(){
+    return 'http://myapp.com/user/' + this.user.slug;
+  };
+
+  UserView.prototype.fullname = function(){
+    return this.user.first + ' ' + this.user.last;
+  };
+
+  var view = new UserView(user);
+</script>
