@@ -213,7 +213,7 @@ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 ```
 
-## Staging environment, and deployment to the production environment
+## The staging environment, and deployment to the production environment
 
 A staging environment is available at [https://wheeler-centre-staging.herokuapp.com](https://wheeler-centre-staging.herokuapp.com/). When deploying changes, these should first be deployed the staging environment for testing and review. If you're happy that everything is working as expected, the deployment of these changes to production should be performed by 'promoting' them to production via the pipeline configured for the app on Heroku.
 
