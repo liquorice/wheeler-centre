@@ -1,0 +1,37 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 14px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+</style>
+
+<article>
+  <h1>{ title || 'Untitled' }</h1>
+  <p>{ description.slice(0, 5) }</p>
+</article>
+
+<script src="./reactive.js"></script>
+<script>
+  var Emitter = require('emitter');
+  var reactive = require('reactive');
+
+  var article = {
+    title: 'Reactive',
+    description: 'Some description here.'
+  };
+
+  Emitter(article);
+
+  var el = document.querySelector('article');
+  reactive(el, article);
+
+  setTimeout(function(){
+    article.title = null;
+    article.emit('change title');
+  }, 2000);
+</script>

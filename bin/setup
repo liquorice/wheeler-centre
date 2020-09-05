@@ -4,6 +4,7 @@ bin/bootstrap
 
 # Set up staging and production git remotes
 if ! `git remote | egrep -q "^production$"`; then
+  git remote add staging git@heroku.com:wheeler-centre-staging.git
   git remote add production git@heroku.com:wheeler-centre.git
 fi
 

@@ -1,0 +1,82 @@
+
+<style>
+  body {
+    padding: 50px;
+    font: 14px Helvetica, Arial;
+  }
+  label {
+    display: block;
+    clear: both;
+  }
+</style>
+
+<div class="user">
+  <h1>{first} {last}</h1>
+  <p>{first} is a {occupation}, {sex} is {age} years old.</p>
+</div>
+
+<script src="./reactive"></script>
+<script>
+  var reactive = require('reactive');
+  var Emitter = require('emitter');
+  var tmpl = document.querySelector('.user');
+  tmpl.parentNode.removeChild(tmpl);
+
+  function User(obj) {
+    var self = this;
+    for (var k in obj) this[k] = obj[k];
+  }
+
+  User.prototype.view = function(){
+    var self = this;
+    var el = tmpl.cloneNode(true);
+    var view = reactive(el, this);
+    Object.observe(this, function(changes){
+      for (var i = 0; i < changes.length; i++) {
+        var change = changes[i];
+        self.emit('change ' + change.name);
+      }
+    });
+    return el;
+  };
+
+  Emitter(User.prototype);
+
+  var tobi = new User({
+    first: 'Tobi',
+    last: 'Holowaychuk',
+    occupation: 'ferret',
+    sex: 'male',
+    age: 2
+  });
+
+  var loki = new User({
+    first: 'Loki',
+    last: 'Holowaychuk',
+    occupation: 'ferret',
+    sex: 'male',
+    age: 3
+  });
+
+  var jane = new User({
+    first: 'Jane',
+    last: 'Holowaychuk',
+    occupation: 'ferret',
+    sex: 'femail',
+    age: 6
+  });
+
+  document.body.appendChild(tobi.view());
+  document.body.appendChild(loki.view());
+  document.body.appendChild(jane.view());
+
+  setTimeout(function(){
+    tobi.first = 'Manny';
+    tobi.last = 'Calavera';
+    tobi.occupation = 'cat';
+  }, 1000);
+
+  setInterval(function(){
+    tobi.age++;
+  }, 10);
+</script>

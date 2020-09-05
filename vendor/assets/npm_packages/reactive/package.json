@@ -1,0 +1,65 @@
+{
+  "_from": "reactive@1.2.0",
+  "_id": "reactive@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-vE9f2MTLUqN3YyzcLwh3jArbad0=",
+  "_location": "/reactive",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "reactive@1.2.0",
+    "name": "reactive",
+    "escapedName": "reactive",
+    "rawSpec": "1.2.0",
+    "saveSpec": null,
+    "fetchSpec": "1.2.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/reactive/-/reactive-1.2.0.tgz",
+  "_shasum": "bc4f5fd8c4cb52a377632cdc2f08778c0adb69dd",
+  "_spec": "reactive@1.2.0",
+  "_where": "/Users/dylanwolff/src/liquorice/wheeler-centre",
+  "browser": {
+    "classes": "classes-component",
+    "event": "event-component",
+    "query": "query-component",
+    "emitter": "emitter-component",
+    "clone": "clone-component"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "carry": "0.0.1",
+    "classes-component": "1.1.3",
+    "debug": "0.7.4",
+    "domify": "1.2.1",
+    "emitter-component": "1.1.1",
+    "event-component": "0.1.0",
+    "query-component": "0.0.1"
+  },
+  "deprecated": false,
+  "description": "Reactive template engine with data bindings",
+  "devDependencies": {
+    "better-assert": "~1.0.0",
+    "clone-component": "github:component/clone#acfb79aa",
+    "mocha": "~1.17.0",
+    "zuul": "~1.5.4"
+  },
+  "keywords": [
+    "reactive",
+    "template",
+    "engine",
+    "data",
+    "bind",
+    "bindings"
+  ],
+  "main": "lib/index.js",
+  "name": "reactive",
+  "scripts": {
+    "test": "zuul -- test/*.js",
+    "test-local": "zuul --local -- test/*.js"
+  },
+  "version": "1.2.0"
+}
