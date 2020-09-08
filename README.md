@@ -217,7 +217,7 @@ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby
 
 A staging environment is available at [https://wheeler-centre-staging.herokuapp.com](https://wheeler-centre-staging.herokuapp.com/). When deploying changes, these should first be deployed the staging environment for testing and review. If you're happy that everything is working as expected, the deployment of these changes to production should be performed by 'promoting' them to production via the pipeline configured for the app on Heroku.
 
-## An important caveat regarding the staging environment
+### An important caveat regarding the staging environment
 
 The staging environment mostly functions as per the production environment, with an important caveat: asset uploads and deletions via Heracles don't function as expected.
 
@@ -227,6 +227,13 @@ The application relies on AWS S3 (for asset storage) and [Transloadit](https://t
 
 Performing either of these actions will affect production data, and therefore must be avoided.
 
+### Staging environment variables
+
+There are some environment variables that are referenced within the app's assets, so in order for these to be present in the compiled slug that's promoted to production these must be set to the appropriate values in the staging environment. These variables are:
+
+* `EMBEDLY_API_KEY`
+* `FLARUM_AUTH_TOKEN`
+* `FLARUM_HOST`
 
 ## Dealing with Heroku review apps
 

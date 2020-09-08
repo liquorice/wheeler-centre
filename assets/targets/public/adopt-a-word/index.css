@@ -73,9 +73,11 @@
   width: calc(42% - 3.2rem);
   margin-right: 1.6rem;
   line-height: 3rem;
-}
-.adopt-a-word__description-left {
   margin-bottom: 2.4rem;
+}
+
+.adopt-a-word__description-left--no-stories {
+  width: calc(67% - 1.6rem);
 }
 
 .adopt-a-word__find-your-word a {
@@ -103,6 +105,10 @@
   padding-bottom: 3rem;
   border: 2px solid #eee;
   border-radius: 4px;
+}
+
+.adopt-a-word__description-right--no-stories {
+  margin-right: 0;
 }
 
 .breakpoint-phone .adopt-a-word__description-right,
@@ -556,5 +562,3 @@ li.adopt-a-word-thanks__whatsapp {
 .adopt-a-word-thanks__certificate-image img {
   width: 38rem;
 }
-
-
