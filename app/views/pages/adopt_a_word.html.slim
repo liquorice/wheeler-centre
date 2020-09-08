@@ -51,13 +51,13 @@
 
   .adopt-a-word__description-wrapper.column-wrapper
     .adopt-a-word__description-content.column-wide.clearfix
-      .adopt-a-word__description-left.copy
+      .adopt-a-word__description-left.copy class=("adopt-a-word__description-left--no-stories" unless page.stories.present?)
         = render_content page.fields[:description_left]
 
         .adopt-a-word__find-your-word
           a href="#words" Find your word
 
-      .adopt-a-word__description-right.copy
+      .adopt-a-word__description-right.copy class=("adopt-a-word__description-right--no-stories" unless page.stories.present?)
         p.adopt-a-word__list-amount
           - if page.fields[:donation_amount].data_present?
             = "FOR $#{page.fields[:donation_amount].value},"
