@@ -112,4 +112,6 @@
         .adopt-a-word__archive-button-wrapper
           a.adopt-a-word__archive-button href=archive_page.absolute_url
             ' View adopted words
-  = render "partials/adopt_a_word_footer"
+
+  - if page.fields[:donation_info].data_present?
+    = render "partials/adopt_a_word_footer"
