@@ -2,14 +2,16 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
   data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
   data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
   ]
-  button.masthead-nav-main__anchor
+  button.masthead-nav-main__anchor class=("masthead-nav-main__anchor--active" if request.path.match(/^\/topics/))
     ' Topics
     i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
-  .masthead-nav-main__dropdown.clearfix
-    - primary_topics.in_groups(2, false).each do |group|
-      - if group.present?
-        ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
-          - group.each do |topic|
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href=url_with_domain(topic.absolute_url, with_domain: with_domain)
-                == markdown_line topic.title
+
+  - cache ["nav-topics-5", primary_topics, with_domain] do
+    .masthead-nav-main__dropdown.clearfix
+      - primary_topics.in_groups(2, false).each do |group|
+        - if group.present?
+          ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+            - group.each do |topic|
+              li.masthead-nav-main__dropdown-item
+                a.masthead-nav-main__dropdown-anchor href=url_with_domain(topic.absolute_url, with_domain: with_domain)
+                  == markdown_line topic.title

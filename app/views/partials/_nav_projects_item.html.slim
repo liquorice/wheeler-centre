@@ -2,14 +2,16 @@ li.masthead-nav-main__item.masthead-nav-main__item--has-dropdown[
   data-view-touch-preview={previewClassName: "masthead-nav-main__item--has-dropdown--hover", focusSelector: "button,a"}.to_json
   data-view-nav-toggle={toggleSelector: ".masthead-nav-main__anchor", targetSelector: ".masthead-nav-main__dropdown", targetActiveClassName: "masthead-nav-main__dropdown--active", preventLinks: { default: false, "phone-wide" => true, phone: true}}.to_json
   ]
-  button.masthead-nav-main__anchor
+  button.masthead-nav-main__anchor class=("masthead-nav-main__anchor--active" if request.path.match(/^\/projects/))
     = projects_page.title
     i.masthead-nav-main__dropdown-icon.fa.fa-chevron-down
-  .masthead-nav-main__dropdown.clearfix
-    - projects_for_navigation.in_groups(2, false).each do |group|
-      - if group.present?
-        ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
-          - group.each do |project|
-            li.masthead-nav-main__dropdown-item
-              a.masthead-nav-main__dropdown-anchor href=url_with_domain(project.absolute_url, with_domain: with_domain)
-                == markdown_line project.title
+
+  - cache ["nav-projects-5", projects_page, projects_for_navigation, with_domain] do
+    .masthead-nav-main__dropdown.clearfix
+      - projects_for_navigation.in_groups(2, false).each do |group|
+        - if group.present?
+          ul.masthead-nav-main__dropdown-list.masthead-nav-main__dropdown-list--half
+            - group.each do |project|
+              li.masthead-nav-main__dropdown-item
+                a.masthead-nav-main__dropdown-anchor href=url_with_domain(project.absolute_url, with_domain: with_domain)
+                  == markdown_line project.title
