@@ -401,7 +401,7 @@
       color: var(--primary-color);
     }
 
-  .podcast-series__subscribe-itunes {
+  .podcast-series__subscribe-itunes, .podcast-series__subscribe-spotify {
     float: left;
     margin-right: 7rem;
   }

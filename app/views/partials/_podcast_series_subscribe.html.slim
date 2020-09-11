@@ -19,6 +19,9 @@
         .podcast-series__subscribe-itunes
           a href= page.fields[:itunes_url]
             img src= image_path("public/podcasts/link-badge-itunes.png")
+        .podcast-series__subscribe-spotify
+          a href= page.fields[:spotify_url]
+            img src= image_path("public/podcasts/link-badge-spotify.png")
       - if page.fields[:soundcloud_url].data_present? || page.fields[:stitcher_url].data_present?
         .podcast-series__listen-links
           ' Listen on: &nbsp;

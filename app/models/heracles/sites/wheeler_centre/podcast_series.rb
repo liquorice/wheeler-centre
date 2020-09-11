@@ -22,6 +22,7 @@ module Heracles
               {name: :itunes_categories, type: :associated_pages, page_type: :itunes_category},
               # Other sound links
               {name: :soundcloud_url, type: :text},
+              {name: :spotify_url, type: :text},
               {name: :stitcher_url, type: :text},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
