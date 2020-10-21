@@ -379,70 +379,52 @@
       .podcast-series__open-in-app-and-copy__button i {
         padding-right: 0.6rem;
       }
-  .podcast-series__subscribe_methods {
-    font-family: var(--font-sans);
-    font-size: 1.6rem;
-    margin-bottom: 3rem;
-  }
-  .podcast-series__listen-links {
-    float: left;
-    font-weight: bold;
-    margin-right: 2rem;
-    padding-top: 1.1rem;
-  }
-    .breakpoint-phone-wide .podcast-series__listen-links,
-    .breakpoint-phone .podcast-series__listen-links {
-      float: none;
-    }
-    .podcast-series__listen-links a {
-      text-decoration: underline;
-      font-weight: normal;
-    }
-    .podcast-series__listen-links a:hover {
-      color: var(--primary-color);
-    }
 
-  .podcast-series__subscribe-itunes, .podcast-series__subscribe-spotify {
-    float: left;
-    margin-right: 2rem;
+  .podcast-series__subscribe_methods {
+    margin-bottom: 2rem;
+  }
+
+  .podcast-series__badge {
+    display: inline-block;
+  }
+
+  .podcast-series__badge img {
+    width: 150px;
   }
 
   .podcast-series__feed-url {
-    float: right;
-    vertical-align: top;
+    font-family: var(--font-sans);
+    width: 100%;
   }
+
   .breakpoint-phone-wide .podcast-series__feed-url ,
   .breakpoint-phone .podcast-series__feed-url  {
-    float: none;
     margin-top: 1.5rem;
   }
 
     span.podcast-series__feed-url-title {
-      display: block;
+      display: inline-block;
       font-weight: bold;
-      float: left;
-      padding-top: 1.1rem;
       padding-bottom: 1.1rem;
     }
     input.podcast-series__feed-url-box {
-      float: right;
       border: 1px solid #ccc;
       border-radius: 4px;
+      display: inline-block;
       padding: 1.1rem 1.5rem;
       font-weight: normal;
       font-size: 1.4rem;
-      width: 26rem;
       height: 4rem;
-      margin-left: 2rem;
+      width: 100%;
     }
-    .breakpoint-phone-wide span.podcast-series__feed-url-title ,
+    /* .breakpoint-phone-wide span.podcast-series__feed-url-title ,
     .breakpoint-phone span.podcast-series__feed-url-title,
     .breakpoint-phone-wide input.podcast-series__feed-url-box ,
     .breakpoint-phone input.podcast-series__feed-url-box {
       float: none;
       width: 100%;
       margin-left: 0;
-    }
+    } */
 
 
 .podcast-series__explicit {
