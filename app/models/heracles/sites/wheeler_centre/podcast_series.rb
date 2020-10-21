@@ -20,10 +20,13 @@ module Heracles
               {name: :itunes_description, type: :text},
               {name: :itunes_keywords, type: :text},
               {name: :itunes_categories, type: :associated_pages, page_type: :itunes_category},
-              # Other sound links
-              {name: :soundcloud_url, type: :text},
-              {name: :spotify_url, type: :text},
-              {name: :stitcher_url, type: :text},
+              # Other podcast sources
+              {name: :google_podcasts_url, type: :text, label: "Google Podcasts URL"},
+              {name: :pocket_casts_url, type: :text, label: "Pocket Casts URL"},
+              {name: :radio_public_url, type: :text, label: "Radio Public URL"},
+              {name: :soundcloud_url, type: :text, label: "SoundCloud URL"},
+              {name: :spotify_url, type: :text, label: "Spotify URL"},
+              {name: :stitcher_url, type: :text, label: "Stitcher URL"},
               # Extra
               {name: :extra_info, type: :info, text: "<hr/>"},
               {name: :people, type: :associated_pages, page_type: :person},
