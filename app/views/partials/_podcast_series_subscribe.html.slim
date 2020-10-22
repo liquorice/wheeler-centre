@@ -23,7 +23,7 @@
         .podcast-series__badge
           a href= page.fields[:google_podcasts_url]
             img src= image_path("public/podcasts/badge-google-podcasts.png")
-      - if page.fields[:google_podcasts_url].data_present?
+      - if page.fields[:pocket_casts_url].data_present?
         .podcast-series__badge
           a href= page.fields[:pocket_casts_url]
             img src= image_path("public/podcasts/badge-pocket-casts.png")
