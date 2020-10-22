@@ -392,6 +392,7 @@
 
   .podcast-series__badge {
     display: inline-block;
+    margin-bottom: -2px;
     margin-right: 4px;
   }
 
