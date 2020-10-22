@@ -321,7 +321,7 @@
   .podcast-series__open-in-app-and-copy {
     border-bottom: 1px solid #dfdfdf;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
   }
   .podcast-series__open-in-app-and-copy:after {
@@ -422,15 +422,6 @@
       height: 4rem;
       width: 100%;
     }
-    /* .breakpoint-phone-wide span.podcast-series__feed-url-title ,
-    .breakpoint-phone span.podcast-series__feed-url-title,
-    .breakpoint-phone-wide input.podcast-series__feed-url-box ,
-    .breakpoint-phone input.podcast-series__feed-url-box {
-      float: none;
-      width: 100%;
-      margin-left: 0;
-    } */
-
 
 .podcast-series__explicit {
   display: inline-block;
