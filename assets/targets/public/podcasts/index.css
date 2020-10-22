@@ -406,8 +406,10 @@
   }
 
   .podcast-series__feed-url {
+    display: flex;
+    justfy-content: center;
+    align-items: baseline;
     font-family: var(--font-sans);
-    width: 100%;
   }
 
   .breakpoint-phone-wide .podcast-series__feed-url ,
@@ -416,19 +418,17 @@
   }
 
     span.podcast-series__feed-url-title {
-      display: inline-block;
       font-weight: bold;
-      padding-bottom: 1.1rem;
+      margin-right: 1.5rem;
     }
     input.podcast-series__feed-url-box {
       border: 1px solid #ccc;
       border-radius: 4px;
-      display: inline-block;
       padding: 1.1rem 1.5rem;
       font-weight: normal;
       font-size: 1.4rem;
       height: 4rem;
-      width: 100%;
+      flex: 2;
     }
 
 .podcast-series__explicit {
