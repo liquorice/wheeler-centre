@@ -386,6 +386,11 @@
 
   .podcast-series__badge {
     display: inline-block;
+    margin-right: 4px
+  }
+
+  .podcast-series__badge:last-child {
+    margin-right: 0px;
   }
 
   .podcast-series__badge img {
