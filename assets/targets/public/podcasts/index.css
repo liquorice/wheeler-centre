@@ -386,7 +386,8 @@
 
   .podcast-series__badge {
     display: inline-block;
-    margin-right: 4px
+    padding-left: 1.5px;
+    padding-right: 1.5px;
   }
 
   .podcast-series__badge:last-child {
