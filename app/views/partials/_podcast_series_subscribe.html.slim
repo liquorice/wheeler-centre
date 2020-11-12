@@ -39,11 +39,10 @@
         .podcast-series__badge
           a href= page.fields[:stitcher_url]
             img src= image_path("public/podcasts/badge-stitcher.png")
-      // TODO: Reenable this once we have a badge for SoundCloud
-      / - if page.fields[:soundcloud_url].data_present?
-      /   .podcast-series__badge
-      /     a href= page.fields[:soundcloud_url]
-      /       img src= image_path("public/podcasts/badge-soundcloud.png")
+      - if page.fields[:soundcloud_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:soundcloud_url]
+            img src= image_path("public/podcasts/badge-soundcloud.png")
 
     .podcast-series__feed-url
       span.podcast-series__feed-url-title
