@@ -392,11 +392,14 @@
 
   .podcast-series__badge {
     display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
     margin-bottom: -2px;
   }
 
   .breakpoint-widescreen .podcast-series__badge,
   .breakpoint-widescreen-wide .podcast-series__badge {
+    margin-left: 0px;
     margin-right: 4px;
   }
 
