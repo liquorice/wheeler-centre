@@ -393,6 +393,10 @@
   .podcast-series__badge {
     display: inline-block;
     margin-bottom: -2px;
+  }
+
+  .breakpoint-widescreen .podcast-series__badge,
+  .breakpoint-widescreen-wide .podcast-series__badge {
     margin-right: 4px;
   }
 
