@@ -16,21 +16,35 @@
         span.copy-tooltip.copy-tooltip--hidden Copied
     .podcast-series__subscribe_methods.clearfix
       - if page.fields[:itunes_url].data_present?
-        .podcast-series__subscribe-itunes
+        .podcast-series__badge
           a href= page.fields[:itunes_url]
-            img src= image_path("public/podcasts/link-badge-itunes.png")
-      - if page.fields[:soundcloud_url].data_present? || page.fields[:stitcher_url].data_present?
-        .podcast-series__listen-links
-          ' Listen on: &nbsp;
-          - if page.fields[:soundcloud_url].data_present?
-            a href= page.fields[:soundcloud_url]
-              ' Soundcloud
-          - if page.fields[:soundcloud_url].data_present? && page.fields[:stitcher_url].data_present?
-            ' ∙
-          - if page.fields[:stitcher_url].data_present?
-            a href= page.fields[:stitcher_url]
-              ' Stitcher
-      .podcast-series__feed-url
-        span.podcast-series__feed-url-title
-          ' Feed URL
-        input.podcast-series__feed-url-box.podcast-feed-url type="text" readonly="readonly" value=podcast_tracking_link(page) data-view-select-on-focus=true
+            img src= image_path("public/podcasts/badge-apple-podcasts.png")
+      - if page.fields[:google_podcasts_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:google_podcasts_url]
+            img src= image_path("public/podcasts/badge-google-podcasts.png")
+      - if page.fields[:pocket_casts_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:pocket_casts_url]
+            img src= image_path("public/podcasts/badge-pocket-casts.png")
+      - if page.fields[:radio_public_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:radio_public_url]
+            img src= image_path("public/podcasts/badge-radio-public.png")
+      - if page.fields[:spotify_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:spotify_url]
+            img src= image_path("public/podcasts/badge-spotify.png")
+      - if page.fields[:stitcher_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:stitcher_url]
+            img src= image_path("public/podcasts/badge-stitcher.png")
+      - if page.fields[:soundcloud_url].data_present?
+        .podcast-series__badge
+          a href= page.fields[:soundcloud_url]
+            img src= image_path("public/podcasts/badge-soundcloud.png")
+
+    .podcast-series__feed-url
+      span.podcast-series__feed-url-title
+        ' Feed URL
+      input.podcast-series__feed-url-box.podcast-feed-url type="text" readonly="readonly" value=podcast_tracking_link(page) data-view-select-on-focus=true
