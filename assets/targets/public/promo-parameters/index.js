@@ -36,10 +36,10 @@ function onLinkClick(e) {
     e.metaKey ||
     e.ctrlKey ||
     e.delegateTarget.getAttribute("target") === "_blank";
-  // Intercept any links to my.wheelercentre.com or test-ap-play.tn.services (the test domain)
+  // Intercept any links to my.wheelercentre.com or play-tnew-test.tnhs.cloud (the test domain)
   if (
     parsedLinkURL.hostname === "my.wheelercentre.com" ||
-    parsedLinkURL.hostname === "test-ap-play.tn.services"
+    parsedLinkURL.hostname === "play-tnew-test.tnhs.cloud"
   ) {
     e.preventDefault();
     parsedLinkURL.set(
@@ -48,7 +48,7 @@ function onLinkClick(e) {
     );
     visitLink(parsedLinkURL.toString(), promoCode, openInNewWindow);
   } else if (
-    // Intercept any links to my.wheelercentre.com or test-ap-play.tn.services _through_ track.wheelercentre.com
+    // Intercept any links to my.wheelercentre.com or play-tnew-test.tnhs.cloud _through_ track.wheelercentre.com
     parsedLinkURL.hostname === "track.wheelercentre.com" &&
     parsedLinkURL.query &&
     (/http?s\:\/\/my\.wheelercentre\.com/.test(parsedLinkURL.query.target) ||
