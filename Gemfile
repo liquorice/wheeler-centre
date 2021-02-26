@@ -67,17 +67,6 @@ gem "staccato"
 # Utilities
 gem "ffaker"
 
-# Temporary for the Blueprint import
-# gem "syck", "1.0.1"
-# gem "rdiscount"
-# gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
-# gem "trollop"
-# gem "aws-sdk"
-# gem "net-scp"
-# gem "thin"
-# gem "nokogiri"
-# gem "progress_bar"
-
 # Sitemap
 gem "sitemap_generator"
 gem "fog"
@@ -115,7 +104,6 @@ group :development do
   gem "launchy"
   gem "letter_opener"
   gem "quiet_assets"
-  # gem "rack-mini-profiler"
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr", "2.1.1"
