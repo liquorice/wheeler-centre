@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby "2.2.2"
+ruby "2.4.10"
 
 # Rails
 gem "rails", "~> 4.2.0"
@@ -16,7 +16,7 @@ gem "icelab-heracles", "2.0.0.beta67", path: "vendor/heracles", require: "heracl
 # this patch goes upstream, we can remove this, since Heracles is the right
 # place to require sunspot-queue (but we can't use github dependencies in its
 # gemspec).
-gem "sunspot-queue", github: "timriley/sunspot-queue", ref: "649af734420db481fd0421dde152bbb9e7499bde"
+gem "sunspot-queue", git: "https://github.com/timriley/sunspot-queue", ref: "649af734420db481fd0421dde152bbb9e7499bde"
 gem "sunspot_rails", "2.1.1"
 
 # Background worker
@@ -67,17 +67,6 @@ gem "staccato"
 # Utilities
 gem "ffaker"
 
-# Temporary for the Blueprint import
-# gem "syck", "1.0.1"
-# gem "rdiscount"
-# gem 'google-api-client',      '~> 0.8.2', :require => 'google/api_client'
-# gem "trollop"
-# gem "aws-sdk"
-# gem "net-scp"
-# gem "thin"
-# gem "nokogiri"
-# gem "progress_bar"
-
 # Sitemap
 gem "sitemap_generator"
 gem "fog"
@@ -90,7 +79,7 @@ group :production do
 end
 
 group :test do
-  gem "capybara", github: "jnicklas/capybara" # RSpec 3 deprecations, waiting for the next gem release.
+  gem "capybara", git: "https://github.com/teamcapybara/capybara", ref: "5849ecb66e7e961b1e3eee4fe62e67fb0b1061f5" # RSpec 3 deprecations, waiting for the next gem release.
   gem "database_cleaner"
   gem "factory_girl_rails"
   gem "fuubar", "~> 2.0.0"
@@ -102,7 +91,7 @@ end
 
 
 group :test, :development do
-  gem "dotenv", github: "bkeepers/dotenv"
+  gem "dotenv", git: "https://github.com/bkeepers/dotenv", ref: "a47020f6c414e0a577680b324e61876a690d2200"
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5.0"
 end
@@ -115,7 +104,6 @@ group :development do
   gem "launchy"
   gem "letter_opener"
   gem "quiet_assets"
-  # gem "rack-mini-profiler"
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr", "2.1.1"
