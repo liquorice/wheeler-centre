@@ -54,6 +54,10 @@ module Heracles
           search_podcast_episodes(options)
         end
 
+        def episodes_by_season_number(season_number)
+          search_podcast_episodes_by_season_number(season_number)
+        end
+
         def people
           if fields[:people].data_present?
             fields[:people].pages.visible.published
@@ -69,6 +73,21 @@ module Heracles
           end
           top_level_categories = all_categories.select {|c| c.parent.page_type == "placeholder"}
           build_category_tree(top_level_categories, all_categories)
+        end
+
+        def season_numbers
+          results = PodcastEpisode.where(
+            site_id: site.id,
+            hidden: false,
+            published: true
+          )
+          .children_of(self)
+          .pluck("fields_data->'season_number'->>'value'")
+          .compact
+          .uniq
+          .map(&:to_i)
+          .sort
+          .reverse
         end
 
         searchable do
@@ -132,6 +151,20 @@ module Heracles
 
           #   paginate page: options[:page] || 1, per_page: options[:per_page] || 20
           # end
+        end
+
+        # TODO: Deal with pagination
+        def search_podcast_episodes_by_season_number(season_number)
+          results = PodcastEpisode.where(
+            site_id: site.id,
+            hidden: false,
+            published: true
+          )
+          .children_of(self)
+          .where("fields_data->'season_number'->>'value' = ?", season_number.to_s)
+          .order("fields_data->'publish_date'->>'value' DESC NULLS LAST")
+
+          results.page(1).per(20)
         end
 
         def find_parent_categories(category, all_categories)
