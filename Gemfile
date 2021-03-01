@@ -72,10 +72,13 @@ gem "sitemap_generator"
 gem "fog"
 
 group :production do
+  gem "memcachier"
   gem "rails_12factor"
-  gem "dalli"      # memcache on production
-  gem "memcachier" # memcache on production
   gem "rails_autoscale_agent"
+end
+
+group :production, :development do
+  gem "dalli"
 end
 
 group :test do
@@ -88,7 +91,6 @@ group :test do
   gem "shoulda-matchers"
   gem "simplecov", "~> 0.7.1" # https://github.com/colszowka/simplecov/issues/281
 end
-
 
 group :test, :development do
   gem "dotenv", git: "https://github.com/bkeepers/dotenv", ref: "a47020f6c414e0a577680b324e61876a690d2200"
