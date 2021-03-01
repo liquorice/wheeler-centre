@@ -87,7 +87,7 @@
     - if !show_all
       // If the series has season numbers, use the season-based layout
       - if season_numbers.any?
-        .podcast-series__seasons.column-wrapper
+        .podcast-series__seasons.column-wrapper#seasons
           .column-mid
             .section-header
               h2 Seasons
@@ -98,11 +98,11 @@
                 // We limit the display of seasons to the last 3 so that we don't render an enormous nav
                 - season_numbers.take(1).each do |number|
                   li.podcast-series__seasons-navigation-item
-                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}" class=(active_class if !params[:season].present?)
+                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}#seasons" class=(active_class if !params[:season].present?)
                       = "Season #{number}"
                 - season_numbers.drop(1).take(2).each do |number|
                   li.podcast-series__seasons-navigation-item
-                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?season=#{number}" class=(active_class if params[:season].present? && params[:season].to_i == number)
+                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?season=#{number}#seasons" class=(active_class if params[:season].present? && params[:season].to_i == number)
                       = "Season #{number}"
                 li.podcast-series__seasons-navigation-item
                   a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?show_all=true"
