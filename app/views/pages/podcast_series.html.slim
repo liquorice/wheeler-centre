@@ -106,7 +106,7 @@
                       = "Season #{number}"
                 li.podcast-series__seasons-navigation-item
                   a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?show_all=true"
-                    ' View all episodes
+                    ' All episodes
 
         - cache ["podcast-series-season-episodes-1", page, episodes] do
           - if episodes.present?

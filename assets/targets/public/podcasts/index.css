@@ -498,6 +498,10 @@
   margin-bottom: 4rem;
 }
 
+.podcast-series__seasons .section-header {
+  padding-bottom: 2rem;
+}
+
 .podcast-series__seasons-navigation {
   display: inline;
   font-family: "Colfax", Helvetica, sans-serif;
@@ -506,18 +510,17 @@
 
 .podcast-series__seasons-navigation-item {
   display: inline;
-  padding-right: 4rem;
+  padding-right: 2rem;
+}
+
+.podcast-series__seasons-navigation-item:last-child {
+  padding-right: 0;
 }
 
 .podcast-series__seasons-navigation-anchor {
   border-bottom: 2px solid #fff;
   color: var(--primary-color);
   display: inline;
-  padding-right: 4rem;
-}
-
-.podcast-series__seasons-navigation-anchor:last-child {
-  padding-right: 0;
 }
 
 .podcast-series__seasons-navigation-anchor:hover, .podcast-series__seasons-navigation-anchor:focus {
