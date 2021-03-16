@@ -494,6 +494,50 @@
   margin-bottom: 8rem;
 }
 
+.podcast-series__seasons {
+  margin-bottom: 4rem;
+}
+
+.podcast-series__seasons .section-header {
+  padding-bottom: 2rem;
+}
+
+.podcast-series__seasons-navigation {
+  display: inline;
+  font-family: "Colfax", Helvetica, sans-serif;
+  text-align: center;
+}
+
+.podcast-series__seasons-navigation-item {
+  display: inline;
+  padding-right: 2rem;
+}
+
+.podcast-series__seasons-navigation-item:last-child {
+  padding-right: 0;
+}
+
+.breakpoint-phone .podcast-series__seasons-navigation-item:last-child {
+  display: block;
+  margin-top: 1rem;
+}
+
+.podcast-series__seasons-navigation-anchor {
+  border-bottom: 2px solid #fff;
+  color: var(--primary-color);
+  display: inline;
+  font-size: 2rem;
+}
+
+.podcast-series__seasons-navigation-anchor:hover, .podcast-series__seasons-navigation-anchor:focus {
+  color: #4a4a4a;
+}
+
+.podcast-series__seasons-navigation-anchor--active {
+  border-color: #d9d9d9;
+  color: #4a4a4a;
+}
+
 .podcast-series__episodes-list {
   margin-bottom: 2.5rem;
 }
@@ -504,6 +548,7 @@
     border-bottom: 1px solid #ddd;
     padding-top: 2.4rem;
     padding-bottom: 2.4rem;
+    padding-right: 2rem;
     font-family:  var(--font-sans);
   }
   a.podcast-series__episode:last-child {

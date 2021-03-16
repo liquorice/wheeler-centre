@@ -28,6 +28,7 @@ module Heracles
               {name: :legacy_recording_id, type: :integer, label: "Legacy recording ID"},
               {name: :topics, type: :associated_pages, page_type: :topic},
               {name: :flarum_discussion_id, type: :text, editor_type: :code},
+              {name: :season_number, type: :integer, hint: "Used to group episodes for display on the series' index page"},
             ]
           }
         end
@@ -37,9 +38,9 @@ module Heracles
         def to_summary_hash
           {
             title: title,
+            season: fields[:season_number],
             video: (fields[:video].data_present?) ? "✔" : "×",
             audio: (fields[:audio].data_present?) ? "♫" : "×",
-            events: events.map(&:title).join(", "),
             people: fields[:people].pages.map(&:title).join(", "),
             discussion: (fields[:flarum_discussion_id].data_present?) ? "✔" : "•",
             published: (published) ? "✔" : "•",

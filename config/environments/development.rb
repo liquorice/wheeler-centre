@@ -9,9 +9,20 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  # Show full error reports
+  config.consider_all_requests_local = true
+
+  # Enable/disable caching.
+  # By default caching is disabled but can be enabled by setting any value for ENV["CACHING_ENABLED"]
+  if ENV["CACHING_ENABLED"].present?
+    config.action_controller.perform_caching = true
+
+    # Use memcached in development. Server address defaults to localhost:11211 if not provided.
+    config.cache_store = :mem_cache_store
+  else
+    config.action_controller.perform_caching = false
+    config.cache_store = :null_store
+  end
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
