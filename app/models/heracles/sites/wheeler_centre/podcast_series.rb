@@ -76,7 +76,7 @@ module Heracles
         end
 
         def season_numbers
-          results = PodcastEpisode.where(
+          PodcastEpisode.where(
             site_id: site.id,
             hidden: false,
             published: true
