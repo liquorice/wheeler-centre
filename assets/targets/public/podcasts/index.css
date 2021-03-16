@@ -517,6 +517,11 @@
   padding-right: 0;
 }
 
+.breakpoint-phone .podcast-series__seasons-navigation-item:last-child {
+  display: block;
+  margin-top: 1rem;
+}
+
 .podcast-series__seasons-navigation-anchor {
   border-bottom: 2px solid #fff;
   color: var(--primary-color);
