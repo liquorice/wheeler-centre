@@ -153,9 +153,8 @@ module Heracles
           # end
         end
 
-        # TODO: Deal with pagination
         def search_podcast_episodes_by_season_number(season_number)
-          results = PodcastEpisode.where(
+          PodcastEpisode.where(
             site_id: site.id,
             hidden: false,
             published: true
@@ -163,8 +162,6 @@ module Heracles
           .children_of(self)
           .where("fields_data->'season_number'->>'value' = ?", season_number.to_s)
           .order("fields_data->'publish_date'->>'value' DESC NULLS LAST")
-
-          results.page(1).per(20)
         end
 
         def find_parent_categories(category, all_categories)
