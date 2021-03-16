@@ -521,6 +521,7 @@
   border-bottom: 2px solid #fff;
   color: var(--primary-color);
   display: inline;
+  font-size: 2rem;
 }
 
 .podcast-series__seasons-navigation-anchor:hover, .podcast-series__seasons-navigation-anchor:focus {
