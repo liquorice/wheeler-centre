@@ -30,11 +30,12 @@
   })
 
 - show_all = !!params[:show_all]
+- all_episodes = !!params[:all_episodes]
 - season_numbers = page.season_numbers
 // We explicitly set the first episode here so this isn't overriden when filtering by season
 - first_episode = page.episodes.first
 
-- if show_all
+- if show_all || all_episodes
   - episodes = page.episodes(page: params[:page], per_page: params[:per_page])
 - elsif season_numbers.any? && params[:season].present?
   - episodes = page.episodes_by_season_number(params[:season])
@@ -98,14 +99,14 @@
                 // We limit the display of seasons to the last 3 so that we don't render an enormous nav
                 - season_numbers.take(1).each do |number|
                   li.podcast-series__seasons-navigation-item
-                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}#seasons" class=(active_class if !params[:season].present?)
+                    a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}#seasons" class=(active_class if !all_episodes && !params[:season].present?)
                       = "Season #{number}"
                 - season_numbers.drop(1).take(2).each do |number|
                   li.podcast-series__seasons-navigation-item
                     a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?season=#{number}#seasons" class=(active_class if params[:season].present? && params[:season].to_i == number)
                       = "Season #{number}"
                 li.podcast-series__seasons-navigation-item
-                  a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?show_all=true"
+                  a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?all_episodes=true#seasons" class=(active_class if all_episodes)
                     ' All episodes
 
         - cache ["podcast-series-season-episodes-1", page, episodes] do
@@ -115,6 +116,15 @@
                 .podcast-series__episodes-list
                   - episodes.each do |episode|
                     = render "partials/podcast_series_episode", episode: episode
+
+                - if all_episodes && episodes.total_pages > 1
+                  .pagination-context.pagination-context--bottom
+                    ' Page
+                    = (params[:page] || 1)
+                    em &nbsp;of&nbsp;
+                    = episodes.total_pages
+                  .pagination-bottom
+                    = paginate episodes, outer_window: 3, params: { anchor: "seasons" }
 
       // Otherwise use the standard layout
       - else
