@@ -70,7 +70,7 @@ module Heracles
           search_user_writings(options)
         end
 
-        def di_gribble_argument_feature_items(options={})
+        def di_gribble_argument_feature_items
           tags = fields[:di_gribble_argument_feature_tags].data_present? ? fields[:di_gribble_argument_feature_tags].value.split(",") : ["di-gribble-argument-feature"]
 
           search_by_tag(tags: tags)
