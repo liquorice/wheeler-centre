@@ -9,7 +9,7 @@ module Heracles
               # Banners
               {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
               # Di Gribble Argument feature
-              {name: :di_gribble_argument_feature_title, type: :text, label: "Di Gribble Argument feature title", hint: "Defaults to 'The Di Gribble Argument'"},
+              {name: :di_gribble_argument_feature_title, type: :text, label: "Di Gribble Argument feature title", hint: "Defaults to 'The Di Gribble Argument 2021 Essays'"},
               {name: :di_gribble_argument_feature_tags, type: :text, editor_type: :code, label: "Di Gribble Argument feature tags", hint: "Defaults to 'di-gribble-argument-feature'"},
               {name: :di_gribble_argument_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true, label: "Di Gribble Argument feature content"},
               # Highlights
