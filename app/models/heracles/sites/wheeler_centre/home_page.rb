@@ -8,6 +8,10 @@ module Heracles
               {name: :intro, type: :content},
               # Banners
               {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
+              # Di Gribble Argument feature
+              {name: :di_gribble_argument_feature_title, type: :text, label: "Di Gribble Argument feature title"},
+              {name: :di_gribble_argument_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true, label: "Di Gribble Argument feature content"},
+              {name: :di_gribble_argument_feature_tags, type: :text, editor_type: :code, label: "Di Gribble Argument feature tags", hint: "Defaults to 'di-gribble-argument-feature'"},
               # Highlights
               {name: :highlights_info, type: :info, text: "<hr/>"},
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
@@ -65,6 +69,14 @@ module Heracles
           options.reverse_merge!({tags: options[:tags]})
           search_user_writings(options)
         end
+
+        def di_gribble_argument_feature_items(options={})
+          options[:tags] = options[:tags].presence || ["di-gribble-argument-feature"]
+          options.reverse_merge!({tags: options[:tags]})
+
+          search_by_tag(options)
+        end
+
         private
 
         def searchable_types

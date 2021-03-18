@@ -22,6 +22,39 @@
     position: relative;
   }
 
+/* Di Gribble Argument feature */
+
+.home__di-gribble-argument-feature,
+.home__user-highlights {
+  padding-bottom: 3.5rem;
+}
+
+.home__di-gribble-argument-feature .grouper {
+  text-align: left;
+}
+
+.home__di-gribble-argument-feature {
+  float: left;
+  width: 50%;
+}
+  .home__di-gribble-argument-feature .snap-wrapper {
+    margin-right: 0;
+  }
+  .home__di-gribble-argument-feature--full {
+    float: none;
+    width: 100%;
+  }
+
+.breakpoint-phone .home__di-gribble-argument-feature {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Highlights */
+
 .home__highlights,
 .home__user-highlights {
   /*padding-top: 3.5rem;*/
@@ -62,6 +95,7 @@
   padding-left: 0;
   padding-right: 0;
 }
+
 
 
 /* Quotes */
