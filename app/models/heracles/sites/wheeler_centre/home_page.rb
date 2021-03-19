@@ -12,7 +12,7 @@ module Heracles
               {name: :hero_feature_title, type: :text, hint: "Defaults to 'Featured Notes'"},
               {name: :hero_feature_tags, type: :text, editor_type: :code, hint: "Defaults to 'homepage-hero-feature'"},
               {name: :hero_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
-              {name: :display_hero_feature, type: :boolean, question_text: "Display?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
+              {name: :display_hero_feature, type: :boolean, question_text: "Display the hero feature?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
               # Highlights
               {name: :highlights_info, type: :info, text: "<hr/>"},
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
