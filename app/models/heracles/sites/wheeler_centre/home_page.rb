@@ -9,9 +9,10 @@ module Heracles
               # Banners
               {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
               # Hero/Di Gribble Argument feature
-              {name: :hero_feature_title, type: :text, hint: "Defaults to 'Featured'"},
+              {name: :hero_feature_title, type: :text, hint: "Defaults to 'Featured Notes'"},
               {name: :hero_feature_tags, type: :text, editor_type: :code, hint: "Defaults to 'homepage-hero-feature'"},
               {name: :hero_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :display_hero_feature, type: :boolean, question_text: "Display?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
               # Highlights
               {name: :highlights_info, type: :info, text: "<hr/>"},
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
@@ -68,6 +69,12 @@ module Heracles
         def user_writings(options={})
           options.reverse_merge!({tags: options[:tags]})
           search_user_writings(options)
+        end
+
+        def display_hero_feature?
+          return false unless fields[:display_hero_feature].data_present?
+
+          fields[:display_hero_feature].value == true
         end
 
         def hero_feature_items

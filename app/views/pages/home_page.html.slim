@@ -56,17 +56,17 @@
                       '  ›
 
     / Hero/Di Gribble Argument feature
-    - if hero_feature_items.total > 0
-      .column-wrapper
-        .column-full.clearfix
-          - cache ["home-page-hero-feature-1", page, hero_feature_items] do
+    - if page.display_hero_feature? && hero_feature_items.total > 0
+      - cache ["home-page-hero-feature-1", page, hero_feature_items] do
+        .column-wrapper
+          .column-full.clearfix
             .home__hero-feature
               .section-header
                 h2
                   - if page.fields[:hero_feature_title].data_present?
                     = page.fields[:hero_feature_title].value
                   - else
-                    ' Featured
+                    ' Featured Notes
                 - if page.fields[:hero_feature_content].data_present?
                   .intro.copy
                     = render_content page.fields[:hero_feature_content]
