@@ -22,38 +22,38 @@
     position: relative;
   }
 
-/* Di Gribble Argument feature */
+/* Hero/Di Gribble Argument feature */
 
-.home__di-gribble-argument-feature {
+.home__hero-feature {
   padding-bottom: 3.5rem;
 }
 
-.home__di-gribble-argument-feature .grouper {
+.home__hero-feature .grouper {
   text-align: left;
 }
 
-.home__di-gribble-argument-feature .grouper--3 .grouper-item {
+.home__hero-feature .grouper--3 .grouper-item {
   width: calc((100% / 3) + 1.2rem);
 }
 
-.home__di-gribble-argument-feature .grouper--3 .grouper-item:last-child {
+.home__hero-feature .grouper--3 .grouper-item:last-child {
   padding-right: 0;
   width: calc((100% / 3) - 2.4rem);
 }
 
-.home__di-gribble-argument-feature {
+.home__hero-feature {
   float: left;
   width: 50%;
 }
-  .home__di-gribble-argument-feature .snap-wrapper {
+  .home__hero-feature .snap-wrapper {
     margin-right: 0;
   }
-  .home__di-gribble-argument-feature--full {
+  .home__hero-feature--full {
     float: none;
     width: 100%;
   }
 
-.breakpoint-phone .home__di-gribble-argument-feature {
+.breakpoint-phone .home__hero-feature {
   width: 100%;
   background: transparent;
   border: none;

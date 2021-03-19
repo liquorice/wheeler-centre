@@ -8,10 +8,10 @@ module Heracles
               {name: :intro, type: :content},
               # Banners
               {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
-              # Di Gribble Argument feature
-              {name: :di_gribble_argument_feature_title, type: :text, label: "Di Gribble Argument feature title", hint: "Defaults to 'The Di Gribble Argument 2021 Essays'"},
-              {name: :di_gribble_argument_feature_tags, type: :text, editor_type: :code, label: "Di Gribble Argument feature tags", hint: "Defaults to 'di-gribble-argument-feature'"},
-              {name: :di_gribble_argument_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true, label: "Di Gribble Argument feature content"},
+              # Hero/Di Gribble Argument feature
+              {name: :hero_feature_title, type: :text, hint: "Defaults to 'Featured'"},
+              {name: :hero_feature_tags, type: :text, editor_type: :code, hint: "Defaults to 'homepage-hero-feature'"},
+              {name: :hero_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
               # Highlights
               {name: :highlights_info, type: :info, text: "<hr/>"},
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
@@ -70,10 +70,17 @@ module Heracles
           search_user_writings(options)
         end
 
-        def di_gribble_argument_feature_items
-          tags = fields[:di_gribble_argument_feature_tags].data_present? ? fields[:di_gribble_argument_feature_tags].value.split(",") : ["di-gribble-argument-feature"]
+        def hero_feature_items
+          tags = fields[:hero_feature_tags].data_present? ? fields[:hero_feature_tags].value.split(",") : ["homepage-hero-feature"]
 
-          search_by_tag(tags: tags)
+          Sunspot.search(LongformBlogPost) do
+            with :site_id, site.id
+            with :published, true
+            with :hidden, false
+            with :tag_list, tags
+            order_by :date_sort_field, :desc
+            paginate page: 1, per_page: 3
+          end
         end
 
         private

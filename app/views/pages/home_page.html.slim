@@ -23,7 +23,7 @@
 - else
   - user_highlights = false
 
-- di_gribble_argument_feature_items = page.di_gribble_argument_feature_items
+- hero_feature_items = page.hero_feature_items
 
 - user_tags = page.fields[:writings_tags].value.split(",") if page.fields[:writings_tags].data_present?
 - user_writings = page.user_writings(per_page: 4, tags: user_tags)
@@ -55,24 +55,24 @@
                       = force_excerptify_html render_content(banner.fields[:label]), 60, "i em strong"
                       '  ›
 
-    / Di Gribble feature
-    - if di_gribble_argument_feature_items.total > 0
+    / Hero/Di Gribble Argument feature
+    - if hero_feature_items.total > 0
       .column-wrapper
-        .column-mid.clearfix
-          - cache ["home-page-di-gribble-argument-feature-1", page, di_gribble_argument_feature_items] do
-            .home__di-gribble-argument-feature class="home__di-gribble-argument-feature--full"
+        .column-full.clearfix
+          - cache ["home-page-hero-feature-1", page, hero_feature_items] do
+            .home__hero-feature class="home__hero-feature--full"
               .section-header
                 h2
-                  - if page.fields[:di_gribble_argument_feature_title].data_present?
-                    = page.fields[:di_gribble_argument_feature_title].value
+                  - if page.fields[:hero_feature_title].data_present?
+                    = page.fields[:hero_feature_title].value
                   - else
-                    ' The Di Gribble Argument 2021 Essays
-                - if page.fields[:di_gribble_argument_feature_content].data_present?
+                    ' Featured
+                - if page.fields[:hero_feature_content].data_present?
                   .intro.copy
-                    = render_content page.fields[:di_gribble_argument_feature_content]
+                    = render_content page.fields[:hero_feature_content]
               .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "phone-wide" => 1, phone: 1 }}.to_json
-                - di_gribble_argument_feature_items.results.each do |post|
-                  = render "partials/snap_block", post: post, show_type: false
+                - hero_feature_items.results.each do |post|
+                  = render "partials/hero_feature_snap_block", post: post
 
     / Highlights
     .column-wrapper
