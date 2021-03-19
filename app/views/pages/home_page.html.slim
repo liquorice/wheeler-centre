@@ -60,7 +60,7 @@
       .column-wrapper
         .column-full.clearfix
           - cache ["home-page-hero-feature-1", page, hero_feature_items] do
-            .home__hero-feature class="home__hero-feature--full"
+            .home__hero-feature
               .section-header
                 h2
                   - if page.fields[:hero_feature_title].data_present?

@@ -42,16 +42,13 @@
 }
 
 .home__hero-feature {
-  float: left;
-  width: 50%;
+  float: none;
+  width: 100%;
 }
-  .home__hero-feature .snap-wrapper {
-    margin-right: 0;
-  }
-  .home__hero-feature--full {
-    float: none;
-    width: 100%;
-  }
+
+.home__hero-feature .snap-wrapper {
+  margin-right: 0;
+}
 
 .breakpoint-phone .home__hero-feature {
   width: 100%;
