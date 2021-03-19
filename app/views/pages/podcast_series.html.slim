@@ -101,13 +101,15 @@
                   li.podcast-series__seasons-navigation-item
                     a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}#seasons" class=(active_class if !all_episodes && !params[:season].present?)
                       = "Season #{number}"
+                    span.podcast-series__seasons-navigation-separator |
                 - season_numbers.drop(1).take(2).each do |number|
                   li.podcast-series__seasons-navigation-item
                     a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?season=#{number}#seasons" class=(active_class if params[:season].present? && params[:season].to_i == number)
                       = "Season #{number}"
+                    span.podcast-series__seasons-navigation-separator |
                 li.podcast-series__seasons-navigation-item
                   a.podcast-series__seasons-navigation-anchor href="#{page.absolute_url}?all_episodes=true#seasons" class=(active_class if all_episodes)
-                    ' All episodes
+                    | All episodes
 
         - cache ["podcast-series-season-episodes-1", page, episodes] do
           - if episodes.present?
