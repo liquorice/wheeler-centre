@@ -9,8 +9,7 @@
       - unless image.blank?
         .blog-snap__hero
           .blog-snap__hero-inner
-            - image_url = image.content_thumbnail_url
-            img src=image_url alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
+            img src=image.processed_asset.data["versions"]["content_medium_thumbnail"].first["ssl_url"] alt=(image.description.present? ? image.description : "Promo image for #{post.title}")
       h3.blog-snap__title
         span.title-text == widont_format markdown_line post.title
 
