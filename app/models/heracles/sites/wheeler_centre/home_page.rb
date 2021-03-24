@@ -8,6 +8,11 @@ module Heracles
               {name: :intro, type: :content},
               # Banners
               {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
+              # Hero/Di Gribble Argument feature
+              {name: :hero_feature_title, type: :text, hint: "Defaults to 'Featured Notes'"},
+              {name: :hero_feature_tags, type: :text, editor_type: :code, hint: "Defaults to 'homepage-hero-feature'"},
+              {name: :hero_feature_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :display_hero_feature, type: :boolean, question_text: "Display the hero feature?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
               # Highlights
               {name: :highlights_info, type: :info, text: "<hr/>"},
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
@@ -65,6 +70,26 @@ module Heracles
           options.reverse_merge!({tags: options[:tags]})
           search_user_writings(options)
         end
+
+        def display_hero_feature?
+          return false unless fields[:display_hero_feature].data_present?
+
+          fields[:display_hero_feature].value == true
+        end
+
+        def hero_feature_items
+          tags = fields[:hero_feature_tags].data_present? ? fields[:hero_feature_tags].value.split(",") : ["homepage-hero-feature"]
+
+          Sunspot.search(LongformBlogPost) do
+            with :site_id, site.id
+            with :published, true
+            with :hidden, false
+            with :tag_list, tags
+            order_by :date_sort_field, :desc
+            paginate page: 1, per_page: 3
+          end
+        end
+
         private
 
         def searchable_types

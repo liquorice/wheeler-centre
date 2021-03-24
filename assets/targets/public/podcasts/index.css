@@ -494,6 +494,7 @@
   margin-bottom: 8rem;
 }
 
+/* Seasons */
 .podcast-series__seasons {
   margin-bottom: 4rem;
 }
@@ -510,16 +511,15 @@
 
 .podcast-series__seasons-navigation-item {
   display: inline;
-  padding-right: 2rem;
+  margin-right: 2rem;
 }
 
 .podcast-series__seasons-navigation-item:last-child {
-  padding-right: 0;
+  margin-right: 0;
 }
 
-.breakpoint-phone .podcast-series__seasons-navigation-item:last-child {
-  display: block;
-  margin-top: 1rem;
+.podcast-series__seasons-navigation-separator {
+  padding-left: 2rem;
 }
 
 .podcast-series__seasons-navigation-anchor {
@@ -537,6 +537,23 @@
   border-color: #d9d9d9;
   color: #4a4a4a;
 }
+
+/** Seasons - phone styles **/
+
+.breakpoint-phone .podcast-series__seasons-navigation-item:last-child {
+  display: block;
+  margin-top: 1rem;
+}
+
+.breakpoint-phone .podcast-series__seasons-navigation-item:nth-last-child(2) {
+  margin-right: 0;
+}
+
+.breakpoint-phone .podcast-series__seasons-navigation-item:nth-last-child(2) .podcast-series__seasons-navigation-separator {
+  display: none;
+}
+
+/* Episodes */
 
 .podcast-series__episodes-list {
   margin-bottom: 2.5rem;

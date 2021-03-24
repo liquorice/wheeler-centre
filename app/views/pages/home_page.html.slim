@@ -23,6 +23,8 @@
 - else
   - user_highlights = false
 
+- hero_feature_items = page.hero_feature_items
+
 - user_tags = page.fields[:writings_tags].value.split(",") if page.fields[:writings_tags].data_present?
 - user_writings = page.user_writings(per_page: 4, tags: user_tags)
 
@@ -52,6 +54,26 @@
                     .home-banner__label
                       = force_excerptify_html render_content(banner.fields[:label]), 60, "i em strong"
                       '  ›
+
+    / Hero/Di Gribble Argument feature
+    - if page.display_hero_feature? && hero_feature_items.total > 0
+      - cache ["home-page-hero-feature-1", page, hero_feature_items] do
+        .column-wrapper
+          .column-full.clearfix
+            .home__hero-feature
+              .section-header
+                h2
+                  - if page.fields[:hero_feature_title].data_present?
+                    = page.fields[:hero_feature_title].value
+                  - else
+                    ' Featured Notes
+                - if page.fields[:hero_feature_content].data_present?
+                  .intro.copy
+                    = render_content page.fields[:hero_feature_content]
+              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "phone-wide" => 1, phone: 1 }}.to_json
+                - hero_feature_items.results.each do |post|
+                  = render "partials/hero_feature_snap_block", post: post
+
     / Highlights
     .column-wrapper
       .column-full.clearfix
@@ -75,6 +97,7 @@
               .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
                 - highlights.results.each do |post|
                   = render "partials/snap_block", post: post, show_type: true
+
         - cache ["home-page-highlights-1", page, user_highlights] do
           - unless no_user_highlights
             .home__user-highlights

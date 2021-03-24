@@ -22,6 +22,44 @@
     position: relative;
   }
 
+/* Hero/Di Gribble Argument feature */
+
+.home__hero-feature {
+  padding-bottom: 3.5rem;
+}
+
+.home__hero-feature .grouper {
+  text-align: left;
+}
+
+.home__hero-feature .grouper--3 .grouper-item {
+  width: calc((100% / 3) + 1.2rem);
+}
+
+.home__hero-feature .grouper--3 .grouper-item:last-child {
+  padding-right: 0;
+  width: calc((100% / 3) - 2.4rem);
+}
+
+.home__hero-feature {
+  float: none;
+  width: 100%;
+}
+
+.home__hero-feature .snap-wrapper {
+  margin-right: 0;
+}
+
+.breakpoint-phone .home__hero-feature {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Highlights */
+
 .home__highlights,
 .home__user-highlights {
   /*padding-top: 3.5rem;*/
@@ -62,6 +100,7 @@
   padding-left: 0;
   padding-right: 0;
 }
+
 
 
 /* Quotes */
