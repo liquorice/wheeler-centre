@@ -46,7 +46,7 @@
 
 = area :main do
   .podcast-episode
-    - season_numbers = page.series&.season_numbers || []
+    - season_numbers = page.series.season_numbers
     - cache ["podcast-series-intro-2", page, page.series, season_numbers.any?] do
       - if page.series
         - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
