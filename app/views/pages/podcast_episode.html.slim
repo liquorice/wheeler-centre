@@ -46,10 +46,13 @@
 
 = area :main do
   .podcast-episode
-    - cache ["podcast-series-intro-1", page, page.series] do
+    - season_numbers = page.series.season_numbers
+    - cache ["podcast-series-intro-2", page, page.series, season_numbers.any?] do
       - if page.series
         - highlight_color = page.series.fields[:highlight_colour].value if page.series.fields[:highlight_colour].data_present? && valid_hex_color(page.series.fields[:highlight_colour].value)
-        a.podcast-episode__series-header.column-wrapper href="#{page.series.absolute_url}?show_all=true" style=style_for_event_series_block(highlight_color)
+        - series_url = season_numbers.any? ? "#{page.series.absolute_url}?all_episodes=true#seasons" : "#{page.series.absolute_url}?show_all=true"
+
+        a.podcast-episode__series-header.column-wrapper href=series_url style=style_for_event_series_block(highlight_color)
           .column-full.clearfix
             .podcast-episode__series-header-inner
               p.podcast-episode__series-meta Part of a podcast series
@@ -57,6 +60,7 @@
               p.podcast-episode__series-call-to-action
                 | <em><span>View</span> all <span>episodes</span> in this series</em>
                 i.fa.fa-chevron-right
+
     .podcast-episode__header.column-wrapper
       .column-wide
         p.podcast-episode__byline
