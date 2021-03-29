@@ -1,6 +1,7 @@
 - context ||= "series"
 - hero_image = page.fields[:hero_image].assets.first if page.fields[:hero_image].data_present?
 - highlight_color = page.fields[:highlight_colour].value if page.fields[:highlight_colour].data_present? && valid_hex_color(page.fields[:highlight_colour].value)
+
 .podcast-series__top.column-wrapper style=style_for_event_series_block(highlight_color)
   .podcast-series__header.column-wide.clearfix
     - if hero_image.present?
@@ -25,4 +26,5 @@
           a href="#episode_list" Episode List
           a href="#about" Show information
         - else
-          a href="#{page.absolute_url}?show_all=true" View all episodes in series
+          - series_url = page.season_numbers.any? ? "#{page.absolute_url}?all_episodes=true#seasons" : "#{page.absolute_url}?show_all=true"
+          a href=series_url View all episodes in series
