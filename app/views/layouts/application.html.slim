@@ -16,6 +16,7 @@ html lang="en"
                         reverse: true
     = stylesheet_link_tag "public", media: "screen"
   	= stylesheet_link_tag "print", media: "print"
+
     - if Rails.env.development?
       = development_javascript
     /[if lt IE 9]
@@ -24,7 +25,11 @@ html lang="en"
 
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
-    = render 'partials/analytics'
+
+    - unless Rails.env.development?
+      = render 'partials/analytics'
+      = render 'partials/hotjar'
+
     = render "partials/favicons"
     = area :head
 
