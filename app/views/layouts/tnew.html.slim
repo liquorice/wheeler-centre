@@ -29,7 +29,9 @@ html lang="en"
 
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
-    = render 'partials/analytics'
+    - unless Rails.env.development?
+      = render 'partials/analytics'
+      = render 'partials/hotjar'
 
     link href=asset_url_with_domain(asset_path("public/favicons/favicon.ico")) rel="shortcut icon"
     link href=asset_url_with_domain(asset_path("public/favicons/apple-touch-icon-57x57.png")) rel="apple-touch-icon" sizes="57x57"

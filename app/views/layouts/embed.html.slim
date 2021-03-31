@@ -5,6 +5,10 @@ html lang="en"
     = render "partials/inline_boot_javascript"
     = stylesheet_link_tag "embed", media: "screen"
     = javascript_include_tag "embed", async: true
-    = render "partials/analytics"
+
+    - unless Rails.env.development?
+      = render 'partials/analytics'
+      = render 'partials/hotjar'
+
   body
     = yield

@@ -15,7 +15,9 @@ html lang="en"
       = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true
 
-    = render 'partials/analytics'
+    - unless Rails.env.development?
+      = render 'partials/analytics'
+      = render 'partials/hotjar'
 
     body data-view-fast-click=true
       = render "partials/static_masthead"

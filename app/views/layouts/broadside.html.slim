@@ -37,7 +37,9 @@ html#nc lang="en"
 
     / TODO shift to xhr if we use a CDN -> origin structure
     / = csrf_meta_tags
-    = render 'partials/broadside_analytics'
+    - unless Rails.env.development?
+      = render 'partials/broadside_analytics'
+
     link rel="icon" href=image_path("public-broadside/favicon.png")
 
     / Adobe fonts
