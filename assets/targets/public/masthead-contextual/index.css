@@ -166,7 +166,7 @@
   .upcoming-events__item {
     border-left: 1px solid rgba(255,255,255,0.2);
     float: left;
-    min-height: 9.5rem;
+    height: auto;
     width: 19.5rem;
   }
 
@@ -182,7 +182,6 @@
   .breakpoint-w-599 .upcoming-events__item {
     border-left: none;
     height: auto;
-    min-height: initial;
     width: 100%;
   }
 
