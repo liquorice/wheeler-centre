@@ -712,6 +712,27 @@ if Rails.env.development? || ENV["FORCE_SEED"]
     build_topic_page(topic, topics, site)
   end
 
+  # Notes index page
+  # ------------------------------------------------------------------------------
+  notes_index = Heracles::Sites::WheelerCentre::LongformBlog.find_or_initialize_by(url: "notes")
+  notes_index.site = site
+  notes_index.title = "Notes"
+  notes_index.slug = "notes"
+  notes_index.published = true
+  notes_index.locked = true
+  notes_index.page_order_position = :last if notes_index.new_record?
+  notes_index.save!
+
+  # Projects page
+  # ------------------------------------------------------------------------------
+  projects = Heracles::Sites::WheelerCentre::ContentPage.find_or_initialize_by(url: "projects")
+  projects.site = site
+  projects.title = "Projects"
+  projects.slug = "projects"
+  projects.published = true
+  projects.locked = false
+  projects.page_order_position = :last if projects.new_record? if projects.new_record?
+  projects.save!
 
   # About us
   # ------------------------------------------------------------------------------
