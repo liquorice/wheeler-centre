@@ -56,13 +56,6 @@
               - page.fields[:major_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          // 5. Supporting partners
-          - if page.fields[:supporting_partners].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h1 Supporting Partners
-              - page.fields[:supporting_partners].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
           // 6. Program partners
           - if page.fields[:program_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
@@ -70,7 +63,21 @@
               - page.fields[:program_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          // 7. Resident organisations
+          // 6. Regional partners
+          - if page.fields[:regional_partners].data_present?
+            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              h1 Regional Partners
+              - page.fields[:regional_partners].pages.each do |sponsor|
+                = render "partials/sponsor_list_item", sponsor: sponsor
+
+          // 7. Accessibility and Inclusion partners
+          - if page.fields[:accessibility_and_inclusion_partners].data_present?
+            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              h1 Accessibility and Inclusion Partners
+              - page.fields[:accessibility_and_inclusion_partners].pages.each do |sponsor|
+                = render "partials/sponsor_list_item", sponsor: sponsor
+
+          // 8. Resident organisations
           - if page.fields[:resident_organisations].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h1 Resident Organisations
