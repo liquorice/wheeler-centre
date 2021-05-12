@@ -42,18 +42,18 @@
               - page.fields[:government_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          // 3. Major partners
+          // 3. Trusts and foundations partners
+          - if page.fields[:trusts_and_foundations].data_present?
+            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
+              h1 Trusts and Foundations
+              - page.fields[:trusts_and_foundations].pages.each do |sponsor|
+                = render "partials/sponsor_list_item", sponsor: sponsor
+
+          // 4. Major partners
           - if page.fields[:major_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
               h1 Major Partners
               - page.fields[:major_partners].pages.each do |sponsor|
-                = render "partials/sponsor_list_item", sponsor: sponsor
-
-          // 4. Program partners
-          - if page.fields[:program_partners].data_present?
-            .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h1 Program Partners
-              - page.fields[:program_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
           // 5. Supporting partners
@@ -63,11 +63,11 @@
               - page.fields[:supporting_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
-          // 6. Trusts and foundations partners
-          - if page.fields[:trusts_and_foundations].data_present?
+          // 6. Program partners
+          - if page.fields[:program_partners].data_present?
             .sponsors-list.snap-wrapper.clearfix data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 4, tablet: 3, "phone-wide" => 3, phone: 2 }}.to_json
-              h1 Trusts and Foundations
-              - page.fields[:trusts_and_foundations].pages.each do |sponsor|
+              h1 Program Partners
+              - page.fields[:program_partners].pages.each do |sponsor|
                 = render "partials/sponsor_list_item", sponsor: sponsor
 
           // 7. Resident organisations
