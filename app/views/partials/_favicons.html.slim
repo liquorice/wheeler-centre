@@ -1,5 +1,5 @@
 / We display an alternate version of the favicon in the staging environment to make it easier to distinguish this from
-/ the prouction environment
+/ the production environment
 - if ENV["CANONICAL_HOSTNAME"] == "wheeler-centre-staging.herokuapp.com"
   link href=asset_path("public/favicons-alt/favicon.ico") rel="shortcut icon"
 - else
