@@ -1,10 +1,4 @@
-/ We display an alternate version of the favicon in the staging environment to make it easier to distinguish this from
-/ the production environment
-- if ENV["CANONICAL_HOSTNAME"] == "wheeler-centre-staging.herokuapp.com"
-  link href=asset_path("public/favicons-alt/favicon.ico") rel="shortcut icon"
-- else
-  link href=asset_path("public/favicons/favicon.ico") rel="shortcut icon"
-
+link href=asset_path("public/favicons/favicon.ico") rel="shortcut icon"
 link href=asset_path("public/favicons/apple-touch-icon-57x57.png") rel="apple-touch-icon" sizes="57x57"
 link href=asset_path("public/favicons/apple-touch-icon-72x72.png") rel="apple-touch-icon" sizes="72x72"
 link href=asset_path("public/favicons/apple-touch-icon-114x114.png") rel="apple-touch-icon" sizes="114x114"
