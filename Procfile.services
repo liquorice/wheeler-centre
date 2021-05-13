@@ -1,1 +1,2 @@
 postgres: postgres
+solr: bundle exec rake sunspot:solr:run

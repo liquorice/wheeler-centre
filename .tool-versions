@@ -1,4 +1,4 @@
 java zulu-8.42.0.23
 nodejs 6.9.4
-postgres 9.6.10
+postgres 10.16
 ruby 2.4.10

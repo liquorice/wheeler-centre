@@ -11,6 +11,11 @@ html
           = stylesheet_link_tag "#{site.engine_path}/admin", media: "all", "data-turbolinks-track" => true
       = area :javascripts do
         = render partial: "heracles/admin/shared/admin_loader"
+
+      / We display an alternate version of the favicon in the admin area to make it easier to distinguish this from
+      / the public parts of the site
+      link href=asset_path("heracles/admin/favicon-alt.ico") rel="shortcut icon"
+
       = csrf_meta_tags
   body class=admin_body_classes
     = flashes
