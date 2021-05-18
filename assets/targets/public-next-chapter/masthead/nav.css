@@ -1,5 +1,7 @@
 .nc-nav {
+  align-items: center;
   background-color: var(--color-dark-blue);
+  display: flex;
   padding-bottom: 4rem;
   padding-left: 9rem;
   padding-top: 3rem;
@@ -105,8 +107,16 @@
   margin-bottom: 3rem;
 }
 
+.nc-primary-nav__list-item:last-child {
+  margin-bottom: 0;
+}
+
 .breakpoint-w-799 .nc-primary-nav__list-item {
   margin-bottom: 2rem;
+}
+
+.breakpoint-w-799 .nc-primary-nav__list-item:last-child {
+  margin-bottom: 0;
 }
 
 .breakpoint-phone-wide .nc-primary-nav__list-item,

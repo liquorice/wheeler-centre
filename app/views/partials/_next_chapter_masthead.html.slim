@@ -13,30 +13,31 @@
         .nc-clip
 
         .nc-nav
-          ul.nc-secondary-nav
-            li.nc-secondary-nav__list-item
-              a.nc-secondary-nav__list-anchor href="/about-us" About us
-            li.nc-secondary-nav__list-item
-              a.nc-secondary-nav__list-anchor href="/faqs" Frequently Asked Questions
-
-            li.nc-secondary-nav__list-item tabindex="0"
-
-              .nc-font-sizes data-view-font-resizer={fontResizingSelector: "#nc", activeClass: "nc-font-size--active", buttons: [{selector: ".nc-font-size--small", fontSize: "57.5%"}, {selector: ".nc-font-size--normal", fontSize: "62.5%"}, {selector: ".nc-font-size--large", fontSize: "67.5%"}]}.to_json
-                button.nc-font-size.nc-font-size--small aria-label="Button font size small" A
-                button.nc-font-size.nc-font-size--normal.nc-font-size--active aria-label="Button font size medium" A
-                button.nc-font-size.nc-font-size--large aria-label="Button font size large" A
-
           ul.nc-primary-nav
-            li.nc-primary-nav__list-item
-              a.nc-primary-nav__list-anchor href="/what-is-the-next-chapter" What is the Next Chapter?
+            - if site.pages.find_by_url("thenextchapter/what-is-the-next-chapter")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/what-is-the-next-chapter" What is the Next Chapter?
 
-            - if site.pages.find_by_url("thenextchapter/meet-the-writers").visible?
+            - if site.pages.find_by_url("thenextchapter/how-do-i-apply")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/how-do-i-apply" How do I apply?
+
+            - if site.pages.find_by_url("thenextchapter/meet-the-writers")&.visible?
               li.nc-primary-nav__list-item
                 a.nc-primary-nav__list-anchor href="/meet-the-writers" Meet the writers
 
-            li.nc-primary-nav__list-item
-              a.nc-primary-nav__list-anchor href="/meet-the-judges" Meet the judges
-            li.nc-primary-nav__list-item
-              a.nc-primary-nav__list-anchor href="/news" News
-            li.nc-primary-nav__list-item
-              a.nc-primary-nav__list-anchor href="/how-do-i-apply" How do I apply?
+            - if site.pages.find_by_url("thenextchapter/meet-the-mentors")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/meet-the-mentors" Meet the mentors
+
+            - if site.pages.find_by_url("thenextchapter/meet-the-judges")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/meet-the-judges" Meet the judges
+
+            - if site.pages.find_by_url("thenextchapter/news")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/news" News
+
+            - if site.pages.find_by_url("thenextchapter/contact")&.visible?
+              li.nc-primary-nav__list-item
+                a.nc-primary-nav__list-anchor href="/contact" Contact

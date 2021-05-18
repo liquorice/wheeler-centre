@@ -10,7 +10,7 @@ cache ["podcast-series-1", page, cache_time] do
   end
 
   type = (params[:type] == "video") ? "video" : "audio"
-  episodes = page.episodes(type: type, per_page: 25)
+  episodes = page.episodes(type: type, per_page: 50)
   series_image_url = if page.fields[:itunes_image].data_present?
     version = :original
     version = :itunes if page.fields[:itunes_image].assets.first.versions.include?(:itunes)
