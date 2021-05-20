@@ -48,7 +48,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_thumbnail" => {
       "robot" => "/image/optimize",
@@ -63,7 +63,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_small" => {
       "robot" => "/image/optimize",
@@ -78,7 +78,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_medium" => {
       "robot" => "/image/optimize",
@@ -93,7 +93,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => false,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_large" => {
       "robot" => "/image/optimize",
@@ -110,7 +110,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_large_thumbnail" => {
       "robot" => "/image/optimize",
@@ -127,7 +127,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_medium_thumbnail" => {
       "robot" => "/image/optimize",
@@ -144,7 +144,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "content_small_thumbnail" => {
       "robot" => "/image/optimize",
@@ -161,7 +161,7 @@ Heracles::Sites::WheelerCentre.configure do |config|
       "zoom" => true,
       "strip" => true,
       "background" => "none",
-      "colorspace" => "RGB"
+      "colorspace" => "sRGB"
     },
     "itunes" => {
       "robot" => "/image/optimize",
