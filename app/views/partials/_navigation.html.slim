@@ -2,7 +2,7 @@
 / Appending the request path parent (e.g. /broadcasts or /notes) is necessary to make the active state on the nav items
 / it contains work
 - path_for_cache_key = request.path.match(/^\/broadcasts\/podcasts/) ? "/broadcasts/podcasts" : request.path.match(/^\/[^\/]+/)
-- cache ["navigation-all-4-#{path_for_cache_key}", Time.current.beginning_of_day, with_domain] do
+- cache ["navigation-all-5-#{path_for_cache_key}", Time.current.beginning_of_day, with_domain] do
   nav.masthead__navigation.clearfix role="navigation" data-view-nav-toggle={toggleSelector: ".masthead__mobile-toggle", targetSelector: ".masthead-nav-main--mobile", targetActiveClassName: "masthead-nav-main--active"}.to_json
     button.masthead__mobile-toggle
       i.fa.fa-angle-down
