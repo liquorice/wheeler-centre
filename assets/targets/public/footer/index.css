@@ -108,6 +108,7 @@
 }
   .footer-nav-secondary ul {
     float: right;
+    padding-bottom: 7.5rem;
   }
   .breakpoint-tablet-wide .footer-nav-secondary ul,
   .breakpoint-tablet .footer-nav-secondary ul ,
@@ -205,4 +206,3 @@
       transform: scale3d(0.85, 0.85, 1);
       opacity: 0.9;
     }
-

@@ -20,8 +20,6 @@
             a.masthead-nav-main__dropdown-anchor href="https://my.wheelercentre.com/cart/details"
               ' View cart
 
-    = render "partials/nav_topics_item", primary_topics: primary_topics, with_domain: with_domain
-
     - event_children = events_page.children.in_order.visible.published.where(collection_id: nil)
     - active_event_series = events_page.active_series
     = render "partials/nav_events_item", events_page: events_page, event_children: event_children, active_event_series: active_event_series, with_domain: with_domain
