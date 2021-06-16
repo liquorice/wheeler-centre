@@ -21,9 +21,6 @@
             a.masthead-nav-main__dropdown-anchor href="https://my.wheelercentre.com/cart/details"
               ' View cart
 
-    - cache ["nav-topics-2", primary_topics, with_domain] do
-      = render "partials/nav_topics_item", with_domain: with_domain
-
     - cache ["nav-people-2", people_page, with_domain] do
       li.masthead-nav-main__item.masthead-nav-main__item--break
         a.masthead-nav-main__anchor href=url_with_domain(people_page.absolute_url, with_domain: with_domain)
@@ -67,4 +64,3 @@
           = blog_page.title
 
     = render "partials/nav_search_box", with_domain: with_domain
-
