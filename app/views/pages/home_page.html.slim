@@ -98,8 +98,8 @@
       .column-wrapper
         .column-mid.clearfix
           - if display_quotes == true
-            - cache ["home-page-quotes-2", page] do
-              .home__quotes class=("home__quotes--full" unless display_writings == true)
+            .home__quotes class=("home__quotes--full" unless display_writings == true)
+              - cache ["home-page-quotes-2", page] do
                 .section-header
                   - if page.fields[:quotes_title].data_present?
                     h2
@@ -124,8 +124,8 @@
                           = render_content quote.fields[:caption]
 
           - if display_writings == true
-            - cache ["home-page-writings-2", page] do
-              .home__writings class=("home__writings--full" unless display_quotes == true)
+            .home__writings class=("home__writings--full" unless display_quotes == true)
+              - cache ["home-page-writings-2", page] do
                 .section-header
                   - if page.fields[:writings_title].data_present?
                     h2
