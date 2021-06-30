@@ -18,9 +18,6 @@ module Heracles
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
               {name: :highlights_primary_tags, type: :text, editor_type: :code, editor_columns: 6, hint: "Defaults to 'highlights'"},
               {name: :highlights_primary_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
-              {name: :highlights_secondary_title, type: :text, editor_columns: 6},
-              {name: :highlights_secondary_tags, type: :text, editor_type: :code, editor_columns: 6, hint: "Separate multiple tags with a comma"},
-              {name: :highlights_secondary_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
               # Quotes
               {name: :quotes_info, type: :info, text: "<hr/>"},
               {name: :quotes_title, type: :text},
@@ -53,13 +50,6 @@ module Heracles
         # Should be replace with saved-search insertables
         def highlights(options={})
           options[:tags] = options[:tags].presence || ["highlights"]
-          options.reverse_merge!({tags: options[:tags]})
-          search_by_tag(options)
-        end
-
-        # Temporary
-        # Should be replace with saved-search insertables
-        def user_highlights(options={})
           options.reverse_merge!({tags: options[:tags]})
           search_by_tag(options)
         end
