@@ -90,46 +90,49 @@
     / Social mo'
     = render "partials/social_media_wide"
 
-    / People bits
-    .column-wrapper
-      .column-mid.clearfix
-          .home__quotes
-            - cache ["home-page-quotes-header-1", page] do
-              .section-header
-                - if page.fields[:quotes_title].data_present?
-                  h2
-                    = page.fields[:quotes_title].value
-                - if page.fields[:quotes_content].data_present?
-                  .intro.copy
-                    = render_content page.fields[:quotes_content]
-            .home__quotes-list
-              - if page.fields[:quotes].data_present?
-                - page.fields[:quotes].pages.each do |quote|
-                  - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
-                  - if presenter
-                    - image = presenter.fields[:portrait].assets.first if presenter.fields[:portrait].data_present?
-                  - cache ["home-page-quotes-1", quote, presenter, image] do
-                    .home-quote
-                      - if image
-                        .event-presenter__image
-                          .event-presenter__image-inner
-                            img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
-                      .home-quote__quote.copy
-                        = render_content quote.fields[:quote]
-                      .home-quote__caption.copy
-                        = render_content quote.fields[:caption]
-          .home__writings
-            - cache ["home-page-writings-header-1", page] do
-              .section-header
-                - if page.fields[:writings_title].data_present?
-                  h2
-                    = page.fields[:writings_title].value
-                - if page.fields[:writings_content].data_present?
-                  .intro.copy
-                    = render_content page.fields[:writings_content]
-            .home__writings-list
-              - user_writings.each_with_index do |writing, index|
-                = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
+    / Quotes & Writings
+    - if page.display_quotes? && page.fields[:quotes].pages.any? || page.display_writings? && user_writings.any?
+      .column-wrapper
+        .column-mid.clearfix
+          - if page.display_quotes? && page.fields[:quotes].pages.any?
+            - cache ["home-page-quotes-2", page] do
+              .home__quotes
+                .section-header
+                  - if page.fields[:quotes_title].data_present?
+                    h2
+                      = page.fields[:quotes_title].value
+                  - if page.fields[:quotes_content].data_present?
+                    .intro.copy
+                      = render_content page.fields[:quotes_content]
+                .home__quotes-list
+                  - if page.fields[:quotes].data_present?
+                    - page.fields[:quotes].pages.each do |quote|
+                      - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
+                      - if presenter
+                        - image = presenter.fields[:portrait].assets.first if presenter.fields[:portrait].data_present?
+                      .home-quote
+                        - if image
+                          .event-presenter__image
+                            .event-presenter__image-inner
+                              img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
+                        .home-quote__quote.copy
+                          = render_content quote.fields[:quote]
+                        .home-quote__caption.copy
+                          = render_content quote.fields[:caption]
+
+          - if page.display_writings? && user_writings.any?
+            - cache ["home-page-writings-2", page] do
+              .home__writings
+                .section-header
+                  - if page.fields[:writings_title].data_present?
+                    h2
+                      = page.fields[:writings_title].value
+                  - if page.fields[:writings_content].data_present?
+                    .intro.copy
+                      = render_content page.fields[:writings_content]
+                .home__writings-list
+                  - user_writings.each_with_index do |writing, index|
+                    = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
 
     / General content area
     - cache ["home-page-body-1", page] do

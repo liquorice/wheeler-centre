@@ -24,11 +24,13 @@ module Heracles
               {name: :quotes_title, type: :text},
               {name: :quotes_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
               {name: :quotes, label: "Home page quotes", type: :associated_pages, page_type: :home_quote},
+              {name: :display_quotes, type: :boolean, question_text: "Display quotes?", hint: "Even if checked, this will only be displayed if there are quotes selected above"},
               # Writings
               {name: :writings_info, type: :info, text: "<hr/>"},
               {name: :writings_title, type: :text, editor_columns: 6},
               {name: :writings_tags, type: :text, editor_type: :code, editor_columns: 6, hint: "Separate multiple tags with a comma"},
               {name: :writings_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :display_writings, type: :boolean, question_text: "Display writings?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
               # Body
               {name: :body_info, type: :info, text: "<hr/>"},
               {name: :body, type: :content},
@@ -72,6 +74,18 @@ module Heracles
           return false unless fields[:display_highlights].data_present?
 
           fields[:display_highlights].value == true
+        end
+
+        def display_quotes?
+          return false unless fields[:display_quotes].data_present?
+
+          fields[:display_quotes].value == true
+        end
+
+        def display_writings?
+          return false unless fields[:display_writings].data_present?
+
+          fields[:display_writings].value == true
         end
 
         def hero_feature_items
