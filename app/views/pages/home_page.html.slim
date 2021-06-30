@@ -69,12 +69,11 @@
                   = render "partials/hero_feature_snap_block", post: post
 
     / Highlights
-    .column-wrapper
-      .column-full.clearfix
-        - cache ["home-page-highlights-1", page, highlights] do
-          - if highlights.total > 0
-            - per_group = { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
-            .home__highlights class="home__highlights--full"
+    - if page.display_highlights? && highlights.total > 0
+      - cache ["home-page-highlights-2", page, highlights] do
+        .column-wrapper
+          .column-full.clearfix
+            .home__highlights
               .section-header
                 h2
                   - if page.fields[:highlights_primary_title].data_present?
@@ -84,9 +83,9 @@
                 - if page.fields[:highlights_primary_content].data_present?
                   .intro.copy
                     = render_content page.fields[:highlights_primary_content]
-              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
+              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "phone-wide" => 1, phone: 1 }}.to_json
                 - highlights.results.each do |post|
-                  = render "partials/snap_block", post: post, show_type: true
+                  = render "partials/snap_block", post: post, aspect: :landscape
 
     / Social mo'
     = render "partials/social_media_wide"

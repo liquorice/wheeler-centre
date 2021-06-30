@@ -18,6 +18,7 @@ module Heracles
               {name: :highlights_primary_title, type: :text, editor_columns: 6},
               {name: :highlights_primary_tags, type: :text, editor_type: :code, editor_columns: 6, hint: "Defaults to 'highlights'"},
               {name: :highlights_primary_content, type: :content, with_buttons: %i(bold italic), disable_insertables: true},
+              {name: :display_highlights, type: :boolean, question_text: "Display highlights?", hint: "Even if checked, this will only be displayed if there is content available matching the tag(s) above"},
               # Quotes
               {name: :quotes_info, type: :info, text: "<hr/>"},
               {name: :quotes_title, type: :text},
@@ -65,6 +66,12 @@ module Heracles
           return false unless fields[:display_hero_feature].data_present?
 
           fields[:display_hero_feature].value == true
+        end
+
+        def display_highlights?
+          return false unless fields[:display_highlights].data_present?
+
+          fields[:display_highlights].value == true
         end
 
         def hero_feature_items

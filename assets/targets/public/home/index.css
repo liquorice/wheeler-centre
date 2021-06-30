@@ -25,7 +25,9 @@
 /* Hero/Di Gribble Argument feature */
 
 .home__hero-feature {
+  float: none;
   padding-bottom: 3.5rem;
+  width: 100%;
 }
 
 .home__hero-feature .grouper {
@@ -39,11 +41,6 @@
 .home__hero-feature .grouper--3 .grouper-item:last-child {
   padding-right: 0;
   width: calc((100% / 3) - 2.4rem);
-}
-
-.home__hero-feature {
-  float: none;
-  width: 100%;
 }
 
 .home__hero-feature .snap-wrapper {
@@ -60,47 +57,36 @@
 
 /* Highlights */
 
-.home__highlights,
-.home__user-highlights {
-  /*padding-top: 3.5rem;*/
+.home__highlights {
+  float: none;
   padding-bottom: 3.5rem;
+  width: 100%;
 }
 
-.home__highlights .grouper,
-.home__user-highlights .grouper {
+.home__highlights .grouper {
   text-align: left;
 }
 
-.home__highlights {
-  float: left;
-  width: 50%;
-}
-  .home__highlights .snap-wrapper {
-    margin-right: 0;
-  }
-  .home__highlights--full {
-    float: none;
-    width: 100%;
-  }
-
-.home__user-highlights {
-  background: linear-gradient(to top, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to bottom, #fff 0%, rgba(250, 250, 250, 0) 20%), linear-gradient(to left, rgba(0,0,0,0) 30%, rgba(0, 0, 0, 0.05) 100%);
-  border-left: 1px solid #ededed;
-  float: right;
-  padding-left: 3.5rem;
-  width: 50%;
+.home__highlights .grouper--3 .grouper-item {
+  width: calc((100% / 3) + 1.2rem);
 }
 
+.home__highlights .grouper--3 .grouper-item:last-child {
+  padding-right: 0;
+  width: calc((100% / 3) - 2.4rem);
+}
 
-.breakpoint-phone .home__highlights,
-.breakpoint-phone .home__user-highlights {
+.home__highlights .snap-wrapper {
+  margin-right: 0;
+}
+
+.breakpoint-phone .home__highlights {
   width: 100%;
   background: transparent;
   border: none;
   padding-left: 0;
   padding-right: 0;
 }
-
 
 
 /* Quotes */
