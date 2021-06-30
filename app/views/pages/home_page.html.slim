@@ -18,9 +18,12 @@
   - highlights = page.highlights
 
 - hero_feature_items = page.hero_feature_items
-
 - user_tags = page.fields[:writings_tags].value.split(",") if page.fields[:writings_tags].data_present?
 - user_writings = page.user_writings(per_page: 4, tags: user_tags)
+
+// Shorthand to simplify adjusting the display of these sections dependent on whether the other is displayed
+- display_quotes = page.display_quotes? && page.fields[:quotes].pages.any?
+- display_writings = page.display_writings? && user_writings.any?
 
 = area :main do
   .home
@@ -91,12 +94,12 @@
     = render "partials/social_media_wide"
 
     / Quotes & Writings
-    - if page.display_quotes? && page.fields[:quotes].pages.any? || page.display_writings? && user_writings.any?
+    - if display_quotes == true || display_writings == true
       .column-wrapper
         .column-mid.clearfix
-          - if page.display_quotes? && page.fields[:quotes].pages.any?
+          - if display_quotes == true
             - cache ["home-page-quotes-2", page] do
-              .home__quotes
+              .home__quotes class=("home__quotes--full" unless display_writings == true)
                 .section-header
                   - if page.fields[:quotes_title].data_present?
                     h2
@@ -120,9 +123,9 @@
                         .home-quote__caption.copy
                           = render_content quote.fields[:caption]
 
-          - if page.display_writings? && user_writings.any?
+          - if display_writings == true
             - cache ["home-page-writings-2", page] do
-              .home__writings
+              .home__writings class=("home__writings--full" unless display_quotes == true)
                 .section-header
                   - if page.fields[:writings_title].data_present?
                     h2

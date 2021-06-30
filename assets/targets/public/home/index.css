@@ -119,6 +119,12 @@
     right: 0;
   }
 
+.home__quotes--full {
+  border-right: 0;
+  float: none;
+  width: 100%;
+}
+
 .home-quote {
   position: relative;
   padding-left: 11rem;
@@ -199,6 +205,13 @@
     width: 100%;
   }
 
+.home__writings--full {
+  border-left: 0;
+  float: none;
+  margin-left: 0;
+  width: 100%;
+}
+
 .home__writings-list {
   padding-left: 3.5rem;
   padding-top: 3rem;
@@ -208,6 +221,16 @@
     padding-left: 0;
   }
 
+.home__writings--full > .home__writings-list {
+  padding-left: 0;
+}
+
+.home__writings-list > .snap-block {
+  display: block;
+}
+
+
+/* Body content */
 .home__body {
   margin-top: 3.5rem;
 }
