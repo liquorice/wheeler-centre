@@ -122,7 +122,7 @@
 
           - if display_writings == true
             .home__writings class=("home__writings--full" unless display_quotes == true)
-              - cache ["home-page-writings-2", page] do
+              - cache ["home-page-writings-2", page, user_writings] do
                 .section-header
                   - if page.fields[:writings_title].data_present?
                     h2
