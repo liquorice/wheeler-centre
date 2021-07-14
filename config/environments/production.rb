@@ -84,14 +84,14 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Action mailer mail delivery settings
+  # Taken from: https://devcenter.heroku.com/articles/mailgun#sending-emails-via-smtp
   config.action_mailer.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => ENV['MAILGUN_DOMAIN'],
+    :authentication => :plain
   }
 
   config.action_mailer.delivery_method = :smtp

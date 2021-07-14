@@ -48,6 +48,19 @@
         ' Donate
 
   ul.masthead-nav-secondary.masthead-nav-secondary--mobile.clearfix
+    li.masthead-nav-secondary__item.masthead-nav-secondary__item--social-media-icon
+      a.masthead-nav-secondary__anchor href="https://twitter.com/wheelercentre"
+        i.fa.fa-twitter
+    li.masthead-nav-secondary__item.masthead-nav-secondary__item--social-media-icon
+      a.masthead-nav-secondary__anchor href="https://www.youtube.com/user/wheelercentre"
+        i.fa.fa-youtube
+    li.masthead-nav-secondary__item.masthead-nav-secondary__item--social-media-icon
+      a.masthead-nav-secondary__anchor href="http://instagram.com/wheelercentre"
+        i.fa.fa-instagram
+    li.masthead-nav-secondary__item.masthead-nav-secondary__item--social-media-icon
+      a.masthead-nav-secondary__anchor href="https://www.facebook.com/wheelercentre"
+        i.fa.fa-facebook
+
     - cache ["nav-events-3", broadcasts_page, with_domain] do
       li.masthead-nav-secondary__item
         a.masthead-nav-secondary__anchor href=href=url_with_domain(events_page.absolute_url, with_domain: with_domain)

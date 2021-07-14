@@ -17,16 +17,13 @@
 - else
   - highlights = page.highlights
 
-- if page.fields[:highlights_secondary_tags].data_present?
-  - tags = page.fields[:highlights_secondary_tags].value.split(",")
-  - user_highlights = page.user_highlights(tags: tags)
-- else
-  - user_highlights = false
-
 - hero_feature_items = page.hero_feature_items
-
 - user_tags = page.fields[:writings_tags].value.split(",") if page.fields[:writings_tags].data_present?
 - user_writings = page.user_writings(per_page: 4, tags: user_tags)
+
+// Shorthand to simplify adjusting the display of these sections dependent on whether the other is displayed
+- display_quotes = page.display_quotes? && page.fields[:quotes].pages.any?
+- display_writings = page.display_writings? && user_writings.any?
 
 = area :main do
   .home
@@ -75,16 +72,11 @@
                   = render "partials/hero_feature_snap_block", post: post
 
     / Highlights
-    .column-wrapper
-      .column-full.clearfix
-        - no_user_highlights = (user_highlights.blank? || user_highlights.total == 0)
-        - cache ["home-page-highlights-1", page, highlights] do
-          - if highlights.total > 0
-            - if no_user_highlights
-              - per_group = { default: 4, "widescreen-wide" => 6, widescreen: 5, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
-            - else
-              - per_group = { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }
-            .home__highlights class=("home__highlights--full" if no_user_highlights)
+    - if page.display_highlights? && highlights.total > 0
+      - cache ["home-page-highlights-2", page, highlights] do
+        .column-wrapper
+          .column-full.clearfix
+            .home__highlights
               .section-header
                 h2
                   - if page.fields[:highlights_primary_title].data_present?
@@ -94,68 +86,53 @@
                 - if page.fields[:highlights_primary_content].data_present?
                   .intro.copy
                     = render_content page.fields[:highlights_primary_content]
-              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: per_group}.to_json
+              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "phone-wide" => 1, phone: 1 }}.to_json
                 - highlights.results.each do |post|
-                  = render "partials/snap_block", post: post, show_type: true
+                  = render "partials/snap_block", post: post, aspect: :landscape
 
-        - cache ["home-page-highlights-1", page, user_highlights] do
-          - unless no_user_highlights
-            .home__user-highlights
-              .section-header
-                h2
-                  - if page.fields[:highlights_secondary_title].data_present?
-                    = page.fields[:highlights_secondary_title].value
-                  - else
-                    ' Highlights
-                - if page.fields[:highlights_secondary_content].data_present?
-                  .intro.copy
-                    = render_content page.fields[:highlights_secondary_content]
-              .snap-wrapper data-view-grouper={elementsSelector: ".snap-block", perGroup: { default: 3, "tablet-wide" => 3, tablet: 2, "phone-wide" => 2, phone: 2 }}.to_json
-                - user_highlights.results.each do |post|
-                  = render "partials/snap_block", post: post, show_type: true
-    / Social mo'
-    = render "partials/social_media_wide"
+    / Quotes & Writings
+    - if display_quotes == true || display_writings == true
+      .column-wrapper
+        .column-mid.clearfix
+          - if display_quotes == true
+            .home__quotes class=("home__quotes--full" unless display_writings == true)
+              - cache ["home-page-quotes-2", page] do
+                .section-header
+                  - if page.fields[:quotes_title].data_present?
+                    h2
+                      = page.fields[:quotes_title].value
+                  - if page.fields[:quotes_content].data_present?
+                    .intro.copy
+                      = render_content page.fields[:quotes_content]
+                .home__quotes-list
+                  - if page.fields[:quotes].data_present?
+                    - page.fields[:quotes].pages.each do |quote|
+                      - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
+                      - if presenter
+                        - image = presenter.fields[:portrait].assets.first if presenter.fields[:portrait].data_present?
+                      .home-quote
+                        - if image
+                          .event-presenter__image
+                            .event-presenter__image-inner
+                              img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
+                        .home-quote__quote.copy
+                          = render_content quote.fields[:quote]
+                        .home-quote__caption.copy
+                          = render_content quote.fields[:caption]
 
-    / People bits
-    .column-wrapper
-      .column-mid.clearfix
-          .home__quotes
-            - cache ["home-page-quotes-header-1", page] do
-              .section-header
-                - if page.fields[:quotes_title].data_present?
-                  h2
-                    = page.fields[:quotes_title].value
-                - if page.fields[:quotes_content].data_present?
-                  .intro.copy
-                    = render_content page.fields[:quotes_content]
-            .home__quotes-list
-              - if page.fields[:quotes].data_present?
-                - page.fields[:quotes].pages.each do |quote|
-                  - presenter = quote.fields[:person].pages.first if quote.fields[:person].data_present?
-                  - if presenter
-                    - image = presenter.fields[:portrait].assets.first if presenter.fields[:portrait].data_present?
-                  - cache ["home-page-quotes-1", quote, presenter, image] do
-                    .home-quote
-                      - if image
-                        .event-presenter__image
-                          .event-presenter__image-inner
-                            img src=image.content_thumbnail_url alt="Portrait of #{presenter.title}"
-                      .home-quote__quote.copy
-                        = render_content quote.fields[:quote]
-                      .home-quote__caption.copy
-                        = render_content quote.fields[:caption]
-          .home__writings
-            - cache ["home-page-writings-header-1", page] do
-              .section-header
-                - if page.fields[:writings_title].data_present?
-                  h2
-                    = page.fields[:writings_title].value
-                - if page.fields[:writings_content].data_present?
-                  .intro.copy
-                    = render_content page.fields[:writings_content]
-            .home__writings-list
-              - user_writings.each_with_index do |writing, index|
-                = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
+          - if display_writings == true
+            .home__writings class=("home__writings--full" unless display_quotes == true)
+              - cache ["home-page-writings-2", page, user_writings] do
+                .section-header
+                  - if page.fields[:writings_title].data_present?
+                    h2
+                      = page.fields[:writings_title].value
+                  - if page.fields[:writings_content].data_present?
+                    .intro.copy
+                      = render_content page.fields[:writings_content]
+                .home__writings-list
+                  - user_writings.each_with_index do |writing, index|
+                    = render "partials/blog_snap_block", post: writing, show_type: false, hide_image: true
 
     / General content area
     - cache ["home-page-body-1", page] do

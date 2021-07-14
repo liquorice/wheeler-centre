@@ -112,6 +112,14 @@ module Heracles
           end
         end
 
+        def publish_date
+          if fields[:publish_date].data_present?
+            fields[:publish_date].value
+          else
+            created_at
+          end
+        end
+
         searchable do
 
           string :topic_ids, multiple: true do

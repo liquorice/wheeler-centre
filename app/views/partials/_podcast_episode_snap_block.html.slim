@@ -9,8 +9,8 @@
 - cache ["podcast-episode-snap-block-1", post, show_type, show_summary, image, first_topic, post.series, aspect] do
   .snap-block
     a.podcast-episode-snap class="podcast-episode-snap--#{aspect}" href=post.absolute_url
-      span.podcast-episode-snap__date
-        ' &nbsp;
+      time.podcast-episode-snap__date
+        = l post.publish_date, format: :medium_date
       - if image
         .podcast-episode-snap__hero
           .podcast-episode-snap__hero-inner
