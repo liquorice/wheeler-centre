@@ -71,6 +71,8 @@ gem "ffaker"
 gem "sitemap_generator"
 gem "fog"
 
+gem 'bigdecimal', '1.3.5'
+
 group :production do
   gem "memcachier"
   gem "rails_12factor"
