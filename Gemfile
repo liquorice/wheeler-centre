@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Heroku uses the ruby version to configure your application's runtime.
-ruby "2.4.10"
+ruby "2.7.5"
 
 # Rails
 gem "rails", "~> 4.2.0"
