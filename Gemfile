@@ -91,7 +91,7 @@ group :test do
   gem "poltergeist"
   gem "minitest" # Remove this after https://github.com/thoughtbot/shoulda-matchers/issues/408 is fixed.
   gem "shoulda-matchers"
-  gem "simplecov", "~> 0.7.1" # https://github.com/colszowka/simplecov/issues/281
+  gem 'simplecov', require: false
 end
 
 group :test, :development do
