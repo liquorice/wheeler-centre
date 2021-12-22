@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   protected
 
   def set_cache_headers_for_page
-    expires = request.format == :rss ? 1.hour.to_i : 1.day.to_i
+    expires = request.format == :rss ? 1.hour.to_i : 2.hours.to_i
 
     if Rails.env.production?
       response.headers["Surrogate-Control"] = "max-age=#{expires}"
