@@ -721,7 +721,6 @@ DEPENDENCIES
   memcachier
   memoit
   meta-tags
-  minitest
   passenger (~> 5.0.7)
   pg
   poltergeist
