@@ -22,4 +22,11 @@ RSpec.describe BulkPublicationAction, :type => :model do
       expect(described_class.in_progress(SecureRandom.uuid,1)).to eq([])
     end
   end
+
+  describe '#readable_tags' do
+    subject {BulkPublicationAction.new(site_id: 1, user_id: 1, tags: 'tag', action: 1)}
+    it 'converts to html' do
+      expect(subject.readable_tags).to eq("<i>tag</i>")
+    end
+  end
 end
