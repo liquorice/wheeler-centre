@@ -6,9 +6,15 @@ RSpec.describe BulkPublicationAction, :type => :model do
     it 'passes for :site_id' do
       expect validate_presence_of(:site_id)
     end
-    it { expect validate_presence_of(:user_id) }
-    it { expect validate_presence_of(:tags) }
-    it { expect validate_presence_of(:action) }
+    it 'passes for :user_id' do
+      expect validate_presence_of(:user_id)
+    end
+    it 'passes for :tags' do
+      expect validate_presence_of(:tags)
+    end
+    it 'passes for :action' do
+      expect validate_presence_of(:action)
+    end
   end
 
   describe 'Scope' do
