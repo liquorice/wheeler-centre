@@ -95,6 +95,7 @@ group :test, :development do
   gem "dotenv", git: "https://github.com/bkeepers/dotenv", ref: "a47020f6c414e0a577680b324e61876a690d2200"
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5.0"
+  gem "pry-byebug"
 end
 
 # Development tools
@@ -108,7 +109,6 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr", "2.1.1"
-  gem "pry-byebug"
 
   # Guard et al
   gem "guard", "~> 2"
