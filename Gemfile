@@ -84,8 +84,6 @@ end
 group :test do
   gem "capybara", git: "https://github.com/teamcapybara/capybara", ref: "5849ecb66e7e961b1e3eee4fe62e67fb0b1061f5" # RSpec 3 deprecations, waiting for the next gem release.
   gem "database_cleaner"
-  gem "factory_girl_rails"
-  gem "fuubar", "~> 2.0.0"
   gem "poltergeist"
   gem "shoulda-matchers"
   gem "simplecov", "~> 0.7.1" # https://github.com/colszowka/simplecov/issues/281
