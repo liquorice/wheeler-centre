@@ -94,6 +94,7 @@ group :test, :development do
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5.0"
   gem "pry-byebug"
+  gem 'factory_bot_rails'
 end
 
 # Development tools
