@@ -84,10 +84,7 @@ end
 group :test do
   gem "capybara", git: "https://github.com/teamcapybara/capybara", ref: "5849ecb66e7e961b1e3eee4fe62e67fb0b1061f5" # RSpec 3 deprecations, waiting for the next gem release.
   gem "database_cleaner"
-  gem "factory_girl_rails"
-  gem "fuubar", "~> 2.0.0"
   gem "poltergeist"
-  gem "minitest" # Remove this after https://github.com/thoughtbot/shoulda-matchers/issues/408 is fixed.
   gem "shoulda-matchers"
   gem "simplecov", "~> 0.7.1" # https://github.com/colszowka/simplecov/issues/281
 end
@@ -96,6 +93,8 @@ group :test, :development do
   gem "dotenv", git: "https://github.com/bkeepers/dotenv", ref: "a47020f6c414e0a577680b324e61876a690d2200"
   gem "dotenv-rails"
   gem "rspec-rails", "~> 3.5.0"
+  gem "pry-byebug"
+  gem 'factory_bot_rails'
 end
 
 # Development tools
@@ -109,7 +108,6 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "sunspot_solr", "2.1.1"
-  gem "pry-byebug"
 
   # Guard et al
   gem "guard", "~> 2"
