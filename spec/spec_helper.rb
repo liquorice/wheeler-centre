@@ -15,8 +15,7 @@ if ENV["COVERAGE"]
 
   SimpleCov.start do
     add_filter "/spec/"
-    add_filter "/config/"
-    add_filter "/vendor/"
+    add_filter "/config/"    
     add_group  "Models", "app/models"
     add_group  "Controllers", "app/controllers"
     add_group  "Helpers", "app/helpers"
