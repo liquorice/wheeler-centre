@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Heracles::Sites::WheelerCentre::HomePage, type: :model do
+  let(:home_page) { build(:home_page) }
+
   describe '.config' do
     it 'has :fields => []' do
-      expect(Heracles::Sites::WheelerCentre::HomePage.config).to include(:fields)
+      expect(home_page.config).to include(:fields)
       
-      expect(Heracles::Sites::WheelerCentre::HomePage.config[:fields]).to include(
+      expect(home_page.config[:fields]).to include(
         { name: :intro, type: :content },
         # Banners
         {name: :banners, label: "Home page banners", type: :associated_pages, page_type: :home_banner},
@@ -43,18 +45,12 @@ RSpec.describe Heracles::Sites::WheelerCentre::HomePage, type: :model do
   end
 
   describe '#sorted_banners' do
-    it 'with banners field' do
-
-      homepage = Heracles::Sites::WheelerCentre::HomePage.new
-      dbl = double(homepage)
-      allow(dbl).to receive(:sorted_banners).and_return("banners")
-      expect(dbl.sorted_banners).to eq("banners")
+    xit 'with banners field' do
       
     end
 
-    it 'without banners field' do
-      homepage = Heracles::Sites::WheelerCentre::HomePage.new
-      expect(homepage.sorted_banners).to be nil
+    it 'without banners field' do      
+      expect(home_page.sorted_banners).to be nil
     end     
   end
 
@@ -76,11 +72,11 @@ RSpec.describe Heracles::Sites::WheelerCentre::HomePage, type: :model do
 
   describe '#display_hero_feature?' do
     it 'returns false if no display_hero_feature' do      
-      expect(subject.fields[:display_hero_feature].data_present?).to be false
+      expect(home_page.fields[:display_hero_feature].data_present?).to be false
     end
 
     xit 'returns true if display_hero_feature' do
-      expect(subject.fields[:display_hero_feature].data_present?).to be true
+      
     end
   end
 
