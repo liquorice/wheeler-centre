@@ -38,7 +38,7 @@ html lang="en"
       = area :body do
         = render 'partials/skip_links'
         = render 'partials/campaign_banner'
-        = render 'partials/subscribe_popup'
+        / render 'partials/subscribe_popup'
         = area :masthead do
           = render 'partials/masthead', with_domain: false
         = area :main_outer do
@@ -46,7 +46,7 @@ html lang="en"
             = area :main
             = area :main_footer
         = area :footer_before do
-          = render 'partials/subscribe_simple_wide'
+          / render 'partials/subscribe_simple_wide'
           - if current_page?(root_path)
             = render 'partials/home_logos'
         = area :footer do
