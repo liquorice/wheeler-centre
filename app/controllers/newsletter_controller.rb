@@ -1,4 +1,6 @@
 class NewsletterController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  
   def subscribe
     unless verify_recaptcha?(params[:recaptcha_token], 'letter')
       flash.now[:error] = "reCAPTCHA Authorization Failed. Please try again later."

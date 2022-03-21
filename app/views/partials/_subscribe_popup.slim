@@ -7,7 +7,7 @@
       .subscribe-popup__inner
         .simple-subscribe.column-wrapper data-view-subscribe-form=true
           .simple-subscribe__inner.column-wide
-            form.clearfix action="https://tracking.wordfly.com/join/wheelercentre" method="post"
+            form.clearfix action="newsletter/subscribe" method="post"
               label.simple-subscribe__label.copy
                 - if settings_page.fields[:subscribe_popup_intro].data_present?
                   = render_content settings_page.fields[:subscribe_popup_intro], image: {version: :content_small}
@@ -22,6 +22,7 @@
                 /* WordFly requires the HTML to submit the form */
                 input name="FirstName" type="hidden"
                 input name="LastName" type="hidden"
+                = hidden_field_tag :authenticity_token, form_authenticity_token
 
                 button type="submit" Subscribe
                 = recaptcha_execute 'letter'
