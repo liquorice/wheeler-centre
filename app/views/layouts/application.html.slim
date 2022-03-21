@@ -2,6 +2,7 @@ doctype 5
 html lang="en"
   head
     meta charset="utf-8"
+    = include_recaptcha_js    
     = render "partials/metaquery_breakpoints"
     = render "partials/inline_boot_javascript"
 
@@ -19,6 +20,7 @@ html lang="en"
 
     - if Rails.env.development?
       = development_javascript
+      = csrf_meta_tags
     /[if lt IE 9]
       = javascript_include_tag "html5shiv", defer: true
     = javascript_include_tag "public", async: true

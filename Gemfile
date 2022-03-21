@@ -9,6 +9,9 @@ gem "rails", "~> 4.2.0"
 # Database drivers
 gem "pg"
 
+# Request
+gem 'httparty'
+
 # Heracles
 gem "icelab-heracles", "2.0.0.beta67", path: "vendor/heracles", require: "heracles"
 

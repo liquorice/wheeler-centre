@@ -383,6 +383,8 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     humanize (1.1.2)
     i18n (0.8.1)
     icalendar (2.4.1)
@@ -425,6 +427,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     nenv (0.3.0)
     nestive (0.6.0)
       rails (>= 3.0.0)
@@ -711,6 +714,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   html_truncator
+  httparty
   humanize (~> 1.1.0)
   icalendar (~> 2.3)
   icelab-heracles (= 2.0.0.beta67)!

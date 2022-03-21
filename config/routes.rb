@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   # Heracles public pages.
   post "*path/__preview" => "pages#show", preview: true
+  post "newsletter/subscribe" => "newsletter#subscribe"
   get "*path" => "pages#show"
   root to: "pages#show"
 end

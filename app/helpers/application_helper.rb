@@ -10,6 +10,29 @@ module ApplicationHelper
       "data-turbolinks-track" => true)
   end
 
+  RECAPTCHA_SITE_KEY = ENV['RECAPTCHA_SITE_KEY']
+
+  def include_recaptcha_js
+    javascript_include_tag(
+      "https://www.google.com/recaptcha/api.js?render=#{RECAPTCHA_SITE_KEY}"
+    )
+  end
+
+  def recaptcha_execute(action)
+    id = "recaptcha_token_#{SecureRandom.hex(10)}"
+
+    raw %Q{
+      <input name="recaptcha_token" type="hidden" id="#{id}"/>
+      <script>
+        grecaptcha.ready(function() {
+          grecaptcha.execute('#{RECAPTCHA_SITE_KEY}', {action: '#{action}'}).then(function(token) {
+            document.getElementById("#{id}").value = token;
+          });
+        });
+      </script>
+    }
+  end
+
   ### Heracles helpers
 
   # Use "content_small" by default when rendering image insertables. This can
